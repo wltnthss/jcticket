@@ -41,7 +41,8 @@ exampleDao exampleDao;
         System.out.println("exampleDao.test() = " + exampleDao.test());
         Date now = new Date();
         System.out.println(now);
-//        assertTrue(exampleDao.test()==ld);
+
+//        assertTrue(exampleDao.test()==ld);asdad
     }
 
 }
