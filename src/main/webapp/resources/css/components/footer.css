@@ -1,0 +1,49 @@
+
+.play-bottom{
+    position: relative;
+    height: 165px;
+    width: 100%;
+    min-width: 1300px;
+    padding-bottom: 25px;
+    border-top: 1px solid #ddd;
+    padding-bottom: 25px;
+}
+
+.play-bottom .cont{
+    width: 1200px;
+    margin: 0 auto;
+}
+.play-bottom-txt{
+    position: relative;
+    height: 165px;
+}
+
+.play-bottom-txt .bottom-main-logo{
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 2px;
+}
+
+.play-bottom-txt .play-bottom-copyright{
+    position: absolute;
+    top: 10px;
+    left: 221px
+}
+
+.play-bottom-copyright .cr1{
+    font-size: 15px;
+    color: black;
+    line-height: 23px;
+    margin-bottom: 0px;
+}
+
+.play-bottom-copyright .cr2{
+    font-size: 13px;
+    color: gray;
+}
+
+.play-bottom-copyright .cr3{
+    font-size: 13px;
+    color: black;
+}
