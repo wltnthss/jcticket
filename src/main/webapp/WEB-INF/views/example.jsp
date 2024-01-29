@@ -11,7 +11,10 @@
     <title>Title</title>
     <h1>Example Test</h1>
 </head>
+<link rel="stylesheet" href="/resources/css/example/example.css">
 <body>
+
+<h1 id="css-test">Css Test</h1>
 
 </body>
 </html>

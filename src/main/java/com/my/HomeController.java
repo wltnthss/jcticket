@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
 
+    // Test용이므로 지우셔도됩니다.
     private String test1(){
         return "index";
     }
