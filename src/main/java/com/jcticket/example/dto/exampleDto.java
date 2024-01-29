@@ -1,4 +1,10 @@
 package com.jcticket.example.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class exampleDto {
+    private String name;
 }
