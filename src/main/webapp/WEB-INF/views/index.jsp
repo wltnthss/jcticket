@@ -9,10 +9,9 @@
 <html>
 <head>
     <title>Title</title>
-    <h1>H1 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT</h1>
+    <h1>HomeController Test 성공</h1>
 </head>
-<body>s
-hello
-hello
+<body>
+
 </body>
 </html>

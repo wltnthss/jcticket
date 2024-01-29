@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
 
-    // 이거 만드느라 너무 힘들었어요.
-    private String yoonjae(){
+    private String test1(){
         return "index";
     }
 }
