@@ -42,7 +42,7 @@ exampleDao exampleDao;
         Date now = new Date();
         System.out.println(now);
 
-//        assertTrue(exampleDao.test()==ld);asdad
+//        assertTrue(exampleDao.test()==ld);asdadqw
     }
 
 }
