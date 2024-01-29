@@ -1,6 +1,8 @@
 package com.jcticket.example.controller;
 
 import com.jcticket.example.dto.exampleDto;
+import com.jcticket.example.service.exampleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class exampleController {
 
+    @Autowired
+    exampleService service;
+
     @GetMapping("/example")
     public String example(){
         return "example";
@@ -36,5 +41,15 @@ public class exampleController {
         model.addAttribute("dto", dto);
 
         return "lombok";
+    }
+
+    @GetMapping("/test")
+    public String test(Model model) throws Exception {
+
+        String data = service.test();
+
+        model.addAttribute("data", data);
+
+        return "test";
     }
 }

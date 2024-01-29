@@ -1,4 +1,5 @@
 package com.jcticket.example.dao;
 
-public class exampleDao {
+public interface exampleDao {
+    String test() throws Exception;
 }

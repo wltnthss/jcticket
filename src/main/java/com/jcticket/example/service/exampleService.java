@@ -1,4 +1,7 @@
 package com.jcticket.example.service;
 
-public class exampleService {
+import org.springframework.stereotype.Service;
+
+public interface exampleService {
+    String test() throws Exception;
 }
