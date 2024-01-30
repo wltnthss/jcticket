@@ -10,7 +10,6 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/components/footer.css">
-
 </head>
 <body>
 <footer class="play-bottom" id="play-bottom">
