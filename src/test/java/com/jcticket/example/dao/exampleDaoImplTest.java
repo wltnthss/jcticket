@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.xml.crypto.Data;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static org.junit.Assert.*;
 
 /**
@@ -40,9 +38,14 @@ exampleDao exampleDao;
     public void test2() throws Exception {
         System.out.println("exampleDao.test() = " + exampleDao.test());
         Date now = new Date();
-        System.out.println(now);
 
-//        assertTrue(exampleDao.test()==ld);asdadqw
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // 날짜를 문자열로 변환
+        String dateString = dateFormat.format(now);
+
+        System.out.println("현재 날짜 및 시간: " + dateString);
+
+        assertTrue(now.equals(exampleDao.test()));
     }
-
 }
