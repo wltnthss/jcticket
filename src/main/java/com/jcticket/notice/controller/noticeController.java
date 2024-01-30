@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 2024-01-30             jisoo Son             최초 생성
  */
 @Controller
-@RequestMapping("/notice")
 public class noticeController {
 
-    @GetMapping("/noticePage")
+    @GetMapping("/notice")
     public String noticePage(){
         return "/notice/notice";
     }
