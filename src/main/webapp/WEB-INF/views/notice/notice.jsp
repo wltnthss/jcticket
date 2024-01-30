@@ -14,9 +14,9 @@
         <div class="notice-table">
             <table>
                 <tr>
-                    <th>구분</th>
-                    <th style="width: 600px">제목</th>
-                    <th style="width: 200px">티켓오픈 일시</th>
+                    <th>번호</th>
+                    <th style="width: 200px">제목</th>
+                    <th style="width: 600px">내용</th>
                     <th>조회수</th>
                 </tr>
             </table>
