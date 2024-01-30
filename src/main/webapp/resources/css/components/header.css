@@ -100,6 +100,14 @@
     padding-top: 22px
 }
 
+.play-top-right .notice{
+    background: url(https://lh3.google.com/u/0/d/1YANiqrqtV2sD3O_0tUcdKrBVQ2Bn1tkN=w2560-h1347-iv1)no-repeat center top;;
+    background-size: contain;
+    right: 115px;
+    padding: 2px;
+    padding-top: 22px
+}
+
 .play-top-right a{
     display: inline-block;
     height: 22px;
