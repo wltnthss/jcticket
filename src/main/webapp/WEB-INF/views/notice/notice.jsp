@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Gram17
-  Date: 2024-01-30
-  Time: 오후 1:43
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -31,5 +24,7 @@
     </div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</head>
+<body>
 </body>
 </html>
