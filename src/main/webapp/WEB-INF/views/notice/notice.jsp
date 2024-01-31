@@ -13,6 +13,14 @@
     <div class="notice-container">
         <h1 class="notice-text">공지사항</h1>
 
+        <div class="notice-category">
+            <a id="notice-order1" class="on">등록순</a>
+            <a id="notice-order2" class="">조회순</a>
+            <div class="notice-search">
+                <input type="text" placeholder="궁금하신 내용을 입력해주세요"><a style="cursor: pointer"></a>
+            </div>
+        </div>
+
         <div class="notice-table">
             <table>
                 <tr>
@@ -27,7 +35,7 @@
                     <tr class="notice-tr">
                         <td class="notice-td">${NoticeDto.notice_seq}</td>
                         <td class="notice-td">${NoticeDto.notice_title}</td>
-                        <td class="notice-td">${NoticeDto.notice_content}</td>
+                        <td class="notice-td title">${NoticeDto.notice_content}</td>
                         <td class="notice-td"><fmt:formatDate value="${NoticeDto.notice_reg_at}" pattern="yyyy-MM-dd" type="date"/></td>
                         <td class="notice-td">${NoticeDto.notice_view_cnt}</td>
                     </tr>
