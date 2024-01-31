@@ -14,5 +14,5 @@ import org.springframework.stereotype.Service;
  * 2024-01-30             jisoo Son             최초 생성
  */
 @Service
-public class noticeService {
+public interface noticeService {
 }
