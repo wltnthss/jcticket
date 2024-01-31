@@ -45,6 +45,6 @@ exampleDao exampleDao;
 
         System.out.println("현재 날짜 및 시간: " + dateString);
 
-        assertTrue(now.equals(exampleDao.test()));
+        assertTrue(dateString.equals(exampleDao.test()));
     }
 }
