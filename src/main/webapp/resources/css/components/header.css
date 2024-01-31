@@ -71,41 +71,56 @@
 }
 
 .play-top-right .my-page{
-    background: url(https://lh3.google.com/u/0/d/1cRbX274bQ-RYPx2fTo5_kCmQiZdr0-is=w1680-h1398-iv1)no-repeat center top;
-    background-size: contain;
+    width: 22px;
     right: 33px;
-    padding-top: 22px
-
 }
 
+.play-top-right .my-page .mp_icon{
+    width: 22px;
+    right: 33px;
+}
+
+
 .play-top-right .customer-service{
-    background: url(https://lh3.google.com/u/0/d/1pUPrt2Do7EeDCYQ5PblA2EIJqI2Z0_ln=w2560-h1398-iv1)no-repeat center top;;
-    background-size: contain;
+    width: 22px;
     right: -11px;
-    padding-top: 22px
+}
+
+.play-top-right .customer-service .cs_icon{
+    width: 22px;
+    right: -11px;
 }
 
 .play-top-right .login{
-    background: url(https://lh3.google.com/u/0/d/1lm3__8bTghnamlFXm6SHAIVNobxkwIOU=w2560-h1398-iv1)no-repeat center top;;
-    background-size: contain;
+    width: 22px;
     right: 75px;
-    padding-top: 22px
+}
+
+.play-top-right .login .login_icon{
+    width: 22px;
+    right: 75px;
 }
 
 .play-top-right .logout{
+    width: 22px;
+    right: 75px;
+}
+
+.play-top-right .logout .logout_icon{
     display: none;
-    background: url(https://lh3.google.com/u/0/d/1pN1jpIWmEaydd1QTOBox9EhBqeUpr6kZ=w2560-h1398-iv1)no-repeat center top;;
-    background-size: contain;
-    right: 81px;
-    padding-top: 22px
+    width: 22px;
+    right: 75px;
 }
 
 .play-top-right .notice{
-    background: url(https://lh3.google.com/u/0/d/1YANiqrqtV2sD3O_0tUcdKrBVQ2Bn1tkN=w2560-h1347-iv1)no-repeat center top;;
-    background-size: contain;
     right: 115px;
-    padding: 2px;
-    padding-top: 22px
+    width: 27px;
+    margin-right: 5px;
+}
+
+.play-top-right .notice .notice_icon{
+    right: 115px;
+    width: 27px;
 }
 
 .play-top-right a{
