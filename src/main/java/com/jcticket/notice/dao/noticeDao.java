@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  * 2024-01-30             jisoo Son             최초 생성
  */
 @Repository
-public class noticeDao {
+public interface noticeDao {
 }
