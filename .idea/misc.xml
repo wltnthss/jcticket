@@ -8,10 +8,6 @@
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
-<<<<<<< HEAD
-=======
-
->>>>>>> 1477ba340b5916b3621c518e585ccdcc10e9daac
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
