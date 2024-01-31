@@ -1,0 +1,37 @@
+*{
+    font-family:  fonPretendard Variable,Noto Sans KR,Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,sans-serif;
+    box-sizing: border-box;
+}
+hr{
+    border: 0.5px solid lightgray;
+}
+.notice-container{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    align-items: center;
+}
+.notice-text{
+    text-align: center;
+    font-size: 40px;
+}
+.notice-table{
+    padding-top: 30px;
+    width: 1200px;
+    margin: 0 auto 37px auto;
+    border-bottom: 1px solid #999;
+}
+.notice-table table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.notice-table th{
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background: #f6f6f6;
+    border-top: 2px solid #333;
+}
