@@ -50,6 +50,6 @@ public class exampleController {
 
         model.addAttribute("data", data);
 
-        return "test";
+        return "ticketing/ticketing";
     }
 }

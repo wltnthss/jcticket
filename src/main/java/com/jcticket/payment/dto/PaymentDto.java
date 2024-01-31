@@ -13,11 +13,6 @@ import lombok.*;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Getter
-@Setter
-@NoArgsConstructor
-//@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+
 public class PaymentDto {
 }
