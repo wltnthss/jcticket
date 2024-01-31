@@ -35,3 +35,10 @@ hr{
     background: #f6f6f6;
     border-top: 2px solid #333;
 }
+.notice-tr{
+    border-top: 1px solid lightgray;
+}
+.notice-td{
+    text-align: center;
+    padding: 20px 0;
+}
