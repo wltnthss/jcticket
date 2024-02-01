@@ -34,8 +34,8 @@
                 <c:forEach items="${list}" var="NoticeDto">
                     <tr class="notice-tr">
                         <td class="notice-td">${NoticeDto.notice_seq}</td>
-                        <td class="notice-td title"><a href="<c:url value="/notice/notice_seq=${NoticeDto.notice_seq}"/>">${NoticeDto.notice_title}</a></td>
-                        <td class="notice-td content"><a href="<c:url value="/notice/notice_seq=${NoticeDto.notice_seq}"/>">${NoticeDto.notice_content}</a></td>
+                        <td class="notice-td title"><a href="/notice/notice_seq=${NoticeDto.notice_seq}">${NoticeDto.notice_title}</a></td>
+                        <td class="notice-td content"><a href="/notice/notice_seq=${NoticeDto.notice_seq}">${NoticeDto.notice_content}</a></td>
                         <td class="notice-td"><fmt:formatDate value="${NoticeDto.notice_reg_at}" pattern="yyyy-MM-dd" type="date"/></td>
                         <td class="notice-td">${NoticeDto.notice_view_cnt}</td>
                     </tr>
