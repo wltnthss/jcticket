@@ -6,5 +6,16 @@
     <select id="test" resultType="String">
         select sysdate()
     </select>
+
+    <select id="selectAll" resultType="NoticeDto">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+    </select>
 </mapper>
 

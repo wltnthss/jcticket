@@ -9,7 +9,7 @@
 
     <bean id = "dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://172.30.1.75:3306/jcticket?useUnicode=true&amp;characterEncoding=utf8" ></property>
+        <property name="url" value="jdbc:mysql://192.168.129.123:3306/jcticket?useUnicode=true&amp;characterEncoding=utf8" ></property>
         <property name="username" value="js"></property>
         <property name="password" value="1q2w3e4R$"></property>
     </bean>

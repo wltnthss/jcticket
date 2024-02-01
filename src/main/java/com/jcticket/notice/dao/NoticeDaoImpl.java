@@ -1,8 +1,11 @@
 package com.jcticket.notice.dao;
 
+import com.jcticket.notice.dto.NoticeDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * packageName :  com.jcticket.notice.dao
@@ -26,5 +29,10 @@ public class NoticeDaoImpl implements NoticeDao{
     @Override
     public String test() throws Exception {
         return sqlSession.selectOne(namespace + "test");
+    }
+
+    @Override
+    public List<NoticeDto> list() throws Exception {
+        return sqlSession.selectList(namespace+"selectAll");
     }
 }

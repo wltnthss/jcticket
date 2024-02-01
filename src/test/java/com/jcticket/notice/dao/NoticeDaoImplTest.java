@@ -30,4 +30,10 @@ public class NoticeDaoImplTest {
     public void test() throws Exception {
         System.out.println("noticeDao.test() => " + noticeDao.test());
     }
+
+    @Test
+    public void selectAllTest() throws Exception {
+        System.out.println("noticeDao selectAll => " + noticeDao.list());
+        assertTrue(noticeDao.list().size() == 12);
+    }
 }
