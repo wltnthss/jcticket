@@ -1,10 +1,10 @@
-package com.jcticket.ticketing.dao;
+package com.jcticket.ticketing.service;
 
-import org.springframework.stereotype.Repository;
+import com.jcticket.ticketing.dto.TicketingDto;
 
 /**
- * packageName    : com.jcticket.ticketing.dao
- * fileName       : TicketDao
+ * packageName    : com.jcticket.ticketing.service
+ * fileName       : TicketService
  * author         : 조영상
  * date           : 1/31/24
  * description    : 자동 주석 생성
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Repository
-public interface TicketDao {
+public interface TicketingService {
+    String showNow() throws Exception;
+    TicketingDto getTicketingInfo(int ticketingId) throws Exception;
+
 }

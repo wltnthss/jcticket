@@ -22,8 +22,7 @@
     </beans:bean>
 
     <!--view-controller path="/register/add" view-name="registerForm"/-->
-    <context:component-scan base-package="com.my" />
-    <context:component-scan base-package="com.jcticket" />
+    <context:component-scan base-package="com.*" />
 
     <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <beans:property name="defaultErrorView" value="error"/>

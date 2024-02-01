@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jcticket.example.mybatis.mapper.ticketing.ticketingMapper">
+    <select id="getNow" resultType="String">
+        SELECT sysdate()
+    </select>
+    <!--
+    <select id="selectTicketingInfo" parameterType="int" resultType="TicketingDto">
+        SELECT ticketing_id, ticketing_at, ticketing_status, play_name, stage_name, viewing_at, ticketing_cnt, choice_show_seat, cancelable_at
+        FROM ticketing
+    </select>
+    -->
+</mapper>

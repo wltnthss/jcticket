@@ -15,12 +15,12 @@
     <link href="${pageContext.request.contextPath}/resources/css/ticketing/ticketing.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    ${data}
     <button class="btn">결제하기</button>
     <div id="modal" style="display: none">
         <div class="content">
 
         </div>
-    </div>
     </div>
 </body>
 </html>
