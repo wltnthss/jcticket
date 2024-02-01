@@ -1,0 +1,560 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body{
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.loginpage{
+    text-align: center;
+}
+
+.loginpage img{
+    vertical-align: top;
+}
+
+.login-header{
+    height: 100px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.login-headerArea{
+    position: relative;
+    margin: 0 auto;
+    width: 960px;
+    height: 100px;
+    text-align: left;
+}
+
+.login-headerArea h1{
+    margin-top: 10px;
+    height: 100px;
+    text-align: center;
+}
+
+.login-headerArea h1 .login-top-left{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.login-top-left img{
+    height: 70px;
+    margin-top: 15px;
+}
+
+.login-headerArea h1 .login-top-center{
+    height: 100px;
+    line-height: 100px;
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+}
+
+.login-headerArea .login-top-right{
+    position: absolute;
+    height: 39px;
+    right: 0;
+    top: 30px;
+    text-align: right;
+}
+
+
+.login-top-right .signup-logo{
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    color: #555;
+    text-decoration: none;
+}
+
+.login-top-right .signup-wrap{
+    display: inline-block;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 88px;
+    height: 38px;
+    line-height: 39px;
+    text-align: center;
+    border: solid 1px #ebebeb;
+    border-radius: 3px;
+    position: relative;
+    background-color: #fff;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.login-content{
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    width: 958px;
+    height: 554px;
+    border: solid 1px #d8d8d8;
+    text-align: center;
+    background-color: #fff;
+}
+
+.login-form-wrap{
+    margin: 0 auto;
+    position: relative;
+    width: 760px;
+    text-align: left;
+}
+
+.loginForm{
+    float: left;
+    width: 360px;
+}
+
+#spanMemID{
+    display: block;
+    padding: 9px 14px 11px;
+    width: auto;
+    height: 50px;
+    line-height: 28px;
+    box-sizing: border-box;
+    position: relative;
+    zoom: 1;
+    text-align: left;
+    vertical-align: middle;
+    box-shadow: inset 0 1px 2px 0 #fafafa;
+    border: solid 1px #ebebeb;
+    border-top-color: #d8d8d8;
+    border-left-color: #d8d8d8;
+    border-radius: 3px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+#spanMemPWD{
+    display: block;
+    padding: 9px 14px 11px;
+    width: auto;
+    height: 50px;
+    line-height: 28px;
+    box-sizing: border-box;
+    position: relative;
+    zoom: 1;
+    text-align: left;
+    vertical-align: middle;
+    box-shadow: inset 0 1px 2px 0 #fafafa;
+    border: solid 1px #ebebeb;
+    border-top-color: #d8d8d8;
+    border-left-color: #d8d8d8;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+#spanMemID label{
+    display: none;
+    position: absolute;
+    left: 14px;
+    top: 1px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+}
+
+#spanMemPWD label{
+    display: none;
+    position: absolute;
+    left: 14px;
+    top: 1px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+}
+
+#SMemID{
+    padding: 0;
+    height: 28px;
+    width: 332px;
+    line-height: 27px;
+    font-size: 16px;
+    overflow: hidden;
+    border-radius: 0;
+    outline-style: none;
+    vertical-align: top;
+    border: hidden;
+}
+
+#SMemPWD{
+    padding: 0;
+    height: 28px;
+    width: 332px;
+    line-height: 27px;
+    font-size: 16px;
+    overflow: hidden;
+    border-radius: 0;
+    outline-style: none;
+    vertical-align: top;
+    border: hidden;
+}
+
+fieldset{
+    display: block;
+    margin-inline-start: 2px;
+    margin-inline-end: 2px;
+    padding-block-start: 0.35em;
+    padding-block-end: 0.625em;
+    min-inline-size: min-content;
+}
+
+.loginForm-chk{
+    margin-top: 20px;
+
+}
+
+.loginForm-chk .loginKeep{
+    position: relative;
+    display: inline-block;
+    zoom: 1;
+    text-align: left;
+    vertical-align: top;
+}
+
+.loginKeep label{
+    position: relative;
+    bottom: 4px;
+    z-index: 2;
+    padding: 0 0 0 26px;
+    min-height: 20px;
+    line-height: 20px;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#loginBtn{
+    margin: 20px 0 0 0;
+    width: 360px;
+}
+
+.btnWrap{
+    height: 28px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 0;
+    display: block;
+    text-indent: 0;
+    zoom: 1;
+    vertical-align: top;
+}
+
+.btnWrap .txt{
+    padding: 0 10px;
+    line-height: 28px;
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    text-indent: 0;
+    cursor: pointer;
+    display: inline-block;
+    zoom: 1;
+    text-align: center;
+    vertical-align: top;
+}
+
+.loginEtc{
+    position: relative;
+    margin: 11px 0 0 0;
+    margin-left: 20px;
+    padding-bottom: 12px;
+    min-height: 30px;
+    text-align: left;
+    font-size: 12px;
+    color: #555;
+}
+
+.lnk_etc{
+    line-height: 30px;
+    color: #666;
+    display: inline-block;
+    margin-right: 30px;
+    zoom: 1;
+    text-align: left;
+    vertical-align: middle;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.loginSocial{
+    padding: 15px 0 0 0;
+}
+
+ul{
+    margin: 0;
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.loginSocial li{
+    margin-top: 10px;
+}
+
+li{
+    list-style: none;
+}
+
+.btn_social{
+    display: block;
+    color: #555;
+    text-decoration: none;
+}
+
+.socialWrap{
+    display: block;
+    height: 38px;
+    border: solid 1px #ebebeb;
+    border-right: solid 1px #d8d8d8;
+    border-bottom: solid 1px #d8d8d8;
+    background-color: #fff;
+}
+
+.social_icon_naver{
+    float: left;
+    width: 38px;
+    height: 38px;
+    border-right: solid 1px #e5e5e5;
+    display: inline-block;
+    zoom: 1;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: top;
+}
+
+.naver_icon{
+    position: relative;
+    left: 8px;
+    top: 8px;
+}
+
+.social_icon_kakao{
+    float: left;
+    width: 38px;
+    height: 38px;
+    border-right: solid 1px #e5e5e5;
+    display: inline-block;
+    zoom: 1;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: top;
+}
+
+.kakao_icon{
+    position: relative;
+    left: 8px;
+    top: 8px;
+}
+
+.social_icon_google{
+    float: left;
+    width: 38px;
+    height: 38px;
+    border-right: solid 1px #e5e5e5;
+    display: inline-block;
+    zoom: 1;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: top;
+}
+
+.google_icon{
+    position: relative;
+    left: 8px;
+    top: 8px;
+}
+
+.socialWrap .txt{
+    display: block;
+    margin-left: 39px;
+    line-height: 38px;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+}
+
+#loginBotBn{
+    margin-top: 20px;
+}
+
+#loginBotBn img{
+    vertical-align: top;
+    overflow: clip;
+}
+
+img{
+    border: 0 none;
+}
+
+.login-footer{
+    height: 50px;
+    text-align: center;
+}
+
+.login-bottom-copyright{
+    margin: 0 auto;
+    width: 960px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #666;
+    position: relative;
+}
+
+address{
+    display: block;
+    font-size: 12px;
+}
+
+strong{
+    font-weight: bold;
+}
+
+#userAgency_Tab{
+    border-bottom-color: #6699cc;
+    margin-bottom: 20px;
+    display: table;
+    width: 360px;
+    table-layout: fixed;
+    border-bottom: solid 1px #d8d8d8;
+}
+
+#ulTab{
+    display: table-row;
+    display: block;
+    list-style-type: disc;
+    padding: 0;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin-bottom: 0;
+}
+
+#userTab{
+    width: 180px;
+    position: relative;
+    display: table-cell;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+}
+
+#agencyTab{
+    width: 180px;
+    position: relative;
+    display: table-cell;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#userTabA{
+    border-top-color: #6699cc;
+    z-index: 2;
+    background-color: #fff;
+    position: relative;
+    display: block;
+    height: 50px;
+    text-align: center;
+    border : solid 1px #d8d8d8;
+    color: #555;
+    text-decoration: none;
+    cursor: pointer;
+}
+#agencyTabA{
+    border-top-color: #6699cc;
+    z-index: 2;
+    background-color: #fff;
+    position: relative;
+    display: block;
+    height: 50px;
+    text-align: center;
+    color: #555;
+    border : solid 1px #d8d8d8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tabTxt{
+    color: #6699cc;
+    font-weight: bold;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 14px;
+}
+
+.ad .ad_img{
+    width: 360px;
+    height: 567px;
+    float: right;
+    position: relative;
+    bottom: 73px;
+    left: 20px;
+
+}

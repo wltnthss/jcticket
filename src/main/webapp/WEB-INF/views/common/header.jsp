@@ -16,7 +16,7 @@
   <!-- 좌측 -->
   <div class="play-top-left">
     <h1>
-      <a href="메인페이지 이동" class="top-main-logo">
+      <a href="/" class="top-main-logo">
         <img src="resources/img/components/로고1.png" alt class="fixed"/>
         <img src="resources/img/components/로고2.png" alt class="trans"/>
       </a>
@@ -41,7 +41,7 @@
         <a href="/notice" class="notice" style="width: 22px;">
             <img src="resources/img/components/공지사항.png" class="notice_icon">
         </a>
-        <a href="로그인" class="login" style="width: 22px;">
+        <a href="/login" class="login" style="width: 22px;">
             <img src="resources/img/components/로그인.png" class="login_icon">
         </a>
         <a href="로그아웃" class="logout" style="width: 22px;">
