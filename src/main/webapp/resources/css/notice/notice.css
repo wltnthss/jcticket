@@ -74,7 +74,6 @@ hr{
 .notice-search input {
     display: inline-block;
     border: 0 none;
-    margin-left: 15px;
     width: 335px;
     height: 41px;
     line-height: 41px;
@@ -116,11 +115,23 @@ hr{
 .notice-tr{
     border-top: 1px solid lightgray;
 }
+.notice-tr a{
+    text-decoration: none;
+    color: black;
+}
 .notice-td{
     text-align: center;
     padding: 20px 0;
 }
+.notice-td.title{
+    font-weight: bold;
+}
 .notice-td.title:hover{
+    text-decoration:underline;
+    text-underline-position : under;
+    cursor: pointer;
+}
+.notice-td.content:hover{
     text-decoration:underline;
     text-underline-position : under;
     cursor: pointer;

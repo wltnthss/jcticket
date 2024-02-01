@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -34,8 +34,8 @@
                 <c:forEach items="${list}" var="NoticeDto">
                     <tr class="notice-tr">
                         <td class="notice-td">${NoticeDto.notice_seq}</td>
-                        <td class="notice-td">${NoticeDto.notice_title}</td>
-                        <td class="notice-td title">${NoticeDto.notice_content}</td>
+                        <td class="notice-td title"><a href="<c:url value="/notice/notice_seq=${NoticeDto.notice_seq}"/>">${NoticeDto.notice_title}</a></td>
+                        <td class="notice-td content"><a href="<c:url value="/notice/notice_seq=${NoticeDto.notice_seq}"/>">${NoticeDto.notice_content}</a></td>
                         <td class="notice-td"><fmt:formatDate value="${NoticeDto.notice_reg_at}" pattern="yyyy-MM-dd" type="date"/></td>
                         <td class="notice-td">${NoticeDto.notice_view_cnt}</td>
                     </tr>
@@ -45,6 +45,9 @@
     </div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/resources/js/notice/notice.js"></script>
 </head>
 <body>
 </body>
