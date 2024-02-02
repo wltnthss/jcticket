@@ -57,5 +57,10 @@ public class NoticeDaoImpl implements NoticeDao{
         return sqlSession.selectList(namespace+"pagingList", pagingParams);
     }
 
+    @Override
+    public List<NoticeDto> pagingViewOrderList(Map<String, Integer> pagingParams) {
+        return sqlSession.selectList(namespace+"pagingViewOrderList", pagingParams);
+    }
+
 
 }

@@ -50,10 +50,23 @@
             notice_view_cnt
         from
             notice
-        <if test="sort == null">
         order by
             notice_seq desc
-        </if>
+        limit
+            #{start}, #{limit}
+    </select>
+
+    <select id="pagingViewOrderList" resultType="NoticeDto" parameterType="java.util.HashMap">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        order by
+            notice_view_cnt desc
         limit
             #{start}, #{limit}
     </select>

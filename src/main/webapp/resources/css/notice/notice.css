@@ -80,6 +80,7 @@ hr{
     border-top: 3px solid #fff;
     position: relative;
     font-weight: bold;
+    text-decoration: none;
 }
 .notice-category > a:hover {
     cursor: pointer;
@@ -93,24 +94,6 @@ hr{
     position: absolute;
     top: 20px;
     left: -15px;
-}
-.notice-category > a.on:after {
-    content: "↓";
-    display: block;
-    font-size: 14px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #000;
-    width: 12px;
-    height: 55px;
-    font-weight: normal;
-    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
-}
-.notice-category > a.on {
-    color: #333;
-    padding-right: 12px;
-    border-top: 3px solid #ec7d2c;
 }
 .notice-search{
     position: absolute;

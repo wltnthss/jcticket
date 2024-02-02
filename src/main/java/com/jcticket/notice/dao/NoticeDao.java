@@ -28,4 +28,6 @@ public interface NoticeDao {
     // 상세보기 진입시 조회수 1씩 증가
     int addViewCnt(int no) throws Exception;
     List<NoticeDto> pagingList(Map<String, Integer> pagingParams);
+
+    List<NoticeDto> pagingViewOrderList(Map<String, Integer> pagingParams);
 }
