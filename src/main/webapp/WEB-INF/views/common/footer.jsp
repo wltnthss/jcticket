@@ -15,7 +15,7 @@
 <footer class="play-bottom" id="play-bottom">
     <div class="cont">
         <div class="play-bottom-txt">
-            <a href="메인페이지 이동" class="bottom-main-logo">
+            <a href="/" class="bottom-main-logo">
                 <img src="/resources/img/components/로고1.png" class="logout_icon">
             </a>
             <div class="play-bottom-copyright">
