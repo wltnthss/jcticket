@@ -1,5 +1,5 @@
 *{
-    font-family:  fonPretendard Variable,Noto Sans KR,Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,sans-serif;
+    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
     box-sizing: border-box;
 }
 hr{
@@ -15,6 +15,83 @@ hr{
     text-align: center;
     font-size: 40px;
 }
+
+/*등록순,조회순,검색 시작*/
+.notice-category {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+.notice-category > a {
+    display: inline-block;
+    font-size: 15px;
+    color: #333;
+    margin-right: 30px;
+    height: 50px;
+    line-height: 50px;
+    border-top: 3px solid #fff;
+    position: relative;
+    font-weight: bold;
+}
+.notice-category > a:hover {
+    cursor: pointer;
+}
+.notice-category > #notice-order2:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 15px;
+    background: #ddd;
+    position: absolute;
+    top: 20px;
+    left: -15px;
+}
+.notice-category > a.on:after {
+    content: "↓";
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #000;
+    width: 12px;
+    height: 55px;
+    font-weight: normal;
+    font-family: 'Noto Sans KR','NanumBarunGothic','맑은 고딕','Malgun Gothic',sans-serif;
+}
+.notice-category > a.on {
+    color: #333;
+    padding-right: 12px;
+    border-top: 3px solid #ec7d2c;
+}
+.notice-search{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid #333;
+    font-size: 0;
+}
+.notice-search input {
+    display: inline-block;
+    border: 0 none;
+    width: 335px;
+    height: 41px;
+    line-height: 41px;
+    font-size: 14px;
+    color: #999;
+    vertical-align: top;
+    padding-left: 10px;
+}
+.notice-search a {
+    display: inline-block;
+    width: 50px;
+    height: 41px;
+    background: url(http://tkfile.yes24.com/imgNew/common/pf-srch-w.png)no-repeat center center;
+    vertical-align: top;
+}
+/*등록순,조회순,검색 끝*/
+
+/*테이블 시작*/
 .notice-table{
     padding-top: 30px;
     width: 1200px;
@@ -35,3 +112,28 @@ hr{
     background: #f6f6f6;
     border-top: 2px solid #333;
 }
+.notice-tr{
+    border-top: 1px solid lightgray;
+}
+.notice-tr a{
+    text-decoration: none;
+    color: black;
+}
+.notice-td{
+    text-align: center;
+    padding: 20px 0;
+}
+.notice-td.title{
+    font-weight: bold;
+}
+.notice-td.title:hover{
+    text-decoration:underline;
+    text-underline-position : under;
+    cursor: pointer;
+}
+.notice-td.content:hover{
+    text-decoration:underline;
+    text-underline-position : under;
+    cursor: pointer;
+}
+/*테이블 끝*/
