@@ -1,11 +1,16 @@
 package com.jcticket.notice.dao;
 
+import com.jcticket.notice.dto.NoticeDto;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * packageName :  com.jcticket.notice.dao
  * fileName : NoticeDao
  * author :  jisoo Son
  * date : 2024-01-31
- * description :
+ * description : 공지사항 Dao
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------
@@ -13,4 +18,14 @@ package com.jcticket.notice.dao;
  */
 public interface NoticeDao {
     String test() throws Exception;
+
+    List<NoticeDto> list() throws Exception;
+    NoticeDto select(int no) throws Exception;
+
+    // 전체 notice 리스트 개수 조회
+    int count() throws Exception;
+
+    // 상세보기 진입시 조회수 1씩 증가
+    int addViewCnt(int no) throws Exception;
+    List<NoticeDto> pagingList(Map<String, Integer> pagingParams);
 }

@@ -1,15 +1,19 @@
 package com.jcticket.notice.dao;
 
+import com.jcticket.notice.dto.NoticeDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * packageName :  com.jcticket.notice.dao
  * fileName : NoticeDaoImpl
  * author :  jisoo Son
  * date : 2024-01-31
- * description :
+ * description : 공지사항 DaoImpl
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------
@@ -27,4 +31,31 @@ public class NoticeDaoImpl implements NoticeDao{
     public String test() throws Exception {
         return sqlSession.selectOne(namespace + "test");
     }
+
+    @Override
+    public List<NoticeDto> list() throws Exception {
+        return sqlSession.selectList(namespace+"selectAll");
+    }
+
+    @Override
+    public NoticeDto select(int no) throws Exception {
+        return sqlSession.selectOne(namespace+"select", no);
+    }
+
+    @Override
+    public int count() throws Exception {
+        return sqlSession.selectOne(namespace+"count");
+    }
+
+    @Override
+    public int addViewCnt(int no) throws Exception {
+        return sqlSession.update(namespace+"addViewCnt", no);
+    }
+
+    @Override
+    public List<NoticeDto> pagingList(Map<String, Integer> pagingParams) {
+        return sqlSession.selectList(namespace+"pagingList", pagingParams);
+    }
+
+
 }
