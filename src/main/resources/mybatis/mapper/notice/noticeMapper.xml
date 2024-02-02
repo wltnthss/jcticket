@@ -16,6 +16,63 @@
             notice_view_cnt
         from
             notice
+        order by
+            notice_seq desc
     </select>
+
+    <select id="select" resultType="NoticeDto" parameterType="int">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        where
+            notice_seq = #{notice_seq}
+    </select>
+
+    <select id="count" resultType="int">
+        select
+            count(*)
+        from
+            notice
+    </select>
+
+    <select id="pagingList" resultType="NoticeDto" parameterType="java.util.HashMap">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        <if test="sort == null">
+        order by
+            notice_seq desc
+        </if>
+        <if test="sort == null">
+            order by
+            notice_seq desc
+        </if>
+        <if test="sort == null">
+            order by
+            notice_seq desc
+        </if>
+        limit
+            #{start}, #{limit}
+    </select>
+
+    <update id="addViewCnt" parameterType="int">
+        update
+            notice
+        set
+            notice_view_cnt = notice_view_cnt + 1
+        where
+            notice_seq = #{notice_seq}
+    </update>
 </mapper>
 
