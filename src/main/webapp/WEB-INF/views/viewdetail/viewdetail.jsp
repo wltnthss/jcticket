@@ -12,10 +12,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<%--    jQuery--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/resources/css/viewdetail/jquery-ui.css">
     <style>
         body {
-            /*margin: 0;*/
-            /*place-items: center;*/
             margin-right: 5%;
             margin-left: 30px;
         }
@@ -23,23 +26,20 @@
         .container{
             display: grid;
             width: 100%;
-            padding-top: 80px;
+            margin-top: 20px;
+            padding: 80px 24px 0 24px;
             border-top: solid rgba(0, 0, 0, 0.1);
-            padding-left: 24px;
-            padding-right: 24px;
             place-items: center;
         }
 
         .category {
             width: 1200px;
             font-size: 14px;
-            /*float: left;*/
         }
 
         .two {
             width: 1200px;
             font-size: 40px;
-            /*float: left;*/
         }
         .big-title{
             margin-top: 10px;
@@ -68,27 +68,29 @@
         }
 
         .play-img img {
-            width: 400px;
+            width: 430px;
         }
 
         .three {
             display: flex;
-            position: relative;
-            right: 90px;
-            /*place-items: normal;*/
-            /*float: left;*/
+            width: 1200px;
+            place-items: center;
         }
 
         .three-one-left {
-            /*display: flex;*/
             float: left;
             flex-direction: column;
-            margin-right: 60px;
+            margin-right: 70px;
+            width: 430px;
         }
 
         .star-review {
             display: flex;
             flex-direction: row;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 15px;
+            border-bottom: solid rgba(0, 0, 0, 0.1);
         }
 
         .review {
@@ -98,7 +100,124 @@
         .three-one-right {
             display: flex;
             flex-direction: column;
+            width: 700px;
         }
+
+        .play-info dt {
+            font-weight: bold;
+            float: left;
+        }
+
+        .play-info dd {
+            margin-left: 100px;
+            margin-bottom: 15px;
+        }
+
+        .playtime-info dt {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        .playtime-info dd {
+            margin-left: 0;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .playtime-info {
+            border-top: solid rgba(0, 0, 0, 0.5);
+            border-bottom: solid rgba(0, 0, 0, 0.5);
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+
+        ul {
+            float: left;
+            list-style-type: none;
+        }
+
+        li {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+        .price-zone {
+            width: 560px;
+            background-color: rgba(0, 0, 0, 0.03);
+            padding: 10px 0 10px 20px;
+            margin-top: 0;
+        }
+        .price-red {
+            color: red;
+        }
+
+        .four-one {
+            display: flex;
+            width: 1200px;
+        }
+
+        .fourLeft {
+            border-top: solid 1px rgba(0, 0, 0, 0.3);
+            border-right: solid 1px darkorange;
+            border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+            border-left: solid 1px rgba(0, 0, 0, 0.3);
+            padding: 30px 50px;
+            margin-top: 40px;
+        }
+
+        .four-text {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: solid 2px black;
+        }
+
+        .calender {
+            display: flex;
+        }
+
+        #datepicker {
+            width: 320px;
+            border-right: solid rgba(0, 0, 0, 0.1);
+        }
+
+        .showing {
+            width: 230px;
+        }
+
+        .showing a {
+            display: block;
+            margin-left: 30px;
+            margin-bottom: 10px;
+            border: solid rgba(0, 0, 0, 0.1);
+            padding: 5px 20px;
+            text-align: center;
+        }
+
+        .fourRight {
+            border-right: solid 1px rgba(0, 0, 0, 0.3);
+            border-bottom: solid 1px rgba(0, 0, 0, 0.3);
+            border-top: solid 1px rgba(0, 0, 0, 0.3);
+            padding: 30px 50px;
+            margin-top: 40px;
+        }
+
+        .fourLeft, .fourRight {
+            flex: 1;
+        }
+
+        .seatRemain dt{
+            float: left;
+        }
+
+        .seatRemain dd {
+            float: left;
+            margin-left: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -139,8 +258,8 @@
             <div class="three-one">
                 <div class="three-one-left">
                     <div class="play-img">
-                        <img src='/resources/images/viewdetail/testposter.jpg'/>
-    <%--                    <a href="#" class="rn-product-movie" style="display:none;"><img src="http://tkfile.yes24.com/imgNew/common/kv-movie.png" alt="" /></a>--%>
+                        <img src='/resources/img/viewdetail/testposter.jpg'/>
+<%--                        <a href="#" class="rn-product-movie" style="display:none;"><img src="http://tkfile.yes24.com/imgNew/common/kv-movie.png" alt="" /></a>--%>
                     </div>
     <%--                review-mini안에 별점, 평균별점, 리뷰 수 등등 들어감--%>
                     <div class="star-review">
@@ -161,32 +280,28 @@
                     <div class="play-info">
                         <dl>
     <%--                        dt에 float : left 주면 dt dd 일렬로 나옴--%>
-                            <dt style="float: left">등급</dt>
-                            <dd>&nbsp;12세 이상 관람가</dd>
+                            <dt>등급</dt>
+                            <dd>&nbsp;전체이용가</dd>
                             <dt>관람시간</dt>
-                            <dd>&nbsp;150분</dd>
+                            <dd>&nbsp;60분</dd>
                             <dt>출연</dt>
-                            <dd>-</dd>
-                            <dt id="dtPrice" style="float: left">가격</dt>
+                            <dd>&nbsp;개</dd>
+                            <dt id="dtPrice">가격</dt>
                             <dd id="ddPrice">
-
     <%--                            price-zone 마진 없애면 동일선상으로 나옴--%>
                                 <ul class="price-zone">
                                     <div id="seat-grade">
                                         <li>
                                             VIP석
-                                            <span class="price-red">99,000</span>
-                                            원
+                                            <span class="price-red">99,000</span>원
                                         </li>
                                         <li>
                                             R석
-                                            <span class="price-red">79,000</span>
-                                            원
+                                            <span class="price-red">79,000</span>원
                                         </li>
                                         <li>
                                             S석
-                                            <span class="price-red">59,000</span>
-                                            원
+                                            <span class="price-red">59,000</span>원
                                         </li>
                                     </div>
                                 </ul>
@@ -194,13 +309,11 @@
                         </dl>
                     </div>
     <%--                등급, 관람시간, 출연, 가격--%>
-
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-
     <%--                        <dd> left margin 지우면 옆으로 딱 붙음--%>
-                            <dd>화·목·금 7시 30분 / 수 3시, 7시 30분 / 토·일·공휴일 2시, 6시 30분(월 쉼)</dd>
+                            <dd>1부: 13:00, 2부: 15:00</dd>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
                         </dl>
@@ -209,8 +322,81 @@
             </div>
         </div>
 
+        <div class="four">
+            <div class="four-one">
+                <div class="fourLeft" id="leftH">
+                    <p class="four-text">
+                        날짜/시간 선택
+                    </p>
+                    <div class="calender">
+<%--                        datepicker 캘린더--%>
+                        <div id="datepicker"></div>
+                        <div class="showing">
+                            <a>1부 오후 1시 00분</a>
+                            <a>2부 오후 3시 00분</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fourRight" id="rightH">
+                    <p class="four-text">
+                        예매 가능 좌석
+                    </p>
+                    <div class="seat_info">
+                        <dl class="seatRemain">
+                            <li>
+                                VIP석
+                                <span class="price-red">99,000</span>원
+                            </li>
+                            <li>
+                                R석
+                                <span class="price-red">79,000</span>원
+                            </li>
+                            <li>
+                                S석
+                                <span class="price-red">59,000</span>원
+                            </li>
+
+<%--                            <dt>VIP석</dt>--%>
+<%--                            <dd>99,000원--%>
+<%--                                <span>&nbsp;(잔여:0석)</span>--%>
+<%--                            </dd><br>--%>
+<%--                            <dt>R석</dt>--%>
+<%--                            <dd>79,000원--%>
+<%--                                <span>&nbsp;(잔여:2석)</span>--%>
+<%--                            </dd><br>--%>
+<%--                            <dt>S석</dt>--%>
+<%--                            <dd>59,000원--%>
+<%--                                <span>&nbsp;(잔여:1석)</span>--%>
+<%--                            </dd><br>--%>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
+    <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#datepicker").datepicker();
+        });
+
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+        });
+    </script>
 </body>
 </html>
