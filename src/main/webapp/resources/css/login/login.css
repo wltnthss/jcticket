@@ -279,6 +279,9 @@ fieldset{
 }
 
 #loginBtn{
+    background-color: black;
+    color: white;
+    opacity: 0.8;
     margin: 20px 0 0 0;
     width: 360px;
 }

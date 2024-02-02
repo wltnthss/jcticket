@@ -49,6 +49,6 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="/resources/js/notice/notice.js"></script>
 </head>
-<body>
+
 </body>
 </html>

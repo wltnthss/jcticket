@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 82109
@@ -54,31 +55,32 @@
             <!-- 로그인 영역 시작 -->
             <div class="loginForm">
                 <div class="memLoginForm">
-                    <form method="post" name="LoginSub" autocomplete="off">
+                    <form action="<c:url value="/login"/>" method="POST" name="LoginSub" autocomplete="off"/>
                         <fieldset class="formFieldSet">
                                 <span id = spanMemID>
                                     <label for="SMemID">아이디</label>
-                                    <input id="SMemID" name="SMemID" type="text" autocomplete="off" placeholder="아이디">
+                                    <input id="SMemID" name="user_id" type="text" value="${cookie.user_id.value}" autocomplete="off" placeholder="아이디">
                                 </span>
                             <span id = spanMemPWD>
                                     <label for="SMemID">패스워드</label>
-                                    <input id="SMemPWD" name="SMemPWD" type="text" autocomplete="off" placeholder="비밀번호">
+                                    <input id="SMemPWD" name="user_pwd" type="password" autocomplete="off" placeholder="비밀번호">
                                 </span>
                             <div class="loginForm-chk">
                                     <span class="loginKeep">
                                         <label for="chkAutoLogin">
                                             로그인 상태 유지
                                         </label>
-                                        <input id="chkAutoLogin" name="chkAutoLogin" type="checkbox" autocapitalize="off" class="iptChk" style="zoom: 1.5;">
+                                        <input id="chkAutoLogin" name="AutoLogin" type="checkbox" autocapitalize="off" class="iptChk" style="zoom: 1.5;">
                                     </span>
                                 <span class="loginKeep">
                                         <label for="chkrememberID">
                                             아이디 저장
                                         </label>
-                                        <input id="chkrememberID" name="chkrememberID" type="checkbox" autocapitalize="off" class="iptChk" style="zoom: 1.5;">
+                                        <input id="chkrememberID" name="rememberId" type="checkbox" autocapitalize="off" class="iptChk" style="zoom: 1.5;"
+                                         value="on" ${empty cookie.user_id.value ? "":"checked"}>
                                     </span>
                             </div>
-                            <button type="button" id="loginBtn" title="로그인">
+                            <button id="loginBtn" title="로그인">
                                     <span class="btnWrap">
                                         <em class="txt">로그인</em>
                                     </span>

@@ -16,15 +16,9 @@
   <!-- 좌측 -->
   <div class="play-top-left">
     <h1>
-<<<<<<< HEAD
-      <a href="/" class="top-main-logo">
-        <img src="resources/img/components/로고1.png" alt class="fixed"/>
-        <img src="resources/img/components/로고2.png" alt class="trans"/>
-=======
       <a href="메인페이지 이동" class="top-main-logo">
         <img src="/resources/img/components/로고1.png" alt class="fixed"/>
         <img src="/resources/img/components/로고2.png" alt class="trans"/>
->>>>>>> main
       </a>
     </h1>
   </div>
@@ -38,7 +32,7 @@
   </div>
   <!-- 오른쪽 -->
     <div class="play-top-right">
-        <a href="마이페이지 이동" class="my-page" style="width: 22px;">
+        <a href="마이페이지" class="my-page" style="width: 22px;">
             <img src="/resources/img/components/마이페이지.png" class="mp_icon">
         </a>
         <a href="고객센터 이동" class="customer-service" style="width: 22px;">
