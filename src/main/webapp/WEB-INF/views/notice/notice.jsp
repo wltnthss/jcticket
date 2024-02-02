@@ -31,12 +31,6 @@
                 <th>조회수</th>
             </tr>
 
-<<<<<<< HEAD
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/notice/notice.js"></script>
-</head>
-
-=======
             <c:forEach items="${list}" var="NoticeDto">
                 <tr class="notice-tr">
                     <td class="notice-td">${NoticeDto.notice_seq}</td>
@@ -86,5 +80,6 @@
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/notice/notice.js"></script>
+<body>
 </body>
 </html>

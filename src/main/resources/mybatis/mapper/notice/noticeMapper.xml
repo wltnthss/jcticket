@@ -54,14 +54,6 @@
         order by
             notice_seq desc
         </if>
-        <if test="sort == null">
-            order by
-            notice_seq desc
-        </if>
-        <if test="sort == null">
-            order by
-            notice_seq desc
-        </if>
         limit
             #{start}, #{limit}
     </select>
