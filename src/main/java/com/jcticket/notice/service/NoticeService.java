@@ -28,6 +28,4 @@ public interface NoticeService {
     List<NoticeDto> pagingList(int page, String sort) throws Exception;
 
     PageDto pagingParam(int page, String sort) throws Exception;
-
-    List<NoticeDto> pagingViewOrderList(int page, String sort) throws Exception;
 }

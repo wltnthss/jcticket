@@ -33,21 +33,14 @@ public class NoticeController {
                             @RequestParam(value = "sort", required = false, defaultValue = "seq")  String sort) throws Exception {
         // page 값이 없이 들어오면다면 default 값 1 설정
         System.out.println("page => " + page);
+        // 정렬값
         System.out.println("sort => " + sort) ;
 
         try {
 
             List<NoticeDto> pagingList = null;
 
-            if(sort.equals("seq")){
-                System.out.println("seq 타나");
-                pagingList = noticeService.pagingList(page, sort);
-            }else{
-                System.out.println("view 타나");
-                pagingList = noticeService.pagingViewOrderList(page, sort);
-                pagingList = noticeService.pagingViewOrderList(page, sort);
-            }
-
+            pagingList = noticeService.pagingList(page, sort);
             PageDto pageDto = noticeService.pagingParam(page, sort);
 
             model.addAttribute("list", pagingList);
