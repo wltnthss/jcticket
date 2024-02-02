@@ -218,6 +218,36 @@
             margin-left: 5px;
         }
 
+        .seatRemain {
+            border: solid 1px rgba(0, 0, 0, 0.1);
+            padding: 20px 50px 125px 20px;
+        }
+
+        .five {
+            border: solid black;
+            padding: 10px 80px;
+            margin-top: 50px;
+        }
+
+        .taketic {
+            font-size: 18px;
+        }
+
+        .six {
+            display: flex;
+            width: 1200px;
+            border-bottom: solid black;
+            padding-top: 100px;
+        }
+
+        .six span {
+            margin: 0;
+            font-size: 18px;
+            padding: 10px 40px 10px 40px;
+            height : 45px;
+            line-height: 45px;
+        }
+
     </style>
 </head>
 <body>
@@ -372,9 +402,29 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
+        <div class="five">
+            <a class="taketic">예매하기</a>
+        </div>
+
+
+<%--            a태그마다 링크 걸어야함--%>
+        <div class="six">
+            <a>
+                <span>상세정보</span>
+            </a>
+            <a>
+<%--                댓글수 가져와야됨--%>
+                <span>
+                    관람후기
+                    <span class="comment_cnt">(123)</span>
+                </span>
+            </a>
+            <a>
+                <span>예매/취소 안내</span>
+            </a>
+        </div>
 
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
