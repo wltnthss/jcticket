@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 public class TicketingDaoImpl implements TicketingDao{
     @Autowired
     SqlSession sqlSession;
-    public final String namespace = "com.jcticket.ticketing.TicketMapper.";
+    public final String namespace = "com.jcticket.ticketingMapper.";
     @Override
     public String getNow() throws Exception {
         return sqlSession.selectOne(namespace+"getNow");

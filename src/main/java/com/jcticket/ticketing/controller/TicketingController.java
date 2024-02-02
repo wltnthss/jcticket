@@ -28,7 +28,7 @@ public class TicketingController {
     public String getNowTime(Model model) throws Exception{
         String data = ticketingService.showNow();
         model.addAttribute("data", data);
-        return"ticketing/ticketing";
+        return "ticketing/ticketing";
     }
 
 }
