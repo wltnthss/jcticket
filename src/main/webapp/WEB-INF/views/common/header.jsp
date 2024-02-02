@@ -38,7 +38,7 @@
         <a href="고객센터 이동" class="customer-service" style="width: 22px;">
             <img src="/resources/img/components/고객센터.png" class="cs_icon">
         </a>
-        <a href="/notice" class="notice" style="width: 22px;">
+        <a href="/notice/paging" class="notice" style="width: 22px;">
             <img src="/resources/img/components/공지사항.png" class="notice_icon">
         </a>
         <a href="로그인" class="login" style="width: 22px;">

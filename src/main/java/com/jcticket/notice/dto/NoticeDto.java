@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * fileName : NoticeDto
  * author :  jisoo Son
  * date : 2024-01-31
- * description :
+ * description : 공지사항 Dto
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------
