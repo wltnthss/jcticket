@@ -24,5 +24,6 @@ public class PageDto {
     private int startPage;  // 현재 페이지 기준 시작 페이지 값
     private int endPage;    // 현재 페이지 기준 마지막 페이지 값
 
-    private String sort;    // 공지사항 정렬 기준
+    private String sort;    // 공지사항 정렬 기준 값
+    private String keyword; // 공지사항 검색 기능 값
 }

@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeDto> pagingList(int page, String sort) throws Exception {
+    public List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception {
         // 1 page 당 보여주는 글 개수 10
         /*
             1page => 0
@@ -58,10 +58,11 @@ public class NoticeServiceImpl implements NoticeService{
         int pagingStart = (page - 1) * pageLimit;
         List<NoticeDto> pagingList = null;
 
-        Map<String, Integer> pagingParams = new HashMap<>();
+        Map<String, Object> pagingParams = new HashMap<>();
 
         pagingParams.put("start", pagingStart);
         pagingParams.put("limit", pageLimit);
+        pagingParams.put("keyword", keyword);
 
         if(sort.equals("seq")){
             pagingList = noticeDao.pagingList(pagingParams);
@@ -73,10 +74,12 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public PageDto pagingParam(int page, String sort) throws Exception {
+    public PageDto pagingParam(int page, String sort, String keyword) throws Exception {
 
         // 전체 글 개수 조회
-        int noticeCount = noticeDao.count();
+        int noticeCount = noticeDao.count(keyword);
+        System.out.println("noticeCount => " + noticeCount);
+
         // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
         int maxPage = (int) (Math.ceil((double) noticeCount / pageLimit));
         // 시작 페이지 값 계산 (1, 11, 21 ...)
@@ -93,6 +96,7 @@ public class NoticeServiceImpl implements NoticeService{
         pageDto.setMaxPage(maxPage);
         pageDto.setStartPage(startPage);
         pageDto.setEndPage(endPage);
+        pageDto.setKeyword(keyword);
 
         return pageDto;
     }

@@ -62,12 +62,13 @@ public class NoticeDaoImplTest {
 
     @Test
     public void countTest() throws Exception {
-        System.out.println("countTest => " + noticeDao.count());
+        String keyword = "qwer";
+        System.out.println("countTest => " + noticeDao.count(keyword));
 
         int listSize = noticeDao.list().size();
         System.out.println("listSize => " + listSize);
 
-        int count = noticeDao.count();
+        int count = noticeDao.count(keyword);
 
         assertTrue(listSize == count);
     }

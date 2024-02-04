@@ -23,11 +23,11 @@ public interface NoticeDao {
     NoticeDto select(int no) throws Exception;
 
     // 전체 notice 리스트 개수 조회
-    int count() throws Exception;
+    int count(String keyword) throws Exception;
 
     // 상세보기 진입시 조회수 1씩 증가
     int addViewCnt(int no) throws Exception;
-    List<NoticeDto> pagingList(Map<String, Integer> pagingParams);
+    List<NoticeDto> pagingList(Map<String, Object> pagingParams);
 
-    List<NoticeDto> pagingViewOrderList(Map<String, Integer> pagingParams);
+    List<NoticeDto> pagingViewOrderList(Map<String, Object> pagingParams);
 }

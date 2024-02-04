@@ -14,10 +14,13 @@
     <h1 class="notice-text">공지사항</h1>
 
     <div class="notice-category">
-        <a id="notice-order1" href="/notice/paging?page=${paging.page}&sort=seq">번호순</a>
-        <a id="notice-order2" href="/notice/paging?page=${paging.page}&sort=view">조회순</a>
+        <a id="notice-order1" href="/notice/paging?page=${paging.page}&keyword=${paging.keyword}&sort=seq">번호순</a>
+        <a id="notice-order2" href="/notice/paging?page=${paging.page}&keyword=${paging.keyword}&sort=view">조회순</a>
         <div class="notice-search">
-            <input type="text" placeholder="궁금하신 내용을 입력해주세요" ><a style="cursor: pointer"></a>
+            <form action="/notice/paging?page=${paging.page}?keyword=${paging.keyword}">
+                <input type="text" value="${paging.keyword}" name="keyword" placeholder="궁금하신 내용을 입력해주세요" >
+                <button type="submit" class="notice-search-btn"></button>
+            </form>
         </div>
     </div>
 
@@ -50,7 +53,7 @@
         </c:if>
         <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
         <c:if test="${paging.page>=2}">
-            <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page-1}"> < </a>
+            <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
         </c:if>
 
         <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -61,7 +64,7 @@
             </c:if>
 
             <c:if test="${i ne paging.page}">
-                <a class="notice-paging-pageitems" href="/notice/paging?page=${i}">${i}</a>
+                <a class="notice-paging-pageitems" href="/notice/paging?page=${i}&keyword=${paging.keyword}">${i}</a>
             </c:if>
         </c:forEach>
 
@@ -70,7 +73,7 @@
         </c:if>
 
         <c:if test="${paging.page < paging.maxPage}">
-            <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page+1}"> > </a>
+            <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
         </c:if>
     </div>
 

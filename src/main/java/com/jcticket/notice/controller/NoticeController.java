@@ -30,18 +30,20 @@ public class NoticeController {
 
     @GetMapping("/paging")
     public String NoticePaging(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                            @RequestParam(value = "sort", required = false, defaultValue = "seq")  String sort) throws Exception {
+                            @RequestParam(value = "sort", required = false, defaultValue = "seq")  String sort,
+                               @RequestParam(value = "keyword", required = false)  String keyword) throws Exception {
         // page 값이 없이 들어오면다면 default 값 1 설정
         System.out.println("page => " + page);
         // 정렬값
         System.out.println("sort => " + sort) ;
+        System.out.println("keyword => " + keyword);
 
         try {
 
             List<NoticeDto> pagingList = null;
 
-            pagingList = noticeService.pagingList(page, sort);
-            PageDto pageDto = noticeService.pagingParam(page, sort);
+            pagingList = noticeService.pagingList(page, sort, keyword);
+            PageDto pageDto = noticeService.pagingParam(page, sort, keyword);
 
             model.addAttribute("list", pagingList);
             model.addAttribute("paging", pageDto);
