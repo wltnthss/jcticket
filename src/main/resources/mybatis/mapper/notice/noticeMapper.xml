@@ -39,6 +39,10 @@
             count(*)
         from
             notice
+        <if test="keyword != null and keyword != '' ">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
     </select>
 
     <select id="pagingList" resultType="NoticeDto" parameterType="java.util.HashMap">
@@ -50,6 +54,10 @@
             notice_view_cnt
         from
             notice
+        <if test="keyword != null">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
         order by
             notice_seq desc
         limit
@@ -65,6 +73,10 @@
             notice_view_cnt
         from
             notice
+        <if test="keyword != null">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
         order by
             notice_view_cnt desc
         limit

@@ -25,7 +25,7 @@ public interface NoticeService {
     // 상세보기 진입시 조회수 1씩 증가
     int addViewCnt(int no) throws Exception;
 
-    List<NoticeDto> pagingList(int page, String sort) throws Exception;
+    List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
 
-    PageDto pagingParam(int page, String sort) throws Exception;
+    PageDto pagingParam(int page, String sort, String keyword) throws Exception;
 }

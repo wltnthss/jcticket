@@ -113,12 +113,14 @@ hr{
     vertical-align: top;
     padding-left: 10px;
 }
-.notice-search a {
+.notice-search-btn {
     display: inline-block;
     width: 50px;
     height: 41px;
     background: url(http://tkfile.yes24.com/imgNew/common/pf-srch-w.png)no-repeat center center;
     vertical-align: top;
+    border: 1px solid #999;
+    cursor: pointer;
 }
 /*등록순,조회순,검색 끝*/
 
