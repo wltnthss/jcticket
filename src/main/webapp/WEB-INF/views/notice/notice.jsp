@@ -14,10 +14,10 @@
     <h1 class="notice-text">공지사항</h1>
 
     <div class="notice-category">
-        <a id="notice-order1" class="on">번호순</a>
-        <a id="notice-order2" class="">조회순</a>
+        <a id="notice-order1" href="/notice/paging?page=${paging.page}&sort=seq">번호순</a>
+        <a id="notice-order2" href="/notice/paging?page=${paging.page}&sort=view">조회순</a>
         <div class="notice-search">
-            <input type="text" placeholder="궁금하신 내용을 입력해주세요"><a style="cursor: pointer"></a>
+            <input type="text" placeholder="궁금하신 내용을 입력해주세요" ><a style="cursor: pointer"></a>
         </div>
     </div>
 
@@ -80,6 +80,23 @@
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/notice/notice.js"></script>
+
+<script>
+
+    // 번호순 toggle click 이벤트
+    $('#notice-order1').on('click', function(){
+
+        $('#notice-order1').classList.add('on')
+        $('#notice-order2').classList.add('on')
+
+    });
+    // 조회순 toggle click 이벤트
+    // $('#notice-order2').on('click', function(){
+    //     $('#notice-order2').classList.add('on')
+    //     $('#notice-order1').classList.remove('on')
+    // });
+
+</script>
 <body>
 </body>
 </html>

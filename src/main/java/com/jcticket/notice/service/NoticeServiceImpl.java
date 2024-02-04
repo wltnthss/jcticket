@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public List<NoticeDto> pagingList(int page) throws Exception {
+    public List<NoticeDto> pagingList(int page, String sort) throws Exception {
         // 1 page 당 보여주는 글 개수 10
         /*
             1page => 0
@@ -56,23 +56,24 @@ public class NoticeServiceImpl implements NoticeService{
 
         // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
         int pagingStart = (page - 1) * pageLimit;
+        List<NoticeDto> pagingList = null;
 
         Map<String, Integer> pagingParams = new HashMap<>();
 
         pagingParams.put("start", pagingStart);
         pagingParams.put("limit", pageLimit);
 
-        System.out.println("pagingParams => " + pagingParams);
-
-        List<NoticeDto> pagingList = noticeDao.pagingList(pagingParams);
-
-        System.out.println("pagingList => " + pagingList);
+        if(sort.equals("seq")){
+            pagingList = noticeDao.pagingList(pagingParams);
+        }else{
+            pagingList = noticeDao.pagingViewOrderList(pagingParams);
+        }
 
         return pagingList;
     }
 
     @Override
-    public PageDto pagingParam(int page) throws Exception {
+    public PageDto pagingParam(int page, String sort) throws Exception {
 
         // 전체 글 개수 조회
         int noticeCount = noticeDao.count();
@@ -95,5 +96,4 @@ public class NoticeServiceImpl implements NoticeService{
 
         return pageDto;
     }
-
 }

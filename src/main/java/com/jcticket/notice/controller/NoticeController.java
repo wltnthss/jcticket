@@ -29,16 +29,26 @@ public class NoticeController {
     NoticeService noticeService;
 
     @GetMapping("/paging")
-    public String NoticePaging(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page) throws Exception {
+    public String NoticePaging(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                            @RequestParam(value = "sort", required = false, defaultValue = "seq")  String sort) throws Exception {
         // page 값이 없이 들어오면다면 default 값 1 설정
         System.out.println("page => " + page);
+        // 정렬값
+        System.out.println("sort => " + sort) ;
 
-        List<NoticeDto> pagingList = noticeService.pagingList(page);
+        try {
 
-        PageDto pageDto = noticeService.pagingParam(page);
+            List<NoticeDto> pagingList = null;
 
-        model.addAttribute("list", pagingList);
-        model.addAttribute("paging", pageDto);
+            pagingList = noticeService.pagingList(page, sort);
+            PageDto pageDto = noticeService.pagingParam(page, sort);
+
+            model.addAttribute("list", pagingList);
+            model.addAttribute("paging", pageDto);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         // 해당 페이지에서 가져올 글 목록
         return "notice/notice";
