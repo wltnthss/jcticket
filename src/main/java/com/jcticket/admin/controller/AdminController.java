@@ -36,6 +36,11 @@ public class AdminController {
         return "admin/admindashboard";
     }
 
+    @GetMapping("/index")
+    public String index(){
+        return "index";
+    }
+
     @PostMapping("/admin")
     @ResponseBody
     private String login(@RequestBody AdminDto adminDto, HttpServletRequest request) throws Exception {
