@@ -2,6 +2,8 @@ package com.jcticket.ticketing.dao;
 
 import com.jcticket.ticketing.dto.TicketingDto;
 
+import java.util.List;
+
 /**
  * packageName    : com.jcticket.ticketing.dao
  * fileName       : TicketDao
@@ -15,6 +17,7 @@ import com.jcticket.ticketing.dto.TicketingDto;
  */
 public interface TicketingDao {
     String getNow() throws Exception;
-    TicketingDto selectTicketingInfo(int ticketingId) throws Exception;
+    List<TicketingDto> selectAll() throws Exception;
+    String selectId() throws Exception;
 
 }
