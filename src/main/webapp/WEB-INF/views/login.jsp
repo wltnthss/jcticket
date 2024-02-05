@@ -186,14 +186,14 @@
                                 <input id="SAgencyPWD" name="agency_pwd" type="password" autocomplete="off" placeholder="기획사 비밀번호">
                             </span>
                             <div class="agencyChk" style="display: block;">
-                                <span class="aLoginKeep">
-                                    <label for="aChkAutoLogin">로그인 상태 유지</label>
-                                    <input id="aChkAutoLogin" name="aAutoLogin" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom:1.5;">
-                                </span>
-                                <span class="aLoginKeep">
-                                    <label for="aChkRememberID">아이디 저장</label>
-                                    <input id="aChkRememberID" name="aRememberId" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom: 1.5;">
-                                </span>
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkAutoLogin">로그인 상태 유지</label>--%>
+<%--                                    <input id="aChkAutoLogin" name="aAutoLogin" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom:1.5;">--%>
+<%--                                </span>--%>
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkRememberID">아이디 저장</label>--%>
+<%--                                    <input id="aChkRememberID" name="aRememberId" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom: 1.5;">--%>
+<%--                                </span>--%>
                             </div>
                             <button id="aLoginBtn" title="기획사 로그인">
                                 <span class="aBtnWrap">
