@@ -2,6 +2,7 @@ package com.jcticket.ticketing.dto;
 
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -19,29 +20,21 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class TicketingDto {
     private int ticketingId;
-    private Date ticketingAt;
-    @NonNull
+    private Timestamp ticketingAt;
     private int ticketingCnt;
     private String ticketingStatus;
-    @NonNull
     private String showingInfo;
-    @NonNull
     private String showingDate;
-    private Date cancelableDate;
-    @NonNull
-    private String playName;
-    @NonNull
+    private Timestamp cancelableDate;
     private String playPrice;
-    @NonNull
     private String stageName;
-    @NonNull
     private String choiceShowSeat;
-    @NonNull
     private String ticketingPrice;
-    @NonNull
     private String userName;
     private Date viewingAt;
+    private String playName;
 }

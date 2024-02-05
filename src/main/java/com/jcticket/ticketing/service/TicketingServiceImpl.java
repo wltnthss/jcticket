@@ -5,6 +5,8 @@ import com.jcticket.ticketing.dto.TicketingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * packageName    : com.jcticket.ticketing.service
  * fileName       : TicketingServiceImpl
@@ -26,7 +28,7 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     @Override
-    public TicketingDto getTicketingInfo(int ticketingId) throws Exception{
-        return ticketingDao.selectTicketingInfo(ticketingId);
+    public List<TicketingDto> getTicketingAll() throws Exception{
+        return ticketingDao.selectAll();
     }
 }

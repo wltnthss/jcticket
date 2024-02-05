@@ -2,6 +2,8 @@ package com.jcticket.ticketing.service;
 
 import com.jcticket.ticketing.dto.TicketingDto;
 
+import java.util.List;
+
 /**
  * packageName    : com.jcticket.ticketing.service
  * fileName       : TicketService
@@ -15,6 +17,6 @@ import com.jcticket.ticketing.dto.TicketingDto;
  */
 public interface TicketingService {
     String showNow() throws Exception;
-    TicketingDto getTicketingInfo(int ticketingId) throws Exception;
-
+    List<TicketingDto> getTicketingAll() throws Exception;
+    String getTicketingId(int ticketingId) throws Exception;
 }

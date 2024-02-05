@@ -1,11 +1,14 @@
 package com.jcticket.ticketing.controller;
 
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.ticketing.controller
@@ -26,8 +29,8 @@ public class TicketingController {
 
     @GetMapping(value = "/now")
     public String getNowTime(Model model) throws Exception{
-        String data = ticketingService.showNow();
-        model.addAttribute("data", data);
+        List<TicketingDto> ticketingList = ticketingService.getTicketingAll();
+        model.addAttribute("list", ticketingList);
         return "ticketing/ticketing";
     }
 

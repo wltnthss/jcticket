@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * packageName    : com.jcticket.ticketing.dao
  * fileName       : TicketingDaoImpl
@@ -19,15 +21,20 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TicketingDaoImpl implements TicketingDao{
     @Autowired
-    SqlSession sqlSession;
-    public final String namespace = "com.jcticket.ticketingMapper.";
+    SqlSession session;
+    public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
     @Override
     public String getNow() throws Exception {
-        return sqlSession.selectOne(namespace+"getNow");
+        return session.selectOne(namespace+"getNow");
     }
 
     @Override
-    public TicketingDto selectTicketingInfo(int ticketingId) throws Exception {
-        return sqlSession.selectOne(namespace+"selectTicketInfo", ticketingId);
+    public List<TicketingDto> selectAll() throws Exception {
+        return session.selectList(namespace+"selectAll");
+    }
+
+    @Override
+    public String selectId() throws Exception{
+        return session.selectOne(namespace+"selectId");
     }
 }
