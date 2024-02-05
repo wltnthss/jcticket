@@ -102,6 +102,7 @@
 }
 
 .play-top-right .logout{
+    display: none;
     width: 22px;
     right: 75px;
 }
