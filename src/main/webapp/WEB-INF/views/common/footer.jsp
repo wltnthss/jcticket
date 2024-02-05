@@ -10,14 +10,13 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/components/footer.css">
-
 </head>
 <body>
 <footer class="play-bottom" id="play-bottom">
     <div class="cont">
         <div class="play-bottom-txt">
-            <a href="메인페이지 이동" class="bottom-main-logo">
-                <img src="https://lh3.google.com/u/0/d/11bTCKMYdqnoLT2uxl9rPDg2GF6aUqDQz=w2560-h1398-iv1" alt class="fixed"/>
+            <a href="/" class="bottom-main-logo">
+                <img src="/resources/img/components/로고1.png" class="logout_icon">
             </a>
             <div class="play-bottom-copyright">
                 <p class="cr1">제이씨티켓</p>

@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 2024-01-29        jinwook Song       최초 생성
  */
 @Controller
-public class userController {
+public class UserController {
     @GetMapping("/index")
     public String index(){
 
         return "index";
     }
+
+
 }

@@ -5,7 +5,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static org.junit.Assert.*;
@@ -25,18 +24,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 public class exampleDaoImplTest {
-@Autowired
-exampleDao exampleDao;
+    @Autowired
+    exampleDao exampleDao;
 
     @Test
     public void test1() {
         System.out.println("exampleDao = " + exampleDao);
-        assertTrue(exampleDao!=null);
+        assertTrue(exampleDao != null);
     }
 
     @Test
     public void test2() throws Exception {
         System.out.println("exampleDao.test() = " + exampleDao.test());
+
         Date now = new Date();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -46,6 +46,6 @@ exampleDao exampleDao;
 
         System.out.println("현재 날짜 및 시간: " + dateString);
 
-        assertTrue(now.equals(exampleDao.test()));
+        assertTrue(dateString.equals(exampleDao.test()));
     }
 }

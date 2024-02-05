@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-
+        <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
+        <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
     </typeAliases>
 </configuration>

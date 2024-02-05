@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jcticket.notice.mybatis.mapper.notice.NoticeMapper">
+    <select id="test" resultType="String">
+        select sysdate()
+    </select>
+
+    <select id="selectAll" resultType="NoticeDto">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        order by
+            notice_seq desc
+    </select>
+
+    <select id="select" resultType="NoticeDto" parameterType="int">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        where
+            notice_seq = #{notice_seq}
+    </select>
+
+    <select id="count" resultType="int">
+        select
+            count(*)
+        from
+            notice
+        <if test="keyword != null and keyword != '' ">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
+    </select>
+
+    <select id="pagingList" resultType="NoticeDto" parameterType="java.util.HashMap">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        <if test="keyword != null">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
+        order by
+            notice_seq desc
+        limit
+            #{start}, #{limit}
+    </select>
+
+    <select id="pagingViewOrderList" resultType="NoticeDto" parameterType="java.util.HashMap">
+        select
+            notice_seq,
+            notice_title,
+            notice_content,
+            notice_reg_at,
+            notice_view_cnt
+        from
+            notice
+        <if test="keyword != null">
+        where
+            notice_title like concat('%',#{keyword},'%')
+        </if>
+        order by
+            notice_view_cnt desc
+        limit
+            #{start}, #{limit}
+    </select>
+
+    <update id="addViewCnt" parameterType="int">
+        update
+            notice
+        set
+            notice_view_cnt = notice_view_cnt + 1
+        where
+            notice_seq = #{notice_seq}
+    </update>
+</mapper>
+
