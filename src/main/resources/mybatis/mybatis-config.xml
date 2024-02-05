@@ -5,6 +5,7 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
+        <typeAlias alias="AdminDto" type="com.jcticket.admin.dto.AdminDto"/>
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
     </typeAliases>
 </configuration>
