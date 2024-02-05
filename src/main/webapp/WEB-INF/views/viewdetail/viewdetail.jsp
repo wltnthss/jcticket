@@ -136,8 +136,7 @@
 <%--                        datepicker 캘린더--%>
                         <div id="datepicker"></div>
                         <div class="showing">
-                            <a>1부 오후 1시 00분</a>
-                            <a>2부 오후 3시 00분</a>
+<%--                            달력에서 날짜 누르면 회차 불러옴--%>
                         </div>
                     </div>
                 </div>
@@ -413,41 +412,8 @@
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
-<%--    datepicker 제이쿼리 달력--%>
+    <%--    datepicker 제이쿼리 달력--%>
     <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var disabledDates = ["2024-02-20", "2024-02-21", "2024-02-22"]; // 선택 못하게 막을 날짜 배열
-
-            $("#datepicker").datepicker({
-                //오늘부터 날짜 선택 가능하도록 함
-                minDate: 0,
-                //최대 선택 가능한 날짜는 1년
-                maxDate: "1Y",
-                //특정일 선택 못하게 막음
-                beforeShowDay: function(date) {
-                    var dateString = $.datepicker.formatDate('yy-mm-dd', date);
-
-                    return [disabledDates.indexOf(dateString) === -1]; // 선택 가능한 날짜는 true, 선택 불가능한 날짜는 false
-                }
-            });
-        });
-
-
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '.'
-        });
-    </script>
-    <%--    datepicker 제이쿼리 달력 끝--%>
 
     <!--
     2. 지도 설치 스크립트
@@ -455,42 +421,9 @@
     -->
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
-    <!-- 3. 지도 실행 스크립트 -->
-    <script charset="UTF-8">
-        new daum.roughmap.Lander({
-            "timestamp" : "1707022341823",
-            "key" : "2hy9x",
-            "mapWidth" : "1200",
-            "mapHeight" : "700"
-        }).render();
-    </script>
 
-    <script>
-        window.onload = function () {
-            // URL복사 이벤트
-            var copyURL = document.getElementById('url_image');
-
-            // 스크롤 이동 이벤트
-            var stagename = document.getElementById('stage_name');
-            var movemap = document.getElementById('map');
-
-            copyURL.onclick = function () {
-                var dummy   = document.createElement("input");
-                var url    = location.href;
-
-                document.body.appendChild(dummy);
-                dummy.value = url;
-                dummy.select();
-                document.execCommand("copy");
-                document.body.removeChild(dummy);
-                alert('주소가 복사되었습니다.');
-            }
-
-            stagename.onclick = function () {
-                movemap.scrollIntoView();
-            }
-        }
-    </script>
+    <%--    js파일--%>
+    <script src="/resources/js/viewdetail/viewdetail.js"></script>
 </body>
 </html>
 

@@ -14,7 +14,7 @@
 .ui-datepicker { width: 270px; padding: 0; display: none; border: 0; margin-top: 10px;}
 
 /*날짜부분 배경*/
-.ui-widget.ui-widget-content { border: 0; border-radius: 3px; overflow: hidden; background: #fff;}
+.ui-widget.ui-widget-content { border: 0; border-radius: 3px; overflow: hidden; background: #fff; margin-top: -14px}
 
 /*월/일 부분 배경*/
 .ui-datepicker .ui-widget-header { position: relative; padding-bottom: 36px ; border: 0; background: white; color: black; border-radius: 0;}

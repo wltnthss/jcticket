@@ -156,14 +156,14 @@ li {
 }
 
 .fourLeft {
-    /*border: solid 1px darkorange;*/
-    border: solid 1px rgba(0, 0, 0, 0.3);
+    border: solid 1px darkorange;
+    /*border: solid 1px rgba(0, 0, 0, 0.3);*/
     /*border-top: solid 1px rgba(0, 0, 0, 0.3);*/
     /*border-bottom: solid 1px rgba(0, 0, 0, 0.3);*/
     /*border-left: solid 1px rgba(0, 0, 0, 0.3);*/
     padding: 30px 50px;
     margin-top: 40px;
-    z-index: 0;
+    z-index: 1;
 }
 
 .four-text {
@@ -198,8 +198,8 @@ li {
 }
 
 .fourRight {
-    border: solid 1px darkorange;
-    /*border: solid 1px rgba(0, 0, 0, 0.3);*/
+    /*border: solid 1px darkorange;*/
+    border: solid 1px rgba(0, 0, 0, 0.3);
     /*border-right: solid 1px rgba(0, 0, 0, 0.3);*/
     /*border-bottom: solid 1px rgba(0, 0, 0, 0.3);*/
     /*border-top: solid 1px rgba(0, 0, 0, 0.3);*/
@@ -207,6 +207,7 @@ li {
     margin-top: 40px;
     position: relative;
     left: -1px;
+    opacity: 0.2;
 }
 
 .fourLeft, .fourRight {

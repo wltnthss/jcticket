@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class viewController {
-    @GetMapping("viewdetail")
+    @GetMapping("/viewdetail")
     public String viewdetail(){
 
-        return "/viewdetail/viewdetail";
+        return "viewdetail/viewdetail";
     }
 }
