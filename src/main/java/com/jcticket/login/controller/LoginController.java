@@ -4,6 +4,7 @@ import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.*;
 import java.net.URLEncoder;
+import java.util.Objects;
 
 /**
  * packageName    : com.jcticket.login
@@ -31,18 +33,25 @@ public class LoginController {
     @Autowired
     UserDao userDao;
 
+
     @GetMapping("/login")
     public String loginForm(){return "login";}
 
     @PostMapping("/login")
-    public String login(String user_id, String user_pwd, boolean rememberId,
-                        HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public String login(String user_id, String user_pwd, boolean rememberId, Model m,
+                        HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        String referer = request.getHeader("Referer");
-        System.out.println("referer = " + referer);
         if(!loginCheck(user_id,user_pwd)){
-            String msg = URLEncoder.encode("아이디 또는 비밀번호가 일치하지 않습니다.","utf-8");
-            System.out.println("실패");
+            m.addAttribute("user_id",user_id);
+            m.addAttribute("user_pwd",user_pwd);
+
+            if(!Objects.equals(user_id, "")&&!Objects.equals(user_pwd, "")){
+                UserDto userDto = null;
+                userDto = userDao.selectUser(user_id);
+                m.addAttribute("boardDtoPWD",userDto.getUser_password());
+                System.out.println("userDto = " + userDto);
+            }
+
             return"redirect:/login";
         }
 
@@ -79,7 +88,6 @@ public class LoginController {
             System.out.println(userDto);
         } catch(Exception e){
             e.printStackTrace();
-
         }
 
         return userDto!=null && userDto.getUser_password().equals(user_pwd);

@@ -16,7 +16,7 @@
   <!-- 좌측 -->
   <div class="play-top-left">
     <h1>
-      <a href="메인페이지 이동" class="top-main-logo">
+      <a href="/" class="top-main-logo">
         <img src="/resources/img/components/로고1.png" alt class="fixed"/>
         <img src="/resources/img/components/로고2.png" alt class="trans"/>
       </a>
