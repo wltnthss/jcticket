@@ -1,4 +1,4 @@
-<%--
+git <%--
   Created by IntelliJ IDEA.
   User: kyd54
   Date: 2024-01-31
@@ -217,7 +217,6 @@
             float: left;
             margin-left: 5px;
         }
-
         .seatRemain {
             border: solid 1px rgba(0, 0, 0, 0.1);
             padding: 20px 50px 125px 20px;

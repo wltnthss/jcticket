@@ -53,7 +53,7 @@ public class LoginController {
             if(!Objects.equals(user_id, "")&&!Objects.equals(user_pwd, "")){
                 UserDto userDto = null;
                 userDto = userDao.selectUser(user_id);
-                m.addAttribute("boardDtoPWD",userDto.getUser_password());
+                m.addAttribute("userDto",userDto);
                 System.out.println("userDto = " + userDto);
             }
 
