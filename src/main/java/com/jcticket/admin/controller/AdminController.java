@@ -48,7 +48,6 @@ public class AdminController {
 
         return "admin/admindashboard";
     }
-
     @PostMapping("/admin")
     @ResponseBody
     private String login(@RequestBody AdminDto adminDto, HttpServletRequest request) throws Exception {
@@ -65,7 +64,10 @@ public class AdminController {
             if (rslt != null) {
                 System.out.println("Admin Login");
                 session.setAttribute("adminId", adminDto.getAdmin_id());
+                session.setAttribute("adminNickName", adminDto.getAdmin_nickname());
                 System.out.println("session => " + session);
+                System.out.println("session 확인 => " + session.getAttribute("adminNickName"));
+
                 msg = "ok";
             }else{
                 session.setAttribute("adminId", null);
@@ -78,5 +80,37 @@ public class AdminController {
 
         return msg;
 
+    }
+    @GetMapping("/admin/user")
+    public String adminuser() throws Exception{
+        return "admin/adminuser";
+    }
+    @GetMapping("/admin/agency")
+    public String adminagency() throws Exception{
+        return "admin/adminagency";
+    }
+    @GetMapping("/admin/product")
+    public String adminproduct() throws Exception{
+        return "admin/adminproduct";
+    }
+    @GetMapping("/admin/notice")
+    public String adminnotice() throws Exception{
+        return "admin/adminnotice";
+    }
+    @GetMapping("/admin/inquiry")
+    public String admininquiry() throws Exception{
+        return "admin/admininquiry";
+    }
+    @GetMapping("/admin/coupon")
+    public String admincoupon() throws Exception{
+        return "admin/admincoupon";
+    }
+    @GetMapping("/admin/stactics")
+    public String adminstactics() throws Exception{
+        return "admin/adminstactics";
+    }
+    @GetMapping("/admin/setting")
+    public String adminsetting() throws Exception{
+        return "admin/adminsetting";
     }
 }
