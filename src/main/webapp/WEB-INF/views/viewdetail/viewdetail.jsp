@@ -217,8 +217,6 @@ git <%--
             float: left;
             margin-left: 5px;
         }
-
-<<<<<<< HEAD
         .seatRemain {
             border: solid 1px rgba(0, 0, 0, 0.1);
             padding: 20px 50px 125px 20px;
@@ -445,9 +443,6 @@ git <%--
         .page_next img, .page_last img{
             transform: scaleX(-1);
         }
-=======
-
->>>>>>> mypage
     </style>
 </head>
 <body>
