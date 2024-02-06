@@ -18,20 +18,37 @@
             },
 
             // 일자 선택된 후 이벤트 발생
-            onSelect: function (dateText, inst) {
-                alert(dateText+'입니다');
+            onSelect: function (dateText) {
+                alert(dateText);
                 //dateText날짜가 DB에 저장된 회차테이블의 회차일시와 같으면 a태그 생성
 
-                var testparent = document.querySelector('.showing');
 
-                testparent.insertAdjacentHTML('afterbegin', "<a>"+dateText+"</a>");
+                // ajax를 통해 컨트롤러로 dateText 보냄
+                $.ajax({
+                    type: "GET",
+                    url: "/viewdetail",
+                    data: { dateText: dateText },
+                    success: function(result) {
+                        if (result) {
+                            alert("완료");
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+
+                // var testparent = document.querySelector('.showing');
+                // testparent.insertAdjacentHTML('afterbegin', "<a>"+dateText+"</a>");
             }
     });
 });
 
     // datepicker 설정
     $.datepicker.setDefaults({
-    dateFormat: 'yy.mm.dd',
+    dateFormat: 'yy-mm-dd',
     prevText: '이전 달',
     nextText: '다음 달',
     monthNames: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'],
@@ -77,5 +94,6 @@ window.onload = function () {
     stagename.onclick = function () {
         movemap.scrollIntoView();
     }
+
 
 }
