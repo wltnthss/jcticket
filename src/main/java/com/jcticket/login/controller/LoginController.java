@@ -83,7 +83,7 @@ public class LoginController {
     }
 
 
-    //회원가입 되어있는(DB에 있는) 아이디 비밀번호 일치확인
+    //회원가입 되어있는(DB에 있는) 아이디 비밀번호 일치확인git
     private boolean loginCheck(String user_id, String user_pwd){
         UserDto userDto = null;
         System.out.println("user_id = " + user_id);
