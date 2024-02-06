@@ -14,7 +14,7 @@
 .ui-datepicker { width: 270px; padding: 0; display: none; border: 0; margin-top: 10px;}
 
 /*날짜부분 배경*/
-.ui-widget.ui-widget-content { border: 0; border-radius: 3px; overflow: hidden; background: #fff;}
+.ui-widget.ui-widget-content { border: 0; border-radius: 3px; overflow: hidden; background: #fff; margin-top: -14px}
 
 /*월/일 부분 배경*/
 .ui-datepicker .ui-widget-header { position: relative; padding-bottom: 36px ; border: 0; background: white; color: black; border-radius: 0;}
@@ -24,7 +24,7 @@
 .ui-datepicker select::-ms-expand {
 display: none; /* 화살표 없애기 for IE10, 11*/
 }
-.ui-datepicker .ui-datepicker-title { line-height: 1.8em; text-align: center; margin: 0px 2.3em; font-size:20px; font-weight:bold; letter-spacing:0; }
+.ui-datepicker .ui-datepicker-title { line-height: 1.8em; text-align: center; margin: 0px 2.3em; font-size:26px; font-weight:normal; letter-spacing:0; }
 .ui-datepicker-title .ui-datepicker-year option, .ui-datepicker-title .ui-datepicker-month option { background: #fff; color: #333; }
 .ui-datepicker-title .ui-datepicker-year { }
 .ui-datepicker-title .ui-datepicker-month { }
@@ -33,7 +33,7 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 /*요일 자간*/
 .ui-datepicker-calendar thead tr { position: absolute; top: -24px; left: 0; right: 0; }
 .ui-datepicker-calendar thead th { float: left; display: block; padding: 0; width: 14.2857%; color: black; font-size:14px;}
-.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position: absolute; top: 6px; width: 1.8em; height: 1.8em; cursor: pointer }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position: absolute; top: 12px; width: 1.8em; height: 1.8em; cursor: pointer }
 .ui-datepicker .ui-datepicker-prev { left: 5px; }
 
 /*기존 이미지 설정 주석처리*/
@@ -44,9 +44,9 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 /*.ui-datepicker .ui-datepicker-next .ui-icon { background: url(../../img/viewdetail/arrow-button.png) -16px 0 no-repeat; }*/
 
 /*일 폰트 등등 설정*/
-.ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: #fff; font-weight: normal; color: #333; box-sizing: border-box; }
+.ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: rgba(0,0,0,0.05); font-weight: normal; color: #333; box-sizing: border-box; }
 .ui-datepicker .ui-state-default.ui-state-hover { background: rgba(0,0,0,0.05); }
-
+.ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 0.25;}
 /*오늘날짜 강조 주석*/
 /*.ui-datepicker-today .ui-state-default { color: #3f51b5; font-weight: bold; }*/
 

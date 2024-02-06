@@ -7,5 +7,6 @@
         <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
         <typeAlias alias="AdminDto" type="com.jcticket.admin.dto.AdminDto"/>
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
+        <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
     </typeAliases>
 </configuration>
