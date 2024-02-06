@@ -157,17 +157,9 @@
 
 
 
-
-
-
-
-
-
-
-
     </style>
 </head>
-    <link rel="icon" href="/resources/css/img/KakaoTalk_20240131_192702986_02.ico">
+    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 <body>
 
     <jsp:include page="../common/header.jsp"></jsp:include>
@@ -177,7 +169,7 @@
     <div id="wrap">
         <div id="cotainer">
             <div id="left-contents">
-                <div><a href=""><img src="/resources/css/img/lnb_mypage.gif"></a></div>
+                <div><a href=""><img src="/resources/img/mypage/lnb_mypage.gif"></a></div>
                 <div id="my_ticket">
                     <div id="grade"><span>Ralo님은 일반회원입니다.</span></div>
 
@@ -195,10 +187,10 @@
                 </div>
                 <div id="ticketing">
                     <ul>
-                        <li><a href=""><img src="/resources/css/img/lmenu_01_ov.gif"></a></li>
-                        <li><a href=""><img src="/resources/css/img/lmenu_02.gif"></a></li>
-                        <li><a href=""><img src="/resources/css/img/lmenu_04.gif"></a></li>
-                        <li><a href=""><img src="/resources/css/img/lmenu_05.gif"></a></li>
+                        <li><a href=""><img src="/resources/img/mypage/lmenu_01_ov.gif"></a></li>
+                        <li><a href=""><img src="/resources/img/mypage/lmenu_02.gif"></a></li>
+                        <li><a href=""><img src="/resources/img/mypage/lmenu_04.gif"></a></li>
+                        <li><a href=""><img src="/resources/img/mypage/lmenu_05.gif"></a></li>
                     </ul>
                 </div>
 
@@ -212,7 +204,6 @@
                     </ul>
                 </div>
             </div>
-
             <div id="center-contents">
                 <div id="coupon">
                     <h2>COUPOM</h2>
@@ -234,7 +225,7 @@
                 <a href=""><img src="/resources/css/img/페페%20한잔해.jpg"></a>
             </div>
 
-
+                <div></div>
                 <table id="middle_list">
                     <tr>
                         <th>예매일</th><th>예매번호</th><th>공연명</th><th>관람일시</th><th>매수</th><th>예매상태</th>
@@ -244,14 +235,6 @@
                     </tr>
                 </table>
 
-
-<%--            <table id="footer_list">--%>
-<%--                <tr>--%>
-<%--                    --%>
-<%--                </tr>--%>
-<%--                <tr><td>반</td><td>갑</td><td>습</td><td>니</td><td>다</td><td>라</td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
 
 
         </div>
