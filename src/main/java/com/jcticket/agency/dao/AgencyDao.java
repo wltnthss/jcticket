@@ -17,21 +17,16 @@ import org.springframework.stereotype.Repository;
  * 2024-02-05        {sana}       최초 생성
  */
 
-
-
-
-
-@Repository
-public class AgencyDao {
-
-    public void saveAgency(AgencyDto agencyDto) {
-        // db에 기획사 정보를 저장
-    }
-
-    public AgencyDto selectAgency(String agencyId) {
-        // db에서 기획사 정보를 조회
-        return null;
-    }
+public interface AgencyDao {
+    AgencyDto agencylogin(AgencyDto agencyDto) throws Exception;
+//    public void saveAgency(AgencyDto agencyDto) {
+//        // db에 기획사 정보를 저장
+//    }
+//
+//    public AgencyDto selectAgency(String agencyId) {
+//        // db에서 기획사 정보를 조회
+//        return null;
+//    }
 
     // 다른 메서드들 추가 가능
 }

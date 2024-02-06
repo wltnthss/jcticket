@@ -60,4 +60,8 @@ public class AgencyDto {
     private String updated_at;
     private String updated_id;
 
+    public AgencyDto(String agency_id, String agency_password){
+        this.agency_id = agency_id;
+        this.agency_password = agency_password;
+    }
 }
