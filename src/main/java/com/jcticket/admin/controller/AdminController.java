@@ -2,12 +2,15 @@ package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.service.AdminService;
+import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -32,7 +35,17 @@ public class AdminController {
     }
 
     @GetMapping("/admin/dashboard")
-    public String admindashboard() throws Exception{
+    public String admindashboard(Model model) throws Exception{
+
+        try {
+            List<UserDto> userLists = adminService.userstatics();
+            System.out.println("userLists => " + userLists);
+
+            model.addAttribute("userLists", userLists);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
         return "admin/admindashboard";
     }
 

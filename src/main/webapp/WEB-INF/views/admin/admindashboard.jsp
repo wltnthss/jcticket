@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>관리자 페이지</title>
@@ -24,7 +25,7 @@
                     </h2>
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </section>
-                <section class="admin-dashboard-side2" style="width: 1000px">
+                <section class="admin-dashboard-side2" style="width: 1100px">
                     <h2>
                         상품 요청현황
                     </h2>
@@ -33,6 +34,7 @@
                         <thead >
                         <tr>
                             <th scope="col">기획사 이름</th>
+                            <th scope="col">기획사 담당자</th>
                             <th scope="col">공연명</th>
                             <th scope="col">공연장</th>
                             <th scope="col">이메일</th>
@@ -44,6 +46,7 @@
                         <tbody>
                         <tr class="tr_alignc">
                             <td>정석코딩 에이전시</td>
+                            <td>최산하</td>
                             <td>오페라의 유령들</td>
                             <td>올림픽공원</td>
                             <td>wltnthss@gmail.com</td>
@@ -74,17 +77,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:forEach items="${userLists}" var="UserDto">
                             <tr class="tr_alignc">
-                                <td>손지수</td>
-                                <td>jisoo son</td>
-                                <td>010-6306-1756</td>
-                                <td>wltnthss@gmail.com</td>
-                                <td>서울시 송파구</td>
-                                <td>남</td>
-                                <td>52</td>
-                                <td>1995-12-14</td>
-                                <td>2020-10-04 18:05 (일)</td>
+                                <td>${UserDto.user_name}</td>
+                                <td>${UserDto.user_id}</td>
+                                <td>${UserDto.user_tel}</td>
+                                <td>${UserDto.user_email}</td>
+                                <td>${UserDto.user_address}</td>
+                                <td>${UserDto.user_gender}</td>
+                                <td>${UserDto.user_visit_cnt}</td>
+                                <td>${UserDto.user_birth}</td>
+                                <td>${UserDto.user_create_at}</td>
                             </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </section>

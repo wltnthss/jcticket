@@ -1,6 +1,9 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.user.dto.UserDto;
+
+import java.util.List;
 
 /**
  * packageName :  com.jcticket.admin.dao
@@ -15,4 +18,6 @@ import com.jcticket.admin.dto.AdminDto;
  */
 public interface AdminDao {
     AdminDto login(AdminDto adminDto) throws Exception;
+
+    List<UserDto> userstatics() throws Exception;
 }
