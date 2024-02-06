@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: joyoungsang
-  Date: 1/31/24
-  Time: 5:03 PM
+  Date: 2/5/24
+  Time: 11:42 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,37 +10,68 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>JCTicket 에매</title>
     <link href="/resources/css/ticketing/ticketing.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <button class="btn-open-modal">예매하기</button>
-    <div class="modal">
-        <div class="modal_body">
-            modal test modal test modal test modal test <br>
-            modal test modal test modal test modal test <br>
-            modal test modal test modal test modal test <br>
-            modal test modal test modal test modal test <br>
-            modal test modal test modal test modal test <br>
-            <c:forEach items="${list}" var="ticketingDto">
-                <h3>${ticketingDto.ticketingId} ${ticketingDto.ticketingAt} ${ticketingDto.ticketingCnt} ${ticketingDto.showingInfo} ${ticketingDto.showingDate} ${ticketingDto.playPrice} ${ticketingDto.stageName} ${ticketingDto.choiceShowSeat} ${ticketingDto.ticketingPrice} ${ticketingDto.userName} ${ticketingDto.playName}</h3>
-            </c:forEach>
-            <button class="btn-close-modal">닫기</button>
+    <!-- 팝업창 전체 감싸는 영역 -->
+    <div id="wrap">
+    <!-- header 영역 -->
+        <div id="header" class="header">
+            <h1>
+                <img src="/resources/img/ticketing/logo.png" alt="logo">
+            </h1>
+            <ul>
+                <li class="progress-1">
+                    <span>날짜 선택</span>
+                </li>
+                <li class="progress-2">
+                    <span>좌석 선택</span>
+                </li>
+                <li class="progress-3">
+                    <span>할인/쿠폰</span>
+                </li>
+                <li class="progress-4">
+                    <span>결제방법</span>
+                </li>
+            </ul>
+        </div>
+
+    <!-- contents 영역 -->
+        <div id="contents">
+            <div id="contents-header">
+                <div id="nav1" class="nav">
+                    <span>날짜 선택</span>
+                </div>
+                <div id="nav2" class="nav">
+                    <span>회차 선택</span>
+                </div>
+            </div>
+            <div id="step1">
+                <div id="step1-calendar">
+
+                </div>
+            </div>
+            <div id="step2">
+
+            </div>
+            <div id="step3">
+
+            </div>
+            <div id="step4">
+
+            </div>
+        </div>
+
+    <!-- result 영역 (선택결과)-->
+        <div id="result">
+
         </div>
     </div>
- <script src="/resources/js/ticketing/ticketing.js"></script>
- <script>
-     // 예매하기 버튼 -> 모달창 보이기
-     $(".btn-open-modal").click(function (){
-         $(".modal").fadeIn();
-     })
-     // 닫기 버튼 -> 모달칭 숨기기
-     $(".btn-close-modal").click(function (){
-         $(".modal").fadeOut();
-     })
- </script>
+
 </body>
 </html>

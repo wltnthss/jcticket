@@ -1,26 +1,26 @@
-.modal {
-    position: absolute;
-    display: none;
+ul,li{list-style: none outside none}
+
+#wrap{width: 810px; height: 620px;}
+
+#header{width: 810px; height: 60px;}
+h1{top: 0; left: 0;}
+img{float: left; margin-right: 80px;}
+ul{list-style: none;}
+li{float: left; margin-right: 80px; padding-top: 20px; color: white}
+.progress-1{background-color: #a9a9a9;}
+.progress-2{background-color: #777777;}
+.progress-3{background-color: #505050;}
+.progress-4{background-color: #343434;}
+
+#contents{width: 640px; height:550px; float: left; margin-right: 5px;}
+#contents-header{width: inherit; height: 30px;}
+#nav1{width: 340px; height: inherit;  }
+#nav2{width: 300px; height: inherit; }
+.nav{
+    float: left;
+    display: flex;
     justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    align-items: center;
 }
-.modal_body{
-    position: absolute;;
-    top: 50%;
-    left: 50%;
-    width: 940px;
-    height: 750px;
-    text-align: center;
-    padding: 40px;
-
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 3px 0 rgba(34,36,38,0.35);
-    transform: translate(-50%, -50%);
-
-}
+#result{width: 160px; height: 550px; float: left;}
 

@@ -31,4 +31,9 @@ public class TicketingServiceImpl implements TicketingService{
     public List<TicketingDto> getTicketingAll() throws Exception{
         return ticketingDao.selectAll();
     }
+
+    @Override
+    public String getTicketingId(int ticketingId) throws Exception {
+        return null;
+    }
 }
