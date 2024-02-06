@@ -5,10 +5,7 @@ import com.jcticket.viewdetail.dao.ViewDetailDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,19 +24,38 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class viewController {
     @GetMapping("/viewdetail")
-    public String viewdetail(@RequestParam(value = "dateText", required = false) String dateText,
+    public String viewdetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "viewdetail/viewdetail";
+    }
+    @PostMapping("/viewdetail")
+    @ResponseBody
+    public String viewdetail2(@RequestBody String dateText,
                              String showing_date, String showing_info,
                              Model model,
                              HttpServletRequest request,
                              HttpServletResponse response) throws Exception {
 
+//        dateText값 들어오는지 확인
+        System.out.println("값 들어오나??");
+        System.out.println("dateText => " + dateText);
+
+
+        // dateText뒤에 계속 등호 들어와서 자름 (2024-02-10=   <<< 이런식으로 들어옴 왜인지는 모르겠다)
+        String dateCal = dateText.substring(0, 10);
+        System.out.println("dateCal => " + dateCal);
+
+        String msg = null;
+
+//        showing_info 나오는지 확인
+        System.out.println("showing_info => " + showing_info);
+
 
         //에러가 떴던 이유, 널값체크 안해서 (dateText != null) 이거
-        if (dateText != null && showing_date.equals(dateText)) {
-            String info = "<a href='#'>" + showing_info + "</a>";
-            model.addAttribute("info", info);
+        if (dateCal != null && showing_date.equals(dateCal)) {
+            msg = showing_info;
         }
 
-        return "viewdetail/viewdetail";
+        return msg;
     }
 }

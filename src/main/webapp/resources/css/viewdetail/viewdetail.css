@@ -47,7 +47,7 @@ body {
 #stage_name {
     display: flex;
     float: left;
-    width: 500px;
+    width: auto;
     padding-left: 5px;
     font-size: 16px;
     text-decoration: none;

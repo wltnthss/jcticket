@@ -25,23 +25,20 @@
 
                 // ajax를 통해 컨트롤러로 dateText 보냄
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: "/viewdetail",
-                    data: { dateText: dateText },
-                    success: function(result) {
-                        if (result) {
+                    data: dateText,
+
+                    // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
+                    // 가져온 메세지(msg)를 이용해서 a태그 만들것
+                    success: function(msg) {
+                            console.log('msg => ', msg)
                             alert("완료");
-                        } else {
-                            alert("전송된 값 없음");
-                        }
                     },
-                    error: function() {
-                        alert("에러 발생");
+                    error: function( error ){
+                        console.log('error => ', error)
                     }
                 });
-
-                // var testparent = document.querySelector('.showing');
-                // testparent.insertAdjacentHTML('afterbegin', "<a>"+dateText+"</a>");
             }
     });
 });

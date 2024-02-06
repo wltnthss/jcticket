@@ -4,6 +4,7 @@
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
     <select id="test" resultType="String">
-        select sysdate()
+        select showing_info from showing
+        where showing_date = #{}
     </select>
 </mapper>
