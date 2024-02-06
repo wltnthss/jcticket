@@ -13,4 +13,15 @@
                 and admin_id = #{admin_id}
                 and admin_password = #{admin_password}
         </select>
+
+        <select id="userstatics" resultType="UserDto">
+            SELECT
+                user_name, user_id, user_tel, user_email, user_address, user_gender , user_visit_cnt , user_birth , user_create_at
+            FROM
+                user
+            ORDER BY
+                user_create_at desc
+            LIMIT
+	            3
+        </select>
 </mapper>
