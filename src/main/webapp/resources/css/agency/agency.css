@@ -1,0 +1,39 @@
+/*agency 메인 헤더 시작*/
+.agency-main-header{
+    min-width: 1210px;
+    background: #393b3f;
+}
+.agency-main-wrap{
+    z-index: 11;
+    position: relative;
+    margin: 0 auto;
+}
+.agency-main-logo{
+    position: relative;
+    height: 50px;
+}
+.agency-main-nav{
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    zoom: 1;
+}
+.agency-main-nav ul{
+    padding: 0;
+    line-height: 50px;
+    zoom: 1;
+    display: inline-block;
+}
+.agency-main-nav ul li{
+    float: left;
+    margin: 0 0 0 10px;
+    padding: 0 10px 0 0;
+    color: #bbb;
+    border-right: 1px solid #444;
+}
+
+
+
+
+/*agency 메인 헤더 끝*/

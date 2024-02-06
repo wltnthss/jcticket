@@ -25,7 +25,7 @@
                 <span class="login-top-center">로그인</span>
             </h1>
             <div class="login-top-right">
-                <a class="signup-logo" href="회원가입페이지">
+                <a href="/signup" class="signup-logo">
                     <span class="signup-wrap"> 회원가입</span>
                 </a>
             </div>
@@ -40,20 +40,20 @@
             <div id="userAgency_Tab">
                 <ul id="ulTab">
                     <li id="userTab">
-                        <a id="userTabA" href="회원로그인탭">
+                        <a id="userTabA" href="javascipt:void(0)">
                             <span class="tabTxt">회원 로그인</span>
                         </a>
                     </li>
                     <li id="agencyTab">
-                        <a id="agencyTabA" href="기획사로그인탭">
+                        <a id="agencyTabA" href="javascipt:void(0)">
                             <span class="tabTxt">기획사 로그인</span>
                         </a>
                     </li>
                 </ul>
             </div>
             <!-- 로그인 유저/기획사 선택 탭 끝 -->
-            <!-- 로그인 영역 시작 -->
             <div class="loginForm">
+                <!-- 회원 로그인 영역 시작 -->
                 <div class="memLoginForm">
                     <form action="<c:url value="/login"/>" method="POST" name="LoginSub" autocomplete="off"/>
                         <fieldset class="formFieldSet">
@@ -61,10 +61,19 @@
                                     <label for="SMemID">아이디</label>
                                     <input id="SMemID" name="user_id" type="text" value="${cookie.user_id.value}" autocomplete="off" placeholder="아이디">
                                 </span>
-                            <span id = spanMemPWD>
-                                    <label for="SMemID">패스워드</label>
-                                    <input id="SMemPWD" name="user_pwd" type="password" autocomplete="off" placeholder="비밀번호">
+                                <c:if test = "${param.user_id==''}">
+                                    <div class="idEmpty">아이디를 입력해주세요</div>
+                                </c:if>
+
+
+                                <span id = spanMemPWD>
+                                        <label for="SMemPWD">패스워드</label>
+                                        <input id="SMemPWD" name="user_pwd" type="password" autocomplete="off" placeholder="비밀번호">
                                 </span>
+
+                                <c:if test = "${param.user_pwd==''}">
+                                    <div class="pwdEmpty">비밀번호를 입력해주세요</div>
+                                </c:if>
                             <div class="loginForm-chk">
                                     <span class="loginKeep">
                                         <label for="chkAutoLogin">
@@ -87,6 +96,7 @@
                             </button>
                         </fieldset>
                     </form>
+
                     <!-- 아이디 비번 찾기영역 시작-->
                     <div class="loginEtc">
                         <a href="아이디 찾기페이지" class="lnk_etc">아이디 찾기</a>
@@ -128,7 +138,72 @@
                         </li>
                     </ul>
                     <!-- 소셜 로그인 영역 끝 -->
+
+                    <%--로그인 실패 팝업창 시작--%>
+                    <c:if test="${(param.user_id!='' and param.user_id !=null) and (param.user_pwd!='' and param.user_pwd!=null)}">
+                        <div class="maskUI">
+                        <div id="loginFailPop" >
+                        <div class="jcPopUp">
+                            <div class="popUpArea">
+                                <div class="popUpAreaTitle">
+                                    <h1>로그인 실패</h1>
+                                </div>
+                                <div class="popUpAreaContent">
+                                    <p class="contentP">
+                                        등록되지 않은 아이디이거나 또는 비밀번호를 잘못 입력하셨습니다.
+                                        <br>
+                                        <br>
+                                        로그인을 여러번 실패하시면 고객님의 정보 보호를 위해 서비스 이용이 차단될 수 있습니다.
+                                    </p>
+                                    <div class="popUp_btn">
+                                        <a href="javascipt:void(0)" class="popUpClose">
+                                            <span class="closeButtonWrap">
+                                                확인
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </c:if>
+
                 </div>
+                <%--회원 로그인 영역 끝--%>
+
+                <%--기획사 로그인 시작--%>
+                <div class="agencyLoginForm" style="display: none">
+                    <form action="/agencyLogin" method="POST" name="loginAgency" autocomplete="off">
+                        <fieldset class="formFieldSet">
+                            <span id="spanAgencyID">
+                                <label for="SAgencyID">아이디</label>
+                                <input id="SAgencyID" name="agency_id" type="text" value autocomplete="off" placeholder="기획사 아이디">
+                            </span>
+                            <span id="spanAgencyPWD">
+                                <label for="SAgencyPWD">비밀번호</label>
+                                <input id="SAgencyPWD" name="agency_pwd" type="password" autocomplete="off" placeholder="기획사 비밀번호">
+                            </span>
+                            <div class="agencyChk" style="display: block;">
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkAutoLogin">로그인 상태 유지</label>--%>
+<%--                                    <input id="aChkAutoLogin" name="aAutoLogin" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom:1.5;">--%>
+<%--                                </span>--%>
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkRememberID">아이디 저장</label>--%>
+<%--                                    <input id="aChkRememberID" name="aRememberId" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom: 1.5;">--%>
+<%--                                </span>--%>
+                            </div>
+                            <button id="aLoginBtn" title="기획사 로그인">
+                                <span class="aBtnWrap">
+                                    <em class="txt">로그인</em>
+                                </span>
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+
             </div>
 
             <!-- 로그인화면 포스터 시작 -->
@@ -156,5 +231,12 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/resources/js/login/login.js"></script>
+<script>
+    let user_id = "${param.user_id}";
+    let user_pwd = "${param.user_pwd}";
+    let boardDtoPWD = "${param.boardDtoPWD}"
+</script>
 </body>
 </html>

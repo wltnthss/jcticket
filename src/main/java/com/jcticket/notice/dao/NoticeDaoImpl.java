@@ -43,8 +43,8 @@ public class NoticeDaoImpl implements NoticeDao{
     }
 
     @Override
-    public int count() throws Exception {
-        return sqlSession.selectOne(namespace+"count");
+    public int count(String keyword) throws Exception {
+        return sqlSession.selectOne(namespace+"count", keyword);
     }
 
     @Override
@@ -53,8 +53,13 @@ public class NoticeDaoImpl implements NoticeDao{
     }
 
     @Override
-    public List<NoticeDto> pagingList(Map<String, Integer> pagingParams) {
+    public List<NoticeDto> pagingList(Map<String, Object> pagingParams) {
         return sqlSession.selectList(namespace+"pagingList", pagingParams);
+    }
+
+    @Override
+    public List<NoticeDto> pagingViewOrderList(Map<String, Object> pagingParams) {
+        return sqlSession.selectList(namespace+"pagingViewOrderList", pagingParams);
     }
 
 
