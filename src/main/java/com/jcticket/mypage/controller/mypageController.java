@@ -16,11 +16,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 2024-01-31        JJS       최초 생성
  */
 @Controller
-@RequestMapping("/mypage")
+//@RequestMapping("/mypage")
 public class mypageController {
 
     @GetMapping("/mypageIndex")
     public String mypage(){
         return "/mypage/mypage_1";
     }
+
+
+    @GetMapping("/mypageticket")
+    public String ticket(){
+        return "/mypage/ticketpage";
+    }
+
+    @GetMapping("/mypagecupon")
+    public String cupon(){
+        return "/mypage/cuponpage";
+    }
+
+    @GetMapping("/mypageview")
+    public String view(){
+        return "/mypage/viewpage";
+    }
+
+    @GetMapping("/mypageclient")
+    public String client(){
+        return "/mypage/clientpage";
+    }
 }
+
+
