@@ -43,4 +43,9 @@ public class UserDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+    
+    public UserDto(String user_id, String user_password){
+        this.user_id = user_id;
+        this.user_password = user_password;
+    }
 }

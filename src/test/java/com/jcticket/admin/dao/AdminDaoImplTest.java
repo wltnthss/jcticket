@@ -1,11 +1,14 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -35,5 +38,16 @@ public class AdminDaoImplTest {
         System.out.println("loginCheck => " + loginCheck);
 
         assertTrue(loginCheck != null);
+    }
+
+    @Test
+    public void userstatics() throws Exception{
+//        UserDto userDto = new UserDto("1", "wook1234");
+
+        List<UserDto> userlists = adminDao.userstatics();
+        System.out.println("userlists => " + userlists);
+
+        assertTrue(userlists.size() == 11);
+
     }
 }
