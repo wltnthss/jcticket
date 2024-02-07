@@ -57,6 +57,7 @@ public class LoginController {
                 System.out.println("userDto = " + userDto);
             }
 
+
             return"redirect:/login";
         }
 
@@ -78,6 +79,8 @@ public class LoginController {
             System.out.println("cookie = " + cookie.getValue());
         }
         //아이디 저장 기능 끝
+
+        userDao.increaseLoginCnt(user_id);
 
         return "index";
     }

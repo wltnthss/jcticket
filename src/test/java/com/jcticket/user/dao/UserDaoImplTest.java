@@ -1,10 +1,13 @@
 package com.jcticket.user.dao;
 
+import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.Timestamp;
 
 import static org.junit.Assert.*;
 
@@ -28,5 +31,21 @@ public class UserDaoImplTest {
     @Test
     public void selectUser() throws Exception {
         System.out.println("userDao.selectUser() = " + userDao.selectUser("1"));
+    }
+
+    @Test
+    public void increaseLoginCnt() throws Exception {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+        UserDto userDto = userDao.selectUser("wook123");
+        System.out.println("userDto = " + userDto);
+
+        String user_id = userDto.getUser_id();
+        System.out.println("user_id = " + user_id);
+
+        int increaseLoginCnt = userDao.increaseLoginCnt(user_id);
+        System.out.println("increaseLoginCnt = " + increaseLoginCnt);
+
+        assertTrue(userDto.getUser_visit_cnt()==10);
     }
 }
