@@ -12,16 +12,11 @@
             beforeShowDay: function(date) {
                 var dateString = $.datepicker.formatDate('yy-mm-dd', date);
                 return [disabledDates.indexOf(dateString) === -1]; // 선택 가능한 날짜는 true, 선택 불가능한 날짜는 false
-
-                // var isDisabled = disabledDates.indexOf(dateString) !== -1;
-                // return [!isDisabled, isDisabled ? 'disabled-date' : 'abled-date']; // 선택 가능한 날짜는 true, 선택 불가능한 날짜는 false 및 'disabled-date' 클래스 추가
             },
 
             // 일자 선택된 후 이벤트 발생
             onSelect: function (dateText) {
-                alert(dateText);
                 //dateText날짜가 DB에 저장된 회차테이블의 회차일시와 같으면 a태그 생성
-
 
                 // ajax를 통해 컨트롤러로 dateText 보냄
                 $.ajax({
@@ -31,8 +26,6 @@
                     // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                     // 가져온 메세지(msg)를 이용해서 a태그 만들것
                     success: function(res) {
-                        // alert('res => '+ res);
-                        // alert("완료");
                         //a태그 생성 이벤트
                         // 1. ajax로 dateTaxt를 컨트롤러로 보냄,
                         // 2. 컨트롤러에서 dateTaxt를 이용해서 sql문을 돌려서 나온 결과를 msg로 리턴함 res로 받음 (배열)
@@ -52,8 +45,9 @@
                             aTag.append(res[i]);
 
                             // var showing = document.querySelector('.showing');
-
                             showing.appendChild(aTag);
+                            aTag.className = 'aTag'+i;
+                            aTag.href = 'javascript:void(0);';
                         }
                     },
                     error: function( error ){
@@ -61,7 +55,10 @@
                     }
                 });
             }
+
     });
+
+
 
         // URL복사 이벤트
         var copyURL = document.getElementById('url_image');

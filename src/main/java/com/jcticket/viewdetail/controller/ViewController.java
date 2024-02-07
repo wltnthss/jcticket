@@ -28,11 +28,6 @@ public class ViewController {
     @Autowired
     ViewDetailService viewDetailService;
 
-//    @Autowired
-//    public ViewController(ViewDetailService viewDetailService) {
-//        this.viewDetailService = viewDetailService;
-//    }
-
     @GetMapping("/viewdetail")
     public String viewDetail() throws Exception {
 
@@ -44,16 +39,17 @@ public class ViewController {
             throws Exception {
 
 //        dateText값 들어오는지 확인
-        System.out.println("값 들어오나??");
-        System.out.println("dateText => " + dateText);
+//        System.out.println("값 들어오나??");
+//        System.out.println("dateText => " + dateText);
 
 
         // dateText뒤에 계속 등호 들어와서 자름 (2024-02-10=   <<< 이런식으로 들어옴 왜인지는 모르겠다)
         String dateCal = dateText.substring(0, 10);
-        System.out.println("dateCal => " + dateCal);
+//        System.out.println("dateCal => " + dateCal);
 
 
-        System.out.println("test => " + viewDetailService.getShowingInfo(dateCal));
+//        값 들어오는지 확인
+//        System.out.println("test => " + viewDetailService.getShowingInfo(dateCal));
 
 
         List<ShowingDto> msg = null;

@@ -14,6 +14,8 @@ git <%--
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%--    페이지 아이콘--%>
+    <link rel="icon" href="/resources/img/viewdetail/god.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제이씨티켓 상세</title>
@@ -52,6 +54,7 @@ git <%--
                         <span class="play-period">
                             2022.07.24
                         </span>
+<%--                        <a href="javascript:void(0);" id="stage_name">--%>
                         <a href="javascript:void(0);" id="stage_name">
                             <span>쉼표 도서관 2층</span>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
