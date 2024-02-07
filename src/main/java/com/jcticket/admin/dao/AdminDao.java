@@ -10,7 +10,7 @@ import java.util.List;
  * fileName : AdminDao
  * author :  jisoo Son
  * date : 2024-02-05
- * description :
+ * description : 관리자 Dao
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------
@@ -18,6 +18,6 @@ import java.util.List;
  */
 public interface AdminDao {
     AdminDto login(AdminDto adminDto) throws Exception;
-
+    // 최근 회원가입 기능 가입순 limit3 List 조회
     List<UserDto> userstatics() throws Exception;
 }

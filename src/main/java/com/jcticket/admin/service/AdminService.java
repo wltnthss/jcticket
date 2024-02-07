@@ -10,7 +10,7 @@ import java.util.List;
  * fileName : AdminService
  * author :  jisoo Son
  * date : 2024-02-05
- * description :
+ * description : 관리자 Service
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------

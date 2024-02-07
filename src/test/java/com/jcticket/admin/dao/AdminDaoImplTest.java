@@ -32,22 +32,25 @@ public class AdminDaoImplTest {
 
     @Test
     public void login() throws Exception{
+
+        // given
         AdminDto adminDto = new AdminDto("jcticket1", "1111");
 
-        AdminDto loginCheck = adminDao.login(adminDto);
-        System.out.println("loginCheck => " + loginCheck);
+        // when
+        AdminDto validateNickName = adminDao.login(adminDto);
 
-        assertTrue(loginCheck != null);
+        // then
+        assertTrue(validateNickName.getAdmin_nickname().equals("jc관리자1"));
     }
 
     @Test
     public void userstatics() throws Exception{
-//        UserDto userDto = new UserDto("1", "wook1234");
 
+        // given, when
         List<UserDto> userlists = adminDao.userstatics();
-        System.out.println("userlists => " + userlists);
 
-        assertTrue(userlists.size() == 11);
+        // then
+        assertTrue(userlists.size() == 3);
 
     }
 }

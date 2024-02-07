@@ -13,7 +13,7 @@ import java.util.List;
  * fileName : AdminDaoImpl
  * author :  jisoo Son
  * date : 2024-02-05
- * description :
+ * description : 관리자 DaoImpl
  * ===========================================================
  * DATE                 AUTHOR                NOTE
  * -----------------------------------------------------------
