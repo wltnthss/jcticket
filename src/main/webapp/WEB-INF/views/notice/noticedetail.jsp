@@ -37,6 +37,7 @@
 
             const page = '${page}';
 
+            // 목록 버튼 클릭시 현재 page 로 이동
             $('#notice-detail-container-btn').on('click', () => {
                 location.href = "/notice/paging?page=" + page;
             });

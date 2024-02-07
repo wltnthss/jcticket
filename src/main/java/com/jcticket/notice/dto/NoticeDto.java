@@ -50,4 +50,8 @@ public class NoticeDto {
     private String created_id;
     private Timestamp updated_at;
     private String update_id;
+
+    public NoticeDto(int notice_seq) {
+        this.notice_seq = notice_seq;
+    }
 }
