@@ -1,7 +1,8 @@
 package com.jcticket.viewdetail.controller;
 
-import com.jcticket.user.dao.UserDao;
 import com.jcticket.viewdetail.dao.ViewDetailDao;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.service.ViewDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.viewdetail.controller
@@ -22,19 +24,24 @@ import javax.servlet.http.HttpServletResponse;
  * 2024-01-31        kyd54       최초 생성
  */
 @Controller
-public class viewController {
+public class ViewController {
+    @Autowired
+    ViewDetailService viewDetailService;
+
+//    @Autowired
+//    public ViewController(ViewDetailService viewDetailService) {
+//        this.viewDetailService = viewDetailService;
+//    }
+
     @GetMapping("/viewdetail")
-    public String viewdetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String viewDetail() throws Exception {
 
         return "viewdetail/viewdetail";
     }
     @PostMapping("/viewdetail")
     @ResponseBody
-    public String viewdetail2(@RequestBody String dateText,
-                             String showing_date, String showing_info,
-                             Model model,
-                             HttpServletRequest request,
-                             HttpServletResponse response) throws Exception {
+    public List<ShowingDto> viewDetail2(@RequestBody String dateText)
+            throws Exception {
 
 //        dateText값 들어오는지 확인
         System.out.println("값 들어오나??");
@@ -45,17 +52,21 @@ public class viewController {
         String dateCal = dateText.substring(0, 10);
         System.out.println("dateCal => " + dateCal);
 
-        String msg = null;
 
-//        showing_info 나오는지 확인
-        System.out.println("showing_info => " + showing_info);
+        System.out.println("test => " + viewDetailService.getShowingInfo(dateCal));
 
 
-        //에러가 떴던 이유, 널값체크 안해서 (dateText != null) 이거
-        if (dateCal != null && showing_date.equals(dateCal)) {
-            msg = showing_info;
+        List<ShowingDto> msg = null;
+
+        try {
+            List<ShowingDto> list = viewDetailService.getShowingInfo(dateCal);
+//            model.addAttribute("info", list);
+            msg = list;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+//        ajax로 보낸건 msg로 받아야됨 viewdetail/viewdetail 로 받으면 안됨
         return msg;
     }
 }

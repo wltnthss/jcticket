@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: kyd54
@@ -137,8 +138,7 @@
 <%--                        datepicker 캘린더--%>
                         <div id="datepicker"></div>
                         <div class="showing">
-<%--                            달력에서 날짜 누르면 회차 불러옴--%>
-                            <c:out value="${info}"/>
+
                         </div>
                     </div>
                 </div>

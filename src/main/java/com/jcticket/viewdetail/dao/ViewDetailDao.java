@@ -1,5 +1,10 @@
 package com.jcticket.viewdetail.dao;
 
+
+import com.jcticket.viewdetail.dto.ShowingDto;
+
+import java.util.List;
+
 /**
  * packageName    : com.jcticket.viewdetail.dao
  * fileName       : ViewDetailDao
@@ -12,5 +17,5 @@ package com.jcticket.viewdetail.dao;
  * 2024-02-05        kyd54       최초 생성
  */
 public interface ViewDetailDao {
-    String test() throws Exception;
+    List<ShowingDto> test(String dateText) throws Exception;
 }

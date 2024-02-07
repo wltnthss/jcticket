@@ -4,7 +4,8 @@
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
     <select id="test" resultType="String">
-        select showing_info from showing
-        where showing_date = #{}
+        select showing_info
+        from showing
+        where showing_date = #{dateText}
     </select>
 </mapper>

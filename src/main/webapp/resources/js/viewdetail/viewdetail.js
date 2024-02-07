@@ -28,12 +28,33 @@
                     type: "POST",
                     url: "/viewdetail",
                     data: dateText,
-
                     // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                     // 가져온 메세지(msg)를 이용해서 a태그 만들것
-                    success: function(msg) {
-                            console.log('msg => ', msg)
-                            alert("완료");
+                    success: function(res) {
+                        alert('res => '+ res);
+                        alert("완료");
+                        //a태그 생성 이벤트
+                        // 1. ajax로 dateTaxt를 컨트롤러로 보냄,
+                        // 2. 컨트롤러에서 dateTaxt를 이용해서 sql문을 돌려서 나온 결과를 msg로 리턴함 res로 받음 (배열)
+                        // 3. 리턴받은 res를 사용해서 a태그를 만듦
+
+                        var showing = document.querySelector('.showing');
+                        // var a = document.querySelector('a');
+
+                        //.showing 안에 있는 요소들 지우기
+                        while(showing.firstChild)  {
+                            showing.removeChild(showing.firstChild);
+                        }
+                        
+                        // .showing 안에 a태그 만들어주기
+                        for(var i = 0;i<res.length;i++) {
+                            var aTag = document.createElement("a");
+                            aTag.append(res[i]);
+
+                            // var showing = document.querySelector('.showing');
+
+                            showing.appendChild(aTag);
+                        }
                     },
                     error: function( error ){
                         console.log('error => ', error)
@@ -41,7 +62,31 @@
                 });
             }
     });
-});
+
+        // URL복사 이벤트
+        var copyURL = document.getElementById('url_image');
+
+        copyURL.onclick = function () {
+            var dummy   = document.createElement("input");
+            var url    = location.href;
+
+            document.body.appendChild(dummy);
+            dummy.value = url;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            alert('주소가 복사되었습니다.');
+        }
+
+        // 스크롤 이동 이벤트
+        var stagename = document.getElementById('stage_name');
+        var movemap = document.getElementById('map');
+
+        stagename.onclick = function () {
+            movemap.scrollIntoView();
+        }
+
+    });
 
     // datepicker 설정
     $.datepicker.setDefaults({
@@ -66,31 +111,3 @@
     "mapWidth" : "1200",
     "mapHeight" : "700"
 }).render();
-
-
-window.onload = function () {
-    // URL복사 이벤트
-    var copyURL = document.getElementById('url_image');
-
-    copyURL.onclick = function () {
-        var dummy   = document.createElement("input");
-        var url    = location.href;
-
-        document.body.appendChild(dummy);
-        dummy.value = url;
-        dummy.select();
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-        alert('주소가 복사되었습니다.');
-    }
-
-    // 스크롤 이동 이벤트
-    var stagename = document.getElementById('stage_name');
-    var movemap = document.getElementById('map');
-
-    stagename.onclick = function () {
-        movemap.scrollIntoView();
-    }
-
-
-}
