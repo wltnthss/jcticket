@@ -240,13 +240,14 @@ thead{
     zoom: 1;
 }
 .admin-common-snb .snb-header{
-    height: 100px;
+    height: 80px;
     text-align: center;
 }
 .admin-common-snb .snb-header h2{
     font-size: 20px;
     letter-spacing: -1px;
     text-align: center;
+    margin-bottom: 8px;
 }
 .admin-common-content{
     margin-left: 204px;
@@ -278,6 +279,9 @@ thead{
     display: block;
     position: relative;
 }
+.admin-common-snb a:hover{
+    background-color: #eeeeee !important;
+}
 .admin-common-snb dd a {
     display: block;
     padding: 7px 0 7px 17px;
@@ -286,41 +290,71 @@ thead{
     color: #555;
     vertical-align: middle;
 }
-.admin-common-snb dd.active a {
-    font-weight: 600;
-    color: #fa2828 !important;
-    background: #eeeeee !important;
+.fa-arrow-down:before{
+    margin-left: 100px;
+    font-size: 10px;
 }
 /*관리자 회원 ~ 환경설정 공통 끝*/
 
 /*관리자 회원관리 시작*/
+.fa-user:before {
+    font-size: 30px;
+    color: #555;
+}
 
 /*관리자 회원관리 끝*/
 
 /*관리자 기획사관리 시작*/
-
+.fa-city:before {
+    font-size: 30px;
+    color: #555;
+}
 /*관리자 기획사관리 끝*/
 
 /*관리자 상품관리 시작*/
-
+.fa-film:before {
+    font-size: 30px;
+    color: #555;
+}
 /*관리자 상품관리 끝*/
 
 /*관리자 공지사항관리 시작*/
-
+.fa-paperclip:before {
+    font-size: 25px;
+    color: #555;
+}
 /*관리자 공지사항관리 끝*/
 
 /*관리자 문의관리 시작*/
+.fa-comment:before {
+    font-size: 30px;
+    color: #555;
+}
 
 /*관리자 문의관리 끝*/
 
 /*관리자 쿠폰관리 시작*/
-
+.fa-gift:before{
+    font-size: 30px;
+    color: #555;
+}
 /*관리자 쿠폰관리 끝*/
 
 /*관리자 통계분석 시작*/
+.fa-square-poll-vertical:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f681";
+}
 
 /*관리자 통계분석 끝*/
 
 /*관리자 환경설정 시작*/
+
+.fa-gears:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f085";
+}
 
 /*관리자 환경설정 끝*/

@@ -34,6 +34,18 @@ public class AdminController {
         return "admin/adminloginform";
     }
 
+    @GetMapping("/admin/logout")
+    public String adminlogout(HttpServletRequest request) throws Exception{
+
+        HttpSession session = request.getSession();
+        System.out.println("logout session => " + session);
+
+        // 로그아웃 후 세션 삭제
+        session.invalidate();
+
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin/dashboard")
     public String admindashboard(Model model) throws Exception{
 
@@ -66,7 +78,6 @@ public class AdminController {
                 session.setAttribute("adminId", adminDto.getAdmin_id());
                 session.setAttribute("adminNickName", adminDto.getAdmin_nickname());
                 System.out.println("session => " + session);
-                System.out.println("session 확인 => " + session.getAttribute("adminNickName"));
 
                 msg = "ok";
             }else{
@@ -84,6 +95,14 @@ public class AdminController {
     @GetMapping("/admin/user")
     public String adminuser() throws Exception{
         return "admin/adminuser";
+    }
+    @GetMapping("/admin/register")
+    public String adminuserregister() throws Exception{
+        return "admin/adminuserregister";
+    }
+    @GetMapping("/admin/delete")
+    public String adminuserdelete() throws Exception{
+        return "admin/adminuserdelete";
     }
     @GetMapping("/admin/agency")
     public String adminagency() throws Exception{
