@@ -43,4 +43,30 @@ $(function (){
 
         });
     })
+
+    // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
+    $('.menu_toggle-u10').on('click', u10Toggle);
+    $('.menu_toggle-u20').on('click', u20Toggle);
+
+    function u10Toggle(){
+        let u10List = document.getElementById('u10');
+        let u10ListDisplay = u10List.style.display;
+
+        if(u10ListDisplay === 'block'){
+            u10List.style.display = 'none';
+        }else if(u10ListDisplay === 'none'){
+            u10List.style.display = 'block';
+        }
+    }
+    function u20Toggle(){
+        let u20List = document.getElementById('u20');
+        let u20ListDisplay = u20List.style.display;
+
+        if(u20ListDisplay === 'block'){
+            u20List.style.display = 'none';
+        }else if(u20ListDisplay === 'none'){
+            u20List.style.display = 'block';
+        }
+    }
+
 })
