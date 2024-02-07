@@ -39,9 +39,9 @@ public class UserDto {
     private int user_visit_cnt;
     private String user_interested_genre;
     private String user_rmark;
-    private String created_at;
+    private Timestamp created_at;
     private String created_id;
-    private String updated_at;
+    private Timestamp updated_at;
     private String updated_id;
     
     public UserDto(String user_id, String user_password){
