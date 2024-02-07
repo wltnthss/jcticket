@@ -26,4 +26,7 @@ public class UserDaoImpl implements UserDao{
     public UserDto selectUser(String user_id){
         return session.selectOne(namespace+"select", user_id);
     }
+
+    @Override
+    public int increaseLoginCnt(String user_id) {return session.update(namespace+"increase_visit_cnt", user_id);}
 }
