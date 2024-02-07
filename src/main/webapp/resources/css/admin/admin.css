@@ -9,6 +9,18 @@
     background: transparent;
     letter-spacing: -0.05em;
 }
+ol, li, ul, dl, dt, dd {
+    list-style: none;
+    text-align: left;
+    position: static;
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: 600;
+}
+body, div, table, th, td{
+    font-size: 12px;
+}
 .admin-login-container{
     min-width: 1080px;
 }
@@ -152,7 +164,7 @@ thead{
     zoom: 1;
 }
 .admin-dashboard-main{
-    padding: 0 30px 50px;
+    padding: 0 30px;
     overflow: hidden;
 }
 .admin-dashboard-main h2{
@@ -178,9 +190,11 @@ thead{
     float: left;
 }
 .admin-dashboard-side2{
+    margin-left: 100px;
     float: left;
 }
 .admin-dashboard-side3{
+    padding: 10px;
     clear: both;
 }
 .admin-dashboard-side2 > table{
@@ -210,4 +224,103 @@ thead{
     border: 1px solid #ddd;
     table-layout: fixed;
 }
+
 /*관리자 Dashboard main 끝*/
+
+/*관리자 회원 ~ 환경설정 공통 시작*/
+.admin-common-wrap{
+    background-color: #fff;
+    min-width: 1210px;
+    zoom: 1;
+}
+.admin-common-snb{
+    float: left;
+    width: 204px;
+    background: #fff;
+    zoom: 1;
+}
+.admin-common-snb .snb-header{
+    height: 100px;
+    text-align: center;
+}
+.admin-common-snb .snb-header h2{
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+}
+.admin-common-content{
+    margin-left: 204px;
+    padding-bottom: 100px;
+    border-left: 1px solid #ccc;
+}
+.admin-common-title{
+    margin: 30px 25px;
+}
+.admin-common-content h1{
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -1px;
+}
+.admin-common-snb dt{
+    background: #f6f6f6;
+    border-top: 1px solid #cfcfcf;
+    padding: 0 0 0 17px;
+    font-size: 12px;
+    line-height: 2.8;
+    font-weight: 600;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.admin-common-snb dd{
+    display: block;
+    position: relative;
+}
+.admin-common-snb dd a {
+    display: block;
+    padding: 7px 0 7px 17px;
+    text-decoration: none;
+    background: #fff;
+    color: #555;
+    vertical-align: middle;
+}
+.admin-common-snb dd.active a {
+    font-weight: 600;
+    color: #fa2828 !important;
+    background: #eeeeee !important;
+}
+/*관리자 회원 ~ 환경설정 공통 끝*/
+
+/*관리자 회원관리 시작*/
+
+/*관리자 회원관리 끝*/
+
+/*관리자 기획사관리 시작*/
+
+/*관리자 기획사관리 끝*/
+
+/*관리자 상품관리 시작*/
+
+/*관리자 상품관리 끝*/
+
+/*관리자 공지사항관리 시작*/
+
+/*관리자 공지사항관리 끝*/
+
+/*관리자 문의관리 시작*/
+
+/*관리자 문의관리 끝*/
+
+/*관리자 쿠폰관리 시작*/
+
+/*관리자 쿠폰관리 끝*/
+
+/*관리자 통계분석 시작*/
+
+/*관리자 통계분석 끝*/
+
+/*관리자 환경설정 시작*/
+
+/*관리자 환경설정 끝*/

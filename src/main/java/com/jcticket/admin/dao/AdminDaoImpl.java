@@ -1,9 +1,12 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * packageName :  com.jcticket.admin.dao
@@ -27,6 +30,11 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public AdminDto login(AdminDto adminDto) throws Exception {
         return sqlSession.selectOne(namespace + "login", adminDto);
+    }
+
+    @Override
+    public List<UserDto> userstatics() throws Exception {
+        return sqlSession.selectList(namespace + "userstatics");
     }
 
 }

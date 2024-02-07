@@ -73,15 +73,30 @@
                                 </label>
                             </span>
                     </div>
+                    <input id="totalEmail" type="hidden" value="">
                 </div>
             </div>
             <!-- 이메일 부분 끝 -->
 
             <!-- 이메일 버튼 시작-->
             <div class="emailBtnWrap">
-                <button class="emailBtn" name="emailAuth" type="button">이메일인증하기</button>
+                <button class="emailBtn" id="emailBtn" name="emailAuth" type="button">이메일인증하기</button>
             </div>
             <!-- 이메일 버튼 끝 -->
+
+            <!-- 이메일 인증번호 시작-->
+            <div class="idPwdNickTelAddGenBir_Wrap">
+                <div class="css_idPwdNickTelAddGenBir_div">
+                    인증번호 6자리를 입력해주세요.
+                </div>
+                <label>
+                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" maxlength="6">
+                </label>
+                <input type="button" id="AuthBtn"  value="인증번호 확인"><br>
+                <div class = authMsg></div>
+            </div>
+
+            <!-- 이메일 인증번호 끝-->
 
             <!-- 아이디 입력 인풋창 시작-->
             <div class="idPwdNickTelAddGenBir_Wrap">
@@ -134,7 +149,7 @@
             <div class="idPwdNickTelAddGenBir_Wrap">
                 <label class="css_idPwdNickTelAddGenBir_label">이름</label>
                 <div class="css_idPwdNickTelAddGenBir_div">
-                    생년월일 8자리를 입력해주세요.
+                    이름을 입력해주세요.
                 </div>
                 <label>
                     <input type="text" class="css_idPwdNickTelAddGenBir_input" name="user_name" placeholder="이름">
@@ -333,6 +348,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/signup/signup.js"></script>
+
 
 </body>
 </html>
