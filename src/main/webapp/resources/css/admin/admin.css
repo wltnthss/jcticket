@@ -21,6 +21,19 @@ h1, h2, h3, h4, h5, h6{
 body, div, table, th, td{
     font-size: 12px;
 }
+hr{
+    border-bottom: 1px solid #888;
+}
+select{
+    font-size: 12px;
+    height: 23px;
+    padding: 1px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+label, input, button, textarea, select, img {
+    vertical-align: middle;
+}
 .admin-login-container{
     min-width: 1080px;
 }
@@ -75,20 +88,7 @@ body, div, table, th, td{
     word-break: keep-all;
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", Dotum, Helvetica, sans-serif;
 }
-input[type="text"]{
-    width: 100%;
-    height: 50px;
-    padding: 0 8px;
-    font-size: 14px;
-    color: #333;
-    border: none;
-    border-bottom: 1px solid #dfe5ed;
-    letter-spacing: inherit;
-    box-sizing: border-box;
-    box-shadow: none;
-    border-radius: 0;
-}
-input[type="text"], input[type="password"] {
+.loginform input{
     width: 100%;
     height: 50px;
     padding: 0 8px;
@@ -294,6 +294,31 @@ thead{
     margin-left: 100px;
     font-size: 10px;
 }
+.admin-common-content h2{
+    margin: 30px 0 0;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1em;
+    padding: 0 0 10px 10px;
+}
+.admin-common-content h2:before{
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: #1a4e99;
+    content: '';
+}
+table th{
+    background-color: #f8f8f8;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.3em;
+}
 /*관리자 회원 ~ 환경설정 공통 끝*/
 
 /*관리자 회원관리 시작*/
@@ -301,7 +326,33 @@ thead{
     font-size: 30px;
     color: #555;
 }
-
+.user-form table{
+    width: 100%;
+}
+.user-w100{
+    width: 100px !important;
+}
+.user-form th{
+    font-weight: 600;
+}
+.user-form th, .user-form td{
+    padding: 8px 14px;
+    height: 23px;
+    border-bottom: 1px solid #e4e5e7;
+    text-align: left;
+    vertical-align: middle;
+}
+.user-form-input{
+    padding: 0 4px 1px 4px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: 23px;
+}
+.w80{
+    width: 80px !important;
+}
 /*관리자 회원관리 끝*/
 
 /*관리자 기획사관리 시작*/
