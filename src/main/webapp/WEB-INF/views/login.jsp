@@ -175,16 +175,22 @@
 
                 <%--기획사 로그인 시작--%>
                 <div class="agencyLoginForm" style="display: none">
-                    <form action="/agencyLogin" method="POST" name="loginAgency" autocomplete="off">
+                    <form action="/agency/processLogin" method="POST" name="loginAgency" autocomplete="off">
                         <fieldset class="formFieldSet">
                             <span id="spanAgencyID">
                                 <label for="SAgencyID">아이디</label>
                                 <input id="SAgencyID" name="agency_id" type="text" value autocomplete="off" placeholder="기획사 아이디">
                             </span>
+                            <c:if test = "${param.agency_id==''}">
+                                <div class="idEmpty">아이디를 입력해주세요</div>
+                            </c:if>
                             <span id="spanAgencyPWD">
                                 <label for="SAgencyPWD">비밀번호</label>
                                 <input id="SAgencyPWD" name="agency_pwd" type="password" autocomplete="off" placeholder="기획사 비밀번호">
                             </span>
+                            <c:if test = "${param.agency_pwd==''}">
+                                <div class="pwdEmpty">비밀번호를 입력해주세요</div>
+                            </c:if>
                             <div class="agencyChk" style="display: block;">
                             </div>
                             <button id="aLoginBtn" title="기획사 로그인">
@@ -194,7 +200,10 @@
                             </button>
                         </fieldset>
                     </form>
+
+
                 </div>
+
             </div>
 
             <!-- 로그인화면 포스터 시작 -->
@@ -222,6 +231,15 @@
         </div>
     </div>
 </div>
+
+<%--<script>--%>
+<%--    // 기획사 로그인 탭으로 돌아가기..--%>
+<%--    document.getElementById("agencyTabA").addEventListener("click", function(event) {--%>
+<%--        // 기획사 로그인 페이지의 URL로 리다이렉트--%>
+<%--        window.location.href = "/agency/processLogin";--%>
+<%--    });--%>
+<%--</script>--%>
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/login/login.js"></script>
 <script>
