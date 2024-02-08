@@ -31,7 +31,7 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 .ui-datepicker .ui-datepicker-calendar { position: relative; width: 260px; padding-top: 100px; margin: 0 auto; }
 
 /*요일 자간*/
-.ui-datepicker-calendar thead tr { position: absolute; top: -24px; left: 0; right: 0; }
+.ui-datepicker-calendar thead tr { position: absolute; top: -24px; left: 0; right: 0;}
 .ui-datepicker-calendar thead th { float: left; display: block; padding: 0; width: 14.2857%; color: black; font-size:14px;}
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position: absolute; top: 12px; width: 1.8em; height: 1.8em; cursor: pointer }
 .ui-datepicker .ui-datepicker-prev { left: 5px; }
@@ -47,8 +47,8 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 .ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: rgba(0,0,0,0.05); font-weight: normal; color: #333; box-sizing: border-box; }
 .ui-datepicker .ui-state-default.ui-state-hover { background: rgba(0,0,0,0.05); }
 /*비활성화된 요소*/
-.ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 0.2;}
-/*.ui-datepicker-unselectable .ui-state-default {background: red !important;}*/
+.ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 1;}
+.ui-datepicker-unselectable .ui-state-default {background-color: white !important;}
  /*오늘날짜 강조 주석*/
 /*.ui-datepicker-today .ui-state-default { color: #3f51b5; font-weight: bold; }*/
 
