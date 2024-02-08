@@ -21,7 +21,7 @@
             <div class="admin-dashboard-main">
                 <section class="admin-dashboard-side1">
                     <h2>
-                        상품 요청현황차트
+                        진행중 공연
                     </h2>
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </section>
@@ -29,7 +29,7 @@
                     <h2>
                         상품 요청현황
                     </h2>
-                    <a href="#" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
+                    <a href="/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
                     <table>
                         <thead >
                         <tr>
@@ -61,7 +61,7 @@
                     <h2>
                         최근 회원가입
                     </h2>
-                    <a href="#" class="admin-btn_small3">회원관리 바로가기</a>
+                    <a href="/admin/user" class="admin-btn_small3">회원관리 바로가기</a>
                     <table>
                         <thead>
                             <tr>
@@ -103,26 +103,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var data = {
+        let data = {
             labels: ["콘서트", "뮤지컬", "연극", "클래식"],
             datasets: [{
                 data: [20, 40, 10, 30], // 각 데이터의 비율
-                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"] // 각 데이터에 대한 색상
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"], // 각 데이터에 대한 색상
+                borderColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"] // 각 border에 대한 색상
+
             }]
         };
 
         // 차트 설정
-        var options = {
+        let options = {
+            cutout: 90, // 중심에서 뚫릴 부분 설정
             responsive: false,
             maintainAspectRatio: false
         };
 
         // Canvas 엘리먼트 가져오기
-        var ctx = document.getElementById("myChart").getContext("2d");
+        let ctx = document.getElementById("myChart").getContext("2d");
 
         // 원 차트 생성
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
+        let myPieChart = new Chart(ctx, {
+            type: 'doughnut',
             data: data,
             options: options
         });

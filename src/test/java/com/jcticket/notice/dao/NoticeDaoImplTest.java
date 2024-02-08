@@ -1,6 +1,8 @@
 package com.jcticket.notice.dao;
 
 import com.jcticket.notice.dto.NoticeDto;
+import com.jcticket.notice.dto.PageDto;
+import com.jcticket.notice.service.NoticeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -32,61 +35,91 @@ public class NoticeDaoImplTest {
     @Autowired
     NoticeDao noticeDao;
 
-    @Test
-    public void test() throws Exception {
-        System.out.println("noticeDao.test() => " + noticeDao.test());
-    }
-
-    @Test
-    public void selectAllTest() throws Exception {
-        System.out.println("noticeDao selectAll => " + noticeDao.list());
-        assertTrue(noticeDao.list().size() == 12);
-    }
-
-    @Test
-    public void selectTest() throws Exception {
-
-        int no = noticeDao.list().get(0).getNotice_seq();
-        System.out.println("no => " + no);
-        System.out.println("notice select => " + noticeDao.select(no));
-
-        // 현재시간 형변환
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-
-        NoticeDto noticeDto;
-        noticeDto = new NoticeDto(1, "제목test", "내용test", 0, currentTimestamp, "Y", "N", "admin1", currentTimestamp , "system", currentTimestamp, "system");
-        System.out.println("noticeDto 객체 생성 => " + noticeDto);
-
-        assertTrue(noticeDto.getNotice_title().equals("제목test"));
-    }
-
-    @Test
-    public void countTest() throws Exception {
-        String keyword = "qwer";
-        System.out.println("countTest => " + noticeDao.count(keyword));
-
-        int listSize = noticeDao.list().size();
-        System.out.println("listSize => " + listSize);
-
-        int count = noticeDao.count(keyword);
-
-        assertTrue(listSize == count);
-    }
+    @Autowired
+    NoticeService noticeService;
 
     @Test
     public void updateViewCnt() throws Exception{
 
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        // given
+        int noticeSeq = 1;
 
-        NoticeDto noticeDto = new NoticeDto(1, "제목test", "내용test", 0, currentTimestamp, "Y", "N", "admin1", currentTimestamp , "system", currentTimestamp, "system");
-        System.out.println("noticeDto1 => "  + noticeDto);
+        // when
+        NoticeDto noticeDto = noticeDao.select(noticeSeq);
+        noticeDao.addViewCnt(noticeDto.getNotice_seq());
 
-        System.out.println("noticeDto => " + noticeDto.toString());
-        System.out.println("noticeDto.getNotice_seq() => " + noticeDto.getNotice_seq());
+        // then
+        assertTrue(47 == noticeDto.getNotice_view_cnt());
+    }
 
-        int increaseOneViewCnt = noticeDao.addViewCnt(noticeDto.getNotice_seq());
-        assertTrue(increaseOneViewCnt == 1);
+    @Test
+    public void listcount() throws Exception{
 
+        //given
 
+        // keyword "" 인 경우 전체 리스트 카운트
+        int totalCnt = noticeDao.count("");
+        // keyword "qwer" 인 경우 DB에 제목이 qwer인 값만 카운트
+        int totcalKeywordCnt = noticeDao.count("qwer");
+
+        // then
+        assertTrue(28 == totalCnt);
+        assertTrue(4 == totcalKeywordCnt);
+    }
+
+    @Test
+    public void pageDefaultList() throws Exception{
+        // given
+        int page = 1;
+        String sort = "";
+        String keyword = "";
+        List<NoticeDto> pagingList = null;
+
+        //when
+        pagingList = noticeService.pagingList(page, sort, keyword);
+        PageDto pageDto = noticeService.pagingParam(page, keyword);
+
+        //then
+        assertTrue(pagingList.size() == 10);
+        assertTrue(3 == pageDto.getMaxPage());
+        assertTrue(1 == pageDto.getStartPage());
+        assertTrue(3 == pageDto.getEndPage());
+    }
+
+    @Test
+    public void pageKeywordList() throws Exception{
+
+        //given
+        int page = 1;
+        String sort = "";
+        String keyword = "qwer";
+        List<NoticeDto> pagingList = null;
+
+        //when
+        pagingList = noticeService.pagingList(page, sort, keyword);
+        PageDto pageDto = noticeService.pagingParam(page, keyword);
+
+        //then
+        assertTrue(pagingList.size() == 4);
+        assertTrue(1 == pageDto.getMaxPage());
+        assertTrue(1 == pageDto.getStartPage());
+        assertTrue(1 == pageDto.getEndPage());
+    }
+
+    @Test
+    public void pageOrderList() throws Exception{
+
+        //given
+        int page = 1;
+        String sort = "view";
+        String keyword = "";
+        List<NoticeDto> pagingList = null;
+
+        //when
+        pagingList = noticeService.pagingList(page, sort, keyword);
+        PageDto pageDto = noticeService.pagingParam(page, keyword);
+
+        //then
+        assertTrue(pagingList.get(0).getNotice_title().equals("공지사항 제목 테스트 1"));
     }
 }

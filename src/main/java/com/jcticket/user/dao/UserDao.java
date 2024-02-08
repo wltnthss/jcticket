@@ -15,5 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 public interface UserDao{
     UserDto selectUser(String user_id) throws Exception;
+    int increaseLoginCnt(String user_id) throws Exception;
 }
 

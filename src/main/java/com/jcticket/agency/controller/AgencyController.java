@@ -85,20 +85,7 @@ import java.util.Objects;
 //    }
 //----------------------------------------------------------------------------------------
 
-@Controller
-@RequestMapping("/agency")//이 클래스의 모든 메서드는 /agency 경로에 매핑
-public class AgencyController {
 
-    @Autowired
-    private AgencyService agencyService;//AgencyService 인터페이스를 사용하기 위해 의존성을 주입 받음
-
-    @GetMapping("/processLogin")//  /agency/processLogin 경로로 POST 요청을 보내면, 이 메서드가 실행되어 로그인을 처리함
-    public String showAgencyLoginForm() {
-
-        return "viewdetail/login"; //로그인 폼을 보여주는 페이지의 경로
-
-
-    }
     // 기획사 로그인 페이지로 리다이렉트하는 메서드
 //    @GetMapping("/login")
 //    public String redirectToAgencyLoginPage() {
@@ -143,23 +130,45 @@ public class AgencyController {
 //        return "/agency/agencydashboard"; // 로그인 실패 시 로그인 폼으로
 //    }
 //-----------------------------------------------------------------
-    @PostMapping("/processLogin") ///agency/processLogin 경로로 온 POST 요청을 받음
-    public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model m,
-                                     HttpServletRequest request, HttpServletResponse response) throws Exception {
+//    @PostMapping("/processLogin") ///agency/processLogin 경로로 온 POST 요청을 받음
+//    public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model m,
+//                                     HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//        if (!agencyLoginCheck(agency_id, agency_pwd)) {//입력된  ID와 비밀번호를 검증하기 위해 agencyLoginCheck() 메서드를 호출
+//            m.addAttribute("agency_id", agency_id);
+//            m.addAttribute("agency_pwd", agency_pwd);
+//
+//            if (!Objects.equals(agency_id, "") && !Objects.equals(agency_pwd, "")) {
+//                AgencyDto agencyDto = null;
+//                agencyDto = agencyService.selectAgency(agency_id);
+//                m.addAttribute("agencyDto", agencyDto);
+//                System.out.println("agencyDto = " + agencyDto);
+//            }
+//
+//            return "redirect:/login?loginFailed=true";//로그인이 실패하면 로그인 폼으로 redirect
+//        }
+@Controller
+@RequestMapping("/agency")//이 클래스의 모든 메서드는 /agency 경로에 매핑
+public class AgencyController {
 
-        if (!agencyLoginCheck(agency_id, agency_pwd)) {//입력된  ID와 비밀번호를 검증하기 위해 agencyLoginCheck() 메서드를 호출
-            m.addAttribute("agency_id", agency_id);
-            m.addAttribute("agency_pwd", agency_pwd);
+    @Autowired
+    private AgencyService agencyService;//AgencyService 인터페이스를 사용하기 위해 의존성을 주입 받음
 
-            if (!Objects.equals(agency_id, "") && !Objects.equals(agency_pwd, "")) {
-                AgencyDto agencyDto = null;
-                agencyDto = agencyService.selectAgency(agency_id);
-                m.addAttribute("agencyDto", agencyDto);
-                System.out.println("agencyDto = " + agencyDto);
-            }
+    @GetMapping("/processLogin")//  /agency/processLogin 경로로 POST 요청을 보내면, 이 메서드가 실행되어 로그인을 처리함
+    public String showAgencyLoginForm() {
 
-            return "redirect:/login";//로그인이 실패하면 로그인 폼으로 redirect
-        }
+        return "viewdetail/login"; //로그인 폼을 보여주는 페이지의 경로
+
+
+    }
+@PostMapping("/processLogin")
+public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model m,
+                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    if (!agencyLoginCheck(agency_id, agency_pwd)) {
+        // 로그인이 실패한 경우, 로그인 폼으로 리다이렉션하되 파라미터를 전달하지 않도록 하여서 입력값을 url에 보여주지 않음
+        return "redirect:/login";
+    }
 
         HttpSession session = request.getSession();//로그인이 성공하면 세션에 기관 ID를 저장
         session.setAttribute("agency_id", agency_id);

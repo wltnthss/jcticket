@@ -31,11 +31,6 @@ public class NoticeServiceImpl implements NoticeService{
     NoticeDao noticeDao;
 
     @Override
-    public List<NoticeDto> list() throws Exception {
-        return noticeDao.list();
-    }
-
-    @Override
     public NoticeDto select(int no) throws Exception {
         return noticeDao.select(no);
     }
@@ -51,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService{
         /*
             1page => 0
             2page => 10
-            3page => 20d
+            3page => 20
          */
 
         // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
@@ -64,6 +59,7 @@ public class NoticeServiceImpl implements NoticeService{
         pagingParams.put("limit", pageLimit);
         pagingParams.put("keyword", keyword);
 
+        // 번호순 seq 값 들어오면 번호순 정렬, 아닐 시에 조회순 정렬
         if(sort.equals("seq")){
             pagingList = noticeDao.pagingList(pagingParams);
         }else{
@@ -74,7 +70,7 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public PageDto pagingParam(int page, String sort, String keyword) throws Exception {
+    public PageDto pagingParam(int page, String keyword) throws Exception {
 
         // 전체 글 개수 조회
         int noticeCount = noticeDao.count(keyword);

@@ -62,3 +62,49 @@ $(document).on("keyup", "#user_tel", function() {
 });
 <!-- 전화번호 자동 하이픈 끝 -->
 
+
+// <!-- 이메일 인증번호 발송 시작 -->
+let code = "";
+$('#emailBtn').on('click',function (){
+    const totalEmail = $('.idInput').val()+$('.emailSep').text()+$('.selDomain').val();
+    $.ajax({
+        type:"GET",
+        url:"/signup/emailChk?totalEmail="+totalEmail,
+        cache:false,
+        success:function(data){
+            if(data==="error"){
+                alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+            }else{
+                alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호를 확인해주세요.");
+            }
+            code=data;
+            console.log(code);
+        }
+    })
+})
+// <!-- 이메일 인증번호 발송 끝 -->
+
+// 인증번호 비교 시작
+$('#AuthBtn').on('click',function (){
+    const inputCode = $('#authNum').val();
+    const $resultMsg = $('.authMsg');
+
+    console.log(inputCode);
+
+    if(inputCode===code && code!=="" && inputCode!==""){
+        $($resultMsg).css('display','block')
+        $resultMsg.html('인증에 성공하였습니다.')
+        $resultMsg.css('color','rgb(0, 159, 206)');
+        $('#authNum').attr('disabled','true')
+    }else if(inputCode!==code){
+        $($resultMsg).css('display','block')
+        $resultMsg.html('인증에 실패하였습니다. 인증번호를 다시 확인해주세요.')
+        $resultMsg.css('color','orangered')
+    }else if(code===""){
+        $($resultMsg).css('display','block')
+        $resultMsg.html('이메일 인증하기 버튼을 눌러 인증번호를 받으세요.')
+        $resultMsg.css('color','orangered')
+    }
+})
+
+// 인증번호 비교 끝

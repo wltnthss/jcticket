@@ -242,6 +242,9 @@
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/login/login.js"></script>
+
+
+
 <script>
     let user_id = "${param.user_id}";
     let user_pwd = "${param.user_pwd}";
