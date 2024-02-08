@@ -23,7 +23,7 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 public class AgencyDto {
 
-
+//1. DTO 생성 : 데이터베이스의 테이블 구조와 일치하도록 DTO 생성 한다.  각 필드는 private을 써서 getter,  setter 메서드 어.. 사용?
 //    CREATE TABLE `Agency` (
 //            `agency_id`	VARCHAR(30)	NOT NULL,
 //	`agency_password`	INT	NOT NULL,
@@ -60,4 +60,8 @@ public class AgencyDto {
     private String updated_at;
     private String updated_id;
 
+    public AgencyDto(String agency_id, String agency_password){
+        this.agency_id = agency_id;
+        this.agency_password = agency_password;
+    }
 }

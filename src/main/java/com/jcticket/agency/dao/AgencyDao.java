@@ -18,20 +18,10 @@ import org.springframework.stereotype.Repository;
  */
 
 
-
-
-
-@Repository
-public class AgencyDao {
-
-    public void saveAgency(AgencyDto agencyDto) {
-        // db에 기획사 정보를 저장
-    }
-
-    public AgencyDto selectAgency(String agencyId) {
-        // db에서 기획사 정보를 조회
-        return null;
-    }
-
-    // 다른 메서드들 추가 가능
+//3.DAO 생성: db에서  agency_id 를 가져온 dto 객체를 반환?
+    // 그래서 interface로 쓴 이유는 유지 보수성 때문인가요?  와 진짜 트루리셋됨
+public interface AgencyDao {
+    AgencyDto selectAgency(String agency_id) throws Exception;
 }
+
+
