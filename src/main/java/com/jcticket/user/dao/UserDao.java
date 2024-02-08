@@ -1,7 +1,7 @@
 package com.jcticket.user.dao;
 
 import com.jcticket.user.dto.UserDto;
-
+import org.springframework.stereotype.Repository;
 /**
  * packageName    : com.jcticket.user
  * fileName       : UserDao
@@ -15,4 +15,6 @@ import com.jcticket.user.dto.UserDto;
  */
 public interface UserDao{
     UserDto selectUser(String user_id) throws Exception;
+    int increaseLoginCnt(String user_id) throws Exception;
 }
+

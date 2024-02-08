@@ -1,0 +1,545 @@
+body{
+    font-size: 15px;
+    line-height: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.page{
+    height: 100%;
+}
+
+.section{
+    display: block;
+    padding-top: 20px;
+    margin: auto;
+}
+
+a{
+    cursor: pointer;
+
+}
+
+label{
+    cursor: default;
+}
+
+form{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+option{
+    font-weight: normal;
+    display: block;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+    white-space: nowrap;
+}
+
+.main-Logo{
+    width: 95px;
+    height: 70px;
+}
+
+.logoImg{
+    width: 95px;
+    height: 70px;
+}
+
+.signup-content{
+    width: 420px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+.signupFont{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.socialSignUpArea{
+    margin: 30px 0 ;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ededed;
+}
+
+.socialSignUpContent{
+    font-size: 12px;
+    text-align: center;
+    margin: 15px 0;
+    color: #757575;
+}
+
+.signup-social-icon{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.ssc-icon{
+    margin : 0 10px;
+    display: list-item;
+    padding: 0;
+}
+
+.ssc{
+    display: block;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.sscImg{
+    width: 48px;
+    height: 48px;
+}
+
+.emailLabel{
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #2F3438;
+    letter-spacing: -0.3px;
+    word-break: keep-all;
+}
+
+.emailInput{
+    display: flex;
+}
+
+.emailId{
+    position: relative;
+    flex: 1 1 0px;
+}
+
+.idInput{
+    font-size: 15px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 15px;
+    line-height: 40px;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #424242;
+}
+
+.emailSep{
+    flex: 0 0 20px;
+    text-align: center;
+    line-height: 40px;
+    color: #dbdbdb;
+}
+
+.emailDomain{
+    position: relative;
+    flex: 1 1 0px;
+}
+
+.selDomain{
+    font-size: 15px;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    height: 40px;
+    padding: 0 15px;
+    line-height: 40px;
+    border-radius: 4px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #424242;
+}
+
+#disabledOpt{
+    color: #757575;
+    opacity: 1;
+}
+
+.domainOpt{
+    color: #424242;
+}
+
+.emailBtnWrap{
+    margin-bottom: 10px;
+    padding-top: 2px;
+}
+
+.emailBtn{
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    padding: 0px;
+    background-color: black;
+    opacity: 0.8;
+    color: #dbdbdb;
+    line-height: 20px;
+    font-size: 17px;
+    min-height: 50px;
+    user-select: none;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: color .1s,background-color .1s,border-color .1s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.idPwdNickTelAddGenBir_Wrap{
+    margin-bottom: 30px;
+}
+
+.css_idPwdNickTelAddGenBir_label{
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #2F3438;
+    letter-spacing: -0.3px;
+    word-break:keep-all;
+}
+
+.css_idPwdNickTelAddGenBir_div{
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #828C94;
+    letter-spacing: -0.3px;
+}
+
+.css_idPwdNickTelAddGenBir_input{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+.css_idPwdNickTelAddGenBir_inputAuth{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 47%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+#sample4_postcode{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+
+#sample4_roadAddress{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 65%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+
+#sample4_jibunAddress{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 33%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+
+#sample4_detailAddress{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 55%;
+    margin: 0;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+
+#sample4_extraAddress{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 43%;
+    margin: 0;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
+
+#addBtn{
+    position: relative;
+    margin-left: 10px;
+    top: 3px;
+    width: 30%;
+    height: 39.33px;
+    padding: 0px;
+    background-color: black;
+    opacity: 0.8;
+    color: #dbdbdb;
+    font-size: 17px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: color .1s,background-color .1s,border-color .1s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#AuthBtn{
+    position: relative;
+    margin-left: 10px;
+    top: 3px;
+    width: 30%;
+    height: 39.33px;
+    padding: 0px;
+    background-color: black;
+    opacity: 0.8;
+    color: #dbdbdb;
+    font-size: 17px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: color .1s,background-color .1s,border-color .1s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.authMsg{
+    display: none;
+}
+
+.termsWrap{
+    padding: 18px;
+    border: 1px solid rgb(234,237,239);
+}
+
+.terms{
+    margin-top: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.termsAll{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+}
+
+.termLabel{
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    flex: 1 1 0%;
+}
+
+.termsChk_div{
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(218,221,224);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgb(255,255,255);
+    transition: border-color 0.1s ease 0s, background-color 0.1s ease 0s;
+    flex-shrink: 0;
+}
+
+.termsChk_div2{
+    position: absolute;
+    overflow: hidden;
+    top: 3.6px;
+    left: 3px;
+    width: 0px;
+    height: 12px;
+    transition: width 0.2s ease 0.1s;
+}
+
+.termsChk_span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    vertical-align: top;
+    color: rgb(255,255,255);
+}
+
+.termsChkBox{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.termsChkCon{
+    flex: 1 1 0%;
+    font-size: 12px;
+    line-height: 20px;
+    margin-left: 6px;
+    color: rgb(47, 52, 56);
+}
+
+.termsChkCon2{
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.termsChkCon2Detail{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(130, 140, 148);
+}
+
+.termsGuideLine{
+    padding: 0px;
+    height: 1px;
+    border: none;
+    background-color: rgb(234, 237, 239);
+    margin: 18px 0px;
+}
+
+.agreeCon{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+}
+
+.essentialTerm::after{
+    content: "(필수)";
+    display: inline-block;
+    padding-left: 2px;
+    font-size: 12px;
+    line-height: 20px;
+    color: orange;
+    font-weight: bold;
+}
+
+.selectiveTerm::after{
+    content: "(선택)";
+    display: inline-block;
+    padding-left: 2px;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgb(130, 140, 148);
+}
+
+.signupBtn{
+    margin-top: 10px;
+    width: 100%;
+    height: 45px;
+    padding: 0px;
+    background-color: black;
+    opacity: 0.8;
+    color: #dbdbdb;
+    line-height: 20px;
+    font-size: 17px;
+    min-height: 50px;
+    user-select: none;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: color .1s,background-color .1s,border-color .1s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.signupChkP{
+    color: rgb(66, 66, 66);
+    font-size: 13px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.goLoginFromSignUp{
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline-block;
+    padding-left: 10px;
+    font-size: 13px;
+}

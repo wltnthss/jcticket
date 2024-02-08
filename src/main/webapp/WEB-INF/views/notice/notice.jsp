@@ -47,32 +47,34 @@
     </div >
 
     <div class="notice-paging">
-        <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 --%>
         <c:if test="${paging.page<=1}">
+            <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 --%>
             <a class="notice-paging-pageitems"> < </a>
         </c:if>
-        <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
         <c:if test="${paging.page>=2}">
+            <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
             <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
         </c:if>
 
         <%-- for(int i=startPage; i<=endPage; i++) --%>
         <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
-            <%-- 요청한 페이지에 있는 경우 현재 페이지 번호는 텍스트만 보이게 --%>
             <c:if test="${i eq paging.page}">
+                <%-- 요청한 페이지에 있는 경우 현재 페이지 번호는 강조  --%>
                 <a class="notice-paging-pageitems ${i eq paging.page? "active" : ""}" >${i}</a>
             </c:if>
-
             <c:if test="${i ne paging.page}">
+                <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
                 <a class="notice-paging-pageitems" href="/notice/paging?page=${i}&keyword=${paging.keyword}">${i}</a>
             </c:if>
         </c:forEach>
 
         <c:if test="${paging.page >= paging.maxPage}">
+            <%-- page가 maxPage보다 크거나 같으면 링크가 제거된 > 표시 --%>
             <a class="notice-paging-pageitems"> > </a>
         </c:if>
 
         <c:if test="${paging.page < paging.maxPage}">
+            <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
             <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
         </c:if>
     </div>
@@ -86,18 +88,6 @@
 
 <script>
 
-    // 번호순 toggle click 이벤트
-    $('#notice-order1').on('click', function(){
-
-        $('#notice-order1').classList.add('on')
-        $('#notice-order2').classList.add('on')
-
-    });
-    // 조회순 toggle click 이벤트
-    // $('#notice-order2').on('click', function(){
-    //     $('#notice-order2').classList.add('on')
-    //     $('#notice-order1').classList.remove('on')
-    // });
 
 </script>
 <body>

@@ -1,0 +1,360 @@
+/*관리자 로그인 페이지 시작*/
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    letter-spacing: -0.05em;
+}
+ol, li, ul, dl, dt, dd {
+    list-style: none;
+    text-align: left;
+    position: static;
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: 600;
+}
+body, div, table, th, td{
+    font-size: 12px;
+}
+.admin-login-container{
+    min-width: 1080px;
+}
+.admin-login-container .loginbox{
+    position: absolute;
+    width: 825px;
+    height: 497px;
+    top: 50%;
+    left: 50%;
+    margin-top: -248.5px;
+    margin-left: -412.5px;
+    border-radius: 30px;
+    z-index: 1;
+}
+.blind{
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    font-size: 10px;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+.admin-login-container .loginbox > div{
+    height: 100%;
+}
+.admin-login-container .loginleft{
+    position: relative;
+    float: left;
+    width: 400px;
+    background: url(//openimage.interpark.com/admin/ticket-manager/login/loginLeft.jpg) no-repeat center;
+    border-radius: 30px 0 0 30px;
+    text-align: center;
+}
+.admin-login-container .loginright{
+    position: relative;
+    float: left;
+    width: 460px;
+    padding: 85px 60px;
+    background-color: #fff;
+    box-sizing: border-box;
+    margin-left: -35px;
+    z-index: 1;
+    border-radius: 30px;
+    box-shadow: 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.admin-login-container .loginright h1{
+    margin-bottom: 42px;
+    font-size: 20px;
+    font-weight: bold;
+    word-break: keep-all;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", Dotum, Helvetica, sans-serif;
+}
+input[type="text"]{
+    width: 100%;
+    height: 50px;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #dfe5ed;
+    letter-spacing: inherit;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: 0;
+}
+input[type="text"], input[type="password"] {
+    width: 100%;
+    height: 50px;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #dfe5ed;
+    letter-spacing: inherit;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: 0;
+}
+.admin-login-container .loginright .btnLogin {
+    width: 100%;
+    height: 55px;
+    margin: 30px 0 23px;
+    font-size: 18px;
+    background: black;
+    opacity: 0.8;
+    border-radius: 10px;
+    color: #fff;
+    transition: width .2s;
+    border: none;
+    cursor: pointer;
+}
+/*관리자 로그인 페이지 끝*/
+
+/*관리자 Dashboard main 시작*/
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table th{
+    line-height: 1.3em;
+}
+thead{
+    font-size: 12px;
+    line-height: 1em;
+    vertical-align: baseline;
+}
+.admin-btn_small2{
+    background: #333;
+    border: 1px solid #333;
+    color: #fff !important;
+    padding: 2px 8px;
+    font-size: 11px;
+    line-height: 1.555;
+    font-weight: normal !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+.admin-btn_small3{
+    float: right;
+    margin-bottom: 5px !important;
+    background: #333;
+    border: 1px solid #333;
+    color: #fff !important;
+    padding: 2px 8px;
+    font-size: 11px;
+    line-height: 1.555;
+    font-weight: normal !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+.admin-dashboard-body{
+    margin-bottom: 20px;
+}
+.admin-dashboard-body{
+    background-color: #fff;
+    z-index: 5;
+    min-width: 1210px;
+    zoom: 1;
+}
+.admin-dashboard-main{
+    padding: 0 30px;
+    overflow: hidden;
+}
+.admin-dashboard-main h2{
+    margin: 30px 0 0;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1em;
+    padding: 0 0 10px 10px;
+}
+.admin-dashboard-main h2:before {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: #1a4e99;
+    content: '';
+}
+.admin-dashboard-side1{
+    float: left;
+}
+.admin-dashboard-side2{
+    margin-left: 100px;
+    float: left;
+}
+.admin-dashboard-side3{
+    padding: 10px;
+    clear: both;
+}
+.admin-dashboard-side2 > table{
+    width: 700px;
+}
+.admin-dashboard-main th{
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: middle;
+}
+.admin-dashboard-main td{
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: middle;
+}
+.admin-dashboard-main tbody td {
+    line-height: 1.4em;
+    word-break: break-all;
+    text-align: center !important;
+}
+
+.admin-dashboard-main table{
+    width: 100%;
+    border: 1px solid #ddd;
+    table-layout: fixed;
+}
+
+/*관리자 Dashboard main 끝*/
+
+/*관리자 회원 ~ 환경설정 공통 시작*/
+.admin-common-wrap{
+    background-color: #fff;
+    min-width: 1210px;
+    zoom: 1;
+}
+.admin-common-snb{
+    float: left;
+    width: 204px;
+    background: #fff;
+    zoom: 1;
+}
+.admin-common-snb .snb-header{
+    height: 80px;
+    text-align: center;
+}
+.admin-common-snb .snb-header h2{
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.admin-common-content{
+    margin-left: 204px;
+    padding-bottom: 100px;
+    border-left: 1px solid #ccc;
+}
+.admin-common-title{
+    margin: 30px 25px;
+}
+.admin-common-content h1{
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -1px;
+}
+.admin-common-snb dt{
+    background: #f6f6f6;
+    border-top: 1px solid #cfcfcf;
+    padding: 0 0 0 17px;
+    font-size: 12px;
+    line-height: 2.8;
+    font-weight: 600;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.admin-common-snb dd{
+    display: block;
+    position: relative;
+}
+.admin-common-snb a:hover{
+    background-color: #eeeeee !important;
+}
+.admin-common-snb dd a {
+    display: block;
+    padding: 7px 0 7px 17px;
+    text-decoration: none;
+    background: #fff;
+    color: #555;
+    vertical-align: middle;
+}
+.fa-arrow-down:before{
+    margin-left: 100px;
+    font-size: 10px;
+}
+/*관리자 회원 ~ 환경설정 공통 끝*/
+
+/*관리자 회원관리 시작*/
+.fa-user:before {
+    font-size: 30px;
+    color: #555;
+}
+
+/*관리자 회원관리 끝*/
+
+/*관리자 기획사관리 시작*/
+.fa-city:before {
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 기획사관리 끝*/
+
+/*관리자 상품관리 시작*/
+.fa-film:before {
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 상품관리 끝*/
+
+/*관리자 공지사항관리 시작*/
+.fa-paperclip:before {
+    font-size: 25px;
+    color: #555;
+}
+/*관리자 공지사항관리 끝*/
+
+/*관리자 문의관리 시작*/
+.fa-comment:before {
+    font-size: 30px;
+    color: #555;
+}
+
+/*관리자 문의관리 끝*/
+
+/*관리자 쿠폰관리 시작*/
+.fa-gift:before{
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 쿠폰관리 끝*/
+
+/*관리자 통계분석 시작*/
+.fa-square-poll-vertical:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f681";
+}
+
+/*관리자 통계분석 끝*/
+
+/*관리자 환경설정 시작*/
+
+.fa-gears:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f085";
+}
+
+/*관리자 환경설정 끝*/

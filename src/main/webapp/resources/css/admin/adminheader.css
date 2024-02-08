@@ -1,0 +1,107 @@
+*{
+    font-family: 나눔고딕, "Nanum Gothic", 맑은고딕, "Malgun Gothic", gulim, arial, Dotum, AppleGothic, sans-serif;
+    font-size: 12px;
+}
+.admin-dashboard-header {
+    min-width: 1200px;
+    background: #393b3f;
+}
+.admin-dashboard-wrap{
+    position: relative;
+    margin: 0 auto;
+    z-index: 11;
+}
+.admin-dashboard-logo{
+    position: relative;
+    height: 50px;
+}
+.admin-dashboard-logo img{
+    position: absolute;
+    top: 16px;
+    left: 17px;
+}
+.header-stat{
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    zoom: 1;
+}
+.header-stat:after{
+    display: block;
+    visibility: hidden;
+    clear: both;
+    content: "";
+}
+.header-stat a{
+    text-decoration: none;
+    color: white;
+}
+.admin-logout{
+    text-decoration: none;
+    color: indianred !important;
+    font-weight: bold;
+}
+.header-stat ul{
+    padding: 0;
+    line-height: 50px;
+    zoom: 1;
+    display: inline-block;
+    list-style: none;
+    text-align: left;
+    position: static;
+    overflow: hidden;
+}.header-stat ul li{
+     float: left;
+     margin: 0 0 0 10px;
+     padding: 0 10px 0 0;
+     color: #bbb;
+     border-right: 1px solid #444;
+ }
+.header-stat ul li{
+    float: left;
+    margin: 0 0 0 10px;
+    padding: 0 10px 0 0;
+    color: #bbb;
+    border-right: 1px solid #444;
+    list-style: none;
+    text-align: left;
+    position: static;
+    overflow: hidden;
+}
+.header-nav{
+    z-index: 12;
+    position: relative;
+    background: #494b50;
+    height: 35px;
+}
+.header-nav-ul{
+    position: relative;
+    padding: 0;
+    zoom: 1;
+    overflow: visible !important;
+}
+.header-nav-li{
+    z-index: 13;
+    position: relative;
+    float: left;
+    margin: 0 0 0 -1px;
+    border: 1px solid #2d3032;
+    border-top: 0;
+    border-bottom: 0;
+    list-style: none;
+    text-align: left;
+    overflow: visible !important;
+}
+.header-nav-li a{
+    display: block;
+    height: 34px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    line-height: 2.6em;
+    list-style: none;
+}

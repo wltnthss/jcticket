@@ -140,7 +140,7 @@
                     <!-- 소셜 로그인 영역 끝 -->
 
                     <%--로그인 실패 팝업창 시작--%>
-                    <c:if test="${param.user_id!='' and param.user_pwd!='' and param.user_pwd!=param.boardDtoPWD}">
+                    <c:if test="${(param.user_id!='' and param.user_id !=null) and (param.user_pwd!='' and param.user_pwd!=null)}">
                         <div class="maskUI">
                         <div id="loginFailPop" >
                         <div class="jcPopUp">
@@ -186,14 +186,14 @@
                                 <input id="SAgencyPWD" name="agency_pwd" type="password" autocomplete="off" placeholder="기획사 비밀번호">
                             </span>
                             <div class="agencyChk" style="display: block;">
-                                <span class="aLoginKeep">
-                                    <label for="aChkAutoLogin">로그인 상태 유지</label>
-                                    <input id="aChkAutoLogin" name="aAutoLogin" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom:1.5;">
-                                </span>
-                                <span class="aLoginKeep">
-                                    <label for="aChkRememberID">아이디 저장</label>
-                                    <input id="aChkRememberID" name="aRememberId" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom: 1.5;">
-                                </span>
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkAutoLogin">로그인 상태 유지</label>--%>
+<%--                                    <input id="aChkAutoLogin" name="aAutoLogin" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom:1.5;">--%>
+<%--                                </span>--%>
+<%--                                <span class="aLoginKeep">--%>
+<%--                                    <label for="aChkRememberID">아이디 저장</label>--%>
+<%--                                    <input id="aChkRememberID" name="aRememberId" type="checkbox" autocapitalize="off" class="aIptChk" style="zoom: 1.5;">--%>
+<%--                                </span>--%>
                             </div>
                             <button id="aLoginBtn" title="기획사 로그인">
                                 <span class="aBtnWrap">
@@ -232,54 +232,11 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
+<script src="/resources/js/login/login.js"></script>
 <script>
     let user_id = "${param.user_id}";
     let user_pwd = "${param.user_pwd}";
     let boardDtoPWD = "${param.boardDtoPWD}"
-        // $('#loginBtn').on('click', formCheck)
-        //
-        // function formCheck(){
-        //
-        //     if (user_id == "") {
-        //         $('#spanMemID').css("border-color", "red")
-        //     }
-        //
-        //     if (user_pwd == "") {
-        //         $('#spanMemPWD').css("border-color", "red")
-        //     }
-        // }
-
-    // $('#loginBtn').on('click', formCheck)
-    //
-    // function formCheck(){
-    //
-    //     if (user_id == "") {
-    //         alert("아이디를 입력해주세요")
-    //     }
-    //
-    //     if (user_pwd == "") {
-    //         alert("비밀번호를 입력해주세요")
-    //     }
-    // }
-    
-    $('.closeButtonWrap').click(function (){
-        $('.maskUI').toggle();
-    })
-
-    $('#userTab').click(function (){
-        $('.memLoginForm').css('display','block')
-        $('.agencyLoginForm').css('display','none')
-        $('#userTabA').css('border','solid 1.5px black')
-        $('#agencyTabA').css('border','solid 1.0px black')
-    })
-
-    $('#agencyTab').click(function (){
-        $('.agencyLoginForm').css('display','block')
-        $('.memLoginForm').css('display','none')
-        $('#agencyTabA').css('border','solid 1.5px black')
-        $('#userTabA').css('border','solid 1.0px black')
-    })
 </script>
 </body>
 </html>
