@@ -46,8 +46,10 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 /*일 폰트 등등 설정*/
 .ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: rgba(0,0,0,0.05); font-weight: normal; color: #333; box-sizing: border-box; }
 .ui-datepicker .ui-state-default.ui-state-hover { background: rgba(0,0,0,0.05); }
-.ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 0.25;}
-/*오늘날짜 강조 주석*/
+/*비활성화된 요소*/
+.ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 0.2;}
+/*.ui-datepicker-unselectable .ui-state-default {background: red !important;}*/
+ /*오늘날짜 강조 주석*/
 /*.ui-datepicker-today .ui-state-default { color: #3f51b5; font-weight: bold; }*/
 
 /*클릭했을때 글자*/
@@ -69,3 +71,4 @@ display: none; /* 화살표 없애기 for IE10, 11*/
  @media screen and (max-width:480px) {
 .ui-datepicker { width: 270px !important; left: 50% !important; margin-left: -135px !important; }
 }
+
