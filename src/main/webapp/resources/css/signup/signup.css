@@ -167,7 +167,7 @@ option{
 }
 
 .emailBtnWrap{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     padding-top: 2px;
 }
 
@@ -235,7 +235,21 @@ option{
     transition: border-color .1s,background-color .1s;
     resize: none;
 }
-
+.css_idPwdNickTelAddGenBir_inputAuth{
+    padding: 8px 15px 9px;
+    display: inline-block;
+    width: 47%;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 21px;
+    transition: border-color .1s,background-color .1s;
+    resize: none;
+}
 #sample4_postcode{
     padding: 8px 15px 9px;
     display: inline-block;
@@ -336,6 +350,41 @@ option{
     border-radius: 4px;
     cursor: pointer;
 }
+
+
+#AuthBtn{
+    position: relative;
+    margin-left: 10px;
+    top: 3px;
+    width: 30%;
+    height: 39.33px;
+    padding: 0px;
+    background-color: black;
+    opacity: 0.8;
+    color: #dbdbdb;
+    font-size: 17px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    transition: color .1s,background-color .1s,border-color .1s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.authMsg{
+    display: none;
+}
+
+.authMsg, #id_warnMsg, #pwd_warnMsg, #pwd_chkWarnMsg, #nickname_warnMsg,
+#tel_warnMsg{
+    display: none;
+}
+
+
+
+
 
 .termsWrap{
     padding: 18px;

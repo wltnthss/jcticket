@@ -10,6 +10,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,15 +22,21 @@
                 <h2>
                     통계분석
                 </h2>
+                <i class="fas fa-solid fa-square-poll-vertical"></i>
             </div>
             <dl>
-                <dt class="menu_toggle">통계분석</dt>
-                <dd class="active">
-                    <a href="/admin/user">통계분석 정보관리</a>
-                </dd>
-                <dd class="">
-                    <a href="/admin/register">통계분석 등록하기</a>
-                </dd>
+                <dt class="menu_toggle-u10">통계분석
+                    <i class="fas fa-solid fa-arrow-down"></i>
+                </dt>
+
+                <div id="u10" style="display: block">
+                    <dd class="u10">
+                        <a href="/admin/user">통계분석 정보관리</a>
+                    </dd>
+                    <dd class="u10">
+                        <a href="/admin/register">통계분석 등록하기</a>
+                    </dd>
+                </div>
             </dl>
         </div>
         <div class="admin-common-content">
@@ -41,5 +48,7 @@
 
     <jsp:include page="/WEB-INF/views/admin/adminfooter.jsp"/>
 
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="/resources/js/admin/admin.js"></script>
 </body>
 </html>

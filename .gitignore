@@ -11,6 +11,7 @@ target/
 .idea/libraries/
 .idea/jsLibraryMappings.xml
 .idea/webContents.xml
+.idea/inspectionProfiles/
 *.iws
 *.iml
 *.ipr

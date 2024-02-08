@@ -10,6 +10,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="/resources/css/admin/adminheader.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="admin-dashboard-header">
@@ -20,12 +21,12 @@
                 </a>
             </div>
             <div class="header-stat">
-                <ul>
-                    <li><a style="cursor: default">${sessionScope.adminNickName}</a></li>
+                <ul>ㄴ
+                    <li><a style="cursor: default">${sessionScope.adminNickName}님 환영합니다</a></li>
                     <li><a href="/admin/setting">관리자정보</a></li>
                     <li><a href="/admin/dashboard">관리자홈</a></li>
                     <li><a href="/index">메인홈</a></li>
-                    <li><a href="/admin" class="admin-logout">로그아웃</a></li>
+                    <li><a href="/admin/logout" class="admin-logout">로그아웃</a></li>
                 </ul>
             </div>
             <nav class="header-nav">

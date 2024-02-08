@@ -34,12 +34,23 @@ public class AdminController {
         return "admin/adminloginform";
     }
 
+    @GetMapping("/admin/logout")
+    public String adminlogout(HttpServletRequest request) throws Exception{
+
+        HttpSession session = request.getSession();
+        System.out.println("logout session => " + session);
+
+        // 로그아웃 후 세션 삭제
+        session.invalidate();
+
+        return "redirect:/admin";
+    }
+
     @GetMapping("/admin/dashboard")
     public String admindashboard(Model model) throws Exception{
 
         try {
             List<UserDto> userLists = adminService.userstatics();
-            System.out.println("userLists => " + userLists);
 
             model.addAttribute("userLists", userLists);
         } catch (Exception e){
@@ -52,8 +63,6 @@ public class AdminController {
     @ResponseBody
     private String login(@RequestBody AdminDto adminDto, HttpServletRequest request) throws Exception {
 
-        System.out.println("admin post 요청 확인");
-
         HttpSession session = request.getSession();
         String msg = null;
 
@@ -62,11 +71,10 @@ public class AdminController {
             System.out.println("rslt => " + rslt);
 
             if (rslt != null) {
-                System.out.println("Admin Login");
-                session.setAttribute("adminId", adminDto.getAdmin_id());
-                session.setAttribute("adminNickName", adminDto.getAdmin_nickname());
-                System.out.println("session => " + session);
-                System.out.println("session 확인 => " + session.getAttribute("adminNickName"));
+
+                session.setAttribute("adminId", rslt.getAdmin_id());
+                // 관리자 헤더 nickname 보여주기 (json 방식이라 model 전달은 안되나 임시방편 session 전달)
+                session.setAttribute("adminNickName", rslt.getAdmin_nickname());
 
                 msg = "ok";
             }else{
@@ -84,6 +92,14 @@ public class AdminController {
     @GetMapping("/admin/user")
     public String adminuser() throws Exception{
         return "admin/adminuser";
+    }
+    @GetMapping("/admin/register")
+    public String adminuserregister() throws Exception{
+        return "admin/adminuserregister";
+    }
+    @GetMapping("/admin/delete")
+    public String adminuserdelete() throws Exception{
+        return "admin/adminuserdelete";
     }
     @GetMapping("/admin/agency")
     public String adminagency() throws Exception{

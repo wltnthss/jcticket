@@ -1,4 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%--
+=======
 git <%--
+>>>>>>> f53ca12cc5c5bb6db892356ba083f284d2750c98
   Created by IntelliJ IDEA.
   User: kyd54
   Date: 2024-01-31
@@ -9,441 +14,22 @@ git <%--
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%--    페이지 아이콘--%>
+    <link rel="icon" href="/resources/img/viewdetail/god.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>제이씨티켓 상세</title>
 <%--    jQuery--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<%--    datepicker css--%>
     <link rel="stylesheet" href="/resources/css/viewdetail/jquery-ui.css">
-    <style>
-        body {
-            margin-right: 5%;
-            margin-left: 30px;
-        }
 
-        .container{
-            display: grid;
-            width: 100%;
-            margin-top: 20px;
-            padding: 80px 24px 0 24px;
-            border-top: solid rgba(0, 0, 0, 0.1);
-            place-items: center;
-        }
+<%--    viewdetail 페이지 css--%>
+    <link rel="stylesheet" href="/resources/css/viewdetail/viewdetail.css">
 
-        .category {
-            width: 1200px;
-            font-size: 14px;
-        }
-
-        .two {
-            width: 1200px;
-            font-size: 40px;
-        }
-        .big-title{
-            margin-top: 10px;
-            margin-bottom: 0px;
-            font-weight: bold;
-        }
-
-        .two-one {
-            border-bottom: solid 2px rgba(0, 0, 0);
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .play-period {
-            border-right: solid rgba(0, 0, 0, 0.1);
-            font-size: 16px;
-        }
-
-        .stage-name {
-            padding-left: 5px;
-            font-size: 16px;
-        }
-
-        .url-image{
-            float: right;
-        }
-
-        .play-img img {
-            width: 430px;
-        }
-
-        .three {
-            display: flex;
-            width: 1200px;
-            place-items: center;
-        }
-
-        .three-one-left {
-            float: left;
-            flex-direction: column;
-            margin-right: 70px;
-            width: 430px;
-        }
-
-        .star-review {
-            display: flex;
-            flex-direction: row;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            padding-bottom: 15px;
-            border-bottom: solid rgba(0, 0, 0, 0.1);
-        }
-
-        .review {
-            margin-left: auto;
-        }
-
-        .three-one-right {
-            display: flex;
-            flex-direction: column;
-            width: 700px;
-        }
-
-        .play-info dt {
-            font-weight: bold;
-            float: left;
-        }
-
-        .play-info dd {
-            margin-left: 100px;
-            margin-bottom: 15px;
-        }
-
-        .playtime-info dt {
-            font-weight: bold;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        .playtime-info dd {
-            margin-left: 0;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .playtime-info {
-            border-top: solid rgba(0, 0, 0, 0.5);
-            border-bottom: solid rgba(0, 0, 0, 0.5);
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
-
-
-        ul {
-            float: left;
-            list-style-type: none;
-        }
-
-        li {
-            list-style-type: none;
-            margin-bottom: 10px;
-        }
-        .price-zone {
-            width: 560px;
-            background-color: rgba(0, 0, 0, 0.03);
-            padding: 10px 0 10px 20px;
-            margin-top: 0;
-        }
-        .text_red {
-            color: red;
-        }
-
-        .four-one {
-            display: flex;
-            width: 1200px;
-        }
-
-        .fourLeft {
-            border-top: solid 1px rgba(0, 0, 0, 0.3);
-            border-right: solid 1px darkorange;
-            border-bottom: solid 1px rgba(0, 0, 0, 0.3);
-            border-left: solid 1px rgba(0, 0, 0, 0.3);
-            padding: 30px 50px;
-            margin-top: 40px;
-        }
-
-        .four-text {
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: solid 2px black;
-        }
-
-        .calender {
-            display: flex;
-        }
-
-        #datepicker {
-            width: 320px;
-            border-right: solid rgba(0, 0, 0, 0.1);
-        }
-
-        .showing {
-            width: 230px;
-        }
-
-        .showing a {
-            display: block;
-            margin-left: 30px;
-            margin-bottom: 10px;
-            border: solid rgba(0, 0, 0, 0.1);
-            padding: 5px 20px;
-            text-align: center;
-        }
-
-        .fourRight {
-            border-right: solid 1px rgba(0, 0, 0, 0.3);
-            border-bottom: solid 1px rgba(0, 0, 0, 0.3);
-            border-top: solid 1px rgba(0, 0, 0, 0.3);
-            padding: 30px 50px;
-            margin-top: 40px;
-        }
-
-        .fourLeft, .fourRight {
-            flex: 1;
-        }
-
-        .seatRemain dt{
-            float: left;
-        }
-
-        .seatRemain dd {
-            float: left;
-            margin-left: 5px;
-        }
-        .seatRemain {
-            border: solid 1px rgba(0, 0, 0, 0.1);
-            padding: 20px 50px 125px 20px;
-        }
-
-        .five {
-            border: solid black;
-            padding: 10px 80px;
-            margin-top: 50px;
-        }
-
-        .taketic {
-            font-size: 18px;
-        }
-
-        .six {
-            display: flex;
-            width: 1200px;
-            border-bottom: solid black;
-            padding-top: 100px;
-        }
-
-        .six a > span {
-            margin: 0;
-            font-size: 18px;
-            padding: 10px 40px 10px 40px;
-            height : 60px;
-            line-height: 60px;
-        }
-
-        .comment_cnt {
-            font-size: 14px;
-        }
-
-        .info_box {
-            width: 1200px;
-        }
-
-        .seven_text {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            padding: 30px 0 30px 0;
-        }
-
-        #seven_text_one {
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            padding: 50px 0 40px 0;
-            margin-bottom: 0;
-        }
-
-        .seven_con {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .seven_table_main {
-            width: 960px;
-            margin: 0 auto 100px auto;
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-right: solid 1px rgba(0,0,0,0.1);
-            border-top: solid rgba(0,0,0);
-        }
-
-        .seven_table_main tr {
-            border-bottom: solid 1px rgba(0,0,0,0.1);
-            height: 50px;
-        }
-
-        .seven_table_main td {
-            text-align: left;
-            padding-left: 16px;
-            font-size: 13px;
-        }
-
-        .seven_table_main p {
-            font-size: 13px;
-            line-height: 25px;
-        }
-
-        .seven_table {
-            background-color: rgba(0,0,0,0.05);
-            font-size: 13px;
-        }
-
-        .seven_table_mini {
-            width: 600px;
-            border-collapse: collapse;
-            border-spacing: 0;
-            text-align: center;
-        }
-
-        .seven_table_mini tr {
-            height: 15px;
-            font-size: 13px;
-        }
-
-        .seven_table_mini th {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            background-color: rgba(81, 110, 253, 0.3);
-        }
-
-        .seven_table_mini td{
-            font-size: inherit;
-            text-align: center !important;
-            padding-left: 0 !important;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
-
-        .eight {
-            border-top: solid;
-            width: 1200px;
-        }
-
-        .eight_map {
-            margin-top: 100px;
-        }
-
-        .map_name {
-            font-size: 30px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .map_location {
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .map_icon_box {
-            width: 800px;
-            margin: 40px auto 0 auto;
-            color: #ec7d2c;
-            font-size: 13px;
-            text-align: center;
-            border-top: solid 1px rgba(0,0,0,0.1);
-            padding: 50px 0 40px 0;
-        }
-
-        .comment_name {
-            padding: 50px 0 50px 0;
-            text-align: center;
-            font-size: 30px;
-        }
-
-        .comment_name span {
-            border-bottom: solid 4px black;
-        }
-
-        .comment_warning {
-            display: flex;
-            float: left;
-            width: 1200px;
-            padding-bottom: 10px;
-        }
-
-        .comment_warning img {
-            width: 39px;
-            height: 35px;
-        }
-
-        .span_box {
-            font-size: 14px;
-            margin-left: 10px;
-        }
-
-        #review_create {
-            margin-left: auto;
-            width: 178px;
-            height: 34px;
-        }
-
-        .comment_board {
-            width: 1200px;
-            padding: 14px;
-            margin: 0;
-            border-top: solid 1px black ;
-        }
-
-        .comment_board > li {
-            border-bottom: solid 1px rgba(0,0,0,0.1);
-            padding-bottom: 19px;
-        }
-
-        .comment_board > li:last-child {
-            border-bottom: solid 1px black;
-        }
-
-        .comment_page {
-            display: flex;
-            width: 1200px;
-            justify-content: center;
-        }
-
-        .comment_page > a {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 1px solid rgba(0,0,0,0.1);
-            text-align: center;
-            line-height: 30px;
-            margin: 5px 3px;
-        }
-
-        .comment_page div > a {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 1px solid rgba(0,0,0,0.1);
-            text-align: center;
-            line-height: 30px;
-            margin: 5px 1px;
-        }
-
-        .comment_page div {
-            margin: 0 20px;
-        }
-
-        .page_next img, .page_last img{
-            transform: scaleX(-1);
-        }
-    </style>
 </head>
 <body>
     <jsp:include page="../common/header.jsp"></jsp:include>
@@ -468,11 +54,13 @@ git <%--
                         <span class="play-period">
                             2022.07.24
                         </span>
-                        <span class="stage-name">
-                            쉼표 도서관 2층
-                        </span>
+<%--                        <a href="javascript:void(0);" id="stage_name">--%>
+                        <a href="javascript:void(0);" id="stage_name">
+                            <span>쉼표 도서관 2층</span>
+                            <img src="/resources/img/viewdetail/location.png" class="location_img">
+                        </a>
 
-                        <a href="javascript:void(0);" class="url-image">
+                        <a href="javascript:void(0);" id="url_image">
                             <img src="https://lh3.google.com/u/0/d/1SmiUAaDs829IOthlFJHUTLQT8GQF_lyI=w2880-h1462-iv1" alt="">
                         </a>
         <%--            </p>--%>
@@ -557,8 +145,7 @@ git <%--
 <%--                        datepicker 캘린더--%>
                         <div id="datepicker"></div>
                         <div class="showing">
-                            <a>1부 오후 1시 00분</a>
-                            <a>2부 오후 3시 00분</a>
+
                         </div>
                     </div>
                 </div>
@@ -744,7 +331,7 @@ git <%--
             </div>
 
             <div class="eight">
-                <div class="eight_map">
+                <div class="eight_map" id="map">
                     <p class="map_name">쉼표도서관</p>
                     <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
                 </div>
@@ -764,7 +351,7 @@ git <%--
                     <div class="comment_warning">
                         <img src="/resources/img/viewdetail/comment_icon.png/">
                         <div class="span_box">
-                            <span class="text_red">매매, 욕설 등 예스24 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</span><br>
+                            <span class="text_red">매매, 욕설 등 제이씨티켓 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</span><br>
                             <span>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</span>
                         </div>
                         <img id="review_create" src="/resources/img/viewdetail/review_create.png/"/>
@@ -834,27 +421,8 @@ git <%--
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
-<%--    datepicker 제이쿼리 달력--%>
+    <%--    datepicker 제이쿼리 달력--%>
     <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#datepicker").datepicker();
-        });
-
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년'
-        });
-    </script>
-    <%--    datepicker 제이쿼리 달력 끝--%>
 
     <!--
     2. 지도 설치 스크립트
@@ -862,15 +430,9 @@ git <%--
     -->
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
-    <!-- 3. 지도 실행 스크립트 -->
-    <script charset="UTF-8">
-        new daum.roughmap.Lander({
-            "timestamp" : "1707022341823",
-            "key" : "2hy9x",
-            "mapWidth" : "1200",
-            "mapHeight" : "700"
-        }).render();
-    </script>
+
+    <%--    js파일--%>
+    <script src="/resources/js/viewdetail/viewdetail.js"></script>
 </body>
 </html>
 

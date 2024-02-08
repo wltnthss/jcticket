@@ -1,0 +1,244 @@
+ul,li{list-style: none outside none}
+
+html{overflow-y:scroll;height:100%; }
+body{width:100%;height:100%;line-height:16px;}
+body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,Vendara;color:#888888}
+.area{
+    display: flex;
+    width: 800px;
+    height: 560px;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.left-section{
+    width: 75%;
+}
+.header{
+    display: flex;
+    width: 100%;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.item-logo{
+    width: 81px;
+}
+.item-header{
+    flex: 1 0 auto;
+    display: flex;
+}
+.item-header.nav1{
+    background-color: #707070;
+    align-items: center;
+    justify-content: center;
+    color: #c9c9c9;
+}
+.item-header.nav2{
+    background-color: #646464;
+    align-items: center;
+    justify-content: center;
+    color: #c9c9c9;
+}
+.item-header.nav3{
+    background-color: #525252;
+    align-items: center;
+    justify-content: center;
+    color: #c9c9c9;
+}
+.item-header.nav4{
+    background-color: #4b4b4b;
+    align-items: center;
+    justify-content: center;
+    color: #c9c9c9;
+}
+
+/* --------------------------------------- */
+
+.contents{
+    width: 100%;
+    height: 500px;
+    background-color: white;
+}
+.step-01{
+    width: 100%;
+    height: 100%;
+    /*display: none;*/
+}
+
+.contents-header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    height: 5%;
+    justify-content: flex-start;
+}
+.ch{
+    background-color: #9cb5cb;
+    color: white;
+    font-size: 13;
+}
+.ch.first{
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+}
+.ch.second{
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+}
+.contents-body{
+    display: flex;
+    width: 100%;
+    height: 95%;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+.contents-body-left{
+    display: flex;
+    width: 60%;
+    flex-flow: row nowrap;
+    justify-content: center;
+    border-right: solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.contents-body-right{
+    display: flex;
+    width: 40%;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+}
+#datepicker{
+    align-self: center;
+    padding-bottom: 50px;
+    padding-right: 20px;
+}
+.round{
+    flex: 1 0 auto;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.round a{
+    text-align: center;
+    width: 150px;
+    border: solid rgba(0,0,0,0.1);
+    margin: 0 0 15px 0;
+    /*justify-self: center;*/
+    /*align-self: center;*/
+}
+
+.right-section{
+    display: flex;
+    width: 25%;
+    background-color: #4b4b4b;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+}
+.show-info{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    padding-top: 4px;
+}
+.poster{
+    width: 40%;
+    height: 100%;
+}
+
+.poster img{
+    width: 100%;
+}
+
+.description{
+    width: 60%;
+    padding-left: 8px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#show-title b{
+    font-size: 12;
+    color: white;
+}
+#show-period p{
+    margin-top: 10px;
+    font-size: 10;
+    color: #c9c9c9;
+}
+
+.select-info{
+    flex: 3 0 auto;
+    display: flex;
+    padding-top: 20px;
+    flex-flow: column nowrap;
+}
+.select-info p{
+
+}
+.select-info-list{
+    display: flex;
+    flex-flow: column nowrap;
+}
+#date{
+    display: flex;
+    flex-flow: row nowrap;
+}
+#date b{
+
+}
+#date p{
+
+}
+#time{
+    display: flex;
+    flex-flow: row nowrap;
+}
+#count{
+    display: flex;
+    flex-flow: row nowrap;
+}
+#seat{
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+
+.select h4{
+    color: white;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.payment-info{
+    flex: 4 0 auto;
+    display: flex;
+}
+
+.payment-price{
+    flex: 1 0 auto;
+    display: flex;
+}
+.next-btn{
+    flex: 1 0 auto;
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+

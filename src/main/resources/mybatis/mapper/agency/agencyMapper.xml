@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="AgencyMapper">
+<!--  2.Mapper 설정: id="AgencyLogin으로 호출하면 AgencyDto로 매핑? 해? 줌?
+네임스페이스는 나중에 AgencyDaoImpl 에서  쿼리 실행 할 때 사용?-->
+    <select id="AgencyLogin" resultType="AgencyDto" parameterType="String">
+        select
+            *
+        from
+            agency
+        where
+            1=1
+          and agency_id = #{agency_id}
+    </select>
+</mapper>

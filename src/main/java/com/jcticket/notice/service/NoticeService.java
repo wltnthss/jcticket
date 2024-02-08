@@ -19,13 +19,10 @@ import java.util.Map;
  */
 public interface NoticeService {
 
-    List<NoticeDto> list() throws Exception;
-
     NoticeDto select(int no) throws Exception;
-    // 상세보기 진입시 조회수 1씩 증가
     int addViewCnt(int no) throws Exception;
-
+    // 화면에서 받은 sort 값에 따라 번호순, 조회순 분기 따라 쿼리 적용
     List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
-
-    PageDto pagingParam(int page, String sort, String keyword) throws Exception;
+    // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
+    PageDto pagingParam(int page, String keyword) throws Exception;
 }
