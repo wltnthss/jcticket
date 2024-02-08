@@ -1,9 +1,10 @@
-package com.jcticket.login.controller;
+package com.jcticket.user.controller;
 
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.agency.dao.AgencyDao;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,14 +34,14 @@ import java.util.Objects;
 //@RequestMapping("/login")
 public class LoginController {
     @Autowired
-    UserDao userDao;
+    LoginService loginService;
 
     @Autowired
     AgencyDao agencyDao;
 
 
     @GetMapping("/login")
-    public String loginForm(){return "login";}
+    public String loginForm(){return "login/login";}
 
     @PostMapping("/login")
     public String login(String user_id, String user_pwd, boolean rememberId, Model m,
@@ -52,7 +53,7 @@ public class LoginController {
 
             if(!Objects.equals(user_id, "")&&!Objects.equals(user_pwd, "")){
                 UserDto userDto = null;
-                userDto = userDao.selectUser(user_id);
+                userDto = loginService.loginUser(user_id);
                 m.addAttribute("userDto",userDto);
                 System.out.println("userDto = " + userDto);
             }
@@ -80,7 +81,7 @@ public class LoginController {
         }
         //아이디 저장 기능 끝
 
-        userDao.increaseLoginCnt(user_id);
+        loginService.loginCnt(user_id);
 
         return "index";
     }
@@ -92,7 +93,7 @@ public class LoginController {
         System.out.println("user_id = " + user_id);
         System.out.println("user_pwd = " + user_pwd);
         try {
-            userDto = userDao.selectUser(user_id);
+            userDto = loginService.loginUser(user_id);
             System.out.println(userDto);
         } catch(Exception e){
             e.printStackTrace();
