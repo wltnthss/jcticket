@@ -3,6 +3,7 @@ body {
     margin-left: 30px;
 }
 
+/*body 내부 전체 css*/
 .container{
     display: grid;
     width: 100%;
@@ -12,31 +13,34 @@ body {
     place-items: center;
 }
 
+/*대분류, 중분류*/
 .category {
     width: 1200px;
     font-size: 14px;
 }
 
+/*큰제목, 공연날짜, 장소를 감싸고 있는 컨테이너*/
 .two {
     width: 1200px;
     font-size: 40px;
 }
 
+/*큰제목*/
 .big-title{
     margin-top: 10px;
     margin-bottom: 0px;
     font-weight: bold;
 }
 
+/*공연기간,공연장소 감싸는 컨테이너*/
 .two-one {
-    /*display: flex;*/
-    /*flex-direction: row;*/
     border-bottom: solid 2px rgba(0, 0, 0);
     padding-bottom: 10px;
     margin: 20px 0 30px 0;
     height: 30px;
 }
 
+/*공연기간*/
 .play-period {
     border-right: solid rgba(0, 0, 0, 0.1);
     font-size: 16px;
@@ -44,6 +48,7 @@ body {
     padding-right: 5px;
 }
 
+/*공연장소*/
 #stage_name {
     display: flex;
     float: left;
@@ -54,27 +59,32 @@ body {
     color: black;
 }
 
+/*공연장소 마커 이미지*/
 .location_img {
     height: 24px;
     width: 20px;
 }
 
+/*url복사하기 이미지*/
 #url_image{
     position: relative;
     float: right;
     bottom: 20px;
 }
 
+/*공연포스터 이미지*/
 .play-img img {
     width: 430px;
 }
 
+/*공연포스터, 평균별점, 후기간략정보(좌측) 공연정보란(우측) 감싸는 컨테이너*/
 .three {
     display: flex;
     width: 1200px;
     place-items: center;
 }
 
+/*공연포스터, 평균별점, 후기간략정보 감싸는 컨테이너*/
 .three-one-left {
     float: left;
     flex-direction: column;
@@ -82,6 +92,7 @@ body {
     width: 430px;
 }
 
+/*별점*/
 .star-review {
     display: flex;
     flex-direction: row;
@@ -91,45 +102,51 @@ body {
     border-bottom: solid rgba(0, 0, 0, 0.1);
 }
 
+/*후기간략정보*/
 .review {
     margin-left: auto;
 }
 
+/*공연정보란 감싸는 컨테이너*/
 .three-one-right {
     display: flex;
     flex-direction: column;
     width: 700px;
 }
 
+/*공연정보 dt css*/
 .play-info dt {
     font-weight: bold;
     float: left;
 }
 
+/*공연정보 dd css*/
 .play-info dd {
     margin-left: 100px;
     margin-bottom: 15px;
 }
 
+/*공연시간안내 dt css*/
 .playtime-info dt {
     font-weight: bold;
     margin-top: 15px;
     margin-bottom: 5px;
 }
 
+/*공연시간안내 dd css*/
 .playtime-info dd {
     margin-left: 0;
     margin-bottom: 5px;
     font-size: 14px;
 }
 
+/*공연시간안내 css*/
 .playtime-info {
     border-top: solid rgba(0, 0, 0, 0.5);
     border-bottom: solid rgba(0, 0, 0, 0.5);
     padding-top: 16px;
     padding-bottom: 16px;
 }
-
 
 ul {
     float: left;
@@ -140,32 +157,45 @@ li {
     list-style-type: none;
     margin-bottom: 10px;
 }
+
+/*좌석등급, 가격 감싸는 컨테이너*/
 .price-zone {
     width: 560px;
     background-color: rgba(0, 0, 0, 0.03);
     padding: 10px 0 10px 20px;
     margin-top: 0;
 }
+
+/*글자 빨간색 강조*/
 .text_red {
     color: red;
 }
 
+/*날짜&시간 선택, 예매가능좌석 감싸는 컨테이너*/
 .four-one {
     display: flex;
     width: 1200px;
 }
 
+/*날짜&시간 선택*/
 .fourLeft {
-    border: solid 1px darkorange;
-    /*border: solid 1px rgba(0, 0, 0, 0.3);*/
-    /*border-top: solid 1px rgba(0, 0, 0, 0.3);*/
-    /*border-bottom: solid 1px rgba(0, 0, 0, 0.3);*/
-    /*border-left: solid 1px rgba(0, 0, 0, 0.3);*/
+    border: solid 1px #3f51b5;
     padding: 30px 50px;
     margin-top: 40px;
     z-index: 1;
 }
 
+/*날짜&시간 선택, 예매가능좌석 css on/off*/
+.off {
+    border: solid 1px rgba(0, 0, 0, 0.3) !important;
+    z-index: 0 !important;
+}
+.on {
+    border: solid 1px #3f51b5 !important;
+    opacity: 1 !important;
+}
+
+/*날짜&시간 선택, 예매가능좌석 제목란*/
 .four-text {
     font-size: 16px;
     font-weight: bold;
@@ -175,19 +205,23 @@ li {
     border-bottom: solid 2px black;
 }
 
+/*datepicker(달력)와 showing(회차&시간)을 감싸고 있음*/
 .calender {
     display: flex;
 }
 
+/*달력 크기, 구분선*/
 #datepicker {
     width: 320px;
     border-right: solid rgba(0, 0, 0, 0.1);
 }
 
+/*회차&시간*/
 .showing {
     width: 230px;
 }
 
+/*회차&시간 내용 css*/
 .showing a {
     display: block;
     margin-left: 30px;
@@ -195,14 +229,19 @@ li {
     border: solid rgba(0, 0, 0, 0.1);
     padding: 5px 20px;
     text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
+/*회차&시간(ex: 1회 13시 00분)이 클릭된 상태*/
+.clicked {
+    background-color: #3f51b5;
+    color: white !important;
+}
+
+/*예매가능좌석*/
 .fourRight {
-    /*border: solid 1px darkorange;*/
     border: solid 1px rgba(0, 0, 0, 0.3);
-    /*border-right: solid 1px rgba(0, 0, 0, 0.3);*/
-    /*border-bottom: solid 1px rgba(0, 0, 0, 0.3);*/
-    /*border-top: solid 1px rgba(0, 0, 0, 0.3);*/
     padding: 30px 50px;
     margin-top: 40px;
     position: relative;
@@ -210,34 +249,40 @@ li {
     opacity: 0.2;
 }
 
+/*플렉스 크기 컨테이너 width 1200px에 맞게 조절*/
 .fourLeft, .fourRight {
     flex: 1;
 }
 
+/*좌석&잔여석 정보*/
 .seatRemain dt{
     float: left;
 }
-
 .seatRemain dd {
     float: left;
     margin-left: 5px;
 }
-
 .seatRemain {
     border: solid 1px rgba(0, 0, 0, 0.1);
     padding: 20px 50px 125px 20px;
 }
 
+/*예매하기 버튼*/
 .five {
-    border: solid black;
+    border: none;
+    background-color: #213bcc;
+    color: #fff;
     padding: 10px 80px;
     margin-top: 50px;
-}
-
-.taketic {
     font-size: 18px;
 }
 
+/*예매하기 버튼안에 a태그 필요없으면 지울것*/
+/*.taketic {*/
+    /*font-size: 18px;*/
+/*}*/
+
+/*상세정보,관람후기,예매/취소안내 목차*/
 .six {
     display: flex;
     width: 1200px;
@@ -245,6 +290,7 @@ li {
     padding-top: 100px;
 }
 
+/*목차 css*/
 .six a > span {
     margin: 0;
     font-size: 18px;
@@ -253,14 +299,17 @@ li {
     line-height: 60px;
 }
 
+/*관람후기 개수 css*/
 .comment_cnt {
     font-size: 14px;
 }
 
+/*상세정보 컨테이너*/
 .info_box {
     width: 1200px;
 }
 
+/*상세정보 컨테이너 제목(유의사항,상품정보제공고시 등등) 폰트*/
 .seven_text {
     text-align: center;
     font-size: 30px;
@@ -268,6 +317,7 @@ li {
     padding: 30px 0 30px 0;
 }
 
+/*상품정보제공고시 제목만 따로 css*/
 #seven_text_one {
     text-align: center;
     font-size: 30px;
@@ -276,11 +326,13 @@ li {
     margin-bottom: 0;
 }
 
+/*공연정보 이미지*/
 .seven_con {
     margin-top: 50px;
     text-align: center;
 }
 
+/*상품정보제공고시 테이블*/
 .seven_table_main {
     width: 960px;
     margin: 0 auto 100px auto;
@@ -289,46 +341,40 @@ li {
     border-right: solid 1px rgba(0,0,0,0.1);
     border-top: solid rgba(0,0,0);
 }
-
 .seven_table_main tr {
     border-bottom: solid 1px rgba(0,0,0,0.1);
     height: 50px;
 }
-
 .seven_table_main td {
     text-align: left;
     padding-left: 16px;
     font-size: 13px;
 }
-
 .seven_table_main p {
     font-size: 13px;
     line-height: 25px;
 }
-
+/*상품정보제공고시 테이블 소제목? css*/
 .seven_table {
     background-color: rgba(0,0,0,0.05);
     font-size: 13px;
 }
-
+/*상품정보제공고시 테이블 안에있는 작은 테이블*/
 .seven_table_mini {
     width: 600px;
     border-collapse: collapse;
     border-spacing: 0;
     text-align: center;
 }
-
 .seven_table_mini tr {
     height: 15px;
     font-size: 13px;
 }
-
 .seven_table_mini th {
     padding-top: 5px;
     padding-bottom: 5px;
     background-color: rgba(81, 110, 253, 0.3);
 }
-
 .seven_table_mini td{
     font-size: inherit;
     text-align: center !important;
@@ -337,26 +383,31 @@ li {
     padding-bottom: 5px;
 }
 
+/*지도 컨테이너*/
 .eight {
     border-top: solid;
     width: 1200px;
 }
 
+/*지도*/
 .eight_map {
     margin-top: 100px;
 }
 
+/*지도이름*/
 .map_name {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
 }
 
+/*주소*/
 .map_location {
     font-size: 16px;
     text-align: center;
 }
 
+/*찾아가는길 아이코*/
 .map_icon_box {
     width: 800px;
     margin: 40px auto 0 auto;
@@ -367,16 +418,25 @@ li {
     padding: 50px 0 40px 0;
 }
 
+/*관람후기 큰제목*/
 .comment_name {
     padding: 50px 0 50px 0;
     text-align: center;
     font-size: 30px;
 }
 
+/*관람후기 큰제목 보더라인*/
 .comment_name span {
     border-bottom: solid 4px black;
 }
 
+/*후기 주의사항 컨테이너*/
+.span_box {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+/*후기 주의사항*/
 .comment_warning {
     display: flex;
     float: left;
@@ -384,22 +444,20 @@ li {
     padding-bottom: 14px;
 }
 
+/*후기 주의사항 이미지*/
 .comment_warning img {
     width: 39px;
     height: 35px;
 }
 
-.span_box {
-    font-size: 14px;
-    margin-left: 10px;
-}
-
+/*관람후기등록 이미지*/
 #review_create {
     margin-left: auto;
     width: 178px;
     height: 34px;
 }
 
+/*관람후기 게시판*/
 .comment_board {
     width: 1200px;
     margin: 0;
@@ -419,6 +477,7 @@ li {
     border-bottom: solid 1px black;
 }
 
+/*관람후기 페이징*/
 .comment_page {
     display: flex;
     width: 1200px;
@@ -450,6 +509,7 @@ li {
     margin: 0 20px;
 }
 
+/*다음페이지, 마지막 페이지 이미지*/
 .page_next img, .page_last img{
     transform: scaleX(-1);
 }

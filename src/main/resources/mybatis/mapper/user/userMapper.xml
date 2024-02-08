@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--유저 1명 조회-->
 <mapper namespace="UserMapper">
     <select id="select" parameterType="String" resultType="UserDto">
     select user_id,
@@ -27,6 +28,7 @@
     where user_id = #{user_id}
     </select>
 
+<!--방문 횟수 카운팅-->
     <update id="increase_visit_cnt" parameterType="String">
         update user
         set user_visit_cnt = user_visit_cnt + 1
