@@ -27,10 +27,15 @@ import java.util.List;
 public class TicketingController {
     private final TicketingService ticketingService;
 
-    @GetMapping(value = "/now")
-    public String getNowTime(Model model) throws Exception{
-        List<TicketingDto> ticketingList = ticketingService.getTicketingAll();
-        model.addAttribute("list", ticketingList);
+    @GetMapping(value = "/ticketing")
+    public String getNowTime() throws Exception{
+        //List<TicketingDto> ticketingList = ticketingService.getTicketingId()
+        //model.addAttribute("list", ticketingList);
+        return "ticketing/popup-test";
+    }
+
+    @GetMapping(value = "/ticketing-detail")
+    public String doTicketing() throws Exception{
         return "ticketing/ticketing";
     }
 
