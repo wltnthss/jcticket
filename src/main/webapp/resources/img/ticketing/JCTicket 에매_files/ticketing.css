@@ -1,5 +1,6 @@
 ul,li{list-style: none outside none}
-
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{font-size:1em}
 html{overflow-y:scroll;height:100%; }
 body{width:100%;height:100%;line-height:16px;}
 body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,Vendara;color:#888888}
@@ -177,38 +178,6 @@ body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,V
 .select-info{
     flex: 3 0 auto;
     display: flex;
-    padding-top: 20px;
-    flex-flow: column nowrap;
-}
-.select-info-list{
-    display: flex;
-    flex-flow: column nowrap;
-}
-#date{
-    display: flex;
-    flex-flow: row nowrap;
-}
-#date b{
-
-}
-#time{
-    display: flex;
-    flex-flow: row nowrap;
-}
-#count{
-    display: flex;
-    flex-flow: row nowrap;
-}
-#seat{
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-
-.select h4{
-    color: white;
-    margin-top: 0;
-    margin-bottom: 5px;
 }
 
 .payment-info{

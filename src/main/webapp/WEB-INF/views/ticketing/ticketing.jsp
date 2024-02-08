@@ -76,6 +76,47 @@
         </div>
     </div>
     <div class="right-section">
+        <div class="show-info">
+            <div class="poster">
+                <img src="/resources/img/viewdetail/testposter.jpg" alt="show">
+            </div>
+            <div class="description">
+                <div id="show-title">
+                    <b>2022 &lt;나는 오늘도 혼자서 논다&gt; - 시흥</b>
+                </div>
+                <div id="show-period">
+                    <p>2024. 02. 09 ~ 2024. 02. 13</p>
+                    <p>쉼표도서관 2층</p>
+                </div>
+            </div>
+        </div>
+        <div class="select-info">
+            <div class="select">
+                <h4>선택내역</h4>
+            </div>
+            <div class="select-info-list">
+                <div id="date">
+                    <p>날짜</p>
+                    <b>2024.02.09</b>
+                </div>
+                <div id="time"></div>
+                <div id="count"></div>
+                <div id="seat"></div>
+            </div>
+
+        </div>
+        <div class="payment-info">
+            <div class="payment"></div>
+            <div id="ticket-price"></div>
+            <div id="fee"></div>
+            <div id="price-sum"></div>
+            <div id="coupon"></div>
+            <div id="discount-sum"></div>
+        </div>
+        <div class="payment-price">
+            <div id="total-price"></div>
+        </div>
+        <div class="next-btn"></div>
 
     </div>
 
