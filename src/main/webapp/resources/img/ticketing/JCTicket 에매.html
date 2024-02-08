@@ -1,0 +1,176 @@
+
+<!-- saved from url=(0038)http://localhost:8080/ticketing-detail -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>JCTicket 에매</title>
+    <link href="./JCTicket 에매_files/ticketing.css" rel="stylesheet" type="text/css">
+    <script src="./JCTicket 에매_files/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./JCTicket 에매_files/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="./JCTicket 에매_files/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="./JCTicket 에매_files/jquery-ui.css">
+
+</head>
+<body>
+    <!-- 팝업창에서 사용할 영역크기 정의-->
+    <div class="area">
+    <!-- left section -->
+    <div class="left-section">
+    <!-- header 영역 -->
+        <div class="header">
+            <div class="item-logo">
+                <img src="./JCTicket 에매_files/logo.png" alt="logo">
+            </div>
+            <div class="item-header nav1">
+                <b>step.1<br>날짜선택</b>
+            </div>
+            <div class="item-header nav2">
+                <b>step.2<br>좌석선택</b>
+            </div>
+            <div class="item-header nav3">
+                <b>step.3<br>쿠폰/할인</b>
+            </div>
+            <div class="item-header nav4">
+                <b>step.4<br>결제방법</b>
+            </div>
+        </div>
+
+    <!-- contents 영역 -->
+        <div class="contents">
+            <div class="step-01">
+                <div class="contents-header">
+                    <div class="ch first">
+                        <a>일정선택</a>
+                    </div>
+                    <div class="ch second">
+                        <a>회차선택</a>
+                    </div>
+                </div>
+                <div class="contents-body">
+                    <div class="contents-body-left">
+                        <div id="datepicker" class="hasDatepicker"><div class="ui-datepicker-inline ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display: block;"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" data-handler="prev" data-event="click" title="이전 달"><span class="ui-icon ui-icon-circle-triangle-w">이전 달</span></a><a class="ui-datepicker-next ui-corner-all" data-handler="next" data-event="click" title="다음 달"><span class="ui-icon ui-icon-circle-triangle-e">다음 달</span></a><div class="ui-datepicker-title"><span class="ui-datepicker-year">2024</span>년&nbsp;<span class="ui-datepicker-month">2월</span></div></div><table class="ui-datepicker-calendar"><thead><tr><th scope="col" class="ui-datepicker-week-end"><span title="일">일</span></th><th scope="col"><span title="월">월</span></th><th scope="col"><span title="화">화</span></th><th scope="col"><span title="수">수</span></th><th scope="col"><span title="목">목</span></th><th scope="col"><span title="금">금</span></th><th scope="col" class="ui-datepicker-week-end"><span title="토">토</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">1</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">2</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">3</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">5</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">6</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">7</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-current-day ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default ui-state-highlight ui-state-active ui-state-hover" href="http://localhost:8080/ticketing-detail#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">9</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">10</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">12</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">13</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">16</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">17</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">18</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">19</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">20</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">21</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">22</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">23</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">24</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">25</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">26</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">27</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">28</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2024"><a class="ui-state-default" href="http://localhost:8080/ticketing-detail#">29</a></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div></div>
+                    </div>
+                    <div class="contents-body-right">
+                        <div class="round">
+                            <a>1회 오후 1시 00분</a>
+                            <a>2회 오후 4시 00분</a>
+                            <a>testetstetstset</a>
+                            <a>testetstetstset</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-02"></div>
+            <div class="step-03"></div>
+            <div class="step-04"></div>
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="show-info">
+            <div class="poster">
+                <img src="./JCTicket 에매_files/testposter.jpg" alt="show">
+            </div>
+            <div class="description">
+                <div id="show-title">
+                    <b>2022 &lt;나는 오늘도 혼자서 논다&gt; - 시흥</b>
+                </div>
+                <div id="show-period">
+                    <p>2024. 02. 09 ~ 2024. 02. 13</p>
+                    <p>쉼표도서관 2층</p>
+                </div>
+            </div>
+        </div>
+        <div class="select-info">
+            <div class="select">
+                <h4>선택내역</h4>
+            </div>
+            <div id="date"></div>
+            <div id="time"></div>
+            <div id="count"></div>
+            <div id="seat"></div>
+        </div>
+        <div class="payment-info">
+            <div class="payment"></div>
+            <div id="ticket-price"></div>
+            <div id="fee"></div>
+            <div id="price-sum"></div>
+            <div id="coupon"></div>
+            <div id="discount-sum"></div>
+        </div>
+        <div class="payment-price">
+            <div id="total-price"></div>
+        </div>
+        <div class="next-btn"></div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+        
+        <script type="text/javascript" src="./JCTicket 에매_files/jquery-ui(1).min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#datepicker").datepicker();
+            });
+
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                showMonthAfterYear: true,
+                yearSuffix: '년'
+            });
+        </script>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>
