@@ -1,6 +1,8 @@
 package com.jcticket.ticketing.dao;
 
-import org.springframework.stereotype.Repository;
+import com.jcticket.ticketing.dto.TicketingDto;
+
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.ticketing.dao
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Repository;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Repository
-public interface TicketDao {
+public interface TicketingDao {
+    String getNow() throws Exception;
+    List<TicketingDto> selectAll() throws Exception;
+    String selectId() throws Exception;
+
 }

@@ -1,6 +1,8 @@
 package com.jcticket.ticketing.service;
 
-import org.springframework.stereotype.Service;
+import com.jcticket.ticketing.dto.TicketingDto;
+
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.ticketing.service
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Service
-public interface TicketService {
+public interface TicketingService {
+    String showNow() throws Exception;
+    List<TicketingDto> getTicketingAll() throws Exception;
+    String getTicketingId(int ticketingId) throws Exception;
 }
