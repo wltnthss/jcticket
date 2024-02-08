@@ -1,23 +1,44 @@
 // <%--    datepicker 제이쿼리 달력--%>
     $(document).ready(function() {
-    var disabledDates = ["2024-02-20", "2024-02-21", "2024-02-22"]; // 선택 못하게 막을 날짜 배열
+
+        var availableDates = ["2024-02-10", "2024-02-11"]; //선택 가능한 날짜
 
         $("#datepicker").datepicker({
         //오늘부터 날짜 선택 가능하도록 함
         minDate: 0,
         //최대 선택 가능한 날짜는 1년
         maxDate: "1Y",
-        //특정일 선택 못하게 막음
+        //특정일만 선택하게한다
+        beforeShowDay: function (date) {
+            var thismonth = date.getMonth()+1;
+            var thisday = date.getDate();
 
-            beforeShowDay: function(date) {
-                var dateString = $.datepicker.formatDate('yy-mm-dd', date);
-                return [disabledDates.indexOf(dateString) === -1]; // 선택 가능한 날짜는 true, 선택 불가능한 날짜는 false
-            },
+            if(thismonth<10){
+                thismonth = "0"+thismonth;
+            }
+            if(thisday<10){
+                thisday = "0"+thisday;
+            }
+
+            ymd = date.getFullYear() + "-" + thismonth + "-" + thisday;
+
+            if ($.inArray(ymd, availableDates) >= 0) {
+                return [true,"",""];
+            } else {
+                return [false,"",""];
+            }
+        },
 
             // 일자 선택된 후 이벤트 발생
             onSelect: function (dateText) {
-                //dateText날짜가 DB에 저장된 회차테이블의 회차일시와 같으면 a태그 생성
+                var left = document.querySelector('.fourLeft');
+                var right = document.querySelector('.fourRight');
 
+                // 달력에 있는 날짜 누르면 left, right css 오프됨
+                left.classList.remove('off');
+                right.classList.remove('on');
+
+                //dateText날짜가 DB에 저장된 회차테이블의 회차일시와 같으면 a태그 생성
                 // ajax를 통해 컨트롤러로 dateText 보냄
                 $.ajax({
                     type: "POST",
@@ -32,9 +53,8 @@
                         // 3. 리턴받은 res를 사용해서 a태그를 만듦
 
                         var showing = document.querySelector('.showing');
-                        // var a = document.querySelector('a');
 
-                        //.showing 안에 있는 요소들 지우기
+                        //.showing 안에 있는 요소들 지우기 (태그 쌓임 방지)
                         while(showing.firstChild)  {
                             showing.removeChild(showing.firstChild);
                         }
@@ -44,19 +64,51 @@
                             var aTag = document.createElement("a");
                             aTag.append(res[i]);
 
-                            // var showing = document.querySelector('.showing');
                             showing.appendChild(aTag);
-                            aTag.className = 'aTag'+i;
+                            aTag.className = 'aTag';
                             aTag.href = 'javascript:void(0);';
                         }
+
+                        // 생성한 a태그 클릭했을때 클래스이름 aTag clicked으로 바꾸기
+                        var aTags = document.querySelectorAll('.aTag');
+                        aTags.forEach(function(aTag) {
+                            aTag.addEventListener('click', function() {
+                                // forEach를 한번 더 돌려서 클릭한 태그 이외의 다른 태그의 클래스명에 clicked가 있다면 지움
+                                aTags.forEach(function(tag) {
+                                    if (tag !== aTag) {
+                                        tag.classList.remove('clicked');
+                                    }
+                                });
+                                // 클릭한 태그의 클래스명 토글
+                                this.classList.toggle('clicked');
+
+                                // 선택한 a태그의 클래스이름이 aTag과 똑같지 않으면 해당 태그의 아이디를 바꿈, 아니면 없앰
+                                if(aTag.className !== 'aTag'){
+                                    this.id = 'clicked';
+                                } else {
+                                    this.id = '';
+                                }
+
+                                //fourLeft클래스(left)와 fourRight클래스(right) 상태 on/off
+
+                                if(aTag.id==='clicked') {
+                                    left.classList.add('off');
+                                    right.classList.add('on');
+                                } else if (aTag.id!=='clicked') {
+                                    left.classList.remove('off');
+                                    right.classList.remove('on');
+                                }
+                            });
+                        });
                     },
                     error: function( error ){
                         console.log('error => ', error)
                     }
                 });
             }
-
     });
+
+
 
 
 
@@ -108,3 +160,5 @@
     "mapWidth" : "1200",
     "mapHeight" : "700"
 }).render();
+
+
