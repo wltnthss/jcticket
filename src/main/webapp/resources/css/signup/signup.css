@@ -377,6 +377,15 @@ option{
     display: none;
 }
 
+.authMsg, #id_warnMsg, #pwd_warnMsg, #pwd_chkWarnMsg, #nickname_warnMsg,
+#tel_warnMsg{
+    display: none;
+}
+
+
+
+
+
 .termsWrap{
     padding: 18px;
     border: 1px solid rgb(234,237,239);
