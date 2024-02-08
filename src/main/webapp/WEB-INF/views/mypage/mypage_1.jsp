@@ -222,7 +222,7 @@
             </div>
 
             <div id="banner">
-                <a href=""><img src="/resources/css/img/페페%20한잔해.jpg"></a>
+                <a href=""><img src="/resources/img/mypage/페페%20한잔해.jpg"></a>
             </div>
 
                 <div></div>
