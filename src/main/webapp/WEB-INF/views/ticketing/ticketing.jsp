@@ -99,22 +99,45 @@
                     <p>날짜</p>
                     <b>2024.02.09</b>
                 </div>
-                <div id="time"></div>
-                <div id="count"></div>
-                <div id="seat"></div>
+                <div id="time">
+                    <p>시간</p>
+                </div>
+                <div id="count">
+                    <p>매수</p>
+                </div>
+                <div id="seat">
+                    <p>좌석</p>
+                </div>
             </div>
 
         </div>
         <div class="payment-info">
-            <div class="payment"></div>
-            <div id="ticket-price"></div>
-            <div id="fee"></div>
-            <div id="price-sum"></div>
-            <div id="coupon"></div>
-            <div id="discount-sum"></div>
+            <div class="payment">
+                <h4>결제내역</h4>
+            </div>
+            <div class="payment-list">
+                <div id="ticket-price">
+                    <p>티켓금액</p>
+                </div>
+                <div id="fee">
+                    <p>수수료</p>
+                </div>
+                <div id="price-sum">
+                    <p>총 금액</p>
+                </div>
+                <div id="coupon">
+                    <p>쿠폰할인금액</p>
+                </div>
+                <div id="discount-sum">
+                    <p>총 할인금액</p>
+                </div>
+            </div>
+
         </div>
         <div class="payment-price">
-            <div id="total-price"></div>
+            <div id="total-price">
+                <h4>최종 결제금액</h4>
+            </div>
         </div>
         <div class="next-btn"></div>
 

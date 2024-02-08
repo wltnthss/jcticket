@@ -180,6 +180,9 @@ body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,V
     padding-top: 20px;
     flex-flow: column nowrap;
 }
+.select-info p{
+
+}
 .select-info-list{
     display: flex;
     flex-flow: column nowrap;
@@ -189,6 +192,9 @@ body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,V
     flex-flow: row nowrap;
 }
 #date b{
+
+}
+#date p{
 
 }
 #time{
