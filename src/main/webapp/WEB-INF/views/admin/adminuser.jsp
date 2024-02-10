@@ -70,7 +70,8 @@
                             <col class="w80">
                             <col class="w90">
                             <col class="w130">
-                            <col class="w300">
+                            <col class="w200">
+                            <col class="w200">
                         </colgroup>
                         <thead>
                         <tr>
@@ -83,6 +84,7 @@
                             <th scope="col">접속횟수</th>
                             <th scope="col">생년월일</th>
                             <th scope="col">가입일시</th>
+                            <th scope="col">탈퇴일시</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -97,6 +99,7 @@
                                 <td>${UserDto.user_visit_cnt}</td>
                                 <td>${UserDto.user_birth}</td>
                                 <td>${UserDto.user_create_at}</td>
+                                <td>${UserDto.user_retire_at}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

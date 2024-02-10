@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,4 @@ public class AdminDaoImpl implements AdminDao{
     public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace+"userpaginglist", pagingParams);
     }
-
 }
