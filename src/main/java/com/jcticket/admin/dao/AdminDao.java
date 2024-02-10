@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 
 import java.util.List;
@@ -25,4 +26,5 @@ public interface AdminDao {
     int usercnt(Map<String, Object> options) throws Exception;
     // 회원 페이징 리스트 조회
     List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception;
+
 }

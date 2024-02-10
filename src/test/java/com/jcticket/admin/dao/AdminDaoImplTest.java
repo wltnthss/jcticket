@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +50,7 @@ public class AdminDaoImplTest {
 
         // given, when
         List<UserDto> userlists = adminDao.userstatics();
+        System.out.println("userlists => "+ userlists);
         // then
         assertTrue(userlists.size() == 3);
     }
@@ -71,7 +73,9 @@ public class AdminDaoImplTest {
         System.out.println("option => " + option);
         System.out.println("keyword => " + keyword);
         System.out.println("userCnt => " + userCnt);
+
         // then
 //        assertTrue(6 == userCnt);
     }
+
 }
