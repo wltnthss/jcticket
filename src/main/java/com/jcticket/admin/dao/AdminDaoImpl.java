@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName :  com.jcticket.admin.dao
@@ -25,7 +26,7 @@ public class AdminDaoImpl implements AdminDao{
     @Autowired
     private SqlSession sqlSession;
 
-    private static String namespace = "adminMapper.";
+    private static final String namespace = "adminMapper.";
 
     @Override
     public AdminDto login(AdminDto adminDto) throws Exception {
@@ -35,6 +36,15 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public List<UserDto> userstatics() throws Exception {
         return sqlSession.selectList(namespace + "userstatics");
+    }
+
+    @Override
+    public int usercnt(Map<String, Object> options) throws Exception {
+        return sqlSession.selectOne(namespace + "usercnt", options);
+    }
+    @Override
+    public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
+        return sqlSession.selectList(namespace+"userpaginglist", pagingParams);
     }
 
 }

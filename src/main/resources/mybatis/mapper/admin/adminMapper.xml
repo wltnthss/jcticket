@@ -3,6 +3,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminMapper">
+    <select id="usercnt" resultType="int" parameterType="String">
+        SELECT
+            count(*)
+        FROM
+            user
+        WHERE
+            1=1
+        <choose>
+            <when test='option=="I"'>
+                AND user_id LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND user_name LIKE concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </select>
+
         <select id="login" resultType="AdminDto">
             SELECT
                 admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id
@@ -24,4 +41,35 @@
             LIMIT
 	            3
         </select>
+
+        <select id="userlist" resultType="UserDto">
+            SELECT
+                *
+            FROM
+                user
+            ORDER BY
+                user_create_at desc
+        </select>
+
+    <select id="userpaginglist" resultType="UserDto" parameterType="java.util.HashMap">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            1=1
+            <choose>
+                <when test='option=="I"'>
+                    AND user_id LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test='option=="N"'>
+                    AND user_name LIKE concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        ORDER BY
+            user_create_at desc
+        limit
+	        #{start}, #{limit}
+    </select>
+
 </mapper>

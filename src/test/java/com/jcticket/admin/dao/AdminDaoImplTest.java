@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -35,10 +37,9 @@ public class AdminDaoImplTest {
 
         // given
         AdminDto adminDto = new AdminDto("jcticket1", "1111");
-
         // when
         AdminDto validateNickName = adminDao.login(adminDto);
-
+        System.out.println("validateNickName => " + validateNickName);
         // then
         assertTrue(validateNickName.getAdmin_nickname().equals("jc관리자1"));
     }
@@ -48,9 +49,29 @@ public class AdminDaoImplTest {
 
         // given, when
         List<UserDto> userlists = adminDao.userstatics();
-
         // then
         assertTrue(userlists.size() == 3);
+    }
 
+    @Test
+    public void userListCnt() throws Exception{
+
+        // given
+        String option = "I";
+        String keyword = "1";
+
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+
+        // when
+        int userCnt = adminDao.usercnt(pagingParams);
+
+        System.out.println("option => " + option);
+        System.out.println("keyword => " + keyword);
+        System.out.println("userCnt => " + userCnt);
+        // then
+//        assertTrue(6 == userCnt);
     }
 }

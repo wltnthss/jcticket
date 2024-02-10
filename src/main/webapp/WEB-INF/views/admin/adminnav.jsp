@@ -33,16 +33,19 @@
             <dd class="u10">
                 <a href="/admin/delete">회원 삭제하기</a>
             </dd>
+            <dd class="u10">
+                <a href="#">회원 일괄등록하기</a>
+            </dd>
         </div>
         <dt class="menu_toggle-u20">가입통계
             <i class="fas fa-solid fa-arrow-down"></i>
         </dt>
         <div id="u20" style="display: block">
             <dd class="u20">
-                <a href="/admin/register">월별 가입통계분석</a>
+                <a href="#">월별 가입통계분석</a>
             </dd>
             <dd class="u20">
-                <a href="/admin/register">일별 가입통계분석</a>
+                <a href="#">일별 가입통계분석</a>
             </dd>
         </div>
     </dl>
