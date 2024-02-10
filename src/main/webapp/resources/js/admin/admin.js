@@ -44,6 +44,14 @@ $(function (){
         });
     })
 
+    $('#selectedItemsAll').on('click', function(){
+        let t = document.querySelector('.list');
+        console.log('t => ' + t);
+        for (const tKey in t) {
+            console.log("tKey => " + tKey);
+        }
+    })
+
     // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
     $('.menu_toggle-u10').on('click', u10Toggle);
     $('.menu_toggle-u20').on('click', u20Toggle);

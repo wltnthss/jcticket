@@ -27,4 +27,7 @@ public interface AdminDao {
     // 회원 페이징 리스트 조회
     List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception;
 
+    // 회원가입
+    int insertUser(UserDto userDto) throws Exception;
+
 }

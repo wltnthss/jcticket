@@ -26,4 +26,7 @@ public interface AdminService {
     List<UserDto> userPaingList(int page, String option, String keyword) throws Exception;
     // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
     UserPageDto pagingParam(int page, String option, String keyword) throws Exception;
+
+    // 유저 회원가입
+    int userInsert(UserDto userDto) throws Exception;
 }

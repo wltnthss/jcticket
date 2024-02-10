@@ -47,4 +47,9 @@ public class AdminDaoImpl implements AdminDao{
     public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace+"userpaginglist", pagingParams);
     }
+
+    @Override
+    public int insertUser(UserDto userDto) throws Exception {
+        return sqlSession.insert(namespace + "insertUser", userDto);
+    }
 }

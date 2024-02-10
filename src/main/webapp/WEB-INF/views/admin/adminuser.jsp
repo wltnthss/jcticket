@@ -48,7 +48,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="btn_confirm">
+                    <div class="btn-confirm">
                         <input type="submit" value="검색" class="btn-medium">
                         <input type="reset" value="초기화" class="btn-medium grey">
                     </div>

@@ -131,12 +131,57 @@ public class AdminController {
 
         return "admin/adminuser";
     }
+    // 회원 등록하기 폼
     @GetMapping("/admin/register")
     public String adminuserregister() throws Exception{
         return "admin/adminuserregister";
     }
+    // 회원 등록하기
+    @PostMapping("/admin/register")
+    public String adminUserRegisterPost(Model model, UserDto userDto) throws Exception{
+
+        try {
+            int rslt = adminService.userInsert(userDto);
+
+            if(rslt < 1){
+                return "error";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "admin/adminuser";
+    }
+
     @GetMapping("/admin/delete")
-    public String adminuserdelete() throws Exception{
+    public String adminuserdelete(Model model,
+                            @RequestParam(value = "option", required = false) String option,
+                            @RequestParam(value = "keyword", required = false) String keyword,
+                            @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        System.out.println("option => " + option);
+        System.out.println("keyword => " + keyword);
+        System.out.println("page => " + page);
+
+        try {
+
+            List<UserDto> pagingList = null;
+
+            pagingList = adminService.userPaingList(page, option, keyword);
+            UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
+            int userTotalCnt = adminService.usercnt(option, keyword);
+
+            System.out.println("pagingList => " + pagingList);
+            System.out.println("userPageDto => " + userPageDto);
+
+            model.addAttribute("list", pagingList);
+            model.addAttribute("paging", userPageDto);
+            model.addAttribute("userListCnt", userTotalCnt);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "admin/adminuserdelete";
     }
     @GetMapping("/admin/agency")
