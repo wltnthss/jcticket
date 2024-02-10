@@ -114,4 +114,8 @@ public class AdminServiceImpl implements AdminService {
         return userPageDto;
     }
 
+    @Override
+    public int userInsert(UserDto userDto) throws Exception {
+        return adminDao.insertUser(userDto);
+    }
 }

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,4 +80,20 @@ public class AdminDaoImplTest {
 //        assertTrue(6 == userCnt);
     }
 
+    @Test
+    public void insertUser() throws Exception {
+
+        // given
+        // 자바 현재 시간 TimeStamp
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+        UserDto userDto = new UserDto("jisu15", "1111", "지수", "wltn@naver.com", "010-2521-3414", "서울 성동구",
+                "soodari", "19990219", "M", currentTimestamp, currentTimestamp, null, "N", 0, "공연", "고수", currentTimestamp, "userAdmin", currentTimestamp, "userAdmin");
+        System.out.println("userDto => " + userDto);
+        // when
+        int result = adminDao.insertUser(userDto);
+        System.out.println("result => " + result);
+
+        // then
+    }
 }
