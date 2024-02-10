@@ -41,15 +41,15 @@ public class NoticeDaoImplTest {
     @Test
     public void updateViewCnt() throws Exception{
 
-        // given
+        // given -> 임의의 데이터를 주입
         int noticeSeq = 1;
 
-        // when
+        // when -> 데이터의 조건 dao, service
         NoticeDto noticeDto = noticeDao.select(noticeSeq);
         noticeDao.addViewCnt(noticeDto.getNotice_seq());
 
-        // then
-        assertTrue(47 == noticeDto.getNotice_view_cnt());
+        // then -> 검증하는 절차
+        assertTrue(48 == noticeDto.getNotice_view_cnt());
     }
 
     @Test
@@ -77,6 +77,7 @@ public class NoticeDaoImplTest {
 
         //when
         pagingList = noticeService.pagingList(page, sort, keyword);
+        System.out.println("pagingList => " + pagingList);
         PageDto pageDto = noticeService.pagingParam(page, keyword);
 
         //then
