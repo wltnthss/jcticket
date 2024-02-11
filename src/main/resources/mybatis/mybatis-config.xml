@@ -10,6 +10,8 @@
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
         <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
+        <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
+
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>
 </configuration>
