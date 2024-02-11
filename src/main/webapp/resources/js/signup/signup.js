@@ -129,6 +129,7 @@ $('#userIdInput').on('keyup',function(){
 
     if(idLength===0){
         $('#id_warnMsg').css('display','none')
+        $('#id_warnMsg').css('color','rgb(255,255,255)')
     }else if(!(regEx.test(idValue))){
         $('#id_warnMsg').css('display','block')
         $('#id_warnMsg').css('color','orangered')
@@ -176,6 +177,8 @@ $('#userPwdInput').on('keyup', function(){
 
     if(pwdLength===0) {
         $('#pwd_warnMsg').css('display', 'none')
+        $('#pwd_warnMsg').css('color', 'rgb(255,255,255)');
+
     }else if(pwdLength<8){
         $('#pwd_warnMsg').css('display', 'block');
         $('#pwd_warnMsg').css('color', 'orangered');
@@ -203,6 +206,7 @@ $('#userPwdChkInput').on('keyup',function (){
     // }
     if(pwdChkLength===0) {
         $('#pwd_chkWarnMsg').css('display', 'none')
+        $('#pwd_chkWarnMsg').css('color', 'rgb(255, 255, 255)');
     }else if(pwdValue===pwdChkValue){
         $('#pwd_chkWarnMsg').css('display','block')
         $('#pwd_chkWarnMsg').css('color', 'rgb(0, 159, 206)');
@@ -252,9 +256,11 @@ $('#user_tel').on('keyup', function (){
     const regEx = /^[0-9\-]+$/ //숫자와 하이픈만 입력가능
 
     if(telValueLength===0) {
-        $('#pwd_chkWarnMsg').css('display', 'none')
+        $('#tel_warnMsg').css('display', 'none')
+        $('#tel_warnMsg').css('color', 'rgb(255,255,255)');
     } else if(regEx.test(telValue)){
         $('#tel_warnMsg').css('display', 'none');
+        $('#tel_warnMsg').css('color', 'rgb(255,255,255)');
     }else{
         $('#tel_warnMsg').css('display', 'block');
         $('#tel_warnMsg').css('color', 'orangered');
@@ -263,3 +269,111 @@ $('#user_tel').on('keyup', function (){
 })
 //전화번호 유효성 검사 끝
 
+//생년월일 유효성 검사 시작.
+$('#user_birth_input').on('keyup', function (){
+    const birthValue = $('#user_birth_input').val();
+    const birthLength = $('#user_birth_input').val().length;
+
+    if(birthLength===0){
+        $('#birth_warnMsg').css('display', 'none')
+        $('#birth_warnMsg').css('color', 'rgb(255,255,255)');
+    }else if(birthLength<8){
+        $('#birth_warnMsg').css('display', 'block')
+        $('#birth_warnMsg').css('color', 'orangered')
+        $('#birth_warnMsg').html('8자리를 입력해주세요')
+    }else if(birthLength===8){
+        $.ajax({
+            url:'/signup/chk_birth',
+            method:"POST",
+            data:{user_birth:birthValue},
+            success:function(data){
+                if(data){
+                    $('#birth_warnMsg').css('display', 'block')
+                    $('#birth_warnMsg').css('color', 'rgb(0, 159, 206)')
+                    $('#birth_warnMsg').html('유효한 생년월일입니다.')
+                }else{
+                    $('#birth_warnMsg').css('display', 'block')
+                    $('#birth_warnMsg').css('color', 'orangered')
+                    $('#birth_warnMsg').html('올바르지 않은 형태의 생년월일입니다.')
+                }
+            }
+        })
+    }
+})
+//생년월일 유효성 검사 끝.
+
+// 성별 유효성 검사
+$('#user_gender_input').on('keyup',function(){
+    if($('#user_gender_input').val()=='M' || $('#user_gender_input').val()=='W'||$('#user_gender_input').val()==''){
+        $('#gender_warnMsg').css('display', 'none')
+        $('#gender_warnMsg').css('color', 'rgb(255,255,255)')
+    }else{
+        $('#gender_warnMsg').css('display', 'block')
+        $('#gender_warnMsg').css('color', 'orangered')
+        $('#gender_warnMsg').html('올바르지 않은 형태의 성별입니다.')
+    }
+})
+// 성별 유효성 검사 끝
+
+//약관 시작
+//전체선택,전체해체
+$('#agreeAll').on('change',function (){
+    if(this.checked){
+        console.log('체크됨')
+        $('.termsChkBox').prop('checked',true).trigger('change')
+        $('.termsChk_div').css('background-color','rgb(53, 197, 240)')
+    }else{
+        console.log('체크해제됨')
+        $('.termsChkBox').prop('checked',false).trigger('change')
+        $('.termsChk_div').css('background-color','rgb(255,255,255)')
+    }
+})
+
+//체크박스 선택, 선택약관 value뽑기
+$('.termsChkBox').on('change', function() {
+    const isChecked = this.checked;
+    const value = isChecked ? 'Y' : 'N';
+    $(this).closest('.terms').find('#selTerm').val(value);
+    console.log($('#selTerm').val())
+
+    if (isChecked) {
+        $(this).closest('.terms').find('.termsChk_div').css('background-color', 'rgb(53, 197, 240)');
+    } else {
+        $(this).closest('.terms').find('.termsChk_div').css('background-color', 'rgb(255, 255, 255)');
+    }
+});
+//약관 끝
+
+//폼 제출 유효성 검사
+$(document).ready(function() {
+    // 폼 제출 이벤트 처리
+    $('#signupForm').on('submit', function(event) {
+
+        if($('.authMsg').css('color')==='rgb(255, 69, 0)'){
+            alert('인증번호 확인을 하거나, 올바르게 입력해주세요.')
+            $('#authNum').focus();
+            event.preventDefault();
+        }else if($('#id_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#userIdInput').focus();
+            event.preventDefault();
+        }else if($('#pwd_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#userPwdInput').focus();
+            event.preventDefault();
+        }else if($('#pwd_chkWarnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#userPwdChkInput').focus();
+            event.preventDefault();
+        }else if($('#nickname_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#userNicknameInput').focus();
+            event.preventDefault();
+        }else if($('#tel_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#user_tel').focus();
+            event.preventDefault();
+        }else if($('#birth_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#user_birth_input').focus();
+            event.preventDefault();
+        }else if($('#gender_warnMsg').css('color')==='rgb(255, 69, 0)'){
+            $('#user_gender_input').focus();
+            event.preventDefault();
+        }
+    });
+});
