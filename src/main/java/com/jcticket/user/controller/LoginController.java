@@ -36,9 +36,6 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-//    @Autowired
-//    AgencyDao agencyDao;
-
 
     @GetMapping("/login")
     public String loginForm(){return "login/login";}

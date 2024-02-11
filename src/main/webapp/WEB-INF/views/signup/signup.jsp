@@ -47,7 +47,7 @@
         <!-- 소셜 회원가입 부분 끝 -->
 
         <%-- 회원가입 폼 시작 --%>
-        <form action="<c:url value="/signup/signup"/>" class="signupForm" method="POST">
+        <form action="<c:url value="/signup/signup"/>" id="signupForm" class="signupForm" method="POST">
             <!-- 이메일 부분 시작 -->
             <div class="emailWrap">
                 <label class="emailLabel">이메일</label>
@@ -62,7 +62,7 @@
                         <span class="emailDomain">
                                 <label>
                                     <select class="selDomain" required = "required">
-                                        <option id="disabledOpt" value selected disabled hidden>선택해주세요</option>
+                                        <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
                                         <option class="domainOpt" value="naver.com">naver.com</option>
                                         <option class="domainOpt" value="hanmail.net">hanmail.net</option>
                                         <option class="domainOpt" value="daum.net">daum.net</option>
@@ -91,7 +91,7 @@
                     인증번호 6자리를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" maxlength="6" required="required">
+                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" minlength="6" maxlength="6" required="required">
                 </label>
                 <input type="button" id="AuthBtn"  value="인증번호 확인"><br>
                 <div class = authMsg></div>
@@ -170,7 +170,7 @@
                     전화번호를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="user_tel" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" required="required" maxlength="13">
+                    <input type="text" id="user_tel" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" required="required" minlength="13" maxlength="13">
                 </label>
                 <div id="tel_warnMsg"></div>
             </div>
@@ -183,8 +183,9 @@
                     생년월일 8자리를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" class="css_idPwdNickTelAddGenBir_input" name="user_birth" placeholder="생년월일" required="required">
+                    <input type="text" id="user_birth_input" class="css_idPwdNickTelAddGenBir_input" name="user_birth" placeholder="생년월일" required="required" maxlength="8">
                 </label>
+                <div id="birth_warnMsg"></div>
             </div>
             <!-- 생년월일 입력 인풋창 끝 -->
 
@@ -197,10 +198,10 @@
                     <input type="text" id="sample4_postcode" placeholder="우편번호" required="required">
                     <input type="button" id="addBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소" required="required">
-                    <input type="text" id="sample4_jibunAddress" placeholder="지번주소" required="required">
+                    <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
                     <span id="guide" style="color:#999;display:none"></span>
                     <input type="text" id="sample4_detailAddress" placeholder="상세주소" required="required">
-                    <input type="text" id="sample4_extraAddress" placeholder="참고항목" required="required">
+                    <input type="text" id="sample4_extraAddress" placeholder="참고항목">
                 </label>
                 <input id="user_address" type="hidden" name="user_address" value="">
             </div>
@@ -213,8 +214,9 @@
                     남성 : M 여성 : W
                 </div>
                 <label>
-                    <input type="text" class="css_idPwdNickTelAddGenBir_input" name="user_gender" placeholder="M / W" required="required">
+                    <input type="text" id="user_gender_input" class="css_idPwdNickTelAddGenBir_input" name="user_gender" placeholder="M / W" required="required" maxlength="1">
                 </label>
+                <div id="gender_warnMsg"></div>
             </div>
             <!-- 성별 입력 인풋창 끝 -->
 
@@ -225,8 +227,16 @@
                     콘서트, 뮤지컬, 연극, 클래식 중 1개를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" class="css_idPwdNickTelAddGenBir_input" name="user_interested_genre" placeholder="ex : 뮤지컬" required="required">
+<%--                    <input type="text" id="user_genre_input" class="css_idPwdNickTelAddGenBir_input" name="user_interested_genre" placeholder="ex : 뮤지컬" required="required">--%>
+                        <select class="selGenre" name="user_interested_genre" required = "required">
+                            <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
+                            <option class="genreOpt" value="콘서트">콘서트</option>
+                            <option class="genreOpt" value="뮤지컬">뮤지컬</option>
+                            <option class="genreOpt" value="연극">연극</option>
+                            <option class="genreOpt" value="클래식">클래식</option>
+                        </select>
                 </label>
+                <div id="genre_warnMsg"></div>
             </div>
             <!-- 관심장르 입력 인풋창 끝 -->
 
@@ -242,7 +252,7 @@
                                     <span class="termsChk_span">
                                     </span>
                                 </div>
-                                <input name="agreeAll" type="checkbox" class="termsChkBox" value="false">
+                                <input name="agreeAll" id="agreeAll" type="checkbox" class="termsChkBoxAll">
                             </div>
                             <span class="termsChkCon">
                                 <span class="termsChkCon2">
@@ -265,7 +275,7 @@
                                     <span class="termsChk_span">
                                     </span>
                                 </div>
-                                <input name="agree1" type="checkbox" class="termsChkBox" value="false" >
+                                <input name="agree1" type="checkbox" class="termsChkBox" value="약관1 동의" required="required">
                             </div>
                             <span class="termsChkCon">
                                 <span class="essentialTerm">
@@ -284,7 +294,7 @@
                                     <span class="termsChk_span">
                                     </span>
                                 </div>
-                                <input name="agree2" type="checkbox" class="termsChkBox" value="false" >
+                                <input name="agree2" type="checkbox" class="termsChkBox" value="Y" required="required">
                             </div>
                             <span class="termsChkCon">
                                 <span class="essentialTerm">
@@ -295,24 +305,24 @@
                     </div>
                     <!-- 개인정보수집 및 이용동의 약관(필수) 끝 -->
 
-                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 시작 -->
-                    <div class="terms">
-                        <label class="termLabel">
-                            <div class="termsChk_div">
-                                <div class="termsChk_div2">
-                                    <span class="termsChk_span">
-                                    </span>
-                                </div>
-                                <input name="agree3" type="checkbox" class="termsChkBox" value="false">
-                            </div>
-                            <span class="termsChkCon">
-                                <span class="selectiveTerm">
-                                    개인정보 마케팅 활용 동의
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 끝 -->
+<%--                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 시작 -->--%>
+<%--                    <div class="terms">--%>
+<%--                        <label class="termLabel">--%>
+<%--                            <div class="termsChk_div">--%>
+<%--                                <div class="termsChk_div2">--%>
+<%--                                    <span class="termsChk_span">--%>
+<%--                                    </span>--%>
+<%--                                </div>--%>
+<%--                                <input name="agreement1" type="checkbox" class="termsChkBox" value="Y">--%>
+<%--                            </div>--%>
+<%--                            <span class="termsChkCon">--%>
+<%--                                <span class="selectiveTerm">--%>
+<%--                                    개인정보 마케팅 활용 동의--%>
+<%--                                </span>--%>
+<%--                            </span>--%>
+<%--                        </label>--%>
+<%--                    </div>--%>
+<%--                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 끝 -->--%>
 
                     <!-- 이벤트,쿠폰,특가 알림 메일 및 SMS 등 수신 약관(선택) 시작 -->
                     <div class="terms">
@@ -322,7 +332,8 @@
                                     <span class="termsChk_span">
                                     </span>
                                 </div>
-                                <input name="agree4" type="checkbox" class="termsChkBox" value="false">
+                                <input id="selTermChkbox" type="checkbox" class="termsChkBox">
+                                <input id="selTerm" type="hidden" name="agreement" value="">
                             </div>
                             <span class="termsChkCon">
                                 <span class="selectiveTerm">
@@ -356,7 +367,9 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/signup/signup.js"></script>
+<script>
 
+</script>
 
 </body>
 </html>
