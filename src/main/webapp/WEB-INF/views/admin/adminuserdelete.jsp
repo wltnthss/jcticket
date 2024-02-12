@@ -73,7 +73,7 @@
                         </colgroup>
                         <thead>
                         <tr>
-                            <th scope="col"><input type="checkbox" name="selectedItems" id="selectedItemsAll"> </th>
+                            <th scope="col"><input type="checkbox" id="selectedItemsAll"> </th>
                             <th scope="col">이름</th>
                             <th scope="col">아이디</th>
                             <th scope="col">핸드폰</th>
@@ -89,7 +89,7 @@
                         <tbody>
                         <c:forEach items="${list}" var="UserDto" varStatus="status">
                             <tr class="list">
-                                <td><input type="checkbox" name="selectedItems" value="${status.index}"></td>
+                                <td><input type="checkbox" name="selectedItems" value="${UserDto.user_id}"></td>
                                 <td>${UserDto.user_name}</td>
                                 <td>${UserDto.user_id}</td>
                                 <td>${UserDto.user_tel}</td>
@@ -138,7 +138,7 @@
                     </c:if>
                 </div>
                 <div class="btn-confirm">
-                    <input type="submit" value="삭제" id="btn_submit" class="btn-large" style="background: red">
+                    <input type="button" value="삭제" id="user-delete-btn" class="btn-large" style="background: red">
                 </div>
             </div>
         </div>

@@ -52,4 +52,9 @@ public class AdminDaoImpl implements AdminDao{
     public int insertUser(UserDto userDto) throws Exception {
         return sqlSession.insert(namespace + "insertUser", userDto);
     }
+
+    @Override
+    public int userDelete(String user_id) throws Exception {
+        return sqlSession.update(namespace + "userretireupdate", user_id);
+    }
 }

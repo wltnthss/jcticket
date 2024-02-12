@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -184,6 +185,29 @@ public class AdminController {
 
         return "admin/adminuserdelete";
     }
+    @DeleteMapping("/admin/delete")
+    @ResponseBody
+    public int adminUserDeleteMapping(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+
+        System.out.println("delete controller 진입");
+        System.out.println("valueArr => " + valueArr);
+
+        try {
+            for (String userId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.userDelete(userId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     @GetMapping("/admin/agency")
     public String adminagency() throws Exception{
         return "admin/adminagency";

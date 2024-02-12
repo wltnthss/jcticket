@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,9 @@ public class AdminDaoImplTest {
 
     @Autowired
     AdminDao adminDao;
+
+    @Autowired
+    UserDao userDao;
 
     @Test
     public void login() throws Exception{
@@ -95,5 +99,26 @@ public class AdminDaoImplTest {
         System.out.println("result => " + result);
 
         // then
+    }
+
+    @Test
+    public void userDelete() throws Exception {
+        // given
+        UserDto userDto = new UserDto("0sang", "4444");
+        System.out.println("userDto => " + userDto);
+        UserDto testUser = userDao.selectUser(userDto.getUser_id());
+        System.out.println("testUser => " + testUser);
+        System.out.println("testUserData => " + testUser.getUser_retire_yn() + ", " +testUser.getUser_retire_at());
+
+        // when
+        int updateResult = adminDao.userDelete(testUser.getUser_id());
+        UserDto afterUpdateTestUser = userDao.selectUser(userDto.getUser_id());
+
+        System.out.println("updateResult => " + updateResult);
+        System.out.println("afterUpdateTestUser_retire_yn() => " + afterUpdateTestUser.getUser_retire_yn());
+
+        // then
+        assertTrue(1 == updateResult);
+        assertTrue("Y".equals(afterUpdateTestUser.getUser_retire_yn()));
     }
 }

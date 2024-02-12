@@ -118,4 +118,9 @@ public class AdminServiceImpl implements AdminService {
     public int userInsert(UserDto userDto) throws Exception {
         return adminDao.insertUser(userDto);
     }
+
+    @Override
+    public int userDelete(String user_id) throws Exception {
+        return adminDao.userDelete(user_id);
+    }
 }
