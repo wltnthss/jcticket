@@ -24,26 +24,26 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
-public class UserDaoImplTest {
+public class LoginDaoImplTest {
     @Autowired
-    UserDao userDao;
+    LoginDao loginDao;
 
     @Test
     public void selectUser() throws Exception {
-        System.out.println("userDao.selectUser() = " + userDao.selectUser("1"));
+        System.out.println("userDao.selectUser() = " + loginDao.selectUser("1"));
     }
 
     @Test
     public void increaseLoginCnt() throws Exception {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
 
-        UserDto userDto = userDao.selectUser("wook123");
+        UserDto userDto = loginDao.selectUser("wook123");
         System.out.println("userDto = " + userDto);
 
         String user_id = userDto.getUser_id();
         System.out.println("user_id = " + user_id);
 
-        int increaseLoginCnt = userDao.increaseLoginCnt(user_id);
+        int increaseLoginCnt = loginDao.increaseLoginCnt(user_id);
         System.out.println("increaseLoginCnt = " + increaseLoginCnt);
 
         assertTrue(userDto.getUser_visit_cnt()==10);

@@ -1,8 +1,7 @@
 package com.jcticket.user.service;
 
-import com.jcticket.user.dao.UserDao;
+import com.jcticket.user.dao.LoginDao;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
  * fileName       : LoginServiceImpl
  * author         : jinwook Song
  * date           : 2024-02-01
- * description    : 자동 주석 생성
+ * description    : LoginService 구현클래스
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -20,16 +19,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginServiceImpl implements LoginService {
     @Autowired
-    UserDao userDao;
+    LoginDao loginDao;
 
+    //user_id에 맞는 유저 정보 가져옴
     @Override
     public UserDto loginUser(String user_id)throws Exception{
-        return userDao.selectUser(user_id);
+        return loginDao.selectUser(user_id);
     }
 
+    //user가 로그인 할때마다 1씩 증가. 방문횟수
     @Override
     public int loginCnt(String user_id) throws Exception {
-        return userDao.increaseLoginCnt(user_id);
+        return loginDao.increaseLoginCnt(user_id);
     }
 
 }

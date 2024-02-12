@@ -1,4 +1,3 @@
-
 <!-- 주소검색 시작 -->
 function sample4_execDaumPostcode() {
     new daum.Postcode({
@@ -55,13 +54,6 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 <!-- 주소검색 끝 -->
-
-<!-- 전화번호 자동 하이픈 시작 -->
-$(document).on("keyup", "#user_tel", function() {
-    $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
-});
-<!-- 전화번호 자동 하이픈 끝 -->
-
 
 // <!-- 이메일 인증번호 발송 시작 -->
 let code = "";
@@ -241,9 +233,7 @@ $('#userPwdChkInput').on('keyup',function (){
             console.error('AJAX Error:', error);
         }
         })
-
     })
-
 //닉네임 중복 체크 끝
 
 
@@ -269,14 +259,25 @@ $('#user_tel').on('keyup', function (){
 })
 //전화번호 유효성 검사 끝
 
+// <!-- 전화번호 자동 하이픈 시작 -->
+$(document).on("keyup", "#user_tel", function() {
+    $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+});
+<!-- 전화번호 자동 하이픈 끝 -->
+
 //생년월일 유효성 검사 시작.
 $('#user_birth_input').on('keyup', function (){
     const birthValue = $('#user_birth_input').val();
     const birthLength = $('#user_birth_input').val().length;
+    const regEx = /^[0-9]+$/ // 숫자만 사용 가능
 
     if(birthLength===0){
         $('#birth_warnMsg').css('display', 'none')
         $('#birth_warnMsg').css('color', 'rgb(255,255,255)');
+    } else if(!(regEx.test(birthValue))){
+        $('#birth_warnMsg').css('display', 'block')
+        $('#birth_warnMsg').css('color', 'orangered')
+        $('#birth_warnMsg').html('숫자만 입력해주세요')
     }else if(birthLength<8){
         $('#birth_warnMsg').css('display', 'block')
         $('#birth_warnMsg').css('color', 'orangered')
@@ -299,6 +300,7 @@ $('#user_birth_input').on('keyup', function (){
             }
         })
     }
+
 })
 //생년월일 유효성 검사 끝.
 

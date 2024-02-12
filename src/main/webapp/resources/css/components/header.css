@@ -102,14 +102,12 @@
 }
 
 .play-top-right .logout{
-    display: none;
-    width: 22px;
+    width: 19px;
     right: 75px;
 }
 
 .play-top-right .logout .logout_icon{
-    display: none;
-    width: 22px;
+    width: 19px;
     right: 75px;
 }
 

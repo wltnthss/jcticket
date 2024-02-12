@@ -4,6 +4,7 @@
 
 <mapper namespace="TermsMapper">
     <insert id="terms1" parameterType="TermsDto">
+--     terms insert
         insert into user_terms
         (
          terms_seq,

@@ -7,7 +7,7 @@ import com.jcticket.signup.dto.TermsDto;
  * fileName       : TermsService
  * author         : jinwook Song
  * date           : 2024-02-11
- * description    : 자동 주석 생성
+ * description    : TermsService
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
