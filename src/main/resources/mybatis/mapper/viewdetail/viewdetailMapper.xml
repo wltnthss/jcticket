@@ -3,9 +3,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
-    <select id="test" resultType="String">
-        select showing_info
+    <select id="select_showing_info" resultType="map">
+        select showing_info,showing_seq
         from showing
         where showing_date = #{dateText}
+    </select>
+
+
+<!--    위는 Showing 아래는 SeatClass-->
+    <select id="seat_price" resultType="int">
+        select seat_price
+        from seat_class
+    </select>
+
+
+    <select id="remain_seat" resultType="int">
+        select
+            s.showing_seat_cnt -
+            (select count(*)
+            from show_seat ss
+            where s.showing_seq = ss.showing_seq
+            and show_seat_status = 'N') as remaining_seats
+        from
+            showing s
+        where s.showing_seq = #{showing_seq};
     </select>
 </mapper>
