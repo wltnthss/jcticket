@@ -18,7 +18,7 @@
     <script>
         function showPopup(){
             let popupW = 800;
-            let popupH = 600;
+            let popupH = 900;
             let left = Math.ceil((window.screen.width - popupW)/2);
             let top = Math.ceil((window.screen.height - popupH)/2);
             window.open('ticketing-detail','','width='+popupW+',height='+popupH+',left='+left+',top='+top+',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no')
