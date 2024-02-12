@@ -10,13 +10,11 @@
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
 
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
-<<<<<<< HEAD
-=======
+
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
         <typeAlias alias="ShowSeatDto" type="com.jcticket.viewdetail.dto.ShowSeatDto"/>
 
 
->>>>>>> viewdetail
         <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
         <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
 
