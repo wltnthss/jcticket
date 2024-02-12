@@ -72,4 +72,15 @@
 	        #{start}, #{limit}
     </select>
 
+    <update id="userretireupdate" parameterType="String">
+        UPDATE user
+        SET
+            user_retire_yn = 'Y',
+            user_retire_at = now()
+        WHERE
+            user_id = #{user_id};
+    </update>
+
+
+
 </mapper>

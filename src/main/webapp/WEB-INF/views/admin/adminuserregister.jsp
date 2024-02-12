@@ -36,11 +36,11 @@
                         <tbody>
                         <tr>
                             <th scope="row">회원 아이디</th>
-                            <td><input type="text" minlength="4" name="user_id" maxlength="20" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td><input type="text" placeholder="4글자 이상 입력." minlength="4" name="user_id" maxlength="20" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
                         </tr>
                         <tr>
                             <th scope="row">회원 패스워드</th>
-                            <td><input type="password" minlength="4" name="user_password" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td><input type="password" placeholder="4글자 이상 입력." minlength="4" name="user_password" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
                         </tr>
                         <tr>
                             <th scope="row">이름(실명)</th>

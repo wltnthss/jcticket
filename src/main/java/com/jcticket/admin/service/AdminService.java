@@ -29,4 +29,6 @@ public interface AdminService {
 
     // 유저 회원가입
     int userInsert(UserDto userDto) throws Exception;
+    // 회원 탈퇴
+    int userDelete(String user_id) throws Exception;
 }
