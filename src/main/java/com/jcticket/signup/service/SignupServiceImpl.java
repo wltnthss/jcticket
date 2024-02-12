@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * fileName       : SignupServiceImpl
  * author         : jinwook Song
  * date           : 2024-02-07
- * description    : 자동 주석 생성
+ * description    : SignupService 구현 클래스
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -22,16 +22,19 @@ public class SignupServiceImpl implements SignupService {
     @Autowired
     SignupDao signupDao;
 
+    //회원가입 시 user table에 입력한 정보들 insert
     @Override
     public int insertUser(SignupDto signupDto)throws Exception{
         return signupDao.insertUser(signupDto);
     }
 
+    //중복 아이디 체크
     @Override
     public int chkIdDupl(String user_id) throws Exception {
         return signupDao.selectOne(user_id);
     }
 
+    //중복 닉네임 체크
     @Override
     public int chkNickNameDupl(String user_nickname) throws Exception {
         return signupDao.selectNickName(user_nickname);

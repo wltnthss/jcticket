@@ -7,7 +7,7 @@ import com.jcticket.user.dto.UserDto;
  * fileName       : LoginService
  * author         : jinwook Song
  * date           : 2024-02-01
- * description    : 자동 주석 생성
+ * description    : LoginService
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------

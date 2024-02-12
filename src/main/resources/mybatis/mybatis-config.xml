@@ -8,8 +8,16 @@
         <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
         <typeAlias alias="AdminDto" type="com.jcticket.admin.dto.AdminDto"/>
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
+
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
+
+        <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
+        <typeAlias alias="ShowSeatDto" type="com.jcticket.viewdetail.dto.ShowSeatDto"/>
+
+
         <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
+        <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
+
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>
 </configuration>
