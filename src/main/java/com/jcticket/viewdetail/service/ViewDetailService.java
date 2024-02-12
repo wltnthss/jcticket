@@ -23,5 +23,7 @@ public interface ViewDetailService {
 
     int getSeatPrice() throws Exception;
 
-    int getRemainSeat(String showing_seq) throws  Exception;
+    int getRemainSeat(String showing_seq) throws Exception;
+
+    List<ShowingDto> getShowingDate() throws Exception;
 }

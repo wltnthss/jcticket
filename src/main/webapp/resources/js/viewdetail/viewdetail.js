@@ -1,7 +1,14 @@
 // <%--    datepicker 제이쿼리 달력--%>
     $(document).ready(function() {
-        var availableDates = ["2024-02-28", "2024-02-29"]; //선택 가능한 날짜
-        
+        var dateShow = document.querySelectorAll(".dateShow");
+
+        //선택 가능한 날짜 ex)
+        // var availableDates = ["2024-02-28", "2024-02-29"];
+        var availableDates = [];
+        for(var i=0;i<dateShow.length;i++){
+            availableDates.push(dateShow[i].innerHTML);
+        }
+
         //영상님파트로 보낼 날짜정보, 아래 하나 더 있음 ajax임
         var booking_date = null;
         $("#datepicker").datepicker({
