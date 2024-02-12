@@ -17,7 +17,7 @@
     <link href="/resources/css/ticketing/ticketing.css" rel="stylesheet" type="text/css">
     <script>
         function showPopup(){
-            let popupW = 800;
+            let popupW = 765;
             let popupH = 900;
             let left = Math.ceil((window.screen.width - popupW)/2);
             let top = Math.ceil((window.screen.height - popupH)/2);

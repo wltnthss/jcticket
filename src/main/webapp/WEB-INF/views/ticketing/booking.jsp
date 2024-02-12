@@ -226,6 +226,7 @@
         }
         .form-card .row .col-8{
             display: flex;
+            flex-wrap: nowrap;
             justify-content: center;
         }
         .form-card .row .col-4{
@@ -246,12 +247,13 @@
         }
         .seats{
             display: flex;
+            flex-wrap: nowrap;
         }
 
         .seats span{
             width: 20px;
             height: 20px;
-            margin: 0 5px 12px 0;
+            margin: 0 5px 10px 0;
         }
         .selected-seats.head{
             text-align: center;
@@ -523,17 +525,13 @@
         </div>
     </div>
 </div>
-<!-- /.Horizontal Steppers -->
-<%--    <div class="container">--%>
-<%--        <div id="datepicker"></div>--%>
-<%--    </div>--%>
-<%--    <input type="text" id="datePicker" class="form-control" value="2024-02-10" />--%>
 
 
 
-<script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
+
+<%--<script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>--%>
 </body>
-<!-- 우선 body 부분에 input tag를 하나 만들어준다. -->
+
 
 
 <%--    datepicker --%>
