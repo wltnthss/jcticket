@@ -6,9 +6,10 @@
 
 .ui-icon-circle-triangle-w { background-position: -0px -0px; background-size: 36px; }
 
-.ui-datepicker-calendar>tbody>tr>td:first-child a { color: red; }
+/*토요일 일요일 글자 빨간색*/
+.ui-datepicker-calendar>tbody>tr>td:first-child span { color: red; }
 
-.ui-datepicker-calendar>tbody>tr>td:last-child a { color: red; }
+.ui-datepicker-calendar>tbody>tr>td:last-child span { color: red; }
 
 /* datepicker Style */
 .ui-datepicker { width: 270px; padding: 0; display: none; border: 0; margin-top: 10px;}
@@ -44,8 +45,8 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 /*.ui-datepicker .ui-datepicker-next .ui-icon { background: url(../../img/viewdetail/arrow-button.png) -16px 0 no-repeat; }*/
 
 /*일 폰트 등등 설정*/
-.ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: rgba(0,0,0,0.05); font-weight: normal; color: #333; box-sizing: border-box; }
-.ui-datepicker .ui-state-default.ui-state-hover { background: rgba(0,0,0,0.05); }
+.ui-datepicker .ui-state-default { display: block; border: 0; border-radius: 15px; width: 30px; height: 30px; line-height: 30px; padding: 0; margin: 4px auto; font-size: 14px; text-align: center; background: rgba(0,0,0,0.06); font-weight: normal; color: #333; box-sizing: border-box; }
+/*.ui-datepicker .ui-state-default.ui-state-hover { background: rgba(0,0,0,0.05); }*/
 /*비활성화된 요소*/
 .ui-state-disabled, .ui-widget-content .ui-state-disabled {opacity: 1;}
 .ui-datepicker-unselectable .ui-state-default {background-color: white !important;}

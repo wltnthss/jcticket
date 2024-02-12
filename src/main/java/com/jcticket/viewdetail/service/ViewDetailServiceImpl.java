@@ -1,6 +1,7 @@
 package com.jcticket.viewdetail.service;
 
 import com.jcticket.viewdetail.dao.ViewDetailDao;
+import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,14 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     ViewDetailDao viewDetailDao;
 
     public List<ShowingDto> getShowingInfo(String dateText) throws Exception {
-        return viewDetailDao.test(dateText);
+        return viewDetailDao.select_showing_info(dateText);
+    }
+
+    public int getSeatPrice() throws Exception {
+        return viewDetailDao.seat_price();
+    }
+
+    public int getRemainSeat(String showing_seq) throws Exception {
+        return viewDetailDao.remain_seat(showing_seq);
     }
 }
