@@ -40,4 +40,11 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     public int remain_seat(String showing_seq) throws Exception {
         return session.selectOne(namespace + "remain_seat", showing_seq);
     }
+
+    @Override
+    public List<ShowingDto> showing_date() throws Exception {
+        return session.selectList(namespace + "showing_date");
+    }
+
+
 }

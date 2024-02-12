@@ -37,4 +37,9 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     public int getRemainSeat(String showing_seq) throws Exception {
         return viewDetailDao.remain_seat(showing_seq);
     }
+
+    public List<ShowingDto> getShowingDate() throws Exception {
+        return viewDetailDao.showing_date();
+
+    }
 }

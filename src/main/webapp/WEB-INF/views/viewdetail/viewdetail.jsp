@@ -53,7 +53,16 @@ git <%--
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
-                            2022.07.24
+<%--                            상영날짜출력--%>
+<%--                            <c:forEach var="String" items="ShowingDate">--%>
+<%--                                <a class="asdasd"><c:out value="${ShowingDate}"/></a>--%>
+<%--                            </c:forEach>--%>
+
+<%--                            대괄호 제거하고 상영날짜 출력--%>
+                            <c:forEach var="date" items="${ShowingDate}" varStatus="loop">
+                                <a class="dateShow"><c:out value="${date}" /></a>
+                                <c:if test="${!loop.last}">,</c:if>
+                            </c:forEach>
                         </span>
 <%--                        <a href="javascript:void(0);" id="stage_name">--%>
                         <a href="javascript:void(0);" id="stage_name">

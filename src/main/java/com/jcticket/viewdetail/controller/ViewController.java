@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -42,11 +44,17 @@ public class ViewController {
     public String remainSeat(Model model) throws Exception{
 
         try {
-//            List<String> list = new ArrayList<>(viewDetailService.getRemainSeat(showing_seq));
-            int list = viewDetailService.getSeatPrice();
-
+//            좌석가격
+            int priceSeat = viewDetailService.getSeatPrice();
+//            공연날짜 set에 넣었다 빼서 중복을 제거함
+            List<ShowingDto> showingDate = viewDetailService.getShowingDate();
+            HashSet<ShowingDto> deduplication = new HashSet<>(showingDate);
+            showingDate = new ArrayList<>(deduplication);
+//            ArrayList역순으로 순서 바꿔줌 why? 그래야 날짜순으로 화면에 출력됨
+            Collections.reverse(showingDate);
 //            System.out.println(list);
-            model.addAttribute("SeatPrice", list);
+            model.addAttribute("SeatPrice", priceSeat);
+            model.addAttribute("ShowingDate", showingDate);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -66,6 +74,7 @@ public class ViewController {
         List<ShowingDto> msg = null;
 
         try {
+//            날짜정보를 통해 해당 날짜의 회차정보 받음
             List<ShowingDto> list = viewDetailService.getShowingInfo(dateCal);
 //            model.addAttribute("info", list);
             msg = list;
@@ -120,6 +129,7 @@ public class ViewController {
 
         int msg = 0;
         try {
+//            잔여석 정보
             int list = viewDetailService.getRemainSeat(remainSeatCal);
             msg = list;
 //            System.out.println(msg);
