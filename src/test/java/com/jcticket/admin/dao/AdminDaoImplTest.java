@@ -2,7 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.ticketing.dto.TicketingDto;
-import com.jcticket.user.dao.UserDao;
+import com.jcticket.user.dao.LoginDao;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +37,7 @@ public class AdminDaoImplTest {
     AdminDao adminDao;
 
     @Autowired
-    UserDao userDao;
+    LoginDao userDao;
 
     @Test
     public void login() throws Exception{
