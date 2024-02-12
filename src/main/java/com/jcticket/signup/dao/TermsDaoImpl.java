@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * fileName       : TermsDaoImpl
  * author         : jinwook Song
  * date           : 2024-02-11
- * description    : 자동 주석 생성
+ * description    : TermsDao구현
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -22,13 +22,10 @@ public class TermsDaoImpl implements TermsDao{
     private SqlSession session;
     private static String namespace = "TermsMapper.";
 
+    //user_term에 insert
     @Override
     public int insertTerm(TermsDto termsDto) throws Exception {
         return session.insert(namespace+"terms1",termsDto);
     }
 
-//    @Override
-//    public int insertTerm2(TermsDto termsDto) throws Exception {
-//        return session.insert(namespace+"terms2",termsDto);
-//    }
 }

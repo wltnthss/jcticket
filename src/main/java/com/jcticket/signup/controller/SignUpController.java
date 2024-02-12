@@ -28,7 +28,7 @@ import java.util.Properties;
  * fileName       : SignUpController
  * author         : jinwook Song
  * date           : 2024-02-04
- * description    : 자동 주석 생성
+ * description    : SignupController
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -94,6 +94,7 @@ public class SignUpController {
         System.out.println("user_id = " + user_id);
 
         try {
+            //user table에 같은 아이디 있는지 카운트. 1이면 중복(true) 0이면 중복x(false)
             return signupService.chkIdDupl(user_id) == 1;
         }catch (Exception e){
             e.printStackTrace();
@@ -110,6 +111,7 @@ public class SignUpController {
         System.out.println("user_nickname = " + user_nickname);
 
         try{
+            //user table에 같은 닉네임 있는지 카운트. 1이면 중복(true) 0이면 중복x(false)
             return signupService.chkNickNameDupl(user_nickname) ==1;
         }catch (Exception e){
             e.printStackTrace();
@@ -155,10 +157,12 @@ public class SignUpController {
         System.out.println("signupDto = " + signupDto);
 
         try{
+            //user table insert 실패시 예외 발생시킴
             if(signupService.insertUser(signupDto)!=1){
                 throw new Exception("insert failed");
             }
 
+            //유저_약관 table insert 실패시 예외 발생시킴
             if(termsService.insertUserTerm(termsDto)!=1){
                 throw new Exception("insert terms failed");
             }

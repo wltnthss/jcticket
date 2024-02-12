@@ -7,7 +7,7 @@ import com.jcticket.signup.dto.TermsDto;
  * fileName       : termsDao
  * author         : jinwook Song
  * date           : 2024-02-11
- * description    : 자동 주석 생성
+ * description    : TermsDao
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -15,6 +15,4 @@ import com.jcticket.signup.dto.TermsDto;
  */
 public interface TermsDao {
     int insertTerm(TermsDto termsDto) throws Exception;
-//    int insertTerm2(TermsDto termsDto) throws Exception;
-
 }

@@ -1,7 +1,7 @@
 package com.jcticket.user.dao;
 
 import com.jcticket.user.dto.UserDto;
-import org.springframework.stereotype.Repository;
+
 /**
  * packageName    : com.jcticket.user
  * fileName       : UserDao
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * -----------------------------------------------------------
  * 2024-02-01        jinwook Song       최초 생성
  */
-public interface UserDao{
+public interface LoginDao {
     UserDto selectUser(String user_id) throws Exception;
     int increaseLoginCnt(String user_id) throws Exception;
 }

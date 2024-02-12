@@ -52,6 +52,7 @@
                 </ul>
             </div>
             <!-- 로그인 유저/기획사 선택 탭 끝 -->
+
             <div class="loginForm">
                 <!-- 회원 로그인 영역 시작 -->
                 <div class="memLoginForm">
@@ -85,6 +86,7 @@
                                         <label for="chkrememberID">
                                             아이디 저장
                                         </label>
+                                        <%--  쿠키가 있으면(아이디 저장) 체크 아니면 체크 x  --%>
                                         <input id="chkrememberID" name="rememberId" type="checkbox" autocapitalize="off" class="iptChk" style="zoom: 1.5;"
                                          value="on" ${empty cookie.user_id.value ? "":"checked"}>
                                     </span>
@@ -169,7 +171,6 @@
                     </div>
                         </div>
                     </c:if>
-
                 </div>
                 <%--회원 로그인 영역 끝--%>
 
@@ -200,10 +201,7 @@
                             </button>
                         </fieldset>
                     </form>
-
-
                 </div>
-
             </div>
 
             <!-- 로그인화면 포스터 시작 -->
@@ -231,14 +229,6 @@
         </div>
     </div>
 </div>
-
-<%--<script>--%>
-<%--    // 기획사 로그인 탭으로 돌아가기..--%>
-<%--    document.getElementById("agencyTabA").addEventListener("click", function(event) {--%>
-<%--        // 기획사 로그인 페이지의 URL로 리다이렉트--%>
-<%--        window.location.href = "/agency/processLogin";--%>
-<%--    });--%>
-<%--</script>--%>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/login/login.js"></script>

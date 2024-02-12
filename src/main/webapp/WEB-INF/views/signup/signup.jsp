@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: 82109
-  Date: 2024-02-04
-  Time: 오후 9:17
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -170,7 +163,7 @@
                     전화번호를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="user_tel" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" required="required" minlength="13" maxlength="13">
+                    <input type="text" id="user_tel" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" required="required" maxlength="13" minlength="13">
                 </label>
                 <div id="tel_warnMsg"></div>
             </div>
@@ -227,7 +220,6 @@
                     콘서트, 뮤지컬, 연극, 클래식 중 1개를 입력해주세요.
                 </div>
                 <label>
-<%--                    <input type="text" id="user_genre_input" class="css_idPwdNickTelAddGenBir_input" name="user_interested_genre" placeholder="ex : 뮤지컬" required="required">--%>
                         <select class="selGenre" name="user_interested_genre" required = "required">
                             <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
                             <option class="genreOpt" value="콘서트">콘서트</option>
@@ -305,25 +297,6 @@
                     </div>
                     <!-- 개인정보수집 및 이용동의 약관(필수) 끝 -->
 
-<%--                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 시작 -->--%>
-<%--                    <div class="terms">--%>
-<%--                        <label class="termLabel">--%>
-<%--                            <div class="termsChk_div">--%>
-<%--                                <div class="termsChk_div2">--%>
-<%--                                    <span class="termsChk_span">--%>
-<%--                                    </span>--%>
-<%--                                </div>--%>
-<%--                                <input name="agreement1" type="checkbox" class="termsChkBox" value="Y">--%>
-<%--                            </div>--%>
-<%--                            <span class="termsChkCon">--%>
-<%--                                <span class="selectiveTerm">--%>
-<%--                                    개인정보 마케팅 활용 동의--%>
-<%--                                </span>--%>
-<%--                            </span>--%>
-<%--                        </label>--%>
-<%--                    </div>--%>
-<%--                    <!-- 개인정보 마케팅 활용 동의 약관(선택) 끝 -->--%>
-
                     <!-- 이벤트,쿠폰,특가 알림 메일 및 SMS 등 수신 약관(선택) 시작 -->
                     <div class="terms">
                         <label class="termLabel">
@@ -333,7 +306,7 @@
                                     </span>
                                 </div>
                                 <input id="selTermChkbox" type="checkbox" class="termsChkBox">
-                                <input id="selTerm" type="hidden" name="agreement" value="">
+                                <input id="selTerm" type="hidden" name="agreement" value="N">
                             </div>
                             <span class="termsChkCon">
                                 <span class="selectiveTerm">
@@ -360,16 +333,10 @@
             이미 아이디가 있으신가요?
             <a href="/login" class="goLoginFromSignUp">로그인</a>
         </p>
-
     </div>
-
 </div>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/signup/signup.js"></script>
-<script>
-
-</script>
-
 </body>
 </html>
