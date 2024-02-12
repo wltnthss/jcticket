@@ -1,6 +1,7 @@
 package com.jcticket.admin.service;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.user.dto.UserDto;
 
 import java.util.List;
@@ -19,4 +20,13 @@ import java.util.List;
 public interface AdminService {
     AdminDto login(AdminDto adminDto) throws Exception;
     List<UserDto> userstatics() throws Exception;
+    // 총 회원수 조회
+    int usercnt(String option, String keyword) throws Exception;
+    // 회원 페이징 리스트 조회
+    List<UserDto> userPaingList(int page, String option, String keyword) throws Exception;
+    // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
+    UserPageDto pagingParam(int page, String option, String keyword) throws Exception;
+
+    // 유저 회원가입
+    int userInsert(UserDto userDto) throws Exception;
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TermsMapper">
+    <insert id="terms1" parameterType="TermsDto">
+        insert into user_terms
+        (
+         terms_seq,
+         user_id,
+         agreement,
+         agreement_at,
+         created_at,
+         created_id,
+         updated_at,
+         updated_id)
+        values
+        (
+         3,
+         #{user_id},
+         #{agreement},
+         current_timestamp,
+         current_timestamp,
+         'system',
+         current_timestamp,
+         'system')
+    </insert>
+
+</mapper>
