@@ -36,7 +36,7 @@ public class TicketingController {
 
     @GetMapping(value = "/ticketing-detail")
     public String doTicketing() throws Exception{
-        return "ticketing/ticketing";
+        return "ticketing/booking";
     }
 
 }
