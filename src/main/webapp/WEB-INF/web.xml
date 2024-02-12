@@ -30,6 +30,7 @@
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
     <!-- 한글 변환 필터 시작 -->
     <filter>
         <filter-name>encodingFilter</filter-name>

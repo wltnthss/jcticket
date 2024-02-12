@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * fileName       : SignupDto
  * author         : jinwook Song
  * date           : 2024-02-07
- * description    : 자동 주석 생성
+ * description    : 회원가입 Dto
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------

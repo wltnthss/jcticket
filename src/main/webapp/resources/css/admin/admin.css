@@ -34,6 +34,10 @@ select{
 label, input, button, textarea, select, img {
     vertical-align: middle;
 }
+a:link, a:visited {
+    color: #454545;
+    text-decoration: none;
+}
 .admin-login-container{
     min-width: 1080px;
 }
@@ -251,11 +255,10 @@ thead{
 }
 .admin-common-content{
     margin-left: 204px;
-    padding-bottom: 100px;
     border-left: 1px solid #ccc;
 }
 .admin-common-title{
-    margin: 30px 25px;
+    margin: 30px 25px 0 30px;
 }
 .admin-common-content h1{
     margin: 0 0 20px;
@@ -319,6 +322,152 @@ table th{
     text-overflow: ellipsis;
     line-height: 1.3em;
 }
+.tbl_frm01 table {
+    width: 100%;
+}
+.frm_input {
+    padding: 0 4px 1px 4px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    height: 23px;
+}
+.btn-confirm{
+    margin: 30px;
+    text-align: center;
+}
+.btn-large, .btn-ssmall, .btn-small, .btn-lsmall, .btn-medium {
+    background: #333;
+    border: 1px solid #333;
+    color: #fff !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+.btn-large {
+    padding: 10px 21px;
+    font-size: 15px;
+    line-height: 1.222;
+    font-weight: 600;
+}
+.btn-medium {
+    padding: 8px 15px;
+    font-size: 13px;
+    line-height: 1.444;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn_lsmall {
+    padding: 3px 10px;
+    font-size: 12px;
+    line-height: 1.666;
+    font-weight: normal !important;
+}
+.bx-white {
+    background: #fff;
+    border: 1px solid #ccc;
+    color: #222 !important;
+}
+.grey {
+    background: #888;
+    border: 1px solid #888;
+    color: #fff !important;
+}
+.tbl_header{
+    border-top: 1px solid #aeaeae;
+    border-bottom: 1px solid #e4e5e7;
+}
+.tbl_header table{
+    width: 100%;
+}
+.tbl_header th {
+    padding: 8px 10px;
+    line-height: 1em;
+    font-weight: 600;
+    background: #f1f1f1;
+    border-left: 1px solid #e4e5e7;
+    text-align: center;
+    vertical-align: middle;
+}
+.tbl_header td {
+    height: 22px;
+    padding: 8px 8px;
+    line-height: 1.6em;
+    border: 1px solid #e4e5e7;
+    text-align: center;
+    vertical-align: middle;
+}
+.tbl_frm01 th, .tbl_frm01 td {
+    padding: 8px 14px;
+    height: 23px;
+    border-bottom: 1px solid #e4e5e7;
+    text-align: left;
+    vertical-align: middle;
+}
+.w80{
+    width: 80px !important;
+}
+.w50 {
+    width: 50px !important;
+}
+.w100 {
+    width: 100px !important;
+}
+.w60 {
+    width: 60px !important;
+}
+.w90 {
+    width: 90px !important;
+}
+.w130 {
+    width: 130px !important;
+}
+.w150 {
+    width: 150px !important;
+}
+.w180 {
+    width: 180px !important;
+}
+.w200 {
+    width: 200px !important;
+}
+.w300 {
+    width: 300px !important;
+}
+.w400 {
+    width: 400px !important;
+}
+.w500 {
+    width: 500px !important;
+}
+.notice-paging{
+    margin: 30px 0;
+    text-align: center;
+}
+.notice-paging a{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    margin: 0 3px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+}
+.notice-paging-pageitems.active{
+    border: 1px solid #333;
+    color: #333;
+}
+.tbl_frm01{
+    border-top: 1px solid #888;
+    margin: 0px 30px;
+}
+
 /*관리자 회원 ~ 환경설정 공통 끝*/
 
 /*관리자 회원관리 시작*/
@@ -350,8 +499,20 @@ table th{
     background-color: #fff;
     height: 23px;
 }
-.w80{
-    width: 80px !important;
+.local_ov {
+    margin: 0;
+    padding: 10px;
+    border-top: 1px solid #aeaeae;
+}
+.mart30 {
+    margin-top: 30px !important;
+}
+.local_frm01{
+    overflow: hidden;
+    margin: 0;
+    padding: 7px 10px;
+    background: #fcfcfc;
+    border-top: 1px solid #ececec;
 }
 /*관리자 회원관리 끝*/
 

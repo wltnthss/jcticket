@@ -1,6 +1,7 @@
 package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,14 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    // /admin url 입력시 loginform 이동
     @GetMapping("/admin")
     public String admin() throws Exception{
         return "admin/adminloginform";
     }
 
+
+    // 관리자 로그아웃
     @GetMapping("/admin/logout")
     public String adminlogout(HttpServletRequest request) throws Exception{
 
@@ -46,6 +50,7 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    // 관리자 로그인시 대시보드 이동
     @GetMapping("/admin/dashboard")
     public String admindashboard(Model model) throws Exception{
 
@@ -59,6 +64,8 @@ public class AdminController {
 
         return "admin/admindashboard";
     }
+
+    // 관리자 로그인
     @PostMapping("/admin")
     @ResponseBody
     private String login(@RequestBody AdminDto adminDto, HttpServletRequest request) throws Exception {
@@ -70,7 +77,10 @@ public class AdminController {
             AdminDto rslt = adminService.login(adminDto);
             System.out.println("rslt => " + rslt);
 
-            if (rslt != null) {
+            // DB에 있는 관리자 사용 여부
+            String adminUseYn = rslt.getAdmin_use_yn();
+
+            if (rslt != null && adminUseYn.equals("Y")) {
 
                 session.setAttribute("adminId", rslt.getAdmin_id());
                 // 관리자 헤더 nickname 보여주기 (json 방식이라 model 전달은 안되나 임시방편 session 전달)
@@ -78,8 +88,8 @@ public class AdminController {
 
                 msg = "ok";
             }else{
-                session.setAttribute("adminId", null);
-                System.out.println("session => " + session);
+                session.invalidate();
+
                 msg = "fail";
             }
         } catch (Exception e) {
@@ -89,16 +99,89 @@ public class AdminController {
         return msg;
 
     }
+    // 회원 관리
     @GetMapping("/admin/user")
-    public String adminuser() throws Exception{
+    public String adminuser(Model model,
+                            @RequestParam(value = "option", required = false) String option,
+                            @RequestParam(value = "keyword", required = false) String keyword,
+                            @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        System.out.println("option => " + option);
+        System.out.println("keyword => " + keyword);
+        System.out.println("page => " + page);
+
+        try {
+
+            List<UserDto> pagingList = null;
+
+            pagingList = adminService.userPaingList(page, option, keyword);
+            UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
+            int userTotalCnt = adminService.usercnt(option, keyword);
+
+            System.out.println("pagingList => " + pagingList);
+            System.out.println("userPageDto => " + userPageDto);
+
+            model.addAttribute("list", pagingList);
+            model.addAttribute("paging", userPageDto);
+            model.addAttribute("userListCnt", userTotalCnt);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "admin/adminuser";
     }
+    // 회원 등록하기 폼
     @GetMapping("/admin/register")
     public String adminuserregister() throws Exception{
         return "admin/adminuserregister";
     }
+    // 회원 등록하기
+    @PostMapping("/admin/register")
+    public String adminUserRegisterPost(Model model, UserDto userDto) throws Exception{
+
+        try {
+            int rslt = adminService.userInsert(userDto);
+
+            if(rslt < 1){
+                return "error";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "admin/adminuser";
+    }
+
     @GetMapping("/admin/delete")
-    public String adminuserdelete() throws Exception{
+    public String adminuserdelete(Model model,
+                            @RequestParam(value = "option", required = false) String option,
+                            @RequestParam(value = "keyword", required = false) String keyword,
+                            @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        System.out.println("option => " + option);
+        System.out.println("keyword => " + keyword);
+        System.out.println("page => " + page);
+
+        try {
+
+            List<UserDto> pagingList = null;
+
+            pagingList = adminService.userPaingList(page, option, keyword);
+            UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
+            int userTotalCnt = adminService.usercnt(option, keyword);
+
+            System.out.println("pagingList => " + pagingList);
+            System.out.println("userPageDto => " + userPageDto);
+
+            model.addAttribute("list", pagingList);
+            model.addAttribute("paging", userPageDto);
+            model.addAttribute("userListCnt", userTotalCnt);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "admin/adminuserdelete";
     }
     @GetMapping("/admin/agency")
