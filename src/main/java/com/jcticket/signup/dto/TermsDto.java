@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * fileName       : termsDto
  * author         : jinwook Song
  * date           : 2024-02-11
- * description    : 자동 주석 생성
+ * description    : 약관Dto
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------

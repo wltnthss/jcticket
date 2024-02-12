@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * fileName       : TermsServiceImpl
  * author         : jinwook Song
  * date           : 2024-02-11
- * description    : 자동 주석 생성
+ * description    : TermsService구현클래스
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
