@@ -24,5 +24,5 @@ public interface ViewDetailDao {
 
     int remain_seat(String showing_seq) throws Exception;
 
-    List<ShowingDto> showing_date() throws  Exception;
+    List<String> showing_date() throws  Exception;
 }

@@ -25,5 +25,5 @@ public interface ViewDetailService {
 
     int getRemainSeat(String showing_seq) throws Exception;
 
-    List<ShowingDto> getShowingDate() throws Exception;
+    List<String> getShowingDate() throws Exception;
 }

@@ -40,6 +40,7 @@ public class ViewController {
 //        return "viewdetail/viewdetail";
 //    }
 
+//    곧바로 가져올 정보들
     @GetMapping("/viewdetail")
     public String remainSeat(Model model) throws Exception{
 
@@ -47,8 +48,8 @@ public class ViewController {
 //            좌석가격
             int priceSeat = viewDetailService.getSeatPrice();
 //            공연날짜 set에 넣었다 빼서 중복을 제거함
-            List<ShowingDto> showingDate = viewDetailService.getShowingDate();
-            HashSet<ShowingDto> deduplication = new HashSet<>(showingDate);
+            List<String> showingDate = viewDetailService.getShowingDate();
+            HashSet<String> deduplication = new HashSet<>(showingDate);
             showingDate = new ArrayList<>(deduplication);
 //            ArrayList역순으로 순서 바꿔줌 why? 그래야 날짜순으로 화면에 출력됨
             Collections.reverse(showingDate);
@@ -62,6 +63,7 @@ public class ViewController {
         return "viewdetail/viewdetail";
     }
 
+//    회차정보받기
     @PostMapping("/viewdetail")
     @ResponseBody
     public List<ShowingDto> viewDetail2(@RequestBody String dateText)
@@ -88,31 +90,7 @@ public class ViewController {
     }
 //}
 
-//    @PostMapping("/viewdetail/seatInfo")
-//    @ResponseBody
-//    public List<SeatClassDto> viewDetail3(@RequestBody String seatInfo)
-//            throws Exception {
-//        //디코딩
-//        String decodedSeatInfo = URLDecoder.decode(seatInfo, "UTF-8");
-//
-//        char[] charArr = decodedSeatInfo.toCharArray();
-//        String seatInfoCal = decodedSeatInfo.substring(0, charArr.length-1);
-//
-//        //        dateText값 들어오는지 확인
-////        System.out.println("값 들어오나??");
-////        System.out.println("seatInfo => " + seatInfoCal);
-//
-//        List<SeatClassDto> msg = null;
-//        try {
-//            List<SeatClassDto> list = viewDetailService.getSeatPrice(seatInfoCal);
-//            msg = list;
-////            System.out.println(list.get(0));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return msg;
-//    }
-
+//    잔여석정보
     @PostMapping("/viewdetail/remainSeat")
     @ResponseBody
     public int viewDetail4(@RequestBody String remainSeat)
@@ -139,3 +117,27 @@ public class ViewController {
         return msg;
     }
 }
+    //    @PostMapping("/viewdetail/seatInfo")
+//    @ResponseBody
+//    public List<SeatClassDto> viewDetail3(@RequestBody String seatInfo)
+//            throws Exception {
+//        //디코딩
+//        String decodedSeatInfo = URLDecoder.decode(seatInfo, "UTF-8");
+//
+//        char[] charArr = decodedSeatInfo.toCharArray();
+//        String seatInfoCal = decodedSeatInfo.substring(0, charArr.length-1);
+//
+//        //        dateText값 들어오는지 확인
+////        System.out.println("값 들어오나??");
+////        System.out.println("seatInfo => " + seatInfoCal);
+//
+//        List<SeatClassDto> msg = null;
+//        try {
+//            List<SeatClassDto> list = viewDetailService.getSeatPrice(seatInfoCal);
+//            msg = list;
+////            System.out.println(list.get(0));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return msg;
+//    }
