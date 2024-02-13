@@ -13,6 +13,7 @@
         select
             stage_name
         from stage
+        where stage_id = #{stage_id}
     </select>
 
     <select id="selectAll" resultType="TicketingDto">
