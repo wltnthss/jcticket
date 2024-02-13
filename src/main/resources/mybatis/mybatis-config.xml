@@ -5,25 +5,18 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
-<<<<<<< HEAD
-        <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
-=======
 
         <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
 
->>>>>>> mypage
+
+        <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
+
+
         <typeAlias alias="AdminDto" type="com.jcticket.admin.dto.AdminDto"/>
 
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> a200a9f570260cf614b12d5e064698f96830df47
-=======
 
->>>>>>> mypage
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
 
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
@@ -31,10 +24,8 @@
 
 
         <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
-<<<<<<< HEAD
+
         <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
-=======
->>>>>>> mypage
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>
