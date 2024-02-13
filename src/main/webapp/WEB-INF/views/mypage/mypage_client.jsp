@@ -10,140 +10,10 @@
 <head>
     <title>Title</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
+    <link href="/resources/css/mypage/mypage.css" rel="stylesheet">
+    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
-        #container {
-            width: 960px;
-            height: 900px;
-            margin: auto;
-        }
-
-
-        #side {
-            width: 210px;
-            height: 900px;
-            float: left;
-        }
-
-        #con {
-            width: 700px;
-            height: 900px;
-            float: left;
-            margin: 0px 20px;
-        }
-
-        <%--     mypage시작   --%>
-
-        #container {
-            width: 960px;
-            height: 921px;
-        }
-
-        #infor {
-            width: 208px;
-            height: 150px;
-            border: 1px solid;
-            background-color: #e9e8e8;
-        }
-
-        #infor-name {
-            margin: 3px;
-        }
-
-        #infor-point {
-            width: 195px;
-            height: 85px;
-            border: 1px solid;
-            border-radius: 5px;
-            margin: auto;
-            background-color: white;
-        }
-
-        #infor-point > ul {
-            font-size: 15px;
-            margin: 2px;
-            list-style: none;
-            padding-left: 10px;
-            border-radius: 5px;
-        }
-
-        #infor-update  {
-            margin: 5px;
-            display: flex;
-            justify-content: center;
-        }
-        <%--     mypage끝   --%>
-
-        <%--    예약관리 시작    --%>
-        #ticket {
-            margin: 20px 0px;
-            padding-left: 5px;
-            border: 5px solid darkorchid;
-            border-radius: 5px;
-            list-style: none;
-        }
-
-        #ticket > a {
-            text-decoration-line: none;
-        }
-        #ticket > a > h3 {
-            margin: 10px;
-        }
-        <%--    예약관리 끝    --%>
-
-        <%--    클라이언트 시작    --%>
-        #client {
-            border: 5px solid #6699cc;
-            border-radius: 5px;
-            padding-left: 5px;
-        }
-
-        #client > ul {
-            list-style: none;
-        }
-        <%--    클라이언트 시작    --%>
-
-        #question {
-            width: 100%;
-            height: 300px;
-            background-color: white;
-        }
-
-        #question > h2 {
-            margin-bottom: 10px;
-        }
-
-        #question > details > summary {
-            margin: 10px;
-        }
-
-
-        #question > p {
-            margin: 10px;
-        }
-
-        #question > details > p {
-
-            margin: 10px;
-        }
-
-        #question > details  > ul {
-            padding-left: 5px;
-            list-style: none;
-        }
-        #question > details > ul > li {
-            margin: 10px;
-        }
-
-
-
-    </style>
 </head>
-<link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
 
@@ -157,25 +27,18 @@
         <div id="contents">
             <aside id="side">
                 <div id="side-mypage">
-                    <img src="/resources/img/mypage/lnb_mypage.gif">
-                    <div id="infor">
-                        <div id="infor-name"><span>전재승님은일반회원입니다.</span></div>
-                        <div id="infor-point">
-                            <ul>
-                                <li>yes포인트: 250원</li>
-                                <li>yes포인트: 250원</li>
-                                <li>yes포인트: 250원</li>
-                                <li>yes포인트: 250원</li>
-                            </ul>
-                        </div>
-                        <div id="infor-update"><button>회원정보수정</button></div>
+                    <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
+
+                    <div id="side_img">
+                        <img src="/resources/img/mypage/페페%20한잔해.jpg">
                     </div>
 
                     <div id="ticket">
-                        <a href=""><h3>예매확인/취소</h3></a>
-                        <a href=""><h3>쿠폰/예매권</h3></a>
-                        <a href=""><h3>나의 관람 공연</h3></a>
-                        <a href=""><h3>문의사항</h3></a>
+                        <a href="/mypageticket"><h3>예매확인/취소</h3></a>
+                        <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
+                        <a href="/mypageview"><h3>나의 관람 공연</h3></a>
+                        <a href="/mypageclient"><h3>문의사항</h3></a>
+                        <a href=""><h3>회원정보 수정</h3></a>
                     </div>
 
                     <div id="client">

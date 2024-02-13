@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jcticket.ticketing.mybatis.mapper.mypage.mypageMapper">
+
+    <select id="findAll" resultType="TicketingDTO">
+        select
+            ticketing_at,
+            ticketing_id,
+            play_name,
+            viewing_at,
+            ticketing_cnt,
+            cc.comn_code_name ticketing_status
+        from
+            ticketing t left join comn_code cc
+        on t.ticketing_status = cc.comn_code_id
+    </select>
+
+    <select id="selectAll_desc" resultType="TicketingDTO">
+        SELECT
+            ticketing_at,
+            ticketing_id,
+            play_name,
+            viewing_at,
+            ticketing_cnt,
+            cc.comn_code_name AS ticketing_status
+        FROM
+            ticketing t
+                LEFT JOIN comn_code cc ON t.ticketing_status = cc.comn_code_id
+        ORDER BY
+            ticketing_at DESC
+            LIMIT 5
+    </select>
+
+    <select id="selectAll_page" parameterType="map" resultType="TicketingDTO">
+        SELECT
+            ticketing_at,
+            ticketing_id,
+            play_name,
+            viewing_at,
+            ticketing_cnt,
+            cc.comn_code_name AS ticketing_status
+        FROM
+            ticketing t
+                LEFT JOIN
+            comn_code cc ON t.ticketing_status = cc.comn_code_id
+        ORDER BY
+            ticketing_at DESC
+            LIMIT
+            #{pageSize}
+        OFFSET
+            #{offset}
+    </select>
+
+    <select id="count" resultType="int">
+        select
+        count(*)
+        from
+        ticketing
+    </select>
+
+
+
+
+
+
+
+</mapper>
