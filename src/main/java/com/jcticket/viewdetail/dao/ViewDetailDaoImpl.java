@@ -23,7 +23,7 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     @Autowired
     private SqlSession session;
 
-    private static String namespace="com.jcticket.viewdetail.viewdetailMapper.";
+    private static String namespace="com.jcticket.viewdetail. .";
 
     @Override
     public List<ShowingDto> test(String dateText) throws Exception {
