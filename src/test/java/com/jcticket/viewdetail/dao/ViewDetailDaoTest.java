@@ -31,14 +31,30 @@ public class ViewDetailDaoTest {
     @Autowired
     ViewDetailDao viewDetailDao;
 
-    @Autowired
-    ViewDetailService viewDetailService;
+    @Test
+    public void remain_seat() throws Exception {
+        List<String> showingDate = viewDetailDao.showing_date();
 
-//    @Test
-//    public void remain_seat() throws Exception {
-//
-//        List<String> test = viewDetailDao.remain_seat();
-//
-//        assertNotNull(test);
-//    }
+        for (String asd : showingDate) {
+            List<ShowingDto> showinginfo = viewDetailDao.select_showing_info(asd);
+            System.out.print("dto.getShowing_date() => ");
+            for (ShowingDto infoDto : showinginfo) {
+                System.out.print(infoDto.getShowing_seq() + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+    @Test
+    public void select_showing_info() throws Exception {
+        List<String> showingDate = viewDetailDao.showing_date();
+
+        for (String dto : showingDate) {
+            List<ShowingDto> showinginfo = viewDetailDao.select_showing_info(dto);
+
+
+            System.out.println(showinginfo);
+            System.out.println("showingDto => " + dto);
+        }
+    }
 }

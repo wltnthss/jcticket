@@ -33,6 +33,7 @@
     </select>
 
 <!--    공연날짜 조회-->
+<!--    공연 많아지면 where절로 조건 걸어줘야됨 지금은 하나니까 이렇게-->
     <select id="showing_date" resultType="String">
         select showing_date
         from showing

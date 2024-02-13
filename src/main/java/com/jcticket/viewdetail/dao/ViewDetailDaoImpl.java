@@ -42,7 +42,7 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public List<ShowingDto> showing_date() throws Exception {
+    public List<String> showing_date() throws Exception {
         return session.selectList(namespace + "showing_date");
     }
 
