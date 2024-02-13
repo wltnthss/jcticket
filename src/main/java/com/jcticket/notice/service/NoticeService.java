@@ -19,8 +19,7 @@ import java.util.Map;
  */
 public interface NoticeService {
 
-    NoticeDto select(int no) throws Exception;
-    int addViewCnt(int no) throws Exception;
+    NoticeDto read(int no) throws Exception;
     // 화면에서 받은 sort 값에 따라 번호순, 조회순 분기 따라 쿼리 적용
     List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
     // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달

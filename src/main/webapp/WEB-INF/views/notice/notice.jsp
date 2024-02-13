@@ -48,7 +48,7 @@
 
     <div class="notice-paging">
         <c:if test="${paging.page<=1}">
-            <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 --%>
+            <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 ( PageHandler 사용으로 변환? )--%>
             <a class="notice-paging-pageitems"> < </a>
         </c:if>
         <c:if test="${paging.page>=2}">
