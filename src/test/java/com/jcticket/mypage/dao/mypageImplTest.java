@@ -28,7 +28,7 @@ public class mypageImplTest {
         @Autowired
         mypageDAO mypageDAO;
     @Test
-    public void selectAll() throws Exception {
+    public void selectAll_ok() throws Exception {
         List<TicketingDto> list = mypageDAO.findAll();
 
 //        System.out.println("list = "  + list);
@@ -36,6 +36,27 @@ public class mypageImplTest {
             if(list.get(i).getTicketing_status().equals("예매취소"))
             System.out.println("list = " + list.get(i).getTicketing_id());
         }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+
+    public void selectAll_cancle() throws Exception {
+        List<TicketingDto> list = mypageDAO.findAll();
+
+//        System.out.println("list = "  + list);
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i).getTicketing_status().equals("예매확인"))
+                System.out.println("list = " + list.get(i).getTicketing_id());
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 
 
