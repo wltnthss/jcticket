@@ -55,7 +55,7 @@ public class NoticeDaoImplTest {
     @Test
     public void listcount() throws Exception{
 
-        //given
+        //given => insert 한 내용을 기준으로 재테스트
 
         // keyword "" 인 경우 전체 리스트 카운트
         int totalCnt = noticeDao.count("");
@@ -69,7 +69,7 @@ public class NoticeDaoImplTest {
 
     @Test
     public void pageDefaultList() throws Exception{
-        // given
+        // given  => for문으로 재테스트
         int page = 1;
         String sort = "";
         String keyword = "";

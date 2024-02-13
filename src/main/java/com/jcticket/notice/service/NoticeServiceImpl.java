@@ -24,20 +24,19 @@ import java.util.Map;
 @Service
 public class NoticeServiceImpl implements NoticeService{
 
-    final int pageLimit = 10;   // 한 페이지당 보여줄 글 개수
-    final int blockLimit = 10;  // 하단에 보여줄 페이지 번호
+    final static int PAGELIMIT = 10;   // 한 페이지당 보여줄 글 개수
+    final static int BLOCKLIMIT = 10;  // 하단에 보여줄 페이지 번호
 
     @Autowired
     NoticeDao noticeDao;
 
     @Override
-    public NoticeDto select(int no) throws Exception {
-        return noticeDao.select(no);
-    }
+    public NoticeDto read(int no) throws Exception {
 
-    @Override
-    public int addViewCnt(int no) throws Exception {
-        return noticeDao.addViewCnt(no);
+        // controller에서 1씩 증가된 값
+        noticeDao.addViewCnt(no);
+
+        return noticeDao.select(no);
     }
 
     @Override
@@ -50,13 +49,13 @@ public class NoticeServiceImpl implements NoticeService{
          */
 
         // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
-        int pagingStart = (page - 1) * pageLimit;
+        int pagingStart = (page - 1) * PAGELIMIT;
         List<NoticeDto> pagingList = null;
 
         Map<String, Object> pagingParams = new HashMap<>();
 
         pagingParams.put("start", pagingStart);
-        pagingParams.put("limit", pageLimit);
+        pagingParams.put("limit", PAGELIMIT);
         pagingParams.put("keyword", keyword);
 
         // 번호순 seq 값 들어오면 번호순 정렬, 아닐 시에 조회순 정렬
@@ -77,11 +76,11 @@ public class NoticeServiceImpl implements NoticeService{
         System.out.println("noticeCount => " + noticeCount);
 
         // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
-        int maxPage = (int) (Math.ceil((double) noticeCount / pageLimit));
+        int maxPage = (int) (Math.ceil((double) noticeCount / PAGELIMIT));
         // 시작 페이지 값 계산 (1, 11, 21 ...)
-        int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
+        int startPage = (((int) (Math.ceil((double) page / BLOCKLIMIT))) -1 ) * BLOCKLIMIT + 1;
         // 끝 페이지 값 계산 (10, 20, 30...)
-        int endPage = startPage + blockLimit - 1;
+        int endPage = startPage + BLOCKLIMIT - 1;
 
         if(endPage > maxPage){
             endPage = maxPage;

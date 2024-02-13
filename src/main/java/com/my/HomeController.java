@@ -18,4 +18,10 @@ public class HomeController {
     private String getIndex(){
         return "index";
     }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+
+    private String errorPage(){
+        return "/error/error";
+    }
 }
