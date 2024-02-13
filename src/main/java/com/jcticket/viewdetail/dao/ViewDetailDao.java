@@ -1,6 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
 
+import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
@@ -17,5 +18,11 @@ import java.util.List;
  * 2024-02-05        kyd54       최초 생성
  */
 public interface ViewDetailDao {
-    List<ShowingDto> test(String dateText) throws Exception;
+    List<ShowingDto> select_showing_info(String dateText) throws Exception;
+
+    int seat_price() throws Exception;
+
+    int remain_seat(String showing_seq) throws Exception;
+
+    List<ShowingDto> showing_date() throws  Exception;
 }

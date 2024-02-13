@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <title>업로드</title>
+    <!-- jquery  -->
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <!-- jquery  -->
+    <!-- propper.js // for popup layer-->
+    <script type="text/javascript" src="/js/popper.js"></script>
+    <!-- moment.js // for datepicket etc...time and date -->
+    <script type="text/javascript" src="/js/moment.js"></script>
+    <!-- bootStrap DatePicker4 -->
+    <link rel="stylesheet" type="text/css" href="/css/tempusdominus-bootstrap-4.min.css" />
+    <!-- bootStrap-select CSS  -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css" />
+    <!-- bootStrap CSS  -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- lodash -->
+    <script type="text/javascript" src="/js/lodash.min.js"></script>
+    <!-- bootStrap JS  -->
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <!-- bootStrap -select JS  -->
+    <script type="text/javascript" src="/js/bootstrap-select.js"></script>
+    <!-- bootStrap DatePicker4 JS-->
+    <script type="text/javascript" src="/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- bootStrap JS  -->
+    <!-- jquery-sortable JS  -->
+    <script type="text/javascript" src="/js/jquery-sortable.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+</head>
+
+<body>
+    <modal-uploads-dialog workflow-step="ESSENTIALS">
+        <paper-dialog id="dialog" class="style-scope modal-uploads-dialog">
+            <div class="dialog-content style-scope modal-uploads-dialog">
+                <!-- 헤더 영역-->
+                <div class="header style-scope modal-uploads-dialog">
+                    <!-- 타이틀 라인 -->
+                    <div class="title-row style-scope modal-uploads-dialog">
+                        <!-- 타이틀 -->
+                        <div class="title style-scope modal-uploads-dialog">
+                            동영상 업로드(베타)
+                        </div>
+                        <!-- 타이틀 -->
+
+                        <!-- 상태 메시지 뱃지 -->
+                        <modal-badge class="draft-badge style-scope modal-uploads-dialog" label="초안 - 시청자에게 표시되지 않음"
+                            state="default" large="">
+                            <div class="container style-scope modal-badge">
+                                <div class="label style-scope modal-badge">초안 - 시청자에게 표시되지 않음</div>
+                            </div>
+                        </modal-badge>
+                        <!-- 상태 메시지 뱃지 -->
+                        <!-- 업로드 프로그레스 -->
+                        <modal-uploads-progress class="progress visible style-scope modal-uploads-dialog">
+                            <div class="progress-container style-scope modal-uploads-progress">
+                                <paper-progress class="style-scope modal-uploads-progress" role="progressbar"
+                                    value="100" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                                    aria-disabled="false">
+
+
+                                    <div id="progressContainer" class="style-scope paper-progress">
+                                        <div id="primaryProgress" class="style-scope paper-progress"
+                                            style="transform: scaleX(1);"></div>
+                                    </div>
+                                </paper-progress>
+                            </div>
+                            <div class="progress-label style-scope modal-uploads-progress">동영상 처리율: 100%</div>
+                        </modal-uploads-progress>
+                        <!-- 업로드 프로그레스 -->
+                    </div>
+                    <!-- 타이틀 라인 -->
+                    <!-- 스텝 -->
+                    <modal-animatable
+                        class="metadata-fade-in-section stepper-animatable style-scope modal-uploads-dialog">
+                        <modal-stepper class="style-scope modal-uploads-dialog">
+                            <!-- state="numbered"가 주어진 스텝은 활성화 state="disabled"는 비활성화-->
+                            <!-- panel1,panel3은 style.css 마지막 줄에 display:none되어 있음.-->
+                            <div class="stepper style-scope modal-stepper"><button
+                                    class="step remove-default-style  style-scope modal-stepper" state="numbered"
+                                    step-index="0">
+                                    <div class="step-badge style-scope modal-stepper">
+                                        <span class="step-badge-number style-scope modal-stepper">1</span>
+                                    </div>
+                                    <div class="step-title style-scope modal-stepper">
+                                        <div class="style-scope modal-stepper">기본 정보</div>
+                                    </div>
+                                </button>
+                                <div class="separator style-scope modal-stepper"></div><button
+                                    class="step remove-default-style  style-scope modal-stepper" state="disabled"
+                                    step-index="1">
+                                    <div class="step-badge style-scope modal-stepper">
+                                        <span class="step-badge-number style-scope modal-stepper">2</span>
+                                    </div>
+                                    <div class="step-title style-scope modal-stepper">
+                                        <div class="style-scope modal-stepper">고급 설정</div>
+                                    </div>
+                                </button>
+                                <div class="separator style-scope modal-stepper"></div><button
+                                    class="step remove-default-style  style-scope modal-stepper" state="disabled"
+                                    step-index="2">
+                                    <div class="step-badge style-scope modal-stepper"><span
+                                            class="step-badge-number style-scope modal-stepper">3</span>
+                                    </div>
+                                    <div class="step-title style-scope modal-stepper">
+                                        <div class="style-scope modal-stepper">미리보기 및 게시</div>
+                                    </div>
+                                </button>
+                                <div class="separator style-scope modal-stepper"></div>
+                            </div>
+                        </modal-stepper>
+                    </modal-animatable>
+                    <!-- 스텝 -->
+                </div>
+                <!-- 헤더 영역-->
+                <!-- 콘텐트 영역 -->
+                <modal-animatable id="scrollable-content"
+                    class="metadata-fade-in-section style-scope modal-uploads-dialog">
+                    <!-- step1 -->
+                    <modal-uploads-essentials id="essentials" class="style-scope modal-uploads-dialog panel1">
+                        <div class="left-col style-scope modal-uploads-essentials">
+                            <modal-form-textarea class="title-textarea style-scope modal-uploads-essentials" label="제목"
+                                placeholder="제목 추가">
+                                <div class=" text-container style-scope modal-form-textarea">
+                                    <div id="section-label" class="style-scope modal-form-textarea">
+                                        제목(필수 항목)
+                                    </div>
+                                    <textarea class="style-scope modal-form-textarea" aria-label="제목 추가"
+                                        placeholder="제목 추가"></textarea>
+                                </div>
+                            </modal-form-textarea>
+                            <modal-form-textarea class="description-textarea style-scope modal-uploads-essentials"
+                                label="설명" placeholder="설명 추가">
+                                <div class=" text-container style-scope modal-form-textarea">
+                                    <div id="section-label" class="style-scope modal-form-textarea">
+                                        설명(필수 항목)
+                                    </div>
+                                    <textarea class="style-scope modal-form-textarea" aria-label="설명 추가"
+                                        placeholder="설명 추가"></textarea>
+                                </div>
+                            </modal-form-textarea>
+                            <modal-thumbnails-compact-editor class="style-scope modal-uploads-essentials">
+                                <div class="label style-scope modal-thumbnails-compact-editor" id="autogen-thumb-label">
+                                    미리보기 이미지
+                                </div>
+                                <div id="still-picker" role="listbox" aria-labelledby="autogen-thumb-label"
+                                    class="style-scope modal-thumbnails-compact-editor">
+                                    <modal-thumbnails-compact-editor-uploader
+                                        class="style-scope modal-thumbnails-compact-editor">
+                                        <div class="upload-picker style-scope modal-thumbnails-compact-editor-uploader">
+                                            <button
+                                                class="remove-default-style style-scope modal-thumbnails-compact-editor-uploader"><span
+                                                    class="style-scope modal-thumbnails-compact-editor-uploader">
+                                                    맞춤 미리보기 이미지(2MB 이하)
+                                                </span>
+                                            </button></div>
+                                    </modal-thumbnails-compact-editor-uploader>
+                                    <modal-still-cell role="option" id="still-0"
+                                        class="style-scope modal-thumbnails-compact-editor"
+                                        aria-label="자동 생성된 미리보기 이미지 1" aria-disabled="false"
+                                        aria-describedby="goog_890018499"><button
+                                            class="remove-default-style style-scope modal-still-cell">
+                                            <modal-img-with-fallback class="still style-scope modal-still-cell"
+                                                always-show-last-image="" rounded="" image-ready="">
+
+
+                                                <div class="container style-scope modal-img-with-fallback">
+                                                    <img id="img-with-fallback"
+                                                        class="style-scope modal-img-with-fallback"
+                                                        src="https://i9.ytimg.com/vi/WrrXPSPbvpU/mq1.jpg?sqp=CPPxpuwF&amp;rs=AOn4CLAQi8J3oaOpRYbpfhtkoyAytGEfig">
+                                                </div>
+                                            </modal-img-with-fallback>
+                                        </button></modal-still-cell>
+                                    <modal-still-cell role="option" id="still-1"
+                                        class="style-scope modal-thumbnails-compact-editor"
+                                        aria-label="자동 생성된 미리보기 이미지 2" aria-disabled="false"
+                                        aria-describedby="goog_890018500" selected=""><button
+                                            class="remove-default-style style-scope modal-still-cell">
+                                            <modal-img-with-fallback class="still style-scope modal-still-cell"
+                                                always-show-last-image="" image-ready="">
+                                                <div class="container style-scope modal-img-with-fallback">
+                                                    <img id="img-with-fallback"
+                                                        class="style-scope modal-img-with-fallback"
+                                                        src="https://i9.ytimg.com/vi/WrrXPSPbvpU/mq2.jpg?sqp=CPPxpuwF&amp;rs=AOn4CLA4pK-Upu3JcgkHKhwRFFr_WHxE0Q">
+                                                </div>
+                                            </modal-img-with-fallback>
+                                        </button></modal-still-cell>
+                                    <modal-still-cell role="option" id="still-2"
+                                        class="style-scope modal-thumbnails-compact-editor"
+                                        aria-label="자동 생성된 미리보기 이미지 3" aria-disabled="false"
+                                        aria-describedby="goog_890018501"><button
+                                            class="remove-default-style style-scope modal-still-cell">
+                                            <modal-img-with-fallback class="still style-scope modal-still-cell"
+                                                always-show-last-image="" rounded="" image-ready="">
+
+
+                                                <div class="container style-scope modal-img-with-fallback">
+                                                    <img id="img-with-fallback"
+                                                        class="style-scope modal-img-with-fallback"
+                                                        src="https://i9.ytimg.com/vi/WrrXPSPbvpU/mq3.jpg?sqp=CPPxpuwF&amp;rs=AOn4CLD_Nfcqfwpm-hE1WT_K5CpU-DmjFw">
+                                                </div>
+                                            </modal-img-with-fallback>
+                                        </button></modal-still-cell>
+                                </div>
+                            </modal-thumbnails-compact-editor>
+                        </div>
+                        <div class="right-col style-scope modal-uploads-essentials">
+                            <modal-video-metadata-info>
+                                <div class="container style-scope modal-video-metadata-info">
+
+                                    <iframe width="328px" height="184.5px" frameborder="0"
+                                        src="https://www.youtube.com/embed/QLYvOsGqd3s"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen id="ctrlVideo"></iframe>
+                                    <div class="row style-scope modal-video-metadata-info">
+                                        <div class="left style-scope modal-video-metadata-info">
+                                            <div class="label style-scope modal-video-metadata-info">동영상 URL</div>
+                                            <div class="value video-url-fadeable style-scope modal-video-metadata-info">
+                                                <a target="_blank" class="style-scope modal-video-metadata-info"
+                                                    href="https://youtu.be/WrrXPSPbvpU">https://youtu.be/WrrXPSPbsvpU</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="label style-scope modal-video-metadata-info">파일 이름</div>
+                                    <div id="original-filename" class="value style-scope modal-video-metadata-info">
+                                        20190921_144813.mp4
+                                    </div>
+                                </div>
+                            </modal-video-metadata-info>
+                        </div>
+                    </modal-uploads-essentials>
+                    <!-- step1 -->
+                    <!-- step2 -->
+                    <modal-uploads-extras class="style-scope modal-uploads-dialog panel2">
+                        <div class="section">
+                            <div class="section-title">가장 많이 사용하는</div>
+                            <div class="col left">
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">재생목록</p>
+                                    <p class="desc">이 동영상을 1개 이상의 재생목록에 추가하세요.</p>
+                                    <div class="posAbs fRight"><input type="button"
+                                            class="btn btn-toggle-arrow panel1Icon" data-target="#panel1Content"
+                                            data-toggle="collapse" aria-expanded="false" aria-controls="panel1Content">
+                                    </div>
+                                    <div class="collapse" id="panel1Content">
+                                        <div class="collapse-body">
+                                            <ul>
+                                                <li><label for="item1"><input type="checkbox" name="chekcbox"
+                                                            class="chk" id="item1"> 강아지</label></li>
+                                                <li><label for="item2"><input type="checkbox" name="chekcbox"
+                                                            class="chk" id="item2"> 고양이</label></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- -->
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">카드</p>
+                                    <p class="desc">이 동영상에 정보카드를 추가하세요.</p>
+                                    <div class="posAbs fRight"><i class="new_window svg"></i></div>
+                                </div>
+                                <!--- -->
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">태그</p>
+                                    <p class="desc">모두가 콘텐츠를 이용할 수 있게 만드세요.</p>
+                                    <div class="posAbs fRight"><input type="button"
+                                            class="btn btn-toggle-arrow panel1Icon" data-target="#panel2Content"
+                                            data-toggle="collapse" aria-expanded="false" aria-controls="panel2Content">
+                                    </div>
+                                    <div class="collapse" id="panel2Content">
+                                        <div class="collapse-body">
+
+                                            <div class="cardModalTagCloud">
+                                                <span class="tabCloudCore">
+                                                    <span class="tagBadge">
+                                                        <a href="/list.php?keyword='정경호'">정경호</a>
+                                                        <input type="button" class="btnDelete" value="X">
+                                                    </span>
+                                                    <span class="tagBadge">
+                                                        <a href="/list.php?keyword='정경호'">수목</a>
+                                                        <input type="button" class="btnDelete" value="X">
+                                                    </span>
+                                                </span>
+                                                <input type="text" class="noborder tagInput" placeholder="검색어를 입력하세요">
+                                            </div>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    //tag Delete
+                                                    $('.tagBadge .btnDelete').click(function () {
+                                                        console.log($(this).parents('.tagBadge')
+                                                            .html());
+                                                        $(this).parents('.tagBadge').remove('span');
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- -->
+                            </div>
+                            <div class="col right">
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">최종화면</p>
+                                    <p class="desc">이 동영상을 1개 이상의 재생목록에 추가하세요.</p>
+                                    <div class="posAbs fRight"><i class="new_window svg"></i></div>
+                                </div>
+                                <!--- -->
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">언어 및 자막</p>
+                                    <p class="desc">모두가 콘텐츠를 이용할 수 있게 만드세요.</p>
+                                    <div class="posAbs fRight"><input type="button"
+                                            class="btn btn-toggle-arrow panel1Icon" data-target="#panel3Content"
+                                            data-toggle="collapse" aria-expanded="false" aria-controls="panel3Content">
+                                    </div>
+                                    <div class="collapse" id="panel3Content">
+                                        <div class="collapse-body">
+                                            <!-- 다중선택 셀렉트입니다. multiple 어트리뷰트를 제거하면 단순 셀렉트 박스가 됩니다. -->
+                                            <select multiple class="form-control selectpicker noborder"
+                                                data-live-search="true" title="자막" name="ctrlSortValue"
+                                                id="ctrlPlayList">
+                                                <option>한국어</option>
+                                                <option>독일어</option>
+                                                <option>서반어</option>
+                                                <option>빠야어</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- -->
+                            </div>
+                        </div>
+                        <div class="section">
+                            <div class="section-title">가장 많이 사용하는</div>
+                            <div class="col left">
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">그냥 인풋박스</p>
+                                    <p class="desc">이 동영상을 1개 이상의 재생목록에 추가하세요.</p>
+                                    <div class="posAbs fRight"><input type="button"
+                                            class="btn btn-toggle-arrow panel1Icon" data-target="#panel4Content"
+                                            data-toggle="collapse" aria-expanded="false" aria-controls="panel4Content">
+                                    </div>
+                                    <div class="collapse" id="panel4Content">
+                                        <div class="collapse-body">
+                                            <input type="text" class="form-control" placeholder="내용을 입력하세요">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- -->
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">카드</p>
+                                    <p class="desc">이 동영상에 정보카드를 추가하세요.</p>
+                                    <div class="posAbs fRight"><i class="new_window svg"></i></div>
+                                </div>
+                                <!--- -->
+                            </div>
+                            <div class="col right">
+                                <!--- -->
+                                <div class="exp1">
+                                    <p class="expTitle">최종화면</p>
+                                    <p class="desc">이 동영상을 1개 이상의 재생목록에 추가하세요.</p>
+                                    <div class="posAbs fRight"><i class="new_window svg"></i></div>
+                                </div>
+                                <!--- -->
+                            </div>
+                        </div>
+                    </modal-uploads-extras>
+                    <!-- step2 -->
+                    <!-- step3 -->
+                    <modal-uploads-essentials id="essentials" class="style-scope modal-uploads-dialog panel3">
+                        <div class="left-col style-scope modal-uploads-essentials">
+                            <h2 class="section-title">공개 상태 선택</h2>
+                            <div class="diVider"">
+                                <label class=" radioCheck" for="radio1"><input type="radio" name="radio" id="radio1">
+                                공개</label>
+                                <p class="label-desc">모든 사용자가 내 동영상을 볼 수 있습니다.</p>
+                            </div>
+                            <div class="diVider">
+                                <label class="radioCheck" for="radio2"><input type="radio" name="radio" id="radio2">
+                                    비공개</label>
+                                <p class="label-desc">나와 내가 선택한 사용자만 내 동영상을 볼 수 있습니다.</p>
+                            </div>
+                            <div class="diVider">
+                                <label class="radioCheck" for="radio3"><input type="radio" name="radio" id="radio3">
+                                    미등록</label>
+                                <p class="label-desc">링크가 있는 사람만 내 동영상을 볼 수 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="right-col style-scope modal-uploads-essentials">
+                            <modal-video-metadata-info>
+                                <div class="container style-scope modal-video-metadata-info">
+
+                                    <iframe width="328px" height="184.5px" frameborder="0"
+                                        src="https://www.youtube.com/embed/QLYvOsGqd3s"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen id="ctrlVideo"></iframe>
+                                    <div class="row style-scope modal-video-metadata-info">
+                                        <div class="left style-scope modal-video-metadata-info">
+                                            <div class="label style-scope modal-video-metadata-info">동영상 URL</div>
+                                            <div class="value video-url-fadeable style-scope modal-video-metadata-info">
+                                                <a target="_blank" class="style-scope modal-video-metadata-info"
+                                                    href="https://youtu.be/WrrXPSPbvpU">https://youtu.be/WrrXPSPbsvpU</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="label style-scope modal-video-metadata-info">파일 이름</div>
+                                    <div id="original-filename" class="value style-scope modal-video-metadata-info">
+                                        20190921_144813.mp4
+                                    </div>
+                                </div>
+                            </modal-video-metadata-info>
+                        </div>
+                    </modal-uploads-essentials>
+                    <!-- step3 -->
+                </modal-animatable>
+                <!-- 콘텐트 영역 -->
+                <div class="button-area ">
+                    <div class="inner-button-area">
+                        <div class="left-button-area">필요할 때 쓰는 영역</div>
+                        <div class="right-button-area"><input type="button" class="btn-primary" value="다음">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </paper-dialog>
+        <div class="popup-host-behavior-backdrop"></div>
+    </modal-uploads-dialog>
+</body>
+
+</html>
