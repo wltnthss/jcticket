@@ -2,6 +2,7 @@ package com.jcticket.ticketing.service;
 
 import com.jcticket.ticketing.dto.TicketingDto;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,7 +17,6 @@ import java.util.List;
  * 1/31/24         조영상        최초 생성
  */
 public interface TicketingService {
-    String showNow() throws Exception;
     List<TicketingDto> getTicketingAll() throws Exception;
-    String getTicketingId(int ticketingId) throws Exception;
+    List<String> readShowingInfo(int play_id, int stage_id)throws Exception;
 }

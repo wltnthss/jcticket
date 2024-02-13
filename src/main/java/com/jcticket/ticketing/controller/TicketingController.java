@@ -28,14 +28,16 @@ public class TicketingController {
     private final TicketingService ticketingService;
 
     @GetMapping(value = "/ticketing")
-    public String getNowTime() throws Exception{
+    public String ticketing() throws Exception{
         //List<TicketingDto> ticketingList = ticketingService.getTicketingId()
         //model.addAttribute("list", ticketingList);
         return "ticketing/popup-test";
     }
 
     @GetMapping(value = "/ticketing-detail")
-    public String doTicketing() throws Exception{
+    public String doTicketing(Model model) throws Exception{
+        List<String> list = ticketingService.readShowingInfo(1, 1);
+        model.addAttribute("list", list);
         return "ticketing/booking";
     }
 

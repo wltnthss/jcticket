@@ -3,8 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper">
-    <select id="getNow" resultType="String">
-        SELECT sysdate()
+    <select id="selectPlayName" resultType="string" parameterType="int">
+        select
+            play_name
+        from play
+        where play_id = #{play_id}
+    </select>
+    <select id="selectStageName" resultType="string" parameterType="int">
+        select
+            stage_name
+        from stage
     </select>
 
     <select id="selectAll" resultType="TicketingDto">

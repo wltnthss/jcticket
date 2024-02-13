@@ -16,8 +16,9 @@ import java.util.List;
  * 1/31/24         조영상        최초 생성
  */
 public interface TicketingDao {
-    String getNow() throws Exception;
+
     List<TicketingDto> selectAll() throws Exception;
-    String selectId() throws Exception;
+    String selectPlayName(int play_id) throws Exception;
+    String selectStageName(int play_id) throws Exception;
 
 }

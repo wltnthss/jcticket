@@ -5,6 +5,7 @@ import com.jcticket.ticketing.dto.TicketingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketingServiceImpl implements TicketingService{
     private final TicketingDao ticketingDao;
-    @Override
-    public String showNow() throws Exception{
-        return ticketingDao.getNow();
-    }
 
     @Override
     public List<TicketingDto> getTicketingAll() throws Exception{
@@ -33,7 +30,10 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     @Override
-    public String getTicketingId(int ticketingId) throws Exception {
-        return null;
+    public List<String> readShowingInfo(int play_id, int stage_id) throws Exception{
+        List<String> showingInfo = new ArrayList<>();
+        showingInfo.add(ticketingDao.selectPlayName(play_id));
+        showingInfo.add(ticketingDao.selectStageName(stage_id));
+        return showingInfo;
     }
 }

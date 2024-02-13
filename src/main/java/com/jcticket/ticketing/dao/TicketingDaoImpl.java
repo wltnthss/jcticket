@@ -24,17 +24,17 @@ public class TicketingDaoImpl implements TicketingDao{
     SqlSession session;
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
     @Override
-    public String getNow() throws Exception {
-        return session.selectOne(namespace+"getNow");
-    }
-
-    @Override
     public List<TicketingDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
     }
+    @Override
+    public String selectPlayName(int play_id) throws Exception{
+        return session.selectOne(namespace+"selectPlayName", play_id);
+    }
 
     @Override
-    public String selectId() throws Exception{
-        return session.selectOne(namespace+"selectId");
+    public String selectStageName(int stage_id)throws Exception{
+        return session.selectOne(namespace+"selectStageName", stage_id);
     }
+
 }
