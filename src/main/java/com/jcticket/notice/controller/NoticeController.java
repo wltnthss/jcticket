@@ -63,10 +63,7 @@ public class NoticeController {
                                @RequestParam(value = "page", required = false, defaultValue = "1") int page) throws Exception {
 
         try {
-            NoticeDto dto = noticeService.select(notice_seq);
-
-            // 조회 수 1 증가
-            noticeService.addViewCnt(notice_seq);
+            NoticeDto dto = noticeService.read(notice_seq);
 
             model.addAttribute("dto", dto);
             model.addAttribute("page", page);

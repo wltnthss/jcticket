@@ -162,11 +162,11 @@ public class AgencyController {
 
     }
 
-    @RequestMapping(value = "/agencyenroll/insert_data", method = RequestMethod.POST)
-    public String insert_data(@ModelAttribute agencyEnroll agencyenroll){
-        System.out.print(agencyenroll.toString());
-        return "redirect:/agency/agencyenroll";
-    }
+//    @RequestMapping(value = "/agencyenroll/insert_data", method = RequestMethod.POST)
+//    public String insert_data(@ModelAttribute agencyEnroll agencyenroll){
+//        System.out.print(agencyenroll.toString());
+//        return "redirect:/agency/agencyenroll";
+//    }
 
 
 @PostMapping("/processLogin")
