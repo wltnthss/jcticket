@@ -33,6 +33,7 @@ git <%--
 </head>
 <body>
     <jsp:include page="../common/header.jsp"></jsp:include>
+
     <div class="container">
         <%-- content area    --%>
         <div class="category">
@@ -52,7 +53,16 @@ git <%--
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
-                            2022.07.24
+<%--                            상영날짜출력--%>
+<%--                            <c:forEach var="String" items="ShowingDate">--%>
+<%--                                <a class="asdasd"><c:out value="${ShowingDate}"/></a>--%>
+<%--                            </c:forEach>--%>
+
+<%--                            대괄호 제거하고 상영날짜 출력--%>
+                            <c:forEach var="date" items="${ShowingDate}" varStatus="loop">
+                                <a class="dateShow"><c:out value="${date}" /></a>
+                                <c:if test="${!loop.last}">,</c:if>
+                            </c:forEach>
                         </span>
 <%--                        <a href="javascript:void(0);" id="stage_name">--%>
                         <a href="javascript:void(0);" id="stage_name">
@@ -103,18 +113,10 @@ git <%--
                             <dd id="ddPrice">
     <%--                            price-zone 마진 없애면 동일선상으로 나옴--%>
                                 <ul class="price-zone">
-                                    <div id="seat-grade">
+                                    <div class="seat-price">
                                         <li>
                                             VIP석
-                                            <span class="text_red">99,000</span>원
-                                        </li>
-                                        <li>
-                                            R석
-                                            <span class="text_red">79,000</span>원
-                                        </li>
-                                        <li>
-                                            S석
-                                            <span class="text_red">59,000</span>원
+                                            <span class="text_red">${SeatPrice}</span>원
                                         </li>
                                     </div>
                                 </ul>
@@ -155,38 +157,18 @@ git <%--
                     </p>
                     <div class="seat_info">
                         <dl class="seatRemain">
-                            <li>
+                            <li id="seatPrice1">
                                 VIP석
-                                <span class="text_red">99,000</span>원
-                            </li>
-                            <li>
-                                R석
-                                <span class="text_red">79,000</span>원
-                            </li>
-                            <li>
-                                S석
-                                <span class="text_red">59,000</span>원
-                            </li>
+                                <span class="text_red">${SeatPrice}</span>원
 
-<%--                            <dt>VIP석</dt>--%>
-<%--                            <dd>99,000원--%>
-<%--                                <span>&nbsp;(잔여:0석)</span>--%>
-<%--                            </dd><br>--%>
-<%--                            <dt>R석</dt>--%>
-<%--                            <dd>79,000원--%>
-<%--                                <span>&nbsp;(잔여:2석)</span>--%>
-<%--                            </dd><br>--%>
-<%--                            <dt>S석</dt>--%>
-<%--                            <dd>59,000원--%>
-<%--                                <span>&nbsp;(잔여:1석)</span>--%>
-<%--                            </dd><br>--%>
+                            </li>
                         </dl>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="five">
+        <div class="five" onclick="location.href='javascript:void(0);'">
             <a class="taketic">예매하기</a>
         </div>
 
@@ -331,7 +313,7 @@ git <%--
             </div>
 
             <div class="eight">
-                <div class="eight_map" id="map">
+                <div class="eight_map" id="mapa">
                     <p class="map_name">쉼표도서관</p>
                     <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
                 </div>
@@ -339,8 +321,8 @@ git <%--
                     <img src="/resources/img/viewdetail/path_icon.png"/><br>찾아가는길
                 </div>
 
-                <!-- 1. 지도 노드 -->
-                <div id="daumRoughmapContainer1707022341823" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+<%--                카카오 지도 api--%>
+                <div id="map" style="width: 1200px; height: 700px;"></div>
             </div>
 
             <div class="nine">
@@ -424,15 +406,13 @@ git <%--
     <%--    datepicker 제이쿼리 달력--%>
     <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
 
-    <!--
-    2. 지도 설치 스크립트
-    * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
-    -->
-    <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
+<%--    카카오 지도 api 스크립트--%>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae"></script>
 
     <%--    js파일--%>
     <script src="/resources/js/viewdetail/viewdetail.js"></script>
+
 </body>
 </html>
 

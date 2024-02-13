@@ -143,7 +143,7 @@ option{
     flex: 1 1 0px;
 }
 
-.selDomain{
+.selDomain, .selGenre{
     font-size: 15px;
     width: 100%;
     display: block;
@@ -157,12 +157,12 @@ option{
     color: #424242;
 }
 
-#disabledOpt{
+.disabledOpt{
     color: #757575;
     opacity: 1;
 }
 
-.domainOpt{
+.domainOpt, .genreOpt{
     color: #424242;
 }
 
@@ -378,7 +378,7 @@ option{
 }
 
 .authMsg, #id_warnMsg, #pwd_warnMsg, #pwd_chkWarnMsg, #nickname_warnMsg,
-#tel_warnMsg{
+#tel_warnMsg,#birth_warnMsg,#gender_warnMsg,#genre_warnMsg{
     display: none;
 }
 
@@ -446,6 +446,17 @@ option{
 }
 
 .termsChkBox{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.termsChkBoxAll{
     position: absolute;
     top: 0px;
     left: 0px;

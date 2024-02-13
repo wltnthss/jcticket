@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * fileName       : SignupDaoImpl
  * author         : jinwook Song
  * date           : 2024-02-07
- * description    : 자동 주석 생성
+ * description    : SignupDao구현
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -23,16 +23,19 @@ public class SignupDaoImpl implements SignupDao {
     private SqlSession session;
     private static String namespace = "SignupMapper.";
 
+    // user 테이블에 insert
     @Override
     public int insertUser(SignupDto signupDto) throws Exception {
         return session.insert(namespace+"signup",signupDto);
     }
 
+    //아이디 중복검사
     @Override
     public int selectOne(String user_id) throws Exception {
         return session.selectOne(namespace+"chkIdDupl",user_id);
     }
 
+    //닉네임 중복검사
     @Override
     public int selectNickName(String user_nickname) throws Exception {
         return session.selectOne(namespace+"chk_NickName_Dupl",user_nickname);

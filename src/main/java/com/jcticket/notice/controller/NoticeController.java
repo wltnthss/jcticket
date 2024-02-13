@@ -59,8 +59,8 @@ public class NoticeController {
     }
 
     @GetMapping("/{notice_seq}")
-    public String NoticeDetail(Model model, int notice_seq,
-                               @RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
+    public String NoticeDetail(Model model, @PathVariable  int notice_seq,
+                               @RequestParam(value = "page", required = false, defaultValue = "1") int page) throws Exception {
 
         try {
             NoticeDto dto = noticeService.select(notice_seq);

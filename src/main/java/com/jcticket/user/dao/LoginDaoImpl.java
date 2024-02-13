@@ -17,16 +17,18 @@ import org.springframework.stereotype.Repository;
  * 2024-02-01        jinwook Song       최초 생성
  */
 @Repository
-public class UserDaoImpl implements UserDao{
+public class LoginDaoImpl implements LoginDao {
     @Autowired
     private SqlSession session;
     private static String namespace = "UserMapper.";
 
+    // user_id로 user정보를 가져옴
     @Override
     public UserDto selectUser(String user_id){
         return session.selectOne(namespace+"select", user_id);
     }
 
+    // user가 로그인 시 1씩 증가. 방문횟수
     @Override
     public int increaseLoginCnt(String user_id) {return session.update(namespace+"increase_visit_cnt", user_id);}
 }

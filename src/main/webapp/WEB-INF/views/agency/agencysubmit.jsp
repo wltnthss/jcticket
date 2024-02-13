@@ -15,7 +15,7 @@
 </head>
 <body>
 <%
-    // 파라미터로부터 사용자 입력 값을 추출
+    // 파라미터에서 유저가 입력한 값을 가져오기
     String playName = request.getParameter("play_name");
     String playSubName = request.getParameter("play_sub_name");
     String playMajorCategory = request.getParameter("play_major_cat");
@@ -51,7 +51,7 @@
     } catch (Exception e) {
         // DB 저장 중 오류 발생 시, 오류 메시지 출력
         out.println("DB 저장 중 오류가 발생했습니다: " + e.getMessage());
-        //  오류 처리 페이지로 이동시키는 방법도 존재
+        //  오류 처리 페이지로 이동시키는 방법도 존재함
         // response.sendRedirect("error.jsp");
     }
 %>

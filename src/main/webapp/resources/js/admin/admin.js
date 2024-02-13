@@ -44,6 +44,59 @@ $(function (){
         });
     })
 
+    // 전체 체크박스 선택 시 자식 체크박스 전체 선택 on/off 기능
+    $('#selectedItemsAll').on('click', function(){
+
+        // 1. $(this).prop('checked') -> 전체 선택/해제 체크박스의 현재 상태를 나타냄(true/false)
+        // 2. prop('checked', true/false) -> 체크박스의 선택 상태를 변경
+        $("input[name='selectedItems']").prop('checked', $(this).prop('checked'));
+
+    })
+
+    // 관리자 회원 삭제 버튼 클릭 이벤트
+    $('#user-delete-btn').on('click', function(){
+
+        // 체크박스 리스트 전체
+        let checkList = $("input[name=selectedItems]:checked");
+        let valueArr = [];
+
+        // checkList가 check 된 상태이면 배열에 값 저장
+        checkList.each(function () {
+            valueArr.push($(this).val());
+        });
+
+        console.log('valueArr => ' + valueArr);
+
+        if(valueArr.length === 0){
+            alert("삭제할 항목을 선택해주세요");
+            return false;
+        }else{
+            if(confirm("정말 삭제하시겠습니까?")){
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/delete',
+                    data: JSON.stringify(valueArr),
+                    contentType: "application/json",
+                    success: function (res){
+                        console.log('res => ' + res)
+                        if(res > 0){
+                            location.href= "/admin/user";
+                        }else{
+                            location.href= "/admin/delete";
+                            alert('삭제 실패');
+                        }
+                    },
+                    error: function (e) {
+                        console.error("삭제 실패", e);
+                    }
+                });
+
+                alert('삭제되었습니다.');
+            }
+        }
+    });
+
     // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
     $('.menu_toggle-u10').on('click', u10Toggle);
     $('.menu_toggle-u20').on('click', u20Toggle);

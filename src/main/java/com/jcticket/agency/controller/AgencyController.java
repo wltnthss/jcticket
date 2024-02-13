@@ -161,6 +161,14 @@ public class AgencyController {
 
 
     }
+
+    @RequestMapping(value = "/agencyenroll/insert_data", method = RequestMethod.POST)
+    public String insert_data(@ModelAttribute agencyEnroll agencyenroll){
+        System.out.print(agencyenroll.toString());
+        return "redirect:/agency/agencyenroll";
+    }
+
+
 @PostMapping("/processLogin")
 public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model m,
                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -176,7 +184,7 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
         System.out.println("rememberId = " + rememberId);
 
 
-        return "/agency/agencydashboard";//로그인 성공 시
+        return "/agency/agency/agencydashboard";//로그인 성공 시
     }
     @GetMapping("/dashboard")
     public String showAgencyDashboard(Model model) {

@@ -1,5 +1,6 @@
 package com.jcticket.viewdetail.service;
 
+import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,10 @@ import java.util.List;
 
 public interface ViewDetailService {
     List<ShowingDto> getShowingInfo(String dateText) throws Exception;
+
+    int getSeatPrice() throws Exception;
+
+    int getRemainSeat(String showing_seq) throws Exception;
+
+    List<ShowingDto> getShowingDate() throws Exception;
 }

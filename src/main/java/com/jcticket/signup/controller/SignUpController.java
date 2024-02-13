@@ -1,7 +1,9 @@
 package com.jcticket.signup.controller;
 
 import com.jcticket.signup.dto.SignupDto;
+import com.jcticket.signup.dto.TermsDto;
 import com.jcticket.signup.service.SignupService;
+import com.jcticket.signup.service.TermsService;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +18,9 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -23,7 +28,7 @@ import java.util.Properties;
  * fileName       : SignUpController
  * author         : jinwook Song
  * date           : 2024-02-04
- * description    : 자동 주석 생성
+ * description    : SignupController
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
@@ -37,6 +42,9 @@ public class SignUpController {
 
     @Autowired
     SignupService signupService;
+
+    @Autowired
+    TermsService termsService;
 
 //회원가입 페이지 이동
     @GetMapping("")
@@ -86,6 +94,7 @@ public class SignUpController {
         System.out.println("user_id = " + user_id);
 
         try {
+            //user table에 같은 아이디 있는지 카운트. 1이면 중복(true) 0이면 중복x(false)
             return signupService.chkIdDupl(user_id) == 1;
         }catch (Exception e){
             e.printStackTrace();
@@ -102,6 +111,7 @@ public class SignUpController {
         System.out.println("user_nickname = " + user_nickname);
 
         try{
+            //user table에 같은 닉네임 있는지 카운트. 1이면 중복(true) 0이면 중복x(false)
             return signupService.chkNickNameDupl(user_nickname) ==1;
         }catch (Exception e){
             e.printStackTrace();
@@ -110,18 +120,52 @@ public class SignUpController {
     }
     // 닉네임 중복체크 시작
 
+    //생년월일 검사 시작. 1900년생 이후인지, 날짜 형식에 맞는지
+    @ResponseBody
+    @PostMapping("/chk_birth")
+    public boolean chkBirth(@RequestParam String user_birth){
+        System.out.println("user_birth = " + user_birth);
 
-    //회원가입 버튼 눌렀을 때.
+        try{
+            //검증할 날짜 포맷 설정
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            //false일경우 처리시 입력한 값이 잘못된 형식일 시 오류가 발생
+            sdf.setLenient(false);
+
+            //user_birth를 날짜로 parsing
+            Date formatDate = sdf.parse(user_birth);
+
+            // 입력한 생년월일이 1900년 1월 1일 이후인지 확인
+            Calendar minDate = Calendar.getInstance();
+            minDate.set(1900, Calendar.JANUARY, 1);
+
+            if(formatDate.after(minDate.getTime())) {
+                return true; // 유효한 범위 내에 있음
+            }else{
+                return false; // 범위를 벗어남
+            }
+        }catch (Exception e){
+            return false;
+        }
+    }
+    //생년월일 검사 끝.
+
+    //회원가입 버튼 눌렀을 때.insert
     @PostMapping("/signup")
-    public String insertUser(SignupDto signupDto, Model m, HttpServletRequest request,
+    public String insertUser(SignupDto signupDto, TermsDto termsDto, Model m, HttpServletRequest request,
                              HttpServletResponse response) throws Exception{
         System.out.println("signupDto = " + signupDto);
 
         try{
+            //user table insert 실패시 예외 발생시킴
             if(signupService.insertUser(signupDto)!=1){
                 throw new Exception("insert failed");
             }
 
+            //유저_약관 table insert 실패시 예외 발생시킴
+            if(termsService.insertUserTerm(termsDto)!=1){
+                throw new Exception("insert terms failed");
+            }
             System.out.println("회원가입 성공");
             return "signupSuccess";
 
@@ -132,10 +176,6 @@ public class SignUpController {
             return "redirect:/signup";
         }
     }
-
-
-//    @GetMapping("signupSuccess")
-
 }
 
 

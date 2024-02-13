@@ -47,6 +47,7 @@
                      #{showingInfo}
                  );
     </insert>
+<!--    쿼리 개별로 작성-->
 
 
 </mapper>

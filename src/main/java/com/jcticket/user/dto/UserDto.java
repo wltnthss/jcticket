@@ -35,6 +35,7 @@ public class UserDto {
     private String user_gender;
     private Timestamp user_create_at;
     private Timestamp user_update_at;
+    private Timestamp user_retire_at;
     private String user_retire_yn;
     private int user_visit_cnt;
     private String user_interested_genre;
