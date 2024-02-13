@@ -10,126 +10,78 @@
 <html>
 <head>
     <title>관리자 페이지</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="/resources/css/agency/agency.css">
 </head>
-<body class="admin-dashboard">
-<div class="admin-dashboard-container">
+<body class="agency-dashboard">
+    <div class="agency-dashboard-container">
 
-    <jsp:include page="/WEB-INF/views/agency/agencyheader.jsp"/>
+        <jsp:include page="/WEB-INF/views/agency/agencyheader.jsp"/>
 
-    <div class="admin-dashboard-body">
-        <div class="admin-dashboard-main">
-            <section class="admin-dashboard-side1">
-                <h2>
-                    진행중 공연
-                </h2>
+            <div class="agency-dashboard-body">
+                <div class="agency-dashboard-main">
+                    <section class="agency-dashboard-side2">
+                        <h2>상단 영역</h2>
 
-            </section>
-            <section class="admin-dashboard-side2" style="width: 1100px">
-                <h2>
-                    상품 요청현황
-                </h2>
-                <a href="/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
-                <table>
-                    <thead >
-                    <tr>
-                        <th scope="col">기획사 이름</th>
-                        <th scope="col">기획사 담당자</th>
-                        <th scope="col">공연명</th>
-                        <th scope="col">공연장</th>
-                        <th scope="col">이메일</th>
-                        <th scope="col">핸드폰</th>
-                        <th scope="col">요청상태</th>
-                        <th scope="col">요청일시</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="tr_alignc">
-                        <td>정석코딩 에이전시</td>
-                        <td>최산하</td>
-                        <td>오페라의 유령들</td>
-                        <td>올림픽공원</td>
-                        <td>wltnthss@gmail.com</td>
-                        <td>010-6306-1756</td>
-                        <td>등록요청</td>
-                        <td>2020-10-04 18:05 (일)</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </section>
-            <section class="admin-dashboard-side3">
-                <h2>
-                    최근 회원가입
-                </h2>
-                <a href="/admin/user" class="admin-btn_small3">회원관리 바로가기</a>
-                <table>
-                    <thead>
-                    <tr>
-                        <th scope="col">이름</th>
-                        <th scope="col">아이디</th>
-                        <th scope="col">핸드폰</th>
-                        <th scope="col">이메일</th>
-                        <th scope="col">주소</th>
-                        <th scope="col">성별</th>
-                        <th scope="col">접속횟수</th>
-                        <th scope="col">생년월일</th>
-                        <th scope="col">가입일시</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${userLists}" var="UserDto">
-                        <tr class="tr_alignc">
-                            <td>${UserDto.user_name}</td>
-                            <td>${UserDto.user_id}</td>
-                            <td>${UserDto.user_tel}</td>
-                            <td>${UserDto.user_email}</td>
-                            <td>${UserDto.user_address}</td>
-                            <td>${UserDto.user_gender}</td>
-                            <td>${UserDto.user_visit_cnt}</td>
-                            <td>${UserDto.user_birth}</td>
-                            <td>${UserDto.user_create_at}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </section>
-        </div>
-    </div>
-    <hr>
+                        <table>
+                            <thead >
+                            <tr>
+                                <th scope="col">상품정보</th>
+                                <th scope="col">일시</th>
+                                <th scope="col">공연장</th>
+                                <th scope="col">상품관리/수정</th>
 
-    <jsp:include page="/WEB-INF/views/admin/adminfooter.jsp"/>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr_alignc" id="dynamicRow">
+                                <!-- 받는 칸 3개 까지만 늘어 나도록 -->
+                                <td>(포스터랑 정보들 받아와야하는데.. 투명하게 칸 나눠서 받을지 고민해봐야함,)</td>
+                                <td>(일시)</td>
+                                <td>(공연장)</td>
+                                <td>(버튼만들기)</td>
 
-</div>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    let data = {
-        labels: ["콘서트", "뮤지컬", "연극", "클래식"],
-        datasets: [{
-            data: [20, 40, 10, 30], // 각 데이터의 비율
-            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"], // 각 데이터에 대한 색상
-            borderColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"] // 각 border에 대한 색상
+                    <section class="agency-dashboard-side3" >
+                        <h2>하단 영역</h2>
+                        <table>
+                            <thead >
+                            <tr>
+                                <th scope="col">번호</th>
+                                <th scope="col">접수번호</th>
+                                <th scope="col">내용</th>
+                                <th scope="col">요청일</th>
+                                <th scope="col">상태</th>
+                                <th scope="col">처리자</th>
+                                <th scope="col">처리일</th>
 
-        }]
-    };
 
-    // 차트 설정
-    let options = {
-        cutout: 90, // 중심에서 뚫릴 부분 설정
-        responsive: false,
-        maintainAspectRatio: false
-    };
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr_alignc" id="dynamicRow2">
+                                <!-- 받는 칸 대략 3개 까지만 늘어 나도록  -->
 
-    // Canvas 엘리먼트 가져오기
-    let ctx = document.getElementById("myChart").getContext("2d");
+                                <td>(1)</td>
+                                <td>(12234)</td>
+                                <td>(수정요청)</td>
+                                <td>(요청일)</td>
+                                <td>(처리상태)</td>
+                                <td>(처리자)</td>
+                                <td>(처리일)</td>
 
-    // 원 차트 생성
-    let myPieChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: options
-    });
-</script>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                </div>
+            </div>
+
+            </div>
 </body>
 </html>
 

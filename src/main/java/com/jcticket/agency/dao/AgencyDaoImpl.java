@@ -1,6 +1,6 @@
 package com.jcticket.agency.dao;
 
-import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,4 +36,21 @@ public class AgencyDaoImpl implements AgencyDao {
     public AgencyDto selectAgency(String agency_id) throws Exception {
         return sqlSession.selectOne(namespace + "AgencyLogin", agency_id);
     }//selectAgency 메서드는 SqlSession 객체를 사용해 db에서 쿼리를 실행?
+
+//    @Override //데이터를 데이터베이스에 저장할 save 메서드를 추가
+//    public void save(AgencyDto agencyDto) throws Exception {
+//        sqlSession.insert(namespace + "insertAgency", agencyDto);
+//
+//
+//    }
+//    @Override
+//    public void deleteStage(String stage_id) throws Exception {
+//        sqlSession.delete(namespace + "deleteStage", stage_id);
+//    }
+//
+//    @Override
+//    public void updateStage(StageDto stageDto) throws Exception {
+//        sqlSession.update(namespace + "updateStage", stageDto);
+//    }
+
 }//selectOne 메서드를 사용해 db에서 한 개의 결과를 가져오는 쿼리를 실행하고, 결과를 AgencyDto 객체로 매핑해서 return

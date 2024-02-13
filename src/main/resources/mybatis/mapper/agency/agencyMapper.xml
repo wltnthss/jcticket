@@ -15,4 +15,38 @@
             1=1
           and agency_id = #{agency_id}
     </select>
+
+
+
+    <insert id="insertAgency" parameterType="com.jcticket.agency.dto.AgencyDto">
+        INSERT INTO play (
+            play_name,
+            play_sub_name,
+            play_major_cat,
+            play_poster
+        ) VALUES (
+                     #{playName},
+                     #{playSubName},
+                     #{playMajorCategory},
+                     #{playPoster}
+                 );
+        INSERT INTO stage (
+            stage_name,
+            stage_address
+        ) VALUES (
+                     #{stageName},
+                     #{stageAddress}
+                 );
+        INSERT INTO showing (
+            showing_start_at,
+            showing_end_at,
+            showing_info
+        ) VALUES (
+                     #{showingStartAt},
+                     #{showingEndAt},
+                     #{showingInfo}
+                 );
+    </insert>
+
+
 </mapper>

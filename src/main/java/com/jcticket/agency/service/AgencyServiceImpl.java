@@ -2,8 +2,12 @@ package com.jcticket.agency.service;
 
 import com.jcticket.agency.dao.AgencyDao;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.PlayDto;
+import com.jcticket.agency.dto.ShowingDto;
+import com.jcticket.agency.dto.StageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.agency.service
@@ -28,4 +32,23 @@ public class AgencyServiceImpl implements AgencyService{
     public AgencyDto selectAgency(String agency_id) throws Exception {//또외처리
         return agencyDao.selectAgency(agency_id); //AgencyDao를 사용하여 agency_id정보를 가져오고 반환?
     }
+//    @Override
+//    public List<AgencyDto> getAllAgencies() throws Exception {
+//        return agencyDao.selectAllAgencies();
+//    }
+//
+//    @Override
+//    public void addAgency(AgencyDto agency) throws Exception {
+//        agencyDao.insertAgency(agency);
+//    }
+//
+//    @Override
+//    public void updateAgency(AgencyDto agency) throws Exception {
+//        agencyDao.updateAgency(agency);
+//    }
+//
+//    @Override
+//    public void deleteAgency(String agencyId) throws Exception {
+//        agencyDao.deleteAgency(agencyId);
+//    }
 }

@@ -178,6 +178,42 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
 
         return "/agency/agencydashboard";//로그인 성공 시
     }
+    @GetMapping("/dashboard")
+    public String showAgencyDashboard(Model model) {
+        model.addAttribute("dashboardPage", "agency/agencydashboard");
+        return "agency/agencydashboard";
+    }
+
+    @GetMapping("/enroll") // 신규 등록
+    public String agencyEnroll() throws Exception {
+        return "agency/agencyenroll";
+    }
+
+    @GetMapping("/productlist")
+    public  String agencyproductlist() throws Exception{
+        return "agency/agencyproductlist";
+    }
+
+    @GetMapping("/sale")
+    public  String agencysale() throws Exception{
+        return "agency/agencysale";
+    }
+
+    @GetMapping("/rollout")
+    public String agencyrollout() throws Exception{
+        return "agency/agencyrollout";
+    }
+
+    @GetMapping("/soldout")
+    public String agencysoldout() throws Exception{
+        return "agency/agencysoldout";
+    }
+
+    @GetMapping("/setting")
+    public String agencysetting() throws Exception{
+        return "agency/agencysetting";
+    }
+
 
     private boolean agencyLoginCheck (String agency_id, String agency_pwd) {
         AgencyDto agencyDto = null;
@@ -194,6 +230,8 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
 
 
     }
+
+
 }
 
     // 기획사 로그인 체크

@@ -1,39 +1,301 @@
-/*agency 메인 헤더 시작*/
-.agency-main-header{
+/* Dashboard main 시작*/
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table th{
+    line-height: 1.3em;
+}
+thead{
+    font-size: 12px;
+    line-height: 1em;
+    vertical-align: baseline;
+}
+.agency-btn_small2{
+    background: #333;
+    border: 1px solid #333;
+    color: #fff !important;
+    padding: 2px 8px;
+    font-size: 11px;
+    line-height: 1.555;
+    font-weight: normal !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+.agency-btn_small3{
+    float: right;
+    margin-bottom: 5px !important;
+    background: #333;
+    border: 1px solid #333;
+    color: #fff !important;
+    padding: 2px 8px;
+    font-size: 11px;
+    line-height: 1.555;
+    font-weight: normal !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+.agency-dashboard-body{
+    margin-bottom: 20px;
+}
+.agency-dashboard-body{
+    background-color: #fff;
+    z-index: 5;
     min-width: 1210px;
-    background: #393b3f;
-}
-.agency-main-wrap{
-    z-index: 11;
-    position: relative;
-    margin: 0 auto;
-}
-.agency-main-logo{
-    position: relative;
-    height: 50px;
-}
-.agency-main-nav{
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    right: 30px;
     zoom: 1;
 }
-.agency-main-nav ul{
-    padding: 0;
-    line-height: 50px;
-    zoom: 1;
+.agency-dashboard-main{
+    padding: 0 30px;
+    overflow: hidden;
+}
+.agency-dashboard-main h2{
+    margin: 30px 0 0;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1em;
+    padding: 0 0 10px 10px;
+}
+.agency-dashboard-main h2:before {
     display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: #1a4e99;
+    content: '';
 }
-.agency-main-nav ul li{
+/*.agency-dashboard-side1{*/
+/*    float: left;*/
+/*}*/
+/*.agency-dashboard-side2{*/
+/*    margin-left: 100px;*/
+/*    float: left;*/
+/*}*/
+.agency-dashboard-side2{
+    padding: 10px;
+    clear: both;
+}
+.agency-dashboard-side3{
+    padding: 10px;
+    clear: both;
+}
+.agency-dashboard-side2 > table{
+    width: 700px;
+}
+.agency-dashboard-main th{
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: middle;
+}
+.agency-dashboard-main td{
+    border: 1px solid #ddd;
+    padding: 10px;
+    vertical-align: middle;
+}
+.agency-dashboard-main tbody td {
+    line-height: 1.4em;
+    word-break: break-all;
+    text-align: center !important;
+}
+
+.agency-dashboard-main table{
+    width: 100%;
+    border: 1px solid #ddd;
+    table-layout: fixed;
+}
+
+/*관리자 Dashboard main 끝*/
+
+/*관리자 회원 ~ 환경설정 공통 시작*/
+.agency-common-wrap{
+    background-color: #fff;
+    min-width: 1210px;
+    zoom: 1;
+}
+.agency-common-snb{
     float: left;
-    margin: 0 0 0 10px;
-    padding: 0 10px 0 0;
-    color: #bbb;
-    border-right: 1px solid #444;
+    width: 204px;
+    background: #fff;
+    zoom: 1;
+}
+.agency-common-snb .snb-header{
+    height: 80px;
+    text-align: center;
+}
+.agency-common-snb .snb-header h2{
+    font-size: 20px;
+    letter-spacing: -1px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.agency-common-content{
+    margin-left: 204px;
+    padding-bottom: 100px;
+    border-left: 1px solid #ccc;
+}
+.agency-common-title{
+    margin: 30px 25px;
+}
+.agency-common-content h1{
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -1px;
+}
+.agency-common-snb dt{
+    background: #f6f6f6;
+    border-top: 1px solid #cfcfcf;
+    padding: 0 0 0 17px;
+    font-size: 12px;
+    line-height: 2.8;
+    font-weight: 600;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.agency-common-snb dd{
+    display: block;
+    position: relative;
+}
+.agency-common-snb a:hover{
+    background-color: #eeeeee !important;
+}
+.agency-common-snb dd a {
+    display: block;
+    padding: 7px 0 7px 17px;
+    text-decoration: none;
+    background: #fff;
+    color: #555;
+    vertical-align: middle;
+}
+.fa-arrow-down:before{
+    margin-left: 100px;
+    font-size: 10px;
+}
+.agency-common-content h2{
+    margin: 30px 0 0;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1em;
+    padding: 0 0 10px 10px;
+}
+.agency-common-content h2:before{
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: #1a4e99;
+    content: '';
+}
+table th{
+    background-color: #f8f8f8;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.3em;
+}
+/*관리자 회원 ~ 환경설정 공통 끝*/
+
+/*관리자 회원관리 시작*/
+.fa-enroll:before {
+    font-size: 30px;
+    color: #555;
+}
+.enroll-form table{
+    width: 100%;
+}
+.enroll-w100{
+    width: 100px !important;
+}
+.enroll-form th{
+    font-weight: 600;
+}
+.enroll-form th, .enroll-form td{
+    padding: 8px 14px;
+    height: 23px;
+    border-bottom: 1px solid #e4e5e7;
+    text-align: left;
+    vertical-align: middle;
+}
+.enroll-form-input{
+    padding: 0 4px 1px 4px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    height: 23px;
+}
+.w80{
+    width: 80px !important;
+}
+/*관리자 회원관리 끝*/
+
+/*관리자 관리자관리 시작*/
+.fa-city:before {
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 관리자관리 끝*/
+
+/*관리자 상품관리 시작*/
+.fa-film:before {
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 상품관리 끝*/
+
+/*관리자 공지사항관리 시작*/
+.fa-paperclip:before {
+    font-size: 25px;
+    color: #555;
+}
+/*관리자 공지사항관리 끝*/
+
+/*관리자 문의관리 시작*/
+.fa-comment:before {
+    font-size: 30px;
+    color: #555;
 }
 
+/*관리자 문의관리 끝*/
+
+/*관리자 쿠폰관리 시작*/
+.fa-gift:before{
+    font-size: 30px;
+    color: #555;
+}
+/*관리자 쿠폰관리 끝*/
+
+/*관리자 통계분석 시작*/
+.fa-square-poll-vertical:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f681";
+}
+
+/*관리자 통계분석 끝*/
+
+/*관리자 환경설정 시작*/
+
+.fa-gears:before{
+    font-size: 30px;
+    color: #555;
+    content: "\f085";
+}
+
+/*관리자 환경설정 끝*/
 
 
 
-/*agency 메인 헤더 끝*/
+
