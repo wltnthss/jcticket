@@ -10,6 +10,10 @@
         VALUES(#{notice_seq}, #{notice_title}, #{notice_content}, '0', CURRENT_TIMESTAMP, 'Y', 'N', 'admin', CURRENT_TIMESTAMP, 'JISOO', CURRENT_TIMESTAMP, 'JISOO');
     </insert>
 
+    <delete id="deleteAll">
+        delete from notice
+    </delete>
+
     <select id="select" resultType="NoticeDto" parameterType="int">
         select
             notice_seq,

@@ -17,7 +17,9 @@ import java.util.Map;
  * 2024-01-31             jisoo Son             최초 생성
  */
 public interface NoticeDao {
-    // 공지사항 내용추가
+    // 공지사항 전체 삭제
+    int deleteAll() throws Exception;
+    // 공지사항 인서트
     int insert(NoticeDto noticeDto) throws Exception;
     // 공지사항 전체 리스트 조회
     List<NoticeDto> selectAll() throws Exception;

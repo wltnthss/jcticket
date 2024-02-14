@@ -3,6 +3,7 @@ package com.jcticket.notice.dao;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.dto.PageDto;
 import com.jcticket.notice.service.NoticeService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,53 +36,61 @@ public class NoticeDaoImplTest {
     @Autowired
     NoticeDao noticeDao;
 
-    Timestamp now = new Timestamp(System.currentTimeMillis());
+    // DTO timestamp 데이터 삽입 테스트용
+    final static Timestamp NOW = new Timestamp(System.currentTimeMillis());
+    // count keyword null 테스트용
+    final static String KEYWORD = "";
+
+    // 각 테스트 케이스 실행전 공지사항 전체 삭제
+    @Before
+    public void init() throws Exception{
+        System.out.println("init DELETE ALL");
+        noticeDao.deleteAll();
+    }
 
     @Test
     public void insert() throws Exception {
         // given
-        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집", 0, now, "Y", "N", "admin", now, "JISOO", now, "JISOO");
-        System.out.println("noticeDto => " + noticeDto);
+        int result = 0;
+        for (int i = 1; i < 112; i++) {
+            NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
 
-        // when
-        int result = noticeDao.insert(noticeDto);
-
+            // when
+            result = noticeDao.insert(noticeDto);
+            assertTrue(1 == result);
+        }
         // then
-        assertTrue(1 == result);
-
-        System.out.println("noticeDto => " + noticeDto);
+        assertTrue(noticeDao.count(KEYWORD) == 111);
     }
     @Test
     public void selectAllCnt() throws Exception {
         // given
-        List<NoticeDto> list = null;
-        String keyword = "";
-        list = noticeDao.selectAll();
-        int listSize = list.size();
+        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집합니다", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
+        int insertResult = noticeDao.insert(noticeDto);
 
         // when
-        int vertifyCnt = noticeDao.count(keyword);
+        List<NoticeDto> list = noticeDao.selectAll();
+        int vertifyCnt = noticeDao.count(KEYWORD);
 
         // then
-        assertTrue(listSize == vertifyCnt);
+        assertTrue(insertResult==1);
+        assertTrue(list.size() == vertifyCnt);
     }
     @Test
     public void updateViewCnt() throws Exception{
 
         // given
-        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집", 0, now, "Y", "N", "admin", now, "JISOO", now, "JISOO");
-        System.out.println("noticeDto => " + noticeDto);
+        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
 
         // when
-        int result = noticeDao.insert(noticeDto);
+        int insertRslt = noticeDao.insert(noticeDto);
         noticeDto = noticeDao.select(noticeDto.getNotice_seq());
-        System.out.println("noticeDto => " + noticeDto);
 
         noticeDao.addViewCnt(noticeDto.getNotice_seq());
         noticeDto = noticeDao.select(noticeDto.getNotice_seq());
 
-        // then -> 검증하는 절차
-        assertTrue(1 == result);
+        // then
+        assertTrue(1 == insertRslt);
         assertTrue(1 == noticeDto.getNotice_view_cnt());
     }
 }

@@ -81,6 +81,45 @@
             user_id = #{user_id};
     </update>
 
+    <insert id="insertUser" parameterType="UserDto">
+        insert into user
+        (user_id,
+         user_password,
+         user_name,
+         user_email,
+         user_tel,
+         user_address,
+         user_nickname,
+         user_birth,
+         user_gender,
+         user_create_at,
+         user_retire_yn,
+         user_visit_cnt,
+         user_interested_genre,
+         created_at,
+         created_id,
+         updated_at,
+         updated_id)
+        values
+            (#{user_id},
+             #{user_password},
+             #{user_name},
+             #{user_email},
+             #{user_tel},
+             #{user_address},
+             #{user_nickname},
+             #{user_birth},
+             #{user_gender},
+             current_timestamp,
+             "N",
+             0,
+             #{user_interested_genre},
+             current_timestamp,
+             "system",
+             current_timestamp,
+             "system")
+    </insert>
+
 
 
 </mapper>

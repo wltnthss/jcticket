@@ -28,6 +28,11 @@ public class NoticeDaoImpl implements NoticeDao{
     private static String namespace = "NoticeMapper.";
 
     @Override
+    public int deleteAll() throws Exception {
+        return sqlSession.delete(namespace+"deleteAll");
+    }
+
+    @Override
     public int insert(NoticeDto noticeDto) throws Exception {
         return sqlSession.insert(namespace+"insert", noticeDto);
     }
