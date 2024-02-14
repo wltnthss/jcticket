@@ -98,6 +98,9 @@ public class AdminServiceImpl implements AdminService {
         int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
         // 끝 페이지 값 계산 (10, 20, 30...)
         int endPage = startPage + blockLimit - 1;
+        // 이전, 다음 링크 계산
+        boolean showPrev = page != 1;
+        boolean showNext = page != maxPage;
 
         if(endPage > maxPage){
             endPage = maxPage;
@@ -108,6 +111,8 @@ public class AdminServiceImpl implements AdminService {
         userPageDto.setMaxPage(maxPage);
         userPageDto.setStartPage(startPage);
         userPageDto.setEndPage(endPage);
+        userPageDto.setShowPrev(showPrev);
+        userPageDto.setShowNext(showNext);
         userPageDto.setOption(option);
         userPageDto.setKeyword(keyword);
 

@@ -224,6 +224,15 @@
             <version>2.13.3</version>
         </dependency>
 
+        <!-- log4j 설정 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.22.1</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>my-spring</finalName>
