@@ -3,6 +3,60 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
+
+<!--    play테이블 insert-->
+    <insert id="play_insert" parameterType="PlayDto">
+        insert into play
+        (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
+        values(#{play_id},#{play_name},#{play_poster},#{play_info},#{play_major_cat},#{play_middle_cat},#{play_small_cat},#{play_run_time},#{agency_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    showing테이블 insert-->
+    <insert id="showing_insert" parameterType="ShowingDto">
+        insert into showing
+        (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        values (#{showing_seq},#{showing_start_at},#{showing_end_at},#{showing_info},#{showing_date},#{showing_day},#{showing_status},#{showing_seat_cnt},#{play_id},#{stage_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    seat_class테이블 insert-->
+    <insert id="seat_class_insert" parameterType="SeatClassDto">
+        insert into seat_class
+        (seat_grade_seq, seat_price, play_id, created_at, created_id, updated_at, updated_id)
+        values (#{seat_grade_seq},#{seat_price},#{play_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    play테이블 delete all-->
+    <delete id="play_delete_all">
+        delete from play
+    </delete>
+
+<!--    showing테이블 delete all-->
+    <delete id="showing_delete_all">
+        delete from showing
+    </delete>
+
+<!--    seat_class테이블 delete all-->
+    <delete id="seat_class_delete_all">
+        delete from seat_class
+    </delete>
+
+<!--    테스트용 delete-->
+    <delete id="test_delete_play">
+        delete from play
+        where play_id = "테스트1";
+    </delete>
+
+    <delete id="test_delete_showing">
+        delete from showing
+        where play_id = "테스트1";
+    </delete>
+
+    <delete id="test_delete_seat_class">
+        delete from seat_class
+        where play_id = "테스트1";
+    </delete>
+<!--    테스트용 delete-->
+
     <!--    공연회차정보,시퀀스 조회 (dateText는 달력에서 선택한 날짜)-->
     <select id="select_showing_info" resultType="hashmap">
         select showing_info,showing_seq
