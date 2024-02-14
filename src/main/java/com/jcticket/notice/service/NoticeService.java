@@ -24,4 +24,11 @@ public interface NoticeService {
     List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
     // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
     PageDto pagingParam(int page, String keyword) throws Exception;
+    // 공지사항 인서트
+    int insert(NoticeDto noticeDto) throws Exception;
+    // 공지사항 전체 삭제
+    int deleteAll() throws Exception;
+    // 전체 notice 리스트 개수 조회
+    int count(String keyword) throws Exception;
+
 }
