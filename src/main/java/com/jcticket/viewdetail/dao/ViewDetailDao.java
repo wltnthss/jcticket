@@ -1,7 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
 
-import com.jcticket.viewdetail.dto.SeatClassDto;
+import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
@@ -20,9 +20,9 @@ import java.util.List;
 public interface ViewDetailDao {
     List<ShowingDto> select_showing_info(String dateText) throws Exception;
 
-    int seat_price() throws Exception;
-
     int remain_seat(String showing_seq) throws Exception;
 
-    List<String> showing_date() throws  Exception;
+    List<JoinDto> viewDetail(String play_id) throws Exception;
+
+    List<ShowingDto> view_showing_info(String play_id) throws Exception;
 }

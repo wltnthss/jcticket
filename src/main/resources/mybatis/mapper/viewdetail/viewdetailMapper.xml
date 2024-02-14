@@ -3,40 +3,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
-
-<!--    공연회차정보,시퀀스 조회-->
-    <select id="select_showing_info" resultType="map">
+    <!--    공연회차정보,시퀀스 조회 (dateText는 달력에서 선택한 날짜)-->
+    <select id="select_showing_info" resultType="hashmap">
         select showing_info,showing_seq
         from showing
         where showing_date = #{dateText}
     </select>
 
-
-<!--    좌석가격 조회-->
-    <select id="seat_price" resultType="int">
-        select seat_price
-        from seat_class
-    </select>
-
-
-<!--    잔여석 조회-->
+    <!--    잔여석 조회(공연회차정보, 시퀀스 조회에서 받은 시퀀스를 가지고 잔여석 조회)-->
     <select id="remain_seat" resultType="int">
         select
             s.showing_seat_cnt -
             (select count(*)
-            from show_seat ss
-            where s.showing_seq = ss.showing_seq
-            and show_seat_status = 'N') as remaining_seats
+             from show_seat ss
+             where s.showing_seq = ss.showing_seq
+               and show_seat_status = 'N') as remaining_seats
         from
             showing s
         where s.showing_seq = #{showing_seq};
     </select>
 
-<!--    공연날짜 조회-->
-<!--    공연 많아지면 where절로 조건 걸어줘야됨 지금은 하나니까 이렇게-->
-    <select id="showing_date" resultType="String">
-        select showing_date
+<!--    공연(play),회차(showing),좌석구분(seat_class)테이블 조인 view에서 보여주는 정보들-->
+    <select id="viewDetail" resultType="JoinDto">
+        select DISTINCT
+               p.play_name,
+               p.play_major_cat,
+               p.play_middle_cat,
+               p.play_run_time,
+               p.play_poster,
+               p.play_info,
+               p.agency_id,
+               s.showing_date,
+--                s.showing_info,
+               sc.seat_price
+        from play p,showing s,seat_class sc
+        where p.play_id = s.play_id
+          and s.play_id = sc.play_id
+          and p.play_id = #{play_id}
+          and s.play_id = #{play_id}
+          and sc.play_id = #{play_id}
+        order by s.showing_date asc;
+    </select>
+
+<!--    위 쿼리에 showing_info넣고싶은데 그러면 view에서 중복제거가 안됨... 질문할것-->
+    <select id="view_showing_info" resultType="ShowingDto">
+        select showing_info
         from showing
-        order by showing_date asc;
+        where play_id = #{play_id}
     </select>
 </mapper>

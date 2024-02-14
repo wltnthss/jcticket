@@ -1,6 +1,6 @@
 package com.jcticket.viewdetail.dao;
 
-import com.jcticket.viewdetail.dto.SeatClassDto;
+import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,19 +32,17 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public int seat_price() throws Exception {
-        return session.selectOne(namespace + "seat_price");
-    }
-
-    @Override
     public int remain_seat(String showing_seq) throws Exception {
         return session.selectOne(namespace + "remain_seat", showing_seq);
     }
 
     @Override
-    public List<String> showing_date() throws Exception {
-        return session.selectList(namespace + "showing_date");
+    public List<JoinDto> viewDetail(String play_id) throws Exception {
+        return session.selectList(namespace + "viewDetail", play_id);
     }
 
-
+    @Override
+    public List<ShowingDto> view_showing_info(String play_id) throws Exception {
+        return session.selectList(namespace + "view_showing_info", play_id);
+    }
 }

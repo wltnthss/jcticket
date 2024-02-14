@@ -1,6 +1,6 @@
 package com.jcticket.viewdetail.dao;
 
-import com.jcticket.viewdetail.dto.SeatClassDto;
+import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.service.ViewDetailService;
 import org.junit.Test;
@@ -31,30 +31,4 @@ public class ViewDetailDaoTest {
     @Autowired
     ViewDetailDao viewDetailDao;
 
-    @Test
-    public void remain_seat() throws Exception {
-        List<String> showingDate = viewDetailDao.showing_date();
-
-        for (String asd : showingDate) {
-            List<ShowingDto> showinginfo = viewDetailDao.select_showing_info(asd);
-            System.out.print("dto.getShowing_date() => ");
-            for (ShowingDto infoDto : showinginfo) {
-                System.out.print(infoDto.getShowing_seq() + ", ");
-            }
-            System.out.println();
-        }
-    }
-
-    @Test
-    public void select_showing_info() throws Exception {
-        List<String> showingDate = viewDetailDao.showing_date();
-
-        for (String dto : showingDate) {
-            List<ShowingDto> showinginfo = viewDetailDao.select_showing_info(dto);
-
-
-            System.out.println(showinginfo);
-            System.out.println("showingDto => " + dto);
-        }
-    }
 }
