@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -39,18 +40,24 @@ public class AdminDaoImplTest {
     @Autowired
     LoginDao userDao;
 
+    final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
+
     @Test
     public void login() throws Exception{
 
         // given
-        AdminDto adminDto = new AdminDto("jcticket1", "1111");
+        AdminDto adminDto = new AdminDto("admin", "admin@gmail.com", "1111", "010-1257-7845", "jcticket 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
         // when
-        AdminDto validateNickName = adminDao.login(adminDto);
-        System.out.println("validateNickName => " + validateNickName);
+        int result = adminDao.insertAdmin(adminDto);
+        AdminDto validateNickName = adminDao.adminLogin(adminDto);
         // then
-        assertTrue(validateNickName.getAdmin_nickname().equals("jc관리자1"));
-    }
+        assertEquals(result, 1);
+        assertEquals("jcticket 관리자", validateNickName.getAdmin_nickname());
 
+        // after data delete
+        int deleteCnt = adminDao.deleteAdmin(validateNickName.getAdmin_id());
+        assertEquals(1, deleteCnt);
+    }
     @Test
     public void userstatics() throws Exception{
 
@@ -58,67 +65,47 @@ public class AdminDaoImplTest {
         List<UserDto> userlists = adminDao.userstatics();
         System.out.println("userlists => "+ userlists);
         // then
-        assertTrue(userlists.size() == 3);
-    }
-
-    @Test
-    public void userListCnt() throws Exception{
-
-        // given
-        String option = "I";
-        String keyword = "1";
-
-        Map<String, Object> pagingParams = new HashMap<>();
-
-        pagingParams.put("option", option);
-        pagingParams.put("keyword", keyword);
-
-        // when
-        int userCnt = adminDao.usercnt(pagingParams);
-
-        System.out.println("option => " + option);
-        System.out.println("keyword => " + keyword);
-        System.out.println("userCnt => " + userCnt);
-
-        // then
-//        assertTrue(6 == userCnt);
+        assertEquals(3, userlists.size());
     }
 
     @Test
     public void insertUser() throws Exception {
 
         // given
-        // 자바 현재 시간 TimeStamp
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-
-        UserDto userDto = new UserDto("jisu15", "1111", "지수", "wltn@naver.com", "010-2521-3414", "서울 성동구",
-                "soodari", "19990219", "M", currentTimestamp, currentTimestamp, null, "N", 0, "공연", "고수", currentTimestamp, "userAdmin", currentTimestamp, "userAdmin");
-        System.out.println("userDto => " + userDto);
-        // when
-        int result = adminDao.insertUser(userDto);
-        System.out.println("result => " + result);
-
-        // then
+        for (int i = 1; i < 9; i++) {
+            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "wltn@naver.com", "010-1111-341"+i, "서울 성동구",
+                    "soodal"+i, "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+            // when
+            int result = adminDao.insertUser(userDto);
+            // then
+            assertEquals(1, result);
+        }
     }
-
     @Test
-    public void userDelete() throws Exception {
+    public void deleteUser() throws Exception {
+
+        // given
+        for (int i = 1; i < 9; i++) {
+            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "wltn@naver.com", "010-2521-341"+i, "서울 성동구",
+                    "soodal"+i, "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+            // when
+            int result = adminDao.userDelete("jisoo" + i);
+            // then
+            assertEquals(1, result);
+        }
+    }
+    @Test
+    public void userRetireUpdate() throws Exception {
         // given
         UserDto userDto = new UserDto("0sang", "4444");
-        System.out.println("userDto => " + userDto);
         UserDto testUser = userDao.selectUser(userDto.getUser_id());
-        System.out.println("testUser => " + testUser);
-        System.out.println("testUserData => " + testUser.getUser_retire_yn() + ", " +testUser.getUser_retire_at());
 
         // when
-        int updateResult = adminDao.userDelete(testUser.getUser_id());
+        int updateResult = adminDao.userRetireUpdate(testUser.getUser_id());
         UserDto afterUpdateTestUser = userDao.selectUser(userDto.getUser_id());
 
-        System.out.println("updateResult => " + updateResult);
-        System.out.println("afterUpdateTestUser_retire_yn() => " + afterUpdateTestUser.getUser_retire_yn());
-
         // then
-        assertTrue(1 == updateResult);
-        assertTrue("Y".equals(afterUpdateTestUser.getUser_retire_yn()));
+        assertEquals(1, updateResult);
+        assertEquals("Y", afterUpdateTestUser.getUser_retire_yn());
     }
 }

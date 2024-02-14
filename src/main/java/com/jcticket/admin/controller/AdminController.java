@@ -43,7 +43,6 @@ public class AdminController {
     public String adminlogout(HttpServletRequest request) throws Exception{
 
         HttpSession session = request.getSession();
-        System.out.println("logout session => " + session);
 
         // 로그아웃 후 세션 삭제
         session.invalidate();
@@ -75,8 +74,7 @@ public class AdminController {
         String msg = null;
 
         try {
-            AdminDto rslt = adminService.login(adminDto);
-            System.out.println("rslt => " + rslt);
+            AdminDto rslt = adminService.adminLogin(adminDto);
 
             // DB에 있는 관리자 사용 여부
             String adminUseYn = rslt.getAdmin_use_yn();
@@ -107,10 +105,6 @@ public class AdminController {
                             @RequestParam(value = "keyword", required = false) String keyword,
                             @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
 
-        System.out.println("option => " + option);
-        System.out.println("keyword => " + keyword);
-        System.out.println("page => " + page);
-
         try {
 
             List<UserDto> pagingList = null;
@@ -118,9 +112,6 @@ public class AdminController {
             pagingList = adminService.userPaingList(page, option, keyword);
             UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
             int userTotalCnt = adminService.usercnt(option, keyword);
-
-            System.out.println("pagingList => " + pagingList);
-            System.out.println("userPageDto => " + userPageDto);
 
             model.addAttribute("list", pagingList);
             model.addAttribute("paging", userPageDto);
@@ -145,25 +136,21 @@ public class AdminController {
             int rslt = adminService.userInsert(userDto);
 
             if(rslt < 1){
-                return "error";
+                throw new RuntimeException();
             }
         } catch (Exception e){
-            // 에러페이지 -> 에러처리?
             e.printStackTrace();
         }
 
-        return "admin/adminuser";
+        return "redirect:/admin/user";
     }
 
+    // 회원 삭제 폼
     @GetMapping("/admin/userdelete")
     public String adminuserdelete(Model model,
                             @RequestParam(value = "option", required = false) String option,
                             @RequestParam(value = "keyword", required = false) String keyword,
                             @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
-
-        System.out.println("option => " + option);
-        System.out.println("keyword => " + keyword);
-        System.out.println("page => " + page);
 
         try {
 
@@ -172,9 +159,6 @@ public class AdminController {
             pagingList = adminService.userPaingList(page, option, keyword);
             UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
             int userTotalCnt = adminService.usercnt(option, keyword);
-
-            System.out.println("pagingList => " + pagingList);
-            System.out.println("userPageDto => " + userPageDto);
 
             model.addAttribute("list", pagingList);
             model.addAttribute("paging", userPageDto);
@@ -186,15 +170,13 @@ public class AdminController {
 
         return "admin/adminuserdelete";
     }
+    // 회원 삭제
     @DeleteMapping("/admin/userdelete")
     @ResponseBody
     public int adminUserDeleteMapping(@RequestBody List<String> valueArr) throws Exception{
 
         // ajax 성공, 실패 결과 return
         int result = 1;
-
-        System.out.println("delete controller 진입");
-        System.out.println("valueArr => " + valueArr);
 
         try {
             for (String userId : valueArr) {
