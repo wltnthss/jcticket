@@ -1,5 +1,6 @@
 package com.jcticket.admin.service;
 
+import org.junit.After;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,31 +18,4 @@ import static org.junit.Assert.*;
  */
 public class AdminServiceImplTest {
 
-    @Test
-    public void login() {
-    }
-
-    @Test
-    public void userstatics() {
-    }
-
-    @Test
-    public void usercnt() {
-    }
-
-    @Test
-    public void userPaingList() {
-    }
-
-    @Test
-    public void pagingParam() {
-    }
-
-    @Test
-    public void userInsert() {
-    }
-
-    @Test
-    public void userDelete() {
-    }
 }
