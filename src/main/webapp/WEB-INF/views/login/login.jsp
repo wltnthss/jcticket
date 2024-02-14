@@ -56,7 +56,7 @@
             <div class="loginForm">
                 <!-- 회원 로그인 영역 시작 -->
                 <div class="memLoginForm">
-                    <form action="<c:url value="/login"/>" method="POST" name="LoginSub" autocomplete="off"/>
+                    <form action="<c:url value="/login"/>" id="loginSub" method="POST" name="LoginSub" autocomplete="off"/>
                         <fieldset class="formFieldSet">
                                 <span id = spanMemID>
                                     <label for="SMemID">아이디</label>
@@ -238,7 +238,14 @@
 <script>
     let user_id = "${param.user_id}";
     let user_pwd = "${param.user_pwd}";
-    let boardDtoPWD = "${param.boardDtoPWD}"
+    let user_retireYN = "${param.retireYN}"
+
+        $('#loginSub').on('submit', function(){
+            console.log(user_retireYN)
+            if(user_retireYN==='Y'){
+                alert("탈퇴한 회원입니다.")
+            }
+        })
 </script>
 </body>
 </html>

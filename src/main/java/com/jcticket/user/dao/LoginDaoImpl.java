@@ -31,4 +31,35 @@ public class LoginDaoImpl implements LoginDao {
     // user가 로그인 시 1씩 증가. 방문횟수
     @Override
     public int increaseLoginCnt(String user_id) {return session.update(namespace+"increase_visit_cnt", user_id);}
+
+
+
+
+    @Override
+    public int count() throws Exception {
+        return session.selectOne(namespace+"count");
+    }
+
+
+    @Override
+    public int insert(UserDto userDto) throws Exception {
+        return session.insert(namespace+"insert",userDto);
+    }
+
+    @Override
+    public int delete(String user_id) throws Exception {
+        return session.delete(namespace+"delete",user_id);
+    }
+
+    @Override
+    public int update(UserDto userDto) throws Exception {
+        return session.update(namespace+"update",userDto);
+    }
+
+    @Override
+    public int deleteAll() throws Exception {
+        return session.delete(namespace+"deleteAll");
+    }
+
+
 }

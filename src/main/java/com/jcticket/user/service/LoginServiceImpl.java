@@ -24,13 +24,10 @@ public class LoginServiceImpl implements LoginService {
     //user_id에 맞는 유저 정보 가져옴
     @Override
     public UserDto loginUser(String user_id)throws Exception{
+
+        // user가 로그인 할때마다 1씩 증가. 방문횟수
+        loginDao.increaseLoginCnt(user_id);
+
         return loginDao.selectUser(user_id);
     }
-
-    //user가 로그인 할때마다 1씩 증가. 방문횟수
-    @Override
-    public int loginCnt(String user_id) throws Exception {
-        return loginDao.increaseLoginCnt(user_id);
-    }
-
 }

@@ -29,6 +29,8 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    String retireYN = "";
+
     @GetMapping("/logout")
     public String logout(HttpSession session){
         //세션을 지우고
@@ -44,18 +46,36 @@ public class LoginController {
     public String login(String user_id, String user_pwd, boolean rememberId, Model m,
                         HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+
+        //아이디 비번 틀리면 로그인 안되게
         if (!loginCheck(user_id, user_pwd)) {
             //유효성 검사 때매 넘김
             m.addAttribute("user_id", user_id);
             m.addAttribute("user_pwd", user_pwd);
+            return "redirect:/login";
+        }else{
 
+        }
+
+        //탈퇴회원이면 로그인 안되게
+        UserDto userDto = loginService.loginUser(user_id);
+        String retireYN = userDto.getUser_retire_yn();
+        if(userDto!=null && retireYN.equals("Y")){
+            m.addAttribute("retireYN",retireYN);
             return "redirect:/login";
         }
 
         HttpSession session = request.getSession();
         session.setAttribute("user_id", user_id);
 
-        //아이디 저장 기능 시작
+        //아이디 저장
+        rememberId(user_id, rememberId, response);
+
+        return "index";
+    }
+
+
+    private static void rememberId(String user_id, boolean rememberId, HttpServletResponse response) {
         // rememberId가 true이면(아이디 저장 체크박스 체크되어있으면)
         if (rememberId) {
 //            쿠키 생성
@@ -70,12 +90,6 @@ public class LoginController {
             response.addCookie(cookie);
             System.out.println("cookie = " + cookie.getValue());
         }
-        //아이디 저장 기능 끝
-
-        //방문횟수 1 추가
-        loginService.loginCnt(user_id);
-
-        return "index";
     }
 
 
@@ -93,7 +107,18 @@ public class LoginController {
 
         return userDto != null && userDto.getUser_password().equals(user_pwd);
     }
+
+
+//    private boolean retireCheck(String user_id){
+//        System.out.println("user_id = " + user_id);
+//        UserDto userDto = null;
+//        try {
+//            userDto = loginService.loginUser(user_id);
+//            retireYN = userDto.getUser_retire_yn();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return userDto !=null && retireYN.equals("Y");
+//    }
 }
-
-
-
