@@ -45,7 +45,7 @@ public class AdminDaoImpl implements AdminDao{
     }
     @Override
     public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
-        return sqlSession.selectList(namespace+"userpaginglist", pagingParams);
+        return sqlSession.selectList(namespace + "userpaginglist", pagingParams);
     }
 
     @Override

@@ -133,12 +133,12 @@ public class AdminController {
         return "admin/adminuser";
     }
     // 회원 등록하기 폼
-    @GetMapping("/admin/register")
+    @GetMapping("/admin/userregister")
     public String adminuserregister() throws Exception{
         return "admin/adminuserregister";
     }
     // 회원 등록하기
-    @PostMapping("/admin/register")
+    @PostMapping("/admin/userregister")
     public String adminUserRegisterPost(Model model, UserDto userDto) throws Exception{
 
         try {
@@ -148,13 +148,14 @@ public class AdminController {
                 return "error";
             }
         } catch (Exception e){
+            // 에러페이지 -> 에러처리?
             e.printStackTrace();
         }
 
         return "admin/adminuser";
     }
 
-    @GetMapping("/admin/delete")
+    @GetMapping("/admin/userdelete")
     public String adminuserdelete(Model model,
                             @RequestParam(value = "option", required = false) String option,
                             @RequestParam(value = "keyword", required = false) String keyword,
@@ -185,7 +186,7 @@ public class AdminController {
 
         return "admin/adminuserdelete";
     }
-    @DeleteMapping("/admin/delete")
+    @DeleteMapping("/admin/userdelete")
     @ResponseBody
     public int adminUserDeleteMapping(@RequestBody List<String> valueArr) throws Exception{
 
@@ -211,6 +212,11 @@ public class AdminController {
     @GetMapping("/admin/agency")
     public String adminagency() throws Exception{
         return "admin/adminagency";
+    }
+
+    @GetMapping("/admin/agencyregister")
+    public String adminagencyregister() throws Exception{
+        return "admin/adminagencyregister";
     }
     @GetMapping("/admin/product")
     public String adminproduct() throws Exception{
