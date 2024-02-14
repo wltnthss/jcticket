@@ -42,27 +42,26 @@ public class LoginController {
     public String loginForm(){return "login/login";}
 
     @PostMapping("/login")
-    public String login(String user_id, String user_pwd, boolean rememberId, Model m,
+    public String login(String user_id, String user_password, boolean rememberId, Model m,
                         HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 
         //아이디 비번 틀리면 로그인 안되게
-        if (!loginCheck(user_id, user_pwd)) {
+        if (!userService.loginCheck(user_id,user_password)){
             //유효성 검사 때매 넘김
             m.addAttribute("user_id", user_id);
-            m.addAttribute("user_pwd", user_pwd);
+            m.addAttribute("user_password", user_password);
             return "redirect:/login";
-        }else{
-
         }
 
         //탈퇴회원이면 로그인 안되게
-        UserDto userDto = userService.loginUser(user_id);
-        String retireYN = userDto.getUser_retire_yn();
-        if(userDto!=null && retireYN.equals("Y")){
-            m.addAttribute("retireYN",retireYN);
+        if (userService.isUserRetired(user_id)) {
+            m.addAttribute("retireYN", "Y");
             return "redirect:/login";
         }
+
+        //방문횟수 증가
+        userService.increaseLoginCnt(user_id);
 
         HttpSession session = request.getSession();
         session.setAttribute("user_id", user_id);
@@ -92,32 +91,5 @@ public class LoginController {
     }
 
 
-    //회원가입 되어있는(DB에 있는) 아이디 비밀번호 일치확인
-    private boolean loginCheck(String user_id, String user_pwd) {
-        UserDto userDto = null;
-        System.out.println("user_id = " + user_id);
-        System.out.println("user_pwd = " + user_pwd);
-        try {
-            userDto = userService.loginUser(user_id);
-            System.out.println(userDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return userDto != null && userDto.getUser_password().equals(user_pwd);
-    }
-
-
-//    private boolean retireCheck(String user_id){
-//        System.out.println("user_id = " + user_id);
-//        UserDto userDto = null;
-//        try {
-//            userDto = loginService.loginUser(user_id);
-//            retireYN = userDto.getUser_retire_yn();
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        return userDto !=null && retireYN.equals("Y");
-//    }
 }

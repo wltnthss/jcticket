@@ -14,16 +14,20 @@ import com.jcticket.user.dto.UserDto;
  * 2024-02-01        jinwook Song       최초 생성
  */
 public interface UserDao {
-    UserDto select(String user_id) throws Exception;
-    int increaseLoginCnt(String user_id) throws Exception;
-    int selectIdDupl(String user_id) throws Exception;
-    int selectNickNameDupl(String user_nickname) throws Exception;
+    //유저 조회
+    UserDto select(String user_id) throws Exception; //
+    //방문횟수
+    int increaseLoginCnt(String user_id) throws Exception; //
+    //아이디 중복 확인
+    int selectIdDupl(String user_id) throws Exception;//
+    //닉네임 중복 확인
+    int selectNickNameDupl(String user_nickname) throws Exception;//
 
-    int count() throws Exception;
-    int insert(UserDto userDto) throws Exception;
-    int delete(String user_id) throws  Exception;
-    int update(UserDto userDto) throws Exception;
-    int deleteAll() throws Exception;
+    //
+    int count() throws Exception; //
+    int insert(UserDto userDto) throws Exception; //
+    int delete(String user_id) throws  Exception; //
+    int deleteAll() throws Exception;//
 
 }
 

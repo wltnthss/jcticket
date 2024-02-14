@@ -59,10 +59,6 @@ public class UserDaoImpl implements UserDao {
         return session.delete(namespace+"delete",user_id);
     }
 
-    @Override
-    public int update(UserDto userDto) throws Exception {
-        return session.update(namespace+"update",userDto);
-    }
 
     @Override
     public int deleteAll() throws Exception {
