@@ -24,7 +24,7 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     @Autowired
     private SqlSession session;
 
-    private static String namespace="com.jcticket.viewdetail. .";
+    private static String namespace="com.jcticket.viewdetail.viewdetailMapper.";
 
     @Override
     public List<ShowingDto> select_showing_info(String dateText) throws Exception {

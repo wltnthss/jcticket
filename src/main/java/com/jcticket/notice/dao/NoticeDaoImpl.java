@@ -28,6 +28,16 @@ public class NoticeDaoImpl implements NoticeDao{
     private static String namespace = "NoticeMapper.";
 
     @Override
+    public int insert(NoticeDto noticeDto) throws Exception {
+        return sqlSession.insert(namespace+"insert", noticeDto);
+    }
+
+    @Override
+    public List<NoticeDto> selectAll() throws Exception {
+        return sqlSession.selectList(namespace+"selectAll");
+    }
+
+    @Override
     public NoticeDto select(int no) throws Exception {
         return sqlSession.selectOne(namespace+"select", no);
     }
@@ -43,10 +53,4 @@ public class NoticeDaoImpl implements NoticeDao{
     public List<NoticeDto> pagingList(Map<String, Object> pagingParams) {
         return sqlSession.selectList(namespace+"pagingList", pagingParams);
     }
-    @Override
-    public List<NoticeDto> pagingViewOrderList(Map<String, Object> pagingParams) {
-        return sqlSession.selectList(namespace+"pagingViewOrderList", pagingParams);
-    }
-
-
 }
