@@ -1,7 +1,7 @@
 package com.jcticket.user.controller;
 
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.user.service.LoginService;
+import com.jcticket.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.*;
-import java.util.Objects;
 
 /**
  * packageName    : com.jcticket.login
@@ -27,7 +26,7 @@ import java.util.Objects;
 //@RequestMapping("/login")
 public class LoginController {
     @Autowired
-    LoginService loginService;
+    UserService userService;
 
     String retireYN = "";
 
@@ -58,7 +57,7 @@ public class LoginController {
         }
 
         //탈퇴회원이면 로그인 안되게
-        UserDto userDto = loginService.loginUser(user_id);
+        UserDto userDto = userService.loginUser(user_id);
         String retireYN = userDto.getUser_retire_yn();
         if(userDto!=null && retireYN.equals("Y")){
             m.addAttribute("retireYN",retireYN);
@@ -99,7 +98,7 @@ public class LoginController {
         System.out.println("user_id = " + user_id);
         System.out.println("user_pwd = " + user_pwd);
         try {
-            userDto = loginService.loginUser(user_id);
+            userDto = userService.loginUser(user_id);
             System.out.println(userDto);
         } catch (Exception e) {
             e.printStackTrace();

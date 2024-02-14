@@ -1,8 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.ticketing.dto.TicketingDto;
-import com.jcticket.user.dao.LoginDao;
+import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +35,7 @@ public class AdminDaoImplTest {
     AdminDao adminDao;
 
     @Autowired
-    LoginDao userDao;
+    UserDao userDao;
 
     @Test
     public void login() throws Exception{
@@ -106,13 +104,13 @@ public class AdminDaoImplTest {
         // given
         UserDto userDto = new UserDto("0sang", "4444");
         System.out.println("userDto => " + userDto);
-        UserDto testUser = userDao.selectUser(userDto.getUser_id());
+        UserDto testUser = userDao.select(userDto.getUser_id());
         System.out.println("testUser => " + testUser);
         System.out.println("testUserData => " + testUser.getUser_retire_yn() + ", " +testUser.getUser_retire_at());
 
         // when
         int updateResult = adminDao.userDelete(testUser.getUser_id());
-        UserDto afterUpdateTestUser = userDao.selectUser(userDto.getUser_id());
+        UserDto afterUpdateTestUser = userDao.select(userDto.getUser_id());
 
         System.out.println("updateResult => " + updateResult);
         System.out.println("afterUpdateTestUser_retire_yn() => " + afterUpdateTestUser.getUser_retire_yn());

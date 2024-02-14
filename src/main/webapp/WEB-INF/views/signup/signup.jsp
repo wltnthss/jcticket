@@ -112,7 +112,7 @@
                     영문 대문자, 소문자, 숫자,특수문자를 포함한 8자 이상
                 </div>
                 <label>
-                    <input type="password" id="userPwdInput" class="css_idPwdNickTelAddGenBir_input" name="user_pwd" placeholder="비밀번호" required="required">
+                    <input type="password" id="userPwdInput" class="css_idPwdNickTelAddGenBir_input" name="user_password" placeholder="비밀번호" required="required">
                 </label>
                 <div id="pwd_warnMsg"></div>
             </div>

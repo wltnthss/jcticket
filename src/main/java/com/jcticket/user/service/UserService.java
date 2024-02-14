@@ -14,6 +14,9 @@ import com.jcticket.user.dto.UserDto;
  * 2024-02-01        jinwook Song       최초 생성
  */
 
-public interface LoginService {
+public interface UserService {
     UserDto loginUser(String user_id) throws Exception;
+    int insertUser(UserDto userDto) throws Exception;
+    int chkIdDupl(String user_id) throws Exception;
+    int chkNickNameDupl(String user_nickname) throws Exception;
 }

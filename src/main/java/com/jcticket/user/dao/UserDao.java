@@ -13,10 +13,11 @@ import com.jcticket.user.dto.UserDto;
  * -----------------------------------------------------------
  * 2024-02-01        jinwook Song       최초 생성
  */
-public interface LoginDao {
-    UserDto selectUser(String user_id) throws Exception;
+public interface UserDao {
+    UserDto select(String user_id) throws Exception;
     int increaseLoginCnt(String user_id) throws Exception;
-
+    int selectIdDupl(String user_id) throws Exception;
+    int selectNickNameDupl(String user_nickname) throws Exception;
 
     int count() throws Exception;
     int insert(UserDto userDto) throws Exception;
