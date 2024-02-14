@@ -2,6 +2,7 @@ package com.jcticket.ticketing.dao;
 
 import com.jcticket.ticketing.dto.TicketingDto;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,7 +19,10 @@ import java.util.List;
 public interface TicketingDao {
 
     List<TicketingDto> selectAll() throws Exception;
-    String selectPlayName(int play_id) throws Exception;
-    String selectStageName(int play_id) throws Exception;
+
+    List<HashMap<String,Object>> selectShowingDate(String playId) throws Exception;
+
+    List<HashMap<String,Object>> selectShowingStageName(String dateText, String playId) throws Exception;
+
 
 }

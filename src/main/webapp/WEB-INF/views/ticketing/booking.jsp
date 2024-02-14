@@ -311,18 +311,18 @@
                             <tbody>
                             <tr>
                                 <th scope="row" style="width: 30%">공연명</th>
-                                <%--데이터 받아오기 playname --%>
+                                <%--데이터 받아오기: playname --%>
                                 <td>나는 오늘도 혼자 산다</td>
                             </tr>
                             <tr>
-                                <th scope="row">공연장</th>
-                                <%--데이터 받아오기 stagename --%>
-                                <td>쉼표도서관</td>
+                                <th scope="row">공연일시</th>
+                                <%-- 데이터 받아오기: showing_info, showing_day--%>
+                                <td>조영상</td>
                             </tr>
                             <tr>
-                                <th scope="row">출연진</th>
-                                <%-- 데이터 받아오기 ???--%>
-                                <td>조영상</td>
+                                <th scope="row">공연장</th>
+                                <%--데이터 받아오기: stagename --%>
+                                <td>쉼표도서관</td>
                             </tr>
                             </tbody>
                         </table>

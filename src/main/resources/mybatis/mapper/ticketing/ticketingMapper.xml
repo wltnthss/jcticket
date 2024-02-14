@@ -3,41 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper">
-    <!-- 공연날짜 조회 -->
-    <select id="showing_date" resultType="String">
+    <!-- 예매창 구현에 필요한 쿼리들 -->
+
+    <!-- ********** step1. 일정 선택 ************-->
+    <!-- 공연날짜 조회 - datepicker에 표시하기 위해-->
+    <select id="select_showing_date" parameterType="string" resultType="hashmap">
         select showing_date
         from showing
+        where play_id = #{play_id}
         order by showing_date asc;
     </select>
+
+    <!-- 공연회차정보, 시퀀스 조회 - 시퀀스도 같이 얻어와서 회차별 좌석정보 구분한다. -->
+    <select id="select_showing_info" parameterType="hashmap" resultType="hashmap">
+        select showing_info,showing_seq
+        from showing
+        where showing_date = #{dateText} and play_id = #{play_id}
+    </select>
+
+    <!-- 공연명, 공연장 조회하기 join 사용 -->
+    <select id="select_play_stage_name" parameterType="string" resultType="hashmap">
+        select play_name, stage_name
+        from (select play_id ,stage_id from showing WHERE play_id = '공연아이디1') s, play p, stage t
+        where s.stage_id = t.stage_id
+          and s.play_id = p.play_id
+    </select>
+
+
+
+    <!-- ************** next steps **************** -->
     <!-- 좌석가격 조회 -->
     <select id="seat_price" resultType="int">
         select seat_price
         from seat_class
     </select>
-    <!-- 공연회차정보, 시퀀스 조회 -->
-    <select id="select_showing_info" resultType="map">
-        select showing_info,showing_seq
-        from showing
-        where showing_date = #{dateText}
-    </select>
-
-
-
-
-
-    <select id="selectPlayName" resultType="string" parameterType="int">
-        select
-            play_name
-        from play
-        where play_id = #{play_id}
-    </select>
-    <select id="selectStageName" resultType="string" parameterType="int">
-        select
-            stage_name
-        from stage
-        where stage_id = #{stage_id}
-    </select>
-
     <select id="selectAll" resultType="TicketingDto">
         SELECT ticketing_id, ticketing_at, ticketing_cnt,
                ticketing_status, showing_info, showing_date,
