@@ -168,7 +168,7 @@ li {
 
 /*글자 빨간색 강조*/
 .text_red {
-    color: red;
+    color: orangered;
 }
 
 /*날짜&시간 선택, 예매가능좌석 감싸는 컨테이너*/
@@ -515,12 +515,19 @@ li {
     transform: scaleX(-1);
 }
 
-/*잔여석 마진*/
+/*잔여석 css*/
 .remain_seat {
     margin-left: 3px;
+    color: orangered !important;
+    font-size: 14px !important;
 }
 
 /*회차 클릭된 상태에서는 클릭불가*/
 .aTag.clicked {
     pointer-events: none;
+}
+
+/*회차 클릭시 가격 색 검은색으로*/
+.fourRight.on .text_red {
+    color: black !important;
 }

@@ -38,33 +38,36 @@ git <%--
         <%-- content area    --%>
         <div class="category">
             <a class="major-cat">
-                콘서트
+                <c:forEach var="play" items="${viewDetail}">
+                    <a>${play.play_major_cat}</a>
+                </c:forEach>
             </a>
             >
             <a class="middle-cat">
-                강연
+                <c:forEach var="play" items="${viewDetail}">
+                    <a>${play.play_middle_cat}</a>
+                </c:forEach>
             </a>
         </div>
 
     <%--    나중에 two 아래 css로 밑줄 만들것--%>
         <div class="two">
         <%--제목--%>
-            <p class="big-title">2022 <나는 오늘도 혼자서 논다> -시흥</p>
+            <p class="big-title">
+                <c:forEach var="play" items="${viewDetail}">
+                    <a>${play.play_name}</a>
+                </c:forEach>
+            </p>
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
-<%--                            상영날짜출력--%>
-<%--                            <c:forEach var="String" items="ShowingDate">--%>
-<%--                                <a class="asdasd"><c:out value="${ShowingDate}"/></a>--%>
-<%--                            </c:forEach>--%>
-
 <%--                            대괄호 제거하고 상영날짜 출력--%>
-                            <c:forEach var="date" items="${ShowingDate}" varStatus="loop">
-                                <a class="dateShow"><c:out value="${date}" /></a>
+                            <c:forEach var="date" items="${viewDetail}" varStatus="loop">
+                                <a class="dateShow"><c:out value="${date.showing_date}" /></a>
                                 <c:if test="${!loop.last}">,</c:if>
                             </c:forEach>
                         </span>
-<%--                        <a href="javascript:void(0);" id="stage_name">--%>
+
                         <a href="javascript:void(0);" id="stage_name">
                             <span>쉼표 도서관 2층</span>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
@@ -106,7 +109,9 @@ git <%--
                             <dt>등급</dt>
                             <dd>&nbsp;전체이용가</dd>
                             <dt>관람시간</dt>
-                            <dd>&nbsp;60분</dd>
+                            <c:forEach var="play" items="${viewDetail}">
+                                <dd>&nbsp;${play.play_run_time}분</dd>
+                            </c:forEach>
                             <dt>출연</dt>
                             <dd>&nbsp;개</dd>
                             <dt id="dtPrice">가격</dt>
@@ -116,7 +121,9 @@ git <%--
                                     <div class="seat-price">
                                         <li>
                                             VIP석
-                                            <span class="text_red">${SeatPrice}</span>원
+                                            <c:forEach var="price" items="${viewDetail}">
+                                                <span class="text_red">${price.seat_price}</span>원
+                                            </c:forEach>
                                         </li>
                                     </div>
                                 </ul>
@@ -127,8 +134,14 @@ git <%--
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-    <%--                        <dd> left margin 지우면 옆으로 딱 붙음--%>
-                            <dd>1부: 13:00, 2부: 15:00</dd>
+                            <c:forEach var="info" items="${viewShwoingInfo}">
+                                <dd>${info.showing_info}</dd>
+                            </c:forEach>
+
+<%--                            질문 : viewDetail 매퍼로 받으면 중복제거가 안됨--%>
+<%--                            <c:forEach var="info" items="${viewDetail}">--%>
+<%--                                <dd>${info.showing_info}</dd>--%>
+<%--                            </c:forEach>--%>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
                         </dl>
@@ -159,8 +172,9 @@ git <%--
                         <dl class="seatRemain">
                             <li id="seatPrice1">
                                 VIP석
-                                <span class="text_red">${SeatPrice}</span>원
-
+                                <c:forEach var="price" items="${viewDetail}">
+                                    <span class="text_red">${price.seat_price}</span>원
+                                </c:forEach>
                             </li>
                         </dl>
                     </div>
