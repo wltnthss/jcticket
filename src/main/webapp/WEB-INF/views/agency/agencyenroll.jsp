@@ -24,7 +24,7 @@
             <h1>신규등록</h1>
             <h2>기본정보입력</h2>
             <hr>
-            <form id="playEnroll" action="agencyenroll/insert_data" method="post">
+            <form id="playEnroll" action="enroll" method="post">
                 <div class="enroll-form">
                     <table>
                         <colgroup>

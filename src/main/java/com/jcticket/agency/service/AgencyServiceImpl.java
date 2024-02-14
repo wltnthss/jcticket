@@ -28,10 +28,32 @@ public class AgencyServiceImpl implements AgencyService{
     @Autowired//AgencyDao 빈을 주입받음
     private AgencyDao agencyDao;
 
-    @Override//selectAgency 메서드를 오버라이드.
-    public AgencyDto selectAgency(String agency_id) throws Exception {//또외처리
-        return agencyDao.selectAgency(agency_id); //AgencyDao를 사용하여 agency_id정보를 가져오고 반환?
+
+
+
+    @Override
+    public boolean processAgencyLogin(String agency_id, String agency_pwd) {
+        try {
+            AgencyDto agencyDto = agencyDao.selectAgency(agency_id);
+            return agencyDto != null && agencyDto.getAgency_password().equals(agency_pwd);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // 예외 발생 시 로그인 실패 처리
+        }
     }
+
+    @Override
+    public AgencyDto selectAgency(String agency_id) throws Exception {
+        return agencyDao.selectAgency(agency_id);
+    }
+
+//    @Override//selectAgency 메서드를 오버라이드.
+//    public AgencyDto selectAgency(String agency_id) throws Exception {//또외처리
+//        return agencyDao.selectAgency(agency_id); //AgencyDao를 사용하여 agency_id정보를 가져오고 반환?
+//    }
+
+
+
 //    @Override
 //    public List<AgencyDto> getAllAgencies() throws Exception {
 //        return agencyDao.selectAllAgencies();

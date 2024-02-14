@@ -4,6 +4,8 @@ import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.PlayDto;
 import com.jcticket.agency.dto.ShowingDto;
 import com.jcticket.agency.dto.StageDto;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
@@ -17,8 +19,12 @@ import java.util.List;
  * -----------------------------------------------------------
  * 2024-02-07        {sana}       최초 생성
  */
+
 public interface AgencyService {
+    boolean processAgencyLogin(String agency_id, String agency_pwd) throws Exception;
     AgencyDto selectAgency(String agency_id) throws Exception;
+//    String processAgencyLogin(String agency_id, String agency_pwd) throws Exception;
+//    AgencyDto selectAgency(String agency_id) throws Exception;
 //    List<AgencyDto> getAllAgencies() throws Exception;
 //    void addAgency(AgencyDto agency) throws Exception;
 //    void updateAgency(AgencyDto agency) throws Exception;

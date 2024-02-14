@@ -25,6 +25,29 @@ import java.util.List;
     // 그래서 interface로 쓴 이유는 유지 보수성 때문인가요?  와 진짜 트루리셋됨
 public interface AgencyDao {
     AgencyDto selectAgency(String agency_id) throws Exception;
+
+//CRUD;;
+//    void insertAgency(AgencyDto agencyDto) throws Exception;
+//    void updateAgency(AgencyDto agencyDto) throws Exception;
+//    void deleteAgency(String agency_id) throws Exception;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    List<AgencyDto> selectAllAgencies() throws Exception;
 //    void insertAgency(AgencyDto agency) throws Exception;
 //    void updateAgency(AgencyDto agency) throws Exception;

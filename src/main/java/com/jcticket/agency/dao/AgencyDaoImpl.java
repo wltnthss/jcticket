@@ -37,6 +37,36 @@ public class AgencyDaoImpl implements AgencyDao {
         return sqlSession.selectOne(namespace + "AgencyLogin", agency_id);
     }//selectAgency 메서드는 SqlSession 객체를 사용해 db에서 쿼리를 실행?
 
+
+
+
+
+    //로그인에 왜 CRUD를 전부 적어둬야 하는지 모르겠으나.. 시켜서 적는..
+
+//    @Override
+//    public void insertAgency(AgencyDto agencyDto) throws Exception {
+//        sqlSession.insert(namespace + "insertAgency", agencyDto);
+//    }
+//
+//    @Override
+//    public void updateAgency(AgencyDto agencyDto) throws Exception {
+//        sqlSession.update(namespace + "updateAgency", agencyDto);
+//    }
+//
+//    @Override
+//    public void deleteAgency(String agency_id) throws Exception {
+//        sqlSession.delete(namespace + "deleteAgency", agency_id);
+//    }
+
+
+
+
+
+
+
+
+
+
 //    @Override //데이터를 데이터베이스에 저장할 save 메서드를 추가
 //    public void save(AgencyDto agencyDto) throws Exception {
 //        sqlSession.insert(namespace + "insertAgency", agencyDto);
