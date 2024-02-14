@@ -30,22 +30,22 @@ public class AdminDaoImpl implements AdminDao{
     private static final String namespace = "adminMapper.";
 
     @Override
-    public AdminDto login(AdminDto adminDto) throws Exception {
-        return sqlSession.selectOne(namespace + "login", adminDto);
+    public AdminDto adminLogin(AdminDto adminDto) throws Exception {
+        return sqlSession.selectOne(namespace + "adminLogin", adminDto);
     }
 
     @Override
     public List<UserDto> userstatics() throws Exception {
-        return sqlSession.selectList(namespace + "userstatics");
+        return sqlSession.selectList(namespace + "userStatics");
     }
 
     @Override
     public int usercnt(Map<String, Object> options) throws Exception {
-        return sqlSession.selectOne(namespace + "usercnt", options);
+        return sqlSession.selectOne(namespace + "userCnt", options);
     }
     @Override
     public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
-        return sqlSession.selectList(namespace + "userpaginglist", pagingParams);
+        return sqlSession.selectList(namespace + "userPagingList", pagingParams);
     }
 
     @Override
@@ -54,7 +54,22 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
+    public int userRetireUpdate(String user_id) throws Exception {
+        return sqlSession.update(namespace + "userRetireUpdate", user_id);
+    }
+
+    @Override
     public int userDelete(String user_id) throws Exception {
-        return sqlSession.update(namespace + "userretireupdate", user_id);
+        return sqlSession.delete(namespace+"userDelete", user_id);
+    }
+
+    @Override
+    public int insertAdmin(AdminDto adminDto) throws Exception {
+        return sqlSession.insert(namespace+"insertAdmin", adminDto);
+    }
+
+    @Override
+    public int deleteAdmin(String admin_id) throws Exception {
+        return sqlSession.delete(namespace + "adminDelete", admin_id);
     }
 }

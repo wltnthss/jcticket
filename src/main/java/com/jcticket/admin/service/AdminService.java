@@ -18,7 +18,7 @@ import java.util.List;
  * 2024-02-05             jisoo Son             최초 생성
  */
 public interface AdminService {
-    AdminDto login(AdminDto adminDto) throws Exception;
+    AdminDto adminLogin(AdminDto adminDto) throws Exception;
     List<UserDto> userstatics() throws Exception;
     // 총 회원수 조회
     int usercnt(String option, String keyword) throws Exception;

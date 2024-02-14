@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
     AdminDao adminDao;
 
     @Override
-    public AdminDto login(AdminDto adminDto) throws Exception {
-        return adminDao.login(adminDto);
+    public AdminDto adminLogin(AdminDto adminDto) throws Exception {
+        return adminDao.adminLogin(adminDto);
     }
 
     @Override
@@ -126,6 +126,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int userDelete(String user_id) throws Exception {
-        return adminDao.userDelete(user_id);
+        return adminDao.userRetireUpdate(user_id);
     }
 }
