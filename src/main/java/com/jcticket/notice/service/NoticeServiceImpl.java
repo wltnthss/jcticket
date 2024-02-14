@@ -97,4 +97,19 @@ public class NoticeServiceImpl implements NoticeService{
 
         return pageDto;
     }
+
+    @Override
+    public int insert(NoticeDto noticeDto) throws Exception {
+        return noticeDao.insert(noticeDto);
+    }
+
+    @Override
+    public int deleteAll() throws Exception {
+        return noticeDao.deleteAll();
+    }
+
+    @Override
+    public int count(String keyword) throws Exception {
+        return noticeDao.count(keyword);
+    }
 }

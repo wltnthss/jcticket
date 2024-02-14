@@ -75,16 +75,17 @@ $(function (){
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/delete',
+                    url: '/admin/userdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
+                            alert('삭제되었습니다.');
                             location.href= "/admin/user";
                         }else{
-                            location.href= "/admin/delete";
                             alert('삭제 실패');
+                            location.href= "/admin/delete";
                         }
                     },
                     error: function (e) {
@@ -92,7 +93,7 @@ $(function (){
                     }
                 });
 
-                alert('삭제되었습니다.');
+
             }
         }
     });
