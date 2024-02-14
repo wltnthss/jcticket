@@ -30,10 +30,5 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
-    @Test
-    public void selectAll() throws Exception {
-        List<TicketingDto> list = ticketingDao.selectAll();
-        System.out.println("list => " + list);
 
-    }
 }

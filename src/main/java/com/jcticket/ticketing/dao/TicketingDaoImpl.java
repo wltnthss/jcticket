@@ -1,6 +1,7 @@
 package com.jcticket.ticketing.dao;
 
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,28 @@ public class TicketingDaoImpl implements TicketingDao{
 
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
     @Override
-    public List<TicketingDto> selectAll() throws Exception {
-        return session.selectList(namespace+"selectAll");
+    public int insertShowing(ShowingDto dto) throws Exception{
+        return session.insert(namespace+"insertShowing", dto);
     }
     @Override
-    public List<HashMap<String, Object>> selectShowingDate(String playId) throws Exception{
-
+    public int deleteShowing(String play_id) throws Exception{
+        return session.delete(namespace+"deleteShowing", play_id);
+    }
+    @Override
+    public List<HashMap<String,Object>> selectShowingDate(String playId) throws Exception{
+        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingDate", playId);
+        return list;
     }
 
     @Override
-    public List<HashMap<String, Object>> selectShowingStageName(String dateText, String playId)throws Exception{
+    public List<HashMap<String,Object>> selectShowingRound(HashMap<String,Object> hm) throws Exception{
+        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingInfo", hm);
+        return list;
+    }
 
+    public HashMap<String,Object> selectPlayStageName(String play_id) throws Exception{
+        HashMap<String,Object> hm = session.selectOne(namespace+"selectPlayStageName", play_id);
+        return hm;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.jcticket.ticketing.service;
 
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,19 @@ import java.util.List;
  * 1/31/24         조영상        최초 생성
  */
 public interface TicketingService {
-    List<TicketingDto> getTicketingAll() throws Exception;
-    List<String> readShowingInfo(int play_id, int stage_id)throws Exception;
+
+    // 서비스에서 어떤 (DAO처럼 단순 쿼리와는 다른) 작업을 구현하고 데이터 가공을 어떻게 할지에 대한 고민이 생각보단 복잡하네여..
+
+    // Step1. 일정선택
+
+
+    // 리턴타입이 같고 처리 결과가 비슷하며 파라미터가 연관깊은 두 메서드를 하나의 작업으로 묶을지....말지...
+    // List<HashMap<String,Object>> getShowTimeInfo(String play_id, String dateText) throws Exception;
+    List<HashMap<String,Object>> getShowingDate(String play_id) throws Exception;
+
+    List<HashMap<String, Object>> getShowingRound(String dateText) throws Exception;
+
+    HashMap<String, Object> getPlayStageName(String play_id) throws Exception;
+
+    // next step...
 }

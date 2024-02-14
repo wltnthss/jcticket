@@ -2,10 +2,12 @@ package com.jcticket.ticketing.service;
 
 import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -24,16 +26,24 @@ import java.util.List;
 public class TicketingServiceImpl implements TicketingService{
     private final TicketingDao ticketingDao;
 
+    // 서비스에서 어떤 (DAO처럼 단순 쿼리와는 다른) 작업을 구현하고 데이터 가공을 어떻게 할지에 대한 고민이 생각보단 복잡하네여..
+
+    // Step1. 일정선택
     @Override
-    public List<TicketingDto> getTicketingAll() throws Exception{
-        return ticketingDao.selectAll();
+    public List<HashMap<String,Object>> getShowingDate(String play_id) throws Exception{
+
     }
 
     @Override
-    public List<String> readShowingInfo(int play_id, int stage_id) throws Exception{
-        List<String> showingInfo = new ArrayList<>();
-        showingInfo.add(ticketingDao.selectPlayName(play_id));
-        showingInfo.add(ticketingDao.selectStageName(stage_id));
-        return showingInfo;
+    public List<HashMap<String,Object>> getShowingRound(String dateText) throws Exception{
+
     }
+
+    @Override
+    public HashMap<String,Object> getPlayStageName(String play_id) throws Exception{
+
+    }
+
+    //Next step...
 }
+
