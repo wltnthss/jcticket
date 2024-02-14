@@ -3,6 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper">
+    <!-- 공연날짜 조회 -->
+    <select id="showing_date" resultType="String">
+        select showing_date
+        from showing
+        order by showing_date asc;
+    </select>
+    <!-- 좌석가격 조회 -->
+    <select id="seat_price" resultType="int">
+        select seat_price
+        from seat_class
+    </select>
+    <!-- 공연회차정보, 시퀀스 조회 -->
+    <select id="select_showing_info" resultType="map">
+        select showing_info,showing_seq
+        from showing
+        where showing_date = #{dateText}
+    </select>
+
+
+
+
+
     <select id="selectPlayName" resultType="string" parameterType="int">
         select
             play_name
@@ -25,5 +47,4 @@
         FROM ticketing
     </select>
 </mapper>
-.,.,.,.,.,.,,
 <!-- com.jcticket.example.mybatis.mapper.ticketing.ticketingMapper -->
