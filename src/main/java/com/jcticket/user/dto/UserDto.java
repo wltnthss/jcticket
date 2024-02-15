@@ -2,6 +2,9 @@ package com.jcticket.user.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 /**
@@ -24,6 +27,8 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class UserDto {
+
+    @NotBlank
     private String user_id;
     private String user_password;
     private String user_name;
@@ -39,6 +44,7 @@ public class UserDto {
     private String user_retire_yn;
     private int user_visit_cnt;
     private String user_interested_genre;
+    @NotNull
     private String user_rmark;
     private Timestamp created_at;
     private String created_id;

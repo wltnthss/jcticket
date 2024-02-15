@@ -1,18 +1,24 @@
 package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.ErrorResponse;
 import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -130,19 +136,24 @@ public class AdminController {
     }
     // 회원 등록하기
     @PostMapping("/admin/userregister")
-    public String adminUserRegisterPost(Model model, UserDto userDto) throws Exception{
+    public ResponseEntity<?> adminUserRegisterPost(Model model, @Valid UserDto userDto, BindingResult bindingResult) throws Exception{
+
+        System.out.println("bindingResult.hasErrors() => " + bindingResult.hasErrors());
+
+        if(bindingResult.hasErrors()){
+            List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
+            System.out.println("errors => " + errors);
+            // 200 response with 404 status code
+            return ResponseEntity.ok(new ErrorResponse("404", "Validation failure", errors));
+        }
 
         try {
             int rslt = adminService.userInsert(userDto);
-
-            if(rslt < 1){
-                throw new RuntimeException();
-            }
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        return "redirect:/admin/user";
+        return ResponseEntity.ok(200);
+//        return "redirect:/admin/user";
     }
 
     // 회원 삭제 폼
