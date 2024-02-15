@@ -64,6 +64,4 @@ public class UserDaoImpl implements UserDao {
     public int deleteAll() throws Exception {
         return session.delete(namespace+"deleteAll");
     }
-
-
 }
