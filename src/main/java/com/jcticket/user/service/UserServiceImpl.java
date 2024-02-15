@@ -2,6 +2,7 @@ package com.jcticket.user.service;
 
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +36,8 @@ public class UserServiceImpl implements UserService {
         return userDao.increaseLoginCnt(user_id);
     }
 
-
     @Override
-    public int insertUser(UserDto userDto) throws Exception {
+    public int signup(UserDto userDto) throws Exception {
         return userDao.insert(userDto);
     }
 
@@ -53,15 +53,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean loginCheck(String user_id, String user_password) throws Exception {
-        UserDto userDto = null;
+        UserDto userDto = userDao.select(user_id);
+        System.out.println(userDto);
+        System.out.println("userDto.getUser_password() = " + userDto.getUser_password());
+        System.out.println("user_password = " + user_password);
 
-        try {
-            userDto = userDao.select(user_id);
-            System.out.println(userDto);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if(BCrypt.checkpw(user_password,userDto.getUser_password())) {
+            System.out.println("비밀번호가 일치합니다");
+            return true;
         }
-        return userDto != null && userDto.getUser_password().equals(user_password);
+        System.out.println("비밀번호가 일치하지 않습니다.");
+        return false;
     }
 
     @Override
@@ -72,5 +75,15 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int deleteAll() throws Exception {
+        return userDao.deleteAll();
+    }
+
+    @Override
+    public int count() throws Exception {
+        return userDao.count();
     }
 }

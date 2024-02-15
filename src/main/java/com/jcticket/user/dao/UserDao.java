@@ -22,12 +22,12 @@ public interface UserDao {
     int selectIdDupl(String user_id) throws Exception;//
     //닉네임 중복 확인
     int selectNickNameDupl(String user_nickname) throws Exception;//
-
-    //
-    int count() throws Exception; //
+    //회원가입
     int insert(UserDto userDto) throws Exception; //
+
+
+    int count() throws Exception; //
     int delete(String user_id) throws  Exception; //
     int deleteAll() throws Exception;//
-
 }
 

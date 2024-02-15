@@ -4,6 +4,7 @@ import com.jcticket.user.dto.TermsDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.user.service.UserService;
 import com.jcticket.user.service.TermsService;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -153,9 +154,13 @@ public class SignUpController {
         System.out.println("userDto = " + userDto);
         System.out.println("userDto.getUser_password() = " + userDto.getUser_password());
 
+        // DB 저장 전 비밀번호 암호화
+        String hashPassword = BCrypt.hashpw(userDto.getUser_password(), BCrypt.gensalt());
+        userDto.setUser_password(hashPassword);
+
         try{
             //user table insert 실패시 예외 발생시킴
-            if(userService.insertUser(userDto)!=1){
+            if(userService.signup(userDto)!=1){
                 throw new Exception("insert failed");
             }
 
