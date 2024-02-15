@@ -41,9 +41,7 @@ public class TicketingServiceImpl implements TicketingService{
 
     @Override
     public HashMap<String,Object> getPlayStageName(String play_id) throws Exception{
-
     }
-
     //Next step...
 }
 

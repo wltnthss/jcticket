@@ -2,6 +2,7 @@ package com.jcticket.ticketing.dao;
 
 import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,12 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
+    @Test
+    public void insertTest() throws Exception{
+        // given -> 임의의 데이터를 주입
+        ShowingDto dto = new ShowingDto()
+        // when -> 데이터의 조건 dao, service
 
+        // then -> 검증하는 절차
+    }
 }
