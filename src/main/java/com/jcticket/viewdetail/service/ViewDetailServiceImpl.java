@@ -38,6 +38,11 @@ public class ViewDetailServiceImpl implements ViewDetailService{
 
     @Override
     public List<JoinDto> getViewDetail(String play_id) throws Exception {
-        return viewDetailDao.viewDetail(play_id);
+        return viewDetailDao.viewDetail_view(play_id);
+    }
+
+    @Override
+    public List<ShowingDto> getViewDetailTime(String play_id) throws Exception {
+        return viewDetailDao.viewDetail_view_time(play_id);
     }
 }

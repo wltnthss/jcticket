@@ -1,4 +1,4 @@
-package com.jcticket.signup.dto;
+package com.jcticket.user.dto;
 
 import lombok.*;
 

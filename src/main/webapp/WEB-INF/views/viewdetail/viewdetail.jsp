@@ -62,14 +62,17 @@ git <%--
         <%--            <p>--%>
                         <span class="play-period">
 <%--                            대괄호 제거하고 상영날짜 출력--%>
-                            <c:forEach var="date" items="${viewDetail}" varStatus="loop">
+                            <c:forEach var="date" items="${viewDetailTime}" varStatus="loop">
                                 <a class="dateShow"><c:out value="${date.showing_date}" /></a>
                                 <c:if test="${!loop.last}">,</c:if>
                             </c:forEach>
                         </span>
 
                         <a href="javascript:void(0);" id="stage_name">
-                            <span>쉼표 도서관 2층</span>
+<%--                            <span>쉼표 도서관 2층</span>--%>
+                            <c:forEach var="stage" items="${viewDetail}">
+                                <span>&nbsp;${stage.stage_name}</span>
+                            </c:forEach>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
                         </a>
 
@@ -134,8 +137,8 @@ git <%--
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-                            <c:forEach var="info" items="${viewDetail}">
-                                <dd>${info.showing_info}</dd>
+                            <c:forEach var="info" items="${viewDetailTime}">
+                                <dd>${info.showing_date} ${info.showing_info}</dd>
                             </c:forEach>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
