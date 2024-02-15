@@ -50,9 +50,6 @@
                         <a href="/admin/coupon" class="header_nav-a">쿠폰관리</a>
                     </li>
                     <li class="header-nav-li">
-                        <a href="/admin/stactics" class="header_nav-a">통계분석</a>
-                    </li>
-                    <li class="header-nav-li">
                         <a href="/admin/setting" class="header_nav-a">환경설정</a>
                     </li>
                 </ul>
