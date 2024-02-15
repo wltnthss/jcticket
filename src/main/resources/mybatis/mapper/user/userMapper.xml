@@ -35,4 +35,153 @@
         where user_id = #{user_id}
     </update>
 
+    <!--user insert-->
+    <insert id="signup" parameterType="UserDto">
+        insert into user
+        (user_id,
+         user_password,
+         user_name,
+         user_email,
+         user_tel,
+         user_address,
+         user_nickname,
+         user_birth,
+         user_gender,
+         user_create_at,
+         user_retire_yn,
+         user_visit_cnt,
+         user_interested_genre,
+         created_at,
+         created_id,
+         updated_at,
+         updated_id)
+        values
+            (#{user_id},
+             #{user_password},
+             #{user_name},
+             #{user_email},
+             #{user_tel},
+             #{user_address},
+             #{user_nickname},
+             #{user_birth},
+             #{user_gender},
+             current_timestamp,
+             "N",
+             0,
+             #{user_interested_genre},
+             current_timestamp,
+             "system",
+             current_timestamp,
+             "system")
+    </insert>
+
+    <!-- 아이디 중복체크   -->
+    <select id="chkIdDupl" parameterType="String" resultType="int">
+        select count(*)
+        from user
+        where user_id = #{user_id}
+    </select>
+
+    <!-- 닉네임 중복체크-->
+    <select id="chk_NickName_Dupl" parameterType="String" resultType="int">
+        select count(*)
+        from user
+        where user_nickname = #{user_nickname}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <delete id="delete" parameterType="String">
+        delete from
+            user
+        where
+            user_id = #{user_id}
+    </delete>
+
+    <update id="update" parameterType="UserDto">
+        update user
+        set
+            user_password = #{user_password},
+            user_name = #{user_name},
+            user_email = #{user_email},
+            user_tel = #{user_tel},
+            user_address = #{user_address},
+            user_nickname = #{user_nickname},
+            user_birth = #{user_birth},
+            user_gender = #{user_gender},
+            user_create_at = #{user_create_at},
+            user_update_at = #{user_update_at},
+            user_retire_yn = #{user_retire_yn},
+            user_visit_cnt = #{user_visit_cnt},
+            user_interested_genre = #{user_interested_genre},
+            user_rmark = #{user_rmark},
+            created_at = #{created_at},
+            created_id = #{created_id},
+            updated_at = #{updated_at},
+            updated_id = #{updated_id}
+        where user_id = #{user_id}
+    </update>
+
+    <insert id="insert" parameterType="UserDto">
+        INSERT INTO `user`
+        (`user_id`,
+         `user_password`,
+         `user_name`,
+         `user_email`,
+         `user_tel`,
+         `user_address`,
+         `user_nickname`,
+         `user_birth`,
+         `user_gender`,
+         `user_create_at`,
+         `user_retire_yn`,
+         `user_visit_cnt`,
+         `user_interested_genre`,
+         `created_at`,
+         `created_id`,
+         `updated_at`,
+         `updated_id`)
+        values
+            (#{user_id},
+             #{user_password},
+             #{user_name},
+             #{user_email},
+             #{user_tel},
+             #{user_address},
+             #{user_nickname},
+             #{user_birth},
+             #{user_gender},
+             current_timestamp,
+             "N",
+             0,
+             #{user_interested_genre},
+             current_timestamp,
+             "system",
+             current_timestamp,
+             "system")
+    </insert>
+
+    <delete id="deleteAll">
+        delete from user
+    </delete>
+
+    <delete id="delte">
+        delete from user
+        where user_id = #{user_id}
+    </delete>
+
+    <select id="count" resultType="int">
+        select count(*) from user
+    </select>
 </mapper>

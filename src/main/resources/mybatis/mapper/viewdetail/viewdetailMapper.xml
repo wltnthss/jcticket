@@ -78,30 +78,58 @@
     </select>
 
 
-    <!--    공연(play),회차(showing),좌석구분(seat_class)테이블 조인 view에서 보여주는 정보들-->
-    <select id="viewDetail" resultType="JoinDto">
+    <!--    공연(play),좌석구분(seat_class),공연장(stage) 테이블 합침 view에서 보여주는 정보들-->
+    <select id="viewDetail_view" resultType="JoinDto">
+        SELECT p.play_name,
+               p.play_major_cat,
+               p.play_middle_cat,
+               p.play_run_time,
+               p.play_poster,
+               p.play_info,
+               p.agency_id,
+               sc.seat_price,
+               (SELECT stg.stage_name
+                FROM showing s
+                         JOIN stage stg ON s.stage_id = stg.stage_id
+                WHERE s.play_id = p.play_id
+                GROUP BY stg.stage_name) stage_name
+        FROM play p
+                 JOIN seat_class sc ON p.play_id = sc.play_id
+        WHERE p.play_id = #{play_id};
+    </select>
+
+    <!--    회차(showing)테이블 view에서 보여주는 정보들(날짜, 시간)-->
+    <select id="viewDetail_view_time" resultType="ShowingDto">
         SELECT
-            p.play_name,
-            p.play_major_cat,
-            p.play_middle_cat,
-            p.play_run_time,
-            p.play_poster,
-            p.play_info,
-            p.agency_id,
-            s.showing_date,
-            GROUP_CONCAT(DISTINCT s.showing_info) AS showing_info, -- 모든 showing_info 값을 하나의 문자열로 합침
-            sc.seat_price
-        FROM
-            play p
-                JOIN
-            showing s ON p.play_id = s.play_id
-                JOIN
-            seat_class sc ON s.play_id = sc.play_id
+            showing_date,
+            showing_info
+        FROM showing s
         WHERE
-            p.play_id = #{play_id}
-        GROUP BY
-            p.play_id, s.showing_date, sc.seat_price
-        ORDER BY
-            s.showing_date ASC;
+            s.play_id = #{play_id}
+        ORDER BY showing_date;
     </select>
 </mapper>
+
+
+<!--        &#45;&#45;         SELECT p.play_name,-->
+<!--        &#45;&#45;                p.play_major_cat,-->
+<!--        &#45;&#45;                p.play_middle_cat,-->
+<!--        &#45;&#45;                p.play_run_time,-->
+<!--        &#45;&#45;                p.play_poster,-->
+<!--        &#45;&#45;                p.play_info,-->
+<!--        &#45;&#45;                p.agency_id,-->
+<!--        &#45;&#45;                sc.seat_price,-->
+<!--        &#45;&#45;                stgName.stage_name-->
+<!--        &#45;&#45;         FROM play p,-->
+<!--        &#45;&#45;              seat_class sc,-->
+<!--        &#45;&#45;              (SELECT stg.stage_name-->
+<!--        &#45;&#45;               FROM play p,-->
+<!--        &#45;&#45;                    showing s,-->
+<!--        &#45;&#45;                    stage stg-->
+<!--        &#45;&#45;               WHERE p.play_id = s.play_id-->
+<!--        &#45;&#45;                 AND s.stage_id = stg.stage_id-->
+<!--        &#45;&#45;               GROUP BY stg.stage_name) stgName-->
+<!--        &#45;&#45;         WHERE-->
+<!--        &#45;&#45;             p.play_id = #{play_id}-->
+<!--        &#45;&#45;             AND sc.play_id = #{play_id}-->
+<!--        &#45;&#45;             AND s.stage_id = stg.stage_id-->

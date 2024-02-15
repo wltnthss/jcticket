@@ -1,6 +1,6 @@
-package com.jcticket.signup.dao;
+package com.jcticket.user.dao;
 
-import com.jcticket.signup.dto.TermsDto;
+import com.jcticket.user.dto.TermsDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
  * 2024-02-11        jinwook Song       최초 생성
  */
 @Repository
-public class TermsDaoImpl implements TermsDao{
+public class TermsDaoImpl implements TermsDao {
     @Autowired
     private SqlSession session;
     private static String namespace = "TermsMapper.";

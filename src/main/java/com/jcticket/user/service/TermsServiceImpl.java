@@ -1,7 +1,7 @@
-package com.jcticket.signup.service;
+package com.jcticket.user.service;
 
-import com.jcticket.signup.dao.TermsDao;
-import com.jcticket.signup.dto.TermsDto;
+import com.jcticket.user.dao.TermsDao;
+import com.jcticket.user.dto.TermsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * 2024-02-11        jinwook Song       최초 생성
  */
 @Service
-public class TermsServiceImpl implements TermsService{
+public class TermsServiceImpl implements TermsService {
     @Autowired
     TermsDao termsDao;
 
