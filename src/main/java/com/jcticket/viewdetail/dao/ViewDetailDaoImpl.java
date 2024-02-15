@@ -83,7 +83,12 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public List<JoinDto> viewDetail(String play_id) throws Exception {
-        return session.selectList(namespace + "viewDetail", play_id);
+    public List<JoinDto> viewDetail_view(String play_id) throws Exception {
+        return session.selectList(namespace + "viewDetail_view", play_id);
+    }
+
+    @Override
+    public List<ShowingDto> viewDetail_view_time(String play_id) throws Exception {
+        return session.selectList(namespace + "viewDetail_view_time", play_id);
     }
 }
