@@ -40,9 +40,4 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     public List<JoinDto> getViewDetail(String play_id) throws Exception {
         return viewDetailDao.viewDetail(play_id);
     }
-
-    @Override
-    public List<ShowingDto> getViewShowingInfo(String play_id) throws Exception {
-        return viewDetailDao.view_showing_info(play_id);
-    }
 }
