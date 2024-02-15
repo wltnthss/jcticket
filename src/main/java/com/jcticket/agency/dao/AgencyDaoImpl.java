@@ -37,8 +37,45 @@ public class AgencyDaoImpl implements AgencyDao {
         return sqlSession.selectOne(namespace + "AgencyLogin", agency_id);
     }//selectAgency 메서드는 SqlSession 객체를 사용해 db에서 쿼리를 실행?
 
+    @Override
+    public int insertAgency(AgencyDto agencyDto) throws Exception {
+        return sqlSession.insert(namespace+"AgencyInsert", agencyDto);
+    }
+
+    @Override
+    public int deleteAgency() throws Exception {
+        return sqlSession.delete(namespace + "AgencyDelete");
+    }
+
+    @Override
+    public int agencyCount() throws Exception {
+        return sqlSession.selectOne(namespace + "AgencyCount");
+    }
+
+    @Override
+    public void saveAgency(String agencyName) {
+        String sql = "INSERT INTO agency (name) VALUES (?)";
+        sqlSession.update(sql, agencyName);
+    }
 
 
+    @Override
+    public void savePlay(String playName) {
+        String sql = "INSERT INTO play (name) VALUES (?)";
+        sqlSession.update(sql, playName);
+    }
+
+    @Override
+    public void saveShowing(String showingName) {
+        String sql = "INSERT INTO showing (name) VALUES (?)";
+        sqlSession.update(sql, showingName);
+    }
+
+    @Override
+    public void saveStage(String stageName) {
+        String sql = "INSERT INTO stage (name) VALUES (?)";
+        sqlSession.update(sql, stageName);
+    }
 
 
     //로그인에 왜 CRUD를 전부 적어둬야 하는지 모르겠으나.. 시켜서 적는..

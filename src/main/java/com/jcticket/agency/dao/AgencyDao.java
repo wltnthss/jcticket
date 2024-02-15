@@ -26,6 +26,18 @@ import java.util.List;
 public interface AgencyDao {
     AgencyDto selectAgency(String agency_id) throws Exception;
 
+    int insertAgency(AgencyDto agencyDto) throws Exception;
+
+    int deleteAgency() throws Exception;
+
+    int agencyCount() throws Exception;
+
+
+
+    void saveAgency(String agencyName);
+    void savePlay(String playName);
+    void saveShowing(String showingName);
+    void saveStage(String stageName);
 //CRUD;;
 //    void insertAgency(AgencyDto agencyDto) throws Exception;
 //    void updateAgency(AgencyDto agencyDto) throws Exception;

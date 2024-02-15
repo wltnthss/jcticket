@@ -55,9 +55,9 @@ public class AgencyDto {
     private Timestamp agency_contract_expire_at;
     private String agency_content;
     private String agency_manager_name;
-    private String created_at;
+    private Timestamp created_at;
     private String created_id;
-    private String updated_at;
+    private Timestamp updated_at;
     private String updated_id;
 
     public AgencyDto(String agency_id, String agency_password){

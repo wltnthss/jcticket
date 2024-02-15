@@ -1,5 +1,6 @@
 package com.jcticket.agency.service;
 
+import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dao.AgencyDao;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.PlayDto;
@@ -46,6 +47,25 @@ public class AgencyServiceImpl implements AgencyService{
     public AgencyDto selectAgency(String agency_id) throws Exception {
         return agencyDao.selectAgency(agency_id);
     }
+
+    @Override
+    public void saveFormData(EnrollDto enrollDto) {
+        // DTO에서 데이터 추출
+        String agencyName = enrollDto.getAgencyName();
+        String playName = enrollDto.getPlayName();
+        String showingName = enrollDto.getShowingName();
+        String stageName = enrollDto.getStageName();
+
+        // 각 테이블에 데이터 저장하는 로직 구현
+        agencyDao.saveAgency(agencyName);
+        agencyDao.savePlay(playName);
+        agencyDao.saveShowing(showingName);
+        agencyDao.saveStage(stageName);
+    }
+
+
+
+
 
 //    @Override//selectAgency 메서드를 오버라이드.
 //    public AgencyDto selectAgency(String agency_id) throws Exception {//또외처리

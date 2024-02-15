@@ -6,6 +6,21 @@
 <mapper namespace="AgencyMapper">
 <!--  2.Mapper 설정: id="AgencyLogin으로 호출하면 AgencyDto로 매핑? 해? 줌?
 네임스페이스는 나중에 AgencyDaoImpl 에서  쿼리 실행 할 때 사용?-->
+
+    <insert id="AgencyInsert" parameterType="AgencyDto">
+        INSERT INTO agency
+        (agency_id, agency_password, agency_name, agency_email, agency_tel, agency_register_num, agency_reg_at, agency_status_val, agency_contract_reg_at, agency_contract_expire_at, agency_content, agency_manager_name, created_at, created_id, updated_at, updated_id)
+        VALUES(#{agency_id}, #{agency_password}, #{agency_name}, #{agency_email}, #{agency_tel}, #{agency_register_num}, CURRENT_TIMESTAMP, #{agency_status_val}, CURRENT_TIMESTAMP, #{agency_contract_expire_at}, #{agency_content}, #{agency_manager_name}, CURRENT_TIMESTAMP, #{created_id}, CURRENT_TIMESTAMP, #{updated_id})
+    </insert>
+
+    <select id="AgencyCount" resultType="int">
+        select count(*) from agency
+    </select>
+
+    <delete id="AgencyDelete">
+        delete from agency
+    </delete>
+
     <select id="AgencyLogin" resultType="AgencyDto" parameterType="String">
         select
             *
