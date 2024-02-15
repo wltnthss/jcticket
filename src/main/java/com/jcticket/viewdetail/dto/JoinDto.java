@@ -29,9 +29,8 @@ public class JoinDto {
     private String play_poster;
     private String play_info;
     private String agency_id;
-    private String showing_date;
-    private String showing_info;
     private String seat_price;
+    private String stage_name;
 }
 
 
