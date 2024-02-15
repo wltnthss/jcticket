@@ -142,17 +142,16 @@
                         <br>
 
                         <div id="paging">
-                            <c:if test="=${ph.showPrev}">
+                            <c:if test="${ph.showPrev}">
                                 <a href="<c:url value="/mypageticket?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
                             </c:if>
                             <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
                                 <a href="<c:url value="/mypageticket?page=${i}&pageSize=${ph.pageSize}"/>">${i}</a>
                             </c:forEach>
-                            <c:if test="=${ph.showNext}">
-                                <a href="<c:url value="/mypageticket?page=${ph.endPage + 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
+                            <c:if test="${ph.showNext}">
+                                <a href="<c:url value="/mypageticket?page=${ph.endPage + 1}&pageSize=${ph.pageSize}"/>">&gt;</a>
                             </c:if>
                         </div>
-
                     </div>
 
                     <h3>유의사항</h3>

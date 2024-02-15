@@ -1,4 +1,4 @@
-package com.jcticket.mypage.dto;
+package com.jcticket.mypage.controller;
 
 /**
  * packageName    : com.jcticket.mypage.dto
@@ -11,42 +11,43 @@ package com.jcticket.mypage.dto;
  * -----------------------------------------------------------
  * 2024-02-13        JJS       최초 생성
  */
-public class MyPagingDTO {
+public class PageHandler {
 
+    private int page;
     private int totalCnt;
     private int pageSize;
     private int navSize = 10;
     private int totalPage;
-    private int page;
     private int beginPage;
     private int endPage;
     private boolean showPrev;
     private boolean showNext;
 
-    public MyPagingDTO(int totalCnt, int page) {
+    public PageHandler(int totalCnt, int page) {
         this(totalCnt, page, 10);
     }
 
-    public MyPagingDTO(int totalCnt, int page, int pageSize) {
+    public PageHandler(int totalCnt, int page, int pageSize) {
         this.totalCnt = totalCnt;
         this.page = page;
         this.pageSize = pageSize;
 
-        totalPage = (int)Math.ceil(totalCnt / (double)pageSize);
-        beginPage = page / navSize * navSize + 1;
-        endPage = Math.min(beginPage + navSize - 1, totalPage);
-        showPrev = beginPage != 1;
-        showNext = endPage != totalPage;
+
+        totalPage = (int)Math.ceil(totalCnt / (double)pageSize);    // 11
+        beginPage = (page - 1) / navSize * navSize + 1;             // 1
+        endPage = Math.min(beginPage + navSize - 1, totalPage);     // 10
+        showPrev = beginPage != 1;                                  // false
+        showNext = endPage != totalPage;                            // true
+
     }
 
-    void print() {
+    public void print() {
         System.out.println("page = " + page);
         System.out.print(showPrev ? "[PREV] " : " ");
         for(int i = beginPage; i <= endPage; i++) {
             System.out.print(i + " ");
         }
         System.out.print(showNext ? " [NEXT] " : " ");
-
     }
 
     public int getTotalCnt() {

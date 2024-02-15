@@ -1,6 +1,7 @@
 package com.jcticket.mypage.dao;
 
 import com.jcticket.ticketing.dto.TicketingDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -17,14 +18,18 @@ import java.util.Map;
  * 2024-02-10        JJS       최초 생성
  */
 
+@Repository
 public interface mypageDAO {
 
-    List<TicketingDto> findAll() throws Exception;
-
-    List<TicketingDto> selectArll_desc() throws  Exception;
-
     int count() throws Exception;
+//    List<TicketingDto> selectArll_desc() throws  Exception;
+//    public List<TicketingDto> selectAll_page(Map map) throws Exception;
 
-    public List<TicketingDto> selectAll_page(Map map) throws Exception;
+    List<TicketingDto> selectAll(Map map);
+
+
+    int insert(TicketingDto ticketingDto)  throws Exception;
+
+
 
 }
