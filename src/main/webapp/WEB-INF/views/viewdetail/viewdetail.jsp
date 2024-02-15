@@ -55,7 +55,7 @@ git <%--
         <%--제목--%>
             <p class="big-title">
                 <c:forEach var="play" items="${viewDetail}">
-                    <a>${play.play_name}</a>
+                    <a id="for_ticketing_play_name">${play.play_name}</a>
                 </c:forEach>
             </p>
                 <div class="two-one">
@@ -71,7 +71,7 @@ git <%--
                         <a href="javascript:void(0);" id="stage_name">
 <%--                            <span>쉼표 도서관 2층</span>--%>
                             <c:forEach var="stage" items="${viewDetail}">
-                                <span>&nbsp;${stage.stage_name}</span>
+                                <span id="for_ticketing_stage_name">${stage.stage_name}</span>
                             </c:forEach>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
                         </a>
@@ -180,7 +180,8 @@ git <%--
             </div>
         </div>
 
-        <div class="five" onclick="location.href='javascript:void(0);'">
+<%--        <div class="five" onclick="location.href='javascript:void(0);'">--%>
+        <div class="five">
             <a class="taketic">예매하기</a>
         </div>
 
@@ -326,7 +327,10 @@ git <%--
 
             <div class="eight">
                 <div class="eight_map" id="mapa">
-                    <p class="map_name">쉼표도서관</p>
+<%--                    <p class="map_name">쉼표도서관</p>--%>
+                    <c:forEach var="stage" items="${viewDetail}">
+                        <p class="map_name">&nbsp;${stage.stage_name}</p>
+                    </c:forEach>
                     <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
                 </div>
                 <div class="map_icon_box">

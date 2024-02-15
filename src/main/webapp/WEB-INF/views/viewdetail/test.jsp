@@ -27,7 +27,8 @@
     function moveToPlay1() {
         // 공연1의 아이디를 가져와서 URL에 추가
         var playId = '공연아이디1';
-        var url = '/viewdetail?this_play_id=' + encodeURIComponent(playId);
+        // var url = '/viewdetail?this_play_id=' + encodeURIComponent(playId);
+        var url = '/viewdetail?this_play_id=' + playId;
         // URL로 이동
         window.location.href = url;
     }
