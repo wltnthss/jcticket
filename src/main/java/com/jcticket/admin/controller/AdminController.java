@@ -7,12 +7,16 @@ import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -130,13 +134,29 @@ public class AdminController {
     }
     // 회원 등록하기
     @PostMapping("/admin/userregister")
-    public String adminUserRegisterPost(Model model, UserDto userDto) throws Exception{
+    public String adminUserRegisterPost(Model model, @Valid UserDto userDto, BindingResult bindingResult) throws Exception{
+
+        if(bindingResult.hasErrors()){
+
+            // 회원가입 실패시 입력 데이터 값 유지하기 위함
+            model.addAttribute("userDto", userDto);
+
+            // Map 타입 ex) { valid_user_id, "오류 메세지" } 리턴
+            Map<String, String> validatorRslt = adminService.validateHandling(bindingResult);
+
+            for (String key: validatorRslt.keySet()) {
+                model.addAttribute(key, validatorRslt.get(key));
+                System.out.println("key = " + key);
+            }
+
+            return "admin/adminuserregister";
+        }
 
         try {
             int rslt = adminService.userInsert(userDto);
 
-            if(rslt < 1){
-                throw new RuntimeException();
+            if(rslt != 1){
+                throw new RuntimeException("Insert Fail");
             }
         } catch (Exception e){
             e.printStackTrace();

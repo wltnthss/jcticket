@@ -3,8 +3,10 @@ package com.jcticket.admin.service;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.user.dto.UserDto;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName :  com.jcticket.admin.service
@@ -30,4 +32,6 @@ public interface AdminService {
     int userInsert(UserDto userDto) throws Exception;
     // 회원 탈퇴
     int userDelete(String user_id) throws Exception;
+    // validator 예외처리 Handling 처리
+    Map<String, String> validateHandling(BindingResult bindingResult);
 }

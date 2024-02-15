@@ -6,6 +6,9 @@ import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -127,5 +130,19 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int userDelete(String user_id) throws Exception {
         return adminDao.userRetireUpdate(user_id);
+    }
+
+    @Override
+    public Map<String, String> validateHandling(BindingResult bindingResult) {
+
+        Map<String, String> validatorRslt = new HashMap<>();
+
+        for (FieldError error : bindingResult.getFieldErrors()) {
+            String validKeyName = String.format("valid_%s", error.getField());
+            validatorRslt.put(validKeyName, error.getDefaultMessage());
+            System.out.println("validatorRslt = " + validatorRslt);
+        }
+
+        return validatorRslt;
     }
 }

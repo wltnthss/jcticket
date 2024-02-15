@@ -514,6 +514,11 @@ table th{
     background: #fcfcfc;
     border-top: 1px solid #ececec;
 }
+.valid{
+    color: red;
+    font-weight: 550;
+    padding-top: 5px;
+}
 /*관리자 회원관리 끝*/
 
 /*관리자 기획사관리 시작*/
