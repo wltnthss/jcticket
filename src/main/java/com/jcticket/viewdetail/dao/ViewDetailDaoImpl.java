@@ -1,5 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
+import com.jcticket.viewdetail.dto.JoinDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
@@ -24,16 +26,55 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     @Autowired
     private SqlSession session;
 
-    private static String namespace="com.jcticket.viewdetail. .";
+    private static String namespace="com.jcticket.viewdetail.viewdetailMapper.";
+
+    @Override
+    public int play_insert(PlayDto playDto) throws Exception {
+        return session.insert(namespace + "play_insert", playDto);
+    }
+
+    @Override
+    public int showing_insert(ShowingDto showingDto) throws Exception {
+        return session.insert(namespace + "showing_insert", showingDto);
+    }
+
+    @Override
+    public int seat_class_insert(SeatClassDto seatClassDto) throws Exception {
+        return session.insert(namespace + "seat_class_insert", seatClassDto);
+    }
+
+    @Override
+    public int play_delete_all() throws Exception {
+        return session.delete(namespace + "play_delete_all");
+    }
+
+    @Override
+    public int showing_delete_all() throws Exception {
+        return session.delete(namespace + "showing_delete_all");
+    }
+
+    @Override
+    public int seat_class_delete_all() throws Exception {
+        return session.delete(namespace + "seat_class_delete_all");
+    }
+
+//    테스트용 delete
+    @Override
+    public int test_delete_play() throws Exception {
+        return session.delete(namespace + "test_delete_play");
+    }
+    @Override
+    public int test_delete_showing() throws Exception {
+        return session.delete(namespace + "test_delete_showing");
+    }
+    @Override
+    public int test_delete_seat_class() throws Exception {
+        return session.delete(namespace + "test_delete_seat_class");
+    }
 
     @Override
     public List<ShowingDto> select_showing_info(String dateText) throws Exception {
         return session.selectList(namespace + "select_showing_info", dateText);
-    }
-
-    @Override
-    public int seat_price() throws Exception {
-        return session.selectOne(namespace + "seat_price");
     }
 
     @Override
@@ -42,9 +83,7 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public List<ShowingDto> showing_date() throws Exception {
-        return session.selectList(namespace + "showing_date");
+    public List<JoinDto> viewDetail(String play_id) throws Exception {
+        return session.selectList(namespace + "viewDetail", play_id);
     }
-
-
 }

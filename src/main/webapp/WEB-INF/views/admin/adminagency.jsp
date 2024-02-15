@@ -17,31 +17,40 @@
     <jsp:include page="/WEB-INF/views/admin/adminheader.jsp"/>
 
     <div class="admin-common-wrap">
-        <div class="admin-common-snb">
-            <div class="snb-header">
-                <h2>
-                    기획사관리
-                </h2>
-                <i class="fas fa-solid fa-city"></i>
-            </div>
-            <dl>
-                <dt class="menu_toggle-u10">기획사관리
-                    <i class="fas fa-solid fa-arrow-down"></i>
-                </dt>
+        <%--좌측 nav 페이지--%>
+        <jsp:include page="/WEB-INF/views/admin/adminagencynav.jsp"/>
 
-                <div id="u10" style="display: block">
-                    <dd class="u10">
-                        <a href="/admin/user">기획사 정보관리</a>
-                    </dd>
-                    <dd class="u10">
-                        <a href="/admin/register">기획사 등록하기</a>
-                    </dd>
-                </div>
-            </dl>
-        </div>
         <div class="admin-common-content">
             <div class="admin-common-title">
-                <h1>기획사 관리</h1>
+                <h1>기획사 정보관리</h1>
+                <h2>기본검색</h2>
+                <hr>
+                <form id="agencySearch" action="/admin/agency" method="get">
+                    <div class="user-form">
+                        <table>
+                            <colgroup>
+                                <col class="user-w100">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th scope="row">검색어</th>
+                                <td>
+                                    <select name="option">
+                                        <option value="I">아이디</option>
+                                        <option value="N">회원명</option>
+                                    </select>
+                                    <input type="text" name="keyword" value="" class="user-form-input" size="30">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-confirm">
+                        <input type="submit" value="검색" class="btn-medium">
+                        <input type="reset" value="초기화" class="btn-medium grey">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

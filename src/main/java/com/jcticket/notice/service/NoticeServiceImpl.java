@@ -57,13 +57,10 @@ public class NoticeServiceImpl implements NoticeService{
         pagingParams.put("start", pagingStart);
         pagingParams.put("limit", PAGELIMIT);
         pagingParams.put("keyword", keyword);
+        pagingParams.put("sort", sort);
 
         // 번호순 seq 값 들어오면 번호순 정렬, 아닐 시에 조회순 정렬
-        if(sort.equals("seq")){
-            pagingList = noticeDao.pagingList(pagingParams);
-        }else{
-            pagingList = noticeDao.pagingViewOrderList(pagingParams);
-        }
+        pagingList = noticeDao.pagingList(pagingParams);
 
         return pagingList;
     }
@@ -81,6 +78,9 @@ public class NoticeServiceImpl implements NoticeService{
         int startPage = (((int) (Math.ceil((double) page / BLOCKLIMIT))) -1 ) * BLOCKLIMIT + 1;
         // 끝 페이지 값 계산 (10, 20, 30...)
         int endPage = startPage + BLOCKLIMIT - 1;
+        // 이전, 다음 링크 계산
+        boolean showPrev = page != 1;
+        boolean showNext = page != maxPage;
 
         if(endPage > maxPage){
             endPage = maxPage;
@@ -91,8 +91,25 @@ public class NoticeServiceImpl implements NoticeService{
         pageDto.setMaxPage(maxPage);
         pageDto.setStartPage(startPage);
         pageDto.setEndPage(endPage);
+        pageDto.setShowPrev(showPrev);
+        pageDto.setShowNext(showNext);
         pageDto.setKeyword(keyword);
 
         return pageDto;
+    }
+
+    @Override
+    public int insert(NoticeDto noticeDto) throws Exception {
+        return noticeDao.insert(noticeDto);
+    }
+
+    @Override
+    public int deleteAll() throws Exception {
+        return noticeDao.deleteAll();
+    }
+
+    @Override
+    public int count(String keyword) throws Exception {
+        return noticeDao.count(keyword);
     }
 }

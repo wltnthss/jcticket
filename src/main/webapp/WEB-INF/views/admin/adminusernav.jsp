@@ -28,10 +28,10 @@
                 <a href="/admin/user">회원 정보관리</a>
             </dd>
             <dd class="u10">
-                <a href="/admin/register">회원 등록하기</a>
+                <a href="/admin/userregister">회원 등록하기</a>
             </dd>
             <dd class="u10">
-                <a href="/admin/delete">회원 삭제하기</a>
+                <a href="/admin/userdelete">회원 삭제하기</a>
             </dd>
             <dd class="u10">
                 <a href="#">회원 일괄등록하기</a>

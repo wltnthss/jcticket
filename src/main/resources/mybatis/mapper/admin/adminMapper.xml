@@ -3,7 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="adminMapper">
-    <select id="usercnt" resultType="int" parameterType="String">
+
+    <delete id="userDeleteAll">
+        DELETE FROM USER
+    </delete>
+
+    <delete id="userDelete" parameterType="String">
+        DELETE FROM USER WHERE user_id = #{user_id}
+    </delete>
+
+    <delete id="adminDelete" parameterType="String">
+        DELETE FROM ADMIN WHERE admin_id = #{admin_id}
+    </delete>
+
+    <select id="userCnt" resultType="int" parameterType="String">
         SELECT
             count(*)
         FROM
@@ -20,38 +33,38 @@
         </choose>
     </select>
 
-        <select id="login" resultType="AdminDto">
-            SELECT
-                admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id
-            FROM
-                admin
-            WHERE
-                1=1
-                and admin_id = #{admin_id}
-                and admin_password = #{admin_password}
-        </select>
+    <select id="adminLogin" resultType="AdminDto">
+        SELECT
+            admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id
+        FROM
+            admin
+        WHERE
+            1=1
+            and admin_id = #{admin_id}
+            and admin_password = #{admin_password}
+    </select>
 
-        <select id="userstatics" resultType="UserDto">
-            SELECT
-                user_name, user_id, user_tel, user_email, user_address, user_gender , user_visit_cnt , user_birth , user_create_at
-            FROM
-                user
-            ORDER BY
-                user_create_at desc
-            LIMIT
-	            3
-        </select>
+    <select id="userStatics" resultType="UserDto">
+        SELECT
+            user_name, user_id, user_tel, user_email, user_address, user_gender , user_visit_cnt , user_birth , user_create_at
+        FROM
+            user
+        ORDER BY
+            user_create_at desc
+        LIMIT
+            3
+    </select>
 
-        <select id="userlist" resultType="UserDto">
-            SELECT
-                *
-            FROM
-                user
-            ORDER BY
-                user_create_at desc
-        </select>
+    <select id="userList" resultType="UserDto">
+        SELECT
+            *
+        FROM
+            user
+        ORDER BY
+            user_create_at desc
+    </select>
 
-    <select id="userpaginglist" resultType="UserDto" parameterType="java.util.HashMap">
+    <select id="userPagingList" resultType="UserDto" parameterType="java.util.HashMap">
         SELECT
             *
         FROM
@@ -72,7 +85,7 @@
 	        #{start}, #{limit}
     </select>
 
-    <update id="userretireupdate" parameterType="String">
+    <update id="userRetireUpdate" parameterType="String">
         UPDATE user
         SET
             user_retire_yn = 'Y',
@@ -81,6 +94,48 @@
             user_id = #{user_id};
     </update>
 
+    <insert id="insertUser" parameterType="UserDto">
+        insert into user
+        (user_id,
+         user_password,
+         user_name,
+         user_email,
+         user_tel,
+         user_address,
+         user_nickname,
+         user_birth,
+         user_gender,
+         user_create_at,
+         user_retire_yn,
+         user_visit_cnt,
+         user_interested_genre,
+         created_at,
+         created_id,
+         updated_at,
+         updated_id)
+        values
+            (#{user_id},
+             #{user_password},
+             #{user_name},
+             #{user_email},
+             #{user_tel},
+             #{user_address},
+             #{user_nickname},
+             #{user_birth},
+             #{user_gender},
+             current_timestamp,
+             "N",
+             0,
+             #{user_interested_genre},
+             current_timestamp,
+             "system",
+             current_timestamp,
+             "system")
+    </insert>
 
-
+    <insert id="insertAdmin" parameterType="NoticeDto">
+        INSERT INTO admin
+        (admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id)
+        VALUES(#{admin_id}, #{admin_email}, #{admin_password}, #{admin_phone}, #{admin_nickname}, "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
+    </insert>
 </mapper>

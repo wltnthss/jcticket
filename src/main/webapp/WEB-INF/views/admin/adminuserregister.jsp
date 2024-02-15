@@ -19,14 +19,14 @@
     <div class="admin-common-wrap">
 
         <%--좌측 nav 페이지--%>
-        <jsp:include page="/WEB-INF/views/admin/adminnav.jsp"/>
+        <jsp:include page="/WEB-INF/views/admin/adminusernav.jsp"/>
 
         <div class="admin-common-content">
             <div class="admin-common-title">
-                <h1>회원 정보등록하기</h1>
+                <h1>회원 등록하기</h1>
                 <h2>개인정보 입력</h2>
             </div>
-            <form action="/admin/register" method="post">
+            <form action="/admin/userregister" method="post">
                 <div class="tbl_frm01">
                     <table>
                         <colgroup>
