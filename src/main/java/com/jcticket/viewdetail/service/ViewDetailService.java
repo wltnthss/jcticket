@@ -24,6 +24,4 @@ public interface ViewDetailService {
     int getRemainSeat(String showing_seq) throws Exception;
 
     List<JoinDto> getViewDetail(String play_id) throws Exception;
-
-    List<ShowingDto> getViewShowingInfo(String play_id) throws Exception;
 }
