@@ -1,11 +1,9 @@
 package com.jcticket.viewdetail.dao;
 
-import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
-import com.jcticket.viewdetail.service.ViewDetailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +94,7 @@ public class ViewDetailDaoTest {
         String test_play_id = "테스트1";
         //예상결과
         List<JoinDto> expected_result = new ArrayList<>();
-        expected_result.add(new JoinDto("<테스트>-테스트","콘서트","강연",60,"poster","infoimg","1231","2024-03-15","300,000"));
+        expected_result.add(new JoinDto("<테스트>-테스트","콘서트","강연",60,"poster","infoimg","1231","1회 13시 00분","2024-03-15","300,000"));
         System.out.println("expected_result =>" + expected_result);
 
         //when
@@ -107,5 +105,16 @@ public class ViewDetailDaoTest {
         for (int i=0;i<expected_result.size();i++) {
             assertEquals(expected_result.get(i), list.get(i));
         }
+    }
+
+//    테스트를 마친 후 테스트데이터 제거
+    @Test
+    public void testDelete() throws Exception {
+        //        테스트용 딜리트
+        viewDetailDao.test_delete_seat_class();
+        //        테스트용 딜리트
+        viewDetailDao.test_delete_showing();
+        //        테스트용 딜리트
+        viewDetailDao.test_delete_play();
     }
 }

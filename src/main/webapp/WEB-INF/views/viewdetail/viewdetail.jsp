@@ -134,14 +134,9 @@ git <%--
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-                            <c:forEach var="info" items="${viewShwoingInfo}">
+                            <c:forEach var="info" items="${viewDetail}">
                                 <dd>${info.showing_info}</dd>
                             </c:forEach>
-
-<%--                            질문 : viewDetail 매퍼로 받으면 중복제거가 안됨--%>
-<%--                            <c:forEach var="info" items="${viewDetail}">--%>
-<%--                                <dd>${info.showing_info}</dd>--%>
-<%--                            </c:forEach>--%>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
                         </dl>
