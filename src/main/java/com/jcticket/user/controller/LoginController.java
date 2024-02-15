@@ -89,7 +89,4 @@ public class LoginController {
             System.out.println("cookie = " + cookie.getValue());
         }
     }
-
-
-
 }

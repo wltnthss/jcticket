@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
     //user_id에 맞는 유저 정보 가져옴
     @Override
     public UserDto getUser(String user_id)throws Exception{
-
         return userDao.select(user_id);
     }
 

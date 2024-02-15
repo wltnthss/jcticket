@@ -74,7 +74,7 @@ public class AdminController {
         String msg = null;
 
         try {
-            AdminDto rslt = adminService.login(adminDto);
+            AdminDto rslt = adminService.adminLogin(adminDto);
 
             // DB에 있는 관리자 사용 여부
             String adminUseYn = rslt.getAdmin_use_yn();
