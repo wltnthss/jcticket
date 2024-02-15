@@ -58,7 +58,6 @@ public class ViewDetailDaoTest {
     public void showing_insert() throws Exception {
 //        쿼리 전부 제거
 //        viewDetailDao.showing_delete_all();
-
 //        테스트용 딜리트
         viewDetailDao.test_delete_showing();
         //given
@@ -99,27 +98,24 @@ public class ViewDetailDaoTest {
 
         //when
         List<JoinDto> list = viewDetailDao.viewDetail_view(test_play_id);
-
-        for (int i=0;i<list.size();i++) {
-            System.out.println(list.get(i));
-        }
-//        System.out.println("list =>" + expected_result);
+        System.out.println("list =>" + list);
 
         //then
         assertEquals(expected_result.size(), list.size());
-        for (int i=0;i<expected_result.size();i++) {
+
+        for (int i=0;i<expected_result.size(); i++) {
             assertEquals(expected_result.get(i), list.get(i));
         }
     }
 
 //    테스트를 마친 후 테스트데이터 제거
-    @Test
-    public void testDelete() throws Exception {
-        //        테스트용 딜리트
-        viewDetailDao.test_delete_seat_class();
-        //        테스트용 딜리트
-        viewDetailDao.test_delete_showing();
-        //        테스트용 딜리트
-        viewDetailDao.test_delete_play();
-    }
+//    @Test
+//    public void testDelete() throws Exception {
+//        //        테스트용 딜리트
+//        viewDetailDao.test_delete_seat_class();
+//        //        테스트용 딜리트
+//        viewDetailDao.test_delete_showing();
+//        //        테스트용 딜리트
+//        viewDetailDao.test_delete_play();
+//    }
 }

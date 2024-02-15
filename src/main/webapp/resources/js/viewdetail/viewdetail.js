@@ -9,8 +9,6 @@
             availableDates.push(dateShow[i].innerHTML);
         }
 
-        //영상님파트로 보낼 날짜정보, 아래 하나 더 있음 ajax임
-        var booking_date = null;
         $("#datepicker").datepicker({
         //오늘부터 날짜 선택 가능하도록 함
         minDate: 0,
@@ -39,11 +37,11 @@
 
             // 일자 선택된 후 이벤트 발생
         onSelect: function (dateText) {
+            //콜백함수사용,ticketing으로 보낼 데이터
+            dateTextCallback(dateText)
+
             var left = document.querySelector('.fourLeft');
             var right = document.querySelector('.fourRight');
-
-            //영상님파트로 보낼 날짜정보 저장
-            booking_date = dateText;
 
             // 잔여석 삭제
             var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
@@ -158,28 +156,37 @@
                     alert('Error =' + error)
                 }
             });
-
-            // 영상님한테 보낼 회차정보
-            // var seatInfo = $(this).html();
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/viewdetail/seatInfo",
-            //     // data: seatInfo,
-            //     // 인코딩 해서 컨트롤러에 데이터 보냄 why? 컨트롤러에서 글자가 깨져서
-            //     data: encodeURIComponent(seatInfo),
-            //     success: function(res) {
-            //         // 서버로부터 받은 응답 데이터를 처리
-            //         console.log('Response:', res);
-            //         // alert("성공"+res);
-            //     },
-            //     error: function(error) {
-            //         // 서버 통신 중 발생한 오류를 처리
-            //         console.log('Error:', error);
-            //         alert('Error =' + error)
-            //     }
-            // });
         })
 
+        // for ticketing 티켓팅으로!
+        //콜백함수 사용해서 dateText (선택한 날짜) 가져옴
+        function dateTextCallback(dateText) {
+            var for_ticket = document.querySelector(".five");
+            for_ticket.onclick = function () {
+
+                var atag_id = document.querySelectorAll(".aTag");
+                //회차시퀀스
+                var showing_seq = null;
+                for(var i=0;i<atag_id.length;i++) {
+                    showing_seq = atag_id[i].id;
+                }
+
+                var play_name_id = document.getElementById("for_ticketing_play_name");
+                var stage_name_id = document.getElementById("for_ticketing_stage_name");
+                //공연이름 (<오늘도 혼자 논다>-시흥)
+                var play_name = play_name_id.innerHTML;
+                //공연장이름 (인천앞바다)
+                var stage_name = stage_name_id.innerHTML;
+
+                //쿼리스트링 이용
+                var url = '/ticketing-detail?dateText='+dateText
+                    +'&showing_seq='+showing_seq
+                    +'&play_name='+play_name
+                    +'&stage_name='+stage_name;
+                // URL로 이동
+                window.location.href = url; //성공
+            }
+        }
 
         // URL복사 이벤트
         var copyURL = document.getElementById('url_image');
