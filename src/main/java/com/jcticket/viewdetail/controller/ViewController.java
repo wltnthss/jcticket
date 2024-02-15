@@ -41,9 +41,10 @@ public class ViewController {
             Model model) throws Exception{
         try {
             List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
-            List<ShowingDto> view_showing_info = viewDetailService.getViewShowingInfo(this_play_id);
             model.addAttribute("viewDetail", viewDetail);
-            model.addAttribute("viewShwoingInfo", view_showing_info);
+
+//            List<ShowingDto> view_showing_info = viewDetailService.getViewShowingInfo(this_play_id);
+//            model.addAttribute("viewShwoingInfo", view_showing_info);
         } catch (Exception e){
             e.printStackTrace();
         }
