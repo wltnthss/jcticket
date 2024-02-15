@@ -89,8 +89,7 @@
         UPDATE user
         SET
             user_retire_yn = 'Y',
-            user_retire_at = now(),
-            updated_at = now()
+            user_retire_at = now()
         WHERE
             user_id = #{user_id};
     </update>
