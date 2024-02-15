@@ -144,6 +144,7 @@
                             <tr>
                                 <th scope="row">좌석배치도</th>
                                 <td>
+<%--                                    이거 뭐,, 필요한가? --%>
                                     <input type="file" name="seatingchart" id="seatingchart"><br>
 
                                     <br><em>위의 [좌석판매형태]항목에서 '지정석'을 선택했다면 필수로 배치도가 그려진 파일을 첨부하셔야 합니다.

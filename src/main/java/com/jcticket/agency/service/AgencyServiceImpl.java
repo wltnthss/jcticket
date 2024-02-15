@@ -50,13 +50,13 @@ public class AgencyServiceImpl implements AgencyService{
 
     @Override
     public void saveFormData(EnrollDto enrollDto) {
-        // DTO에서 데이터 추출
+        // DTO에서 데이터 추출한다는 가정
         String agencyName = enrollDto.getAgencyName();
         String playName = enrollDto.getPlayName();
         String showingName = enrollDto.getShowingName();
         String stageName = enrollDto.getStageName();
 
-        // 각 테이블에 데이터 저장하는 로직 구현
+        // 각 테이블에 데이터 저장
         agencyDao.saveAgency(agencyName);
         agencyDao.savePlay(playName);
         agencyDao.saveShowing(showingName);

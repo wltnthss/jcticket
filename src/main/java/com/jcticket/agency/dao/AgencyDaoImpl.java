@@ -1,6 +1,7 @@
 package com.jcticket.agency.dao;
 
 import com.jcticket.agency.dto.*;
+import com.jcticket.agency.dto.EnrollDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

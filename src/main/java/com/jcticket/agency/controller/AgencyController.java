@@ -2,6 +2,7 @@ package com.jcticket.agency.controller;
 
 import com.jcticket.agency.dao.AgencyDao;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.PlayDto;
 import com.jcticket.agency.service.AgencyService;
 import com.jcticket.user.dto.UserDto;
@@ -38,6 +39,8 @@ public class AgencyController {
 
     @Autowired
     private AgencyService agencyService;//AgencyService 인터페이스를 사용하기 위해 의존성을 주입 받음
+
+
 
 
     //RequestMapping("/agency")을 해 줬기 떄문에 GetMapping("/processLogin 만 적어도
@@ -119,11 +122,12 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
 
 
 
-//    @PostMapping("/enroll")
-//    public String enroll(@ModelAttribute AgencyDto agencyDto) {
-//        agencyService.saveData(agencyDto);
-//        return "redirect:/success"; // 성공 페이지로 리다이렉트
-//    }
+    @PostMapping("/enroll")
+    public String enroll(@ModelAttribute AgencyDto agencyDto) {
+        agencyService.saveFormData(new EnrollDto());
+        return "redirect:/success"; // 성공 페이지 필요할까?
+    }
+
 
 
 

@@ -1,7 +1,9 @@
 package com.jcticket.agency.dao;
 
+
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.EnrollDto;
 import org.springframework.stereotype.Repository;
 import com.jcticket.agency.dto.ShowingDto;
 import com.jcticket.agency.dto.StageDto;

@@ -3,10 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
     <typeAliases>
         <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
-
-        <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
 
 
         <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
@@ -18,9 +19,10 @@
 
 
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
-
-        <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
         <typeAlias alias="ShowSeatDto" type="com.jcticket.viewdetail.dto.ShowSeatDto"/>
+        <typeAlias alias="JoinDto" type="com.jcticket.viewdetail.dto.JoinDto"/>
+        <typeAlias alias="PlayDto" type="com.jcticket.viewdetail.dto.PlayDto"/>
+        <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
 
 
         <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
