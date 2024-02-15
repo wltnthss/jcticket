@@ -17,6 +17,12 @@ import java.util.Map;
  * 2024-01-31             jisoo Son             최초 생성
  */
 public interface NoticeDao {
+    // 공지사항 전체 삭제
+    int deleteAll() throws Exception;
+    // 공지사항 인서트
+    int insert(NoticeDto noticeDto) throws Exception;
+    // 공지사항 전체 리스트 조회
+    List<NoticeDto> selectAll() throws Exception;
     // 공지사항 상세보기
     NoticeDto select(int no) throws Exception;
     // 전체 notice 리스트 개수 조회
@@ -25,6 +31,4 @@ public interface NoticeDao {
     int addViewCnt(int no) throws Exception;
     // paging 번호순 내림차순 List 조회
     List<NoticeDto> pagingList(Map<String, Object> pagingParams);
-    // paging 조회순 내림차순 List 조회
-    List<NoticeDto> pagingViewOrderList(Map<String, Object> pagingParams);
 }

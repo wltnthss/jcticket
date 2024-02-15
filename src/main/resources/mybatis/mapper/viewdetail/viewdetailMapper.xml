@@ -4,38 +4,104 @@
 
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
 
-<!--    공연회차정보,시퀀스 조회-->
-    <select id="select_showing_info" resultType="map">
-        select showing_info,showing_seq
-        from showing
-        where showing_date = #{dateText}
+<!--    play테이블 insert-->
+    <insert id="play_insert" parameterType="PlayDto">
+        INSERT INTO play
+        (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id},#{play_name},#{play_poster},#{play_info},#{play_major_cat},#{play_middle_cat},#{play_small_cat},#{play_run_time},#{agency_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    showing테이블 insert-->
+    <insert id="showing_insert" parameterType="ShowingDto">
+        INSERT INTO showing
+        (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES (#{showing_seq},#{showing_start_at},#{showing_end_at},#{showing_info},#{showing_date},#{showing_day},#{showing_status},#{showing_seat_cnt},#{play_id},#{stage_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    seat_class테이블 insert-->
+    <insert id="seat_class_insert" parameterType="SeatClassDto">
+        INSERT INTO seat_class
+        (seat_grade_seq, seat_price, play_id, created_at, created_id, updated_at, updated_id)
+        VALUES (#{seat_grade_seq},#{seat_price},#{play_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+    </insert>
+
+<!--    play테이블 delete all-->
+    <delete id="play_delete_all">
+        DELETE FROM play
+    </delete>
+
+<!--    showing테이블 delete all-->
+    <delete id="showing_delete_all">
+        DELETE FROM showing
+    </delete>
+
+<!--    seat_class테이블 delete all-->
+    <delete id="seat_class_delete_all">
+        DELETE FROM seat_class
+    </delete>
+
+<!--    테스트용 delete-->
+    <delete id="test_delete_play">
+        DELETE FROM play
+        where play_id = "테스트1";
+    </delete>
+
+    <delete id="test_delete_showing">
+        DELETE FROM showing
+        WHERE play_id = "테스트1";
+    </delete>
+
+    <delete id="test_delete_seat_class">
+        DELETE FROM seat_class
+        WHERE play_id = "테스트1";
+    </delete>
+<!--    테스트용 delete-->
+
+    <!--    공연회차정보,시퀀스 조회 (dateText는 달력에서 선택한 날짜)-->
+    <select id="select_showing_info" resultType="hashmap">
+        SELECT showing_info,showing_seq
+        FROM showing
+        WHERE showing_date = #{dateText}
     </select>
 
-
-<!--    좌석가격 조회-->
-    <select id="seat_price" resultType="int">
-        select seat_price
-        from seat_class
-    </select>
-
-
-<!--    잔여석 조회-->
+    <!--    잔여석 조회(공연회차정보, 시퀀스 조회에서 받은 시퀀스를 가지고 잔여석 조회)-->
     <select id="remain_seat" resultType="int">
-        select
+        SELECT
             s.showing_seat_cnt -
-            (select count(*)
-            from show_seat ss
-            where s.showing_seq = ss.showing_seq
-            and show_seat_status = 'N') as remaining_seats
-        from
+            (SELECT count(*)
+             FROM show_seat ss
+             WHERE s.showing_seq = ss.showing_seq
+               AND show_seat_status = 'N') AS remaining_seats
+        FROM
             showing s
-        where s.showing_seq = #{showing_seq};
+        WHERE s.showing_seq = #{showing_seq};
     </select>
 
-<!--    공연날짜 조회-->
-    <select id="showing_date" resultType="String">
-        select showing_date
-        from showing
-        order by showing_date asc;
+
+    <!--    공연(play),회차(showing),좌석구분(seat_class)테이블 조인 view에서 보여주는 정보들-->
+    <select id="viewDetail" resultType="JoinDto">
+        SELECT
+            p.play_name,
+            p.play_major_cat,
+            p.play_middle_cat,
+            p.play_run_time,
+            p.play_poster,
+            p.play_info,
+            p.agency_id,
+            s.showing_date,
+            GROUP_CONCAT(DISTINCT s.showing_info) AS showing_info, -- 모든 showing_info 값을 하나의 문자열로 합침
+            sc.seat_price
+        FROM
+            play p
+                JOIN
+            showing s ON p.play_id = s.play_id
+                JOIN
+            seat_class sc ON s.play_id = sc.play_id
+        WHERE
+            p.play_id = #{play_id}
+        GROUP BY
+            p.play_id, s.showing_date, sc.seat_price
+        ORDER BY
+            s.showing_date ASC;
     </select>
 </mapper>

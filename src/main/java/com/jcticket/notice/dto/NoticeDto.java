@@ -54,4 +54,18 @@ public class NoticeDto {
     public NoticeDto(int notice_seq) {
         this.notice_seq = notice_seq;
     }
+
+    public NoticeDto(String notice_title, String notice_content, int notice_view_cnt, Timestamp notice_reg_at, String notice_use_yn, String notice_pin_yn, String admin_id, Timestamp created_at, String created_id, Timestamp updated_at, String update_id) {
+        this.notice_title = notice_title;
+        this.notice_content = notice_content;
+        this.notice_view_cnt = notice_view_cnt;
+        this.notice_reg_at = notice_reg_at;
+        this.notice_use_yn = notice_use_yn;
+        this.notice_pin_yn = notice_pin_yn;
+        this.admin_id = admin_id;
+        this.created_at = created_at;
+        this.created_id = created_id;
+        this.updated_at = updated_at;
+        this.update_id = update_id;
+    }
 }

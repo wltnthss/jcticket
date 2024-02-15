@@ -3,6 +3,7 @@ package com.jcticket.notice.dao;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.dto.PageDto;
 import com.jcticket.notice.service.NoticeService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,92 +36,61 @@ public class NoticeDaoImplTest {
     @Autowired
     NoticeDao noticeDao;
 
-    @Autowired
-    NoticeService noticeService;
+    // DTO timestamp 데이터 삽입 테스트용
+    final static Timestamp NOW = new Timestamp(System.currentTimeMillis());
+    // count keyword null 테스트용
+    final static String KEYWORD = "";
 
+    // 각 테스트 케이스 실행전 공지사항 전체 삭제
+    @Before
+    public void init() throws Exception{
+        System.out.println("init DELETE ALL");
+        noticeDao.deleteAll();
+    }
+
+    @Test
+    public void insert() throws Exception {
+        // given
+        int result = 0;
+        for (int i = 1; i < 112; i++) {
+            NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
+
+            // when
+            result = noticeDao.insert(noticeDto);
+            assertTrue(1 == result);
+        }
+        // then
+        assertTrue(noticeDao.count(KEYWORD) == 111);
+    }
+    @Test
+    public void selectAllCnt() throws Exception {
+        // given
+        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집합니다", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
+        int insertResult = noticeDao.insert(noticeDto);
+
+        // when
+        List<NoticeDto> list = noticeDao.selectAll();
+        int vertifyCnt = noticeDao.count(KEYWORD);
+
+        // then
+        assertTrue(insertResult==1);
+        assertTrue(list.size() == vertifyCnt);
+    }
     @Test
     public void updateViewCnt() throws Exception{
 
-        // given -> 임의의 데이터를 주입
-        int noticeSeq = 1;
+        // given
+        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
 
-        // when -> 데이터의 조건 dao, service
-        NoticeDto noticeDto = noticeDao.select(noticeSeq);
+        // when
+        int insertRslt = noticeDao.insert(noticeDto);
+        noticeDto = noticeDao.select(noticeDto.getNotice_seq());
+
         noticeDao.addViewCnt(noticeDto.getNotice_seq());
-
-        // then -> 검증하는 절차
-        assertTrue(48 == noticeDto.getNotice_view_cnt());
-    }
-
-    @Test
-    public void listcount() throws Exception{
-
-        //given
-
-        // keyword "" 인 경우 전체 리스트 카운트
-        int totalCnt = noticeDao.count("");
-        // keyword "qwer" 인 경우 DB에 제목이 qwer인 값만 카운트
-        int totcalKeywordCnt = noticeDao.count("qwer");
+        noticeDto = noticeDao.select(noticeDto.getNotice_seq());
 
         // then
-        assertTrue(28 == totalCnt);
-        assertTrue(4 == totcalKeywordCnt);
-    }
-
-    @Test
-    public void pageDefaultList() throws Exception{
-        // given
-        int page = 1;
-        String sort = "";
-        String keyword = "";
-        List<NoticeDto> pagingList = null;
-
-        //when
-        pagingList = noticeService.pagingList(page, sort, keyword);
-        System.out.println("pagingList => " + pagingList);
-        PageDto pageDto = noticeService.pagingParam(page, keyword);
-
-        //then
-        assertTrue(pagingList.size() == 10);
-        assertTrue(3 == pageDto.getMaxPage());
-        assertTrue(1 == pageDto.getStartPage());
-        assertTrue(3 == pageDto.getEndPage());
-    }
-
-    @Test
-    public void pageKeywordList() throws Exception{
-
-        //given
-        int page = 1;
-        String sort = "";
-        String keyword = "qwer";
-        List<NoticeDto> pagingList = null;
-
-        //when
-        pagingList = noticeService.pagingList(page, sort, keyword);
-        PageDto pageDto = noticeService.pagingParam(page, keyword);
-
-        //then
-        assertTrue(pagingList.size() == 4);
-        assertTrue(1 == pageDto.getMaxPage());
-        assertTrue(1 == pageDto.getStartPage());
-        assertTrue(1 == pageDto.getEndPage());
-    }
-
-    @Test
-    public void pageOrderList() throws Exception{
-
-        //given
-        int page = 1;
-        String sort = "view";
-        String keyword = "";
-        List<NoticeDto> pagingList = null;
-
-        //when
-        pagingList = noticeService.pagingList(page, sort, keyword);
-        PageDto pageDto = noticeService.pagingParam(page, keyword);
-
-        //then
-        assertTrue(pagingList.get(0).getNotice_title().equals("공지사항 제목 테스트 1"));
+        assertTrue(1 == insertRslt);
+        assertTrue(1 == noticeDto.getNotice_view_cnt());
     }
 }

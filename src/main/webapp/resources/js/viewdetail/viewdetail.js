@@ -140,13 +140,13 @@
                     var insertSpan = document.querySelector("#seatPrice1");
 
                     if(!existSpan) {
-                        seatRemain.textContent = "잔여: "+res+"석";
+                        seatRemain.textContent = "(잔여: "+res+"석)";
                         seatRemain.className = 'remain_seat'
                         insertSpan.insertAdjacentElement('beforeend',seatRemain);
                     } else {
                         while(insertSpan.firstChild)  {
                             insertSpan.removeChild(existSpan);
-                            seatRemain.textContent = "잔여: "+res+"석";
+                            seatRemain.textContent = "(잔여: "+res+"석)";
                             seatRemain.className = 'remain_seat'
                             insertSpan.insertAdjacentElement('beforeend',seatRemain);
                         }

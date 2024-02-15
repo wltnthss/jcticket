@@ -47,12 +47,8 @@
     </div >
 
     <div class="notice-paging">
-        <c:if test="${paging.page<=1}">
-            <%-- 현재 페이지가 1페이지면 이전 글자만 보여줌 --%>
-            <a class="notice-paging-pageitems"> < </a>
-        </c:if>
-        <c:if test="${paging.page>=2}">
-            <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
+        <c:if test="${paging.showPrev}">
+            <%-- 1페이지가 아닌 경우는 < 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
             <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
         </c:if>
 
@@ -68,12 +64,7 @@
             </c:if>
         </c:forEach>
 
-        <c:if test="${paging.page >= paging.maxPage}">
-            <%-- page가 maxPage보다 크거나 같으면 링크가 제거된 > 표시 --%>
-            <a class="notice-paging-pageitems"> > </a>
-        </c:if>
-
-        <c:if test="${paging.page < paging.maxPage}">
+        <c:if test="${paging.showNext}">
             <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
             <a class="notice-paging-pageitems" href="/notice/paging?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
         </c:if>

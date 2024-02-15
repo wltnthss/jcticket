@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 
 /**
  * packageName    : com.jcticket.viewdetail.dto
- * fileName       : SeatClassDto
+ * fileName       : PlayDto
  * author         : sungjun
  * date           : 2024-02-15
  * description    : 자동 주석 생성
@@ -21,10 +21,16 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class SeatClassDto {
-    private int seat_grade_seq;
-    private String seat_price;
+public class PlayDto {
     private String play_id;
+    private String play_name;
+    private String play_poster;
+    private String play_info;
+    private String play_major_cat;
+    private String play_middle_cat;
+    private String play_small_cat;
+    private int play_run_time;
+    private String agency_id;
     private Timestamp created_at;
     private String created_id;
     private Timestamp updated_at;

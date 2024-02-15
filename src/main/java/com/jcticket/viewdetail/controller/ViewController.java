@@ -2,7 +2,7 @@ package com.jcticket.viewdetail.controller;
 
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dao.ViewDetailDao;
-import com.jcticket.viewdetail.dto.SeatClassDto;
+import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.service.ViewDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,84 +35,42 @@ public class ViewController {
     @Autowired
     ViewDetailService viewDetailService;
 
-//    @GetMapping("/viewdetail")
-//    public String viewDetail() throws Exception {
-//        return "viewdetail/viewdetail";
-//    }
-
+//    공연아이디 조건, view에서 표시할 정보들
     @GetMapping("/viewdetail")
-    public String remainSeat(Model model) throws Exception{
-
+    public String viewdetail(@RequestParam String this_play_id,
+            Model model) throws Exception{
         try {
-//            좌석가격
-            int priceSeat = viewDetailService.getSeatPrice();
-//            공연날짜 set에 넣었다 빼서 중복을 제거함
-            List<ShowingDto> showingDate = viewDetailService.getShowingDate();
-            HashSet<ShowingDto> deduplication = new HashSet<>(showingDate);
-            showingDate = new ArrayList<>(deduplication);
-//            ArrayList역순으로 순서 바꿔줌 why? 그래야 날짜순으로 화면에 출력됨
-            Collections.reverse(showingDate);
-//            System.out.println(list);
-            model.addAttribute("SeatPrice", priceSeat);
-            model.addAttribute("ShowingDate", showingDate);
+            List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
+            model.addAttribute("viewDetail", viewDetail);
 
+//            List<ShowingDto> view_showing_info = viewDetailService.getViewShowingInfo(this_play_id);
+//            model.addAttribute("viewShwoingInfo", view_showing_info);
         } catch (Exception e){
             e.printStackTrace();
         }
         return "viewdetail/viewdetail";
     }
 
+//    회차정보받기(ex.24년 2월 1일 >>> 1회 12시 00분)
     @PostMapping("/viewdetail")
     @ResponseBody
     public List<ShowingDto> viewDetail2(@RequestBody String dateText)
             throws Exception {
-//        System.out.println(dateText);
         // dateText뒤에 계속 등호 들어와서 자름 (2024-02-10=   <<< 이런식으로 들어옴 왜인지는 모르겠다)
         char[] charArr = dateText.toCharArray();
         String dateCal = dateText.substring(0, charArr.length-1);
-
         List<ShowingDto> msg = null;
-
         try {
 //            날짜정보를 통해 해당 날짜의 회차정보 받음
             List<ShowingDto> list = viewDetailService.getShowingInfo(dateCal);
-//            model.addAttribute("info", list);
             msg = list;
-//            System.out.println(list);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        ajax로 보낸건 msg로 받아야됨 viewdetail/viewdetail 로 받으면 안됨
         return msg;
     }
-//}
 
-//    @PostMapping("/viewdetail/seatInfo")
-//    @ResponseBody
-//    public List<SeatClassDto> viewDetail3(@RequestBody String seatInfo)
-//            throws Exception {
-//        //디코딩
-//        String decodedSeatInfo = URLDecoder.decode(seatInfo, "UTF-8");
-//
-//        char[] charArr = decodedSeatInfo.toCharArray();
-//        String seatInfoCal = decodedSeatInfo.substring(0, charArr.length-1);
-//
-//        //        dateText값 들어오는지 확인
-////        System.out.println("값 들어오나??");
-////        System.out.println("seatInfo => " + seatInfoCal);
-//
-//        List<SeatClassDto> msg = null;
-//        try {
-//            List<SeatClassDto> list = viewDetailService.getSeatPrice(seatInfoCal);
-//            msg = list;
-////            System.out.println(list.get(0));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return msg;
-//    }
-
+//    잔여석정보(ex.잔여 5석)
     @PostMapping("/viewdetail/remainSeat")
     @ResponseBody
     public int viewDetail4(@RequestBody String remainSeat)
@@ -123,16 +81,10 @@ public class ViewController {
         char[] charArr = decodedSeatInfo.toCharArray();
         String remainSeatCal = (decodedSeatInfo.substring(0, charArr.length-1));
 
-        //        dateText값 들어오는지 확인
-//        System.out.println("값 들어오나??");
-//        System.out.println("remainSeat => " + remainSeatCal);
-
         int msg = 0;
         try {
-//            잔여석 정보
             int list = viewDetailService.getRemainSeat(remainSeatCal);
             msg = list;
-//            System.out.println(msg);
         } catch (Exception e) {
             e.printStackTrace();
         }

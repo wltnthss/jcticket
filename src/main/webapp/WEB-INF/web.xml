@@ -54,4 +54,30 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+    <!-- 에러 처리 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error/error404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>400</error-code>
+        <location>/WEB-INF/views/error/error400.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/error/error500.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.NullPointerException</exception-type>
+        <location>/WEB-INF/views/error/errorNullPointer.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.ArrayIndexOutOfBoundsException</exception-type>
+        <location>/WEB-INF/views/error/errorIndexOutofBounds.jsp</location>
+    </error-page>
 </web-app>
