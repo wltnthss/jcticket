@@ -36,8 +36,16 @@ public class TicketingDaoImpl implements TicketingDao{
         return session.delete(namespace+"deleteShowing", play_id);
     }
     @Override
-    public List<HashMap<String,Object>> selectShowingDate(String playId) throws Exception{
-        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingDate", playId);
+    public int deleteAll() throws Exception{
+        return session.delete(namespace+"deleteAll");
+    }
+//    @Override
+//    public int countShowingAll() throws Exception{
+//        return session.selectOne(namespace+"countShowingAll");
+//    }
+    @Override
+    public List<HashMap<String,Object>> selectShowingDate(String play_id) throws Exception{
+        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingDate", play_id);
         return list;
     }
 

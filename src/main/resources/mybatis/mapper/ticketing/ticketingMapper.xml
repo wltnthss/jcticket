@@ -48,6 +48,11 @@
         where play_id = #{play_id}
     </delete>
 
+    <!-- 전체 삭제하는 쿼리 -->
+    <delete id="deleteAll">
+        delete from notice
+    </delete>
+
     <!-- 공연날짜 조회 - datepicker에 표시하기 위해-->
     <select id="selectShowingDate" parameterType="string" resultType="hashmap">
         select showing_date
@@ -76,6 +81,10 @@
         where s.play_id	= #{play_id}
     </select>
 
+<!--    <select id="countShowingAll" resultType="int">-->
+<!--        select count(*)-->
+<!--        from showing-->
+<!--    </select>-->
 
 
     <!-- ************** next steps **************** -->

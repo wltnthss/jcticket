@@ -22,6 +22,11 @@ public interface TicketingDao {
     int insertShowing(ShowingDto dto) throws Exception;
     //삭제
     int deleteShowing(String play_id) throws Exception;
+    //전체삭제
+    int deleteAll() throws Exception;
+    // 회차 테이블에 들어있는 모든 공연들 카운팅
+//    int countShowingAll() throws Exception;
+
     // 공연아이다로 공연일정조회
     List<HashMap<String,Object>> selectShowingDate(String play_id) throws Exception;
     // 공연아이디와 공연시퀀스로 공연회차 조회

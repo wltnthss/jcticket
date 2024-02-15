@@ -35,13 +35,13 @@
              #{user_birth},
              #{user_gender},
              current_timestamp,
-             "N",
+             'N',
              0,
              #{user_interested_genre},
              current_timestamp,
-             "system",
+             'system',
              current_timestamp,
-             "system")
+             'system')
     </insert>
 
     <!-- 아이디 중복체크   -->

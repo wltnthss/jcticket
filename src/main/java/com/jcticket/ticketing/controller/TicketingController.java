@@ -34,11 +34,11 @@ public class TicketingController {
         return "ticketing/popup-test";
     }
 
-    @GetMapping(value = "/ticketing-detail")
-    public String doTicketing(Model model) throws Exception{
-        List<String> list = ticketingService.readShowingInfo(1, 1);
-        model.addAttribute("list", list);
-        return "ticketing/booking";
-    }
+//    @GetMapping(value = "/ticketing-detail")
+//    public String doTicketing(Model model) throws Exception{
+//        List<String> list = ticketingService.readShowingInfo(1, 1);
+//        model.addAttribute("list", list);
+//        return "ticketing/booking";
+//    }
 
 }

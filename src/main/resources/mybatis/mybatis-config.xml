@@ -16,7 +16,6 @@
         <typeAlias alias="AdminDto" type="com.jcticket.admin.dto.AdminDto"/>
 
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
-        <typeAlias alias="PlayDto" type="com.jcticket.ticketing.dto.PlayDto"/>
 
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
         <typeAlias alias="ShowSeatDto" type="com.jcticket.viewdetail.dto.ShowSeatDto"/>
