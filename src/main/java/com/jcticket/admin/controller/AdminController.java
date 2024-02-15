@@ -216,10 +216,6 @@ public class AdminController {
     public String admincoupon() throws Exception{
         return "admin/admincoupon";
     }
-    @GetMapping("/admin/stactics")
-    public String adminstactics() throws Exception{
-        return "admin/adminstactics";
-    }
     @GetMapping("/admin/setting")
     public String adminsetting() throws Exception{
         return "admin/adminsetting";

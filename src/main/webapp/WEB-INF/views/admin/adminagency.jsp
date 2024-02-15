@@ -38,7 +38,7 @@
                                 <td>
                                     <select name="option">
                                         <option value="I">아이디</option>
-                                        <option value="N">회원명</option>
+                                        <option value="N">기획사명</option>
                                     </select>
                                     <input type="text" name="keyword" value="" class="user-form-input" size="30">
                                 </td>

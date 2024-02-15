@@ -552,15 +552,6 @@ table th{
 }
 /*관리자 쿠폰관리 끝*/
 
-/*관리자 통계분석 시작*/
-.fa-square-poll-vertical:before{
-    font-size: 30px;
-    color: #555;
-    content: "\f681";
-}
-
-/*관리자 통계분석 끝*/
-
 /*관리자 환경설정 시작*/
 
 .fa-gears:before{
