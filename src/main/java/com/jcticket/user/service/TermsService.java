@@ -1,6 +1,6 @@
-package com.jcticket.signup.service;
+package com.jcticket.user.service;
 
-import com.jcticket.signup.dto.TermsDto;
+import com.jcticket.user.dto.TermsDto;
 
 /**
  * packageName    : com.jcticket.signup.service

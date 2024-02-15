@@ -43,6 +43,14 @@
 
         <!-- Spring -->
 
+        <!-- 비밀번호 암호화  -->
+        <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.3m</version>
+        </dependency>
+
         <!-- STMP 메일 전송 관련 라이브러리 2024.02.06-->
         <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
         <dependency>
