@@ -25,9 +25,7 @@
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
 
 
-        <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
-
-        <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
+        <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>
