@@ -1,7 +1,6 @@
 package com.jcticket.mypage.service;
 
 import com.jcticket.mypage.dao.mypageDAO;
-import com.jcticket.mypage.dto.MyPagingDTO;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,27 +29,23 @@ public class MyServiceImpl implements mypageService {
     @Autowired
     mypageDAO mypageDAO;
 
-    @Autowired
-
-
-    @Override
-    public List<TicketingDto> findAll() throws Exception {
-        return mypageDAO.findAll();
-    }
-
-    @Override
-    public List<TicketingDto> selectAll_desc() throws Exception {
-        return mypageDAO.selectArll_desc();
-    }
-
     @Override
     public Integer count() throws Exception {
         return mypageDAO.count();
     }
+//    @Override
+//    public List<TicketingDto> selectAll_desc() throws Exception {
+//        return mypageDAO.selectArll_desc();
+//    }
+//
+//    @Override
+//    public List<TicketingDto> selectAll_page(Map map) throws Exception {
+//        return mypageDAO.selectAll_page(map);
+//    }
 
     @Override
-    public List<TicketingDto> selectAll_page(Map map) throws Exception {
-        return mypageDAO.selectAll_page(map);
+    public List<TicketingDto> selectAll(Map map) throws Exception {
+        return mypageDAO.selectAll(map);
     }
 
 

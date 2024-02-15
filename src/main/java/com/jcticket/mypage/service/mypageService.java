@@ -19,14 +19,11 @@ import java.util.Map;
  * 2024-02-10        JJS       최초 생성
  */
 public interface mypageService {
-
-    List<TicketingDto> findAll() throws Exception;
-
-    List<TicketingDto> selectAll_desc() throws Exception;
-
     Integer count() throws Exception;
 
-    List<TicketingDto> selectAll_page(Map map) throws Exception;
+//    List<TicketingDto> selectAll_desc() throws Exception;
+//    List<TicketingDto> selectAll_page(Map map) throws Exception;
+    List<TicketingDto> selectAll(Map map) throws Exception;
 
 
 }

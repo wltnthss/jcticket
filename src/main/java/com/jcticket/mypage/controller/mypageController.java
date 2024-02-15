@@ -1,8 +1,5 @@
 package com.jcticket.mypage.controller;
 
-import com.jcticket.mypage.dto.MyPagingDTO;
-import com.jcticket.notice.dto.NoticeDto;
-import com.jcticket.notice.dto.PageDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +31,9 @@ public class mypageController {
 
     @GetMapping("/mypageIndex")
     public String mypage(Model model) throws Exception {
-        List<TicketingDto> list = mypageService.selectAll_desc();
+        Map map = new HashMap();
+        map.put("selectType", "desc");
+        List<TicketingDto> list = mypageService.selectAll(map);
         model.addAttribute("ticketList", list);
         return "/mypage/mypage_main";
     }
@@ -44,18 +43,21 @@ public class mypageController {
     public String ticket(@RequestParam(defaultValue = "1")Integer page,
                          @RequestParam(defaultValue = "5")Integer pageSize,
                          Model model) throws Exception {
+
+        System.out.println("page => " + page);
         int totalCount = mypageService.count();
 
         try {
 
-            MyPagingDTO myPagingDTO = new MyPagingDTO(totalCount, page, pageSize);
+            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize);
 
             Map map = new HashMap();
+            map.put("selectType", "page");
             map.put("offset", (page - 1) * pageSize);
             map.put("pageSize", pageSize);
 
 
-            List<TicketingDto> list = mypageService.selectAll_page(map);
+            List<TicketingDto> list = mypageService.selectAll(map);
             model.addAttribute("ticketList", list);
             model.addAttribute("ph", myPagingDTO);
 

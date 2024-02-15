@@ -28,7 +28,7 @@ public class TicketingDto {
     private int ticketing_cnt;
     private String ticketing_status;
     private String showing_info;
-    private String showing_date;
+    private String showing_date; //TimeStamp로 바꿔야하나??
     private Timestamp cancelable_at;
     private int play_price;
     private String stage_name;
