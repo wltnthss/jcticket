@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
@@ -109,5 +110,21 @@ public class AdminDaoImplTest {
         // then
         assertEquals(1, updateResult);
         assertEquals("Y", afterUpdateTestUser.getUser_retire_yn());
+    }
+
+    @Test
+    public void insertAgency() throws Exception {
+
+        adminDao.deleteAllAgency();
+
+        // given
+        for (int i = 1; i < 11; i++) {
+            AgencyDto agencyDto = new AgencyDto("agency"+i, "1111", "정석코딩(주)", "castello@gmail.com", "010-5789-1548", "98-578-48751", CURRENT_TIMESTAMP, "R", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "정석코딩", "남궁성", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+            // when
+            int result = adminDao.insertAgency(agencyDto);
+            // then
+            assertTrue(1 == result);
+        }
+        assertTrue(10 == adminDao.countAllAgency());
     }
 }

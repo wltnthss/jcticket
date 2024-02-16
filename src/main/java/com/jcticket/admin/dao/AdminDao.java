@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 
@@ -36,5 +37,11 @@ public interface AdminDao {
     int insertAdmin(AdminDto adminDto) throws Exception;
     // 관리자 삭제
     int deleteAdmin(String admin_id) throws Exception;
+    // 기획사 등록
+    int insertAgency(AgencyDto agencyDto) throws Exception;
+    // 기획사 전체 삭제
+    int deleteAllAgency() throws Exception;
+    // 기획사 전체 조회
+    int countAllAgency() throws Exception;
 
 }

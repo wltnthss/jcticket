@@ -3,12 +3,15 @@ package com.jcticket.admin.controller;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.UserPageDto;
 import com.jcticket.admin.service.AdminService;
+import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +47,7 @@ public class AdminController {
 
     // 관리자 로그아웃
     @GetMapping("/admin/logout")
-    public String adminlogout(HttpServletRequest request) throws Exception{
+    public String adminLogout(HttpServletRequest request) throws Exception{
 
         HttpSession session = request.getSession();
 
@@ -56,7 +59,7 @@ public class AdminController {
 
     // 관리자 로그인시 대시보드 이동
     @GetMapping("/admin/dashboard")
-    public String admindashboard(Model model) throws Exception{
+    public String adminDashBoard(Model model) throws Exception{
 
         try {
             List<UserDto> userLists = adminService.userstatics();
@@ -104,7 +107,7 @@ public class AdminController {
     }
     // 회원 관리
     @GetMapping("/admin/user")
-    public String adminuser(Model model,
+    public String adminUser(Model model,
                             @RequestParam(value = "option", required = false) String option,
                             @RequestParam(value = "keyword", required = false) String keyword,
                             @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
@@ -129,7 +132,7 @@ public class AdminController {
     }
     // 회원 등록하기 폼
     @GetMapping("/admin/userregister")
-    public String adminuserregister() throws Exception{
+    public String adminuserRegister() throws Exception{
         return "admin/adminuserregister";
     }
     // 회원 등록하기
@@ -140,9 +143,12 @@ public class AdminController {
 
             // 회원가입 실패시 입력 데이터 값 유지하기 위함
             model.addAttribute("userDto", userDto);
+            System.out.println("userDto = " + userDto);
 
-            // Map 타입 ex) { valid_user_id, "오류 메세지" } 리턴
-            Map<String, String> validatorRslt = adminService.validateHandling(bindingResult);
+            CommonValidateHandling cvh = new CommonValidateHandling();
+
+            // Map 타입 { valid_user_id, "오류 메세지" } 리턴
+            Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
 
             for (String key: validatorRslt.keySet()) {
                 model.addAttribute(key, validatorRslt.get(key));
@@ -167,7 +173,7 @@ public class AdminController {
 
     // 회원 삭제 폼
     @GetMapping("/admin/userdelete")
-    public String adminuserdelete(Model model,
+    public String adminUserDelete(Model model,
                             @RequestParam(value = "option", required = false) String option,
                             @RequestParam(value = "keyword", required = false) String keyword,
                             @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
@@ -210,15 +216,56 @@ public class AdminController {
 
         return result;
     }
-
+    // 기획사관리
     @GetMapping("/admin/agency")
-    public String adminagency() throws Exception{
+    public String adminAgency() throws Exception{
         return "admin/adminagency";
     }
-
+    // 기획사 등록 폼 이동
     @GetMapping("/admin/agencyregister")
-    public String adminagencyregister() throws Exception{
+    public String adminGetAgencyRegister() throws Exception{
+
+        System.out.println("컨트롤러 접근 성공1");
+
         return "admin/adminagencyregister";
+    }
+    // 기획사 등록
+    @PostMapping("/admin/agencyregister")
+    @ExceptionHandler(Exception.class)
+    public String adminPostAgencyRegister(Model model, @Valid AgencyDto agencyDto, BindingResult bindingResult) throws Exception{
+
+        System.out.println("컨트롤러 접근 성공2");
+
+        try {
+
+            if(bindingResult.hasErrors()){
+
+                // 회원가입 실패시 입력 데이터 값 유지하기 위함
+                model.addAttribute("agencyDto", agencyDto);
+
+                CommonValidateHandling cvh = new CommonValidateHandling();
+
+                // Map 타입 { valid_user_id, "오류 메세지" } 리턴
+                Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
+
+                for (String key: validatorRslt.keySet()) {
+                    model.addAttribute(key, validatorRslt.get(key));
+                    System.out.println("key = " + key);
+                }
+
+                return "admin/adminagencyregister";
+            }
+
+            int rslt = adminService.insertAgency(agencyDto);
+
+            if(rslt != 1){
+                throw new RuntimeException("Insert Fail");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "redirect:/admin/agency";
     }
     @GetMapping("/admin/product")
     public String adminproduct() throws Exception{
