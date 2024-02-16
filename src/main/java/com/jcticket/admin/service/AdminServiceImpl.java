@@ -3,6 +3,7 @@ package com.jcticket.admin.service;
 import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.UserPageDto;
+import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -133,16 +134,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Map<String, String> validateHandling(BindingResult bindingResult) {
-
-        Map<String, String> validatorRslt = new HashMap<>();
-
-        for (FieldError error : bindingResult.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorRslt.put(validKeyName, error.getDefaultMessage());
-            System.out.println("validatorRslt = " + validatorRslt);
-        }
-
-        return validatorRslt;
+    public int insertAgency(AgencyDto agencyDto) throws Exception {
+        return adminDao.insertAgency(agencyDto);
     }
 }

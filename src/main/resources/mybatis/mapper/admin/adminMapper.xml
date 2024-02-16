@@ -128,14 +128,28 @@
              0,
              #{user_interested_genre},
              current_timestamp,
-             "system",
+             "JISOO",
              current_timestamp,
-             "system")
+             "JISOO")
     </insert>
 
     <insert id="insertAdmin" parameterType="NoticeDto">
         INSERT INTO admin
-        (admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id)
-        VALUES(#{admin_id}, #{admin_email}, #{admin_password}, #{admin_phone}, #{admin_nickname}, "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
+        (admin_id, admin_email, admin_password, agency_tel, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id)
+        VALUES(#{admin_id}, #{admin_email}, #{admin_password}, #{agency_tel}, #{admin_nickname}, "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
     </insert>
+
+    <insert id="insertAgency" parameterType="AgencyDto">
+        INSERT INTO agency
+        (agency_id, agency_password, agency_name, agency_email, agency_tel, agency_register_num, agency_reg_at, agency_status_val, agency_contract_reg_at, agency_contract_expire_at, agency_content, agency_manager_name, created_at, created_id, updated_at, updated_id)
+        VALUES(#{agency_id}, #{agency_password}, #{agency_name}, #{agency_email}, #{agency_tel}, #{agency_register_num}, CURRENT_TIMESTAMP, "R", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, #{agency_manager_name} , CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
+    </insert>
+
+    <delete id="deleteAllAgency">
+        delete from agency
+    </delete>
+
+    <select id="countAllAgency" resultType="int">
+        select count(*) from agency
+    </select>
 </mapper>
