@@ -162,29 +162,37 @@
         //콜백함수 사용해서 dateText (선택한 날짜) 가져옴
         function dateTextCallback(dateText) {
             var for_ticket = document.querySelector(".five");
+
             for_ticket.onclick = function () {
 
-                var atag_id = document.querySelectorAll(".aTag");
-                //회차시퀀스
-                var showing_seq = null;
-                for(var i=0;i<atag_id.length;i++) {
-                    showing_seq = atag_id[i].id;
+                // 클릭된 .aTag가 있을 경우에만 실행
+                var atag_clicked = document.querySelector(".aTag.clicked");
+
+                if(atag_clicked != null){
+                    var atag_id = document.querySelectorAll(".aTag");
+
+                    //회차시퀀스
+                    var showing_seq = null;
+
+                    for(var i=0;i<atag_id.length;i++) {
+                        showing_seq = atag_id[i].id;
+                    }
+
+                    var play_name_id = document.getElementById("for_ticketing_play_name");
+                    var stage_name_id = document.getElementById("for_ticketing_stage_name");
+                    //공연이름 (<오늘도 혼자 논다>-시흥)
+                    var play_name = play_name_id.innerHTML;
+                    //공연장이름 (인천앞바다)
+                    var stage_name = stage_name_id.innerHTML;
+
+                    //쿼리스트링 이용
+                    var url = '/ticketing-detail?dateText='+dateText
+                        +'&showing_seq='+showing_seq
+                        +'&play_name='+play_name
+                        +'&stage_name='+stage_name;
+                    // URL로 이동
+                    window.location.href = url; //성공
                 }
-
-                var play_name_id = document.getElementById("for_ticketing_play_name");
-                var stage_name_id = document.getElementById("for_ticketing_stage_name");
-                //공연이름 (<오늘도 혼자 논다>-시흥)
-                var play_name = play_name_id.innerHTML;
-                //공연장이름 (인천앞바다)
-                var stage_name = stage_name_id.innerHTML;
-
-                //쿼리스트링 이용
-                var url = '/ticketing-detail?dateText='+dateText
-                    +'&showing_seq='+showing_seq
-                    +'&play_name='+play_name
-                    +'&stage_name='+stage_name;
-                // URL로 이동
-                window.location.href = url; //성공
             }
         }
 
