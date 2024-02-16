@@ -43,5 +43,9 @@ public interface AdminDao {
     int deleteAllAgency() throws Exception;
     // 기획사 전체 조회
     int countAllAgency() throws Exception;
+    // 기획사 테이블 총 개수 조회
+    int agencyCnt(Map<String, Object> options) throws Exception;
+    // 기획사 페이징 리스트 조회
+    List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception;
 
 }

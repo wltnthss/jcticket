@@ -16,6 +16,23 @@
         DELETE FROM ADMIN WHERE admin_id = #{admin_id}
     </delete>
 
+    <select id="agencyCnt" resultType="int" parameterType="String">
+        SELECT
+            count(*)
+        FROM
+            agency
+        WHERE
+            1=1
+        <choose>
+            <when test='option=="I"'>
+                AND agency_id LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND agency_name LIKE concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+    </select>
+
     <select id="userCnt" resultType="int" parameterType="String">
         SELECT
             count(*)
@@ -62,6 +79,27 @@
             user
         ORDER BY
             user_create_at desc
+    </select>
+
+    <select id="agencyPagingList" resultType="AgencyDto" parameterType="java.util.HashMap">
+        SELECT
+            *
+        FROM
+            agency
+        WHERE
+            1=1
+        <choose>
+            <when test='option=="I"'>
+                AND agency_id LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND agency_name LIKE concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+        ORDER BY
+            agency_reg_at desc
+        limit
+            #{start}, #{limit}
     </select>
 
     <select id="userPagingList" resultType="UserDto" parameterType="java.util.HashMap">

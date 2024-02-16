@@ -78,4 +78,14 @@ public class AdminDaoImpl implements AdminDao{
     public int countAllAgency() throws Exception {
         return sqlSession.selectOne(namespace + "countAllAgency");
     }
+
+    @Override
+    public int agencyCnt(Map<String, Object> options) throws Exception {
+        return sqlSession.selectOne(namespace + "agencyCnt", options);
+    }
+
+    @Override
+    public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
+        return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
+    }
 }

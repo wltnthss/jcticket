@@ -1,7 +1,7 @@
 package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.UserPageDto;
+import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.common.CommonValidateHandling;
@@ -10,14 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -113,15 +110,14 @@ public class AdminController {
                             @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
 
         try {
-
             List<UserDto> pagingList = null;
 
             pagingList = adminService.userPaingList(page, option, keyword);
-            UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
+            PageDto pageDto = adminService.userPagingParam(page, option, keyword);
             int userTotalCnt = adminService.usercnt(option, keyword);
 
             model.addAttribute("list", pagingList);
-            model.addAttribute("paging", userPageDto);
+            model.addAttribute("paging", pageDto);
             model.addAttribute("userListCnt", userTotalCnt);
 
         } catch (Exception e) {
@@ -143,7 +139,6 @@ public class AdminController {
 
             // 회원가입 실패시 입력 데이터 값 유지하기 위함
             model.addAttribute("userDto", userDto);
-            System.out.println("userDto = " + userDto);
 
             CommonValidateHandling cvh = new CommonValidateHandling();
 
@@ -152,7 +147,6 @@ public class AdminController {
 
             for (String key: validatorRslt.keySet()) {
                 model.addAttribute(key, validatorRslt.get(key));
-                System.out.println("key = " + key);
             }
 
             return "admin/adminuserregister";
@@ -183,11 +177,11 @@ public class AdminController {
             List<UserDto> pagingList = null;
 
             pagingList = adminService.userPaingList(page, option, keyword);
-            UserPageDto userPageDto = adminService.pagingParam(page, option, keyword);
+            PageDto pageDto = adminService.userPagingParam(page, option, keyword);
             int userTotalCnt = adminService.usercnt(option, keyword);
 
             model.addAttribute("list", pagingList);
-            model.addAttribute("paging", userPageDto);
+            model.addAttribute("paging", pageDto);
             model.addAttribute("userListCnt", userTotalCnt);
 
         } catch (Exception e) {
@@ -218,14 +212,31 @@ public class AdminController {
     }
     // 기획사관리
     @GetMapping("/admin/agency")
-    public String adminAgency() throws Exception{
+    public String adminAgency(Model model,
+                              @RequestParam(value = "option", required = false) String option,
+                              @RequestParam(value = "keyword", required = false) String keyword,
+                              @RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        try {
+            List<AgencyDto> pagingList = null;
+
+            pagingList = adminService.agencyPaingList(page, option, keyword);
+            PageDto pageDto = adminService.agencyPagingParam(page, option, keyword);
+            int agencyCnt = adminService.agencyCnt(option, keyword);
+
+            model.addAttribute("list", pagingList);
+            model.addAttribute("paging", pageDto);
+            model.addAttribute("listCnt", agencyCnt);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "admin/adminagency";
     }
     // 기획사 등록 폼 이동
     @GetMapping("/admin/agencyregister")
     public String adminGetAgencyRegister() throws Exception{
-
-        System.out.println("컨트롤러 접근 성공1");
 
         return "admin/adminagencyregister";
     }
@@ -233,8 +244,6 @@ public class AdminController {
     @PostMapping("/admin/agencyregister")
     @ExceptionHandler(Exception.class)
     public String adminPostAgencyRegister(Model model, @Valid AgencyDto agencyDto, BindingResult bindingResult) throws Exception{
-
-        System.out.println("컨트롤러 접근 성공2");
 
         try {
 
@@ -250,7 +259,6 @@ public class AdminController {
 
                 for (String key: validatorRslt.keySet()) {
                     model.addAttribute(key, validatorRslt.get(key));
-                    System.out.println("key = " + key);
                 }
 
                 return "admin/adminagencyregister";
