@@ -38,7 +38,7 @@ public class AgencyDto {
     @Pattern(regexp = "(010|016|011)-[0-9]{3,4}-[0-9]{4}", message = "휴대폰번호 형식이 올바르지 않습니다.")
     private String agency_tel;
     @NotBlank(message = "사업자등록번호는 필수 입력 값입니다.")
-    @Pattern(regexp = "^\\d{3}-\\d{2}-\\d{5}$", message = "사업자등록번호 형식이 올바르지 않습니다.")
+    @Pattern(regexp = "^\\d{2}-\\d{3}-\\d{5}$", message = "사업자등록번호 형식이 올바르지 않습니다.")
     private String agency_register_num;
     private Timestamp agency_reg_at;
     private String agency_status_val;
