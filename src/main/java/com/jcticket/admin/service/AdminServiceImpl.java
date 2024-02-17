@@ -2,13 +2,11 @@ package com.jcticket.admin.service;
 
 import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.UserPageDto;
+import com.jcticket.admin.dto.PageDto;
+import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +79,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserPageDto pagingParam(int page, String option, String keyword) throws Exception {
-
-        System.out.println("serviceImpl option => " + option);
-        System.out.println("serviceImpl keyword => " + keyword);
+    public PageDto userPagingParam(int page, String option, String keyword) throws Exception {
 
         // 전체 글 개수 조회
         Map<String, Object> pagingParams = new HashMap<>();
@@ -93,7 +88,6 @@ public class AdminServiceImpl implements AdminService {
         pagingParams.put("keyword", keyword);
 
         int userCount = adminDao.usercnt(pagingParams);
-        System.out.println("userCount => " + userCount);
 
         // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
         int maxPage = (int) (Math.ceil((double) userCount / pageLimit));
@@ -109,17 +103,17 @@ public class AdminServiceImpl implements AdminService {
             endPage = maxPage;
         }
 
-        UserPageDto userPageDto = new UserPageDto();
-        userPageDto.setPage(page);
-        userPageDto.setMaxPage(maxPage);
-        userPageDto.setStartPage(startPage);
-        userPageDto.setEndPage(endPage);
-        userPageDto.setShowPrev(showPrev);
-        userPageDto.setShowNext(showNext);
-        userPageDto.setOption(option);
-        userPageDto.setKeyword(keyword);
+        PageDto pageDto = new PageDto();
+        pageDto.setPage(page);
+        pageDto.setMaxPage(maxPage);
+        pageDto.setStartPage(startPage);
+        pageDto.setEndPage(endPage);
+        pageDto.setShowPrev(showPrev);
+        pageDto.setShowNext(showNext);
+        pageDto.setOption(option);
+        pageDto.setKeyword(keyword);
 
-        return userPageDto;
+        return pageDto;
     }
 
     @Override
@@ -133,16 +127,81 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Map<String, String> validateHandling(BindingResult bindingResult) {
+    public int insertAgency(AgencyDto agencyDto) throws Exception {
+        return adminDao.insertAgency(agencyDto);
+    }
 
-        Map<String, String> validatorRslt = new HashMap<>();
+    @Override
+    public int agencyCnt(String option, String keyword) throws Exception {
+        Map<String, Object> pagingParams = new HashMap<>();
 
-        for (FieldError error : bindingResult.getFieldErrors()) {
-            String validKeyName = String.format("valid_%s", error.getField());
-            validatorRslt.put(validKeyName, error.getDefaultMessage());
-            System.out.println("validatorRslt = " + validatorRslt);
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+
+        return adminDao.usercnt(pagingParams);
+    }
+
+    @Override
+    public List<AgencyDto> agencyPaingList(int page, String option, String keyword) throws Exception {
+        // 1 page 당 보여주는 글 개수 10
+        /*
+            1page => 0
+            2page => 10
+            3page => 20
+         */
+
+        // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
+        int pagingStart = (page - 1) * pageLimit;
+        List<AgencyDto> pagingList = null;
+
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("start", pagingStart);
+        pagingParams.put("limit", pageLimit);
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+
+        pagingList = adminDao.agencyPaingList(pagingParams);
+
+        return pagingList;
+    }
+
+    @Override
+    public PageDto agencyPagingParam(int page, String option, String keyword) throws Exception {
+
+        // 전체 글 개수 조회
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+
+        int agencyCnt = adminDao.agencyCnt(pagingParams);
+
+        // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
+        int maxPage = (int) (Math.ceil((double) agencyCnt / pageLimit));
+        // 시작 페이지 값 계산 (1, 11, 21 ...)
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
+        // 끝 페이지 값 계산 (10, 20, 30...)
+        int endPage = startPage + blockLimit - 1;
+        // 이전, 다음 링크 계산
+        boolean showPrev = page != 1;
+        boolean showNext = page != maxPage;
+
+        if(endPage > maxPage){
+            endPage = maxPage;
         }
 
-        return validatorRslt;
+        PageDto pageDto = new PageDto();
+        pageDto.setPage(page);
+        pageDto.setMaxPage(maxPage);
+        pageDto.setStartPage(startPage);
+        pageDto.setEndPage(endPage);
+        pageDto.setShowPrev(showPrev);
+        pageDto.setShowNext(showNext);
+        pageDto.setOption(option);
+        pageDto.setKeyword(keyword);
+
+        return pageDto;
     }
+
 }

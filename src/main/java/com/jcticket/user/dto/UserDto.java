@@ -2,7 +2,6 @@ package com.jcticket.user.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;

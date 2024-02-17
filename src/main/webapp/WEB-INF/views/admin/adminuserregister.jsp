@@ -5,7 +5,6 @@
   Time: 오후 9:36
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -38,14 +37,14 @@
                         <tr>
                             <th scope="row">회원 아이디</th>
                             <td>
-                                <input type="text" value="${userDto.user_id}" placeholder="4글자 이상 입력." minlength="4" name="user_id" maxlength="20" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <input type="text" value="${userDto.user_id}" placeholder="4글자 이상 입력." name="user_id" minlength="4" maxlength="20" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
                                 <p class="valid">${valid_user_id}</p>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">회원 패스워드</th>
                             <td>
-                                <input type="password" value="${userDto.user_password}" placeholder="4글자 이상 입력." minlength="4" name="user_password" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <input type="password" value="${userDto.user_password}" placeholder="4글자 이상 입력." name="user_password" minlength="4" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
                                 <p class="valid">${valid_user_password}</p>
                             </td>
                         </tr>
