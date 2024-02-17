@@ -1,10 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
 
-import com.jcticket.viewdetail.dto.JoinDto;
-import com.jcticket.viewdetail.dto.PlayDto;
-import com.jcticket.viewdetail.dto.SeatClassDto;
-import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.*;
 
 import java.util.List;
 
@@ -44,4 +41,21 @@ public interface ViewDetailDao {
     List<JoinDto> viewDetail_view(String play_id) throws Exception;
 
     List<ShowingDto> viewDetail_view_time(String play_id) throws Exception;
+
+//    후기게시판
+    int review_count() throws Exception;
+
+    int review_deleteAll() throws Exception;
+
+    int review_delete(int review_num, String user_id) throws Exception;
+
+    int review_insert(ReviewDto reviewDto) throws Exception;
+
+    int review_increaseViewCnt(int review_num) throws Exception;
+
+    int review_update(ReviewDto reviewDto) throws Exception;
+
+    List<ReviewDto> review_select_all() throws Exception;
+
+    List<ReviewDto> review_select(int review_num) throws Exception;
 }

@@ -20,10 +20,10 @@ public class pageHandlerTest {
 
     @Test
     public void startPageTest() {
-        pageHandler ph = new pageHandler(1,260,20);
+        pageHandler ph = new pageHandler(11,260,10);
         System.out.println("ph = " +ph);
-        assertTrue(ph.getTotalPage()==13);
-        assertTrue(ph.getStartPage()==1);
-        assertTrue(ph.getEndPage()==10);
+        assertTrue(ph.getTotalPage()==26);
+        assertTrue(ph.getStartPage()==11);
+        assertTrue(ph.getEndPage()==20);
     }
 }

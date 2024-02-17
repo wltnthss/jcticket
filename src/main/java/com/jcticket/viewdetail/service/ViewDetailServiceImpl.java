@@ -2,6 +2,7 @@ package com.jcticket.viewdetail.service;
 
 import com.jcticket.viewdetail.dao.ViewDetailDao;
 import com.jcticket.viewdetail.dto.JoinDto;
+import com.jcticket.viewdetail.dto.ReviewDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,45 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     @Override
     public List<ShowingDto> getViewDetailTime(String play_id) throws Exception {
         return viewDetailDao.viewDetail_view_time(play_id);
+    }
+
+    @Override
+    public int get_review_count() throws Exception {
+        return viewDetailDao.review_count();
+    }
+
+    @Override
+    public int review_deleteAll() throws Exception {
+        return viewDetailDao.review_deleteAll();
+    }
+
+    @Override
+    public int review_delete(int review_num, String user_id) throws Exception {
+        return viewDetailDao.review_delete(review_num,user_id);
+    }
+
+    @Override
+    public int review_create(ReviewDto reviewDto) throws Exception {
+        return viewDetailDao.review_insert(reviewDto);
+    }
+
+    @Override
+    public int review_increaseViewCnt(int review_num) throws Exception {
+        return viewDetailDao.review_increaseViewCnt(review_num);
+    }
+
+    @Override
+    public int review_update(ReviewDto reviewDto) throws Exception {
+        return viewDetailDao.review_update(reviewDto);
+    }
+
+    @Override
+    public List<ReviewDto> review_select_all() throws Exception {
+        return viewDetailDao.review_select_all();
+    }
+
+    @Override
+    public List<ReviewDto> review_select(int review_num) throws Exception {
+        return viewDetailDao.review_select(review_num);
     }
 }

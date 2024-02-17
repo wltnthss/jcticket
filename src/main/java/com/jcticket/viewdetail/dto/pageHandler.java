@@ -11,7 +11,6 @@ package com.jcticket.viewdetail.dto;
  * -----------------------------------------------------------
  * 2024-02-14        kyd54       최초 생성
  */
-//제대로 다시 만들것
 public class pageHandler {
     final static int NAV_SIZE = 10;
     int page; //현재 페이지
@@ -33,6 +32,7 @@ public class pageHandler {
         // page(현재페이지)가 전체 페이지의 범위를 벗어나면 기본값인 1로 변경.
         page = page > totalPage || page <= 0 ? 1: page;
         // endPage가 totalPage보다 크면 endPage는 totalPage가 되어야 한다.
+        endPage = startPage + NAV_SIZE -1;
         endPage = endPage>totalPage?totalPage:endPage;
         showPrev = startPage != 1;
         showNext = endPage != totalPage;
@@ -75,14 +75,16 @@ public class pageHandler {
 
     public String toString() {
         String str = "";
-        if (showPrev)
+        if (showPrev) {
             str += "< 이전";
-
-        for (int i = startPage; i < endPage; i++)
+        }
+        for (int i = startPage; i <= endPage; i++) {
             System.out.println(" " + i + " ");
-        if (showNext)
-
+        }
+        if (showNext) {
             str += "다음 >";
+        }
+
         return str;
     }
 }

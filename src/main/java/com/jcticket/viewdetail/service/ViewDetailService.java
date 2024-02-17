@@ -1,6 +1,7 @@
 package com.jcticket.viewdetail.service;
 
 import com.jcticket.viewdetail.dto.JoinDto;
+import com.jcticket.viewdetail.dto.ReviewDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +27,21 @@ public interface ViewDetailService {
     List<JoinDto> getViewDetail(String play_id) throws Exception;
 
     List<ShowingDto> getViewDetailTime(String play_id) throws Exception;
+
+
+    int get_review_count() throws Exception;
+
+    int review_deleteAll() throws Exception;
+
+    int review_delete(int review_num, String user_id) throws Exception;
+
+    int review_create(ReviewDto reviewDto) throws Exception;
+
+    int review_increaseViewCnt(int review_num) throws Exception;
+
+    int review_update(ReviewDto reviewDto) throws Exception;
+
+    List<ReviewDto> review_select_all() throws Exception;
+
+    List<ReviewDto> review_select(int review_num) throws Exception;
 }

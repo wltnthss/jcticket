@@ -71,7 +71,7 @@
             (SELECT count(*)
              FROM show_seat ss
              WHERE s.showing_seq = ss.showing_seq
-               AND show_seat_status = 'N') AS remaining_seats
+               AND show_seat_status = 'N') remaining_seats
         FROM
             showing s
         WHERE s.showing_seq = #{showing_seq};
@@ -107,5 +107,92 @@
         WHERE
             s.play_id = #{play_id}
         ORDER BY showing_date;
+    </select>
+
+
+<!--    후기게시판-->
+<!--    리뷰 테이블 카운트-->
+    <select id="review_count" resultType="int">
+        SELECT count(*) FROM review
+    </select>
+<!--    전체삭제-->
+    <delete id="review_deleteAll">
+        DELETE FROM review
+    </delete>
+<!--    하나씩 삭제-->
+    <delete id="review_delete" parameterType="hashmap">
+        DELETE FROM review WHERE review_num = #{review_num} and user_id = #{user_id}
+    </delete>
+<!--        게시글 작성-->
+    <insert id="review_insert" parameterType="ReviewDto">
+        INSERT INTO review
+                (review_num,
+                 review_at,
+                 review_star_rating,
+                 review_viewing_at,
+                 review_content,
+--                  review_star_rating_avg,
+                 review_total,
+                 user_id,
+                 play_id,
+                 created_at,
+                 created_id,
+                 updated_at,
+                 updated_id)
+        VALUES
+            (#{review_num},
+             CURRENT_TIMESTAMP,
+             #{review_star_rating},
+             #{review_viewing_at},
+             #{review_content},
+--              (SELECT AVG(review_star_rating) FROM review),
+             '0',
+             #{user_id},
+             #{play_id},
+             CURRENT_TIMESTAMP,
+             #{user_id},
+             CURRENT_TIMESTAMP,
+             #{user_id})
+    </insert>
+
+<!--    조회수 증가-->
+    <update id="review_increaseViewCnt" parameterType="int">
+        UPDATE review
+        SET   review_total = review_total + 1
+        WHERE review_num = #{review_num}
+    </update>
+
+<!--    리뷰 수정-->
+    <update id="review_update" parameterType="ReviewDto">
+        UPDATE review
+        SET  review_content = #{review_content},
+             review_star_rating = #{review_star_rating},
+             updated_at = CURRENT_TIMESTAMP
+        WHERE review_num = #{review_num}
+    </update>
+
+<!--    관람후기 게시판에서 보여줄 내용을 가져옴-->
+    <select id="review_select_all" resultType="ReviewDto">
+        SELECT user_id,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content
+        FROM review
+        ORDER BY review_at DESC
+    </select>
+
+<!--    특정 리뷰 선택-->
+    <select id="review_select" resultType="ReviewDto">
+        SELECT review_num,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content,
+               review_total,
+               user_id,
+               play_id
+        FROM review
+        WHERE review_num = #{review_num}
     </select>
 </mapper>
