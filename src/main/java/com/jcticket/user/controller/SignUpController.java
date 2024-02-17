@@ -1,5 +1,6 @@
 package com.jcticket.user.controller;
 
+import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.user.dto.TermsDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.user.service.UserService;
@@ -10,15 +11,19 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.signup
@@ -149,15 +154,30 @@ public class SignUpController {
 
     //회원가입 버튼 눌렀을 때.insert
     @PostMapping("/signup")
-    public String insertUser(UserDto userDto, TermsDto termsDto, Model m) throws Exception{
-        System.out.println("userDto = " + userDto);
-        System.out.println("userDto.getUser_password() = " + userDto.getUser_password());
+    public String insertUser(@Valid UserDto userDto, BindingResult bindingResult, TermsDto termsDto, Model m, RedirectAttributes rattr) throws Exception{
 
-        // DB 저장 전 비밀번호 암호화
-        String hashPassword = BCrypt.hashpw(userDto.getUser_password(), BCrypt.gensalt());
-        userDto.setUser_password(hashPassword);
+        if(bindingResult.hasErrors()){
+
+            // 회원가입 실패시 입력 데이터 값 유지하기 위함
+            m.addAttribute("userDto", userDto);
+
+            CommonValidateHandling cvh = new CommonValidateHandling();
+
+            // Map 타입 { valid_user_id, "오류 메세지" } 리턴
+            Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
+
+            for (String key: validatorRslt.keySet()) {
+                rattr.addFlashAttribute(key, validatorRslt.get(key));
+            }
+
+            return "redirect:/signup";
+        }
 
         try{
+            // DB 저장 전 비밀번호 암호화
+            String hashPassword = BCrypt.hashpw(userDto.getUser_password(), BCrypt.gensalt());
+            userDto.setUser_password(hashPassword);
+
             //user table insert 실패시 예외 발생시킴
             if(userService.signup(userDto)!=1){
                 throw new Exception("insert failed");

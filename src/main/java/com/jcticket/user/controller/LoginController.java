@@ -46,7 +46,6 @@ public class LoginController {
     public String login(String user_id, String user_password, boolean rememberId, Model m,
                         HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-
         //아이디 비번 틀리면 로그인 안되게
         if (!userService.loginCheck(user_id,user_password)){
             //유효성 검사 때매 넘김
