@@ -6,11 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>JCticket 예매하기</title>
+    <script>console.log("bookig.jsp 진입")</script>
 <%--    jQuery--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -311,18 +313,22 @@
                             <tbody>
                             <tr>
                                 <th scope="row" style="width: 30%">공연명</th>
-                                <%--데이터 받아오기 playname --%>
-                                <td>나는 오늘도 혼자 산다</td>
+                                <%--데이터 받아오기: playname --%>
+                                <td>${play_name}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">공연일시</th>
+                                <%-- 데이터 받아오기: showing_info, showing_day--%>
+                                <td>
+                                    <c:forEach var="item" items="${list}">
+                                        ${item}
+                                    </c:forEach>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">공연장</th>
-                                <%--데이터 받아오기 stagename --%>
-                                <td>쉼표도서관</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">출연진</th>
-                                <%-- 데이터 받아오기 ???--%>
-                                <td>조영상</td>
+                                <%--데이터 받아오기: stagename --%>
+                                <td>${stage_name}</td>
                             </tr>
                             </tbody>
                         </table>
