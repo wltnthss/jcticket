@@ -40,11 +40,12 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
-
+/*
     @Before
     public void deleteAll() throws Exception{
         int result = ticketingDao.deleteAll();
     }
+ */
 
     @Test
     public void insertTest() throws Exception{
@@ -91,9 +92,9 @@ public class TicketingDaoImplTest {
         List<ShowingDto> list = ticketingDao.selectByPlayId(testPlay_id);
         //then
         for(ShowingDto dto : list){
-            assertEquals(dto.getPlay_id(), testPlay_id);
-            assertEquals(dto.getShowing_date(), testDate);
-            assertEquals(dto.getStage_id(), testStage_id);
+            assertEquals(testPlay_id, dto.getPlay_id());
+            assertEquals(testDate, dto.getShowing_date());
+            assertEquals(testStage_id, dto.getStage_id());
         }
     }
 
@@ -112,73 +113,63 @@ public class TicketingDaoImplTest {
             Set<String> keys = map.keySet();
             for (String key : keys) {
                 if (key.equals("showing_date")) {
-                    assertEquals(testDate, map.get("showing_date"));
+                    assertEquals(testDate, map.get(key));
                 }
             }
         }
     }
 
-    // 같은 공연 아이디를 가지는 회차 시퀀스를 조회
+    // 공연아이디 & 공연일정별 회차 시퀀스 회차정보 리스트 조회
     @Test
-    public void selectSeq() throws Exception {
+    public void selectRoundTest() throws Exception{
         //given
-        String sDate = "2024-02-25";
-        ShowingDto dto = new ShowingDto(15,"1회 09시 30분", sDate, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+        String tDate = "2024-02-";
+        for (int i = 1; i <= 10 ; i++) {
+            ShowingDto dto;
+            if(i == 10){
+                dto = new ShowingDto(i + "회 " + i + "시 00분", tDate + i, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+            }else {
+                dto = new ShowingDto(i + "회 " + i + "시 00분", tDate + "0" + i, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+            }
+            ticketingDao.insert(dto);
+        }
+        Map<String,String> param = new HashMap<>();
+        param.put("play_id",testPlay_id);
+        param.put("showing_date","2024-02-01");
         //when
-        int insertResult = ticketingDao.insertShowing(dto);
-        int expectedValue = dto.getShowing_seq();
-        List<HashMap<String,Object>> list = ticketingDao.selectSeq(testPlay_id);
-
-        HashMap<String,Object> hm = list.get(list.size()-1);
-        int result = (Integer)hm.get("showing_sequence");
-        // then
-        assertTrue(insertResult == 1);
-        assertEquals(expectedValue, result);
-    }
-    /*
-        공연날짜를 조회하는 쿼리
-     */
-    @Test
-    public void selectShowingDateTest() throws Exception{
-        //given
-        String testDate = "2024-03-26";
-        ShowingDto dto = new ShowingDto("1회 09시 30분", testDate, "일", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
-        int insertResult = ticketingDao.insertShowing(dto);
-        //when
-        List<HashMap<String,Object>> resultList = ticketingDao.selectShowingDate(testPlay_id);
+        List<Map<String,Object>> list = ticketingDao.selectRound(param);
         //then
-        assertTrue(insertResult == 1);
-        assertTrue(resultList != null);
-    }
-
-    @Test
-    public void selectShowingRoundTest() throws  Exception{
-        //given
-        ShowingDto dto = new ShowingDto("1회 09시 30분", showingDate, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
-        int insertResult = ticketingDao.insertShowing(dto);
-        HashMap<String,String> hashmap = new HashMap<>();
-        hashmap.put("dateText",showingDate);
-        hashmap.put("play_id", testPlay_id);
-        //when
-        List<HashMap<String,String>> resultList = ticketingDao.selectShowingRound(hashmap);
-        String resultDate = resultList.get(resultList.size()-1).get(showingDate);
-        //then
-        assertTrue(1 == insertResult);
-        assertTrue(resultList != null);
-        assertTrue(showingDate.equals(resultDate));
+        for(Map<String,Object> map : list){
+            Set<String> keys = map.keySet();
+            for(String key : keys){
+                if(key.equals("showing_seq")){
+                    assertTrue(map.get(key) != null);
+                } else if (key.equals("showing_info")){
+                    assertEquals("1회 1시 00분", map.get(key));
+                }
+            }
+        }
     }
 
-
+    // 공연아이디별 공연명, 공연장명 조회(단일 행 반환)
     @Test
-    public void selectPlayStageTest() throws Exception{
+    public void selectPlayStageNameTest() throws Exception{
         //given
-        ShowingDto dto = new ShowingDto("1회 09시 30분", showingDate, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
-        int insertResult = ticketingDao.insertShowing(dto);
-
+        for(int i=1; i <= 5; i++){
+            ShowingDto dto1 = new ShowingDto(i+"회 "+i+"시 00분", testDate, "토", "BS", 80, testPlay_id+"1", testStage_id, SYS, SYS);
+            ShowingDto dto2 = new ShowingDto(i+"회 "+i+"시 00분", testDate, "토", "BS", 80, testPlay_id+"2", testStage_id, SYS, SYS);
+            ticketingDao.insert(dto1);
+            ticketingDao.insert(dto2);
+        }
         //when
-        HashMap<String, String> hashMap = ticketingDao.selectPlayStageName(testPlay_id);
+        Map<String,String> map = ticketingDao.selectPlayStageName(testPlay_id+"1");
         //then
-        assertTrue(insertResult == 1);
-        assertTrue(!hashMap.isEmpty());
+        Set<String> keys = map.keySet();
+        for(String key : keys){
+            if (key.equals("play_name"))
+                assertEquals("테스트공연", map.get(key));
+            else if(key.equals("stage_name"))
+                assertEquals("정석극장", map.get(key));
+        }
     }
 }
