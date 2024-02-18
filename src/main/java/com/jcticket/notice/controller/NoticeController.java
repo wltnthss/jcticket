@@ -68,6 +68,7 @@ public class NoticeController {
             model.addAttribute("dto", dto);
             model.addAttribute("page", page);
         } catch (Exception e){
+            // validation 어노테이션
             e.printStackTrace();
         }
 

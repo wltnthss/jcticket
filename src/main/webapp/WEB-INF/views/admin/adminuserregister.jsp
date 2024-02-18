@@ -36,49 +36,74 @@
                         <tbody>
                         <tr>
                             <th scope="row">회원 아이디</th>
-                            <td><input type="text" placeholder="4글자 이상 입력." minlength="4" name="user_id" maxlength="20" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_id}" placeholder="4글자 이상 입력." name="user_id" minlength="4" maxlength="20" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_id}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">회원 패스워드</th>
-                            <td><input type="password" placeholder="4글자 이상 입력." minlength="4" name="user_password" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="password" value="${userDto.user_password}" placeholder="4글자 이상 입력." name="user_password" minlength="4" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_password}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">이름(실명)</th>
-                            <td><input type="text" maxlength="20" placeholder="한글만 입력." pattern="[ㄱ-ㅎ ㅏ-ㅣ 가-힣0 -9]*" name="user_name" required="" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_name}" maxlength="20" name="user_name" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_name}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">닉네임</th>
-                            <td><input type="text" maxlength="30" name="user_nickname" required="" class="frm_input required" size="30" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_nickname}" maxlength="30" name="user_nickname" class="frm_input required" size="30" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_nickname}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">이메일</th>
                             <td>
-                                <input type="email" placeholder="email@gmail.com" pattern="[a-zA-Z0-9]*[@][a-zA-Z0-9]*\.[a-zA-Z]*" name="user_email" required="" class="frm_input required" size="40" maxlength="100" style="background-position: right top; background-repeat: no-repeat;">
+                                <input type="email" value="${userDto.user_email}" placeholder="email@gmail.com" pattern="[a-zA-Z0-9]*[@][a-zA-Z0-9]*\.[a-zA-Z]*" name="user_email" class="frm_input required" size="40" maxlength="100" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_email}</p>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">휴대폰번호</th>
-                            <td><input type="text" placeholder="ex) 010-0000-0000" required pattern="(010|016|011)-[0-9]{3,4}-[0-9]{4}" name="user_tel" class="frm_input" size="20" maxlength="20"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_tel}" placeholder="ex) 010-0000-0000" pattern="(010|016|011)-[0-9]{3,4}-[0-9]{4}" name="user_tel" class="frm_input" size="20" maxlength="20">
+                                <p class="valid">${valid_user_tel}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">주소</th>
                             <td>
-                                <input type="text" name="user_address" required class="frm_input frm_address" size="100">
+                                <input type="text" value="${userDto.user_address}" name="user_address" class="frm_input frm_address" size="100">
+                                <p class="valid">${valid_user_address}</p>
                             </td>
                         </tr>
                         <tr>
                             <th scope="row">생년월일</th>
-                            <td><input type="text" name="user_birth" maxlength="8" placeholder="ex) 20000101" required="" class="frm_input required" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_birth}" name="user_birth" maxlength="8" placeholder="ex) 20000101" class="frm_input required" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_birth}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">성별</th>
-                            <td><input type="text" pattern="M|F" placeholder="M 또는 F 입력." maxlength="1" name="user_gender" required="" class="frm_input required"  size="20" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_gender}" pattern="M|W" placeholder="M 또는 W 입력." maxlength="1" name="user_gender" class="frm_input required"  size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_gender}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">관심장르</th>
-                            <td><input type="text" name="user_interested_genre" required="" class="frm_input required" style="background-position: right top; background-repeat: no-repeat;"></td>
+                            <td>
+                                <input type="text" value="${userDto.user_interested_genre}" name="user_interested_genre" class="frm_input required" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_user_interested_genre}</p>
+                            </td>
                         </tr>
-                        </tbody>
                     </table>
                 </div>
                 <div class="btn-confirm">

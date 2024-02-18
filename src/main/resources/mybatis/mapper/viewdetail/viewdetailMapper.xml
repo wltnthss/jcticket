@@ -109,27 +109,3 @@
         ORDER BY showing_date;
     </select>
 </mapper>
-
-
-<!--        &#45;&#45;         SELECT p.play_name,-->
-<!--        &#45;&#45;                p.play_major_cat,-->
-<!--        &#45;&#45;                p.play_middle_cat,-->
-<!--        &#45;&#45;                p.play_run_time,-->
-<!--        &#45;&#45;                p.play_poster,-->
-<!--        &#45;&#45;                p.play_info,-->
-<!--        &#45;&#45;                p.agency_id,-->
-<!--        &#45;&#45;                sc.seat_price,-->
-<!--        &#45;&#45;                stgName.stage_name-->
-<!--        &#45;&#45;         FROM play p,-->
-<!--        &#45;&#45;              seat_class sc,-->
-<!--        &#45;&#45;              (SELECT stg.stage_name-->
-<!--        &#45;&#45;               FROM play p,-->
-<!--        &#45;&#45;                    showing s,-->
-<!--        &#45;&#45;                    stage stg-->
-<!--        &#45;&#45;               WHERE p.play_id = s.play_id-->
-<!--        &#45;&#45;                 AND s.stage_id = stg.stage_id-->
-<!--        &#45;&#45;               GROUP BY stg.stage_name) stgName-->
-<!--        &#45;&#45;         WHERE-->
-<!--        &#45;&#45;             p.play_id = #{play_id}-->
-<!--        &#45;&#45;             AND sc.play_id = #{play_id}-->
-<!--        &#45;&#45;             AND s.stage_id = stg.stage_id-->

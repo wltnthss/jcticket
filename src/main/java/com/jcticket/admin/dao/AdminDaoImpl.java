@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
@@ -33,12 +34,10 @@ public class AdminDaoImpl implements AdminDao{
     public AdminDto adminLogin(AdminDto adminDto) throws Exception {
         return sqlSession.selectOne(namespace + "adminLogin", adminDto);
     }
-
     @Override
     public List<UserDto> userstatics() throws Exception {
         return sqlSession.selectList(namespace + "userStatics");
     }
-
     @Override
     public int usercnt(Map<String, Object> options) throws Exception {
         return sqlSession.selectOne(namespace + "userCnt", options);
@@ -47,29 +46,46 @@ public class AdminDaoImpl implements AdminDao{
     public List<UserDto> userPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace + "userPagingList", pagingParams);
     }
-
     @Override
     public int insertUser(UserDto userDto) throws Exception {
         return sqlSession.insert(namespace + "insertUser", userDto);
     }
-
     @Override
     public int userRetireUpdate(String user_id) throws Exception {
         return sqlSession.update(namespace + "userRetireUpdate", user_id);
     }
-
     @Override
     public int userDelete(String user_id) throws Exception {
         return sqlSession.delete(namespace+"userDelete", user_id);
     }
-
     @Override
     public int insertAdmin(AdminDto adminDto) throws Exception {
         return sqlSession.insert(namespace+"insertAdmin", adminDto);
     }
-
     @Override
     public int deleteAdmin(String admin_id) throws Exception {
         return sqlSession.delete(namespace + "adminDelete", admin_id);
+    }
+    @Override
+    public int insertAgency(AgencyDto agencyDto) throws Exception {
+        return sqlSession.insert(namespace+"insertAgency", agencyDto);
+    }
+    @Override
+    public int deleteAllAgency() throws Exception {
+        return sqlSession.delete(namespace+"deleteAllAgency");
+    }
+    @Override
+    public int countAllAgency() throws Exception {
+        return sqlSession.selectOne(namespace + "countAllAgency");
+    }
+
+    @Override
+    public int agencyCnt(Map<String, Object> options) throws Exception {
+        return sqlSession.selectOne(namespace + "agencyCnt", options);
+    }
+
+    @Override
+    public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
+        return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
     }
 }
