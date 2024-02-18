@@ -275,13 +275,13 @@ public class AdminController {
 
         return "redirect:/admin/agency";
     }
-    @GetMapping("/admin/product")
-    public String adminproduct() throws Exception{
-        return "admin/adminproduct";
-    }
     @GetMapping("/admin/notice")
     public String adminnotice() throws Exception{
         return "admin/adminnotice";
+    }
+    @GetMapping("/admin/product")
+    public String adminproduct() throws Exception{
+        return "admin/adminproduct";
     }
     @GetMapping("/admin/inquiry")
     public String admininquiry() throws Exception{

@@ -14,39 +14,44 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/admin/adminheader.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
     <div class="admin-common-wrap">
-        <div class="admin-common-snb">
-            <div class="snb-header">
-                <h2>
-                    공지사항
-                </h2>
-                <i class="fas fa-solid fa-paperclip"></i>
-            </div>
-            <dl>
-                <dt class="menu_toggle-u10">공지사항관리
-                    <i class="fas fa-solid fa-arrow-down"></i>
-                </dt>
-
-                <div id="u10" style="display: block">
-                    <dd class="u10">
-                        <a href="/admin/user">공지사항 정보관리</a>
-                    </dd>
-                    <dd class="u10">
-                        <a href="/admin/register">공지사항 등록하기</a>
-                    </dd>
-                </div>
-            </dl>
-        </div>
+        
+        <jsp:include page="/WEB-INF/views/admin/common/adminnoticenav.jsp"/>
+        
         <div class="admin-common-content">
             <div class="admin-common-title">
                 <h1>공지사항 관리</h1>
+                <h2>기본검색</h2>
+                <hr>
+                <form id="userSearch" action="/admin/user" method="get">
+                    <div class="user-form">
+                        <table>
+                            <colgroup>
+                                <col class="user-w100">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th scope="row">검색어</th>
+                                <td>
+                                    <input type="text" value="${paging.keyword}" name="keyword" placeholder="궁금하신 내용을 입력해주세요" >
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="btn-confirm">
+                        <input type="submit" value="검색" class="btn-medium">
+                        <input type="reset" value="초기화" class="btn-medium grey">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/admin/adminfooter.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="/resources/js/admin/admin.js"></script>
