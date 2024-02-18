@@ -31,8 +31,8 @@ public class AdminDaoImpl implements AdminDao{
     private static final String namespace = "adminMapper.";
 
     @Override
-    public AdminDto adminLogin(AdminDto adminDto) throws Exception {
-        return sqlSession.selectOne(namespace + "adminLogin", adminDto);
+    public AdminDto adminLogin(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace + "adminLogin", map);
     }
     @Override
     public List<UserDto> userstatics() throws Exception {

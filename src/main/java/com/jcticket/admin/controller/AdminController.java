@@ -1,6 +1,7 @@
 package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.AdminValidLoginDto;
 import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.agency.dto.AgencyDto;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,36 +73,57 @@ public class AdminController {
 
     // 관리자 로그인
     @PostMapping("/admin")
-    @ResponseBody
-    private String login(@RequestBody AdminDto adminDto, HttpServletRequest request) throws Exception {
+    private String login(Model model, HttpServletRequest request, @Valid AdminValidLoginDto adminValidLoginDto, BindingResult bindingResult) throws Exception {
 
         HttpSession session = request.getSession();
-        String msg = null;
 
         try {
-            AdminDto rslt = adminService.adminLogin(adminDto);
+
+            if (bindingResult.hasErrors()){
+
+                // 회원가입 실패시 입력 데이터 값 유지하기 위함
+                model.addAttribute("adminValidLoginDto", adminValidLoginDto);
+
+                CommonValidateHandling cvh = new CommonValidateHandling();
+
+                // Map 타입 { valid_user_id, "오류 메세지" } 리턴
+                Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
+
+                for (String key: validatorRslt.keySet()) {
+                    model.addAttribute(key, validatorRslt.get(key));
+                }
+
+                return "admin/adminloginform";
+            }
+
+            Map<String, Object> map = new HashMap<>();
+
+            map.put("admin_id", adminValidLoginDto.getAdmin_id());
+            map.put("admin_password", adminValidLoginDto.getAdmin_password());
+
+            AdminDto rslt = adminService.adminLogin(map);
 
             // DB에 있는 관리자 사용 여부
-            String adminUseYn = rslt.getAdmin_use_yn();
-
-            if (rslt != null && adminUseYn.equals("Y")) {
+            if ((rslt != null) && rslt.getAdmin_use_yn().equals("Y")) {
 
                 session.setAttribute("adminId", rslt.getAdmin_id());
-                // 관리자 헤더 nickname 보여주기 (json 방식이라 model 전달은 안되나 임시방편 session 전달)
                 session.setAttribute("adminNickName", rslt.getAdmin_nickname());
 
-                msg = "ok";
+                // 세션 유지기간 60분
+                session.setMaxInactiveInterval(60*60);
+
+                return "redirect:/admin/dashboard";
             }else{
+
+                model.addAttribute("failLogin", "아이디와 패스워드가 일치하지않습니다.");
                 session.invalidate();
 
-                msg = "fail";
+                return "admin/adminloginform";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return msg;
-
+        return "redirect:/admin/dashboard";
     }
     // 회원 관리
     @GetMapping("/admin/user")
@@ -135,6 +158,8 @@ public class AdminController {
     @PostMapping("/admin/userregister")
     public String adminUserRegisterPost(Model model, @Valid UserDto userDto, BindingResult bindingResult) throws Exception{
 
+
+
         if(bindingResult.hasErrors()){
 
             // 회원가입 실패시 입력 데이터 값 유지하기 위함
@@ -150,6 +175,7 @@ public class AdminController {
             }
 
             return "admin/adminuserregister";
+
         }
 
         try {

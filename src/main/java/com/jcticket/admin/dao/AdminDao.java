@@ -20,7 +20,7 @@ import java.util.Map;
  * 2024-02-05             jisoo Son             최초 생성
  */
 public interface AdminDao {
-    AdminDto adminLogin(AdminDto adminDto) throws Exception;
+    AdminDto adminLogin(Map<String, Object> map) throws Exception;
     // 최근 회원가입 기능 가입순 limit3 List 조회
     List<UserDto> userstatics() throws Exception;
     // 회원 테이블 총 개수 조회

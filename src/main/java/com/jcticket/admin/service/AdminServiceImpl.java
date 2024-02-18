@@ -33,8 +33,8 @@ public class AdminServiceImpl implements AdminService {
     AdminDao adminDao;
 
     @Override
-    public AdminDto adminLogin(AdminDto adminDto) throws Exception {
-        return adminDao.adminLogin(adminDto);
+    public AdminDto adminLogin(Map<String, Object> map) throws Exception {
+        return adminDao.adminLogin(map);
     }
 
     @Override
