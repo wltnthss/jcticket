@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -312,17 +313,21 @@
                             <tr>
                                 <th scope="row" style="width: 30%">공연명</th>
                                 <%--데이터 받아오기: playname --%>
-                                <td>나는 오늘도 혼자 산다</td>
+                                <td>${play_name}</td>
                             </tr>
                             <tr>
                                 <th scope="row">공연일시</th>
                                 <%-- 데이터 받아오기: showing_info, showing_day--%>
-                                <td>조영상</td>
+                                <td>
+                                    <c:forEach var="item" items="${list}">
+                                        ${item}
+                                    </c:forEach>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">공연장</th>
                                 <%--데이터 받아오기: stagename --%>
-                                <td>쉼표도서관</td>
+                                <td>${stage_name}</td>
                             </tr>
                             </tbody>
                         </table>
