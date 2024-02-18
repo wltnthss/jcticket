@@ -71,11 +71,11 @@ public class UserServiceImpl implements UserService {
             UserDto userDto = null;
             userDto = userDao.select(user_id);
             System.out.println(userDto);
-
-            return BCrypt.checkpw(user_password, userDto.getUser_password())&&userDto != null;
+            return BCrypt.checkpw(user_password, userDto.getUser_password());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("false");
         return false;
     }
 
@@ -83,6 +83,8 @@ public class UserServiceImpl implements UserService {
     public boolean isUserRetired(String user_id) throws Exception {
         UserDto userDto = userDao.select(user_id);
         String retireYN = userDto.getUser_retire_yn();
+        System.out.println("retireYN = " + retireYN);
+        System.out.println(retireYN.equals("Y"));
         if (retireYN.equals("Y")){
             return true;
         }
@@ -98,7 +100,4 @@ public class UserServiceImpl implements UserService {
     public int count() throws Exception {
         return userDao.count();
     }
-
-
-
 }
