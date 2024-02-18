@@ -50,7 +50,7 @@
         </choose>
     </select>
 
-    <select id="adminLogin" resultType="AdminDto">
+    <select id="adminLogin" resultType="AdminDto" parameterType="Map">
         SELECT
             admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id
         FROM
@@ -173,8 +173,8 @@
 
     <insert id="insertAdmin" parameterType="NoticeDto">
         INSERT INTO admin
-        (admin_id, admin_email, admin_password, agency_tel, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id)
-        VALUES(#{admin_id}, #{admin_email}, #{admin_password}, #{agency_tel}, #{admin_nickname}, "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
+        (admin_id, admin_email, admin_password, admin_phone, admin_nickname, admin_use_yn, admin_reg_at, admin_auth, created_at, created_id, updated_at, updated_id)
+        VALUES(#{admin_id}, #{admin_email}, #{admin_password}, #{admin_phone}, #{admin_nickname}, "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO")
     </insert>
 
     <insert id="insertAgency" parameterType="AgencyDto">
