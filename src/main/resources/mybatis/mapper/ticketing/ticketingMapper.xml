@@ -85,6 +85,7 @@
         from showing
         where 1=1
         and play_id = #{play_id}
+        group by showing_date
         order by showing_date asc;
     </select>
 <!--    공연아이디 && 공연일정별 회차시퀀스, 회차정보 조회-->

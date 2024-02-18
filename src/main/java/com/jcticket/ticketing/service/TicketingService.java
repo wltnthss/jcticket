@@ -27,7 +27,7 @@ public interface TicketingService {
     Map<String,Object> getPlayInfo(String play_id) throws Exception;
 
     // 공연아이디와 공연일자를 가지고 회차 정보 & 회차 시퀀스를 가져온다.
-    Map<String,Object> getShowRound(String play_id, String date_text) throws Exception;
+    Map<String,Object> getRound(String play_id, String date_text) throws Exception;
     // next step
     // 좌석선택하는 로직
 }

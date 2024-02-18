@@ -62,28 +62,36 @@ public class TicketingServiceImpl implements TicketingService{
         return resultMap;
     }
 
-    // 공연아이디와 공연일자를 가지고 회차 시퀀스, 화차정보를 가져온다.
-    public Map<String,Object> getShowRound(String play_id, String date_text) throws Exception{
+    // 공연아이디와 공연일자를 가지고 회차정보를 가져온다.
+    public Map<String,Object> getRound(String play_id, String date_text) throws Exception{
         // 컨트롤러에 반환할 resultMap
         Map<String,Object> resultMap = new HashMap<>();
+        // resultMap 에 key로 넣을 문자열 만들기
+        String infoKey = "";
         // resultMap 에 value로 넣을 ArrayList(회차정보) 만들기.
         List<String> infoList = new ArrayList<>();
 
         // Dao 의 메서드에 파라미터로 전달할 Map 만들기.
         Map<String,String> param = new HashMap<>();
-        param.put(play_id, date_text);
+        param.put("play_id", play_id);
+        param.put("date_text", date_text);
 
         // Dao 메서드 호출하여 회차시퀀스,회차정보를 받아오기.
         List<Map<String,String>> list = ticketingDao.selectRound(param);
 
-        // 받아온 List<Map<String,Object>> 에서 key(시퀀스), value(회차정보) 추출하기.
-        for(Map<String,String> map : list){
-            Set<String> keys = map.keySet();
-            for(String key : keys){
-                System.out.println();
-            }
+        // key는 모두 "showing_seq"로 같다.
+        Set<String> keys = list.get(0).keySet();
+        for(String key : keys){
+            infoKey = key;
         }
-        resultMap.put("test","test");
+
+        // 받아온 List<Map<String,Object>> 에서 value(회차정보) 추출하기.
+        for(Map<String,String> m : list){
+            infoList.add(m.get(infoKey));
+        }
+
+        resultMap.put(infoKey, infoList);
+
         return resultMap;
     }
 }
