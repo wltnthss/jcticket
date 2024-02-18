@@ -15,11 +15,11 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/admin/adminheader.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
     <div class="admin-common-wrap">
         <%--좌측 nav 페이지--%>
-        <jsp:include page="/WEB-INF/views/admin/adminagencynav.jsp"/>
+        <jsp:include page="/WEB-INF/views/admin/common/adminagencynav.jsp"/>
 
         <div class="admin-common-content">
             <div class="admin-common-title">
@@ -122,7 +122,7 @@
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/admin/adminfooter.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="/resources/js/admin/admin.js"></script>

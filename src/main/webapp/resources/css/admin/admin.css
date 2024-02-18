@@ -443,6 +443,12 @@ table th{
 .w500 {
     width: 500px !important;
 }
+.w700{
+    width: 700px !important;
+}
+.w900{
+    width: 900px !important;
+}
 .notice-paging{
     margin: 30px 0;
     text-align: center;
