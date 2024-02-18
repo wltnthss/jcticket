@@ -149,8 +149,7 @@ public class SignUpController {
 
     //회원가입 버튼 눌렀을 때.insert
     @PostMapping("/signup")
-    public String insertUser(UserDto userDto, TermsDto termsDto, Model m, HttpServletRequest request,
-                             HttpServletResponse response) throws Exception{
+    public String insertUser(UserDto userDto, TermsDto termsDto, Model m) throws Exception{
         System.out.println("userDto = " + userDto);
         System.out.println("userDto.getUser_password() = " + userDto.getUser_password());
 
