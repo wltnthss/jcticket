@@ -5,6 +5,7 @@ import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.ticketing.dao
@@ -18,19 +19,27 @@ import java.util.List;
  * 1/31/24         조영상        최초 생성
  */
 public interface TicketingDao {
-    //삽입
-    int insertShowing(ShowingDto dto) throws Exception;
-    //삭제
-    int deleteShowing(String play_id) throws Exception;
-    //전체삭제
+    // 삽입
+    int insert(ShowingDto dto) throws Exception;
+    // 공연아이디별 삭제
+    int deleteByPlayId(String play_id) throws Exception;
+    // 회차시퀀스별 삭제
+    int deleteBySeq(int seq) throws Exception;
+    // 전체 삭제
     int deleteAll() throws Exception;
-    // 회차 테이블에 들어있는 모든 공연들 카운팅
-//    int countShowingAll() throws Exception;
 
-    // 공연아이다로 공연일정조회
-    List<HashMap<String,Object>> selectShowingDate(String play_id) throws Exception;
-    // 공연아이디와 공연시퀀스로 공연회차 조회
-    List<HashMap<String,Object>> selectShowingRound(HashMap<String, Object> hm ) throws Exception;
+    // 공연아이디별 회차 수 카운트
+    int countByPlayId(String play_id) throws Exception;
 
-    HashMap<String, Object> selectPlayStageName(String play_id) throws Exception;
+    // 공연아이디별 조회
+    List<ShowingDto> selectByPlayId(String play_id) throws Exception;
+
+    // 공연아이디별 공연일정 조회
+    List<Map<String,String>> selectDateByPlayId(String play_id) throws Exception;
+
+    // 공연아이디 && 공연일정별로 회차시퀀스, 회차정보 조회
+    List<Map<String,Object>> selectRound(Map<String,String> map ) throws Exception;
+
+    // 공연아이디로 공연명과 공연장명 조회
+    Map<String,String> selectPlayStageName(String play_id) throws Exception;
 }

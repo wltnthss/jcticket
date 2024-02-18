@@ -36,4 +36,28 @@ public class ShowingDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+
+    public ShowingDto(String showing_info, String showing_date, String showing_day, String showing_status, int showing_seat_cnt, String play_id, String stage_id, String created_id, String updated_id){
+        this.showing_info = showing_info;
+        this.showing_date = showing_date;
+        this.showing_day = showing_day;
+        this.showing_status = showing_status;
+        this.showing_seat_cnt = showing_seat_cnt;
+        this.play_id = play_id;
+        this.stage_id = stage_id;
+        this.created_id = created_id;
+        this.updated_id = updated_id;
+    }
+    public ShowingDto(int showing_seq, String showing_info, String showing_date, String showing_day, String showing_status, int showing_seat_cnt, String play_id, String stage_id, String created_id, String updated_id){
+        this.showing_seq = showing_seq;
+        this.showing_info = showing_info;
+        this.showing_date = showing_date;
+        this.showing_day = showing_day;
+        this.showing_status = showing_status;
+        this.showing_seat_cnt = showing_seat_cnt;
+        this.play_id = play_id;
+        this.stage_id = stage_id;
+        this.created_id = created_id;
+        this.updated_id = updated_id;
+    }
 }

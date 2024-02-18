@@ -26,11 +26,14 @@ public interface TicketingService {
 
     // 리턴타입이 같고 처리 결과가 비슷하며 파라미터가 연관깊은 두 메서드를 하나의 작업으로 묶을지....말지...
     // List<HashMap<String,Object>> getShowTimeInfo(String play_id, String dateText) throws Exception;
-    List<HashMap<String,Object>> getShowingDate(String play_id) throws Exception;
+    List<ShowingDto> getList() throws Exception;
 
-    List<HashMap<String, Object>> getShowingRound(String dateText) throws Exception;
+    List<HashMap<String,Object>> getShowingInfo(String play_id)throws Exception;
 
-    HashMap<String, Object> getPlayStageName(String play_id) throws Exception;
+    List<HashMap<String,Object>> getShowingRound(String dateText) throws Exception;
 
-    // next step...
+    HashMap<String,String> getPlayStageName(String play_id) throws Exception;
+
+    // next step ......
+    // 좌석선택하는 로직
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.ticketing.dao
@@ -27,37 +28,57 @@ public class TicketingDaoImpl implements TicketingDao{
     private final SqlSession session;
 
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
+    // 삽입
     @Override
-    public int insertShowing(ShowingDto dto) throws Exception{
+    public int insert(ShowingDto dto) throws Exception{
         return session.insert(namespace+"insertShowing", dto);
     }
+
+    // 공연아이디별 삭제
     @Override
-    public int deleteShowing(String play_id) throws Exception{
-        return session.delete(namespace+"deleteShowing", play_id);
+    public int deleteByPlayId(String play_id) throws Exception{
+        return session.delete(namespace+"deleteByPlayId", play_id);
     }
+
+    // 회차 시퀀스별 삭제
+    @Override
+    public int deleteBySeq(int seq) throws Exception {
+        return session.delete(namespace+"deleteBySeq", seq);
+    }
+
+    // 전체 삭제
     @Override
     public int deleteAll() throws Exception{
         return session.delete(namespace+"deleteAll");
     }
-//    @Override
-//    public int countShowingAll() throws Exception{
-//        return session.selectOne(namespace+"countShowingAll");
-//    }
+
+    // 공연아이디별 회차 수 카운트
     @Override
-    public List<HashMap<String,Object>> selectShowingDate(String play_id) throws Exception{
-        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingDate", play_id);
-        return list;
+    public int countByPlayId(String play_id) throws Exception{
+        return session.selectOne(namespace+"countByPlayId", play_id);
     }
 
+    // 공연아이디별 조회
     @Override
-    public List<HashMap<String,Object>> selectShowingRound(HashMap<String,Object> hm) throws Exception{
-        List<HashMap<String,Object>> list = session.selectList(namespace+"selectShowingInfo", hm);
-        return list;
+    public List<ShowingDto> selectByPlayId(String play_id) throws Exception{
+        return session.selectList(namespace+"selectByPlayId", play_id);
     }
 
-    public HashMap<String,Object> selectPlayStageName(String play_id) throws Exception{
-        HashMap<String,Object> hm = session.selectOne(namespace+"selectPlayStageName", play_id);
-        return hm;
+    // 공연아이디별 공연일정 조회
+    @Override
+    public List<Map<String,String>> selectDateByPlayId(String play_id) throws Exception{
+        return session.selectList(namespace+"selectDateByPlayId",play_id);
+    }
+
+    // 공연아이디 && 공연일정별 회차시퀀스, 회차정보 리스트 조회
+    @Override
+    public List<Map<String,Object>> selectRound(Map<String,String> map) throws Exception{
+        return session.selectList(namespace+"selectRound", map);
+    }
+
+    // 공연아이디별 공연명, 공연장명 조회 (단일 행 반환)
+    public Map<String,String> selectPlayStageName(String play_id) throws Exception{
+        return session.selectOne(namespace+"selectPlayStageName", play_id);
     }
 
 }

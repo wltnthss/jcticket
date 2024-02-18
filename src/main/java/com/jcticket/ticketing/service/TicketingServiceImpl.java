@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -33,20 +34,31 @@ public class TicketingServiceImpl implements TicketingService{
     // 리턴타입이 같고 처리 결과가 비슷하며 파라미터가 연관깊은 두 메서드를 하나의 작업으로 묶을지....말지...
     // List<HashMap<String,Object>> getShowTimeInfo(String play_id, String dateText) throws Exception;
     @Override
-    public List<HashMap<String,Object>> getShowingDate(String play_id) throws Exception{
-        return ticketingDao.selectShowingDate(play_id);
+    public List<ShowingDto> getList() throws Exception{
+        return ticketingDao.selectAll();
     }
 
     @Override
-    public List<HashMap<String,Object>> getShowingRound(String dateText) throws Exception{
-        HashMap<String,Object> hm = new HashMap<>();{
+    public List<HashMap<String,Object>> getShowingInfo(String play_id) throws Exception{
+        List<HashMap<String,Object>> list1 = ticketingDao.selectSeq(play_id);
+        List<HashMap<String,Object>> list2 = ticketingDao.selectShowingDate(play_id);
+        List<HashMap>
+        list1.addAll((Collection<? extends HashMap<String, Object>>) list2);
+        for(HashMap<String,Object> hashMap : list){
+            hashMap
+        }
+
+    }
+    @Override
+    public List<HashMap<String,String>> getShowingRound(String dateText) throws Exception{
+        HashMap<String,String> hm = new HashMap<>();{
             //해시맵 데이터 생성하는 부분.
         }
         return ticketingDao.selectShowingRound(hm);
     }
 
     @Override
-    public HashMap<String,Object> getPlayStageName(String play_id) throws Exception{
+    public HashMap<String,String> getPlayStageName(String play_id) throws Exception{
         return ticketingDao.selectPlayStageName(play_id);
     }
 
