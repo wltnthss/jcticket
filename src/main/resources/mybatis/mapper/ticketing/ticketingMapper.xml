@@ -89,16 +89,16 @@
     </select>
 <!--    공연아이디 && 공연일정별 회차시퀀스, 회차정보 조회-->
     <select id="selectRound" parameterType="hashmap" resultType="hashmap">
-        select showing_seq, showing_info
+        select showing_info
         from showing
         where 1=1
         and play_id = #{play_id}
         and showing_date = #{date_text}
     </select>
 
-<!--    공연아이디로 공연명과 공연장명 조회-->
+<!--    공연아이디로 공연명과 ,공연포스터, 공연장명 조회-->
     <select id="selectPlayStageName" parameterType="string" resultType="hashmap">
-        SELECT p.play_name, t.stage_name
+        SELECT p.play_name, p.play_poster, t.stage_name
         from play p
         inner join (select DISTINCT play_id , stage_id from showing) as s
         on p.play_id = s.play_id

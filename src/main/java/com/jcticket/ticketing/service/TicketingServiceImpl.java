@@ -1,68 +1,89 @@
 package com.jcticket.ticketing.service;
 
 import com.jcticket.ticketing.dao.TicketingDao;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * packageName    : com.jcticket.ticketing.service
  * fileName       : TicketingServiceImpl
  * author         : 조영상
- * date           : 2/1/24
+ * date           : 2/18/24
  * description    : 자동 주석 생성
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2/1/24         조영상        최초 생성
+ * 2/18/24         조영상        최초 생성
  */
-//@Service
-//@RequiredArgsConstructor
-//public class TicketingServiceImpl implements TicketingService{
-//    private final TicketingDao ticketingDao;
-//
-//    // 서비스에서 어떤 (DAO처럼 단순 쿼리와는 다른) 작업을 구현하고 데이터 가공을 어떻게 할지에 대한 고민이 생각보단 복잡하네여..
-//
-//    // Step1. 일정선택
-//
-//    // 리턴타입이 같고 처리 결과가 비슷하며 파라미터가 연관깊은 두 메서드를 하나의 작업으로 묶을지....말지...
-//    // List<HashMap<String,Object>> getShowTimeInfo(String play_id, String dateText) throws Exception;
-//    @Override
-//    public List<ShowingDto> getList() throws Exception{
-//        return ticketingDao.selectAll();
-//    }
-//
-//    @Override
-//    public List<HashMap<String,Object>> getShowingInfo(String play_id) throws Exception{
-//        List<HashMap<String,Object>> list1 = ticketingDao.selectSeq(play_id);
-//        List<HashMap<String,Object>> list2 = ticketingDao.selectShowingDate(play_id);
-//        List<HashMap>
-//        list1.addAll((Collection<? extends HashMap<String, Object>>) list2);
-//        for(HashMap<String,Object> hashMap : list){
-//            hashMap
-//        }
-//
-//    }
-//    @Override
-//    public List<HashMap<String,String>> getShowingRound(String dateText) throws Exception{
-//        HashMap<String,String> hm = new HashMap<>();{
-//            //해시맵 데이터 생성하는 부분.
-//        }
-//        return ticketingDao.selectShowingRound(hm);
-//    }
-//
-//    @Override
-//    public HashMap<String,String> getPlayStageName(String play_id) throws Exception{
-//        return ticketingDao.selectPlayStageName(play_id);
-//    }
-//
-//
-//    //Next step...
-//}
+@Service
+@RequiredArgsConstructor
+public class TicketingServiceImpl implements TicketingService{
+    private final TicketingDao ticketingDao;
 
+    //step1. 일정선택
+    // 공연명, 공연포스터, 공연일자, 공연장명을 공연아이디를 가지고 받아온다.
+    public Map<String,Object> getPlayInfo(String play_id) throws Exception{
+        // 컨트롤러로 넘길 데이터 HashMap
+        Map<String,Object> resultMap = new HashMap<>();
+        // Map<String,ArrayList<String>> 의 형태로 변환하기 위한 key와 value 저장공간.
+        // List<Map<k,v>> 의 key (모두 동일) 를 추출하여 저장할 문자열
+        String dateKey = "";
+        // List<Map<k,v>> 의 value 들의 값을 저장할 리스트
+        List<String> dateList = new ArrayList<>();
+
+        // Dao 를 통해 공연일정 List 를 받아온다.
+        List<Map<String,String>> list = ticketingDao.selectDateByPlayId(play_id);
+        // Dao 를 통해 공연명,공연포스터,공연장명 Map 을 받아온다
+        Map<String,Object> map = ticketingDao.selectPlayStageName(play_id);
+
+        // result map에 데이터 공연명,포스터,공연장명 Map 추가하기
+        Set<String> keys = map.keySet();
+        for(String key : keys){
+            resultMap.put(key,map.get(key));
+        }
+
+        // resultMap 에 Map<String,ArrayList> 형태로 가공하여 공연일정 추가하기
+        // 공연일정 리스트의 Map 에서 키는 dateKey 로 추출하여 resultMap 의 Key로 넣어주고,
+        // 밸류(일정) 값들은 ArrayList<String>에 담아서 resultMap 의 Value로 넣어준다.
+        Set<String> dateKeys = list.get(0).keySet();
+        for(String key : dateKeys){
+            dateKey = key;
+        }
+        for(Map<String,String> m : list){
+            dateList.add(m.get(dateKey));
+        }
+
+        // 위에서 추출한 값들 resultMap 에 저장.
+        resultMap.put(dateKey,dateList);
+
+        return resultMap;
+    }
+
+    // 공연아이디와 공연일자를 가지고 회차 시퀀스, 화차정보를 가져온다.
+    public Map<String,Object> getShowRound(String play_id, String date_text) throws Exception{
+        // 컨트롤러에 반환할 resultMap
+        Map<String,Object> resultMap = new HashMap<>();
+        // resultMap 에 value로 넣을 ArrayList(회차정보) 만들기.
+        List<String> infoList = new ArrayList<>();
+
+        // Dao 의 메서드에 파라미터로 전달할 Map 만들기.
+        Map<String,String> param = new HashMap<>();
+        param.put(play_id, date_text);
+
+        // Dao 메서드 호출하여 회차시퀀스,회차정보를 받아오기.
+        List<Map<String,String>> list = ticketingDao.selectRound(param);
+
+        // 받아온 List<Map<String,Object>> 에서 key(시퀀스), value(회차정보) 추출하기.
+        for(Map<String,String> map : list){
+            Set<String> keys = map.keySet();
+            for(String key : keys){
+                System.out.println();
+            }
+        }
+        resultMap.put("test","test");
+        return resultMap;
+    }
+}

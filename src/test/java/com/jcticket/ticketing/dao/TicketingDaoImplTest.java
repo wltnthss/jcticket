@@ -121,39 +121,42 @@ public class TicketingDaoImplTest {
         }
     }
 
-    // 공연아이디 & 공연일정별 회차 시퀀스 회차정보 리스트 조회
+    // 공연아이디 & 공연일정별 회차정보 리스트 조회
     @Test
     public void selectRoundTest() throws Exception{
         //given
-        String tDate = "2024-02-";
-        for (int i = 1; i <= 10 ; i++) {
-            ShowingDto dto;
-            if(i == 10){
-                dto = new ShowingDto(i + "회 " + i + "시 00분", tDate + i, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
-            }else {
-                dto = new ShowingDto(i + "회 " + i + "시 00분", tDate + "0" + i, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+        String tDate = "2024-02-2";
+        for (int i = 1; i <= 9 ; i++) {
+            for(int j = 1; j <= 3; j++){
+                ShowingDto dto = new ShowingDto(j+"회 " + j + "시 00분", tDate + i, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+                ticketingDao.insert(dto);
             }
-            ticketingDao.insert(dto);
         }
+        int r = 1;
         Map<String,String> param = new HashMap<>();
         param.put("play_id",testPlay_id);
-        param.put("date_text","2024-02-01");
+        param.put("date_text","2024-02-21");
         //when
-        List<Map<String,Object>> list = ticketingDao.selectRound(param);
+        List<Map<String,String>> list = ticketingDao.selectRound(param);
         //then
-        for(Map<String,Object> map : list){
+        System.out.println("list size ==> "+ list.size());
+        assertTrue(3 == list.size());
+        for(Map<String,String> map : list){
             Set<String> keys = map.keySet();
             for(String key : keys){
                 if(key.equals("showing_seq")){
+                    System.out.println("showing_seq ==> "+ map.get(key));
                     assertTrue(map.get(key) != null);
-                } else if (key.equals("showing_info")){
-                    assertEquals("1회 1시 00분", map.get(key));
+                } else if (key.equals("showing_info")) {
+                    System.out.println("showing_info ==> " + map.get(key));
+                    assertEquals(r + "회 " + r + "시 00분", map.get(key));
                 }
             }
+            r++;
         }
     }
 
-    // 공연아이디별 공연명, 공연장명 조회(단일 행 반환)
+    // 공연아이디별 공연명, 공연포스터, 공연장명 조회(단일 행 반환)
     @Test
     public void selectPlayStageNameTest() throws Exception{
         //given
@@ -164,18 +167,21 @@ public class TicketingDaoImplTest {
             ticketingDao.insert(dto2);
         }
         //when
-        Map<String,String> map = ticketingDao.selectPlayStageName(testPlay_id+"1");
+        Map<String,Object> map = ticketingDao.selectPlayStageName(testPlay_id+"1");
         //then
         Set<String> keys = map.keySet();
         for(String key : keys){
             if (key.equals("play_name")) {
                 System.out.println("공연명 ==> "+map.get(key));
                 assertEquals("테스트공연", map.get(key));
-            }
-            else if(key.equals("stage_name")) {
+            }else if(key.equals("play_poster")){
+                System.out.println("공연장 포스터 ==> "+map.get(key));
+                assertTrue(map.get(key) != null);
+            }else if(key.equals("stage_name")) {
                 System.out.println("공연장명 ==> "+map.get(key));
                 assertEquals("정석극장", map.get(key));
             }
+
         }
     }
 }

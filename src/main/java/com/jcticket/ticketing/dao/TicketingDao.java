@@ -37,9 +37,9 @@ public interface TicketingDao {
     // 공연아이디별 공연일정 조회
     List<Map<String,String>> selectDateByPlayId(String play_id) throws Exception;
 
-    // 공연아이디 && 공연일정별로 회차시퀀스, 회차정보 조회
-    List<Map<String,Object>> selectRound(Map<String,String> map ) throws Exception;
+    // 공연아이디 && 공연일정별로 회차정보 조회
+    List<Map<String,String>> selectRound(Map<String,String> map ) throws Exception;
 
-    // 공연아이디로 공연명과 공연장명 조회
-    Map<String,String> selectPlayStageName(String play_id) throws Exception;
+    // 공연아이디로 공연명과 공연표지, 공연장명 조회
+    Map<String,Object> selectPlayStageName(String play_id) throws Exception;
 }
