@@ -46,9 +46,12 @@ public class AdminDaoImplTest {
 
         // given
         AdminDto adminDto = new AdminDto("admin", "admin@gmail.com", "1111", "010-1257-7845", "jcticket 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        Map<String, Object> map = new HashMap<>();
+        map.put("admin_id", adminDto.getAdmin_id());
+        map.put("admin_password", adminDto.getAdmin_password());
         // when
         int result = adminDao.insertAdmin(adminDto);
-        AdminDto validateNickName = adminDao.adminLogin(adminDto);
+        AdminDto validateNickName = adminDao.adminLogin(map);
         // then
         assertEquals(result, 1);
         assertEquals("jcticket 관리자", validateNickName.getAdmin_nickname());
