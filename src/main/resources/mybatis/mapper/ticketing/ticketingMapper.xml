@@ -25,7 +25,7 @@
          updated_at,
          updated_id)
         VALUES
-            (#{showing_id},
+            (#{showing_seq},
              CURRENT_TIMESTAMP,
              CURRENT_TIMESTAMP,
              #{showing_info},
@@ -60,7 +60,7 @@
 
     <!-- 전체 삭제하는 쿼리 -->
     <delete id="deleteAll">
-        delete from notice
+        delete from showing
     </delete>
 
     <!-- 공연아이디별회차 수 카운트 -->
@@ -93,7 +93,7 @@
         from showing
         where 1=1
         and play_id = #{play_id}
-        and play_date = #{date_text}
+        and showing_date = #{date_text}
     </select>
 
 <!--    공연아이디로 공연명과 공연장명 조회-->
@@ -109,8 +109,9 @@
     </select>
 
 
-    <!-- -------------------------------------------------------------------------- -->
+
     <!-- 공연아이디로 회차시퀀스 조회 -->
+
     <select id="selectSeq" parameterType="string" resultType="hashmap">
         select showing_seq
         from showing

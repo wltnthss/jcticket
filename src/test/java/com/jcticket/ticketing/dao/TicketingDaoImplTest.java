@@ -40,12 +40,12 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
-/*
+
     @Before
-    public void deleteAll() throws Exception{
-        int result = ticketingDao.deleteAll();
+    public void init() throws Exception{
+        System.out.println("init DELETE ALL");
+        ticketingDao.deleteAll();
     }
- */
 
     @Test
     public void insertTest() throws Exception{
@@ -82,6 +82,7 @@ public class TicketingDaoImplTest {
     }
 
     // 공연아이디별 조회 테스트
+    @Test
     public void selectByPlayIdTest() throws Exception{
         //given
         for(int i = 1; i <= 10; i++){
@@ -99,6 +100,7 @@ public class TicketingDaoImplTest {
     }
 
     // 공연아이디별 공연일정 조회
+    @Test
     public void selectDateTest() throws Exception{
         //given
         for(int i = 1; i <= 5; i++){
@@ -135,7 +137,7 @@ public class TicketingDaoImplTest {
         }
         Map<String,String> param = new HashMap<>();
         param.put("play_id",testPlay_id);
-        param.put("showing_date","2024-02-01");
+        param.put("date_text","2024-02-01");
         //when
         List<Map<String,Object>> list = ticketingDao.selectRound(param);
         //then
@@ -166,10 +168,14 @@ public class TicketingDaoImplTest {
         //then
         Set<String> keys = map.keySet();
         for(String key : keys){
-            if (key.equals("play_name"))
+            if (key.equals("play_name")) {
+                System.out.println("공연명 ==> "+map.get(key));
                 assertEquals("테스트공연", map.get(key));
-            else if(key.equals("stage_name"))
+            }
+            else if(key.equals("stage_name")) {
+                System.out.println("공연장명 ==> "+map.get(key));
                 assertEquals("정석극장", map.get(key));
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class TicketingDaoImpl implements TicketingDao{
     // 삽입
     @Override
     public int insert(ShowingDto dto) throws Exception{
-        return session.insert(namespace+"insertShowing", dto);
+        return session.insert(namespace+"insert", dto);
     }
 
     // 공연아이디별 삭제

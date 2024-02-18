@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 //@RequestMapping(value = "/ticketing")
 public class TicketingController {
-    private final TicketingService ticketingService;
+    //private final TicketingService ticketingService;
 
     @GetMapping(value = "/ticketing")
     public String ticketing() throws Exception{
