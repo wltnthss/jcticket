@@ -33,11 +33,17 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     }
 
     public int getRemainSeat(String showing_seq) throws Exception {
+
         return viewDetailDao.remain_seat(showing_seq);
     }
 
     @Override
     public List<JoinDto> getViewDetail(String play_id) throws Exception {
-        return viewDetailDao.viewDetail(play_id);
+        return viewDetailDao.viewDetail_view(play_id);
+    }
+
+    @Override
+    public List<ShowingDto> getViewDetailTime(String play_id) throws Exception {
+        return viewDetailDao.viewDetail_view_time(play_id);
     }
 }

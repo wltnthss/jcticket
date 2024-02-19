@@ -55,21 +55,24 @@ git <%--
         <%--제목--%>
             <p class="big-title">
                 <c:forEach var="play" items="${viewDetail}">
-                    <a>${play.play_name}</a>
+                    <a id="for_ticketing_play_name">${play.play_name}</a>
                 </c:forEach>
             </p>
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
 <%--                            대괄호 제거하고 상영날짜 출력--%>
-                            <c:forEach var="date" items="${viewDetail}" varStatus="loop">
+                            <c:forEach var="date" items="${viewDetailTime}" varStatus="loop">
                                 <a class="dateShow"><c:out value="${date.showing_date}" /></a>
                                 <c:if test="${!loop.last}">,</c:if>
                             </c:forEach>
                         </span>
 
                         <a href="javascript:void(0);" id="stage_name">
-                            <span>쉼표 도서관 2층</span>
+<%--                            <span>쉼표 도서관 2층</span>--%>
+                            <c:forEach var="stage" items="${viewDetail}">
+                                <span id="for_ticketing_stage_name">${stage.stage_name}</span>
+                            </c:forEach>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
                         </a>
 
@@ -134,8 +137,8 @@ git <%--
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-                            <c:forEach var="info" items="${viewDetail}">
-                                <dd>${info.showing_info}</dd>
+                            <c:forEach var="info" items="${viewDetailTime}">
+                                <dd>${info.showing_date} ${info.showing_info}</dd>
                             </c:forEach>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
@@ -177,7 +180,8 @@ git <%--
             </div>
         </div>
 
-        <div class="five" onclick="location.href='javascript:void(0);'">
+<%--        <div class="five" onclick="location.href='javascript:void(0);'">--%>
+        <div class="five">
             <a class="taketic">예매하기</a>
         </div>
 
@@ -323,7 +327,10 @@ git <%--
 
             <div class="eight">
                 <div class="eight_map" id="mapa">
-                    <p class="map_name">쉼표도서관</p>
+<%--                    <p class="map_name">쉼표도서관</p>--%>
+                    <c:forEach var="stage" items="${viewDetail}">
+                        <p class="map_name">&nbsp;${stage.stage_name}</p>
+                    </c:forEach>
                     <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
                 </div>
                 <div class="map_icon_box">

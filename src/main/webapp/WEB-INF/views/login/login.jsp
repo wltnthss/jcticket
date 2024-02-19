@@ -56,25 +56,22 @@
             <div class="loginForm">
                 <!-- 회원 로그인 영역 시작 -->
                 <div class="memLoginForm">
-                    <form action="<c:url value="/login"/>" method="POST" name="LoginSub" autocomplete="off"/>
+                    <form action="<c:url value="/login"/>" id="loginSub" method="POST" name="LoginSub" autocomplete="off"/>
                         <fieldset class="formFieldSet">
                                 <span id = spanMemID>
                                     <label for="SMemID">아이디</label>
                                     <input id="SMemID" name="user_id" type="text" value="${cookie.user_id.value}" autocomplete="off" placeholder="아이디">
                                 </span>
-                                <c:if test = "${param.user_id==''}">
-                                    <div class="idEmpty">아이디를 입력해주세요</div>
-                                </c:if>
+                                    <div class="idEmpty">${valid_user_id}</div>
+
 
 
                                 <span id = spanMemPWD>
                                         <label for="SMemPWD">패스워드</label>
-                                        <input id="SMemPWD" name="user_pwd" type="password" autocomplete="off" placeholder="비밀번호">
+                                        <input id="SMemPWD" name="user_password" type="password" autocomplete="off" placeholder="비밀번호">
                                 </span>
+                                    <div class="pwdEmpty">${valid_user_password}</div>
 
-                                <c:if test = "${param.user_pwd==''}">
-                                    <div class="pwdEmpty">비밀번호를 입력해주세요</div>
-                                </c:if>
                             <div class="loginForm-chk">
                                     <span class="loginKeep">
                                         <label for="chkAutoLogin">
@@ -142,7 +139,7 @@
                     <!-- 소셜 로그인 영역 끝 -->
 
                     <%--로그인 실패 팝업창 시작--%>
-                    <c:if test="${(param.user_id!='' and param.user_id !=null) and (param.user_pwd!='' and param.user_pwd!=null)}">
+                    <c:if test="${(param.user_id!='' and param.user_id !=null) and (param.user_password!='' and param.user_password!=null)}">
                         <div class="maskUI">
                         <div id="loginFailPop" >
                         <div class="jcPopUp">
@@ -237,8 +234,15 @@
 
 <script>
     let user_id = "${param.user_id}";
-    let user_pwd = "${param.user_pwd}";
-    let boardDtoPWD = "${param.boardDtoPWD}"
+    let user_pwd = "${param.user_password}";
+    let user_retireYN = "${param.retireYN}";
+
+        $('#loginSub').on('submit', function(){
+            console.log(user_retireYN)
+            if(user_retireYN==='Y'){
+                alert("탈퇴한 회원입니다.")
+            }
+        })
 </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.ticketing.dto.TicketingDto;
-import com.jcticket.user.dao.LoginDao;
+import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class AdminDaoImplTest {
     AdminDao adminDao;
 
     @Autowired
-    LoginDao userDao;
+    UserDao userDao;
 
     final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
@@ -47,9 +46,12 @@ public class AdminDaoImplTest {
 
         // given
         AdminDto adminDto = new AdminDto("admin", "admin@gmail.com", "1111", "010-1257-7845", "jcticket 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        Map<String, Object> map = new HashMap<>();
+        map.put("admin_id", adminDto.getAdmin_id());
+        map.put("admin_password", adminDto.getAdmin_password());
         // when
         int result = adminDao.insertAdmin(adminDto);
-        AdminDto validateNickName = adminDao.adminLogin(adminDto);
+        AdminDto validateNickName = adminDao.adminLogin(map);
         // then
         assertEquals(result, 1);
         assertEquals("jcticket 관리자", validateNickName.getAdmin_nickname());
@@ -98,14 +100,34 @@ public class AdminDaoImplTest {
     public void userRetireUpdate() throws Exception {
         // given
         UserDto userDto = new UserDto("0sang", "4444");
-        UserDto testUser = userDao.selectUser(userDto.getUser_id());
+        System.out.println("userDto => " + userDto);
+        UserDto testUser = userDao.select(userDto.getUser_id());
+        System.out.println("testUser => " + testUser);
+        System.out.println("testUserData => " + testUser.getUser_retire_yn() + ", " +testUser.getUser_retire_at());
 
         // when
-        int updateResult = adminDao.userRetireUpdate(testUser.getUser_id());
-        UserDto afterUpdateTestUser = userDao.selectUser(userDto.getUser_id());
+        int updateResult = adminDao.userDelete(testUser.getUser_id());
+        UserDto afterUpdateTestUser = userDao.select(userDto.getUser_id());
+
 
         // then
         assertEquals(1, updateResult);
         assertEquals("Y", afterUpdateTestUser.getUser_retire_yn());
+    }
+
+    @Test
+    public void insertAgency() throws Exception {
+
+        adminDao.deleteAllAgency();
+
+        // given
+        for (int i = 1; i < 11; i++) {
+            AgencyDto agencyDto = new AgencyDto("agency"+i, "1111", "정석코딩(주)", "castello@gmail.com", "010-5789-1548", "98-578-48751", CURRENT_TIMESTAMP, "R", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, "정석코딩", "남궁성", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+            // when
+            int result = adminDao.insertAgency(agencyDto);
+            // then
+            assertTrue(1 == result);
+        }
+        assertTrue(10 == adminDao.countAllAgency());
     }
 }

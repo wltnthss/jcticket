@@ -1,7 +1,5 @@
 package com.jcticket.viewdetail.controller;
 
-import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dao.ViewDetailDao;
 import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.service.ViewDetailService;
@@ -14,9 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -41,10 +36,9 @@ public class ViewController {
             Model model) throws Exception{
         try {
             List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
+            List<ShowingDto> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
             model.addAttribute("viewDetail", viewDetail);
-
-//            List<ShowingDto> view_showing_info = viewDetailService.getViewShowingInfo(this_play_id);
-//            model.addAttribute("viewShwoingInfo", view_showing_info);
+            model.addAttribute("viewDetailTime", viewDetailTime);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -77,10 +71,8 @@ public class ViewController {
             throws Exception {
         //디코딩
         String decodedSeatInfo = URLDecoder.decode(remainSeat, "UTF-8");
-
         char[] charArr = decodedSeatInfo.toCharArray();
         String remainSeatCal = (decodedSeatInfo.substring(0, charArr.length-1));
-
         int msg = 0;
         try {
             int list = viewDetailService.getRemainSeat(remainSeatCal);

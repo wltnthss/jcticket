@@ -1,6 +1,6 @@
-package com.jcticket.signup.dao;
+package com.jcticket.user.dao;
 
-import com.jcticket.signup.dto.TermsDto;
+import com.jcticket.user.dto.TermsDto;
 
 /**
  * packageName    : com.jcticket.signup.dao

@@ -41,5 +41,7 @@ public interface ViewDetailDao {
 
     int remain_seat(String showing_seq) throws Exception;
 
-    List<JoinDto> viewDetail(String play_id) throws Exception;
+    List<JoinDto> viewDetail_view(String play_id) throws Exception;
+
+    List<ShowingDto> viewDetail_view_time(String play_id) throws Exception;
 }
