@@ -1,5 +1,6 @@
 package com.jcticket.notice.service;
 
+import com.jcticket.notice.dto.NoticeValidDto;
 import com.jcticket.notice.dao.NoticeDao;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.dto.PageDto;
@@ -59,7 +60,7 @@ public class NoticeServiceImpl implements NoticeService{
         pagingParams.put("keyword", keyword);
         pagingParams.put("sort", sort);
 
-        // 번호순 seq 값 들어오면 번호순 정렬, 아닐 시에 조회순 정렬
+        // 동적쿼리 번호순 seq 값 들어오면 번호순 정렬, view 값 들어오면 조회순 정렬
         pagingList = noticeDao.pagingList(pagingParams);
 
         return pagingList;
@@ -112,4 +113,15 @@ public class NoticeServiceImpl implements NoticeService{
     public int count(String keyword) throws Exception {
         return noticeDao.count(keyword);
     }
+
+    @Override
+    public int insertValid(NoticeValidDto noticeValidDto) throws Exception {
+        return noticeDao.insertValid(noticeValidDto);
+    }
+
+    @Override
+    public int updateInfo(NoticeDto noticeDto) throws Exception {
+        return noticeDao.updateInfo(noticeDto);
+    }
+
 }

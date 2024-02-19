@@ -204,4 +204,9 @@ public class AdminServiceImpl implements AdminService {
         return pageDto;
     }
 
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return adminDao.noticeDelete(notice_seq);
+    }
+
 }

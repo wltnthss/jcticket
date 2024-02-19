@@ -12,6 +12,10 @@
         DELETE FROM USER WHERE user_id = #{user_id}
     </delete>
 
+    <delete id="deleteNotice" parameterType="int">
+        DELETE FROM NOTICE WHERE notice_seq = #{notice_seq}
+    </delete>
+
     <delete id="adminDelete" parameterType="String">
         DELETE FROM ADMIN WHERE admin_id = #{admin_id}
     </delete>
