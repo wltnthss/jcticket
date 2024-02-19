@@ -38,5 +38,10 @@ public interface AdminService {
     int agencyCnt(String option, String keyword) throws Exception;
     // 기획사 페이징 리스트 조회
     List<AgencyDto> agencyPaingList(int page, String option, String keyword) throws Exception;
+    // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
     PageDto agencyPagingParam(int page, String option, String keyword) throws Exception;
+
+    // 공지사항 삭제
+    int noticeDelete(int notice_seq) throws Exception;
+
 }

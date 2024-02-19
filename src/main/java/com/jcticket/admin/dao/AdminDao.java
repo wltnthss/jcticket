@@ -33,6 +33,9 @@ public interface AdminDao {
     int userRetireUpdate(String user_id) throws Exception;
     // 회원 삭제
     int userDelete(String user_id) throws Exception;
+
+    // 공지사항 삭제
+    int noticeDelete(int notice_seq) throws Exception;
     // 관리자 회원가입
     int insertAdmin(AdminDto adminDto) throws Exception;
     // 관리자 삭제

@@ -41,7 +41,7 @@ public class NoticeDaoImplTest {
     // count keyword null 테스트용
     final static String KEYWORD = "";
 
-    // 각 테스트 케이스 실행전 공지사항 전체 삭제
+    // 각 테스트 케이스 실행전 공지사항 전체 삭제 -> before는 테스트케이스 안에 넣는 것이 명확하기 때문에 메서드 안에서 사용하자.
     @Before
     public void init() throws Exception{
         System.out.println("init DELETE ALL");

@@ -1,10 +1,10 @@
 package com.jcticket.notice.service;
 
+import com.jcticket.notice.dto.NoticeValidDto;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.dto.PageDto;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * packageName :  com.jcticket.notice.service
@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public interface NoticeService {
 
+    // 공지사항 상세보기시 조회수 1 증가
     NoticeDto read(int no) throws Exception;
     // 화면에서 받은 sort 값에 따라 번호순, 조회순 분기 따라 쿼리 적용
     List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
@@ -30,5 +31,9 @@ public interface NoticeService {
     int deleteAll() throws Exception;
     // 전체 notice 리스트 개수 조회
     int count(String keyword) throws Exception;
+    // 관리자단 공지사항 인서트
+    int insertValid(NoticeValidDto noticeValidDto) throws Exception;
+    // 관리자단 공지사항 수정
+    int updateInfo(NoticeDto noticeDto) throws Exception;
 
 }

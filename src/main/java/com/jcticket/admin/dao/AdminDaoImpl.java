@@ -58,6 +58,12 @@ public class AdminDaoImpl implements AdminDao{
     public int userDelete(String user_id) throws Exception {
         return sqlSession.delete(namespace+"userDelete", user_id);
     }
+
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return sqlSession.delete(namespace+"deleteNotice", notice_seq);
+    }
+
     @Override
     public int insertAdmin(AdminDto adminDto) throws Exception {
         return sqlSession.insert(namespace+"insertAdmin", adminDto);
