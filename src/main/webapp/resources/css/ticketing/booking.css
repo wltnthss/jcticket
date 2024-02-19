@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+}
+html {
+    height: 100%
+}
+p {
+    color: grey
+}
+td{
+    color: gray;
+}
+#heading {
+    text-transform: uppercase;
+    color: #673AB7;
+    font-weight: normal;
+    padding-bottom: 10px;
+    border-bottom: dashed rgba(103, 58, 183, 0.2);
+}
+#msform {
+    text-align: center;
+    position: relative;
+    padding-top: 20px;
+}
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+.form-card {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+}
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+#msform input,
+#msform textarea {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    background-color: #ECEFF1;
+    font-size: 16px;
+    letter-spacing: 1px
+}
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #673AB7;
+    outline-width: 0
+}
+#msform .action-button {
+    width: 100px;
+    background: #673AB7;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5px;
+    float: right
+}
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #311B92
+}
+#msform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right
+}
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: #000000
+}
+.card {
+    z-index: 0;
+    border: none;
+    position: relative
+}
+.fs-title {
+    font-size: 20px;
+    color: #673AB7;
+    margin-bottom: 30px;
+    font-weight: normal;
+    text-align: center;
+}
+.fs-title2{
+    font-size: 20px;
+    color: #673AB7;
+    margin-bottom: 30px;
+    font-weight: normal;
+    text-align: center;
+}
+.purple-text {
+    color: #673AB7;
+    font-weight: normal
+}
+.fieldlabels {
+    color: gray;
+    text-align: left
+}
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+#progressbar .active {
+    color: #673AB7
+}
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+#progressbar #date:before {
+    font-family: FontAwesome;
+    font-size: small;
+    content: "step1"
+}
+#progressbar #seat:before {
+    font-family: FontAwesome;
+    font-size: small;
+    content: "step2"
+}
+#progressbar #coupon:before {
+    font-family: FontAwesome;
+    font-size: small;
+    content: "step3"
+}
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    font-size: small;
+    content: "step4"
+}
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    z-index: -1
+}
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #673AB7
+}
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+#datepicker{
+    border-right: solid rgba(0, 0, 0, 0.1);
+}
+
+#round{
+
+}
+#posterinfo {
+    width: 100px;
+}
+.form-card .row .col-8{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.form-card .row .col-4{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-flow: column nowrap;
+
+}
+.select-seat{
+    display: flex;
+    width: 70%;
+    flex-flow: column nowrap;
+}
+#stage{
+    width: 100%;
+    color: white;
+}
+.seats{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.seats span{
+    width: 20px;
+    height: 20px;
+    margin: 0 5px 10px 0;
+}
+.selected-seats.head{
+    text-align: center;
+    height: 10%;
+
+}
+.selected-seats{
+    height: 60%;
+    border-left: solid 0.5px #673AB7;
+    border-right: solid 0.5px #673AB7;
+    border-top: solid 0.5px #673AB7;
+}
+.selected-seats p{
+    margin: 0;
+    height: 25px;
+}
+.selected-price.head{
+    text-align: center;
+    height: 10%;
+    border-bottom: none;
+
+}
+.selected-price{
+    height: 20%;
+    border-left: solid 0.5px #673AB7;
+    border-right: solid 0.5px #673AB7;
+    border-top: solid 0.5px #673AB7;
+    border-bottom: solid 0.5px #673AB7;
+}
+#ss span{
+    height: 25px;
+    margin-bottom: 5px;
+}
