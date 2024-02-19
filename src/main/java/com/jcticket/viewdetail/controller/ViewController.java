@@ -1,6 +1,8 @@
 package com.jcticket.viewdetail.controller;
 
 import com.jcticket.viewdetail.dto.JoinDto;
+import com.jcticket.viewdetail.dto.PageHandler;
+import com.jcticket.viewdetail.dto.ReviewDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.service.ViewDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.viewdetail.controller
@@ -33,12 +37,33 @@ public class ViewController {
 //    공연아이디 조건, view에서 표시할 정보들
     @GetMapping("/viewdetail")
     public String viewdetail(@RequestParam String this_play_id,
-            Model model) throws Exception{
+            Model model,Integer page, Integer pageSize) throws Exception {
+
+        if(page==null) {
+            page = 1;
+        }
+        if(pageSize==null) {
+            pageSize = 10;
+        }
+
         try {
+            //상세보기에 표시할 것들
             List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
             List<ShowingDto> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
             model.addAttribute("viewDetail", viewDetail);
             model.addAttribute("viewDetailTime", viewDetailTime);
+
+            //상세보기 - 관람후기 게시판
+            int totalCnt = viewDetailService.get_review_count();
+            PageHandler pageHandler = new PageHandler(page,totalCnt,pageSize);
+
+            Map map = new HashMap();
+            map.put("offset",(page-1)*pageSize);
+            map.put("pageSize",pageSize);
+
+            List<ReviewDto> list = viewDetailService.review_select_page(map);
+            model.addAttribute("list",list);
+            model.addAttribute("ph",pageHandler);
         } catch (Exception e){
             e.printStackTrace();
         }

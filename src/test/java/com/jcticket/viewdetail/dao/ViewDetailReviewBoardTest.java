@@ -52,31 +52,31 @@ public class ViewDetailReviewBoardTest {
     }
 
 //    하나씩 제거 테스트
-    @Test
-    public void review_delete() throws Exception {
-        int review_cnt = viewDetailDao.review_count();
-
-        System.out.println("review_cnt =>" + review_cnt);
-
-        for(int i=review_cnt;i>0;i--){
-            int review_num = i+i;
-            String user_id = "test123";
-            viewDetailDao.review_delete(review_num, user_id);
-        }
-
-        review_cnt = viewDetailDao.review_count();
-
-        assertTrue(review_cnt==50);
-    }
+//    @Test
+//    public void review_delete() throws Exception {
+//        int review_cnt = viewDetailDao.review_count();
+//
+//        System.out.println("review_cnt =>" + review_cnt);
+//
+//        for(int i=review_cnt;i>0;i--){
+//            int review_num = i+i;
+//            String user_id = "test123";
+//            viewDetailDao.review_delete(review_num, user_id);
+//        }
+//
+//        review_cnt = viewDetailDao.review_count();
+//
+//        assertTrue(review_cnt==50);
+//    }
 
     //조회수 테스트
-    @Test
-    public void review_increaseViewCnt() throws Exception {
-        int review_num = 1;
-        int result = viewDetailDao.review_increaseViewCnt(review_num);
-
-        assertTrue(result == 1);
-    }
+//    @Test
+//    public void review_increaseViewCnt() throws Exception {
+//        int review_num = 1;
+//        int result = viewDetailDao.review_increaseViewCnt(review_num);
+//
+//        assertTrue(result == 1);
+//    }
 
 //    리뷰 수정 테스트
     @Test

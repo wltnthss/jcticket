@@ -399,17 +399,29 @@ git <%--
                         <a class="page_prev"><img src="/resources/img/viewdetail/back.png/"/></a>
 <%--                        페이징--%>
                         <div>
-                            <a><span>1</span></a>
-                            <a><span>2</span></a>
-                            <a><span>3</span></a>
-                            <a><span>4</span></a>
-                            <a><span>5</span></a>
-                            <a><span>6</span></a>
-                            <a><span>7</span></a>
-                            <a><span>8</span></a>
-                            <a><span>9</span></a>
-                            <a><span>10</span></a>
+                            <%--        ph는 BoardController에 정의되어있음, ph = PageHandler--%>
+                            <c:if test="${ph.showPrev}">
+                                <a href="<c:url value='/viewdetail?page=${ph.startPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.startPage}" end="${ph.endPage}">
+                                <a href="<c:url value='/viewdetail?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a href="<c:url value='/viewdetail?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                            </c:if>
                         </div>
+<%--                        <div>--%>
+<%--                            <a><span>1</span></a>--%>
+<%--                            <a><span>2</span></a>--%>
+<%--                            <a><span>3</span></a>--%>
+<%--                            <a><span>4</span></a>--%>
+<%--                            <a><span>5</span></a>--%>
+<%--                            <a><span>6</span></a>--%>
+<%--                            <a><span>7</span></a>--%>
+<%--                            <a><span>8</span></a>--%>
+<%--                            <a><span>9</span></a>--%>
+<%--                            <a><span>10</span></a>--%>
+<%--                        </div>--%>
                         <a class="page_next"><img src="/resources/img/viewdetail/backback.png/"/></a>
                         <a class="page_last"><img src="/resources/img/viewdetail/back.png/"/></a>
                     </div>

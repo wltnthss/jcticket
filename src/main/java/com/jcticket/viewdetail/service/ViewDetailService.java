@@ -6,6 +6,7 @@ import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.viewdetail.service
@@ -41,7 +42,9 @@ public interface ViewDetailService {
 
     int review_update(ReviewDto reviewDto) throws Exception;
 
-    List<ReviewDto> review_select_all() throws Exception;
+    List<ReviewDto> review_select_all(String play_id) throws Exception;
 
     List<ReviewDto> review_select(int review_num) throws Exception;
+
+    List<ReviewDto> review_select_page(Map map) throws Exception;
 }

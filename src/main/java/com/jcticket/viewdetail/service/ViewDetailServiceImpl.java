@@ -7,10 +7,7 @@ import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * packageName    : com.jcticket.viewdetail.service
@@ -79,12 +76,17 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     }
 
     @Override
-    public List<ReviewDto> review_select_all() throws Exception {
-        return viewDetailDao.review_select_all();
+    public List<ReviewDto> review_select_all(String play_id) throws Exception {
+        return viewDetailDao.review_select_all(play_id);
     }
 
     @Override
     public List<ReviewDto> review_select(int review_num) throws Exception {
         return viewDetailDao.review_select(review_num);
+    }
+
+    @Override
+    public List<ReviewDto> review_select_page(Map map) throws Exception {
+        return viewDetailDao.review_select_page(map);
     }
 }

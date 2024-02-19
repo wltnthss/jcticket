@@ -130,12 +130,17 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public List<ReviewDto> review_select_all() throws Exception {
-        return session.selectList(namespace + "review_select_all");
+    public List<ReviewDto> review_select_all(String play_id) throws Exception {
+        return session.selectList(namespace + "review_select_all", play_id);
     }
 
     @Override
     public List<ReviewDto> review_select(int review_num) throws Exception {
         return session.selectOne(namespace + "review_select");
+    }
+
+    @Override
+    public List<ReviewDto> review_select_page(Map map) throws Exception {
+        return session.selectList(namespace + "review_select_page", map);
     }
 }

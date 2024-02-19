@@ -4,6 +4,7 @@ package com.jcticket.viewdetail.dao;
 import com.jcticket.viewdetail.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.viewdetail.dao
@@ -55,7 +56,9 @@ public interface ViewDetailDao {
 
     int review_update(ReviewDto reviewDto) throws Exception;
 
-    List<ReviewDto> review_select_all() throws Exception;
+    List<ReviewDto> review_select_all(String play_id) throws Exception;
 
     List<ReviewDto> review_select(int review_num) throws Exception;
+
+    List<ReviewDto> review_select_page(Map map) throws Exception;
 }

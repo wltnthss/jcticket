@@ -11,7 +11,7 @@ package com.jcticket.viewdetail.dto;
  * -----------------------------------------------------------
  * 2024-02-14        kyd54       최초 생성
  */
-public class pageHandler {
+public class PageHandler {
     final static int NAV_SIZE = 10;
     int page; //현재 페이지
     int totalCnt; //전체 게시물 개수
@@ -22,7 +22,7 @@ public class pageHandler {
     boolean showPrev; //이전 링크
     boolean showNext; //다음 링크
 
-    public pageHandler(int page, int totalCnt, int pageSize) {
+    public PageHandler(int page, int totalCnt, int pageSize) {
         this.page = page;
         this.totalCnt = totalCnt;
         this.pageSize = pageSize;
@@ -84,7 +84,6 @@ public class pageHandler {
         if (showNext) {
             str += "다음 >";
         }
-
         return str;
     }
 }

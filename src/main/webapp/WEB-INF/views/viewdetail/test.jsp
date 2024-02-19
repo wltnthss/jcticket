@@ -20,7 +20,7 @@
 </head>
 <body>
 <form id="viewDetailForm" action="/viewdetail" method="get">
-    <button type="button" class="buttonimg" onclick="moveToPlay1()"></button>
+    <button type="button" id="공연아이디1" class="buttonimg" onclick="moveToPlay1()"></button>
 </form>
 
 <script>

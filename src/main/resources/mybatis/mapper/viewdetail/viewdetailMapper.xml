@@ -179,6 +179,7 @@
                review_viewing_at,
                review_content
         FROM review
+        WHERE play_id = #{play_id}
         ORDER BY review_at DESC
     </select>
 
@@ -194,5 +195,16 @@
                play_id
         FROM review
         WHERE review_num = #{review_num}
+    </select>
+
+    <!--한 페이지에 나타낼 게시글의 수를 조절함 1페이지 > 0~10, 2페이지 > 10~20 ~~~   -->
+    <select id="review_select_page" parameterType="map" resultType="ReviewDto">
+        SELECT user_id,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content
+        ORDER BY review_at DESC
+        LIMIT #{offset}, #{pageSize}
     </select>
 </mapper>
