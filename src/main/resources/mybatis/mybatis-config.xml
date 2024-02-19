@@ -23,8 +23,14 @@
         <typeAlias alias="PlayDto" type="com.jcticket.viewdetail.dto.PlayDto"/>
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
 
+<<<<<<< HEAD
 
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
+=======
+        <typeAlias alias="SignupDto" type="com.jcticket.signup.dto.SignupDto"/>
+
+        <typeAlias alias="TermsDto" type="com.jcticket.signup.dto.TermsDto"/>
+>>>>>>> mypage
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>

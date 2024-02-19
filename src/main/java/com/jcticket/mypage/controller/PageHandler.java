@@ -14,6 +14,12 @@ package com.jcticket.mypage.controller;
 public class PageHandler {
 
     private int page;
+
+    private String option;   // 조회 검색
+
+    private String start_date; //날짜별 조회 검색 시작
+    
+    private String end_date;  //날짜별 조회 검색 끝
     private int totalCnt;
     private int pageSize;
     private int navSize = 10;
@@ -23,14 +29,17 @@ public class PageHandler {
     private boolean showPrev;
     private boolean showNext;
 
-    public PageHandler(int totalCnt, int page) {
-        this(totalCnt, page, 10);
+    public PageHandler(int totalCnt, int page, String option, String start_date, String end_date ) {
+        this(totalCnt, page, 10, option, start_date, end_date);
     }
 
-    public PageHandler(int totalCnt, int page, int pageSize) {
+    public PageHandler(int totalCnt, int page, int pageSize, String option, String start_date, String end_date) {
         this.totalCnt = totalCnt;
         this.page = page;
         this.pageSize = pageSize;
+        this.option = option;
+        this.start_date = start_date;
+        this.end_date = end_date;
 
 
         totalPage = (int)Math.ceil(totalCnt / (double)pageSize);    // 11
@@ -40,6 +49,29 @@ public class PageHandler {
         showNext = endPage != totalPage;                            // true
 
     }
+
+
+
+
+    public PageHandler(int totalCnt, int page, int pageSize) {
+        this.totalCnt = totalCnt;
+        this.page = page;
+        this.pageSize = pageSize;
+
+
+
+        totalPage = (int)Math.ceil(totalCnt / (double)pageSize);    // 11
+        beginPage = (page - 1) / navSize * navSize + 1;             // 1
+        endPage = Math.min(beginPage + navSize - 1, totalPage);     // 10
+        showPrev = beginPage != 1;                                  // false
+        showNext = endPage != totalPage;                            // true
+
+    }
+
+    public PageHandler(int totalCnt, int page) {
+        this(totalCnt, page, 10);
+    }
+
 
     public void print() {
         System.out.println("page = " + page);
@@ -122,18 +154,42 @@ public class PageHandler {
         this.showNext = showNext;
     }
 
-    @Override
-    public String toString() {
-        return "MyPagingDTO{" +
-                "totalCnt=" + totalCnt +
-                ", pageSize=" + pageSize +
-                ", navSize=" + navSize +
-                ", totalPage=" + totalPage +
-                ", page=" + page +
-                ", beginPage=" + beginPage +
-                ", endPage=" + endPage +
-                ", showPrev=" + showPrev +
-                ", showNext=" + showNext +
-                '}';
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
+    public PageHandler(int page, String option, String start_date, String end_date, int totalCnt, int pageSize, int navSize, int totalPage, int beginPage, int endPage, boolean showPrev, boolean showNext) {
+        this.page = page;
+        this.option = option;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.totalCnt = totalCnt;
+        this.pageSize = pageSize;
+        this.navSize = navSize;
+        this.totalPage = totalPage;
+        this.beginPage = beginPage;
+        this.endPage = endPage;
+        this.showPrev = showPrev;
+        this.showNext = showNext;
     }
 }

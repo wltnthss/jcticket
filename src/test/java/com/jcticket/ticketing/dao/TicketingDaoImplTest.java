@@ -40,6 +40,7 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
+<<<<<<< HEAD
 
     @Before
     public void init() throws Exception{
@@ -183,5 +184,16 @@ public class TicketingDaoImplTest {
             }
 
         }
+=======
+    @Test
+    public void selectAll() throws Exception {
+        List<TicketingDto> list = ticketingDao.selectAll();
+        System.out.println("list => " + list);
+>>>>>>> mypage
     }
+
+
+
+//    @Test
+//    public
 }
