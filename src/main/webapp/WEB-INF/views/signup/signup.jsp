@@ -42,6 +42,7 @@
         <%-- 회원가입 폼 시작 --%>
         <form action="<c:url value="/signup/signup"/>" id="signupForm" class="signupForm" method="POST">
             <!-- 이메일 부분 시작 -->
+
             <div class="emailWrap">
                 <label class="emailLabel">이메일</label>
                 <div class="emailInputWrap">
@@ -84,7 +85,7 @@
                     인증번호 6자리를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" minlength="6" maxlength="6" required="required">
+                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" minlength="6" maxlength="6" >
                 </label>
                 <input type="button" id="AuthBtn"  value="인증번호 확인"><br>
                 <div class = authMsg></div>
@@ -99,9 +100,9 @@
                     영문 소문자,숫자만을 사용한 4글자 이상, 20글자 이하
                 </div>
                 <label>
-                    <input type="text" id="userIdInput" class="css_idPwdNickTelAddGenBir_input" name="user_id" placeholder="아이디" required="required">
+                    <input type="text" id="userIdInput" value="${userDto.user_id}" class="css_idPwdNickTelAddGenBir_input" name="user_id" placeholder="아이디" >
                 </label>
-                <div id="id_warnMsg"></div>
+                <div id="id_warnMsg">${valid_user_id}</div>
             </div>
             <!-- 아이디 입력 인풋창 끝-->
 
@@ -112,9 +113,9 @@
                     영문 대문자, 소문자, 숫자,특수문자를 포함한 8자 이상
                 </div>
                 <label>
-                    <input type="password" id="userPwdInput" class="css_idPwdNickTelAddGenBir_input" name="user_password" placeholder="비밀번호" required="required">
+                    <input type="password" id="userPwdInput" value="${userDto.user_password}" class="css_idPwdNickTelAddGenBir_input" name="user_password" placeholder="비밀번호" >
                 </label>
-                <div id="pwd_warnMsg"></div>
+                <div id="pwd_warnMsg">${valid_user_password}</div>
             </div>
             <!-- 비밀번호 입력 인풋창 끝-->
 
@@ -138,9 +139,9 @@
                     사용할 닉네임을 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="userNicknameInput" class="css_idPwdNickTelAddGenBir_input" name="user_nickname" placeholder="닉네임" required="required" maxlength="30">
+                    <input type="text" id="userNicknameInput" value="${userDto.user_nickname}" class="css_idPwdNickTelAddGenBir_input" name="user_nickname" placeholder="닉네임" maxlength="30">
                 </label>
-                <div id="nickname_warnMsg"></div>
+                <div id="nickname_warnMsg">${valid_user_nickname}</div>
             </div>
             <!-- 닉네임 입력 인풋창 끝 -->
 
@@ -151,8 +152,9 @@
                     이름을 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" class="css_idPwdNickTelAddGenBir_input" name="user_name" placeholder="이름" required="required" maxlength="20">
+                    <input type="text" id="userNameInput" class="css_idPwdNickTelAddGenBir_input" value="${userDto.user_name}" name="user_name" placeholder="이름" maxlength="20">
                 </label>
+                <div id="name_warnMsg">${valid_user_name}</div>
             </div>
             <!-- 이름 입력 인풋창 끝 -->
 
@@ -163,9 +165,9 @@
                     전화번호를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="user_tel" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" required="required" maxlength="13" minlength="13">
+                    <input type="text" id="user_tel" value="${userDto.user_tel}" class="css_idPwdNickTelAddGenBir_input" name="user_tel" placeholder="전화번호" maxlength="13" minlength="13">
                 </label>
-                <div id="tel_warnMsg"></div>
+                <div id="tel_warnMsg">${valid_user_tel}</div>
             </div>
             <!-- 전화번호 입력 인풋창 끝 -->
 
@@ -176,9 +178,9 @@
                     생년월일 8자리를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="user_birth_input" class="css_idPwdNickTelAddGenBir_input" name="user_birth" placeholder="생년월일" required="required" maxlength="8">
+                    <input type="text" id="user_birth_input" value="${userDto.user_birth}" class="css_idPwdNickTelAddGenBir_input" name="user_birth" placeholder="생년월일" maxlength="8">
                 </label>
-                <div id="birth_warnMsg"></div>
+                <div id="birth_warnMsg">${valid_user_birth}</div>
             </div>
             <!-- 생년월일 입력 인풋창 끝 -->
 
@@ -190,10 +192,10 @@
                 <label>
                     <input type="text" id="sample4_postcode" placeholder="우편번호" required="required">
                     <input type="button" id="addBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" required="required">
+                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" >
                     <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
                     <span id="guide" style="color:#999;display:none"></span>
-                    <input type="text" id="sample4_detailAddress" placeholder="상세주소" required="required">
+                    <input type="text" id="sample4_detailAddress" placeholder="상세주소" >
                     <input type="text" id="sample4_extraAddress" placeholder="참고항목">
                 </label>
                 <input id="user_address" type="hidden" name="user_address" value="">
@@ -207,9 +209,9 @@
                     남성 : M 여성 : W
                 </div>
                 <label>
-                    <input type="text" id="user_gender_input" class="css_idPwdNickTelAddGenBir_input" name="user_gender" placeholder="M / W" required="required" maxlength="1">
+                    <input type="text" id="user_gender_input" value="${userDto.user_gender}" class="css_idPwdNickTelAddGenBir_input" name="user_gender" placeholder="M / W"  maxlength="1">
                 </label>
-                <div id="gender_warnMsg"></div>
+                <div id="gender_warnMsg">${valid_user_gender}</div>
             </div>
             <!-- 성별 입력 인풋창 끝 -->
 
@@ -220,7 +222,7 @@
                     콘서트, 뮤지컬, 연극, 클래식 중 1개를 입력해주세요.
                 </div>
                 <label>
-                        <select class="selGenre" name="user_interested_genre" required = "required">
+                        <select class="selGenre" name="user_interested_genre" >
                             <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
                             <option class="genreOpt" value="콘서트">콘서트</option>
                             <option class="genreOpt" value="뮤지컬">뮤지컬</option>
@@ -228,7 +230,7 @@
                             <option class="genreOpt" value="클래식">클래식</option>
                         </select>
                 </label>
-                <div id="genre_warnMsg"></div>
+                <div id="genre_warnMsg">${valid_user_interested_genre}</div>
             </div>
             <!-- 관심장르 입력 인풋창 끝 -->
 

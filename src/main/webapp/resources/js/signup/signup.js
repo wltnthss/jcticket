@@ -120,14 +120,10 @@ $('#userIdInput').on('keyup',function(){
     const regEx = /^[a-z0-9]+$/ //특수문자 및 공백 포함 여부 확인
 
     if(idLength===0){
-        $('#id_warnMsg').css('display','none')
-        $('#id_warnMsg').css('color','rgb(255,255,255)')
     }else if(!(regEx.test(idValue))){
-        $('#id_warnMsg').css('display','block')
         $('#id_warnMsg').css('color','orangered')
         $('#id_warnMsg').html("특수문자 또는 공백을 사용할 수 없습니다.");
     } else if(idLength<4){
-        $('#id_warnMsg').css('display','block')
         $('#id_warnMsg').css('color','orangered')
         $('#id_warnMsg').html("4글자 이상의 아이디를 입력해주세요.");
     }else if(idLength>=4 && idLength <=20){
@@ -138,11 +134,9 @@ $('#userIdInput').on('keyup',function(){
                 data:{user_id:idValue},
                 success:function(data){
                     if(data){
-                        $('#id_warnMsg').css('display', 'block');
                         $('#id_warnMsg').css('color', 'orangered');
                         $('#id_warnMsg').html("이미 사용 중인 아이디입니다.");
                     } else {
-                        $('#id_warnMsg').css('display', 'block');
                         $('#id_warnMsg').css('color','rgb(0, 159, 206)');
                         $('#id_warnMsg').html("사용 가능한 아이디입니다.");
                     }
@@ -152,12 +146,11 @@ $('#userIdInput').on('keyup',function(){
                 }
             })
     }else if(idLength>20){
-        $('#id_warnMsg').css('display','block')
         $('#id_warnMsg').css('color','orangered')
         $('#id_warnMsg').html("20글자 이하의 아이디를 입력해주세요.");
     }
 })
-//아이디 유효성 검사 끝
+// 아이디 유효성 검사 끝
 
 
 //비밀번호 유효성 검사 시작
@@ -168,8 +161,6 @@ $('#userPwdInput').on('keyup', function(){
     const pwdValue = $('#userPwdInput').val();
 
     if(pwdLength===0) {
-        $('#pwd_warnMsg').css('display', 'none')
-        $('#pwd_warnMsg').css('color', 'rgb(255,255,255)');
 
     }else if(pwdLength<8){
         $('#pwd_warnMsg').css('display', 'block');
@@ -197,8 +188,6 @@ $('#userPwdChkInput').on('keyup',function (){
     //     $('#pwd_chkWarnMsg').css('display','block')
     // }
     if(pwdChkLength===0) {
-        $('#pwd_chkWarnMsg').css('display', 'none')
-        $('#pwd_chkWarnMsg').css('color', 'rgb(255, 255, 255)');
     }else if(pwdValue===pwdChkValue){
         $('#pwd_chkWarnMsg').css('display','block')
         $('#pwd_chkWarnMsg').css('color', 'rgb(0, 159, 206)');
@@ -246,11 +235,9 @@ $('#user_tel').on('keyup', function (){
     const regEx = /^[0-9\-]+$/ //숫자와 하이픈만 입력가능
 
     if(telValueLength===0) {
-        $('#tel_warnMsg').css('display', 'none')
-        $('#tel_warnMsg').css('color', 'rgb(255,255,255)');
+
     } else if(regEx.test(telValue)){
-        $('#tel_warnMsg').css('display', 'none');
-        $('#tel_warnMsg').css('color', 'rgb(255,255,255)');
+        $('#tel_warnMsg').html("");
     }else{
         $('#tel_warnMsg').css('display', 'block');
         $('#tel_warnMsg').css('color', 'orangered');
@@ -272,8 +259,6 @@ $('#user_birth_input').on('keyup', function (){
     const regEx = /^[0-9]+$/ // 숫자만 사용 가능
 
     if(birthLength===0){
-        $('#birth_warnMsg').css('display', 'none')
-        $('#birth_warnMsg').css('color', 'rgb(255,255,255)');
     } else if(!(regEx.test(birthValue))){
         $('#birth_warnMsg').css('display', 'block')
         $('#birth_warnMsg').css('color', 'orangered')
@@ -317,6 +302,10 @@ $('#user_gender_input').on('keyup',function(){
 })
 // 성별 유효성 검사 끝
 
+$('#userNameInput').on('keyup',function (){
+    $('#name_warnMsg').html("");
+})
+
 //약관 시작
 //전체선택,전체해체
 $('#agreeAll').on('change',function (){
@@ -346,36 +335,40 @@ $('.termsChkBox').on('change', function() {
 });
 //약관 끝
 
-//폼 제출 유효성 검사
+// 폼 제출 유효성 검사
 $(document).ready(function() {
-    // 폼 제출 이벤트 처리
+//     // 폼 제출 이벤트 처리
     $('#signupForm').on('submit', function(event) {
-
-        if($('.authMsg').css('color')==='rgb(255, 69, 0)'){
+//
+        if($('.authMsg').css('color')==='rgb(255, 69, 0)') {
             alert('인증번호 확인을 하거나, 올바르게 입력해주세요.')
             $('#authNum').focus();
             event.preventDefault();
-        }else if($('#id_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#userIdInput').focus();
-            event.preventDefault();
-        }else if($('#pwd_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#userPwdInput').focus();
-            event.preventDefault();
-        }else if($('#pwd_chkWarnMsg').css('color')==='rgb(255, 69, 0)'){
+        }
+//         }else if($('#id_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#userIdInput').focus();
+//             event.preventDefault();
+//         }
+//         else if($('#pwd_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#userPwdInput').focus();
+//             event.preventDefault();
+//         }
+        else if($('#pwd_chkWarnMsg').css('color')==='rgb(255, 69, 0)'){
             $('#userPwdChkInput').focus();
             event.preventDefault();
-        }else if($('#nickname_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#userNicknameInput').focus();
-            event.preventDefault();
-        }else if($('#tel_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#user_tel').focus();
-            event.preventDefault();
-        }else if($('#birth_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#user_birth_input').focus();
-            event.preventDefault();
-        }else if($('#gender_warnMsg').css('color')==='rgb(255, 69, 0)'){
-            $('#user_gender_input').focus();
-            event.preventDefault();
         }
+//         else if($('#nickname_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#userNicknameInput').focus();
+//             event.preventDefault();
+//         }else if($('#tel_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#user_tel').focus();
+//             event.preventDefault();
+//         }else if($('#birth_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#user_birth_input').focus();
+//             event.preventDefault();
+//         }else if($('#gender_warnMsg').css('color')==='rgb(255, 69, 0)'){
+//             $('#user_gender_input').focus();
+//             event.preventDefault();
+//         }
     });
 });

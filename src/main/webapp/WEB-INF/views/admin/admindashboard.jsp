@@ -15,7 +15,7 @@
 <body class="admin-dashboard">
     <div class="admin-dashboard-container">
 
-        <jsp:include page="/WEB-INF/views/admin/adminheader.jsp"/>
+        <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
         <div class="admin-dashboard-body">
             <div class="admin-dashboard-main">
@@ -97,7 +97,7 @@
         </div>
         <hr>
 
-        <jsp:include page="/WEB-INF/views/admin/adminfooter.jsp"/>
+        <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     </div>
 

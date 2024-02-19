@@ -4,8 +4,11 @@ import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
 import java.util.Objects;
 
 /**
@@ -23,6 +26,7 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
+
 
     //user_id에 맞는 유저 정보 가져옴
     @Override
@@ -53,17 +57,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean loginCheck(String user_id, String user_password) throws Exception {
-        UserDto userDto = userDao.select(user_id);
-        System.out.println(userDto);
-        System.out.println("userDto.getUser_password() = " + userDto.getUser_password());
-        System.out.println("user_password = " + user_password);
-
-
-        if(BCrypt.checkpw(user_password,userDto.getUser_password())) {
-            System.out.println("비밀번호가 일치합니다");
-            return true;
+        if (user_id == null || user_id.isEmpty()) {
+            System.out.println("아이디가 빈 값입니다.");
+            return false;
         }
-        System.out.println("비밀번호가 일치하지 않습니다.");
+
+        if (user_password == null || user_password.isEmpty()) {
+            System.out.println("비밀번호가 빈 값입니다.");
+            return false;
+        }
+
+        try {
+            UserDto userDto = null;
+            userDto = userDao.select(user_id);
+            System.out.println(userDto);
+            return BCrypt.checkpw(user_password, userDto.getUser_password());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("false");
         return false;
     }
 
@@ -71,6 +83,8 @@ public class UserServiceImpl implements UserService {
     public boolean isUserRetired(String user_id) throws Exception {
         UserDto userDto = userDao.select(user_id);
         String retireYN = userDto.getUser_retire_yn();
+        System.out.println("retireYN = " + retireYN);
+        System.out.println(retireYN.equals("Y"));
         if (retireYN.equals("Y")){
             return true;
         }

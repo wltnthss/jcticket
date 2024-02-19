@@ -16,18 +16,31 @@
 
     <link href="/resources/css/ticketing/ticketing.css" rel="stylesheet" type="text/css">
     <script>
-        function showPopup(){
-            let popupW = 765;
-            let popupH = 900;
-            let left = Math.ceil((window.screen.width - popupW)/2);
-            let top = Math.ceil((window.screen.height - popupH)/2);
-            window.open('ticketing-detail','','width='+popupW+',height='+popupH+',left='+left+',top='+top+',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no')
-        }
+        $(document).ready(function() {
+            // 버튼을 클릭했을 때 showPopup 함수 호출
+            $("#popupButton").click(function() {
+                console.log("팝업 클릭 이벤트 실행!");
+                showPopup();
+            });
+
+            function showPopup() {
+                // 현재 클릭 안먹힘.... ticketing-detail?play_id=테스트ID 치고 들어가야 보임
+                console.log("showPopup 호출");
+                let playId = "테스트공연ID"; // playId 값을 내부에서 생성
+                let popupW = 765;
+                let popupH = 900;
+                let left = Math.ceil((window.screen.width - popupW) / 2);
+                let top = Math.ceil((window.screen.height - popupH) / 2);
+                let url = 'ticketing-detail?play_id=' + playId;
+                window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
+            }
+        });
     </script>
 </head>
 <body>
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <input type="button" value="예매하기" onclick="showPopup();">
+
+ <button id="popupButton">예매팝업 열기</button>
 </body>
 </html>
 
