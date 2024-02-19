@@ -28,5 +28,8 @@
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
+
+
+        <typeAlias alias="StageDto" type="com.jcticket.agency.dto.StageDto"/>
     </typeAliases>
 </configuration>

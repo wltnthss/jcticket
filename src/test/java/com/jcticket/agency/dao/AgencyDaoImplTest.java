@@ -1,16 +1,27 @@
 package com.jcticket.agency.dao;
 
+import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.StageDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+import java.sql.Connection;
 import java.sql.Timestamp;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
 import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 /**
  * packageName    : com.jcticket.agency.dao
  * fileName       : AgencyDaoImplTest
@@ -69,6 +80,7 @@ public class AgencyDaoImplTest {
     }
 
     @Test
+
     public void insertAgency() throws Exception {
 
         // given
@@ -99,17 +111,74 @@ public class AgencyDaoImplTest {
 
     }
 
+    //----------------------
+
+    @Test
+    public void testInsertAndRetrieveStage() {
+        // StageDto 생성, 임의의 값들을 설정
+        StageDto stageDto = new StageDto();
+        stageDto.setStage_id("stage1");
+        stageDto.setStage_name("Test Stage");
+        stageDto.setStage_address("Test Address");
+        stageDto.setStage_seat_cnt(100);
+        stageDto.setStage_manager("Test Manager");
+        stageDto.setStage_type("Test Type");
+        stageDto.setStage_tel("Test Tel");
+
+        // 생성한 StageDto 삽입
+        agencyDao.insertStage(stageDto);
+
+        // 삽입한 StageDto를 StageDto 조회
+        List<StageDto> stages = agencyDao.getAllStages();
+        assertNotNull(stages);
+        assertTrue(stages.size() > 0);
+
+        // 조회된 StageDto 중에서 첫 번째 StageDto 확인
+        StageDto retrievedStage = stages.get(0);
+        assertEquals(stageDto.getStage_id(), retrievedStage.getStage_id());
+        assertEquals(stageDto.getStage_name(), retrievedStage.getStage_name());
+        assertEquals(stageDto.getStage_address(), retrievedStage.getStage_address());
+        assertEquals(stageDto.getStage_seat_cnt(), retrievedStage.getStage_seat_cnt());
+        assertEquals(stageDto.getStage_manager(), retrievedStage.getStage_manager());
+        assertEquals(stageDto.getStage_type(), retrievedStage.getStage_type());
+        assertEquals(stageDto.getStage_tel(), retrievedStage.getStage_tel());
+    }
+
 //    @Test
-//    public void testSaveFormData()
+//    public void saveAgency() throws Exception {
+//
+//
+//    }
+//@displayname junit5기능인데 좋아보여,, 지수야..
+    //builder() 쓰면 순서 상관없이 쓸 수 있음
+
+//assertThroWs? 이건 뭔데?
 
 
-
-
-
-
-
-
-
+//    @Test
+//    public void testEnrollDto() {
+//        // given
+//        String agencyName = "Agency Test";
+//        String playName = "Play Test";
+//        String showingName = "Showing Test";
+//        String stageName = "Stage Test";
+//
+//        // when
+//        EnrollDto enrollDto = new EnrollDto(agencyName, playName, showingName, stageName);
+//
+//        // then
+//        assertEquals(agencyName, enrollDto.getAgencyName());
+//        assertEquals(playName, enrollDto.getPlayName());
+//        assertEquals(showingName, enrollDto.getShowingName());
+//        assertEquals(stageName, enrollDto.getStageName());
+//    }
 
 
 }
+
+
+
+
+
+
+

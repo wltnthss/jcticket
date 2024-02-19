@@ -1,22 +1,23 @@
 package com.jcticket.agency.controller;
 
-import com.jcticket.agency.dao.AgencyDao;
-import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.EnrollDto;
-import com.jcticket.agency.dto.PlayDto;
 import com.jcticket.agency.service.AgencyService;
-import com.jcticket.user.dto.UserDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.spec.ECField;
-import java.util.Objects;
+import java.sql.Timestamp;
+import java.util.Arrays;
 
 /**
  * packageName    : com.jcticket.agency.controller
@@ -37,10 +38,15 @@ import java.util.Objects;
 
 public class AgencyController {
 
+//    @Autowired
+//    private AgencyService agencyService;//AgencyService 인터페이스를 사용하기 위해 의존성을 주입 받음
+
+    private final AgencyService agencyService;
+
     @Autowired
-    private AgencyService agencyService;//AgencyService 인터페이스를 사용하기 위해 의존성을 주입 받음
-
-
+    public AgencyController(AgencyService agencyService) {
+        this.agencyService = agencyService;
+    }
 
 
     //RequestMapping("/agency")을 해 줬기 떄문에 GetMapping("/processLogin 만 적어도
@@ -58,7 +64,7 @@ public class AgencyController {
 //        return "redirect:/agency/agencyenroll";
 //    }
 
-//--------------실패시 얼럿창, 서비스단에서--------------
+    //--------------실패시 얼럿창, 서비스단에서--------------
 //@PostMapping("/processLogin")
 //public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model m,
 //                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -77,23 +83,23 @@ public class AgencyController {
 //        return "/agency/agencydashboard";//로그인 성공 시
 //    }
     //-------------------------------------------------------------------------------
-@PostMapping("/processLogin")
-public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model model,
-                                 HttpServletRequest request) {
-    try {
-        if (agencyService.processAgencyLogin(agency_id, agency_pwd)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("agency_id", agency_id);
-            return "/agency/agencydashboard"; // 성공 시 대시보드 페이지로 이동
-        } else {
-            model.addAttribute("loginError", true);
-            return "redirect:/login"; // 실패 시 로그인 페이지를 다시 표시
+    @PostMapping("/processLogin")
+    public String processAgencyLogin(String agency_id, String agency_pwd, boolean rememberId, Model model,
+                                     HttpServletRequest request) {
+        try {
+            if (agencyService.processAgencyLogin(agency_id, agency_pwd)) {
+                HttpSession session = request.getSession();
+                session.setAttribute("agency_id", agency_id);
+                return "/agency/agencydashboard"; // 성공 시 대시보드 페이지로 이동
+            } else {
+                model.addAttribute("loginError", true);
+                return "redirect:/login"; // 실패 시 로그인 페이지를 다시 표시
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error"; // 예외 발생 시 로그인 ? 에러?
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        return "error"; // 예외 발생 시 로그인 ? 에러?
     }
-}
 
 
 //    @PostMapping("/submitForm")
@@ -101,8 +107,6 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
 //        agencyService.saveFormData(enrollDto);
 //        return "redirect:/success"; // 성공 페이지로 리다이렉트
 //    }
-
-
 
 
     @GetMapping("/dashboard")//홈
@@ -121,21 +125,70 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
     }
 
 
+    @PostMapping("/enroll")//수동으로.. POST 요청 처리. 요청에서 데이터를 추출하여 EnrollDto로
+    public ResponseEntity<String> enroll(HttpServletRequest request) {
+        try {
+            EnrollDto enrollDto = new EnrollDto();
+            enrollDto.setPlay_id(request.getParameter("play_id"));
+            enrollDto.setPlay_name(request.getParameter("play_name"));
+            enrollDto.setPlay_poster(request.getParameter("play_poster"));
+            enrollDto.setPlay_info(request.getParameter("play_info"));
+            enrollDto.setPlay_major_cat(request.getParameter("play_major_cat"));
+            enrollDto.setPlay_middle_cat(request.getParameter("play_middle_cat"));
+            enrollDto.setPlay_small_cat(request.getParameter("play_small_cat"));
+            enrollDto.setPlay_run_time(Integer.parseInt(request.getParameter("play_run_time")));
+            enrollDto.setAgency_id(request.getParameter("agency_id"));
 
-    @PostMapping("/enroll")
-    public String enroll(@ModelAttribute AgencyDto agencyDto) {
-        agencyService.saveFormData(new EnrollDto());
-        return "redirect:/success"; // 성공 페이지 필요할까?
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp created_at = new Timestamp(System.currentTimeMillis());
+            Timestamp updated_at = new Timestamp(System.currentTimeMillis());
+            enrollDto.setCreated_at(created_at);
+            enrollDto.setCreated_id(request.getParameter("created_id"));
+            enrollDto.setUpdated_at(updated_at);
+            enrollDto.setUpdated_id(request.getParameter("updated_id"));
+
+            enrollDto.setShowing_seq(Integer.parseInt(request.getParameter("showing_seq")));
+
+
+            Timestamp showing_start_at = Timestamp.valueOf(request.getParameter("showing_start_at"));
+            Timestamp showing_end_at = Timestamp.valueOf(request.getParameter("showing_end_at"));
+            enrollDto.setShowing_start_at(showing_start_at);
+            enrollDto.setShowing_end_at(showing_end_at);
+
+            enrollDto.setShowing_info(request.getParameter("showing_info"));
+            enrollDto.setShowing_date(request.getParameter("showing_date"));
+            enrollDto.setShowing_day(request.getParameter("showing_day"));
+            enrollDto.setShowing_status(request.getParameter("showing_status"));
+            enrollDto.setShowing_seat_cnt(Integer.parseInt(request.getParameter("showing_seat_cnt")));
+            enrollDto.setStage_id(request.getParameter("stage_id"));
+            enrollDto.setStage_name(request.getParameter("stage_name"));
+            enrollDto.setStage_address(request.getParameter("stage_address"));
+            enrollDto.setStage_seat_cnt(Integer.parseInt(request.getParameter("stage_seat_cnt")));
+            enrollDto.setStage_manager(request.getParameter("stage_manager"));
+            enrollDto.setStage_type(request.getParameter("stage_type"));
+            enrollDto.setStage_tel(request.getParameter("stage_tel"));
+
+            // AgencyService를 통해서 처리
+            agencyService.processEnrollment(enrollDto);
+            return ResponseEntity.ok("Enrollment process successful.");//성공 시
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during enrollment process.");
+        }
     }
-
-
-
-
-
-//    @GetMapping("/productlist")
-//    public  String agencyproductlist() throws Exception{
-//        return "agency/agencyproductlist";
+//@PostMapping("/enroll")//자동 주입 @ModelAttribute 어노테이션 사용 불가. 의존성 주입이 필요해 보임
+//public ResponseEntity<String> enroll(@ModelAttribute EnrollDto enrollDto) {
+//    try {
+//        // AgencyService를 통해 처리
+//        agencyService.processEnrollment(enrollDto);
+//        return ResponseEntity.ok("Enrollment process successful.");
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during enrollment process.");
 //    }
+//}
+
 
     @GetMapping("/sale")//판매
     public String agencysale() {
@@ -172,7 +225,7 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
             return "error";
         }
     }
-
+}
 
 //    private boolean agencyLoginCheck (String agency_id, String agency_pwd) {
 //        AgencyDto agencyDto = null;
@@ -207,10 +260,7 @@ public String processAgencyLogin(String agency_id, String agency_pwd, boolean re
 //    }
 
 
-
-}
-
-    // 기획사 로그인 체크
+        // 기획사 로그인 체크
 //    private boolean loginCheck(String agencyId, String agencyPwd) {
 //        try {
 //            // 기획사 정보를 데이터베이스에서 가져오는 로직

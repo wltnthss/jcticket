@@ -1,15 +1,13 @@
 package com.jcticket.agency.dao;
 
 
-import com.jcticket.user.dto.UserDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.agency.dto.EnrollDto;
-import org.springframework.stereotype.Repository;
-import com.jcticket.agency.dto.ShowingDto;
 import com.jcticket.agency.dto.StageDto;
-import com.jcticket.agency.dto.PlayDto;
 import java.util.List;
-
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.PlayDto;
+import javax.sql.DataSource;
+import org.springframework.transaction.annotation.Transactional;
 /**
  * packageName    : com.jcticket.agency.dao
  * fileName       : AgencyDao
@@ -34,12 +32,39 @@ public interface AgencyDao {
 
     int agencyCount() throws Exception;
 
+//각 Dto를 db에 삽입하도록
+    void insertPlay(PlayDto playDto);
+    void insertShowing(ShowingDto showingDto);
+    void insertStage(StageDto stageDto);
+
+    List<StageDto> getAllStages();
+
+    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드 추가
 
 
-    void saveAgency(String agencyName);
-    void savePlay(String playName);
-    void saveShowing(String showingName);
-    void saveStage(String stageName);
+
+
+
+
+
+
+
+
+
+
+//    StageDto getStageById(String stageId);
+
+
+//    void deleteStageById(String stageId);//  stage_id로 스테이지를 삭제하는 메서드
+
+//    StageDto getStageById(String stageId);
+
+
+//    void saveAgency(String agencyName);
+//
+//    void savePlay(String playName);
+//    void saveShowing(String showingName);
+//    void saveStage(String stageName);
 //CRUD;;
 //    void insertAgency(AgencyDto agencyDto) throws Exception;
 //    void updateAgency(AgencyDto agencyDto) throws Exception;
@@ -47,46 +72,6 @@ public interface AgencyDao {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    List<AgencyDto> selectAllAgencies() throws Exception;
-//    void insertAgency(AgencyDto agency) throws Exception;
-//    void updateAgency(AgencyDto agency) throws Exception;
-//    void deleteAgency(String agencyId) throws Exception;
-//
-//    // 공연 정보 관련 메서드
-//    PlayDto selectPlay(String playId) throws Exception;
-//    List<PlayDto> selectAllPlays() throws Exception;
-//    void insertPlay(PlayDto play) throws Exception;
-//    void updatePlay(PlayDto play) throws Exception;
-//    void deletePlay(String playId) throws Exception;
-//
-//    // 공연 일정 정보 관련 메서드
-//    ShowingDto selectShowing(int showingSeq) throws Exception;
-//    List<ShowingDto> selectAllShowings() throws Exception;
-//    void insertShowing(ShowingDto showing) throws Exception;
-//    void updateShowing(ShowingDto showing) throws Exception;
-//    void deleteShowing(int showingSeq) throws Exception;
-//
-//    // 공연장 정보 관련 메서드
-//    StageDto selectStage(String stageId) throws Exception;
-//    List<StageDto> selectAllStages() throws Exception;
-//    void insertStage(StageDto stage) throws Exception;
-//    void updateStage(StageDto stage) throws Exception;
-//    void deleteStage(String stageId) throws Exception;
 }
 
 

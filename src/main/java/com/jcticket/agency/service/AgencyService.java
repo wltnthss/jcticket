@@ -2,8 +2,8 @@ package com.jcticket.agency.service;
 
 import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.agency.dto.PlayDto;
-import com.jcticket.agency.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.agency.dto.StageDto;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +26,12 @@ public interface AgencyService {
     AgencyDto selectAgency(String agency_id) throws Exception;
 
 
+    void processEnrollment(EnrollDto enrollDto);//processEnrollment() 메서드를 호출
 
-    void saveFormData(EnrollDto enrollDto);
+//        void savePlay(PlayDto playDto);
+//        void saveShowing(ShowingDto showingDto);
+//        void saveStage(StageDto stageDto);
+
 
 
 }

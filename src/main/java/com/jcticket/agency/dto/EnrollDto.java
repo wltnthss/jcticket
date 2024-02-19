@@ -1,6 +1,7 @@
 package com.jcticket.agency.dto;
 
 import lombok.*;
+import java.sql.Timestamp;
 
 /**
  * packageName    : com.jcticket.agency.dto
@@ -20,10 +21,36 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class EnrollDto {
-    private String agencyName;
-    private String playName;
-    private String showingName;
-    private String stageName;
+    private String play_id;
+    private String play_name;
+    private String play_poster;
+    private String play_info;
+    private String play_major_cat;
+    private String play_middle_cat;
+    private String play_small_cat;
+    private int play_run_time;
+    private String agency_id;
+    private Timestamp created_at;
+    private String created_id;
+    private Timestamp updated_at;
+    private String updated_id;
 
-   //새 Dto 생성 후 값 전부 받아오기
+    private int showing_seq;
+    private Timestamp showing_start_at;
+    private Timestamp showing_end_at;
+    private String showing_info;
+    private String showing_date;
+    private String showing_day;
+    private String showing_status;
+    private int showing_seat_cnt;
+    private String stage_id;
+
+    private String stage_name;
+    private String stage_address;
+    private int stage_seat_cnt;
+    private String stage_manager;
+    private String stage_type;
+    private String stage_tel;
 }
+
+

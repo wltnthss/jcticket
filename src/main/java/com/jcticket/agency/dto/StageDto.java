@@ -21,6 +21,23 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class StageDto {
+    private String stage_id;
+    private String stage_name;
+    private String stage_address;
+    private int stage_seat_cnt;
+    private String stage_manager;
+    private String stage_type;
+    private String stage_tel;
+    private Timestamp createdAt;
+    private String createdId;
+    private Timestamp updatedAt;
+    private String updatedId;
+}
+//stage_type String으로 수정
+
+
+
+
 //    CREATE TABLE `Stage` (
 //              `stage_id`	VARCHAR(30)	NOT NULL,
 //	            `stage_name`	VARCHAR(50)	NOT NULL,
@@ -38,16 +55,3 @@ public class StageDto {
 //    ALTER TABLE `Stage` ADD CONSTRAINT `PK_STAGE` PRIMARY KEY (
 //	`stage_id`
 //    );
-
-    private String stageId;
-    private String stageName;
-    private String stageAddress;
-    private int stageSeatCnt;
-    private String stageManager;
-    private char stageType;
-    private String stageTel;
-    private Timestamp createdAt;
-    private String createdId;
-    private Timestamp updatedAt;
-    private String updatedId;
-}
