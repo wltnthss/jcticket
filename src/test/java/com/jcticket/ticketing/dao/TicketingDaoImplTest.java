@@ -34,6 +34,10 @@ public class TicketingDaoImplTest {
     public void selectAll() throws Exception {
         List<TicketingDto> list = ticketingDao.selectAll();
         System.out.println("list => " + list);
-
     }
+
+
+
+//    @Test
+//    public
 }

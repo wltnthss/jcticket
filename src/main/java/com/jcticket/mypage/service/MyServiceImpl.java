@@ -30,23 +30,34 @@ public class MyServiceImpl implements mypageService {
     mypageDAO mypageDAO;
 
     @Override
-    public Integer count() throws Exception {
-        return mypageDAO.count();
+    public Integer count(Map map) throws Exception {
+        return mypageDAO.count(map);
     }
-//    @Override
-//    public List<TicketingDto> selectAll_desc() throws Exception {
-//        return mypageDAO.selectArll_desc();
-//    }
-//
-//    @Override
-//    public List<TicketingDto> selectAll_page(Map map) throws Exception {
-//        return mypageDAO.selectAll_page(map);
-//    }
+
+    @Override
+    public Integer view_count(Map map) throws Exception {
+        return mypageDAO.view_count(map);
+    }
 
     @Override
     public List<TicketingDto> selectAll(Map map) throws Exception {
         return mypageDAO.selectAll(map);
     }
+
+    @Override
+    public List<TicketingDto> select_list() throws Exception {
+        return mypageDAO.select_list();
+    }
+
+    @Override
+    public List<TicketingDto> selectLimit(Map map) throws Exception {
+        return mypageDAO.selectLimit(map);
+    }
+    @Override
+    public List<TicketingDto> select_view(Map map) throws Exception {
+        return mypageDAO.select_view(map);
+    }
+
 
 
 }

@@ -19,7 +19,7 @@ import java.util.List;
  * 2/1/24         조영상        최초 생성
  */
 @Repository
-public class TicketingDaoImpl implements TicketingDao{
+public class TicketingDaoImpl implements TicketingDao {
     @Autowired
     SqlSession session;
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
@@ -32,6 +32,8 @@ public class TicketingDaoImpl implements TicketingDao{
     public List<TicketingDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
     }
+
+
 
     @Override
     public String selectId() throws Exception{

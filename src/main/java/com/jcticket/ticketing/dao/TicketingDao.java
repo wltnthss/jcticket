@@ -18,6 +18,7 @@ import java.util.List;
 public interface TicketingDao {
     String getNow() throws Exception;
     List<TicketingDto> selectAll() throws Exception;
+
     String selectId() throws Exception;
 
 }

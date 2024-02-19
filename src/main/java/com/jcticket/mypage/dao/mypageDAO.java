@@ -21,15 +21,16 @@ import java.util.Map;
 @Repository
 public interface mypageDAO {
 
-    int count() throws Exception;
-//    List<TicketingDto> selectArll_desc() throws  Exception;
-//    public List<TicketingDto> selectAll_page(Map map) throws Exception;
+    int count(Map map) throws Exception;
+    int view_count(Map map) throws Exception;
 
-    List<TicketingDto> selectAll(Map map);
+    List<TicketingDto> selectAll(Map map) throws  Exception;
+    List<TicketingDto> selectLimit(Map map) throws  Exception;
 
+    List<TicketingDto> select_list() throws Exception;
+    List<TicketingDto> select_view(Map map) throws Exception;
 
     int insert(TicketingDto ticketingDto)  throws Exception;
-
 
 
 }
