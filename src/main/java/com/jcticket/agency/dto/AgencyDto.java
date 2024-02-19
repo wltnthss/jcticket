@@ -2,6 +2,8 @@ package com.jcticket.agency.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 /**
@@ -22,38 +24,28 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class AgencyDto {
-
-//1. DTO 생성 : 데이터베이스의 테이블 구조와 일치하도록 DTO 생성 한다.  각 필드는 private을 써서 getter,  setter 메서드 어.. 사용?
-//    CREATE TABLE `Agency` (
-//            `agency_id`	VARCHAR(30)	NOT NULL,
-//	`agency_password`	INT	NOT NULL,
-//            `agency_name`	VARCHAR(30)	NOT NULL,
-//	`agency_email`	VARCHAR(30)	NOT NULL,
-//	`agency_tel`	INT	NOT NULL,
-//            `agency_register_num`	INT	NOT NULL,
-//            `agency_reg_at`	TIMESTAMP	NOT NULL	DEFAULT current_timestamp,
-//            `agency_status_val`	VARCHAR(10)	NOT NULL	COMMENT '운영중, 폐업, 계약만료',
-//            `agency_contract_reg_at`	TIMESTAMP	NOT NULL,
-//            `agency_contract_expire_at`	TIMESTamP	NOT NULL,
-//            `agency_content`	TEXT	NULL,
-//	`agency_manager_name`	VARCHAR(10)	NOT NULL,
-//	`created_at`	TIMESTAMP	NOT NULL DEFAULT current_timestamp,
-//            `created_id`	VARCHAR(30)	NOT NULL,
-//	   `updated_at`	TIMESTAMP	NOT NULL DEFAULT current_timestamp,
-//            `updated_id`	VARCHAR(30)	NOT NULL
-//);
-
+    @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String agency_id;
+    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String agency_password;
+    @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String agency_name;
+    @NotBlank(message = "이메일은 필수 입력 값입니다.")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
     private String agency_email;
+    @NotBlank(message = "휴대폰번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "(010|016|011)-[0-9]{3,4}-[0-9]{4}", message = "휴대폰번호 형식이 올바르지 않습니다.")
     private String agency_tel;
+    @NotBlank(message = "사업자등록번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "^\\d{2}-\\d{3}-\\d{5}$", message = "사업자등록번호 형식이 올바르지 않습니다.")
     private String agency_register_num;
     private Timestamp agency_reg_at;
     private String agency_status_val;
     private Timestamp agency_contract_reg_at;
     private Timestamp agency_contract_expire_at;
     private String agency_content;
+    @NotBlank(message = "담당자명은 필수 입력 값입니다.")
     private String agency_manager_name;
     private Timestamp created_at;
     private String created_id;

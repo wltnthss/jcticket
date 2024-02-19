@@ -62,19 +62,16 @@
                                     <label for="SMemID">아이디</label>
                                     <input id="SMemID" name="user_id" type="text" value="${cookie.user_id.value}" autocomplete="off" placeholder="아이디">
                                 </span>
-                                <c:if test = "${param.user_id==''}">
-                                    <div class="idEmpty">아이디를 입력해주세요</div>
-                                </c:if>
+                                    <div class="idEmpty">${valid_user_id}</div>
+
 
 
                                 <span id = spanMemPWD>
                                         <label for="SMemPWD">패스워드</label>
                                         <input id="SMemPWD" name="user_password" type="password" autocomplete="off" placeholder="비밀번호">
                                 </span>
+                                    <div class="pwdEmpty">${valid_user_password}</div>
 
-                                <c:if test = "${param.user_password==''}">
-                                    <div class="pwdEmpty">비밀번호를 입력해주세요</div>
-                                </c:if>
                             <div class="loginForm-chk">
                                     <span class="loginKeep">
                                         <label for="chkAutoLogin">
@@ -238,7 +235,7 @@
 <script>
     let user_id = "${param.user_id}";
     let user_pwd = "${param.user_password}";
-    let user_retireYN = "${param.retireYN}"
+    let user_retireYN = "${param.retireYN}";
 
         $('#loginSub').on('submit', function(){
             console.log(user_retireYN)

@@ -443,6 +443,12 @@ table th{
 .w500 {
     width: 500px !important;
 }
+.w700{
+    width: 700px !important;
+}
+.w900{
+    width: 900px !important;
+}
 .notice-paging{
     margin: 30px 0;
     text-align: center;
@@ -514,6 +520,11 @@ table th{
     background: #fcfcfc;
     border-top: 1px solid #ececec;
 }
+.valid{
+    color: red;
+    font-weight: 550;
+    padding-top: 5px;
+}
 /*관리자 회원관리 끝*/
 
 /*관리자 기획사관리 시작*/
@@ -551,15 +562,6 @@ table th{
     color: #555;
 }
 /*관리자 쿠폰관리 끝*/
-
-/*관리자 통계분석 시작*/
-.fa-square-poll-vertical:before{
-    font-size: 30px;
-    color: #555;
-    content: "\f681";
-}
-
-/*관리자 통계분석 끝*/
 
 /*관리자 환경설정 시작*/
 

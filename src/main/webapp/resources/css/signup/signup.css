@@ -373,13 +373,10 @@ option{
     cursor: pointer;
 }
 
-.authMsg{
-    display: none;
-}
 
-.authMsg, #id_warnMsg, #pwd_warnMsg, #pwd_chkWarnMsg, #nickname_warnMsg,
-#tel_warnMsg,#birth_warnMsg,#gender_warnMsg,#genre_warnMsg{
-    display: none;
+#id_warnMsg, #pwd_warnMsg, #pwd_chkWarnMsg, #nickname_warnMsg,
+#tel_warnMsg,#birth_warnMsg,#gender_warnMsg,#genre_warnMsg,#name_warnMsg{
+        color: orangered;
 }
 
 

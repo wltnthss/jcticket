@@ -1,15 +1,20 @@
 package com.jcticket.user.controller;
 
+import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.user.dto.UserValidLoginDto;
 import com.jcticket.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.*;
+import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.login
@@ -43,27 +48,47 @@ public class LoginController {
     public String loginForm(){return "login/login";}
 
     @PostMapping("/login")
-    public String login(String user_id, String user_password, boolean rememberId, Model m,
-                        HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String login(@Valid UserValidLoginDto userValidLoginDto, BindingResult bindingResult, boolean rememberId, Model m,
+                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rattr) throws Exception {
 
+        String user_id = userValidLoginDto.getUser_id();
+        String user_password = userValidLoginDto.getUser_password();
 
-        //아이디 비번 틀리면 로그인 안되게
+        //valid 유효성검사 시작
+        if(bindingResult.hasErrors()){
+
+            // 회원가입 실패시 입력 데이터 값 유지하기 위함
+            m.addAttribute("userValidLoginDto", userValidLoginDto);
+
+            CommonValidateHandling cvh = new CommonValidateHandling();
+
+            // Map 타입 { valid_user_id, "오류 메세지" } 리턴
+            Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
+
+            for (String key: validatorRslt.keySet()) {
+                rattr.addFlashAttribute(key, validatorRslt.get(key));
+            }
+            return "redirect:/login";
+        }
+        //valid 유효성검사 끝
+
+//        아이디 비번 틀리면 로그인 안되게
         if (!userService.loginCheck(user_id,user_password)){
-            //유효성 검사 때매 넘김
             m.addAttribute("user_id", user_id);
             m.addAttribute("user_password", user_password);
-            return "redirect:/login";
+            return "login/login";
         }
 
         //탈퇴회원이면 로그인 안되게
         if (userService.isUserRetired(user_id)) {
             m.addAttribute("retireYN", "Y");
-            return "redirect:/login";
+            return "login/login";
         }
 
         //방문횟수 증가
         userService.increaseLoginCnt(user_id);
 
+        //로그인 성공시 세션 부여
         HttpSession session = request.getSession();
         session.setAttribute("user_id", user_id);
 
@@ -81,9 +106,9 @@ public class LoginController {
             Cookie cookie = new Cookie("user_id", user_id);
             response.addCookie(cookie);
             System.out.println("cookie = " + cookie.getValue());
-        //remember Id가 false이면
+            //remember Id가 false이면
         } else {
-           //쿠키 삭제
+            //쿠키 삭제
             Cookie cookie = new Cookie("user_id", user_id);
             cookie.setMaxAge(0);
             response.addCookie(cookie);

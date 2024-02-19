@@ -71,10 +71,8 @@ public class ViewController {
             throws Exception {
         //디코딩
         String decodedSeatInfo = URLDecoder.decode(remainSeat, "UTF-8");
-
         char[] charArr = decodedSeatInfo.toCharArray();
         String remainSeatCal = (decodedSeatInfo.substring(0, charArr.length-1));
-
         int msg = 0;
         try {
             int list = viewDetailService.getRemainSeat(remainSeatCal);
