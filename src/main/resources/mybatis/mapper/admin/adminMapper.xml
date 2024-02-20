@@ -194,4 +194,26 @@
     <select id="countAllAgency" resultType="int">
         select count(*) from agency
     </select>
+
+    <select id="dupleAdminId" resultType="int" parameterType="String">
+        SELECT count(*) FROM admin WHERE admin_id = #{admin_id}
+    </select>
+
+    <update id="updateAdminInfo" parameterType="AdminDto">
+        update admin
+        set
+            admin_email = #{admin_email},
+            admin_password = #{admin_password},
+            admin_phone = #{admin_phone},
+            admin_nickname = #{admin_nickname},
+            admin_use_yn = 'Y',
+            updated_at = now(),
+            updated_id = "JISOO"
+        where
+            admin_id = #{admin_id}
+    </update>
+
+    <select id="showAdminInfo" parameterType="String" resultType="AdminDto">
+        select * from admin where admin_id = #{admin_id}
+    </select>
 </mapper>
