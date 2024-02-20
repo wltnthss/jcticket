@@ -36,6 +36,7 @@ public class TicketingController {
         return "ticketing/popup-test";
     }
 
+
     @GetMapping(value = "/ticketing-detail")
     public String getTicketingDetail(@RequestParam("play_id") String play_id, Model model) throws Exception{
         System.out.println("ticketing/detail 진입: parameter ==> " + play_id);
