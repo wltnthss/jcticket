@@ -1,6 +1,7 @@
 package com.jcticket.admin.service;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
@@ -46,8 +47,9 @@ public interface AdminService {
     int dupleAdminId(String admin_id) throws Exception;
     // 관리자 정보 수정
     int updateAdminInfo(AdminDto adminDto) throws Exception;
-
     // 관리자 정보 리스트 조회
     AdminDto showAdminInfo(String admin_id) throws Exception;
+    // 관리자 쿠폰 등록
+    int insertCoupon(CouponDto couponDto) throws Exception;
 
 }

@@ -26,10 +26,10 @@
 
             <div id="u10" style="display: block">
                 <dd class="u10">
-                    <a href="/admin/user">쿠폰 정보관리</a>
+                    <a href="/admin/coupon">쿠폰 정보관리</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/register">쿠폰 등록하기</a>
+                    <a href="/admin/couponregister">쿠폰 등록하기</a>
                 </dd>
             </div>
         </dl>

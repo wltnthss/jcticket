@@ -17,12 +17,12 @@
 
 <div class="admin-common-wrap">
     <%--좌측 nav 페이지--%>
-    <jsp:include page="/WEB-INF/views/admin/common/admincouponnav.jsp.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/admincouponnav.jsp"/>
 
     <div class="admin-common-content">
         <div class="admin-common-title">
             <h1>쿠폰 등록하기</h1>
-            <h2>쿠폰정보 입력</h2>
+            <h2>쿠폰정보 입력 <span style="font-size: 12px !important; color: grey">(쿠폰은 중복 사용이 불가능합니다.)</span></h2>
         </div>
         <form action="/admin/couponregister" method="post">
             <div class="tbl_frm01">
@@ -35,50 +35,48 @@
                     <tr>
                         <th scope="row">쿠폰명</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_id}" name="agency_id" placeholder="4글자 이상 입력." minlength="4" maxlength="20" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
-                            <p class="valid">${valid_agency_id}</p>
+                            <input type="text" name="coupon_name" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                            <p class="valid">${valid_coupon_name}</p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">설명</th>
                         <td>
-                            <input type="password" value="${agencyDto.agency_password}" name="agency_password" placeholder="4글자 이상 입력." minlength="4" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
-                            <p class="valid">${valid_agency_password}</p>
+                            <input type="text" name="coupon_description" class="frm_input required" size="80" style="background-position: right top; background-repeat: no-repeat;">
+                            <p class="valid">${valid_coupon_description}</p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">기획사 이름</th>
+                        <th scope="row">사용 여부</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_name}" maxlength="20" name="agency_name" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
-                            <p class="valid">${valid_agency_name}</p>
+                            <input type="radio" value="Y" checked name="coupon_use_yn"> 사용 <input type="radio" value="N" name="coupon_use_yn"> 중지
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">이메일</th>
+                        <th scope="row">사용기간</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_email}" maxlength="30" name="agency_email" placeholder="email@gmail.com" class="frm_input required" size="30" style="background-position: right top; background-repeat: no-repeat;">
-                            <p class="valid">${valid_agency_email}</p>
+                            <input name="coupon_useable_start_at" id="coupon_useable_start_at" type="date"  class="frm_input required" > ~ <input name="coupon_useable_end_at" id="coupon_useable_end_at" type="date"  class="frm_input required" >
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">휴대폰번호</th>
+                        <th scope="row">쿠폰 할인금액</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_tel}" name="agency_tel" placeholder="000-0000-0000" class="frm_input required" size="20" maxlength="100" style="background-position: right top; background-repeat: no-repeat;">
-                            <p class="valid">${valid_agency_tel}</p>
+                            <input type="text" name="coupon_discount_amount" class="frm_input required" size="20" maxlength="100" style="background-position: right top; background-repeat: no-repeat;"> <span>원</span>
+                            <p class="valid">${valid_coupon_discount_amount}</p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">사업자등록번호</th>
+                        <th scope="row">쿠폰 최소 주문 금액</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_register_num}" name="agency_register_num" placeholder="ex) 00-000-00000" class="frm_input" size="20" maxlength="20">
-                            <p class="valid">${valid_agency_register_num}</p>
+                            <input type="text" name="coupon_min_order_amount" class="frm_input" size="20" maxlength="20"> <span>원 이상 구매시</span>
+                            <p class="valid">${valid_coupon_min_order_amount}</p>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">담당자이름</th>
+                        <th scope="row">쿠폰 사용 조건</th>
                         <td>
-                            <input type="text" value="${agencyDto.agency_manager_name}" name="agency_manager_name" class="frm_input frm_address" size="20">
-                            <p class="valid">${valid_agency_manager_name}</p>
+                            <input type="text" placeholder="ex) 20,000원 이상 결제 시 사용 가능" name="coupon_use_condition" class="frm_input frm_address" size="40">
+                            <p class="valid">${valid_coupon_use_condition}</p>
                         </td>
                     </tr>
                 </table>
@@ -95,9 +93,9 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/admin/admin.js"></script>
 
-<script>
-    let msg = "${msg}";
-    if(msg=="INS_ERR")  alert("기획사 등록에 실패했습니다. 재신청해주세요.");
-</script>
+    <script>
+        let msg = "${msg}";
+        if(msg=="INS_ERR")  alert("회원 등록에 실패했습니다. 재신청해주세요.");
+    </script>
 </body>
 </html>
