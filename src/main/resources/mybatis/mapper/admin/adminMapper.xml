@@ -216,4 +216,18 @@
     <select id="showAdminInfo" parameterType="String" resultType="AdminDto">
         select * from admin where admin_id = #{admin_id}
     </select>
+
+    <insert id="insertCoupon" parameterType="CouponDto">
+        INSERT INTO coupon
+        (coupon_id, coupon_reg_at, coupon_name, coupon_useable_start_at, coupon_useable_end_at, coupon_discount_amount, coupon_min_order_amount, coupon_use_yn, coupon_status, coupon_description, coupon_use_condition, created_at, created_id, updated_at, updated_id)
+        VALUES(#{coupon_id}, CURRENT_TIMESTAMP, #{coupon_name}, #{coupon_useable_start_at}, #{coupon_useable_end_at}, #{coupon_discount_amount}, #{coupon_min_order_amount}, #{coupon_use_yn}, "A", #{coupon_description}, #{coupon_use_condition}, CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+    </insert>
+
+    <delete id="deleteAllCoupon">
+        delete from coupon
+    </delete>
+
+    <select id="countAllCoupon" resultType="int">
+        select count(*) from coupon
+    </select>
 </mapper>

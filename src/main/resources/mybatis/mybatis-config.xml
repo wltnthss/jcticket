@@ -23,6 +23,7 @@
         <typeAlias alias="JoinDto" type="com.jcticket.viewdetail.dto.JoinDto"/>
         <typeAlias alias="PlayDto" type="com.jcticket.viewdetail.dto.PlayDto"/>
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
+        <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
 
 
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
