@@ -229,6 +229,21 @@
     text-align: center;
 }
 
+#search {
+    display: inline-block;
+    padding-left: 550px;
+}
+
+#search > select {
+    width: 100px;
+    height: 25px;
+}
+
+#search > input {
+    width: 40px;
+    height: 25px;
+}
+
 
 
 /* mypage_ticket 끝*/
@@ -236,70 +251,70 @@
 /* mypage_view 시작 */
 
 
-#viewing {
-    width: 700px;
-    height: 150px;
-    border: 1px solid;
-}
+/*#viewing {*/
+/*    width: 700px;*/
+/*    height: 150px;*/
+/*    border: 1px solid;*/
+/*}*/
 
-#viewing > p {
-    font-size: 14px;
-    padding: 15px;
-}
+/*#viewing > p {*/
+/*    font-size: 14px;*/
+/*    padding: 15px;*/
+/*}*/
 
-#view-date {
-    margin: 5px 15px;
-}
-
-
-#view-date > input {
-    width: 160px;
-    height: 25px;
-}
-
-#view-select {
-    display: inline-block;
-    margin-left: 40px;
-}
-
-#view-select > select {
-    width: 165px;
-    height: 25px;
-}
-
-#view-nmae {
-    display: inline-block;
-    margin: 20px 0px;
-}
-
-#view-nmae > input {
-    width: 230px;
-    height: 25px;
-}
-
-#view-nmae > a {
-    border-radius: 3px;
-    color: #dddddd;
-    text-decoration: none;
-    margin-left: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    border: 1px solid #444444;
-    background-color: #444444;
-}
+/*#view-date {*/
+/*    margin: 5px 15px;*/
+/*}*/
 
 
-#show-img {
-    width: 100%;
-    display: flex;
-}
+/*#view-date > input {*/
+/*    width: 160px;*/
+/*    height: 25px;*/
+/*}*/
 
-#show-img > a > img {
-    margin: 10px 5px;
-    width: 700px;
-    height: 300px;
-}
+/*#view-select {*/
+/*    display: inline-block;*/
+/*    margin-left: 40px;*/
+/*}*/
+
+/*#view-select > select {*/
+/*    width: 165px;*/
+/*    height: 25px;*/
+/*}*/
+
+/*#view-nmae {*/
+/*    display: inline-block;*/
+/*    margin: 20px 0px;*/
+/*}*/
+
+/*#view-nmae > input {*/
+/*    width: 230px;*/
+/*    height: 25px;*/
+/*}*/
+
+/*#view-nmae > a {*/
+/*    border-radius: 3px;*/
+/*    color: #dddddd;*/
+/*    text-decoration: none;*/
+/*    margin-left: 5px;*/
+/*    padding-left: 5px;*/
+/*    padding-right: 5px;*/
+/*    padding-bottom: 5px;*/
+/*    border: 1px solid #444444;*/
+/*    background-color: #444444;*/
+/*}*/
+
+
+/*#show-img {*/
+/*    width: 100%;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*#show-img > a > img {*/
+/*    margin: 10px 5px;*/
+/*    width: 200px;*/
+/*    height: 300px;*/
+/*}*/
 
 /* mypage_view 끝 */
 
@@ -401,36 +416,46 @@
 
 /* mypage_client 시작*/
 
-#question {
-    width: 100%;
-    height: 300px;
-    background-color: white;
-}
+/*.qustion_box {*/
+/*    width: 700px;*/
+/*    height: 500px;*/
+/*}*/
 
-#question > h2 {
-    margin-bottom: 10px;
-}
+/*.qustion_box_img {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 
-#question > details > summary {
-    margin: 10px;
-}
+/*#question {*/
+/*    width: 100%;*/
+/*    height: 300px;*/
+/*    background-color: white;*/
+/*}*/
+
+/*#question > h2 {*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*#question > details > summary {*/
+/*    margin: 10px;*/
+/*}*/
 
 
-#question > p {
-    margin: 10px;
-}
+/*#question > p {*/
+/*    margin: 10px;*/
+/*}*/
 
-#question > details > p {
+/*#question > details > p {*/
 
-    margin: 10px;
-}
+/*    margin: 10px;*/
+/*}*/
 
-#question > details  > ul {
-    padding-left: 5px;
-    list-style: none;
-}
-#question > details > ul > li {
-    margin: 10px;
-}
+/*#question > details  > ul {*/
+/*    padding-left: 5px;*/
+/*    list-style: none;*/
+/*}*/
+/*#question > details > ul > li {*/
+/*    margin: 10px;*/
+/*}*/
 
 /* mypage_client 끝*/

@@ -1,5 +1,6 @@
 package com.jcticket.mypage.dao;
 
+import com.jcticket.mypage.dto.InquiryDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +29,40 @@ public class mypageImpl implements mypageDAO {
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.mypage.mypageMapper.";
 
     @Override
-    public List<TicketingDto> findAll() throws Exception {
-        return session.selectList(namespace + "findAll");
+    public int count(Map map) throws Exception {
+        return session.selectOne(namespace + "count", map);
     }
 
     @Override
-    public List<TicketingDto> selectArll_desc() throws Exception {
-        return session.selectList(namespace + "selectAll_desc");
+    public int view_count(Map map) throws Exception {
+        return session.selectOne(namespace + "view_count", map);
     }
 
     @Override
-    public int count() throws Exception {
-        return session.selectOne(namespace + "count");
+    public List<TicketingDto> selectAll(Map map) {
+        return session.selectList(namespace + "selectAll", map);
+    }
+    public List<TicketingDto> selectLimit(Map map) {
+        return session.selectList(namespace + "selectLimit", map);
     }
 
     @Override
-    public List<TicketingDto> selectAll_page(Map map) throws Exception {
-        return session.selectList(namespace + "selectAll_page", map);
+    public List<TicketingDto> select_list() throws Exception {
+        return session.selectList(namespace + "select_list");
+    }
+    @Override
+    public List<TicketingDto> select_view(Map map) throws Exception {
+        return session.selectList(namespace + "select_view", map);
+    }
+
+    @Override
+    public int insert(TicketingDto ticketingDto) throws Exception {
+        return session.insert(namespace + "insert", ticketingDto);
+    }
+
+    @Override
+    public int insert_InquiryDto(InquiryDto inquiryDto) throws Exception {
+        return session.insert(namespace + "Inquiry_insert", inquiryDto);
     }
 
 
