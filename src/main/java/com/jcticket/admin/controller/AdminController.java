@@ -529,6 +529,22 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+    // 관리자 쿠폰 관리 폼 이동
+    @GetMapping("/admin/coupon")
+    public String adminCouponForm() throws Exception{
+        return "admin/admincoupon";
+    }
+    // 관리자 쿠폰 등록 폼 이동
+    @GetMapping("/admin/coupon")
+    public String adminCouponRegisterForm() throws Exception{
+        return "admin/admincoupon";
+    }
+    // 관리자 쿠폰 등록
+    @PostMapping("/admin/couponregister")
+    public String adminCouponRegister() throws Exception{
+        return "admin/admincoupon";
+    }
+
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{
         return "admin/adminproduct";
@@ -536,9 +552,5 @@ public class AdminController {
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
         return "admin/admininquiry";
-    }
-    @GetMapping("/admin/coupon")
-    public String adminCoupon() throws Exception{
-        return "admin/admincoupon";
     }
 }
