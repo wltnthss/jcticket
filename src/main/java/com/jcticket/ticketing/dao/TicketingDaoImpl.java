@@ -23,16 +23,12 @@ import java.util.Map;
  * 2/1/24         조영상        최초 생성
  */
 @Repository
-<<<<<<< HEAD
 @RequiredArgsConstructor
-public class TicketingDaoImpl implements TicketingDao{
+public class TicketingDaoImpl implements TicketingDao {
+
+    @Autowired
     private final SqlSession session;
 
-=======
-public class TicketingDaoImpl implements TicketingDao {
-    @Autowired
-    SqlSession session;
->>>>>>> mypage
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
     // 삽입
     @Override
@@ -46,12 +42,11 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.delete(namespace+"deleteByPlayId", play_id);
     }
 
-<<<<<<< HEAD
+
     // 회차 시퀀스별 삭제
-=======
 
 
->>>>>>> mypage
+
     @Override
     public int deleteBySeq(int seq) throws Exception {
         return session.delete(namespace+"deleteBySeq", seq);

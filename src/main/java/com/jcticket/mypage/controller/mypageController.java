@@ -38,6 +38,8 @@ public class mypageController {
         return "/mypage/mypage_main";
     }
 
+
+
     @GetMapping("/mypageticket")
     public String ticket(@RequestParam(defaultValue = "1")Integer page,
                          @RequestParam(defaultValue = "5")Integer pageSize,
@@ -117,6 +119,11 @@ public class mypageController {
     @GetMapping("/mypageclient")
     public String client() {
         return "/mypage/mypage_client";
+    }
+
+    @GetMapping("/mypage_client_in")
+    public String client_insert(Model model) throws Exception {
+        return "/mypage/mypage_client_Insert";
     }
 }
 

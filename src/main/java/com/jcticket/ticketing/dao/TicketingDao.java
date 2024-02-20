@@ -19,7 +19,7 @@ import java.util.Map;
  * 1/31/24         조영상        최초 생성
  */
 public interface TicketingDao {
-<<<<<<< HEAD
+
     // 삽입
     int insert(ShowingDto dto) throws Exception;
     // 공연아이디별 삭제
@@ -28,12 +28,7 @@ public interface TicketingDao {
     int deleteBySeq(int seq) throws Exception;
     // 전체 삭제
     int deleteAll() throws Exception;
-=======
-    String getNow() throws Exception;
-    List<TicketingDto> selectAll() throws Exception;
 
-    String selectId() throws Exception;
->>>>>>> mypage
 
     // 공연아이디별 회차 수 카운트
     int countByPlayId(String play_id) throws Exception;
