@@ -22,6 +22,7 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class PlayDto {
+
     //    `play_id` varchar(20) NOT NULL,
     //  `play_name` varchar(100) NOT NULL,
     //  `play_poster` blob NOT NULL COMMENT '이미지파일',

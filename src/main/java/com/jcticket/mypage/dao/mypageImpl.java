@@ -1,5 +1,6 @@
 package com.jcticket.mypage.dao;
 
+import com.jcticket.mypage.dto.InquiryDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,10 @@ public class mypageImpl implements mypageDAO {
         return session.insert(namespace + "insert", ticketingDto);
     }
 
-
-
+    @Override
+    public int insert_InquiryDto(InquiryDto inquiryDto) throws Exception {
+        return session.insert(namespace + "Inquiry_insert", inquiryDto);
+    }
 
 
 }

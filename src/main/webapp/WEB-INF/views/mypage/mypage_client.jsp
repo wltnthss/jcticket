@@ -103,6 +103,10 @@
                     <img class="qustion_box_img" src="/resources/img/mypage/랄죠_사토루(무량공처).png">
                 </div>
 
+
+                <a href="/mypage_client_in"><button>문의등록</button></a>
+
+
                 <div id="question">
                     <h2>자주 뭍는 질문 TOP 10</h2>
                     <hr>

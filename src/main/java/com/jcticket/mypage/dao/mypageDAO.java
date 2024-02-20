@@ -1,6 +1,7 @@
 package com.jcticket.mypage.dao;
 
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.mypage.dto.InquiryDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,8 +30,9 @@ public interface mypageDAO {
 
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
-
     int insert(TicketingDto ticketingDto)  throws Exception;
+
+    int insert_InquiryDto(InquiryDto inquiryDto) throws Exception;
 
 
 }

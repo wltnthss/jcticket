@@ -1,6 +1,7 @@
 package com.jcticket.mypage.dao;
 
 import com.jcticket.mypage.controller.PageHandler;
+import com.jcticket.mypage.dto.InquiryDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.apache.ibatis.jdbc.Null;
 import org.junit.Before;
@@ -166,16 +167,16 @@ public class mypageDAOTest {
 
                 mypageDAO.insert(ticketingDto);
             }
-
-
-
-
-
         }
-
-
-
     }
 
+    @Test
+    public void insert2() throws Exception {
+        InquiryDto inquiryDto = new InquiryDto(null, "Example Inquiry", null, "This is an example inquiry content.",
+                CURRENT_TIMESTAMP, "General", "user123", CURRENT_TIMESTAMP,
+                "admin", CURRENT_TIMESTAMP, "admin");
+
+        mypageDAO.insert_InquiryDto(inquiryDto);
+    }
 
 }

@@ -23,13 +23,11 @@ import java.util.Map;
  * 2/1/24         조영상        최초 생성
  */
 @Repository
-
 @RequiredArgsConstructor
 public class TicketingDaoImpl implements TicketingDao {
 
     @Autowired
     private final SqlSession session;
-
 
 
     public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
