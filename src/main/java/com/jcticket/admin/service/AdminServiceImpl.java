@@ -204,4 +204,24 @@ public class AdminServiceImpl implements AdminService {
         return pageDto;
     }
 
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return adminDao.noticeDelete(notice_seq);
+    }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return adminDao.dupleAdminId(admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return adminDao.updateAdminInfo(adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return adminDao.showAdminInfo(admin_id);
+    }
+
 }

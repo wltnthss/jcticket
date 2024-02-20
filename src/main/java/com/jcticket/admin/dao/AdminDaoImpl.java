@@ -58,6 +58,12 @@ public class AdminDaoImpl implements AdminDao{
     public int userDelete(String user_id) throws Exception {
         return sqlSession.delete(namespace+"userDelete", user_id);
     }
+
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return sqlSession.delete(namespace+"deleteNotice", notice_seq);
+    }
+
     @Override
     public int insertAdmin(AdminDto adminDto) throws Exception {
         return sqlSession.insert(namespace+"insertAdmin", adminDto);
@@ -87,5 +93,20 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
+    }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace + "dupleAdminId", admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return sqlSession.update(namespace + "updateAdminInfo", adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace+"showAdminInfo", admin_id);
     }
 }

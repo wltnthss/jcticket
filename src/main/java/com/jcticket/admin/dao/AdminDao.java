@@ -33,6 +33,8 @@ public interface AdminDao {
     int userRetireUpdate(String user_id) throws Exception;
     // 회원 삭제
     int userDelete(String user_id) throws Exception;
+    // 공지사항 삭제
+    int noticeDelete(int notice_seq) throws Exception;
     // 관리자 회원가입
     int insertAdmin(AdminDto adminDto) throws Exception;
     // 관리자 삭제
@@ -47,5 +49,12 @@ public interface AdminDao {
     int agencyCnt(Map<String, Object> options) throws Exception;
     // 기획사 페이징 리스트 조회
     List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception;
+    // 관리자 수정폼 아이디 중복체크
+    int dupleAdminId(String admin_id) throws Exception;
+    // 관리자 정보 수정
+    int updateAdminInfo(AdminDto adminDto) throws Exception;
+
+    // 관리자 정보 리스트 조회
+    AdminDto showAdminInfo(String admin_id) throws Exception;
 
 }
