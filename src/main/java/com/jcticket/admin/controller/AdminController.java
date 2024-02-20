@@ -485,20 +485,60 @@ public class AdminController {
 
         return "redirect:/admin/notice";
     }
+    // 환경설정 관리자 정보 수정 폼 이동
+    @GetMapping("/admin/setting")
+    public String adminSettingForm(Model model, String admin_id, HttpSession session) throws Exception{
+
+        admin_id = (String) session.getAttribute("adminId");
+
+        AdminDto dto = adminService.showAdminInfo(admin_id);
+        model.addAttribute("adminDto", dto);
+
+        return "admin/adminsetting";
+    }
+    // 환경설정 관리자 정보 수정
+    @PostMapping("/admin/setting")
+    public String adminSetting(HttpSession session, Model model,
+                               @Valid AdminDto adminDto, BindingResult bindingResult
+                               ) throws Exception{
+
+        try {
+
+            if (bindingResult.hasErrors()){
+
+                CommonValidateHandling cvh = new CommonValidateHandling();
+
+                // Map 타입 { valid_user_id, "오류 메세지" } 뷰 리턴 하기위함
+                Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
+
+                for (String key: validatorRslt.keySet()) {
+                    model.addAttribute(key, validatorRslt.get(key));
+                }
+
+                return "admin/adminsetting";
+            }
+                // adminId는 로그인한 관리자 아이디 세션값 인서트
+                adminDto.setAdmin_id((String) session.getAttribute("adminId"));
+                adminService.updateAdminInfo(adminDto);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 관리자 정보 수정 -> 세션 삭제 후, 로그인폼 페이지 이동
+        session.invalidate();
+
+        return "redirect:/admin";
+    }
     @GetMapping("/admin/product")
-    public String adminproduct() throws Exception{
+    public String adminProduct() throws Exception{
         return "admin/adminproduct";
     }
     @GetMapping("/admin/inquiry")
-    public String admininquiry() throws Exception{
+    public String adminInquiry() throws Exception{
         return "admin/admininquiry";
     }
     @GetMapping("/admin/coupon")
-    public String admincoupon() throws Exception{
+    public String adminCoupon() throws Exception{
         return "admin/admincoupon";
-    }
-    @GetMapping("/admin/setting")
-    public String adminsetting() throws Exception{
-        return "admin/adminsetting";
     }
 }

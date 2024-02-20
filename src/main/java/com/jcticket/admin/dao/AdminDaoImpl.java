@@ -94,4 +94,19 @@ public class AdminDaoImpl implements AdminDao{
     public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
     }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace + "dupleAdminId", admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return sqlSession.update(namespace + "updateAdminInfo", adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace+"showAdminInfo", admin_id);
+    }
 }
