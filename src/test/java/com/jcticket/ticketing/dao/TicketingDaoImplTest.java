@@ -40,7 +40,7 @@ public class TicketingDaoImplTest {
     @Autowired
     TicketingDao ticketingDao;
 
-<<<<<<< HEAD
+
 
     @Before
     public void init() throws Exception{
@@ -159,41 +159,33 @@ public class TicketingDaoImplTest {
 
     // 공연아이디별 공연명, 공연포스터, 공연장명 조회(단일 행 반환)
     @Test
-    public void selectPlayStageNameTest() throws Exception{
+    public void selectPlayStageNameTest() throws Exception {
         //given
-        for(int i=1; i <= 5; i++){
-            ShowingDto dto1 = new ShowingDto(i+"회 "+i+"시 00분", testDate, "토", "BS", 80, testPlay_id+"1", testStage_id, SYS, SYS);
-            ShowingDto dto2 = new ShowingDto(i+"회 "+i+"시 00분", testDate, "토", "BS", 80, testPlay_id+"2", testStage_id, SYS, SYS);
+        for (int i = 1; i <= 5; i++) {
+            ShowingDto dto1 = new ShowingDto(i + "회 " + i + "시 00분", testDate, "토", "BS", 80, testPlay_id + "1", testStage_id, SYS, SYS);
+            ShowingDto dto2 = new ShowingDto(i + "회 " + i + "시 00분", testDate, "토", "BS", 80, testPlay_id + "2", testStage_id, SYS, SYS);
             ticketingDao.insert(dto1);
             ticketingDao.insert(dto2);
         }
         //when
-        Map<String,Object> map = ticketingDao.selectPlayStageName(testPlay_id+"1");
+        Map<String, Object> map = ticketingDao.selectPlayStageName(testPlay_id + "1");
         //then
         Set<String> keys = map.keySet();
-        for(String key : keys){
+        for (String key : keys) {
             if (key.equals("play_name")) {
-                System.out.println("공연명 ==> "+map.get(key));
+                System.out.println("공연명 ==> " + map.get(key));
                 assertEquals("테스트공연", map.get(key));
-            }else if(key.equals("play_poster")){
-                System.out.println("공연장 포스터 ==> "+map.get(key));
+            } else if (key.equals("play_poster")) {
+                System.out.println("공연장 포스터 ==> " + map.get(key));
                 assertTrue(map.get(key) != null);
-            }else if(key.equals("stage_name")) {
-                System.out.println("공연장명 ==> "+map.get(key));
+            } else if (key.equals("stage_name")) {
+                System.out.println("공연장명 ==> " + map.get(key));
                 assertEquals("정석극장", map.get(key));
             }
 
         }
-=======
-    @Test
-    public void selectAll() throws Exception {
-        List<TicketingDto> list = ticketingDao.selectAll();
-        System.out.println("list => " + list);
->>>>>>> mypage
+
+
     }
 
-
-
-//    @Test
-//    public
 }

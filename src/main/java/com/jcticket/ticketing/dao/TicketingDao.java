@@ -28,11 +28,6 @@ public interface TicketingDao {
     int deleteBySeq(int seq) throws Exception;
     // 전체 삭제
     int deleteAll() throws Exception;
-    String getNow() throws Exception;
-    List<TicketingDto> selectAll() throws Exception;
-
-    String selectId() throws Exception;
-
     // 공연아이디별 회차 수 카운트
     int countByPlayId(String play_id) throws Exception;
 

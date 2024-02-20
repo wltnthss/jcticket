@@ -42,9 +42,6 @@ public class TicketingDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
-<<<<<<< HEAD
-
-=======
     private String play_middle_cat;
 
 
@@ -72,7 +69,7 @@ public class TicketingDto {
         this.updated_at = updated_at;
         this.updated_id = updated_id;
     }
->>>>>>> mypage
+
 }
 
 
