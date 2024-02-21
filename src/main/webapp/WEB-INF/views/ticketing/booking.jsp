@@ -227,16 +227,9 @@
                                         <p>선택좌석내역</p>
                                     </div>
                                     <div id="ss" class="selected-seats">
-                                        <span>a7</span>
-                                        <span>a5</span>
-                                        <span>a2</span>
-                                        <span>b10</span>
-                                        <span>d3</span>
-                                        <span>d4</span>
-                                        <span>f9</span>
-                                        <span>h2</span>
-                                        <span>g1</span>
-                                        <span>g2</span>
+<%--                                        선택된 좌석 아이디 들어갈 자리--%>
+<%--                                        <span>a7</span>--%>
+
                                     </div>
                                     <div class="selected-price head">
                                         <p>선택좌석가격</p>

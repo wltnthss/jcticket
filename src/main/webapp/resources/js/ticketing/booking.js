@@ -54,24 +54,20 @@ $(document).ready(function() {
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
-                success: function (res) {
+                success: function (arrayList) {
                     //a태그 생성 이벤트
-                    // 1. ajax로 dateTaxt를 컨트롤러로 보냄,
-                    // 2. 컨트롤러에서 dateTaxt를 이용해서 sql문을 돌려서 나온 결과를 msg로 리턴함 res로 받음 (배열)
-                    // 3. 리턴받은 res를 사용해서 a태그를 만듦
+                    // 1. ajax로 reqData(map)를 컨트롤러로 보냄,
+                    // 2. 컨트롤러에서 reqData를 이용해서 sql문을 돌려서 나온 결과를 res로 리턴함
+                    // 3. 리턴받은 arrayList를 사용해서 div,a태그를 만들기
 
-                    // alert(res);
-                    console.log("response ==> "+res);
                     const round = $("#round");
-                    const arrayList = res;
+                    // res를 arrayList로 변환
+                    //onst arrayList = res;
                     console.log("roundList ==> "+ arrayList);
                     //const showing = document.querySelector('.showing');
 
 
                     //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
-                    // while (round.firstChild){
-                    //     round.removeChild(round.firstChild);
-                    // }
                     $('#round').empty();
                     console.log("a Tag removed");
                     // bootstrap 으로 감싸서 a 태그를 생성하는 코드
@@ -89,33 +85,7 @@ $(document).ready(function() {
                         console.log("======aTag generated======");
                     });
 
-
-                    // $.each(arrayList, function(i, item) {
-                    //     const aTag = $("<a></a>");
-                    //     aTag.append(item);
-                    //     aTag.appendTo(round);
-                    //     aTag.addClass('aTag');
-                    //     aTag.attr('id', i);
-                    //     aTag.attr('href', 'javascript:void(0);');
-                    //     console.log("a Tag generated")
-                    // });
-
-
-                    // 생성한 a태그 클릭했을때 클래스이름 aTag clicked으로 바꾸기
-                    // const aTags = $('.aTag');
-                    // aTags.forEach(function (aTag) {
-                    //     aTag.addEventListener('click', function () {
-                    //         // forEach를 한번 더 돌려서 클릭한 태그 이외의 다른 태그의 클래스명에 clicked가 있다면 지움
-                    //         // 선택한 a태그의 클래스이름이 aTag과 똑같지 않으면 해당 태그의 클래스이름을 없앰
-                    //         aTags.forEach(function (tag) {
-                    //             if (tag !== aTag) {
-                    //                 tag.classList.remove('clicked');
-                    //             }
-                    //         });
-                    //         // 클릭한 태그의 클래스명 토글
-                    //         this.classList.toggle('clicked');
-                    //     });
-                    // });
+                    // 클릭했을때 div태그 배경색 바꾸기 & a태크 글자색 바꾸기
                     $('.aTag').click(function() {
                         let $clickedTag = $(this);$('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
                         $clickedTag.toggleClass('clicked').css('color','white').closest('.box').css('background-color', '#673AB7');
@@ -131,7 +101,7 @@ $(document).ready(function() {
 })
 
 
-// 팝업창 제어
+// 팝업창 제어하는 부분.
 $(document).ready(function(){
     let current_fs, next_fs, previous_fs; //fieldsets
     let opacity;
@@ -143,12 +113,12 @@ $(document).ready(function(){
         next_fs = $(this).parent().next();
 //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-//show the next fieldset
+//다음단계 넘어가기
         next_fs.show();
-//hide the current fieldset with style
+//현재 단계 태그, 스타일 숨기기
         current_fs.animate({opacity: 0}, {
             step: function(now) {
-// for making fielset appear animation
+// 다음단계 넘어갈때 애니메이션 적용하기
                 opacity = 1 - now;
                 current_fs.css({
                     'display': 'none',
