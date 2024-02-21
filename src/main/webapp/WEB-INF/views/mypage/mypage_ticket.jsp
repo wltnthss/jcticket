@@ -12,7 +12,7 @@
 <head>
     <title>Title</title>
 
-    <link href="/resources/css/mypage/mypage.css" rel="stylesheet">
+    <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
 
@@ -25,7 +25,6 @@
     <br>
 
     <script>
-
         window.onload = function () {
             const one = document.getElementById("1month");
             const three = document.getElementById("3month");
@@ -112,8 +111,15 @@
                         <li><button id="3month">3개월</button></li>
                         <li><button id="6month">6개월</button></li>
                        </ul>
-                        <p>주문일자별 조회</p>
-                        <input id="start_date" type="date"> ~ <input id="end_date" type="date"> <button type="submit">조회</button>
+                        <form action="/mypageticket" method="get">
+                            <input name="start_date" id="start_date" type="date"> ~ <input name="end_date" id="end_date" type="date">
+                            <select name="option">
+                                <option value="A">전체</option>
+                                <option value="Y">예매확인</option>
+                                <option value="C">예매취소</option>
+                            </select>
+                            <input type="submit" value="조회">
+                        </form>
                     </div>
 
                     <h3>예매내역</h3>
@@ -142,17 +148,16 @@
                         <br>
 
                         <div id="paging">
-                            <c:if test="=${ph.showPrev}">
-                                <a href="<c:url value="/mypageticket?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
+                            <c:if test="${ph.showPrev}">
+                                <a href="<c:url value="/mypageticket?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&lt;</a>
                             </c:if>
                             <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                                <a href="<c:url value="/mypageticket?page=${i}&pageSize=${ph.pageSize}"/>">${i}</a>
+                                <a href="<c:url value="/mypageticket?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">${i}</a>
                             </c:forEach>
-                            <c:if test="=${ph.showNext}">
-                                <a href="<c:url value="/mypageticket?page=${ph.endPage + 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
+                            <c:if test="${ph.showNext}">
+                                <a href="<c:url value="/mypageticket?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&gt;</a>
                             </c:if>
                         </div>
-
                     </div>
 
                     <h3>유의사항</h3>

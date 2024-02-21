@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
@@ -12,9 +13,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -69,14 +70,28 @@ public class AdminDaoImplTest {
         // then
         assertEquals(3, userlists.size());
     }
+    @Test
+    public void insertAndDeleteUser() throws Exception {
 
+        // given
+        for (int i = 1; i < 9; i++) {
+            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+            // when
+            int insertResult = adminDao.insertUser(userDto);
+            int deleteResult = adminDao.userDelete("jisoo" + i);
+            // then
+            assertEquals(1, insertResult);
+            assertEquals(1, deleteResult);
+        }
+    }
     @Test
     public void insertUser() throws Exception {
 
         // given
         for (int i = 1; i < 9; i++) {
-            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "wltn@naver.com", "010-1111-341"+i, "서울 성동구",
-                    "soodal"+i, "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.insertUser(userDto);
             // then
@@ -88,8 +103,8 @@ public class AdminDaoImplTest {
 
         // given
         for (int i = 1; i < 9; i++) {
-            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "wltn@naver.com", "010-2521-341"+i, "서울 성동구",
-                    "soodal"+i, "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+            UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.userDelete("jisoo" + i);
             // then
@@ -99,20 +114,23 @@ public class AdminDaoImplTest {
     @Test
     public void userRetireUpdate() throws Exception {
         // given
-        UserDto userDto = new UserDto("0sang", "4444");
-        System.out.println("userDto => " + userDto);
-        UserDto testUser = userDao.select(userDto.getUser_id());
-        System.out.println("testUser => " + testUser);
-        System.out.println("testUserData => " + testUser.getUser_retire_yn() + ", " +testUser.getUser_retire_at());
+        UserDto userDto = new UserDto("jisoo", "1111", "지수", "soodall" , "wltn@naver.com", "010-2521-3435",
+                "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+        int insertUser = adminDao.insertUser(userDto);
+        UserDto loginUser = userDao.select(userDto.getUser_id());
 
         // when
-        int updateResult = adminDao.userDelete(testUser.getUser_id());
+        int updateResult = adminDao.userRetireUpdate(loginUser.getUser_id());
         UserDto afterUpdateTestUser = userDao.select(userDto.getUser_id());
 
-
         // then
+        assertEquals(1, insertUser);
         assertEquals(1, updateResult);
         assertEquals("Y", afterUpdateTestUser.getUser_retire_yn());
+
+        // after Delete
+        int deleteUser = adminDao.userDelete(userDto.getUser_id());
+        assertEquals(1, deleteUser);
     }
 
     @Test
@@ -129,5 +147,58 @@ public class AdminDaoImplTest {
             assertTrue(1 == result);
         }
         assertTrue(10 == adminDao.countAllAgency());
+    }
+
+    @Test
+    public void insertCoupon() throws Exception {
+
+        adminDao.deleteAllCoupon();
+
+        String start_at = "2024-02-01";
+        String end_at = "2024-03-01";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start_date;
+        Date end_date;
+
+        start_date = sdf.parse(start_at);
+        end_date = sdf.parse(end_at);
+
+        // Date 객체 Timestamp 객체 변환
+        Timestamp start_timestamp = new Timestamp(start_date.getTime());
+        Timestamp end_timestamp = new Timestamp(end_date.getTime());
+
+        // 쿠폰 31개 생성
+        for (int i = 0; i < 31; i++) {
+            // given
+            // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
+            UUID uuid = UUID.randomUUID();
+            String couponCode = uuid.toString().replace("-", "").substring(0, 8);
+            System.out.println("생성된 쿠폰 코드: " + couponCode);
+
+            CouponDto couponDto = CouponDto.builder()
+                    .coupon_id(couponCode)
+                    .coupon_reg_at(CURRENT_TIMESTAMP)
+                    .coupon_name("[웰컴 쿠폰] 1000원 할인")
+                    .coupon_discount_amount(1000)
+                    .coupon_min_order_amount(20000)
+                    .coupon_use_yn("Y")
+//                    .coupon_status("A") DEFAULT A 인서트
+                    .coupon_useable_start_at("2023-02-01")
+                    .coupon_useable_end_at("2023-03-01")
+                    .coupon_use_condition("20000원 이상 구매시 사용 가능")
+                    .coupon_description("중복 쿠폰 사용 불가한 쿠폰입니다")
+//                    .created_at(CURRENT_TIMESTAMP) DEFAULT 현재시간
+//                    .created_id("JISOO") DEFAULT "JISOO"
+//                    .updated_at(CURRENT_TIMESTAMP) DEFAULT 현재시간
+//                    .updated_id("JISOO")  DEFAULT "JISOO"
+                    .build();
+
+            // when
+            adminDao.insertCoupon(couponDto);
+        }
+
+        // then
+        assertTrue(adminDao.countAllCoupon() == 31);
     }
 }

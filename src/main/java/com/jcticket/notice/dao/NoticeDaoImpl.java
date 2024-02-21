@@ -1,5 +1,6 @@
 package com.jcticket.notice.dao;
 
+import com.jcticket.notice.dto.NoticeValidDto;
 import com.jcticket.notice.dto.NoticeDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,15 @@ public class NoticeDaoImpl implements NoticeDao{
     @Override
     public List<NoticeDto> pagingList(Map<String, Object> pagingParams) {
         return sqlSession.selectList(namespace+"pagingList", pagingParams);
+    }
+
+    @Override
+    public int insertValid(NoticeValidDto noticeValidDto) throws Exception {
+        return sqlSession.insert(namespace + "insertValid", noticeValidDto);
+    }
+
+    @Override
+    public int updateInfo(NoticeDto noticeDto) throws Exception {
+        return sqlSession.update(namespace+"updateInfo", noticeDto);
     }
 }

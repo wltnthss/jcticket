@@ -1,8 +1,5 @@
 package com.jcticket.mypage.controller;
 
-import com.jcticket.mypage.dto.MyPagingDTO;
-import com.jcticket.notice.dto.NoticeDto;
-import com.jcticket.notice.dto.PageDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,28 +31,36 @@ public class mypageController {
 
     @GetMapping("/mypageIndex")
     public String mypage(Model model) throws Exception {
-        List<TicketingDto> list = mypageService.selectAll_desc();
+        Map map = new HashMap();
+        map.put("selectType", "desc");
+        List<TicketingDto> list = mypageService.selectLimit(map);
         model.addAttribute("ticketList", list);
         return "/mypage/mypage_main";
     }
 
 
+
     @GetMapping("/mypageticket")
     public String ticket(@RequestParam(defaultValue = "1")Integer page,
                          @RequestParam(defaultValue = "5")Integer pageSize,
+                         @RequestParam(name = "option", defaultValue = "A") String option,
+                         @RequestParam(required = false) String start_date,
+                         @RequestParam(required = false) String end_date,
                          Model model) throws Exception {
-        int totalCount = mypageService.count();
 
         try {
-
-            MyPagingDTO myPagingDTO = new MyPagingDTO(totalCount, page, pageSize);
-
             Map map = new HashMap();
             map.put("offset", (page - 1) * pageSize);
             map.put("pageSize", pageSize);
+            map.put("option", option);
+            map.put("start_date", start_date);
+            map.put("end_date", end_date);
 
+            int totalCount = mypageService.count(map);
 
-            List<TicketingDto> list = mypageService.selectAll_page(map);
+            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date);
+
+            List<TicketingDto> list = mypageService.selectAll(map);
             model.addAttribute("ticketList", list);
             model.addAttribute("ph", myPagingDTO);
 
@@ -70,14 +75,55 @@ public class mypageController {
         return "/mypage/mypage_cupon";
     }
 
+
+
+
     @GetMapping("/mypageview")
-    public String view() {
+    public String view(@RequestParam(defaultValue = "1")Integer page,
+                       @RequestParam(defaultValue = "3")Integer pageSize,
+                       @RequestParam(name = "option", defaultValue = "A") String option,
+                       @RequestParam(required = false) String start_date,
+                       @RequestParam(required = false) String end_date,
+                       Model model) throws Exception {
+
+
+        System.out.println("option => " + option);
+
+        try {
+
+            Map map = new HashMap();
+            map.put("offset", (page - 1) * pageSize);
+            map.put("pageSize", pageSize);
+            map.put("view_option", option);
+            map.put("view_start_date", start_date);
+            map.put("view_end_date", end_date);
+
+            int totalCount = mypageService.view_count(map);
+
+            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date);
+
+            List<TicketingDto> list = mypageService.select_view(map);
+
+            model.addAttribute("view_list", list);
+            model.addAttribute("ph", myPagingDTO);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return "/mypage/mypage_view";
     }
+
+    
 
     @GetMapping("/mypageclient")
     public String client() {
         return "/mypage/mypage_client";
+    }
+
+    @GetMapping("/mypage_client_in")
+    public String client_insert(Model model) throws Exception {
+        return "/mypage/mypage_client_Insert";
     }
 }
 

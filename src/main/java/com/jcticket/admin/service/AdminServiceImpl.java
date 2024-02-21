@@ -2,6 +2,7 @@ package com.jcticket.admin.service;
 
 import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * packageName :  com.jcticket.admin.service
@@ -202,6 +204,39 @@ public class AdminServiceImpl implements AdminService {
         pageDto.setKeyword(keyword);
 
         return pageDto;
+    }
+
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return adminDao.noticeDelete(notice_seq);
+    }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return adminDao.dupleAdminId(admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return adminDao.updateAdminInfo(adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return adminDao.showAdminInfo(admin_id);
+    }
+
+    @Override
+    public int insertCoupon(CouponDto couponDto) throws Exception {
+
+        // 쿠폰 아이디 랜덤 난수 8글자 insert 하기 위함
+        UUID uuid = UUID.randomUUID();
+        String couponCode = uuid.toString().replace("-", "").substring(0, 8);
+        couponDto.setCoupon_id(couponCode);
+
+        System.out.println("couponDto.getCoupon_id() = " + couponDto.getCoupon_id());
+
+        return adminDao.insertCoupon(couponDto);
     }
 
 }

@@ -35,8 +35,10 @@ public class TicketingController {
         return "ticketing/popup-test";
     }
 
+
     // 예매하기 버튼을 눌렀을때 들어오는 url
     // 팝업창을 만들어 보여준다.
+
     @GetMapping(value = "/ticketing-detail")
     public String getTicketingDetail(@RequestParam("play_id") String play_id, Model model) throws Exception{
         System.out.println("ticketing/detail 진입: parameter ==> " + play_id);

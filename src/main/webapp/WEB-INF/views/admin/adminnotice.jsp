@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -25,7 +26,7 @@
                 <h1>공지사항 관리</h1>
                 <h2>기본검색</h2>
                 <hr>
-                <form id="userSearch" action="/admin/user" method="get">
+                <form id="userSearch" action="/admin/notice?keyword=${paging.keyword}">
                     <div class="user-form">
                         <table>
                             <colgroup>
@@ -36,7 +37,7 @@
                             <tr>
                                 <th scope="row">검색어</th>
                                 <td>
-                                    <input type="text" class="user-form-input" size="30" value="${paging.keyword}" name="keyword" placeholder="궁금하신 내용을 입력해주세요" >
+                                    <input type="text" class="user-form-input" size="30" value="${paging.keyword}" name="keyword" placeholder="궁금하신 내용을 입력해주세요" id="input_keyword" >
                                 </td>
                             </tr>
                             </tbody>
@@ -44,18 +45,18 @@
                     </div>
                     <div class="btn-confirm">
                         <input type="submit" value="검색" class="btn-medium">
-                        <input type="reset" value="초기화" class="btn-medium grey">
+                        <input type="button" value="초기화" class="btn-medium grey" onclick="clearInput()">
                     </div>
                 </form>
                 <div class="local_ov mart30">
-                    총 게시물수 : <b class="fc_red">${userListCnt}</b>개
+                    총 게시물수 : <b class="fc_red">${noticeListCnt}</b>개
                 </div>
                 <div class="tbl_header">
                     <table>
                         <colgroup>
                             <col class="w80">
-                            <col class="w80">
-                            <col class="w900">
+                            <col class="w200">
+                            <col class="w800">
                             <col class="w300">
                             <col class="w80">
                             <col class="w80">
@@ -77,7 +78,7 @@
                             <tr class="list">
                                 <td>${NoticeDto.notice_seq}</td>
                                 <td>${NoticeDto.notice_title}</td>
-                                <td>${NoticeDto.notice_content}</td>
+                                <td style="font-weight: bold; text-decoration-line: underline"><a href="/admin/noticemodify/${NoticeDto.notice_seq}?page=${paging.page}">${NoticeDto.notice_content}</a></td>
                                 <td>${NoticeDto.notice_reg_at}</td>
                                 <td>${NoticeDto.notice_view_cnt}</td>
                                 <td>${NoticeDto.notice_use_yn}</td>
@@ -89,8 +90,8 @@
                 </div>
                 <div class="notice-paging">
                     <c:if test="${paging.showPrev}">
-                        <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
-                        <a class="notice-paging-pageitems" href="/admin/user?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}"> < </a>
+                        <%-- 1페이지가 아닌 경우는 < 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
+                        <a class="notice-paging-pageitems" href="/admin/notice?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
                     </c:if>
 
                     <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -101,13 +102,13 @@
                         </c:if>
                         <c:if test="${i ne paging.page}">
                             <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
-                            <a class="notice-paging-pageitems" href="/admin/user?page=${i}&option=${paging.option}&keyword=${paging.keyword}">${i}</a>
+                            <a class="notice-paging-pageitems" href="/admin/notice?page=${i}&keyword=${paging.keyword}">${i}</a>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${paging.showNext}">
                         <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
-                        <a class="notice-paging-pageitems" href="/admin/user?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}"> > </a>
+                        <a class="notice-paging-pageitems" href="/admin/notice?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
                     </c:if>
                 </div>
             </div>
@@ -117,7 +118,14 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
 
+<script>
+    function clearInput() {
+        document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
+    }
+
+    let msg = "${msg}";
+    if(msg=="READ_ERR")  alert("삭제되었거나 없는 게시물입니다.");
+</script>
 </body>
 </html>

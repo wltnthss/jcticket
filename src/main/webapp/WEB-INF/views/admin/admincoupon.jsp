@@ -17,28 +17,10 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
     <div class="admin-common-wrap">
-        <div class="admin-common-snb">
-            <div class="snb-header">
-                <h2>
-                    쿠폰관리
-                </h2>
-                <i class="fas fa-solid fa-gift"></i>
-            </div>
-            <dl>
-                <dt class="menu_toggle-u10">쿠폰관리
-                    <i class="fas fa-solid fa-arrow-down"></i>
-                </dt>
 
-                <div id="u10" style="display: block">
-                    <dd class="u10">
-                        <a href="/admin/user">쿠폰 정보관리</a>
-                    </dd>
-                    <dd class="u10">
-                        <a href="/admin/register">쿠폰 등록하기</a>
-                    </dd>
-                </div>
-            </dl>
-        </div>
+        <jsp:include page="/WEB-INF/views/admin/common/admincouponnav.jsp"/>
+
+
         <div class="admin-common-content">
             <div class="admin-common-title">
                 <h1>쿠폰 관리</h1>

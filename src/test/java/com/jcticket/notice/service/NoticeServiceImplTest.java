@@ -76,7 +76,7 @@ public class NoticeServiceImplTest {
     @Test
     public void pageKeywordList() throws Exception{
 
-        // given
+        // given 테스트케이스 꼼꼼하게 더 추가하기
         int result = 0;
         for (int i = 1; i < 122; i++) {
             NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
