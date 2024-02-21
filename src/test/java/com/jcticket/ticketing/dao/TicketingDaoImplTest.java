@@ -104,19 +104,26 @@ public class TicketingDaoImplTest {
     @Test
     public void selectDateTest() throws Exception {
         //given
+
         for (int i = 1; i <= 5; i++) {
             ShowingDto dto = new ShowingDto(i + "회 " + i + "시 00분", testDate, "토", "BS", 80, testPlay_id, testStage_id, SYS, SYS);
+
             ticketingDao.insert(dto);
+            System.out.println("dto"+i+" ==> "+dto.toString());
         }
         //when
         List<Map<String, String>> list = ticketingDao.selectDateByPlayId(testPlay_id);
         //then
+        System.out.println("list size ==> " + list.size());
         assertTrue(list.size() == 5);
         for (Map<String, String> map : list) {
             Set<String> keys = map.keySet();
             for (String key : keys) {
+                System.out.println("key ==> " + key);
+                System.out.println("value ==> " + map.get(key));
                 if (key.equals("showing_date")) {
-                    assertEquals(testDate, map.get(key));
+                    assertEquals(tDate+x, map.get(key));
+                    x++;
                 }
             }
         }

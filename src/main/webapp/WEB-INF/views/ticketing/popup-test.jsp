@@ -15,6 +15,7 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
     <link href="/resources/css/ticketing/ticketing.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function() {
             // 버튼을 클릭했을 때 showPopup 함수 호출
@@ -38,7 +39,6 @@
     </script>
 </head>
 <body>
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
  <button id="popupButton">예매팝업 열기</button>
 </body>
