@@ -195,12 +195,32 @@ td{
     border-right: solid rgba(0, 0, 0, 0.1);
 }
 
-#round{
-
+.clicked {
+    background-color: #3f51b5;
+    color: white !important;
 }
+#round{
+ width: 100%;
+}
+.box{
+    background-color: white;
+}
+
+/*#round a{*/
+/*    display: block;*/
+/*    margin-left: 10px;*/
+/*    margin-bottom: 10px;*/
+/*    border: solid rgba(0, 0, 0, 0.1);*/
+/*    padding: 5px 20px;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    color: black;*/
+/*}*/
+
 #posterinfo {
     width: 100px;
 }
+
 .form-card .row .col-8{
     display: flex;
     flex-wrap: nowrap;

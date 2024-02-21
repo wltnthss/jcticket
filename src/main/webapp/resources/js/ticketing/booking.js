@@ -1,11 +1,10 @@
 // step.1 일정선택
 $(document).ready(function() {
-    var dateShow = document.querySelectorAll(".dateShow");
-
+    let dateShow = $(".dateShow");
     //선택 가능한 날짜 ex)
     // var availableDates = ["2024-02-28", "2024-02-29"];
-    var availableDates = [];
-    for (var i = 0; i < dateShow.length; i++) {
+    let availableDates = [];
+    for (let i = 0; i < dateShow.length; i++) {
         availableDates.push(dateShow[i].innerHTML);
     }
 
@@ -16,8 +15,8 @@ $(document).ready(function() {
         maxDate: "1Y",
         //특정일만 선택하게한다
         beforeShowDay: function (date) {
-            var thismonth = date.getMonth() + 1;
-            var thisday = date.getDate();
+            let thismonth = date.getMonth() + 1;
+            let thisday = date.getDate();
 
             if (thismonth < 10) {
                 thismonth = "0" + thismonth;
@@ -38,28 +37,21 @@ $(document).ready(function() {
         // 일자 선택된 후 이벤트 발생
         onSelect: function (dateText) {
             //콜백함수사용,ticketing으로 보낼 데이터
-            dateTextCallback(dateText)
-
-            var left = document.querySelector('.fourLeft');
-            var right = document.querySelector('.fourRight');
-
-            // 잔여석 삭제
-            var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
-            var spanRemove = document.querySelector("#seatPrice1");
-            if (existSpan != null) {
-                spanRemove.removeChild(spanRemove.lastChild);
-            }
-
-            // 달력에 있는 날짜 누르면 left, right css 오프됨
-            left.classList.remove('off');
-            right.classList.remove('on');
+            //dateTextCallback(dateText)
+            console.log("=======onSelect 실행=======")
+            // ajax를 통해 Map으로 전송할 데이터 셋팅하기
+            const reqData = {
+                'play_id': $("#play_id").val(),
+                'date_text': dateText
+            };
 
             //dateText날짜가 DB에 저장된 회차테이블의 회차일시와 같으면 a태그 생성
-            // ajax를 통해 컨트롤러로 dateText 보냄
+            // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/viewdetail",
-                data: dateText,
+                url: "/ticketing-detail",
+                data: JSON.stringify(reqData),
+                contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
                 success: function (res) {
@@ -69,48 +61,65 @@ $(document).ready(function() {
                     // 3. 리턴받은 res를 사용해서 a태그를 만듦
 
                     // alert(res);
+                    console.log("response ==> "+res);
+                    const round = $("#round");
+                    const arrayList = res;
+                    console.log("roundList ==> "+ arrayList);
+                    //const showing = document.querySelector('.showing');
 
-                    var showing = document.querySelector('.showing');
 
-                    //.showing 안에 있는 요소들 지우기 (태그 쌓임 방지)
-                    while (showing.firstChild) {
-                        showing.removeChild(showing.firstChild);
-                    }
+                    //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
+                    // while (round.firstChild){
+                    //     round.removeChild(round.firstChild);
+                    // }
+                    $('#round').empty();
+                    console.log("a Tag removed");
+                    // bootstrap 으로 감싸서 a 태그를 생성하는 코드
+                    $.each(arrayList, function (i, item){
+                        const divTag = $("<div></div>")
+                            .addClass("shadow p-2 mb-2 rounded box")
+                            .appendTo(round);
+                        console.log("======divTag generated======");
+                        const aTag = $("<a></a>")
+                            .append(item)
+                            .addClass('aTag')
+                            .attr('id', i)
+                            .attr('href', 'javascript:void(0);')
+                            .appendTo(divTag);
+                        console.log("======aTag generated======");
+                    });
 
-                    // .showing 안에 a태그 만들어주기
-                    for (var i = 0; i < res.length; i++) {
-                        var aTag = document.createElement("a");
-                        aTag.append(res[i].showing_info);
-                        showing.appendChild(aTag);
-                        aTag.className = 'aTag';
-                        aTag.id = res[i].showing_seq;
-                        aTag.href = 'javascript:void(0);';
-                    }
+
+                    // $.each(arrayList, function(i, item) {
+                    //     const aTag = $("<a></a>");
+                    //     aTag.append(item);
+                    //     aTag.appendTo(round);
+                    //     aTag.addClass('aTag');
+                    //     aTag.attr('id', i);
+                    //     aTag.attr('href', 'javascript:void(0);');
+                    //     console.log("a Tag generated")
+                    // });
+
 
                     // 생성한 a태그 클릭했을때 클래스이름 aTag clicked으로 바꾸기
-                    var aTags = document.querySelectorAll('.aTag');
-                    aTags.forEach(function (aTag) {
-                        aTag.addEventListener('click', function () {
-                            // forEach를 한번 더 돌려서 클릭한 태그 이외의 다른 태그의 클래스명에 clicked가 있다면 지움
-                            // 선택한 a태그의 클래스이름이 aTag과 똑같지 않으면 해당 태그의 클래스이름을 없앰
-                            aTags.forEach(function (tag) {
-                                if (tag !== aTag) {
-                                    tag.classList.remove('clicked');
-                                }
-                            });
-                            // 클릭한 태그의 클래스명 토글
-                            this.classList.toggle('clicked');
-
-
-                            //fourLeft클래스(left)와 fourRight클래스(right) 상태 on/off
-                            if (aTag.classList.contains('clicked')) {
-                                left.classList.add('off');
-                                right.classList.add('on');
-                            } else {
-                                left.classList.remove('off');
-                                right.classList.remove('on');
-                            }
-                        });
+                    // const aTags = $('.aTag');
+                    // aTags.forEach(function (aTag) {
+                    //     aTag.addEventListener('click', function () {
+                    //         // forEach를 한번 더 돌려서 클릭한 태그 이외의 다른 태그의 클래스명에 clicked가 있다면 지움
+                    //         // 선택한 a태그의 클래스이름이 aTag과 똑같지 않으면 해당 태그의 클래스이름을 없앰
+                    //         aTags.forEach(function (tag) {
+                    //             if (tag !== aTag) {
+                    //                 tag.classList.remove('clicked');
+                    //             }
+                    //         });
+                    //         // 클릭한 태그의 클래스명 토글
+                    //         this.classList.toggle('clicked');
+                    //     });
+                    // });
+                    $('.aTag').click(function() {
+                        let $clickedTag = $(this);$('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
+                        $clickedTag.toggleClass('clicked').css('color','white').closest('.box').css('background-color', '#673AB7');
+                        //$('.box').css('background-color', 'blue');
                     });
                 },
                 error: function (error) {

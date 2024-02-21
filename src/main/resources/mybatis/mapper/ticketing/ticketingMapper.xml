@@ -95,6 +95,7 @@
         where 1=1
         and play_id = #{play_id}
         and showing_date = #{date_text}
+        order by showing_info asc
     </select>
 
 <!--    공연아이디로 공연명과 ,공연포스터, 공연장명 조회-->

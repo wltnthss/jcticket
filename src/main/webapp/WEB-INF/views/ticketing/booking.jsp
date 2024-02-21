@@ -45,6 +45,7 @@
                         <img id="posterinfo" src='/resources/img/viewdetail/testposter.jpg'/>
                     </div>
                     <div class="col-8 text-left">
+                        <input type="hidden" id="play_id" value="${play_id}">
                         <table class="table table-borderless">
                             <tbody>
                             <tr>
@@ -56,8 +57,9 @@
                                 <th scope="row">공연일시</th>
                                 <%-- 데이터 받아오기: showing_info, showing_day--%>
                                 <td>
-                                    <c:forEach var="item" items="${list}">
-                                        ${item}
+                                    <c:forEach var="date" items="${list}" varStatus="loop">
+                                        <a class="dateShow"><c:out value="${date}" /></a>
+                                        <c:if test="${!loop.last}">,</c:if>
                                     </c:forEach>
                                 </td>
                             </tr>
@@ -91,10 +93,11 @@
                             <div class="calendar row">
                                 <div id="datepicker" class="col-7"></div>
                                 <div id="round" class="col-5">
+                                        <div class="shadow p-2 mb-2 rounded box"><a></a></div>
 <%--                                    회차 들어갈 자리--%>
-                                    <div class="shadow p-2 mb-2 bg-white rounded"><a>${date_text}</a></div>
-                                    <div class="shadow p-2 mb-2 bg-white rounded">2회 오후 4시 30분</div>
-                                    <div class="shadow p-2 mb-2 bg-white rounded">3회 오후 6시 30분</div>
+<%--                                    <div class="shadow p-2 mb-2 bg-white rounded"><a>${date_text}</a></div>--%>
+<%--                                    <div class="shadow p-2 mb-2 bg-white rounded"></div>--%>
+<%--                                    <div class="shadow p-2 mb-2 bg-white rounded"></div>--%>
                                 </div>
                             </div>
                         </div> <input type="button" name="next" class="next action-button" value="다음단계" />
