@@ -21,7 +21,6 @@
 
         <jsp:include page="/WEB-INF/views/admin/common/admincouponnav.jsp"/>
 
-
         <div class="admin-common-content">
             <div class="admin-common-title">
                 <h1>쿠폰 관리</h1>

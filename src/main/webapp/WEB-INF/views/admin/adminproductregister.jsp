@@ -15,24 +15,24 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
+<jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
-    <div class="admin-common-wrap">
+<div class="admin-common-wrap">
 
-        <jsp:include page="/WEB-INF/views/admin/common/adminproductnav.jsp"/>
+    <jsp:include page="/WEB-INF/views/admin/common/adminproductnav.jsp"/>
 
-        <div class="admin-common-content">
-            <div class="admin-common-title">
-                <h1>상품 관리</h1>
-                <h2>상품 검색</h2>
-            </div>
+    <div class="admin-common-content">
+        <div class="admin-common-title">
+            <h1>상품 관리</h1>
+            <h2>상품 등록</h2>
         </div>
     </div>
+</div>
 
-    <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
+<jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/resources/js/admin/admin.js"></script>
 
 </body>
 </html>
