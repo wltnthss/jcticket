@@ -580,6 +580,7 @@ public class AdminController {
 
         return "redirect:/admin/coupon";
     }
+    // 관리자 쿠폰 삭제 폼
     @GetMapping("/admin/coupondelete")
     public String adminCouponDeleteForm(Model model, Map<String, Object> map
             ,@RequestParam(defaultValue = "A") String option
@@ -604,6 +605,7 @@ public class AdminController {
 
         return "admin/admincoupondelete";
     }
+    // 관리자 쿠폰 삭제
     @DeleteMapping("/admin/coupondelete")
     @ResponseBody
     public int adminCouponDelete(@RequestBody List<String> valueArr) throws Exception{
@@ -624,9 +626,20 @@ public class AdminController {
 
         return result;
     }
+    // 관리자 상품 관리
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{
         return "admin/adminproduct";
+    }
+    // 관리자 상품 관리 등록 폼
+    @GetMapping("/admin/productregister")
+    public String adminProductRegisterForm() throws Exception{
+        return "admin/adminproductregister";
+    }
+    // 관리자 상품 관리 등록
+    @PostMapping("/admin/productregister")
+    public String adminProductRegister() throws Exception{
+        return "admin/adminproductregister";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
