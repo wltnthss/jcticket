@@ -2,6 +2,7 @@ package com.jcticket.admin.controller;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.AdminValidLoginDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.notice.dto.NoticeValidDto;
 import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
@@ -439,7 +440,6 @@ public class AdminController {
     }
     // 공지사항 수정 폼 이동
     @GetMapping("/admin/noticemodify/{notice_seq}")
-    @ExceptionHandler(Exception.class)
     public String adminNoticeModifyForm(Model model, @PathVariable  int notice_seq,
                                     @RequestParam(value = "page", required = false, defaultValue = "1") int page
             ,RedirectAttributes rattr) throws Exception{
@@ -529,6 +529,36 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+    // 관리자 쿠폰 관리 폼 이동
+    @GetMapping("/admin/coupon")
+    public String adminCouponForm() throws Exception{
+        return "admin/admincoupon";
+    }
+    // 관리자 쿠폰 등록 폼 이동
+    @GetMapping("/admin/couponregister")
+    public String adminCouponRegisterForm() throws Exception{
+        return "admin/admincouponregister";
+    }
+    // 관리자 쿠폰 등록
+    @PostMapping("/admin/couponregister")
+    public String adminCouponRegister(CouponDto couponDto) throws Exception{
+
+        System.out.println("couponDto = " + couponDto);
+
+        try {
+            int rslt = adminService.insertCoupon(couponDto);
+
+            if(rslt == 0){
+//                rattr.addFlashAttribute("msg", "INS_ERR");
+                return "redirect:/admin/couponregister";
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "redirect:/admin/coupon";
+    }
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{
         return "admin/adminproduct";
@@ -536,9 +566,5 @@ public class AdminController {
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
         return "admin/admininquiry";
-    }
-    @GetMapping("/admin/coupon")
-    public String adminCoupon() throws Exception{
-        return "admin/admincoupon";
     }
 }

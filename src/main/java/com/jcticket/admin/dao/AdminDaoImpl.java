@@ -1,6 +1,7 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
@@ -108,5 +109,20 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public AdminDto showAdminInfo(String admin_id) throws Exception {
         return sqlSession.selectOne(namespace+"showAdminInfo", admin_id);
+    }
+
+    @Override
+    public int insertCoupon(CouponDto couponDto) throws Exception {
+        return sqlSession.insert(namespace+"insertCoupon", couponDto);
+    }
+
+    @Override
+    public int deleteAllCoupon() throws Exception {
+        return sqlSession.delete(namespace+"deleteAllCoupon");
+    }
+
+    @Override
+    public int countAllCoupon() throws Exception {
+        return sqlSession.selectOne(namespace+"countAllCoupon");
     }
 }
