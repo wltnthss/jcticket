@@ -3,7 +3,6 @@ package com.jcticket.admin.dao;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 
 import java.util.List;
@@ -62,5 +61,13 @@ public interface AdminDao {
     int deleteAllCoupon() throws Exception;
     // 관리자 쿠폰 전체 카운트
     int countAllCoupon() throws Exception;
+    // 관리자 쿠폰 전체 리스트 조회
+    List<CouponDto> selectAllCoupon() throws Exception;
+    // 관리자 쿠폰 옵션,keyword,date 카운트 조회
+    int countOptionCoupon(Map<String, Object> map) throws Exception;
+    // 관리자 쿠폰 옵션,keyword,date 리스트 조회
+    List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception;
+    // 관리자 쿠폰 삭제
+    void deleteCoupon(String coupon_id) throws Exception;
 
  }

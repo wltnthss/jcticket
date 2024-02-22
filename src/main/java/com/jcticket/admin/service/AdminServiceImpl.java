@@ -205,27 +205,22 @@ public class AdminServiceImpl implements AdminService {
 
         return pageDto;
     }
-
     @Override
     public int noticeDelete(int notice_seq) throws Exception {
         return adminDao.noticeDelete(notice_seq);
     }
-
     @Override
     public int dupleAdminId(String admin_id) throws Exception {
         return adminDao.dupleAdminId(admin_id);
     }
-
     @Override
     public int updateAdminInfo(AdminDto adminDto) throws Exception {
         return adminDao.updateAdminInfo(adminDto);
     }
-
     @Override
     public AdminDto showAdminInfo(String admin_id) throws Exception {
         return adminDao.showAdminInfo(admin_id);
     }
-
     @Override
     public int insertCoupon(CouponDto couponDto) throws Exception {
 
@@ -238,5 +233,89 @@ public class AdminServiceImpl implements AdminService {
 
         return adminDao.insertCoupon(couponDto);
     }
+    @Override
+    public List<CouponDto> selectAllCoupon() throws Exception {
+        return adminDao.selectAllCoupon();
+    }
+    @Override
+    public int countAllCoupon() throws Exception {
+        return adminDao.countAllCoupon();
+    }
+    @Override
+    public int countOptionCoupon(Map<String, Object> map)throws Exception {
 
+        return adminDao.countOptionCoupon(map);
+    }
+    @Override
+    public List<CouponDto> selectAllOptionCoupon(int page, String option, String keyword, String start_at, String end_at) throws Exception {
+        // 1 page 당 보여주는 글 개수 10
+        /*
+            1page => 0
+            2page => 10
+            3page => 20
+         */
+
+        // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
+        int pagingStart = (page - 1) * pageLimit;
+        List<CouponDto> pagingList = null;
+
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("start", pagingStart);
+        pagingParams.put("limit", pageLimit);
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+        pagingParams.put("start_date", start_at);
+        pagingParams.put("end_date", end_at);
+
+        pagingList = adminDao.selectAllOptionCoupon(pagingParams);
+
+        return pagingList;
+    }
+
+    @Override
+    public PageDto couponPagingParam(int page, String option, String keyword, String start_at, String end_at) throws Exception {
+        // 전체 글 개수 조회
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+        pagingParams.put("start_date", start_at);
+        pagingParams.put("end_date", end_at);
+
+        int agencyCnt = adminDao.countOptionCoupon(pagingParams);
+
+        // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
+        int maxPage = (int) (Math.ceil((double) agencyCnt / pageLimit));
+        // 시작 페이지 값 계산 (1, 11, 21 ...)
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
+        // 끝 페이지 값 계산 (10, 20, 30...)
+        int endPage = startPage + blockLimit - 1;
+        // 이전, 다음 링크 계산
+        boolean showPrev = page != 1;
+        boolean showNext = page != maxPage;
+
+        if(endPage > maxPage){
+            endPage = maxPage;
+        }
+
+        PageDto pageDto = new PageDto();
+        pageDto.setPage(page);
+        pageDto.setMaxPage(maxPage);
+        pageDto.setStartPage(startPage);
+        pageDto.setEndPage(endPage);
+        pageDto.setShowPrev(showPrev);
+        pageDto.setShowNext(showNext);
+        pageDto.setOption(option);
+        pageDto.setKeyword(keyword);
+        pageDto.setStart_at(start_at);
+        pageDto.setEnd_at(end_at);
+
+        return pageDto;
+    }
+
+    @Override
+    public void deleteCoupon(String coupon_id) throws Exception {
+        adminDao.deleteCoupon(coupon_id);
+    }
 }

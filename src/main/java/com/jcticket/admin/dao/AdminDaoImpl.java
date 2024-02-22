@@ -3,7 +3,6 @@ package com.jcticket.admin.dao;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,5 +123,25 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public int countAllCoupon() throws Exception {
         return sqlSession.selectOne(namespace+"countAllCoupon");
+    }
+
+    @Override
+    public List<CouponDto> selectAllCoupon() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllCoupon");
+    }
+
+    @Override
+    public int countOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionCoupon", map);
+    }
+
+    @Override
+    public List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectList(namespace+"selectAllOptionCoupon", map);
+    }
+
+    @Override
+    public void deleteCoupon(String coupon_id) throws Exception {
+        sqlSession.delete(namespace + "deleteCoupon", coupon_id);
     }
 }
