@@ -29,6 +29,18 @@
                 <p class="cr3">Copyright © JC TICKET Corp. All Rights Reserved.</p>
             </div>
         </div>
+        <div class="foo-right">
+            <p class="mark">
+                <img src="http://tkfile.yes24.com/imgNew/common/fmark.png" alt>
+            </p>
+            <p class="fservice">
+                고객님은 안전거래를 위한 현금 등으로 결제 시
+                <br>
+                저희 쇼핑몰에서 가입한 구매안전서비스를
+                <br>
+                이용하실 수 있습니다.
+            </p>
+        </div>
     </div>
 </footer>
 </body>

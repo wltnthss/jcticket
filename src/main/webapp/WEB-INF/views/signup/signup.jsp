@@ -85,7 +85,7 @@
                     인증번호 6자리를 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" minlength="6" maxlength="6" >
+                    <input type="text" id="authNum" class="css_idPwdNickTelAddGenBir_inputAuth" name="email_num" placeholder="인증번호" minlength="6" maxlength="6" required="required" >
                 </label>
                 <input type="button" id="AuthBtn"  value="인증번호 확인"><br>
                 <div class = authMsg></div>

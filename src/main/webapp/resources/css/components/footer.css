@@ -46,3 +46,22 @@
     font-size: 13px;
     color: black;
 }
+
+.foo-right {
+    position: absolute;
+    top: 30px;
+    right: 150px;
+    width: 300px;
+    font-size: 12px;
+}
+
+.foo-right .mark img {
+    vertical-align: middle;
+}
+
+.foo-right p.fservice {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+    line-height: 18px;
+}
