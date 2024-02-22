@@ -230,4 +230,104 @@
     <select id="countAllCoupon" resultType="int">
         select count(*) from coupon
     </select>
+
+    <select id="selectAllCoupon" resultType="CouponDto">
+        SELECT
+            coupon_id ,
+            coupon_name,
+            date_format(coupon_useable_start_at, '%Y-%m-%d') coupon_useable_start_at,
+            date_format(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at,
+            coupon_discount_amount ,
+            coupon_use_condition ,
+            (
+            SELECT
+                <![CDATA[CASE WHEN coupon_useable_end_at <= now() THEN '유효기간만료' ELSE comn_code_name
+                    END comn_code_name]]>
+            FROM
+                comn_code cc
+            WHERE
+                1=1
+                AND comn_code_group_id = '1'
+                AND	cc.comn_code_id = c.coupon_status
+            ) coupon_status,
+            date_format(coupon_reg_at, '%Y-%m-%d') coupon_reg_at
+        FROM
+            coupon c
+        WHERE
+            1=1
+            and coupon_use_yn  = 'Y'
+        ORDER BY
+            coupon_reg_at DESC
+    </select>
+
+    <select id="selectAllOptionCoupon" resultType="CouponDto" parameterType="Map">
+        SELECT
+            coupon_id ,
+            coupon_name,
+            date_format(coupon_useable_start_at, '%Y-%m-%d') coupon_useable_start_at,
+            date_format(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at,
+            coupon_discount_amount ,
+            coupon_use_condition ,
+            (
+                SELECT
+                <![CDATA[CASE WHEN coupon_useable_end_at <= now() THEN '유효기간만료' ELSE comn_code_name
+                        END comn_code_name]]>
+                FROM
+                    comn_code cc
+                WHERE
+                    1=1
+                  AND comn_code_group_id = '1'
+                  AND	cc.comn_code_id = c.coupon_status
+            ) coupon_status,
+            date_format(coupon_reg_at, '%Y-%m-%d') coupon_reg_at
+        FROM
+            coupon c
+        WHERE
+            1=1
+        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
+            AND coupon_useable_start_at BETWEEN #{start_date} AND #{end_date}
+            AND coupon_useable_end_at BETWEEN #{start_date} AND #{end_date}
+        </if>
+        <choose>
+            <when test='option=="I"'>
+                AND coupon_id like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND coupon_name like concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+            AND coupon_use_yn = 'Y'
+        ORDER BY
+            coupon_reg_at DESC
+        LIMIT
+            #{start}, #{limit}
+    </select>
+
+    <select id="countOptionCoupon" parameterType="Map" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            coupon c
+        WHERE
+            1=1
+        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
+            AND coupon_useable_start_at BETWEEN #{start_date} AND #{end_date}
+            AND coupon_useable_end_at BETWEEN #{start_date} AND #{end_date}
+        </if>
+    <choose>
+        <when test='option=="I"'>
+            AND coupon_id like concat('%', #{keyword}, '%')
+        </when>
+        <when test='option=="N"'>
+            AND coupon_name like concat('%', #{keyword}, '%')
+        </when>
+    </choose>
+            AND coupon_use_yn = 'Y';
+    </select>
+
+    <delete id="deleteCoupon" parameterType="String">
+        delete from coupon where coupon_id = #{coupon_id}
+    </delete>
+
+
 </mapper>

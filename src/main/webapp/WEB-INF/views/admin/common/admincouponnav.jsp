@@ -31,6 +31,9 @@
                 <dd class="u10">
                     <a href="/admin/couponregister">쿠폰 등록하기</a>
                 </dd>
+                <dd class="u10">
+                    <a href="/admin/coupondelete">쿠폰 삭제하기</a>
+                </dd>
             </div>
         </dl>
     </div>
