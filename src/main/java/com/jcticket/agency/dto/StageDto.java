@@ -28,10 +28,10 @@ public class StageDto {
     private String stage_manager;
     private String stage_type;
     private String stage_tel;
-    private Timestamp createdAt;
-    private String createdId;
-    private Timestamp updatedAt;
-    private String updatedId;
+    private Timestamp created_at;
+    private String created_id;
+    private Timestamp updated_at;
+    private String updated_id;
 }
 //stage_type String으로 수정
 

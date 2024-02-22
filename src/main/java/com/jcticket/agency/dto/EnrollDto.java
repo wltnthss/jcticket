@@ -16,12 +16,13 @@ import java.sql.Timestamp;
  */
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class EnrollDto {
-    private String play_id;
+    private String play_id; //시스템에서 자동으로 할당되도록? 관리자가 발급?
     private String play_name;
     private String play_poster;
     private String play_info;
@@ -29,9 +30,11 @@ public class EnrollDto {
     private String play_middle_cat;
     private String play_small_cat;
     private int play_run_time;
-    private String agency_id;
-    private Timestamp created_at;
-    private String created_id;
+
+    private String agency_id;//로그인한 사용자의 기획사 ID세션을 통해 서버에서 처리 되도록
+
+    private Timestamp created_at;// 시스템에서 자동으로 설정되도록
+    private String created_id;//로그인세션 이하동문
     private Timestamp updated_at;
     private String updated_id;
 
@@ -43,8 +46,8 @@ public class EnrollDto {
     private String showing_day;
     private String showing_status;
     private int showing_seat_cnt;
-    private String stage_id;
 
+    private String stage_id;
     private String stage_name;
     private String stage_address;
     private int stage_seat_cnt;

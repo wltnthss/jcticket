@@ -128,6 +128,19 @@ public class AgencyController {
     @PostMapping("/enroll")//수동으로.. POST 요청 처리. 요청에서 데이터를 추출하여 EnrollDto로
     public ResponseEntity<String> enroll(HttpServletRequest request) {
         try {
+//            EnrollDto example = EnrollDto.builder()
+//                    .agency_id("agency_id")
+//                    .play_id("play_id")
+//                    .play_name("play_name")
+//                    .play_poster("play_poster")
+//                    .play_info("hi")
+//                    .play_major_cat("play_major_cat")
+//                    .play_middle_cat("play_middle_cat")
+//                    .play_run_time("")
+//                    .build();
+
+
+
             EnrollDto enrollDto = new EnrollDto();
             enrollDto.setPlay_id(request.getParameter("play_id"));
             enrollDto.setPlay_name(request.getParameter("play_name"));

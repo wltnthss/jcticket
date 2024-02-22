@@ -24,7 +24,7 @@
             <h1>신규등록</h1>
             <h2>기본정보입력</h2>
             <hr>
-            <form id="playEnroll" action="enroll" method="post">
+            <form id="playEnroll" action="enroll" method="post"  enctype="multipart/form-data">
                 <div class="enroll-form">
                     <table>
                         <colgroup>
@@ -44,13 +44,25 @@
                                     <label><input type="radio" name="disagree" value="no"> ㄴ</label>
                                 </td>
                             </tr>
+
+<%--   play_id공연아이디>관리자가 발급?    agency_id기획사>로그인 세션     created_at, created_id, updated_at, updated_id 시간은나우 아이디는 세션    --%>
+
+<%--
+  showing_seq,  회차일련번호 헷갈려.   ( showing_date,일시   showing_day,요일 )   showing_status,상태는bs로 고정      showing_seat_cnt,좌석수가뭘까?
+
+
+  이건 입력된 공연장 이름 으로 디비에서 정보 가져오도록 수정.
+    stage_id,공연장아이디   stage_seat_cnt,공연장 좌석수    stage_manager,공연장 담당자    stage_type,공연장유형   stage_tel공연장전번 --%>
+
+
+
                             <tr>
                                 <th scope="row">상품명</th>
                                 <td>
                                     <input type="text" name="play_name" placeholder="공연명을 입력해주세요." value="" id="play_name" class="enroll-form-input w80 " maxlength="100">
                                     &nbsp;&nbsp;&nbsp;&nbsp;부제목(선택입력)
                                     <input type="text" name="play_sub_name" placeholder="부제목을을 입력해주세요." value="" id="play_sub_name" class="enroll-form-input w80 " maxlength="100">
-<%--                                    공연명 부제목은 입력 시 제목 뒤에 따라붙도록 --%>
+<%--                                    공연명 부제목은 입력 시 제목 뒤에 따라붙도록? --%>
                                 </td>
                             </tr>
                             <tr>
@@ -144,7 +156,7 @@
                             <tr>
                                 <th scope="row">좌석배치도</th>
                                 <td>
-<%--                                    이거 뭐,, 필요한가? --%>
+<%--                                    이거 뭐,, 필요한가? 테이블에 추가 할지 말지.. 어떡하지. --%>
                                     <input type="file" name="seatingchart" id="seatingchart"><br>
 
                                     <br><em>위의 [좌석판매형태]항목에서 '지정석'을 선택했다면 필수로 배치도가 그려진 파일을 첨부하셔야 합니다.

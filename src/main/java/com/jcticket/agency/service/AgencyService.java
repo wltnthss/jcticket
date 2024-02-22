@@ -25,12 +25,8 @@ public interface AgencyService {
     boolean processAgencyLogin(String agency_id, String agency_pwd) throws Exception;
     AgencyDto selectAgency(String agency_id) throws Exception;
 
-
+  //  String uploadImage(MultipartFile file) throws Exception; // 이미지 업로드 메서드
     void processEnrollment(EnrollDto enrollDto);//processEnrollment() 메서드를 호출
-
-//        void savePlay(PlayDto playDto);
-//        void saveShowing(ShowingDto showingDto);
-//        void saveStage(StageDto stageDto);
 
 
 

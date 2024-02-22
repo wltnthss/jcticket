@@ -35,8 +35,6 @@ private final AgencyDao agencyDao;
         this.agencyDao = agencyDao;
     }
 
-
-
     @Override
     public boolean processAgencyLogin(String agency_id, String agency_pwd) {
         try {
@@ -52,27 +50,37 @@ private final AgencyDao agencyDao;
     public AgencyDto selectAgency(String agency_id) throws Exception {
         return agencyDao.selectAgency(agency_id);
     }
+//---------------------------------------------------------------------------
+
+
+
 
 
 //    @Override
-//    public void processEnrollment(EnrollDto enrollDto) {
-//        // 입력된 EnrollDto에서 PlayDto, ShowingDto, StageDto를 추출합니다.
-//        PlayDto playDto = enrollDto.getPlayDto();
-//        ShowingDto showingDto = enrollDto.getShowingDto();
-//        StageDto stageDto = enrollDto.getStageDto();
+//    public String uploadImage(MultipartFile file) throws Exception {
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename()); // 파일명에서 경로 제거
+//        String uploadDir = "/경로/설절/"; // 업로드 디렉토리 경로
+//        String filePath = uploadDir + fileName;
+//        File dest = new File(filePath);
+//        file.transferTo(dest); // 파일 저장
 //
-//        // 각 DTO를 데이터베이스에 저장합니다.
-//        savePlay(playDto);
-//        saveShowing(showingDto);
-//        saveStage(stageDto);
+//        // 업로드된 이미지 파일의 경로를 반환
+//        return filePath;
 //    }
-
 
     @Override//processEnrollment() 메서드 처리. EnrollDto에서 데이터를 가져와 PlayDto, ShowingDto, StageDto를 생성
     //@Transactional  사용하려면 의존성 추가 필요해 보임. 해 줘
     public void processEnrollment(EnrollDto enrollDto) {
         try {
 
+            // 이미지 업로드
+//            String imagePath = uploadImage(enrollDto.getPlay_poster());
+
+            // 이미지 경로 설정
+//            enrollDto.setPlay_poster(imagePath);
+
+
+            // PlayDto 생성 및 설정
             PlayDto playDto = new PlayDto();
             playDto.setPlay_id(enrollDto.getPlay_id());
             playDto.setPlay_name(enrollDto.getPlay_name());
@@ -88,7 +96,7 @@ private final AgencyDao agencyDao;
             playDto.setUpdated_at(new Timestamp(System.currentTimeMillis()));
             playDto.setUpdated_id(enrollDto.getUpdated_id());
 
-
+// ShowingDto 생성 및 설정
             ShowingDto showingDto = new ShowingDto();
             showingDto.setPlay_id(enrollDto.getPlay_id());
             showingDto.setShowing_seq(enrollDto.getShowing_seq());
@@ -114,10 +122,10 @@ private final AgencyDao agencyDao;
             stageDto.setStage_manager(enrollDto.getStage_manager());
             stageDto.setStage_type(enrollDto.getStage_type());
             stageDto.setStage_tel(enrollDto.getStage_tel());
-            stageDto.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-            stageDto.setCreatedId(enrollDto.getCreated_id());
-            stageDto.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-            stageDto.setUpdatedId(enrollDto.getUpdated_id());
+            stageDto.setCreated_at(new Timestamp(System.currentTimeMillis()));
+            stageDto.setCreated_id(enrollDto.getCreated_id());
+            stageDto.setUpdated_at(new Timestamp(System.currentTimeMillis()));
+            stageDto.setUpdated_id(enrollDto.getUpdated_id());
 
             // DAO를 통해 각 DTO를 저장
             agencyDao.insertPlay(playDto);
@@ -129,15 +137,24 @@ private final AgencyDao agencyDao;
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // catch (Exception e) {
 //        logger.error("An error occurred during enrollment process", e);
 //        // 예외 처리
 //    }로그 사용 하려면 의존성 추가 해 줘야 함
 //}
-
-
-
-
 
 
 

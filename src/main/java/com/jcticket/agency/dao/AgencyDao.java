@@ -32,15 +32,18 @@ public interface AgencyDao {
 
     int agencyCount() throws Exception;
 
-//각 Dto를 db에 삽입하도록
+//각 Dto를 db에 삽입하도록---------------------
     void insertPlay(PlayDto playDto);
     void insertShowing(ShowingDto showingDto);
     void insertStage(StageDto stageDto);
 
     List<StageDto> getAllStages();
+    List<PlayDto> getAllPlays();
+    List<ShowingDto> getAllShowings();
 
-    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드 추가
+    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드
 
+    //void insertImage(String playId, String imagePath); // 이미지 저장을 위한 메서드
 
 
 

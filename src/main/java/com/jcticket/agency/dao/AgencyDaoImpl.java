@@ -10,12 +10,15 @@ import com.jcticket.viewdetail.dto.PlayDto;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.sql.Connection;
 import java.util.Collections;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+
 
 /**
  * packageName    : com.jcticket.agency.dao
@@ -33,18 +36,25 @@ import javax.sql.DataSource;
 //4.DaoImpl : AgencyDao의 interface를  implements한 AgencyDaoImpl class 라는 말 같음.
 //그러니까 AgencyDao의 interface를 구현해서 db와 상호작용하며, SqlSession 객체를 주입받고
 //그를 사용하여 매퍼에서 정의된 SQL 쿼리를 실행
-@Repository
-public class AgencyDaoImpl implements AgencyDao {
 
-    private static final String namespace = "AgencyMapper.";
-    //AgencyMapper.xml랑 연결?
+    @Repository
+    public class AgencyDaoImpl implements AgencyDao {
+
+        private static final String namespace = "AgencyMapper.";
+        //AgencyMapper.xml랑 연결?
+
+        private static final String INSERT_IMAGE_SQL = "UPDATE play SET play_poster = ? WHERE play_id = ?";
+
+        private DataSource dataSource; // 데이터베이스 연결용 DataSource
+
+        @Autowired
+        public AgencyDaoImpl(DataSource dataSource) {// 생성자를 통해서 의존성 주입
+            this.dataSource = dataSource;
+        }
 
 
-    private DataSource dataSource; // 데이터베이스 연결용 DataSource
 
-
-    //SqlSession객체를  자동 연결해서 주입받음 (의존성 주입)
-    @Autowired
+    @Autowired//SqlSession객체를  자동 연결해서 주입받음 (의존성 주입)
     private SqlSession sqlSession;
 
 
@@ -71,22 +81,22 @@ public class AgencyDaoImpl implements AgencyDao {
 
 
 
+
 //    @Override
-//    public void insertPlay(PlayDto playDto) {
-//        sqlSession.insert(namespace + "insertPlay", playDto);
-//    }
-//
-//    @Override
-//    public void insertShowing(ShowingDto showingDto) {
-//        sqlSession.insert(namespace + "insertShowing", showingDto);
-//    }
-//
-//    @Override
-//    public void insertStage(StageDto stageDto) {
-//        sqlSession.insert(namespace + "insertStage", stageDto);
+//    public void insertImage(String playId, String imagePath) {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_IMAGE_SQL)) {
+//            preparedStatement.setString(1, imagePath);
+//            preparedStatement.setString(2, playId);
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            //나중에 예외처리 변경 하기
+//        }
 //    }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void insertPlay(PlayDto playDto) {
         try (Connection connection = sqlSession.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -114,6 +124,7 @@ public class AgencyDaoImpl implements AgencyDao {
     }
 
     @Override
+    @Transactional
     public void insertShowing(ShowingDto showingDto) {
         try (Connection connection = sqlSession.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
@@ -143,7 +154,7 @@ public class AgencyDaoImpl implements AgencyDao {
 
     @Override
     public void insertStage(StageDto stageDto) {
-        try (Connection connection = sqlSession.getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
                      "INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id) " +
                              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
@@ -154,10 +165,10 @@ public class AgencyDaoImpl implements AgencyDao {
             preparedStatement.setString(5, stageDto.getStage_manager());
             preparedStatement.setString(6, stageDto.getStage_type());
             preparedStatement.setString(7, stageDto.getStage_tel());
-            preparedStatement.setTimestamp(8, stageDto.getCreatedAt());
-            preparedStatement.setString(9, stageDto.getCreatedId());
-            preparedStatement.setTimestamp(10, stageDto.getUpdatedAt());
-            preparedStatement.setString(11, stageDto.getUpdatedId());
+            preparedStatement.setTimestamp(8, stageDto.getCreated_at());
+            preparedStatement.setString(9, stageDto.getCreated_id());
+            preparedStatement.setTimestamp(10, stageDto.getUpdated_at());
+            preparedStatement.setString(11, stageDto.getUpdated_id());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -175,12 +186,11 @@ public class AgencyDaoImpl implements AgencyDao {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-@Override
-public List<StageDto> getAllStages() {
-    try (Connection connection = dataSource.getConnection();
-         PreparedStatement preparedStatement = connection.prepareStatement(
-                 "SELECT * FROM stage")) {
-        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+    @Override
+    public List<StageDto> getAllStages() {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM stage");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             List<StageDto> stages = new ArrayList<>();
             while (resultSet.next()) {
                 StageDto stageDto = new StageDto();
@@ -191,48 +201,88 @@ public List<StageDto> getAllStages() {
                 stageDto.setStage_manager(resultSet.getString("stage_manager"));
                 stageDto.setStage_type(resultSet.getString("stage_type"));
                 stageDto.setStage_tel(resultSet.getString("stage_tel"));
-                // 추가적인 필드 설정
+                stageDto.setCreated_at(resultSet.getTimestamp("created_at"));
+                stageDto.setCreated_id(resultSet.getString("created_id"));
+                stageDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+                stageDto.setUpdated_id(resultSet.getString("updated_id"));
+
                 stages.add(stageDto);
             }
             return stages;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return Collections.emptyList(); // 예외 발생 시 빈 리스트 반환인데 , 예외 발생 시 에러페이지? 이동이나 전체 저장 안되도록
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        // 예외 처리
-        return Collections.emptyList(); // 예외 발생 시 빈 리스트 반환
     }
-}
 
 
-//    @Override
-//    public void saveEnroll(String enrollment) {
-//        String sql ="INSERT INTO agency (name) VALUES (?)";
-//        sqlSession.update(sql, enrollName);
-//    }
-//    @Override
-//    public void saveAgency(String agencyName) {
-//        String sql = "INSERT INTO agency (name) VALUES (?)";
-//        sqlSession.update(sql, agencyName);
-//    }
-//
-//
-//    @Override
-//    public void savePlay(String playName) {
-//        String sql = "INSERT INTO play (name) VALUES (?)";
-//        sqlSession.update(sql, playName);
-//    }
-//
-//    @Override
-//    public void saveShowing(String showingName) {
-//        String sql = "INSERT INTO showing (name) VALUES (?)";
-//        sqlSession.update(sql, showingName);
-//    }
-//
-//    @Override
-//    public void saveStage(String stageName) {
-//        String sql = "INSERT INTO stage (name) VALUES (?)";
-//        sqlSession.update(sql, stageName);
-//    }
+    @Override
+    public List<PlayDto> getAllPlays() {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM play");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<PlayDto> plays = new ArrayList<>();
+            while (resultSet.next()) {
+                PlayDto playDto = new PlayDto();
+                playDto.setPlay_id(resultSet.getString("play_id"));
+                playDto.setPlay_name(resultSet.getString("play_name"));
+                playDto.setPlay_poster(resultSet.getString("play_poster"));
+                playDto.setPlay_info(resultSet.getString("play_info"));
+                playDto.setPlay_major_cat(resultSet.getString("play_major_cat"));
+                playDto.setPlay_middle_cat(resultSet.getString("play_middle_cat"));
+                playDto.setPlay_small_cat(resultSet.getString("play_small_cat"));
+                playDto.setPlay_run_time(resultSet.getInt("play_run_time"));
+                playDto.setAgency_id(resultSet.getString("agency_id"));
+                playDto.setCreated_at(resultSet.getTimestamp("created_at"));
+                playDto.setCreated_id(resultSet.getString("created_id"));
+                playDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+                playDto.setUpdated_id(resultSet.getString("updated_id"));
+
+                plays.add(playDto);
+            }
+            return plays;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public List<ShowingDto> getAllShowings() {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM showing");
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            List<ShowingDto> showings = new ArrayList<>();
+            while (resultSet.next()) {
+                ShowingDto showingDto = new ShowingDto();
+                showingDto.setShowing_seq(resultSet.getInt("showing_seq"));
+                showingDto.setShowing_start_at(resultSet.getTimestamp("showing_start_at"));
+                showingDto.setShowing_end_at(resultSet.getTimestamp("showing_end_at"));
+                showingDto.setShowing_info(resultSet.getString("showing_info"));
+                showingDto.setShowing_date(resultSet.getString("showing_date"));
+                showingDto.setShowing_day(resultSet.getString("showing_day"));
+                showingDto.setShowing_status(resultSet.getString("showing_status"));
+                showingDto.setShowing_seat_cnt(resultSet.getInt("showing_seat_cnt"));
+                showingDto.setPlay_id(resultSet.getString("play_id"));
+                showingDto.setStage_id(resultSet.getString("stage_id"));
+                showingDto.setCreated_at(resultSet.getTimestamp("created_at"));
+                showingDto.setCreated_id(resultSet.getString("created_id"));
+                showingDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+                showingDto.setUpdated_id(resultSet.getString("updated_id"));
+
+                showings.add(showingDto);
+            }
+            return showings;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            return Collections.emptyList();
+        }
+    }
+
+
 
 
     //로그인에 왜 CRUD를 전부 적어둬야 하는지 모르겠으나.. 시켜서 적는..

@@ -34,21 +34,21 @@
 
 
     <!-- PlayDto를 db에 insert -->
-    <insert id="insertPlay" parameterType="com.jcticket.agency.dto.PlayDto">
+    <insert id="insertPlay" parameterType="com.jcticket.viewdetail.dto.PlayDto">
         INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{playId}, #{playName}, #{playPoster}, #{playInfo}, #{playMajorCat}, #{playMiddleCat}, #{playSmallCat}, #{playRunTime}, #{agencyId}, #{createdAt}, #{createdId}, #{updatedAt}, #{updatedId})
+        VALUES (#{playId}, #{playName}, #{playPoster}, #{playInfo}, #{playMajorCat}, #{playMiddleCat}, #{playSmallCat}, #{playRunTime}, #{agencyId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
     </insert>
 
     <!-- ShowingDto를 db에 insert -->
-    <insert id="insertShowing" parameterType="com.jcticket.agency.dto.ShowingDto">
+    <insert id="insertShowing" parameterType="com.jcticket.viewdetail.dto.ShowingDto">
         INSERT INTO showing (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{showingSeq}, #{showingStartAt}, #{showingEndAt}, #{showingInfo}, #{showingDate}, #{showingDay}, #{showingStatus}, #{showingSeatCnt}, #{playId}, #{stageId}, #{createdAt}, #{createdId}, #{updatedAt}, #{updatedId})
+        VALUES (#{showingSeq}, #{showingStartAt}, #{showingEndAt}, #{showingInfo}, #{showingDate}, #{showingDay}, #{showingStatus}, #{showingSeatCnt}, #{playId}, #{stageId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
     </insert>
 
     <!-- StageDto를 db에 insert -->
     <insert id="insertStage" parameterType="com.jcticket.agency.dto.StageDto">
         INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id)
-        VALUES (#{stageId}, #{stageName}, #{stageAddress}, #{stageSeatCnt}, #{stageManager}, #{stageType}, #{stageTel}, #{createdAt}, #{createdId}, #{updatedAt}, #{updatedId})
+        VALUES (#{stageId}, #{stageName}, #{stageAddress}, #{stageSeatCnt}, #{stageManager}, #{stageType}, #{stageTel}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
     </insert>
 
 
@@ -56,6 +56,13 @@
         SELECT * FROM stage
     </select>
 
+    <select id="getAllPlays" resultType="com.jcticket.viewdetail.dto.PlayDto">
+        SELECT  * FROM play
+    </select>
+
+    <select id="getAllShowings" resultType="com.jcticket.viewdetail.dto.ShowingDto">
+        SELECT  * FROM showing
+    </select>
 
 <!--login CRUD...-->
 <!--    <insert id="insertAgency" parameterType="AgencyDto">-->
@@ -73,11 +80,6 @@
 <!--        DELETE FROM agency WHERE agency_id = #{agency_id}-->
 <!--    </delete>-->
 <!--    why....?-->
-
-
-
-
-
 
 
 

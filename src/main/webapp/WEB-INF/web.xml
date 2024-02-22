@@ -24,6 +24,13 @@
             <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <!--web.xml에 DispatcherServlet 의 Multipart 설정-->
+
+        <multipart-config>
+            <max-file-size>31457280</max-file-size>   <!-- 30mb-->
+            <max-request-size>1004857600</max-request-size>  <!-- 100mb -->
+        </multipart-config>
+
     </servlet>
 
     <servlet-mapping>
