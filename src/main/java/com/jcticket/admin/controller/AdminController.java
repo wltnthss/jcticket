@@ -531,25 +531,46 @@ public class AdminController {
     }
     // 관리자 쿠폰 관리 폼 이동
     @GetMapping("/admin/coupon")
-    public String adminCouponForm() throws Exception{
+    public String adminCouponForm(Model model, Map<String, Object> map
+                        ,@RequestParam(defaultValue = "A") String option
+                        ,@RequestParam(required = false) String start_at
+                        ,@RequestParam(required = false) String end_at
+                        ,@RequestParam(required = false) String keyword
+                        ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+
+        List<CouponDto> list = adminService.selectAllOptionCoupon(page, option, keyword, start_at, end_at);
+        PageDto pageDto = adminService.couponPagingParam(page, option, keyword, start_at, end_at);
+        int couponListCnt = adminService.countOptionCoupon(map);
+
+        model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
+        model.addAttribute("couponListCnt", couponListCnt);
+
         return "admin/admincoupon";
     }
     // 관리자 쿠폰 등록 폼 이동
     @GetMapping("/admin/couponregister")
     public String adminCouponRegisterForm() throws Exception{
+
         return "admin/admincouponregister";
     }
     // 관리자 쿠폰 등록
     @PostMapping("/admin/couponregister")
-    public String adminCouponRegister(CouponDto couponDto) throws Exception{
-
-        System.out.println("couponDto = " + couponDto);
+    public String adminCouponRegister(Model model, RedirectAttributes rattr,
+                                      CouponDto couponDto) throws Exception{
 
         try {
+
             int rslt = adminService.insertCoupon(couponDto);
 
             if(rslt == 0){
-//                rattr.addFlashAttribute("msg", "INS_ERR");
+                rattr.addFlashAttribute("msg", "INS_ERR");
                 return "redirect:/admin/couponregister";
             }
 
@@ -558,6 +579,50 @@ public class AdminController {
         }
 
         return "redirect:/admin/coupon";
+    }
+    @GetMapping("/admin/coupondelete")
+    public String adminCouponDeleteForm(Model model, Map<String, Object> map
+            ,@RequestParam(defaultValue = "A") String option
+            ,@RequestParam(required = false) String start_at
+            ,@RequestParam(required = false) String end_at
+            ,@RequestParam(required = false) String keyword
+            ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+
+        List<CouponDto> list = adminService.selectAllOptionCoupon(page, option, keyword, start_at, end_at);
+        PageDto pageDto = adminService.couponPagingParam(page, option, keyword, start_at, end_at);
+        int couponListCnt = adminService.countOptionCoupon(map);
+
+        model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
+        model.addAttribute("couponListCnt", couponListCnt);
+
+        return "admin/admincoupondelete";
+    }
+    @DeleteMapping("/admin/coupondelete")
+    @ResponseBody
+    public int adminCouponDelete(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+        System.out.println("valueArr = " + valueArr);
+
+        try {
+            for (String couponId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.deleteCoupon(couponId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
     }
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{

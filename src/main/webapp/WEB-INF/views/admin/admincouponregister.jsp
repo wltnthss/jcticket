@@ -35,14 +35,14 @@
                     <tr>
                         <th scope="row">쿠폰명</th>
                         <td>
-                            <input type="text" name="coupon_name" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                            <input type="text" name="coupon_name" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;" required>
                             <p class="valid">${valid_coupon_name}</p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">설명</th>
                         <td>
-                            <input type="text" name="coupon_description" class="frm_input required" size="80" style="background-position: right top; background-repeat: no-repeat;">
+                            <input type="text" name="coupon_description" class="frm_input required" size="80" style="background-position: right top; background-repeat: no-repeat;" required>
                             <p class="valid">${valid_coupon_description}</p>
                         </td>
                     </tr>
@@ -55,27 +55,27 @@
                     <tr>
                         <th scope="row">사용기간</th>
                         <td>
-                            <input name="coupon_useable_start_at" id="coupon_useable_start_at" type="date"  class="frm_input required" > ~ <input name="coupon_useable_end_at" id="coupon_useable_end_at" type="date"  class="frm_input required" >
+                            <input name="coupon_useable_start_at" required id="coupon_useable_start_at" type="date"  class="frm_input required" > ~ <input name="coupon_useable_end_at" required id="coupon_useable_end_at" type="date"  class="frm_input required" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">쿠폰 할인금액</th>
                         <td>
-                            <input type="text" name="coupon_discount_amount" class="frm_input required" size="20" maxlength="100" style="background-position: right top; background-repeat: no-repeat;"> <span>원</span>
+                            <input type="text" name="coupon_discount_amount" class="frm_input required" size="20" maxlength="100" style="background-position: right top; background-repeat: no-repeat;" required> <span>원</span>
                             <p class="valid">${valid_coupon_discount_amount}</p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">쿠폰 최소 주문 금액</th>
                         <td>
-                            <input type="text" name="coupon_min_order_amount" class="frm_input" size="20" maxlength="20"> <span>원 이상 구매시</span>
+                            <input type="text" name="coupon_min_order_amount" class="frm_input" size="20" maxlength="20" required> <span>원 이상 구매시</span>
                             <p class="valid">${valid_coupon_min_order_amount}</p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">쿠폰 사용 조건</th>
                         <td>
-                            <input type="text" placeholder="ex) 20,000원 이상 결제 시 사용 가능" name="coupon_use_condition" class="frm_input frm_address" size="40">
+                            <input type="text" placeholder="ex) 20,000원 이상 결제 시 사용 가능" name="coupon_use_condition" class="frm_input frm_address" size="40" required>
                             <p class="valid">${valid_coupon_use_condition}</p>
                         </td>
                     </tr>

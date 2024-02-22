@@ -51,5 +51,16 @@ public interface AdminService {
     AdminDto showAdminInfo(String admin_id) throws Exception;
     // 관리자 쿠폰 등록
     int insertCoupon(CouponDto couponDto) throws Exception;
-
+    // 관리자 전체 쿠폰 리스트 조회
+    List<CouponDto> selectAllCoupon() throws Exception;
+    // 관리자 쿠폰 전체 카운트
+    int countAllCoupon() throws Exception;
+    // 관리자 쿠폰 옵션,keyword 카운트 조회
+    int countOptionCoupon(Map<String, Object> map) throws Exception;
+    // 관리자 쿠폰 옵션,keyword,date 리스트 조회
+    List<CouponDto> selectAllOptionCoupon(int page, String option, String keyword, String start_at, String end_at) throws Exception;
+    // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
+    PageDto couponPagingParam(int page, String option, String keyword, String start_at, String end_at) throws Exception;
+    // 관리자 쿠폰 삭제
+    void deleteCoupon(String coupon_id) throws Exception;
 }
