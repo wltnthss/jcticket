@@ -28,4 +28,6 @@ public class PageDto {
 
     private String option;  // 회원 검색 옵션 기준
     private String keyword; // 회원 검색 keyword
+    private String start_at;// 관리자 쿠폰 조회 시작 일자
+    private String end_at;  // 관리자 쿠폰 조회 종료 일자
 }

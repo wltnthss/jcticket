@@ -16,7 +16,6 @@
                 <img src="/resources/img/components/로고2.png" alt class="trans"/>
             </a>
         </div>
-
         <!-- 가운데 -->
         <div class="play-top-center" style="left : 500px; transform: none;">
             <a href="콘서트 페이지">콘서트</a>
@@ -29,7 +28,6 @@
             <a href="/mypageIndex" class="my-page">
                 <img src="/resources/img/components/마이페이지_흑.png" class="mp_icon">
             </a>
-
             <a href="/notice/paging" class="notice">
                 <img src="/resources/img/components/공지사항_흑.png" class="notice_icon">
             </a>

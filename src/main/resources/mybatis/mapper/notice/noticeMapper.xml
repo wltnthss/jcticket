@@ -4,10 +4,18 @@
 
 <mapper namespace="NoticeMapper">
 
+<!--    테스트용 공지사항 insert-->
     <insert id="insert" parameterType="NoticeDto" useGeneratedKeys="true" keyProperty="notice_seq">
         INSERT INTO notice
         (notice_seq, notice_title, notice_content, notice_view_cnt, notice_reg_at, notice_use_yn, notice_pin_yn, admin_id, created_at, created_id, updated_at, updated_id)
         VALUES(#{notice_seq}, #{notice_title}, #{notice_content}, '0', CURRENT_TIMESTAMP, 'Y', 'N', 'admin', CURRENT_TIMESTAMP, 'JISOO', CURRENT_TIMESTAMP, 'JISOO');
+    </insert>
+
+<!--    관리자단 공지사항 insert-->
+    <insert id="insertValid" parameterType="NoticeValidDto" useGeneratedKeys="true" keyProperty="notice_seq">
+        INSERT INTO notice
+        (notice_seq, notice_title, notice_content, notice_view_cnt, notice_reg_at, notice_use_yn, notice_pin_yn, admin_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{notice_seq}, #{notice_title}, #{notice_content}, '0', CURRENT_TIMESTAMP, 'Y', 'N', #{admin_id}, CURRENT_TIMESTAMP, 'JISOO', CURRENT_TIMESTAMP, 'JISOO');
     </insert>
 
     <delete id="deleteAll">
@@ -60,7 +68,9 @@
             notice_title,
             notice_content,
             notice_reg_at,
-            notice_view_cnt
+            notice_view_cnt,
+            notice_use_yn,
+            admin_id
         from
             notice
         where
@@ -97,5 +107,18 @@
             and notice_seq = #{notice_seq}
             and notice_use_yn = 'Y'
     </update>
+
+    <update id="updateInfo" parameterType="NoticeDto">
+        update
+            notice
+        set
+            notice_title = #{notice_title},
+            notice_content = #{notice_content},
+            updated_at = CURRENT_TIMESTAMP,
+            updated_id = "JISOO"
+        where
+            notice_seq = #{notice_seq}
+    </update>
+
 </mapper>
 

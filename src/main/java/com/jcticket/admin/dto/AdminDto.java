@@ -2,6 +2,8 @@ package com.jcticket.admin.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 
 /**
@@ -38,11 +40,17 @@ public class AdminDto {
 //        `updated_id` varchar(36) NOT NULL,
 //        PRIMARY KEY (`admin_id`)
 //    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
     private String admin_id;
+    @NotBlank(message = "이메일은 필수 입력 값입니다.")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")
     private String admin_email;
+    @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String admin_password;
+    @NotBlank(message = "휴대폰번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "(010|016|011)-[0-9]{3,4}-[0-9]{4}", message = "휴대폰번호 형식이 올바르지 않습니다.")
     private String admin_phone;
+    @NotBlank(message = "닉네임은 필수 입력 값입니다.")
     private String admin_nickname;
     private String admin_use_yn;
     private Timestamp admin_reg_at;

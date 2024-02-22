@@ -94,5 +94,10 @@
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="/resources/js/admin/admin.js"></script>
+
+<script>
+    let msg = "${msg}";
+    if(msg=="INS_ERR")  alert("기획사 등록에 실패했습니다. 재신청해주세요.");
+</script>
 </body>
 </html>

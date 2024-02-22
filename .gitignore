@@ -1,3 +1,7 @@
+### rootcontext.xml ###
+**/src/main/webapp/WEB-INF/spring/root-context.xml
+/src/main/webapp/WEB-INF/spring/root-context.xml
+
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

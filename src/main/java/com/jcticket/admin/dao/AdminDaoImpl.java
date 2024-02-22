@@ -1,8 +1,8 @@
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +58,12 @@ public class AdminDaoImpl implements AdminDao{
     public int userDelete(String user_id) throws Exception {
         return sqlSession.delete(namespace+"userDelete", user_id);
     }
+
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return sqlSession.delete(namespace+"deleteNotice", notice_seq);
+    }
+
     @Override
     public int insertAdmin(AdminDto adminDto) throws Exception {
         return sqlSession.insert(namespace+"insertAdmin", adminDto);
@@ -87,5 +93,55 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
+    }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace + "dupleAdminId", admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return sqlSession.update(namespace + "updateAdminInfo", adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace+"showAdminInfo", admin_id);
+    }
+
+    @Override
+    public int insertCoupon(CouponDto couponDto) throws Exception {
+        return sqlSession.insert(namespace+"insertCoupon", couponDto);
+    }
+
+    @Override
+    public int deleteAllCoupon() throws Exception {
+        return sqlSession.delete(namespace+"deleteAllCoupon");
+    }
+
+    @Override
+    public int countAllCoupon() throws Exception {
+        return sqlSession.selectOne(namespace+"countAllCoupon");
+    }
+
+    @Override
+    public List<CouponDto> selectAllCoupon() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllCoupon");
+    }
+
+    @Override
+    public int countOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionCoupon", map);
+    }
+
+    @Override
+    public List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectList(namespace+"selectAllOptionCoupon", map);
+    }
+
+    @Override
+    public void deleteCoupon(String coupon_id) throws Exception {
+        sqlSession.delete(namespace + "deleteCoupon", coupon_id);
     }
 }

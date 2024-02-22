@@ -78,8 +78,8 @@
 <script src="/resources/js/notice/notice.js"></script>
 
 <script>
-
-
+    let msg = "${msg}";
+    if(msg=="READ_ERR")  alert("삭제되었거나 없는 게시물입니다.");
 </script>
 <body>
 </body>

@@ -8,6 +8,7 @@
     </settings>
     <typeAliases>
         <typeAlias alias="NoticeDto" type="com.jcticket.notice.dto.NoticeDto"/>
+        <typeAlias alias="NoticeValidDto" type="com.jcticket.notice.dto.NoticeValidDto"/>
 
 
         <typeAlias alias="TicketingDto" type="com.jcticket.ticketing.dto.TicketingDto"/>
@@ -17,15 +18,17 @@
 
         <typeAlias alias="UserDto" type="com.jcticket.user.dto.UserDto"/>
 
-
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
         <typeAlias alias="ShowSeatDto" type="com.jcticket.viewdetail.dto.ShowSeatDto"/>
         <typeAlias alias="JoinDto" type="com.jcticket.viewdetail.dto.JoinDto"/>
         <typeAlias alias="PlayDto" type="com.jcticket.viewdetail.dto.PlayDto"/>
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
+        <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
 
 
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
+        <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>
+
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
     </typeAliases>
