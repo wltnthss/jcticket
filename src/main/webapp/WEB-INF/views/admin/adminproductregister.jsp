@@ -24,7 +24,9 @@
     <div class="admin-common-content">
         <div class="admin-common-title">
             <h1>상품 관리</h1>
-            <h2>상품 등록</h2>
+            <h2>공연 등록</h2>
+            <h2>공연장 등록</h2>
+            <h2>좌석 등록</h2>
         </div>
     </div>
 </div>
