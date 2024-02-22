@@ -122,8 +122,7 @@ public class TicketingDaoImplTest {
                 System.out.println("key ==> " + key);
                 System.out.println("value ==> " + map.get(key));
                 if (key.equals("showing_date")) {
-                    assertEquals(tDate+x, map.get(key));
-                    x++;
+                    assertEquals(testDate, map.get(key));
                 }
             }
         }
