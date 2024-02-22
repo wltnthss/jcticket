@@ -98,6 +98,10 @@
 
         }
 
+        #paging {
+            text-align: center;
+        }
+
 
     </style>
 </head>

@@ -75,6 +75,11 @@ public class mypageController {
         return "/mypage/mypage_cupon";
     }
 
+    @GetMapping("/mypagedetail")
+    public String detail() {
+        return "/mypage/mypage_detail";
+    }
+
 
 
 
@@ -88,17 +93,21 @@ public class mypageController {
 
 
         System.out.println("option => " + option);
+        System.out.println("start_date => " + start_date);
+        System.out.println("end_date => " + end_date);
 
         try {
 
             Map map = new HashMap();
             map.put("offset", (page - 1) * pageSize);
             map.put("pageSize", pageSize);
-            map.put("view_option", option);
-            map.put("view_start_date", start_date);
-            map.put("view_end_date", end_date);
+            map.put("option", option);
+            map.put("start_date", start_date);
+            map.put("end_date", end_date);
 
             int totalCount = mypageService.view_count(map);
+
+            System.out.println("totalCount = " + totalCount);
 
             PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date);
 

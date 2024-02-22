@@ -232,6 +232,7 @@
                                 핸드폰으로 답변받기
                             </div>
                         </div>
+
                     </div>
 
                     <div id="client_submit"><input type="submit" value="문의 등록"></div>
