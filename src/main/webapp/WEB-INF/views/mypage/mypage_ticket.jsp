@@ -15,6 +15,84 @@
     <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
+    <style>
+        #client > ul {
+            list-style: none;
+        }
+
+        #select-date {
+            width: 690px;
+            height: 100px;
+            margin: 20px auto;
+            border: 1px solid #dddddd;
+            background-color: #dddddd;
+        }
+
+        #select-date > p {
+            margin: 5px 5px;
+            display: inline-block;
+        }
+
+        #select-date > ul {
+            list-style: none;
+        }
+
+        #select-date > ul > li {
+            margin: 3px;
+            float: left;
+        }
+
+        #select-date > input {
+            width: 180px;
+        }
+
+        #note {
+            padding-left: 5px;
+            text-align: left;
+            font-size: 12px;
+            margin: 20px 0;
+        }
+
+        #note > hr {
+            height: 2px;
+            background: black;
+        }
+
+        #note > ul {
+            list-style: none;
+        }
+
+        #note > ul > li {
+            margin: 5px;
+        }
+
+
+
+        #search {
+            display: inline-block;
+            padding-left: 550px;
+        }
+
+        #search > select {
+            width: 100px;
+            height: 25px;
+        }
+
+        #search > input {
+            font-size: 16px;
+            bottom: 40px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        #submit {
+            font-size: 16px;
+            bottom: 40px;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+
 
 </head>
 <body>
@@ -118,7 +196,7 @@
                                 <option value="Y">예매확인</option>
                                 <option value="C">예매취소</option>
                             </select>
-                            <input type="submit" value="조회">
+                            <input id="submit" type="submit" value="조회">
                         </form>
                     </div>
 
@@ -140,7 +218,7 @@
                                 <td>${TicketingDto.play_name}</td>
                                 <td>${TicketingDto.viewing_at}</td>
                                 <td>${TicketingDto.ticketing_cnt}</td>
-                                <td>${TicketingDto.ticketing_status}</td>
+                                <td><a href="/mypagedetail">${TicketingDto.ticketing_status}</a></td>
                             </tr>
                             </c:forEach>
                         </table>

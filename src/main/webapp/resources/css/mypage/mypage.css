@@ -30,6 +30,8 @@
     margin: 0px 20px;
 }
 
+
+
 /*<%--     mypage시작   --%>*/
 
 #container {
@@ -175,74 +177,83 @@
 
 /* mypage_ticket 시작 */
 
-#client > ul {
-    list-style: none;
-}
+/*#client > ul {*/
+/*    list-style: none;*/
+/*}*/
 
-#select-date {
-    width: 690px;
-    height: 100px;
-    margin: 20px auto;
-    border: 1px solid #dddddd;
-    background-color: #dddddd;
-}
+/*#select-date {*/
+/*    width: 690px;*/
+/*    height: 100px;*/
+/*    margin: 20px auto;*/
+/*    border: 1px solid #dddddd;*/
+/*    background-color: #dddddd;*/
+/*}*/
 
-#select-date > p {
-    margin: 5px 5px;
-    display: inline-block;
-}
+/*#select-date > p {*/
+/*    margin: 5px 5px;*/
+/*    display: inline-block;*/
+/*}*/
 
-#select-date > ul {
-    list-style: none;
-}
+/*#select-date > ul {*/
+/*    list-style: none;*/
+/*}*/
 
-#select-date > ul > li {
-    margin: 3px;
-    float: left;
-}
+/*#select-date > ul > li {*/
+/*    margin: 3px;*/
+/*    float: left;*/
+/*}*/
 
-#select-date > input {
-    width: 180px;
-}
+/*#select-date > input {*/
+/*    width: 180px;*/
+/*}*/
 
-#note {
-    padding-left: 5px;
-    text-align: left;
-    font-size: 12px;
-    margin: 20px 0;
-}
+/*#note {*/
+/*    padding-left: 5px;*/
+/*    text-align: left;*/
+/*    font-size: 12px;*/
+/*    margin: 20px 0;*/
+/*}*/
 
-#note > hr {
-    height: 2px;
-    background: black;
-}
+/*#note > hr {*/
+/*    height: 2px;*/
+/*    background: black;*/
+/*}*/
 
-#note > ul {
-    list-style: none;
-}
+/*#note > ul {*/
+/*    list-style: none;*/
+/*}*/
 
-#note > ul > li {
-    margin: 5px;
-}
+/*#note > ul > li {*/
+/*    margin: 5px;*/
+/*}*/
 
-#paging {
-    text-align: center;
-}
+/*#paging {*/
+/*    text-align: center;*/
+/*}*/
 
-#search {
-    display: inline-block;
-    padding-left: 550px;
-}
+/*#search {*/
+/*    display: inline-block;*/
+/*    padding-left: 550px;*/
+/*}*/
 
-#search > select {
-    width: 100px;
-    height: 25px;
-}
+/*#search > select {*/
+/*    width: 100px;*/
+/*    height: 25px;*/
+/*}*/
 
-#search > input {
-    width: 40px;
-    height: 25px;
-}
+/*#search > input {*/
+/*    font-size: 16px;*/
+/*    bottom: 40px;*/
+/*    color: #666;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*#submit {*/
+/*    font-size: 16px;*/
+/*    bottom: 40px;*/
+/*    color: #666;*/
+/*    font-weight: bold;*/
+/*}*/
 
 
 
