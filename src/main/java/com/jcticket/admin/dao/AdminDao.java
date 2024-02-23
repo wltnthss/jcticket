@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 
@@ -69,5 +70,8 @@ public interface AdminDao {
     List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception;
     // 관리자 쿠폰 삭제
     void deleteCoupon(String coupon_id) throws Exception;
-
+    // 공연장 데이터 등록 (공연장은 별도의 입력창에서 입력하는 값 없이 DB내에 존재하는 값 사용)
+    int insertStage(StageDto stageDto) throws Exception;
+    // 공연장 데이터 전체 삭제
+    void deleteAllStage() throws Exception;
  }

@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
@@ -143,5 +144,15 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public void deleteCoupon(String coupon_id) throws Exception {
         sqlSession.delete(namespace + "deleteCoupon", coupon_id);
+    }
+
+    @Override
+    public int insertStage(StageDto stageDto) throws Exception {
+        return sqlSession.delete(namespace+"insertStage", stageDto);
+    }
+
+    @Override
+    public void deleteAllStage() throws Exception {
+        sqlSession.delete(namespace + "deleteAllStage");
     }
 }

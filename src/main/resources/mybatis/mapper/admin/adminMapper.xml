@@ -329,5 +329,15 @@
         delete from coupon where coupon_id = #{coupon_id}
     </delete>
 
+    <insert id="insertStage" parameterType="StageDto">
+        INSERT INTO stage
+        (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_tel, created_at, created_id, updated_at, updated_id)
+        VALUES(#{stage_id}, #{stage_name}, #{stage_address}, #{stage_seat_cnt}, #{stage_manager}, #{stage_tel}, CURRENT_TIMESTAMP, 'JISOO', CURRENT_TIMESTAMP, 'JISOO');
+    </insert>
+
+    <delete id="deleteAllStage">
+        delete from stage
+    </delete>
+
 
 </mapper>
