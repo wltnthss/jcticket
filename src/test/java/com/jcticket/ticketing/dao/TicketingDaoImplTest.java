@@ -144,11 +144,11 @@ public class TicketingDaoImplTest {
         param.put("play_id", testPlay_id);
         param.put("date_text", "2024-02-21");
         //when
-        List<Map<String, String>> list = ticketingDao.selectRound(param);
+        List<Map<String, Object>> list = ticketingDao.selectRound(param);
         //then
         System.out.println("list size ==> " + list.size());
         assertTrue(3 == list.size());
-        for (Map<String, String> map : list) {
+        for (Map<String, Object> map : list) {
             Set<String> keys = map.keySet();
             for (String key : keys) {
                 if (key.equals("showing_seq")) {

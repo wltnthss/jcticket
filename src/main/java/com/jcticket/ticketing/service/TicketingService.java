@@ -24,10 +24,10 @@ public interface TicketingService {
     // Step1. 일정선택
 
     // 공연명, 공연포스터, 공연일자, 공연장명을 공연아이디를 가지고 받아온다.
-    Map<String,Object> getPlayInfo(String play_id) throws Exception;
+    Map<String, Object> getPlayInfo(String play_id) throws Exception;
 
     // 공연아이디와 공연일자를 가지고 회차 정보 & 회차 시퀀스를 가져온다.
-    List<String> getRoundList(String play_id, String date_text) throws Exception;
+    Map<String, Object> getRoundInfo(String play_id, String date_text) throws Exception;
     // next step
     // 좌석선택하는 로직
 }

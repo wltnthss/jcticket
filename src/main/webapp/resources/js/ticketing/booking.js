@@ -54,7 +54,7 @@ $(document).ready(function() {
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
-                success: function (arrayList) {
+                success: function (resMap) {
                     //a태그 생성 이벤트
                     // 1. ajax로 reqData(map)를 컨트롤러로 보냄,
                     // 2. 컨트롤러에서 reqData를 이용해서 sql문을 돌려서 나온 결과를 res로 리턴함
@@ -62,24 +62,30 @@ $(document).ready(function() {
 
                     const round = $("#round");
                     // res를 arrayList로 변환
-                    //onst arrayList = res;
-                    console.log("roundList ==> "+ arrayList);
+                    // const arrayList = res;
+                    const seqList = resMap.showing_seq;
+                    const infoList = resMap.showing_info;
                     //const showing = document.querySelector('.showing');
 
 
                     //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
-                    $('#round').empty();
+                    round.empty();
                     console.log("a Tag removed");
+                    console.log(`resMap ==> ${resMap}`);
+                    console.log(`seqList ==> ${seqList}`);
+                    console.log(`infoList ==> ${infoList}` );
+
                     // bootstrap 으로 감싸서 a 태그를 생성하는 코드
-                    $.each(arrayList, function (i, item){
+                    $.each(infoList, function (i, item){
                         const divTag = $("<div></div>")
                             .addClass("shadow p-2 mb-2 rounded box")
                             .appendTo(round);
                         console.log("======divTag generated======");
+                        console.log("infoList ==> "+ infoList[i]);
                         const aTag = $("<a></a>")
                             .append(item)
                             .addClass('aTag')
-                            .attr('id', i)
+                            .attr('id', seqList[i])
                             .attr('href', 'javascript:void(0);')
                             .appendTo(divTag);
                         console.log("======aTag generated======");

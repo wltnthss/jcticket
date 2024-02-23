@@ -77,9 +77,9 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.selectList(namespace + "selectDateByPlayId", play_id);
     }
 
-    // 공연아이디 && 공연일정별 회차정보 리스트 조회
+    // 공연아이디 && 공연일정별 회차시퀀스, 회차정보 리스트 조회
     @Override
-    public List<Map<String, String>> selectRound(Map<String, String> map) throws Exception {
+    public List<Map<String, Object>> selectRound(Map<String, String> map) throws Exception {
         return session.selectList(namespace + "selectRound", map);
     }
 

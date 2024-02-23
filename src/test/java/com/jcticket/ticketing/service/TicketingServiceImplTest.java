@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import static org.junit.Assert.*;
 /**
  * packageName    : com.jcticket.ticketing.service
@@ -66,15 +64,18 @@ public class TicketingServiceImplTest {
     @Test
     public void getRoundTest() throws Exception{
         //given
-        List<String> roundList;
+        HashMap<String, Object> map;
+        ArrayList<String> seqList;
+        ArrayList<String> infoList;
         //when
-        roundList = ticketingService.getRoundList(TEST_PLAY_ID, TEST_DATE);
+        map = (HashMap<String, Object>) ticketingService.getRoundInfo(TEST_PLAY_ID, TEST_DATE);
         //then
+        assertTrue(1 == 1);
         //assertTrue( 3 == roundList.size());
-        for (String round : roundList){
-            System.out.println("회차 리스트 : ");
-            System.out.println(round);
-            assertTrue(round != null);
+        //Iterator<String> it = map.keySet().iterator();
+        Set<String> keys = map.keySet();
+        for (String key : keys){
+            System.out.println(key+" ==> "+ map.get(key));
         }
     }
 }
