@@ -79,33 +79,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="admin-common-title">
-                <h2>좌석 등록</h2>
-            </div>
-            <div class="tbl_frm01">
-                <table>
-                    <colgroup>
-                        <col class="w180">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <th scope="row">좌석가격</th>
-                        <td>
-                            <input type="text" name="play_name" class="frm_input required" size="5" required><span>  원</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">좌석번호</th>
-                        <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             <div class="btn-confirm">
-                <input type="submit" value="등록" id="btn_submit" class="btn-large">
+                <input type="submit" value="등록" class="btn-large">
             </div>
         </form>
         <form action="/admin/productregister" method="post">
@@ -121,14 +96,14 @@
                     <tbody>
                     <tr>
                         <th scope="row">공연장 선택</th>
-                        <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                        <td onclick="openPopup()">
+                            <input type="text" name="play_poster" id="searchStage" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연명 선택</th>
-                        <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                        <td onclick="closePopup()">
+                            <input type="text" name="play_poster" id="searchPlay" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
                         </td>
                     </tr>
                     <tr>
@@ -161,13 +136,65 @@
                             <input type="text" name="play_poster" class="frm_input required" size="20" required>
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">회차 좌석가격</th>
+                        <td>
+                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
             <div class="btn-confirm">
-                <input type="submit" value="등록" id="btn_submit" class="btn-large">
+                <input type="submit" value="등록" class="btn-large">
             </div>
         </form>
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <p class="close-popup" ><span class="close-btn" onclick="closePopup()">X</span></p>
+                <h2>공연장명 검색</h2>
+                <div class="popup-content-detail">
+                    <div class="popup-content-search">
+                        <input type="text" placeholder="공연장명을 입력하세요" class="frm_input required" id="inputName" size="30">
+                        <button onclick="submitForm()" class="search-btn"></button>
+                    </div>
+                    <div class="tbl_header">
+                        <table>
+                            <colgroup>
+                                <col class="w200">
+                                <col class="w300">
+                                <col class="w80">
+                                <col class="w150">
+                                <col class="w80">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th scope="col">공연장명</th>
+                                <th scope="col">주소</th>
+                                <th scope="col">좌석수</th>
+                                <th scope="col">번호</th>
+                                <th scope="col">담당자</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+<%--                            <c:forEach items="${list}" var="UserDto">--%>
+                                <tr class="list">
+                                    <td>올림픽공원 체조경기장</td>
+                                    <td>서울특별시 송파구 올림픽로 424</td>
+                                    <td>80</td>
+                                    <td>02-6000-0114</td>.
+                                    <td>조영상</td>
+                                </tr>
+<%--                            </c:forEach>--%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="popup-btn-line">
+                    <button class="popup-btn-medium" onclick="closePopup()">닫기</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
