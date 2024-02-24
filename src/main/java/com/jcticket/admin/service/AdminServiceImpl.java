@@ -283,10 +283,10 @@ public class AdminServiceImpl implements AdminService {
         pagingParams.put("start_date", start_at);
         pagingParams.put("end_date", end_at);
 
-        int agencyCnt = adminDao.countOptionCoupon(pagingParams);
+        int couponCnt = adminDao.countOptionCoupon(pagingParams);
 
         // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
-        int maxPage = (int) (Math.ceil((double) agencyCnt / pageLimit));
+        int maxPage = (int) (Math.ceil((double) couponCnt / pageLimit));
         // 시작 페이지 값 계산 (1, 11, 21 ...)
         int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
         // 끝 페이지 값 계산 (10, 20, 30...)

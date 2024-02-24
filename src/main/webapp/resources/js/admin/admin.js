@@ -212,5 +212,19 @@ $(function (){
             u20List.style.display = 'block';
         }
     }
+});
 
-})
+//  팝업창 함수
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+function submitForm() {
+    let name = document.getElementById("inputName").value;
+    alert("이름: " + name);
+    closePopup();
+}
