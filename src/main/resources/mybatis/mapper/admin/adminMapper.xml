@@ -339,5 +339,28 @@
         delete from stage
     </delete>
 
+    <select id="selectKeywordStage" resultType="StageDto" parameterType="String">
+        select
+            stage_name,
+            stage_address,
+            stage_seat_cnt,
+            stage_tel,
+            stage_manager
+        from
+            stage
+        where
+            stage_name like concat ('%', #{keyword} ,'%')
+    </select>
 
+    <select id="selectKeywordPlay" resultType="PlayDto" parameterType="String">
+        select
+            play_id,
+            play_name,
+            play_major_cat,
+            play_run_time
+        from
+            play
+        where
+            play_name like concat ('%', #{keyword} ,'%')
+    </select>
 </mapper>

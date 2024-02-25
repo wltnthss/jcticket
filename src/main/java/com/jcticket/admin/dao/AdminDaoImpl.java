@@ -5,6 +5,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -154,5 +155,15 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public void deleteAllStage() throws Exception {
         sqlSession.delete(namespace + "deleteAllStage");
+    }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordStage", keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
     }
 }

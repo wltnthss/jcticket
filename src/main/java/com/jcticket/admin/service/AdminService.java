@@ -3,8 +3,10 @@ package com.jcticket.admin.service;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 
 import java.util.List;
 import java.util.Map;
@@ -63,4 +65,8 @@ public interface AdminService {
     PageDto couponPagingParam(int page, String option, String keyword, String start_at, String end_at) throws Exception;
     // 관리자 쿠폰 삭제
     void deleteCoupon(String coupon_id) throws Exception;
+    // 상품 관리 팝업창 공연장명 검색 조회
+    List<StageDto> selectKeywordStage(String keyword) throws Exception;
+    // 상품 관리 팝업창 공연명 검색 조회
+    List<PlayDto> selectKeywordPlay(String keyword) throws Exception;
 }

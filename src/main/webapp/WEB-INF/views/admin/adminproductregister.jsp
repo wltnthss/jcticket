@@ -96,50 +96,62 @@
                     <tbody>
                     <tr>
                         <th scope="row">공연장 선택</th>
-                        <td onclick="openPopup()">
-                            <input type="text" name="play_poster" id="searchStage" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
+                        <td onclick="openStagePopup()">
+                            <input type="text" name="play_poster" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연명 선택</th>
-                        <td onclick="closePopup()">
-                            <input type="text" name="play_poster" id="searchPlay" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
+                        <td onclick="openPlayPopup()">
+                            <input type="text" name="play_poster" id="inputSearchPlay" class="frm_input required" size="50" style="cursor: pointer" required readonly><span class="search-btn"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">회차 시작 일시</th>
+                        <td>
+                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">회차 종료 일시</th>
+                        <td>
+                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 정보</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_info" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 일시</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_date" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 요일</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_day" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">회차 선택</th>
+                        <th scope="row">회차 상태</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_status" class="frm_input required" size="5" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석수</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석가격</th>
                         <td>
-                            <input type="text" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_seat_price" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     </tbody>
@@ -149,23 +161,24 @@
                 <input type="submit" value="등록" class="btn-large">
             </div>
         </form>
-        <div id="popup" class="popup">
+        <%-- 공연장명 입력 팝업 창 --%>
+        <div id="stagePopup" class="popup">
             <div class="popup-content">
                 <p class="close-popup" ><span class="close-btn" onclick="closePopup()">X</span></p>
                 <h2>공연장명 검색</h2>
                 <div class="popup-content-detail">
                     <div class="popup-content-search">
-                        <input type="text" placeholder="공연장명을 입력하세요" class="frm_input required" id="inputName" size="30">
-                        <button onclick="submitForm()" class="search-btn"></button>
+                            <input type="text" name="keyword" value="" placeholder="공연장명을 입력하세요" class="frm_input required" id="inputStage" size="30">
+                            <button class="search-btn" id="search-stage"></button>
                     </div>
                     <div class="tbl_header">
                         <table>
                             <colgroup>
                                 <col class="w200">
                                 <col class="w300">
-                                <col class="w80">
+                                <col class="w50">
                                 <col class="w150">
-                                <col class="w80">
+                                <col class="w60">
                             </colgroup>
                             <thead>
                             <tr>
@@ -176,16 +189,45 @@
                                 <th scope="col">담당자</th>
                             </tr>
                             </thead>
-                            <tbody>
-<%--                            <c:forEach items="${list}" var="UserDto">--%>
-                                <tr class="list">
-                                    <td>올림픽공원 체조경기장</td>
-                                    <td>서울특별시 송파구 올림픽로 424</td>
-                                    <td>80</td>
-                                    <td>02-6000-0114</td>.
-                                    <td>조영상</td>
-                                </tr>
-<%--                            </c:forEach>--%>
+                            <tbody id="stageList">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="popup-btn-line">
+                    <button class="popup-btn-medium" onclick="closePopup()">닫기</button>
+                </div>
+            </div>
+        </div>
+        <%-- 공연명 입력 팝업 창--%>
+        <div id="playPopup" class="popup">
+            <div class="popup-content">
+                <p class="close-popup" ><span class="close-btn" onclick="closePopup()">X</span></p>
+                <h2>공연명 검색</h2>
+                <div class="popup-content-detail">
+                    <div class="popup-content-search">
+                        <input type="text" name="keyword" placeholder="공연명을 입력하세요" class="frm_input required" id="inputPlay" size="30">
+                        <button class="search-btn" id="search-play"></button>
+                    </div>
+                    <div class="tbl_header">
+                        <table>
+                            <colgroup>
+                                <col class="w80">
+                                <col class="w300">
+                                <col class="w60">
+                                <col class="w60">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th scope="col">공연아이디</th>
+                                <th scope="col">공연명</th>
+                                <th scope="col">대분류</th>
+                                <th scope="col">공연시간</th>
+                            </tr>
+                            </thead>
+                            <tbody id="playList">
+
                             </tbody>
                         </table>
                     </div>
