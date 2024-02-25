@@ -55,6 +55,7 @@ $(document).ready(function() {
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
                 success: function (resMap) {
+                    console.log(resMap);
                     //a태그 생성 이벤트
                     // 1. ajax로 reqData(map)를 컨트롤러로 보냄,
                     // 2. 컨트롤러에서 reqData를 이용해서 sql문을 돌려서 나온 결과를 res로 리턴함
@@ -91,7 +92,7 @@ $(document).ready(function() {
                         console.log("======aTag generated======");
                     });
 
-                    // 클릭했을때 div태그 배경색 바꾸기 & a태크 글자색 바꾸기
+                    // 클릭했을때 div태그 배경색 바꾸기 & a태그 글자색 바꾸기
                     $('.aTag').click(function() {
                         let $clickedTag = $(this);$('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
                         $clickedTag.toggleClass('clicked').css('color','white').closest('.box').css('background-color', '#673AB7');
@@ -99,6 +100,7 @@ $(document).ready(function() {
                     });
                 },
                 error: function (error) {
+
                     console.log('error => ', error)
                 }
             });

@@ -3,6 +3,7 @@ package com.jcticket.ticketing.controller;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -71,12 +72,17 @@ public class TicketingController {
     // ajax로 파라미터 넘기는 방법 찾가
     @PostMapping("/ticketing-detail")
     @ResponseBody // 자바 객체를 HTTP요청의 바디 내용으로 매핑하여 클라이언트로 전송한다.
-    public Map<String, Object> getShowingRound(@RequestBody Map<String,String> data) throws Exception{
+    public ResponseEntity<?> getShowingRound(@RequestBody Map<String,String> data) throws Exception{
         // ajax로 받아온 Map data 에는 date_text와 play_id가 들어있다.
         // map에서 date_text와 play_id 분리하기
-        String play_id = data.get("play_id");
-        String date_text = data.get("date_text");
-        // 서비스에서 받아온 리스트를 반환한다.
-        return ticketingService.getRoundInfo(play_id, date_text);
+            String date_text = data.get("date_text");
+            String play_id = data.get("play_id");
+        try{
+            // 서비스에서 받아온 리스트를 반환한다.
+//            return ResponseEntity.ok().body(ticketingService.getRoundInfo(play_id, date_text));
+            throw new Exception();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(ticketingService.getRoundInfo(play_id, date_text));
+        }
     }
 }
