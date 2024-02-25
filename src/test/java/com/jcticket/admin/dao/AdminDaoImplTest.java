@@ -297,4 +297,32 @@ public class AdminDaoImplTest {
         assertEquals(1, adminDao.insertStage(stageDto4));
         assertEquals(1, adminDao.insertStage(stageDto5));
     }
+
+    @Test
+    public void selectKeywordStage() throws Exception {
+
+        adminDao.deleteAllStage();
+
+        // given => DB내에 존재한다 가정하는 공연장 테스트 데이터 5개 생성
+        StageDto stageDto1 = new StageDto("1ad62b31", "올림픽공원 체조경기장", "서울특별시 송파구 올림픽로 424", 80, "조영상", "02-6000-0114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto2 = new StageDto("2ad62b31", "서울예술의전당", "서울특별시 서초구 서초동 700", 900, "이철수", "02-580-1300", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto3 = new StageDto("3ad62b31", "세종문화회관", "서울특별시 종로구 세종로 175", 500, "박미영", "02-399-1114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto4 = new StageDto("4ad62b31", "블루스퀘어", "서울특별시 용산구 이태원로 294", 700, "정성호", "02-1588-5212", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto5 = new StageDto("5ad62b31", "디큐브아트센터", "서울특별시 구로구 신도림동 360-51", 200, "조영상", "02-2211-3660", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        adminDao.insertStage(stageDto1);
+        adminDao.insertStage(stageDto2);
+        adminDao.insertStage(stageDto3);
+        adminDao.insertStage(stageDto4);
+        adminDao.insertStage(stageDto5);
+
+        String keyword = "올림픽공원";
+
+        // when
+        List<StageDto> list = adminDao.selectKeywordStage(keyword);
+        System.out.println("list = " + list);
+
+        // then
+        assertEquals(list.get(0).getStage_seat_cnt(), 80);
+    }
 }

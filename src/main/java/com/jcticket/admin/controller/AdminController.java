@@ -1,16 +1,14 @@
 package com.jcticket.admin.controller;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.AdminValidLoginDto;
-import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.notice.dto.NoticeValidDto;
-import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -625,6 +623,34 @@ public class AdminController {
         }
 
         return result;
+    }
+    // 관리자 공연장명 검색 팝업 조회
+    @GetMapping("/admin/stage")
+    @ResponseBody
+    public List<StageDto> adminProduct(@RequestParam String keyword) throws Exception {
+
+        List<StageDto> list = null;
+        try {
+            list = adminService.selectKeywordStage(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    // 관리자 공연명 검색 팝업 조회
+    @GetMapping("/admin/play")
+    @ResponseBody
+    public List<PlayDto> adminPlay(@RequestParam String keyword) throws Exception {
+
+        List<PlayDto> list = null;
+        try {
+            list = adminService.selectKeywordPlay(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
     // 관리자 상품 관리
     @GetMapping("/admin/product")

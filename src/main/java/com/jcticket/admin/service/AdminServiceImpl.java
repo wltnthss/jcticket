@@ -4,8 +4,10 @@ import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -317,5 +319,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteCoupon(String coupon_id) throws Exception {
         adminDao.deleteCoupon(coupon_id);
+    }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return adminDao.selectKeywordStage(keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return adminDao.selectKeywordPlay(keyword);
     }
 }
