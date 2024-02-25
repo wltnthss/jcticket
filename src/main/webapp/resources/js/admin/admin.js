@@ -1,4 +1,29 @@
 $(function (){
+    // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
+    $('.menu_toggle-u10').on('click', u10Toggle);
+    $('.menu_toggle-u20').on('click', u20Toggle);
+
+    function u10Toggle(){
+        let u10List = document.getElementById('u10');
+        let u10ListDisplay = u10List.style.display;
+
+        if(u10ListDisplay === 'block'){
+            u10List.style.display = 'none';
+        }else if(u10ListDisplay === 'none'){
+            u10List.style.display = 'block';
+        }
+    }
+    function u20Toggle(){
+        let u20List = document.getElementById('u20');
+        let u20ListDisplay = u20List.style.display;
+
+        if(u20ListDisplay === 'block'){
+            u20List.style.display = 'none';
+        }else if(u20ListDisplay === 'none'){
+            u20List.style.display = 'block';
+        }
+    }
+
     $('.btnLogin').on('click', function (){
         let adminId = $('#admin_id').val();
         let adminPwd = $('#admin_password').val();
@@ -182,35 +207,137 @@ $(function (){
                         console.error("삭제 실패", e);
                     }
                 });
-
-
             }
         }
     });
+    // 공연장 선택 검색 버튼 선택 이벤트
+    $('#search-stage').on('click', function () {
 
-    // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
-    $('.menu_toggle-u10').on('click', u10Toggle);
-    $('.menu_toggle-u20').on('click', u20Toggle);
+        let keyword = $("#inputStage").val();
 
-    function u10Toggle(){
-        let u10List = document.getElementById('u10');
-        let u10ListDisplay = u10List.style.display;
+        let sendData = {
+            keyword: keyword,
+        };
 
-        if(u10ListDisplay === 'block'){
-            u10List.style.display = 'none';
-        }else if(u10ListDisplay === 'none'){
-            u10List.style.display = 'block';
-        }
-    }
-    function u20Toggle(){
-        let u20List = document.getElementById('u20');
-        let u20ListDisplay = u20List.style.display;
+        $.ajax({
+            type: 'GET',
+            url: '/admin/stage',
+            data: sendData,
+            contentType: "application/json",
+            success: function (res){
+                // alert('res => ' + res)
 
-        if(u20ListDisplay === 'block'){
-            u20List.style.display = 'none';
-        }else if(u20ListDisplay === 'none'){
-            u20List.style.display = 'block';
-        }
-    }
+                let listHtml = '';
 
-})
+                // controller에서 받은 공연장 조회 쿼리 결과 수만큼 공연장 결과 Html 결과에 출력
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    listHtml += '<tr class="list">'
+                    listHtml += '<td style="cursor: pointer" class="stage-name-list">' + res[i].stage_name + '</td>';
+                    listHtml += '<td>' + res[i].stage_address + '</td>';
+                    listHtml += '<td class="stage-seat-list">' + res[i].stage_seat_cnt + '</td>';
+                    listHtml += '<td>' + res[i].stage_tel + '</td>';
+                    listHtml += '<td>' + res[i].stage_manager + '</td>';
+                    listHtml += '</tr>'
+                }
+
+                $('#stageList').html(listHtml);
+
+                // 공연장명 선택 시 팝업창이 닫히면서 공연장명 input창에 데이터 삽입
+                let stageLists = document.querySelectorAll(".stage-name-list");
+                let stageSeatLists = document.querySelectorAll(".stage-seat-list");
+
+                for (let i = 0; i < stageLists.length; i++) {
+                    stageLists[i].addEventListener('click', function () {
+
+                        // 공연장, 회차 좌석수 인풋창에 선택한 공연장의 DB정보 삽입
+                        document.getElementById("inputSearchStage").value = stageLists[i].innerHTML;
+                        document.getElementById("showingSeat").value = stageSeatLists[i].innerHTML;
+
+                        // 팝업창 종료
+                        closePopup();
+                    });
+                }
+            },
+            error: function (e) {
+                console.error("Controller 오류", e);
+            }
+        })
+    })
+
+    // 공연명 선택 검색 버튼 선택 이벤트
+    $('#search-play').on('click', function () {
+
+        let keyword = $("#inputPlay").val();
+
+        let sendData = {
+            keyword: keyword,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/play',
+            data: sendData,
+            contentType: "application/json",
+            success: function (res){
+                // alert('res => ' + res)
+
+                let listHtml = '';
+
+                // controller에서 받은 공연 조회 쿼리 결과 수만큼 공연 결과 Html 결과에 출력
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    listHtml += '<tr class="list">'
+                    listHtml += '<td>' + res[i].play_id + '</td>';
+                    listHtml += '<td style="cursor: pointer" class="play-name-list">' + res[i].play_name + '</td>';
+                    listHtml += '<td>' + res[i].play_major_cat + '</td>';
+                    listHtml += '<td>' + res[i].play_run_time + '</td>';
+                    listHtml += '</tr>'
+                }
+
+                $('#playList').html(listHtml);
+
+                // 공연명 선택 시 팝업창이 닫히면서 공연명 input창에 데이터 삽입
+                let playLists = document.querySelectorAll(".play-name-list");
+
+                for (let i = 0; i < playLists.length; i++) {
+                    playLists[i].addEventListener('click', function () {
+
+                        // 1. 공연 인풋창에 선택한 공연 DB정보 삽입
+                        // 1.1. 공연명에 < , > 제거하기 위함.
+                        let replaceLtGt = playLists[i].innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+                        document.getElementById("inputSearchPlay").value = replaceLtGt;
+
+                        // 팝업창 종료
+                        closePopup();
+                    });
+                }
+            },
+            error: function (e) {
+                console.error("Controller 오류", e);
+            }
+        })
+    });
+});
+
+//  공연장 팝업창 오픈
+function openStagePopup() {
+    document.getElementById("stagePopup").style.display = "block";
+}
+// 공연 팝업창 오픈
+function openPlayPopup() {
+    document.getElementById("playPopup").style.display = "block";
+}
+// 팝업창 닫기, 변수 초기화
+function closePopup() {
+    document.querySelectorAll(".popup").forEach(function (e) {
+        e.style.display = "none";
+    });
+    // 팝업창 공연장명, 공연명 인풋창 초기화
+    document.getElementById("inputStage").value = '';
+    document.getElementById("inputPlay").value = '';
+
+    // 팝업창 공연장, 공연 리스트 초기화
+    $('#stageList').html('');
+    $('#playList').html('');
+}

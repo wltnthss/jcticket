@@ -4,8 +4,10 @@ import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -283,10 +285,10 @@ public class AdminServiceImpl implements AdminService {
         pagingParams.put("start_date", start_at);
         pagingParams.put("end_date", end_at);
 
-        int agencyCnt = adminDao.countOptionCoupon(pagingParams);
+        int couponCnt = adminDao.countOptionCoupon(pagingParams);
 
         // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
-        int maxPage = (int) (Math.ceil((double) agencyCnt / pageLimit));
+        int maxPage = (int) (Math.ceil((double) couponCnt / pageLimit));
         // 시작 페이지 값 계산 (1, 11, 21 ...)
         int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
         // 끝 페이지 값 계산 (10, 20, 30...)
@@ -317,5 +319,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteCoupon(String coupon_id) throws Exception {
         adminDao.deleteCoupon(coupon_id);
+    }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return adminDao.selectKeywordStage(keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return adminDao.selectKeywordPlay(keyword);
     }
 }

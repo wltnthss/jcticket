@@ -32,26 +32,27 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int increaseLoginCnt(String user_id) {return session.update(namespace+"increase_visit_cnt", user_id);}
 
+    //아이디 중복검사
     @Override
     public int selectIdDupl(String user_id) throws Exception {
         return session.selectOne(namespace+"chkIdDupl",user_id);
     }
 
+    //닉네임 중복검사
     @Override
     public int selectNickNameDupl(String user_nickname) throws Exception {
         return session.selectOne(namespace+"chk_NickName_Dupl",user_nickname);
     }
 
+    //회원가입
+    @Override
+    public int insert(UserDto userDto) throws Exception {
+        return session.insert(namespace+"insert",userDto);
+    }
 
     @Override
     public int count() throws Exception {
         return session.selectOne(namespace+"count");
-    }
-
-
-    @Override
-    public int insert(UserDto userDto) throws Exception {
-        return session.insert(namespace+"insert",userDto);
     }
 
     @Override

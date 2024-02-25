@@ -91,23 +91,13 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     <delete id="delete" parameterType="String">
         delete from
             user
         where
             user_id = #{user_id}
     </delete>
+
 
     <update id="update" parameterType="UserDto">
         update user
@@ -174,11 +164,6 @@
 
     <delete id="deleteAll">
         delete from user
-    </delete>
-
-    <delete id="delte">
-        delete from user
-        where user_id = #{user_id}
     </delete>
 
     <select id="count" resultType="int">
