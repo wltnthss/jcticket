@@ -672,17 +672,6 @@ public class AdminController {
     @PostMapping("/admin/showingregister")
     public String adminShowingRegister(ShowingDto showingDto) throws Exception{
 
-        // 화면에 입력받은 datetime-local 형식을 자바에서 TimeStamp 형식으로 입력받아 insert 하기 위함
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        Date parseStartDate = dateFormat.parse(showingDto.getShowing_start_at());
-        Date parseEndDate = dateFormat.parse(showingDto.getShowing_end_at());
-
-        Timestamp startTimestamp = new Timestamp(parseStartDate.getTime());
-        Timestamp endTimestamp = new Timestamp(parseEndDate.getTime());
-
-        System.out.println("startTimestamp = " + startTimestamp);
-        System.out.println("endTimestamp = " + endTimestamp);
-
         String[] formatShowingInfo = showingDto.getShowing_info().split(",");
 
         // 회차 정보의 개수 만큼 회차 테이블에 인서트
@@ -690,8 +679,32 @@ public class AdminController {
                 .forEach(info -> {
                     System.out.println("info = " + info);
                     try {
+                        System.out.println("showingSeq ++++ " + showingDto.getShowing_seq());
                         showingDto.setShowing_info(info);
                         adminService.insertShowing(showingDto);
+
+                        int showingSeat = showingDto.getShowing_seat_cnt();
+                        int showingSeq = showingDto.getShowing_seq();
+                        System.out.println("showingSeq ===== " + showingSeq);
+                        String showingStageId = showingDto.getStage_id();
+
+                        final int COL = 10;         // 좌석 수를 열의 총 개수 10으로 나눔.
+                        int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
+                        char startRow = 'A';
+                        char endRow = (char) (startRow + rows - 1);
+
+                        // 회차 인서트 개수 만큼 회차에 존재하는 좌석수의 수 만큼 회차 좌석 수 삽입
+                        for (char row = startRow; row <= endRow; row++) {
+                            for (int column = 1; column <= COL; column++) {
+                                ShowSeatDto showSeatDto = new ShowSeatDto();
+
+                                showSeatDto.setShowing_seq(showingSeq);
+                                showSeatDto.setSeat_row(new String(String.valueOf(row)));
+                                showSeatDto.setSeat_col(column);
+                                showSeatDto.setStage_id(showingStageId);
+                                adminService.insertShowSeat(showSeatDto);
+                            }
+                        }
                     } catch (Exception e) {
                         throw new RuntimeException("INSERT ERROR => " + e);
                     }

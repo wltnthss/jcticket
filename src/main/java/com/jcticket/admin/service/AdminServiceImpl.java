@@ -1,10 +1,7 @@
 package com.jcticket.admin.service;
 
 import com.jcticket.admin.dao.AdminDao;
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.PageDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.PlayDto;
@@ -212,6 +209,12 @@ public class AdminServiceImpl implements AdminService {
     public int noticeDelete(int notice_seq) throws Exception {
         return adminDao.noticeDelete(notice_seq);
     }
+
+    @Override
+    public void adminAllDelete() throws Exception {
+        adminDao.adminAllDelete();
+    }
+
     @Override
     public int dupleAdminId(String admin_id) throws Exception {
         return adminDao.dupleAdminId(admin_id);
@@ -335,6 +338,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int insertShowing(ShowingDto showingDto) throws Exception {
         return adminDao.insertShowing(showingDto);
+    }
+
+    @Override
+    public void deleteAllShoiwing() throws Exception {
+        adminDao.deleteAllShoiwing();
+    }
+
+    @Override
+    public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
+        return adminDao.insertShowSeat(showSeatDto);
     }
 
 }
