@@ -139,8 +139,17 @@
 
     <!-- ************** step2. 좌석선택 **************** -->
     <!-- 회차 시퀀스로 회차좌석가격 조회 -->
-
+    <select id="selectPrice" parameterType="string" resultType="int">
+        select showing_seat_price
+        FROM showing s
+        WHERE 1=1
+          and showing_seq = #{showing_seq}
+        group by showing_seat_price ;
+    </select>
     <!-- 회차 시퀀스로 좌석번호, 좌석상태 리스트 조회 -->
+    <select id="selectSeatList" parameterType="int" resultType="hashmap">
+        
+    </select>
 
 
 

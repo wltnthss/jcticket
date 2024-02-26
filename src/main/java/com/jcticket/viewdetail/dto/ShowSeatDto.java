@@ -22,10 +22,10 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class ShowSeatDto {
-    private int seat_seq;
-    private int seat_grade_seq;
-    private String stage_id;
     private int showing_seq;
+    private String seat_row;
+    private int seat_col;
+    private String stage_id;
     private char show_seat_status;
     private Timestamp created_at;
     private String created_id;
