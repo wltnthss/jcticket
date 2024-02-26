@@ -9,6 +9,7 @@ import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -662,10 +663,41 @@ public class AdminController {
     public String adminProductRegisterForm() throws Exception{
         return "admin/adminproductregister";
     }
-    // 관리자 상품 관리 등록
-    @PostMapping("/admin/productregister")
+    // 관리자 공연 등록
+    @PostMapping("/admin/playregister")
     public String adminProductRegister() throws Exception{
         return "admin/adminproductregister";
+    }
+    // 관리자 회차 등록
+    @PostMapping("/admin/showingregister")
+    public String adminShowingRegister(ShowingDto showingDto) throws Exception{
+
+        // 화면에 입력받은 datetime-local 형식을 자바에서 TimeStamp 형식으로 입력받아 insert 하기 위함
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date parseStartDate = dateFormat.parse(showingDto.getShowing_start_at());
+        Date parseEndDate = dateFormat.parse(showingDto.getShowing_end_at());
+
+        Timestamp startTimestamp = new Timestamp(parseStartDate.getTime());
+        Timestamp endTimestamp = new Timestamp(parseEndDate.getTime());
+
+        System.out.println("startTimestamp = " + startTimestamp);
+        System.out.println("endTimestamp = " + endTimestamp);
+
+        String[] formatShowingInfo = showingDto.getShowing_info().split(",");
+
+        // 회차 정보의 개수 만큼 회차 테이블에 인서트
+        Arrays.stream(formatShowingInfo)
+                .forEach(info -> {
+                    System.out.println("info = " + info);
+                    try {
+                        showingDto.setShowing_info(info);
+                        adminService.insertShowing(showingDto);
+                    } catch (Exception e) {
+                        throw new RuntimeException("INSERT ERROR => " + e);
+                    }
+                });
+
+        return "admin/adminproduct";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
