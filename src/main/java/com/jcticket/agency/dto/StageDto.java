@@ -26,14 +26,14 @@ public class StageDto {
     private String stage_address;
     private int stage_seat_cnt;
     private String stage_manager;
-    private String stage_type;
+//    private String stage_type; 삭제
     private String stage_tel;
     private Timestamp created_at;
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
 }
-//stage_type String으로 수정
+
 
 
 

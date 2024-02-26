@@ -3,11 +3,12 @@ package com.jcticket.agency.dao;
 
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.StageDto;
+import com.jcticket.agency.dto.EnrollDto;
 import java.util.List;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.dto.PlayDto;
 import javax.sql.DataSource;
-import org.springframework.transaction.annotation.Transactional;
+
 /**
  * packageName    : com.jcticket.agency.dao
  * fileName       : AgencyDao
@@ -33,15 +34,17 @@ public interface AgencyDao {
     int agencyCount() throws Exception;
 
 //각 Dto를 db에 삽입하도록---------------------
-    void insertPlay(PlayDto playDto);
-    void insertShowing(ShowingDto showingDto);
-    void insertStage(StageDto stageDto);
+//    void insertPlay(PlayDto playDto);
+//    void insertShowing(ShowingDto showingDto);
+//    void insertStage(StageDto stageDto);
+//
+////    void insertEnroll(EnrollDto enrollDto);
+//
+//    List<StageDto> getAllStages();
+//    List<PlayDto> getAllPlays();
+//    List<ShowingDto> getAllShowings();
 
-    List<StageDto> getAllStages();
-    List<PlayDto> getAllPlays();
-    List<ShowingDto> getAllShowings();
-
-    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드
+//    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드
 
     //void insertImage(String playId, String imagePath); // 이미지 저장을 위한 메서드
 
@@ -49,6 +52,8 @@ public interface AgencyDao {
 
 
 
+
+    int insertEnroll(EnrollDto enrollDto) throws Exception;
 
 
 

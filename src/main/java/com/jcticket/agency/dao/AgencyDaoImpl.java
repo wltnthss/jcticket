@@ -1,7 +1,6 @@
 package com.jcticket.agency.dao;
 
 import com.jcticket.agency.dto.*;
-import com.jcticket.agency.dto.EnrollDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +14,7 @@ import java.util.Collections;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.sql.DataSource;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
 
@@ -95,192 +94,193 @@ import org.springframework.transaction.annotation.Propagation;
 //        }
 //    }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void insertPlay(PlayDto playDto) {
-        try (Connection connection = sqlSession.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id) " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            preparedStatement.setString(1, playDto.getPlay_id());
-            preparedStatement.setString(2, playDto.getPlay_name());
-            preparedStatement.setString(3, playDto.getPlay_poster());
-            preparedStatement.setString(4, playDto.getPlay_info());
-            preparedStatement.setString(5, playDto.getPlay_major_cat());
-            preparedStatement.setString(6, playDto.getPlay_middle_cat());
-            preparedStatement.setString(7, playDto.getPlay_small_cat());
-            preparedStatement.setInt(8, playDto.getPlay_run_time());
-            preparedStatement.setString(9, playDto.getAgency_id());
-            preparedStatement.setTimestamp(10, playDto.getCreated_at());
-            preparedStatement.setString(11, playDto.getCreated_id());
-            preparedStatement.setTimestamp(12, playDto.getUpdated_at());
-            preparedStatement.setString(13, playDto.getUpdated_id());
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 예외 처리
-        }
-    }
-
-    @Override
-    @Transactional
-    public void insertShowing(ShowingDto showingDto) {
-        try (Connection connection = sqlSession.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO showing (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id) " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            preparedStatement.setInt(1, showingDto.getShowing_seq());
-            preparedStatement.setTimestamp(2, showingDto.getShowing_start_at());
-            preparedStatement.setTimestamp(3, showingDto.getShowing_end_at());
-            preparedStatement.setString(4, showingDto.getShowing_info());
-            preparedStatement.setString(5, showingDto.getShowing_date());
-            preparedStatement.setString(6, showingDto.getShowing_day());
-            preparedStatement.setString(7, showingDto.getShowing_status());
-            preparedStatement.setInt(8, showingDto.getShowing_seat_cnt());
-            preparedStatement.setString(9, showingDto.getPlay_id());
-            preparedStatement.setString(10, showingDto.getStage_id());
-            preparedStatement.setTimestamp(11, showingDto.getCreated_at());
-            preparedStatement.setString(12, showingDto.getCreated_id());
-            preparedStatement.setTimestamp(13, showingDto.getUpdated_at());
-            preparedStatement.setString(14, showingDto.getUpdated_id());
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 예외 처리
-        }
-    }
-
-    @Override
-    public void insertStage(StageDto stageDto) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id) " +
-                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-            preparedStatement.setString(1, stageDto.getStage_id());
-            preparedStatement.setString(2, stageDto.getStage_name());
-            preparedStatement.setString(3, stageDto.getStage_address());
-            preparedStatement.setInt(4, stageDto.getStage_seat_cnt());
-            preparedStatement.setString(5, stageDto.getStage_manager());
-            preparedStatement.setString(6, stageDto.getStage_type());
-            preparedStatement.setString(7, stageDto.getStage_tel());
-            preparedStatement.setTimestamp(8, stageDto.getCreated_at());
-            preparedStatement.setString(9, stageDto.getCreated_id());
-            preparedStatement.setTimestamp(10, stageDto.getUpdated_at());
-            preparedStatement.setString(11, stageDto.getUpdated_id());
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 예외 처리
-        }
-    }
+//    @Override
+//    @Transactional(propagation = Propagation.REQUIRED)
+//    public void insertPlay(PlayDto playDto) {
+//        try (Connection connection = sqlSession.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id) " +
+//                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+//            preparedStatement.setString(1, playDto.getPlay_id());
+//            preparedStatement.setString(2, playDto.getPlay_name());
+//            preparedStatement.setString(3, playDto.getPlay_poster());
+//            preparedStatement.setString(4, playDto.getPlay_info());
+//            preparedStatement.setString(5, playDto.getPlay_major_cat());
+//            preparedStatement.setString(6, playDto.getPlay_middle_cat());
+//            preparedStatement.setString(7, playDto.getPlay_small_cat());
+//            preparedStatement.setInt(8, playDto.getPlay_run_time());
+//            preparedStatement.setString(9, playDto.getAgency_id());
+//            preparedStatement.setTimestamp(10, playDto.getCreated_at());
+//            preparedStatement.setString(11, playDto.getCreated_id());
+//            preparedStatement.setTimestamp(12, playDto.getUpdated_at());
+//            preparedStatement.setString(13, playDto.getUpdated_id());
+//
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            // 예외 처리
+//        }
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void insertShowing(ShowingDto showingDto) {
+//        try (Connection connection = sqlSession.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "INSERT INTO showing (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, showing_seat_price, play_id, stage_id, created_at, created_id, updated_at, updated_id) " +
+//                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+//            preparedStatement.setInt(1, showingDto.getShowing_seq());
+//            preparedStatement.setTimestamp(2, showingDto.getShowing_start_at());
+//            preparedStatement.setTimestamp(3, showingDto.getShowing_end_at());
+//            preparedStatement.setString(4, showingDto.getShowing_info());
+//            preparedStatement.setString(5, showingDto.getShowing_date());
+//            preparedStatement.setString(6, showingDto.getShowing_day());
+//            preparedStatement.setString(7, showingDto.getShowing_status());
+//            preparedStatement.setInt(8, showingDto.getShowing_seat_cnt());
+//            preparedStatement.setInt(9, showingDto.getShowing_seat_price());
+//            preparedStatement.setString(10, showingDto.getPlay_id());
+//            preparedStatement.setString(11, showingDto.getStage_id());
+//            preparedStatement.setTimestamp(12, showingDto.getCreated_at());
+//            preparedStatement.setString(13, showingDto.getCreated_id());
+//            preparedStatement.setTimestamp(14, showingDto.getUpdated_at());
+//            preparedStatement.setString(15, showingDto.getUpdated_id());
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            // 예외 처리
+//        }
+//    }
+//
+//    @Override
+//    public void insertStage(StageDto stageDto) {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(
+//                     "INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id) " +
+//                             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+//            preparedStatement.setString(1, stageDto.getStage_id());
+//            preparedStatement.setString(2, stageDto.getStage_name());
+//            preparedStatement.setString(3, stageDto.getStage_address());
+//            preparedStatement.setInt(4, stageDto.getStage_seat_cnt());
+//            preparedStatement.setString(5, stageDto.getStage_manager());
+////            preparedStatement.setString(6, stageDto.getStage_type());
+//            preparedStatement.setString(7, stageDto.getStage_tel());
+//            preparedStatement.setTimestamp(8, stageDto.getCreated_at());
+//            preparedStatement.setString(9, stageDto.getCreated_id());
+//            preparedStatement.setTimestamp(10, stageDto.getUpdated_at());
+//            preparedStatement.setString(11, stageDto.getUpdated_id());
+//
+//            preparedStatement.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            // 예외 처리
+//        }
+//    }
 //-----
 //@Override
 //public List<StageDto> getAllStages() {
 //    return sqlSession.selectList(namespace + "getAllStages");
 //}
 
-    @Override
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-    @Override
-    public List<StageDto> getAllStages() {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM stage");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            List<StageDto> stages = new ArrayList<>();
-            while (resultSet.next()) {
-                StageDto stageDto = new StageDto();
-                stageDto.setStage_id(resultSet.getString("stage_id"));
-                stageDto.setStage_name(resultSet.getString("stage_name"));
-                stageDto.setStage_address(resultSet.getString("stage_address"));
-                stageDto.setStage_seat_cnt(resultSet.getInt("stage_seat_cnt"));
-                stageDto.setStage_manager(resultSet.getString("stage_manager"));
-                stageDto.setStage_type(resultSet.getString("stage_type"));
-                stageDto.setStage_tel(resultSet.getString("stage_tel"));
-                stageDto.setCreated_at(resultSet.getTimestamp("created_at"));
-                stageDto.setCreated_id(resultSet.getString("created_id"));
-                stageDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
-                stageDto.setUpdated_id(resultSet.getString("updated_id"));
-
-                stages.add(stageDto);
-            }
-            return stages;
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            return Collections.emptyList(); // 예외 발생 시 빈 리스트 반환인데 , 예외 발생 시 에러페이지? 이동이나 전체 저장 안되도록
-        }
-    }
-
-
-    @Override
-    public List<PlayDto> getAllPlays() {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM play");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            List<PlayDto> plays = new ArrayList<>();
-            while (resultSet.next()) {
-                PlayDto playDto = new PlayDto();
-                playDto.setPlay_id(resultSet.getString("play_id"));
-                playDto.setPlay_name(resultSet.getString("play_name"));
-                playDto.setPlay_poster(resultSet.getString("play_poster"));
-                playDto.setPlay_info(resultSet.getString("play_info"));
-                playDto.setPlay_major_cat(resultSet.getString("play_major_cat"));
-                playDto.setPlay_middle_cat(resultSet.getString("play_middle_cat"));
-                playDto.setPlay_small_cat(resultSet.getString("play_small_cat"));
-                playDto.setPlay_run_time(resultSet.getInt("play_run_time"));
-                playDto.setAgency_id(resultSet.getString("agency_id"));
-                playDto.setCreated_at(resultSet.getTimestamp("created_at"));
-                playDto.setCreated_id(resultSet.getString("created_id"));
-                playDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
-                playDto.setUpdated_id(resultSet.getString("updated_id"));
-
-                plays.add(playDto);
-            }
-            return plays;
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public List<ShowingDto> getAllShowings() {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM showing");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            List<ShowingDto> showings = new ArrayList<>();
-            while (resultSet.next()) {
-                ShowingDto showingDto = new ShowingDto();
-                showingDto.setShowing_seq(resultSet.getInt("showing_seq"));
-                showingDto.setShowing_start_at(resultSet.getTimestamp("showing_start_at"));
-                showingDto.setShowing_end_at(resultSet.getTimestamp("showing_end_at"));
-                showingDto.setShowing_info(resultSet.getString("showing_info"));
-                showingDto.setShowing_date(resultSet.getString("showing_date"));
-                showingDto.setShowing_day(resultSet.getString("showing_day"));
-                showingDto.setShowing_status(resultSet.getString("showing_status"));
-                showingDto.setShowing_seat_cnt(resultSet.getInt("showing_seat_cnt"));
-                showingDto.setPlay_id(resultSet.getString("play_id"));
-                showingDto.setStage_id(resultSet.getString("stage_id"));
-                showingDto.setCreated_at(resultSet.getTimestamp("created_at"));
-                showingDto.setCreated_id(resultSet.getString("created_id"));
-                showingDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
-                showingDto.setUpdated_id(resultSet.getString("updated_id"));
-
-                showings.add(showingDto);
-            }
-            return showings;
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            return Collections.emptyList();
-        }
-    }
+//    @Override
+//    public void setDataSource(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
+//    @Override
+//    public List<StageDto> getAllStages() {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM stage");
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            List<StageDto> stages = new ArrayList<>();
+//            while (resultSet.next()) {
+//                StageDto stageDto = new StageDto();
+//                stageDto.setStage_id(resultSet.getString("stage_id"));
+//                stageDto.setStage_name(resultSet.getString("stage_name"));
+//                stageDto.setStage_address(resultSet.getString("stage_address"));
+//                stageDto.setStage_seat_cnt(resultSet.getInt("stage_seat_cnt"));
+//                stageDto.setStage_manager(resultSet.getString("stage_manager"));
+////                stageDto.setStage_type(resultSet.getString("stage_type"));
+//                stageDto.setStage_tel(resultSet.getString("stage_tel"));
+//                stageDto.setCreated_at(resultSet.getTimestamp("created_at"));
+//                stageDto.setCreated_id(resultSet.getString("created_id"));
+//                stageDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+//                stageDto.setUpdated_id(resultSet.getString("updated_id"));
+//
+//                stages.add(stageDto);
+//            }
+//            return stages;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//
+//            return Collections.emptyList(); // 예외 발생 시 빈 리스트 반환인데 , 예외 발생 시 에러페이지? 이동이나 전체 저장 안되도록
+//        }
+//    }
+//
+//
+//    @Override
+//    public List<PlayDto> getAllPlays() {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM play");
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            List<PlayDto> plays = new ArrayList<>();
+//            while (resultSet.next()) {
+//                PlayDto playDto = new PlayDto();
+//                playDto.setPlay_id(resultSet.getString("play_id"));
+//                playDto.setPlay_name(resultSet.getString("play_name"));
+//                playDto.setPlay_poster(resultSet.getString("play_poster"));
+//                playDto.setPlay_info(resultSet.getString("play_info"));
+//                playDto.setPlay_major_cat(resultSet.getString("play_major_cat"));
+//                playDto.setPlay_middle_cat(resultSet.getString("play_middle_cat"));
+//                playDto.setPlay_small_cat(resultSet.getString("play_small_cat"));
+//                playDto.setPlay_run_time(resultSet.getInt("play_run_time"));
+//                playDto.setAgency_id(resultSet.getString("agency_id"));
+//                playDto.setCreated_at(resultSet.getTimestamp("created_at"));
+//                playDto.setCreated_id(resultSet.getString("created_id"));
+//                playDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+//                playDto.setUpdated_id(resultSet.getString("updated_id"));
+//
+//                plays.add(playDto);
+//            }
+//            return plays;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//
+//            return Collections.emptyList();
+//        }
+//    }
+//
+//    @Override
+//    public List<ShowingDto> getAllShowings() {
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM showing");
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            List<ShowingDto> showings = new ArrayList<>();
+//            while (resultSet.next()) {
+//                ShowingDto showingDto = new ShowingDto();
+//                showingDto.setShowing_seq(resultSet.getInt("showing_seq"));
+//                showingDto.setShowing_start_at(resultSet.getTimestamp("showing_start_at"));
+//                showingDto.setShowing_end_at(resultSet.getTimestamp("showing_end_at"));
+//                showingDto.setShowing_info(resultSet.getString("showing_info"));
+//                showingDto.setShowing_date(resultSet.getString("showing_date"));
+//                showingDto.setShowing_day(resultSet.getString("showing_day"));
+//                showingDto.setShowing_status(resultSet.getString("showing_status"));
+//                showingDto.setShowing_seat_cnt(resultSet.getInt("showing_seat_cnt"));
+//                showingDto.setPlay_id(resultSet.getString("play_id"));
+//                showingDto.setStage_id(resultSet.getString("stage_id"));
+//                showingDto.setCreated_at(resultSet.getTimestamp("created_at"));
+//                showingDto.setCreated_id(resultSet.getString("created_id"));
+//                showingDto.setUpdated_at(resultSet.getTimestamp("updated_at"));
+//                showingDto.setUpdated_id(resultSet.getString("updated_id"));
+//
+//                showings.add(showingDto);
+//            }
+//            return showings;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//
+//            return Collections.emptyList();
+//        }
+//    }
 
 
 
@@ -303,6 +303,11 @@ import org.springframework.transaction.annotation.Propagation;
 //    }
 
 
+
+    @Override
+    public int insertEnroll(EnrollDto enrollDto) throws Exception {
+        return sqlSession.insert(namespace+"insertenroll", enrollDto);
+    }
 
 
 

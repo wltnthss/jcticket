@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="AgencyMapper">
 <!--  2.Mapper 설정: id="AgencyLogin으로 호출하면 AgencyDto로 매핑? 해? 줌?
 네임스페이스는 나중에 AgencyDaoImpl 에서  쿼리 실행 할 때 사용?-->
@@ -12,6 +11,7 @@
         (agency_id, agency_password, agency_name, agency_email, agency_tel, agency_register_num, agency_reg_at, agency_status_val, agency_contract_reg_at, agency_contract_expire_at, agency_content, agency_manager_name, created_at, created_id, updated_at, updated_id)
         VALUES(#{agency_id}, #{agency_password}, #{agency_name}, #{agency_email}, #{agency_tel}, #{agency_register_num}, CURRENT_TIMESTAMP, #{agency_status_val}, CURRENT_TIMESTAMP, #{agency_contract_expire_at}, #{agency_content}, #{agency_manager_name}, CURRENT_TIMESTAMP, #{created_id}, CURRENT_TIMESTAMP, #{updated_id})
     </insert>
+
 
     <select id="AgencyCount" resultType="int">
         select count(*) from agency
@@ -31,38 +31,97 @@
           and agency_id = #{agency_id}
     </select>
 
+    <insert id="insertenroll" parameterType="com.jcticket.agency.dto.EnrollDto">
+<!--    <insert id="insertenroll" parameterType="EnrollDto">-->
+        insert into enroll(
 
+        enroll_status,
+        stage_id,
+        showing_seq,
+        showing_start_at,
+        showing_end_at,
+        showing_info,
+        showing_status,
+        showing_seat_price,
+        showing_seat_cnt,
+        play_id,
+        play_name,
+        play_poster,
+        play_info,
+        play_major_cat,
+        play_middle_cat,
+        play_run_time,
+        agency_name,
+        agency_manager_name,
+        agency_email,
+        agency_tel,
+        created_at,
+        created_id,
+        updated_at,
+        updated_id
+        ) values (
+
+                're',
+                 #{stage_id},
+                 #{showing_seq},
+                 #{showing_start_at},
+                 #{showing_end_at},
+                 #{showing_info},
+                 'BS',
+                 #{showing_seat_price},
+                 #{showing_seat_cnt},
+                 #{play_id},
+                 #{play_name},
+                 #{play_poster},
+                 #{play_info},
+                 #{play_major_cat},
+                 #{play_middle_cat},
+                 #{play_run_time},
+                 #{agency_name},
+                 #{agency_manager_name},
+                 #{agency_email},
+                 #{agency_tel},
+                 #{created_at},
+                 #{created_id},
+                 #{updated_at},
+                 #{updated_id})
+    </insert>
+
+
+    <insert id="insertenrollpk" parameterType="com.jcticket.enroll.dto.EnrollDto">
+        insert into enroll(enroll_id) values (#{enrollId})
+    </insert>
 
     <!-- PlayDto를 db에 insert -->
-    <insert id="insertPlay" parameterType="com.jcticket.viewdetail.dto.PlayDto">
-        INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{playId}, #{playName}, #{playPoster}, #{playInfo}, #{playMajorCat}, #{playMiddleCat}, #{playSmallCat}, #{playRunTime}, #{agencyId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
-    </insert>
+<!--    <insert id="insertPlay" parameterType="com.jcticket.viewdetail.dto.PlayDto">-->
+<!--        INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)-->
+<!--        VALUES (#{playId}, #{playName}, #{playPoster}, #{playInfo}, #{playMajorCat}, #{playMiddleCat}, #{playSmallCat}, #{playRunTime}, #{agencyId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})-->
+<!--    </insert>-->
 
     <!-- ShowingDto를 db에 insert -->
-    <insert id="insertShowing" parameterType="com.jcticket.viewdetail.dto.ShowingDto">
-        INSERT INTO showing (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{showingSeq}, #{showingStartAt}, #{showingEndAt}, #{showingInfo}, #{showingDate}, #{showingDay}, #{showingStatus}, #{showingSeatCnt}, #{playId}, #{stageId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
-    </insert>
+<!--    <insert id="insertShowing" parameterType="com.jcticket.viewdetail.dto.ShowingDto">-->
+<!--        INSERT INTO showing (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, showing_seat_price,  play_id, stage_id, created_at, created_id, updated_at, updated_id)-->
+<!--        VALUES (#{showingSeq}, #{showingStartAt}, #{showingEndAt}, #{showingInfo}, #{showingDate}, #{showingDay}, #{showingStatus}, #{showingSeatCnt}, #{showing_seat_price}, #{playId}, #{stageId}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})-->
+<!--    </insert>-->
 
     <!-- StageDto를 db에 insert -->
-    <insert id="insertStage" parameterType="com.jcticket.agency.dto.StageDto">
-        INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id)
-        VALUES (#{stageId}, #{stageName}, #{stageAddress}, #{stageSeatCnt}, #{stageManager}, #{stageType}, #{stageTel}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})
-    </insert>
+<!--    <insert id="insertStage" parameterType="com.jcticket.agency.dto.StageDto">-->
+<!--        INSERT INTO stage (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_type, stage_tel, created_at, created_id, updated_at, updated_id)-->
+<!--        VALUES (#{stageId}, #{stageName}, #{stageAddress}, #{stageSeatCnt}, #{stageManager}, #{stageType}, #{stageTel}, current_timestamp, #{createdId}, current_timestamp, #{updatedId})-->
+<!--    </insert>-->
 
 
-    <select id="getAllStages" resultType="com.jcticket.agency.dto.StageDto">
-        SELECT * FROM stage
-    </select>
+<!--    <select id="getAllStages" resultType="com.jcticket.agency.dto.StageDto">-->
+<!--        SELECT * FROM stage-->
+<!--    </select>-->
 
-    <select id="getAllPlays" resultType="com.jcticket.viewdetail.dto.PlayDto">
-        SELECT  * FROM play
-    </select>
+<!--    <select id="getAllPlays" resultType="com.jcticket.viewdetail.dto.PlayDto">-->
+<!--        SELECT  * FROM play-->
+<!--    </select>-->
 
-    <select id="getAllShowings" resultType="com.jcticket.viewdetail.dto.ShowingDto">
-        SELECT  * FROM showing
-    </select>
+<!--    <select id="getAllShowings" resultType="com.jcticket.viewdetail.dto.ShowingDto">-->
+<!--        SELECT  * FROM showing-->
+<!--    </select>-->
 
 <!--login CRUD...-->
 <!--    <insert id="insertAgency" parameterType="AgencyDto">-->

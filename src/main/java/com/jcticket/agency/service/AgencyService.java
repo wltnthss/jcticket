@@ -1,13 +1,8 @@
 package com.jcticket.agency.service;
 
-import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.viewdetail.dto.ShowingDto;
-import com.jcticket.viewdetail.dto.PlayDto;
-import com.jcticket.agency.dto.StageDto;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.jcticket.agency.dto.EnrollDto;
+import com.jcticket.agency.dto.PosterDto;
 
 /**
  * packageName    : com.jcticket.agency.service
@@ -26,8 +21,9 @@ public interface AgencyService {
     AgencyDto selectAgency(String agency_id) throws Exception;
 
   //  String uploadImage(MultipartFile file) throws Exception; // 이미지 업로드 메서드
-    void processEnrollment(EnrollDto enrollDto);//processEnrollment() 메서드를 호출
+//    void processEnrollment(EnrollDto enrollDto);//processEnrollment() 메서드를 호출
 
+    int insertEnroll(EnrollDto enrollDto, PosterDto posterDto) throws Exception;
 
 
 }

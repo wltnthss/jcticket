@@ -1,29 +1,22 @@
 package com.jcticket.agency.dao;
 
-import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.StageDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.dto.PlayDto;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import java.sql.Connection;
+
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+
 /**
  * packageName    : com.jcticket.agency.dao
  * fileName       : AgencyDaoImplTest
@@ -63,6 +56,59 @@ public class AgencyDaoImplTest {
     AgencyDao agencyDao;
 
     Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
+
+
+//    @Test
+//    public void insertEnroll() throws Exception {
+//        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+//        EnrollDto enrollDto = new EnrollDto(1,"kk", "1", 1, currentTimestamp,currentTimestamp,"20240204회차","dd",
+//                100000, 200, "1", "aaa", "poster", "info","a", "b",120, "agency", "manager",
+//                "agency@email.com","01098765432", currentTimestamp,"sana",currentTimestamp,"sana");
+//
+//        System.out.println("enrollDto = " + enrollDto);
+//        assertTrue(agencyDao.insertEnroll(enrollDto)==1); // EnrollDAO를 직접 호출하여 db에 삽입. dto호출시 dto에 추가할게 너무 많아짐
+//    }
+
+
+//id자동생성 테스트
+    @Test
+    public void insertEnroll() throws Exception {
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        EnrollDto enrollDto = EnrollDto.builder()
+                .enroll_status("kk")
+                .stage_id("1")
+                .showing_seq(1)
+                .showing_start_at(currentTimestamp)
+                .showing_end_at(currentTimestamp)
+                .showing_info("20240204회차")
+                .showing_status("dd")
+                .showing_seat_price(100000)
+                .showing_seat_cnt(200)
+                .play_id("1")
+                .play_name("aaa")
+                .play_poster("poster")
+                .play_info("info")
+                .play_major_cat("a")
+                .play_middle_cat("b")
+                .play_run_time(120)
+                .agency_name("agency")
+                .agency_manager_name("manager")
+                .agency_email("agency@email.com")
+                .agency_tel("01098765432")
+                .created_at(currentTimestamp)
+                .created_id("sana")
+                .updated_at(currentTimestamp)
+                .updated_id("sana")
+                .build();
+
+        System.out.println("enrollDto = " + enrollDto);
+        assertTrue(agencyDao.insertEnroll(enrollDto) == 1);
+
+        // 삽입된 행의 enroll_id를 조회해서 아이디값을 넣지 않고 자동 생성 되었는지 확인.
+        int insertedEnrollId = enrollDto.getEnroll_id();
+        System.out.println("Inserted enroll_id: " + insertedEnrollId);
+    }
+
 
     @Test
     public void agencylogin() throws Exception {
@@ -115,162 +161,162 @@ public class AgencyDaoImplTest {
 
     //----------------------------------------------
     //enrollDto > stageDto Insert값 가져 오기?
-    @Test
-    public void testInsertAndRetrieveStage() {
-        // StageDto &#xC0DD;&#xC131;, &#xC784;&#xC758;&#xC758; &#xAC12;&#xB4E4;&#xC744; &#xC124;&#xC815;
-        StageDto stageDto = new StageDto();
-        stageDto.setStage_id("stage1");
-        stageDto.setStage_name("Test Stage");
-        stageDto.setStage_address("Test Address");
-        stageDto.setStage_seat_cnt(100);
-        stageDto.setStage_manager("Test Manager");
-        stageDto.setStage_type("A");
-        stageDto.setStage_tel("Test Tel");
-
-        // 시간 값을 현재 시간으로 설정
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        stageDto.setCreated_at(currentTime);
-        stageDto.setUpdated_at(currentTime);
-
-        // Id 값을 "sana"로 설정
-        stageDto.setCreated_id("sana");
-        stageDto.setUpdated_id("sana");
-
-        // 생성한 StageDto 삽입
-        agencyDao.insertStage(stageDto);
-
-        // 삽입한 StageDto를  조회
-        List<StageDto> stages = agencyDao.getAllStages();
-        assertNotNull(stages);
-        assertTrue(stages.size() > 0);
-
-        // 조회된 StageDto 중에서 첫 번째 StageDto 확인
-        StageDto retrievedStage = stages.get(0);
-        assertEquals(stageDto.getStage_id(), retrievedStage.getStage_id());
-        assertEquals(stageDto.getStage_name(), retrievedStage.getStage_name());
-        assertEquals(stageDto.getStage_address(), retrievedStage.getStage_address());
-        assertEquals(stageDto.getStage_seat_cnt(), retrievedStage.getStage_seat_cnt());
-        assertEquals(stageDto.getStage_manager(), retrievedStage.getStage_manager());
-        assertEquals(stageDto.getStage_type(), retrievedStage.getStage_type());
-        assertEquals(stageDto.getStage_tel(), retrievedStage.getStage_tel());
-
-        // 생성된 데이터의 createdId와 updatedId 값 확인
-        assertEquals(stageDto.getCreated_id(), retrievedStage.getCreated_id());
-        assertEquals(stageDto.getUpdated_id(), retrievedStage.getUpdated_id());
-
-        // 생성된 데이터의 createdAt와 updatedAt 값 확인
-        assertTrue(Math.abs(stageDto.getCreated_at().getTime() - retrievedStage.getCreated_at().getTime()) < 1000 * 50);
-        assertTrue(Math.abs(stageDto.getUpdated_at().getTime() - retrievedStage.getUpdated_at().getTime()) < 1000 * 50);
-    }
-
-
-    @Test
-    public void testInsertAndRetrievePlay() {
-        // PlayDto 생성, 임의의 값들을 설정
-        PlayDto playDto = new PlayDto();
-        playDto.setPlay_id("play1");
-        playDto.setPlay_name("Test Play");
-        playDto.setPlay_poster("Test Poster");
-        playDto.setPlay_info("Test Info");
-        playDto.setPlay_major_cat("con");
-        playDto.setPlay_middle_cat("C_km");
-        playDto.setPlay_small_cat("a");
-        playDto.setPlay_run_time(120);
-        playDto.setAgency_id("sana1");
-
-        // 시간 값을 현재 시간으로 설정
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        playDto.setCreated_at(currentTime);
-        playDto.setUpdated_at(currentTime);
-
-        // Id 값을 "sana"로 설정
-        playDto.setCreated_id("sana");
-        playDto.setUpdated_id("sana");
-
-        // 생성한 PlayDto 삽입
-        agencyDao.insertPlay(playDto);
-
-        // 삽입한 PlayDto를 조회
-        List<PlayDto> plays = agencyDao.getAllPlays();
-        assertNotNull(plays);
-        assertTrue(plays.size() > 0);
-
-        // 조회된 PlayDto 중에서 첫 번째 PlayDto 확인
-        PlayDto retrievedPlay = plays.get(0);
-        assertEquals(playDto.getPlay_id(), retrievedPlay.getPlay_id());
-        assertEquals(playDto.getPlay_name(), retrievedPlay.getPlay_name());
-        assertEquals(playDto.getPlay_poster(), retrievedPlay.getPlay_poster());
-        assertEquals(playDto.getPlay_info(), retrievedPlay.getPlay_info());
-        assertEquals(playDto.getPlay_major_cat(), retrievedPlay.getPlay_major_cat());
-        assertEquals(playDto.getPlay_middle_cat(), retrievedPlay.getPlay_middle_cat());
-        assertEquals(playDto.getPlay_small_cat(), retrievedPlay.getPlay_small_cat());
-        assertEquals(playDto.getPlay_run_time(), retrievedPlay.getPlay_run_time());
-        assertEquals(playDto.getAgency_id(), retrievedPlay.getAgency_id());
-
-        // 생성된 데이터의 createdId와 updatedId 값 확인
-        assertEquals(playDto.getCreated_id(), retrievedPlay.getCreated_id());
-        assertEquals(playDto.getUpdated_id(), retrievedPlay.getUpdated_id());
-
-        // 생성된 데이터의 createdAt와 updatedAt 값 확인
-        assertTrue(Math.abs(playDto.getCreated_at().getTime() - retrievedPlay.getCreated_at().getTime()) < 1000 * 50);
-        assertTrue(Math.abs(playDto.getUpdated_at().getTime() - retrievedPlay.getUpdated_at().getTime()) < 1000 * 50);
-    }
-
-
-
-    @Test
-    public void testInsertAndRetrieveShowing() {
-        // ShowingDto 생성, 임의의 값들을 설정
-        ShowingDto showingDto = new ShowingDto();
-        showingDto.setShowing_seq(1);
-        showingDto.setShowing_start_at(new Timestamp(System.currentTimeMillis()));
-        showingDto.setShowing_end_at(new Timestamp(System.currentTimeMillis()));
-        showingDto.setShowing_info("Test Showing Info");
-        showingDto.setShowing_date("2024-02-21");
-        showingDto.setShowing_day("Monday");
-        showingDto.setShowing_status("bs");
-        showingDto.setShowing_seat_cnt(100);
-        showingDto.setPlay_id("testPlay");
-        showingDto.setStage_id("testStage");
-
-        // 시간 값을 현재 시간으로 설정
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        showingDto.setCreated_at(currentTime);
-        showingDto.setUpdated_at(currentTime);
-
-        // Id 값을 "sana"로 설정
-        showingDto.setCreated_id("sana");
-        showingDto.setUpdated_id("sana");
-
-        // 생성한 ShowingDto 삽입
-        agencyDao.insertShowing(showingDto);
-
-        // 삽입한 ShowingDto를 조회
-        List<ShowingDto> showings = agencyDao.getAllShowings();
-        assertNotNull(showings);
-        assertTrue(showings.size() > 0);
-
-        // 조회된 ShowingDto 중에서 첫 번째 ShowingDto 확인
-        ShowingDto retrievedShowing = showings.get(0);
-        assertEquals(showingDto.getShowing_seq(), retrievedShowing.getShowing_seq());
-        assertEquals(showingDto.getShowing_start_at(), retrievedShowing.getShowing_start_at());
-        assertEquals(showingDto.getShowing_end_at(), retrievedShowing.getShowing_end_at());
-        assertEquals(showingDto.getShowing_info(), retrievedShowing.getShowing_info());
-        assertEquals(showingDto.getShowing_date(), retrievedShowing.getShowing_date());
-        assertEquals(showingDto.getShowing_day(), retrievedShowing.getShowing_day());
-        assertEquals(showingDto.getShowing_status(), retrievedShowing.getShowing_status());
-        assertEquals(showingDto.getShowing_seat_cnt(), retrievedShowing.getShowing_seat_cnt());
-        assertEquals(showingDto.getPlay_id(), retrievedShowing.getPlay_id());
-        assertEquals(showingDto.getStage_id(), retrievedShowing.getStage_id());
-
-        // 생성된 데이터의 createdId와 updatedId 값 확인
-        assertEquals(showingDto.getCreated_id(), retrievedShowing.getCreated_id());
-        assertEquals(showingDto.getUpdated_id(), retrievedShowing.getUpdated_id());
-
-        // 생성된 데이터의 createdAt와 updatedAt 값 확인
-        assertTrue(Math.abs(showingDto.getCreated_at().getTime() - retrievedShowing.getCreated_at().getTime()) < 1000 * 50);
-        assertTrue(Math.abs(showingDto.getUpdated_at().getTime() - retrievedShowing.getUpdated_at().getTime()) < 1000 * 50);
-    }
+//    @Test
+//    public void testInsertAndRetrieveStage() {
+//        // StageDto &#xC0DD;&#xC131;, &#xC784;&#xC758;&#xC758; &#xAC12;&#xB4E4;&#xC744; &#xC124;&#xC815;
+//        StageDto stageDto = new StageDto();
+//        stageDto.setStage_id("stage1");
+//        stageDto.setStage_name("Test Stage");
+//        stageDto.setStage_address("Test Address");
+//        stageDto.setStage_seat_cnt(100);
+//        stageDto.setStage_manager("Test Manager");
+////        stageDto.setStage_type("A");
+//        stageDto.setStage_tel("Test Tel");
+//
+//        // 시간 값을 현재 시간으로 설정
+//        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+//        stageDto.setCreated_at(currentTime);
+//        stageDto.setUpdated_at(currentTime);
+//
+//        // Id 값을 "sana"로 설정
+//        stageDto.setCreated_id("sana");
+//        stageDto.setUpdated_id("sana");
+//
+//        // 생성한 StageDto 삽입
+//        agencyDao.insertStage(stageDto);
+//
+//        // 삽입한 StageDto를  조회
+//        List<StageDto> stages = agencyDao.getAllStages();
+//        assertNotNull(stages);
+//        assertTrue(stages.size() > 0);
+//
+//        // 조회된 StageDto 중에서 첫 번째 StageDto 확인
+//        StageDto retrievedStage = stages.get(0);
+//        assertEquals(stageDto.getStage_id(), retrievedStage.getStage_id());
+//        assertEquals(stageDto.getStage_name(), retrievedStage.getStage_name());
+//        assertEquals(stageDto.getStage_address(), retrievedStage.getStage_address());
+//        assertEquals(stageDto.getStage_seat_cnt(), retrievedStage.getStage_seat_cnt());
+//        assertEquals(stageDto.getStage_manager(), retrievedStage.getStage_manager());
+////        assertEquals(stageDto.getStage_type(), retrievedStage.getStage_type());
+//        assertEquals(stageDto.getStage_tel(), retrievedStage.getStage_tel());
+//
+//        // 생성된 데이터의 createdId와 updatedId 값 확인
+//        assertEquals(stageDto.getCreated_id(), retrievedStage.getCreated_id());
+//        assertEquals(stageDto.getUpdated_id(), retrievedStage.getUpdated_id());
+//
+//        // 생성된 데이터의 createdAt와 updatedAt 값 확인
+//        assertTrue(Math.abs(stageDto.getCreated_at().getTime() - retrievedStage.getCreated_at().getTime()) < 1000 * 50);
+//        assertTrue(Math.abs(stageDto.getUpdated_at().getTime() - retrievedStage.getUpdated_at().getTime()) < 1000 * 50);
+//    }
+//
+//
+//    @Test
+//    public void testInsertAndRetrievePlay() {
+//        // PlayDto 생성, 임의의 값들을 설정
+//        PlayDto playDto = new PlayDto();
+//        playDto.setPlay_id("play1");
+//        playDto.setPlay_name("Test Play");
+//        playDto.setPlay_poster("Test Poster");
+//        playDto.setPlay_info("Test Info");
+//        playDto.setPlay_major_cat("con");
+//        playDto.setPlay_middle_cat("C_km");
+//        playDto.setPlay_small_cat("a");
+//        playDto.setPlay_run_time(120);
+//        playDto.setAgency_id("sana1");
+//
+//        // 시간 값을 현재 시간으로 설정
+//        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+//        playDto.setCreated_at(currentTime);
+//        playDto.setUpdated_at(currentTime);
+//
+//        // Id 값을 "sana"로 설정
+//        playDto.setCreated_id("sana");
+//        playDto.setUpdated_id("sana");
+//
+//        // 생성한 PlayDto 삽입
+//        agencyDao.insertPlay(playDto);
+//
+//        // 삽입한 PlayDto를 조회
+//        List<PlayDto> plays = agencyDao.getAllPlays();
+//        assertNotNull(plays);
+//        assertTrue(plays.size() > 0);
+//
+//        // 조회된 PlayDto 중에서 첫 번째 PlayDto 확인
+//        PlayDto retrievedPlay = plays.get(0);
+//        assertEquals(playDto.getPlay_id(), retrievedPlay.getPlay_id());
+//        assertEquals(playDto.getPlay_name(), retrievedPlay.getPlay_name());
+//        assertEquals(playDto.getPlay_poster(), retrievedPlay.getPlay_poster());
+//        assertEquals(playDto.getPlay_info(), retrievedPlay.getPlay_info());
+//        assertEquals(playDto.getPlay_major_cat(), retrievedPlay.getPlay_major_cat());
+//        assertEquals(playDto.getPlay_middle_cat(), retrievedPlay.getPlay_middle_cat());
+//        assertEquals(playDto.getPlay_small_cat(), retrievedPlay.getPlay_small_cat());
+//        assertEquals(playDto.getPlay_run_time(), retrievedPlay.getPlay_run_time());
+//        assertEquals(playDto.getAgency_id(), retrievedPlay.getAgency_id());
+//
+//        // 생성된 데이터의 createdId와 updatedId 값 확인
+//        assertEquals(playDto.getCreated_id(), retrievedPlay.getCreated_id());
+//        assertEquals(playDto.getUpdated_id(), retrievedPlay.getUpdated_id());
+//
+//        // 생성된 데이터의 createdAt와 updatedAt 값 확인
+//        assertTrue(Math.abs(playDto.getCreated_at().getTime() - retrievedPlay.getCreated_at().getTime()) < 1000 * 50);
+//        assertTrue(Math.abs(playDto.getUpdated_at().getTime() - retrievedPlay.getUpdated_at().getTime()) < 1000 * 50);
+//    }
+//
+//
+//
+//    @Test
+//    public void testInsertAndRetrieveShowing() {
+//        // ShowingDto 생성, 임의의 값들을 설정
+//        ShowingDto showingDto = new ShowingDto();
+//        showingDto.setShowing_seq(1);
+//        showingDto.setShowing_start_at(new Timestamp(System.currentTimeMillis()));
+//        showingDto.setShowing_end_at(new Timestamp(System.currentTimeMillis()));
+//        showingDto.setShowing_info("Test Showing Info");
+//        showingDto.setShowing_date("2024-02-21");
+//        showingDto.setShowing_day("Monday");
+//        showingDto.setShowing_status("bs");
+//        showingDto.setShowing_seat_cnt(100);
+//        showingDto.setPlay_id("testPlay");
+//        showingDto.setStage_id("testStage");
+//
+//        // 시간 값을 현재 시간으로 설정
+//        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+//        showingDto.setCreated_at(currentTime);
+//        showingDto.setUpdated_at(currentTime);
+//
+//        // Id 값을 "sana"로 설정
+//        showingDto.setCreated_id("sana");
+//        showingDto.setUpdated_id("sana");
+//
+//        // 생성한 ShowingDto 삽입
+//        agencyDao.insertShowing(showingDto);
+//
+//        // 삽입한 ShowingDto를 조회
+//        List<ShowingDto> showings = agencyDao.getAllShowings();
+//        assertNotNull(showings);
+//        assertTrue(showings.size() > 0);
+//
+//        // 조회된 ShowingDto 중에서 첫 번째 ShowingDto 확인
+//        ShowingDto retrievedShowing = showings.get(0);
+//        assertEquals(showingDto.getShowing_seq(), retrievedShowing.getShowing_seq());
+//        assertEquals(showingDto.getShowing_start_at(), retrievedShowing.getShowing_start_at());
+//        assertEquals(showingDto.getShowing_end_at(), retrievedShowing.getShowing_end_at());
+//        assertEquals(showingDto.getShowing_info(), retrievedShowing.getShowing_info());
+//        assertEquals(showingDto.getShowing_date(), retrievedShowing.getShowing_date());
+//        assertEquals(showingDto.getShowing_day(), retrievedShowing.getShowing_day());
+//        assertEquals(showingDto.getShowing_status(), retrievedShowing.getShowing_status());
+//        assertEquals(showingDto.getShowing_seat_cnt(), retrievedShowing.getShowing_seat_cnt());
+//        assertEquals(showingDto.getPlay_id(), retrievedShowing.getPlay_id());
+//        assertEquals(showingDto.getStage_id(), retrievedShowing.getStage_id());
+//
+//        // 생성된 데이터의 createdId와 updatedId 값 확인
+//        assertEquals(showingDto.getCreated_id(), retrievedShowing.getCreated_id());
+//        assertEquals(showingDto.getUpdated_id(), retrievedShowing.getUpdated_id());
+//
+//        // 생성된 데이터의 createdAt와 updatedAt 값 확인
+//        assertTrue(Math.abs(showingDto.getCreated_at().getTime() - retrievedShowing.getCreated_at().getTime()) < 1000 * 50);
+//        assertTrue(Math.abs(showingDto.getUpdated_at().getTime() - retrievedShowing.getUpdated_at().getTime()) < 1000 * 50);
+//    }
 
 
 }//끝

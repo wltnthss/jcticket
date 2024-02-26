@@ -1,4 +1,4 @@
-package com.jcticket.agency.dto;
+package com.jcticket.enroll.dto;
 
 import lombok.*;
 
@@ -15,9 +15,8 @@ import java.sql.Timestamp;
  * -----------------------------------------------------------
  * 2024-02-14        {sana}       최초 생성
  */
-
-@Setter
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,23 +24,23 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 public class EnrollDto {
 
-    private int enroll_id; //pk
-    private String enroll_status; // 접수상태, 're'로 고정
-    private String stage_id;// @@@@@@@@@@@@@@@@@@@@@@공연장 이름을 적는게 자연스러운데 어떡하냐?@@@@@@@@@@@@@@@@
+    private String enroll_id; //pk
+    private String enroll_status;//접수상태
+    private String stage_id;
 
-//  private String agency_id;//로그인한 사용자의 기획사 ID세션을 통해 서버에서 처리 되도록
+//    private String agency_id;//로그인한 사용자의 기획사 ID세션을 통해 서버에서 처리 되도록
 
-    private int showing_seq;//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@회차 일련번호 어떡하지?@@@@@@@@@@@@@@@@@@@@@@@@
-    private Timestamp showing_start_at; // 공연 시작 날자
+    private int showing_seq;
+    private Timestamp showing_start_at;
     private Timestamp showing_end_at;
-    private String showing_info; //크기 늘려주고 showing_date,showing_day전부 적음
+    private String showing_info;
 //    private String showing_date;
 //    private String showing_day;
-    private String showing_status;//상영전 BS고정
+    private String showing_status;
     private int showing_seat_price;
     private int showing_seat_cnt;
 
-    private String play_id; //이것도 내가 제출하는게 맞냐?
+    private String play_id; //시스템에서 자동으로 할당되도록? 관리자가 발급?
     private String play_name;
     private String play_poster;
     private String play_info;

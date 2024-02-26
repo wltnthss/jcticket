@@ -212,23 +212,23 @@ table th{
     font-size: 30px;
     color: #555;
 }
-.enroll-form table{
+.enroll-box table{
     width: 100%;
 }
 .enroll-w100{
     width: 100px !important;
 }
-.enroll-form th{
+.enroll-box th{
     font-weight: 600;
 }
-.enroll-form th, .enroll-form td{
+.enroll-box th, .enroll-box td{
     padding: 8px 14px;
     height: 23px;
     border-bottom: 1px solid #e4e5e7;
     text-align: left;
     vertical-align: middle;
 }
-.enroll-form-input{
+.enroll-box-input{
     padding: 0 4px 1px 4px;
     font-size: 12px;
     font-weight: normal;

@@ -30,6 +30,7 @@ public class ShowingDto {
     private String showing_day;
     private String showing_status;
     private int showing_seat_cnt;
+    private  int showing_seat_price;
     private String play_id;
     private String stage_id;
     private Timestamp created_at;
