@@ -40,6 +40,11 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public Integer coupon_count(String coupon_id) throws Exception {
+        return mypageDAO.coupon_count(coupon_id);
+    }
+
+    @Override
     public List<TicketingDto> selectAll(Map map) throws Exception {
         return mypageDAO.selectAll(map);
     }
@@ -57,7 +62,10 @@ public class MyServiceImpl implements mypageService {
     public List<TicketingDto> select_view(Map map) throws Exception {
         return mypageDAO.select_view(map);
     }
-
+    @Override
+    public TicketingDto ticket_detail(String ticketing_id) throws Exception {
+        return mypageDAO.ticket_detail(ticketing_id);
+    }
 
 
 }

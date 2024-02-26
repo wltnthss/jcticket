@@ -19,11 +19,11 @@ import java.util.Map;
 public interface mypageService {
     Integer count(Map map) throws Exception;
     Integer view_count(Map map) throws Exception;
-
+    Integer coupon_count(String coupon_id) throws Exception;
     List<TicketingDto> selectAll(Map map) throws Exception;
-
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> selectLimit(Map map) throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
+    TicketingDto ticket_detail(String ticketing_id) throws Exception;
 
 }

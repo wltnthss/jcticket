@@ -30,22 +30,23 @@
         true
         <choose>
             <when test='option=="A"'>
-                AND t.ticketing_status IN ('Y', 'C')
+                AND t.ticketing_status IN ('Y', 'N')
             </when>
             <when test='option=="Y"'>
                 AND t.ticketing_status = 'Y'
             </when>
             <when test='option=="C"'>
-                AND t.ticketing_status = 'C'
+                AND t.ticketing_status = 'N'
             </when>
         </choose>
         <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
             AND t.ticketing_at between DATE_FORMAT(#{start_date} , '%Y-%m-%d') and DATE_FORMAT(#{end_date}, '%Y-%m-%d')
         </if>
     </select>
+    <!--  ===========================================================================================================================================================================  -->
 
+    <!--  view page  리스트 출력  -->
     <select id="view_count" parameterType="map" resultType="int">
-
         SELECT COUNT(*) AS total_count
         FROM (
         SELECT t.ticketing_id
@@ -72,10 +73,15 @@
         <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
             AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')
         </if>
+        <if test="keyword != null and keyword != ''">
+            AND t.play_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
         GROUP BY t.ticketing_id
         ) AS ticket_count;
 
     </select>
+
+    <!--  ===========================================================================================================================================================================  -->
 
     <!-- TicketingDto 기반으로 만든 mypage_ticket 페이지 -->
     <select id="selectAll" parameterType="map" resultType="TicketingDto">
@@ -92,13 +98,13 @@
         true
         <choose>
             <when test='option=="A"'>
-                AND t.ticketing_status IN ('Y', 'C')
+                AND t.ticketing_status IN ('Y', 'N')
             </when>
             <when test='option=="Y"'>
                 AND t.ticketing_status = 'Y'
             </when>
             <when test='option=="C"'>
-                AND t.ticketing_status = 'C'
+                AND t.ticketing_status = 'N'
             </when>
         </choose>
         <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
@@ -109,6 +115,7 @@
         OFFSET #{offset};
     </select>
 
+    <!--  ===========================================================================================================================================================================  -->
 
     <insert id="insert" parameterType="TicketingDto">
         insert into ticketing (
@@ -126,49 +133,10 @@
                )
     </insert>
 
+    <!--  ===========================================================================================================================================================================  -->
+
 
     <select id="select_view" parameterType="map" resultType="TicketingDto">
-        SELECT
-        t.ticketing_id,
-        MAX(t.ticketing_at) AS ticketing_at,
-        t.stage_name,
-        t.choice_show_seat,
-        p.play_middle_cat,
-        t.play_name
-        FROM
-        ticketing t
-        JOIN play p ON t.play_name = p.play_name
-        WHERE
-        true
-        <choose>
-            <when test='option=="A"'>
-                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
-            </when>
-            <when test='option=="M"'>
-                AND p.play_middle_cat = '뮤지컬'
-            </when>
-            <when test='option=="C"'>
-                AND p.play_middle_cat = '콘서트'
-            </when>
-            <when test='option=="J"'>
-                AND p.play_middle_cat = '전시'
-            </when>
-            <when test='option=="G"'>
-                AND p.play_middle_cat = '공연'
-            </when>
-        </choose>
-        <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
-            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')
-        </if>
-        GROUP BY
-        t.ticketing_id
-        ORDER BY
-        ticketing_at DESC
-        LIMIT #{pageSize}
-        OFFSET #{offset};
-    </select>
-
-<!--    <select id="select_view" parameterType="map" resultType="TicketingDto">-->
 <!--        SELECT-->
 <!--        t.ticketing_id,-->
 <!--        MAX(t.ticketing_at) AS ticketing_at,-->
@@ -201,13 +169,60 @@
 <!--        <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">-->
 <!--            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')-->
 <!--        </if>-->
+<!--        <if test="keyword != null and keyword != ''">-->
+<!--            AND t.play_name LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
 <!--        GROUP BY-->
 <!--        t.ticketing_id-->
 <!--        ORDER BY-->
 <!--        ticketing_at DESC-->
 <!--        LIMIT #{pageSize}-->
-<!--        OFFSET #{offset}-->
-<!--    </select>-->
+<!--        OFFSET #{offset};-->
+
+        SELECT
+        t.ticketing_id,
+        MAX(t.ticketing_at) AS ticketing_at,
+        MAX(t.stage_name) AS stage_name,
+        MAX(t.choice_show_seat) AS choice_show_seat,
+        MAX(p.play_middle_cat) AS play_middle_cat,
+        MAX(t.play_name) AS play_name
+        FROM
+        ticketing t
+        JOIN play p ON t.play_name = p.play_name
+        WHERE
+        true
+        <choose>
+            <when test='option=="A"'>
+                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
+            </when>
+            <when test='option=="M"'>
+                AND p.play_middle_cat = '뮤지컬'
+            </when>
+            <when test='option=="C"'>
+                AND p.play_middle_cat = '콘서트'
+            </when>
+            <when test='option=="J"'>
+                AND p.play_middle_cat = '전시'
+            </when>
+            <when test='option=="G"'>
+                AND p.play_middle_cat = '공연'
+            </when>
+        </choose>
+        <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
+            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND t.play_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        GROUP BY
+        t.ticketing_id
+        ORDER BY
+        ticketing_at DESC
+        LIMIT #{pageSize}
+        OFFSET #{offset};
+    </select>
+
+    <!--  ===========================================================================================================================================================================  -->
     
     <insert id="Inquiry_insert" parameterType="InquiryDto">
         INSERT INTO `Inquiry` (
@@ -219,6 +234,54 @@
             current_timestamp, #{inquiry_category}, #{user_id}, current_timestamp,
             #{created_id}, current_timestamp, #{updated_id}
             );
+    </insert>
+
+    <!--  ===========================================================================================================================================================================  -->
+
+<!--  예매 상세보기   -->
+    <select id="ticket_detail" resultType="TicketingDto" parameterType="String">
+        SELECT
+            t.ticketing_at,
+            t.user_name,
+            t.viewing_at,
+            t.stage_name,
+            t.ticketing_id,
+            t.play_name,
+            t.viewing_at,
+            t.ticketing_cnt,
+            t.choice_show_seat,
+            (SELECT cc.comn_code_name FROM comn_code cc WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
+        FROM
+            ticketing t
+        WHERE
+            t.ticketing_id = #{ticketing_id};
+    </select>
+
+<!--  ===========================================================================================================================================================================  -->
+
+    <select id="coupon_count" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM coupon
+        <if test="coupon_id != null and coupon_id != ''">
+            WHERE coupon_id = #{coupon_id}
+        </if>
+    </select>
+
+    <insert id="coupon_insert">
+        INSERT INTO user (user_id, coupon_id, created_at, created_id, updated_at, updated_id)
+        SELECT
+            '사용자 ID 값' AS user_id,
+            c.coupon_id,
+            current_timestamp AS created_at,
+            '생성자 ID 값' AS created_id,
+            current_timestamp AS updated_at,
+            '생성자 ID 값' AS updated_id
+        FROM
+            Coupon c
+        WHERE
+            -- 특정 조건을 여기에 추가, 예를 들어 쿠폰 이름이 '특정 쿠폰 이름'인 경우
+            c.coupon_name = '특정 쿠폰 이름'
+            LIMIT 1;
     </insert>
 
 </mapper>

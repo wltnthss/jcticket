@@ -162,7 +162,8 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href=""><h3>회원정보 수정</h3></a>
+                            <a href="/signup"><h3>회원정보 수정</h3></a>
+                            <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
                         <div id="client">
@@ -196,7 +197,7 @@
                                 <option value="Y">예매확인</option>
                                 <option value="C">예매취소</option>
                             </select>
-                            <input id="submit" type="submit" value="조회">
+                            <input type="submit" value="조회">
                         </form>
                     </div>
 
@@ -218,7 +219,7 @@
                                 <td>${TicketingDto.play_name}</td>
                                 <td>${TicketingDto.viewing_at}</td>
                                 <td>${TicketingDto.ticketing_cnt}</td>
-                                <td><a href="/mypagedetail">${TicketingDto.ticketing_status}</a></td>
+                                <td><a href="/mypagedetail?ticketing_id=${TicketingDto.ticketing_id}">${TicketingDto.ticketing_status}</a></td>
                             </tr>
                             </c:forEach>
                         </table>

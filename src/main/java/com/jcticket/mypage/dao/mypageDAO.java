@@ -33,6 +33,9 @@ public interface mypageDAO {
     int insert(TicketingDto ticketingDto)  throws Exception;
 
     int insert_InquiryDto(InquiryDto inquiryDto) throws Exception;
+    int coupon_count(String coupon_id) throws Exception;
+
+    TicketingDto ticket_detail(String ticketing_at) throws Exception;
 
 
 }

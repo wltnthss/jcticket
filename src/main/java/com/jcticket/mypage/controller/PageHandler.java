@@ -17,6 +17,8 @@ public class PageHandler {
 
     private String option;   // 조회 검색
 
+    private String keyword;
+
     private String start_date; //날짜별 조회 검색 시작
     
     private String end_date;  //날짜별 조회 검색 끝
@@ -29,17 +31,21 @@ public class PageHandler {
     private boolean showPrev;
     private boolean showNext;
 
-    public PageHandler(int totalCnt, int page, String option, String start_date, String end_date ) {
-        this(totalCnt, page, 10, option, start_date, end_date);
+
+
+    public PageHandler(int totalCnt, int page, String option, String start_date, String end_date, String keyword) {
+        this(totalCnt, page, 10, option, start_date, end_date, keyword);
     }
 
-    public PageHandler(int totalCnt, int page, int pageSize, String option, String start_date, String end_date) {
+    public PageHandler(int totalCnt, int page, int pageSize, String option, String start_date, String end_date, String keyword) {
         this.totalCnt = totalCnt;
         this.page = page;
         this.pageSize = pageSize;
         this.option = option;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.keyword = keyword;
+
 
 
         totalPage = (int)Math.ceil(totalCnt / (double)pageSize);    // 11
@@ -82,6 +88,13 @@ public class PageHandler {
         System.out.print(showNext ? " [NEXT] " : " ");
     }
 
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
     public int getTotalCnt() {
         return totalCnt;
     }

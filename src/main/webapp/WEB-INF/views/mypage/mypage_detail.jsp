@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.jcticket.mypage.dao.mypageDAO" %>
+<%@ page import="com.jcticket.mypage.dao.mypageImpl" %>
+<%@ page import="com.jcticket.ticketing.dto.TicketingDto" %><%--
   Created by IntelliJ IDEA.
   User: wjswo
   Date: 2024-02-04
@@ -8,6 +10,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <html>
 <head>
     <title>MyPage</title>
@@ -214,7 +218,8 @@
                         <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                         <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                         <a href="/mypageclient"><h3>문의사항</h3></a>
-                        <a href=""><h3>회원정보 수정</h3></a>
+                        <a href="/signup"><h3>회원정보 수정</h3></a>
+                        <a href="/withdraw"><h3>회원탈퇴</h3></a>
                     </div>
 
                     <div id="client">
@@ -246,23 +251,23 @@
                             <tbody>
                             <tr id="tr1">
                                 <th>예매번호</th>
-                                <td><strong>Y7275193880</strong></td>
+                                <td><strong>${ticketingDto.ticketing_id}</strong></td>
                                 <th>예매자</th>
-                                <td >전재승</td>
+                                <td>${ticketingDto.user_name}</td>
                             </tr>
                             <tr id="tr2">
                                 <th>관람일</th>
-                                <td colspan="3" class="ri"><strong>2024.01.17 10:00</strong></td>
+                                <td colspan="3" class="ri"><strong>${ticketingDto.viewing_at}</strong></td>
                             </tr>
                             <tr id="tr3">
                                 <th>공연장</th>
-                                <td colspan="3">국립중앙박물관 특별전시실</td>
+                                <td colspan="3">${ticketingDto.stage_name}</td>
                             </tr>
                             <tr id="tr4">
                                 <th>좌석<p></p></th>
                                 <td colspan="3">
                                     <div class="scroll">
-                                        비지정석
+                                        ${ticketingDto.choice_show_seat}
                                     </div>
                                 </td>
                             </tr>
@@ -299,9 +304,9 @@
                             <tbody>
                             <tr>
                                 <th>예매일시</th>
-                                <td>2024.01.16 21:07</td>
+                                <td>${ticketingDto.ticketing_at}</td>
                                 <th>예매상태</th>
-                                <td>예매완료</td>
+                                <td>${ticketingDto.ticketing_status}</td>
                             </tr>
                             <tr>
                                 <th>총결제금액</th>

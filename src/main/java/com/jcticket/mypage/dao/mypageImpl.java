@@ -65,5 +65,15 @@ public class mypageImpl implements mypageDAO {
         return session.insert(namespace + "Inquiry_insert", inquiryDto);
     }
 
+    @Override
+    public int coupon_count(String coupon_id) throws Exception {
+        return session.selectOne(namespace + "coupon_count", coupon_id);
+    }
+
+    @Override
+    public TicketingDto ticket_detail(String ticketing_id) throws Exception {
+        return session.selectOne(namespace + "ticket_detail", ticketing_id);
+    }
+
 
 }

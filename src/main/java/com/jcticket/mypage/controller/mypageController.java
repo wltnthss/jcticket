@@ -46,6 +46,7 @@ public class mypageController {
                          @RequestParam(name = "option", defaultValue = "A") String option,
                          @RequestParam(required = false) String start_date,
                          @RequestParam(required = false) String end_date,
+                         @RequestParam(required = false) String keyword,
                          Model model) throws Exception {
 
         try {
@@ -58,7 +59,7 @@ public class mypageController {
 
             int totalCount = mypageService.count(map);
 
-            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date);
+            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
 
             List<TicketingDto> list = mypageService.selectAll(map);
             model.addAttribute("ticketList", list);
@@ -70,13 +71,18 @@ public class mypageController {
         return "/mypage/mypage_ticket";
     }
 
-    @GetMapping("/mypagecupon")
-    public String cupon() {
-        return "/mypage/mypage_cupon";
-    }
+
 
     @GetMapping("/mypagedetail")
-    public String detail() {
+    public String detail(@RequestParam(required = false) String ticketing_id,
+                         Model model) throws Exception {
+
+        TicketingDto ticketingDto = mypageService.ticket_detail(ticketing_id);
+        System.out.println(ticketing_id);
+        System.out.println(ticketingDto.toString());
+
+        model.addAttribute("ticketingDto", ticketingDto);
+
         return "/mypage/mypage_detail";
     }
 
@@ -84,17 +90,19 @@ public class mypageController {
 
 
     @GetMapping("/mypageview")
-    public String view(@RequestParam(defaultValue = "1")Integer page,
-                       @RequestParam(defaultValue = "3")Integer pageSize,
+    public String view(@RequestParam(defaultValue = "1") Integer page,
+                       @RequestParam(defaultValue = "3") Integer pageSize,
                        @RequestParam(name = "option", defaultValue = "A") String option,
                        @RequestParam(required = false) String start_date,
                        @RequestParam(required = false) String end_date,
+                       @RequestParam(required = false) String keyword,
                        Model model) throws Exception {
 
 
         System.out.println("option => " + option);
         System.out.println("start_date => " + start_date);
         System.out.println("end_date => " + end_date);
+        System.out.println("keyword => " + keyword);
 
         try {
 
@@ -104,12 +112,13 @@ public class mypageController {
             map.put("option", option);
             map.put("start_date", start_date);
             map.put("end_date", end_date);
+            map.put("keyword", keyword);
 
             int totalCount = mypageService.view_count(map);
 
             System.out.println("totalCount = " + totalCount);
 
-            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date);
+            PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
 
             List<TicketingDto> list = mypageService.select_view(map);
 
@@ -123,7 +132,7 @@ public class mypageController {
         return "/mypage/mypage_view";
     }
 
-    
+
 
     @GetMapping("/mypageclient")
     public String client() {
@@ -133,6 +142,26 @@ public class mypageController {
     @GetMapping("/mypage_client_in")
     public String client_insert(Model model) throws Exception {
         return "/mypage/mypage_client_Insert";
+    }
+
+    @GetMapping("/withdraw")
+    public String withdraw() {
+        return "/mypage/withdraw";
+    }
+
+    @GetMapping("/mypagecupon")
+    public String cupon(@RequestParam(required = false) String coupon_id) throws  Exception{
+
+        int a = mypageService.coupon_count(coupon_id);
+
+        if(a != 0 && coupon_id != null) {
+
+        }
+
+
+
+
+        return "/mypage/mypage_cupon";
     }
 }
 

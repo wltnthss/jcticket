@@ -74,7 +74,6 @@
             width: 100%;
             text-align: left;
             display: flex;
-            margin: 20px 0;
         }
 
         #show-all > #show-img{
@@ -89,18 +88,26 @@
         }
 
         #show-all > #show-text {
+            display: flex;
             margin: 20px 0px;
             width: 450px;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
         }
-
         #show-all > #show-text > span,em {
-            margin: 20px;
-
+            margin: 6px 28px
         }
-
         #paging {
             text-align: center;
         }
+
+        #title {
+            border: 1px solid;
+            margin: 15px 0px 0px 0px;
+        }
+
+
 
 
     </style>
@@ -129,7 +136,8 @@
                         <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                         <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                         <a href="/mypageclient"><h3>문의사항</h3></a>
-                        <a href=""><h3>회원정보 수정</h3></a>
+                        <a href="/signup"><h3>회원정보 수정</h3></a>
+                        <a href="/withdraw"><h3>회원탈퇴</h3></a>
                     </div>
 
                     <div id="client">
@@ -165,31 +173,32 @@
                          <input type="submit" value="조회">
                         </form>
 
+                        <form action="/mypageview" method="get">
+                            공연명 : <input type="text" name="keyword">
+                            <input type="submit" value="조회" >
+                        </form>
+
 
                 <c:forEach items="${view_list}" var="TicketingDto">
+                <h2 id="title">${TicketingDto.play_name}</h2>
                 <div id="show-all">
                     <div id="show-img"><a href=""><img src="/resources/img/mypage/페페%20한잔해.jpg"></a></div>
                     <div id="show-text"><span>예매번호 :</span> <em>${TicketingDto.ticketing_id}</em> <span>장르 :</span> <em>${TicketingDto.play_middle_cat}</em>
-                    <br>
-                    <br>
-                    <span>관람일시: </span> <em>${TicketingDto.ticketing_at}</em> <span>공연장 : </span> <em>${TicketingDto.stage_name}</em>
-                    <br>
-                    <br>
-                    <span>좌석 : </span> <em>${TicketingDto.choice_show_seat}</em>
-                    <br>
+                    <span>관람일시: </span> <em>${TicketingDto.ticketing_at}</em>
+                        <span>공연장 : </span> <em>${TicketingDto.stage_name}</em><span>좌석 : </span> <em>${TicketingDto.choice_show_seat}</em>
                     </div>
                 </div>
                 </c:forEach>
 
                 <div id="paging">
                     <c:if test="${ph.showPrev}">
-                        <a href="<c:url value="/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&lt;</a>
+                        <a href="<c:url value="/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&lt;</a>
                     </c:if>
                     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a href="<c:url value="/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">${i}</a>
+                        <a href="<c:url value="/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">${i}</a>
                     </c:forEach>
                     <c:if test="${ph.showNext}">
-                        <a href="<c:url value="/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&gt;</a>
+                        <a href="<c:url value="/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&gt;</a>
                     </c:if>
                 </div>
 

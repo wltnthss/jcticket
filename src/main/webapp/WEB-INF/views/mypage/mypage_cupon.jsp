@@ -40,7 +40,8 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href=""><h3>회원정보 수정</h3></a>
+                            <a href="/signup"><h3>회원정보 수정</h3></a>
+                            <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
                         <div id="client">
@@ -64,10 +65,12 @@
                     </div>
 
                     <div id="cupon-input">
+                        <form action="/mypagecupon" method="get">
                         <h2>공연 할인쿠폰</h2>
 
-                        <input type="text">
-                        <button>등록하기</button>
+                        <input type="text" name="coupon_id">
+                        <input type="submit" value="등록">
+                        </form>
                     </div>
 
                     <div id="h2-tag">
