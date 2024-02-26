@@ -61,7 +61,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_showing();
         //given
-        ShowingDto showingDto = new ShowingDto(5,now,now,"1회 13시 00분","2024-03-15","금","BS",10,"테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
+        ShowingDto showingDto = new ShowingDto(5,"2024-02-28", "2024-03-28","1회 13시 00분","2024-03-15","금","BS",10, 40000, "테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
 
         //when
         int insert = viewDetailDao.showing_insert(showingDto);

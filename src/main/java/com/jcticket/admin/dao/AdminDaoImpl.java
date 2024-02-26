@@ -6,6 +6,7 @@ import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -165,5 +166,10 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
         return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
+    }
+
+    @Override
+    public int insertShowing(ShowingDto showingDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowing", showingDto);
     }
 }

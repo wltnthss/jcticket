@@ -8,6 +8,7 @@ import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -330,4 +331,10 @@ public class AdminServiceImpl implements AdminService {
     public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
         return adminDao.selectKeywordPlay(keyword);
     }
+
+    @Override
+    public int insertShowing(ShowingDto showingDto) throws Exception {
+        return adminDao.insertShowing(showingDto);
+    }
+
 }
