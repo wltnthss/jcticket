@@ -71,7 +71,7 @@ public class TicketingController {
     // @ResponseBody => http 요청의 본문이 그대로 전달된다.
     // ajax로 파라미터 넘기는 방법 찾가
     @PostMapping("/ticketing-detail")
-    @ResponseBody // 자바 객체를 HTTP요청의 바디 내용으로 매핑하여 클라이언트로 전송한다.
+    //@ResponseBody // 자바 객체를 HTTP요청의 바디 내용으로 매핑하여 클라이언트로 전송한다.
     public ResponseEntity<?> getShowingRound(@RequestBody Map<String,String> data) throws Exception{
         // ajax로 받아온 Map data 에는 date_text와 play_id가 들어있다.
         // map에서 date_text와 play_id 분리하기
@@ -79,8 +79,7 @@ public class TicketingController {
             String play_id = data.get("play_id");
         try{
             // 서비스에서 받아온 리스트를 반환한다.
-//            return ResponseEntity.ok().body(ticketingService.getRoundInfo(play_id, date_text));
-            throw new Exception();
+            return ResponseEntity.ok().body(ticketingService.getRoundInfo(play_id, date_text));
         }catch (Exception e){
             return ResponseEntity.badRequest().body(ticketingService.getRoundInfo(play_id, date_text));
         }
