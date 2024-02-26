@@ -7,6 +7,7 @@ import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
 import java.util.Map;
@@ -69,4 +70,6 @@ public interface AdminService {
     List<StageDto> selectKeywordStage(String keyword) throws Exception;
     // 상품 관리 팝업창 공연명 검색 조회
     List<PlayDto> selectKeywordPlay(String keyword) throws Exception;
+    // 관리자 상품 관리 회차 등록
+    int insertShowing(ShowingDto showingDto) throws Exception;
 }

@@ -341,6 +341,7 @@
 
     <select id="selectKeywordStage" resultType="StageDto" parameterType="String">
         select
+            stage_id,
             stage_name,
             stage_address,
             stage_seat_cnt,
@@ -363,4 +364,10 @@
         where
             play_name like concat ('%', #{keyword} ,'%')
     </select>
+
+    <insert id="insertShowing" parameterType="ShowingDto">
+        INSERT INTO showing
+        (showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, showing_seat_price, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_start_at}, #{showing_end_at}, #{showing_info}, #{showing_date}, #{showing_day}, #{showing_status}, #{showing_seat_cnt}, #{showing_seat_price}, #{play_id}, #{stage_id}, CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+    </insert>
 </mapper>

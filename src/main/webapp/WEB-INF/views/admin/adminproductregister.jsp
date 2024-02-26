@@ -26,7 +26,7 @@
             <h1>상품 관리</h1>
             <h2>공연 등록</h2>
         </div>
-        <form action="/admin/productregister" method="post">
+        <form action="/admin/playregister" method="post">
             <div class="tbl_frm01">
                 <table>
                     <colgroup>
@@ -83,7 +83,7 @@
                 <input type="submit" value="등록" class="btn-large">
             </div>
         </form>
-        <form action="/admin/productregister" method="post">
+        <form action="/admin/showingregister" method="post">
             <div class="admin-common-title">
                 <h2>회차 등록</h2>
             </div>
@@ -95,63 +95,66 @@
                     </colgroup>
                     <tbody>
                     <tr>
-                        <th scope="row">공연장 선택</th>
+                        <th scope="row">공연장아이디 선택</th>
                         <td onclick="openStagePopup()">
-                            <input type="text" name="play_poster" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" required readonly><span class="search-btn"></span>
+                            <input type="text" name="stage_id" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" readonly><span class="search-btn"></span>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">공연명 선택</th>
+                        <th scope="row">공연아이디 선택</th>
                         <td onclick="openPlayPopup()">
-                            <input type="text" name="play_poster" id="inputSearchPlay" class="frm_input required" size="50" style="cursor: pointer" required readonly><span class="search-btn"></span>
+                            <input type="text" name="play_id" id="inputSearchPlay" class="frm_input required" size="20" style="cursor: pointer" readonly><span class="search-btn"></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 시작 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20" required>
+                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20">
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 종료 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20" required>
+                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20">
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 정보</th>
                         <td>
-                            <input type="text" name="showing_info" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_info" class="frm_input required" size="60" placeholder="ex) [1회] 13시 00분,[2회] 17시 00분">
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 일시</th>
                         <td>
-                            <input type="text" name="showing_date" class="frm_input required" size="20" required>
+                            <input type="text" name="showing_date" class="frm_input required" size="20" placeholder="ex) 2024-11-25">
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 요일</th>
                         <td>
-                            <input type="text" name="showing_day" class="frm_input required" size="10" required>
+                            <input type="text" name="showing_day" class="frm_input required" size="10" placeholder="ex) 월,화,수">
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 상태</th>
                         <td>
-                            <input type="text" name="showing_status" class="frm_input required" size="5" required>
+                            <select name="showing_status">
+                                <option value="BS">상영전</option>
+                                <option value="IS">상영중</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석수</th>
                         <td>
-                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" required readonly>
+                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석가격</th>
                         <td>
-                            <input type="text" name="showing_seat_price" class="frm_input required" size="10" required>
+                            <input type="text" name="showing_seat_price" class="frm_input required" size="10">
                         </td>
                     </tr>
                     </tbody>
@@ -174,6 +177,7 @@
                     <div class="tbl_header">
                         <table>
                             <colgroup>
+                                <col class="w80">
                                 <col class="w200">
                                 <col class="w300">
                                 <col class="w50">
@@ -182,6 +186,7 @@
                             </colgroup>
                             <thead>
                             <tr>
+                                <th scope="col">공연장 아이디</th>
                                 <th scope="col">공연장명</th>
                                 <th scope="col">주소</th>
                                 <th scope="col">좌석수</th>
