@@ -2,10 +2,12 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,18 @@ public class AdminDaoImplTest {
     final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
     @Test
+    public void insertAdmin() throws Exception{
+
+        adminDao.adminAllDelete();
+
+        // given
+        for (int i = 1; i < 10; i++) {
+            AdminDto adminDto = new AdminDto("jcticket"+i, "admin"+i+"@gmail.com", "smgsmg12!@", "010-1257-7845", "jcticket"+i+" 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+            // when, then
+            assertEquals(1, adminDao.insertAdmin(adminDto));
+        }
+    }
+    @Test
     public void login() throws Exception{
 
         // given
@@ -78,7 +92,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int deleteResult = adminDao.userDelete("jisoo" + i);
             int insertResult = adminDao.insertUser(userDto);
@@ -93,7 +107,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.insertUser(userDto);
             // then
@@ -106,7 +120,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.userDelete("jisoo" + i);
             // then
@@ -117,7 +131,7 @@ public class AdminDaoImplTest {
     public void userRetireUpdate() throws Exception {
         // given
         UserDto userDto = new UserDto("jisoo", "1111", "지수", "soodall" , "wltn@naver.com", "010-2521-3435",
-                "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
         int insertUser = adminDao.insertUser(userDto);
         UserDto loginUser = userDao.select(userDto.getUser_id());
 
@@ -324,5 +338,58 @@ public class AdminDaoImplTest {
 
         // then
         assertEquals(list.get(0).getStage_seat_cnt(), 80);
+    }
+
+    @Test
+    public void showingRegisterSeatClass() throws Exception {
+
+        adminDao.deleteAllShoiwing();
+
+        // given
+        ShowingDto showingDto = new ShowingDto(0, "2024-02-27 13:53:00.0", "2024-03-27 13:53:00.0", "[1회] 13시 00분", "2024-03-15", "월,수,금", "BS", 80, 40000, "공연아이디1", "1ad62b31",
+                CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        int showingSeat = showingDto.getShowing_seat_cnt();
+        int showingSeq = showingDto.getShowing_seq();
+        String showingStageId = showingDto.getStage_id();
+        System.out.println("showSeat = " + showingSeat);
+
+        // 공연장 좌석 수에 따른 행과 열 계산
+        final int COL = 10;         // 좌석 수를 열의 총 개수 10으로 나눔.
+        int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
+        char startRow = 'A';
+        char endRow = (char) (startRow + rows - 1);
+
+        ShowSeatDto showSeatDto = new ShowSeatDto();
+
+
+        System.out.println("========= 좌석 수 검증 시작 ===========");
+
+        System.out.println("열 개수 = " + COL);
+        System.out.println("총 행의 개수 = " + rows);
+        System.out.println("시작 Row 알파벳 startRow = " + startRow);
+        System.out.println("끝나는 Row 알파벳 endRow = " + endRow);
+
+        for (char row = startRow; row <= endRow; row++) {
+            for (int column = 1; column <= COL; column++) {
+                String seat = String.format("%c%d", row, column);
+                System.out.print(seat + " ");
+                showSeatDto.setShowing_seq(showingSeq);
+                showSeatDto.setSeat_row(new String(String.valueOf(row)));
+                showSeatDto.setSeat_col(column);
+                showSeatDto.setStage_id(showingStageId);
+                adminDao.insertShowSeat(showSeatDto);
+            }
+            System.out.println();
+        }
+
+        System.out.println("========= 좌석 수 검증 끝 ===========");
+
+        // when
+        int insertShoiwng = adminDao.insertShowing(showingDto);
+        System.out.println("testShowingDto = " + insertShoiwng);
+
+        // then
+        assertEquals(insertShoiwng, 1);
     }
 }

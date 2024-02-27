@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
@@ -75,6 +76,12 @@ public class AdminDaoImpl implements AdminDao{
     public int deleteAdmin(String admin_id) throws Exception {
         return sqlSession.delete(namespace + "adminDelete", admin_id);
     }
+
+    @Override
+    public void adminAllDelete() throws Exception {
+        sqlSession.delete(namespace + "adminAllDelete");
+    }
+
     @Override
     public int insertAgency(AgencyDto agencyDto) throws Exception {
         return sqlSession.insert(namespace+"insertAgency", agencyDto);
@@ -172,4 +179,15 @@ public class AdminDaoImpl implements AdminDao{
     public int insertShowing(ShowingDto showingDto) throws Exception {
         return sqlSession.insert(namespace + "insertShowing", showingDto);
     }
+
+    @Override
+    public void deleteAllShoiwing() throws Exception {
+        sqlSession.delete(namespace + "deleteAllShowing");
+    }
+
+    @Override
+    public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowSeat", showSeatDto);
+    }
+
 }

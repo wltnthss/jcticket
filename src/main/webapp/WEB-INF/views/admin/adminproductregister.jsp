@@ -37,7 +37,7 @@
                     <tr>
                         <th scope="row">공연명</th>
                         <td>
-                            <input type="text" name="play_name" class="frm_input required" size="20" required>
+                            <input type="text" name="play_name" class="frm_input required" size="50" required>
                         </td>
                     </tr>
                     <tr>
@@ -55,19 +55,19 @@
                     <tr>
                         <th scope="row">공연/전시 대분류</th>
                         <td>
-                            <input type="text" name="play_major_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_major_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 중분류</th>
                         <td>
-                            <input type="text" name="play_middle_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_middle_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 소분류</th>
                         <td>
-                            <input type="text" name="play_small_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_small_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
@@ -96,44 +96,44 @@
                     <tbody>
                     <tr>
                         <th scope="row">공연장아이디 선택</th>
-                        <td onclick="openStagePopup()">
-                            <input type="text" name="stage_id" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" readonly><span class="search-btn"></span>
+                        <td>
+                            <input type="text" name="stage_id" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick="openStagePopup()"></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연아이디 선택</th>
-                        <td onclick="openPlayPopup()">
-                            <input type="text" name="play_id" id="inputSearchPlay" class="frm_input required" size="20" style="cursor: pointer" readonly><span class="search-btn"></span>
+                        <td>
+                            <input type="text" name="play_id" id="inputSearchPlay" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick="openPlayPopup()"></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 시작 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20">
+                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 종료 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20">
+                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 정보</th>
                         <td>
-                            <input type="text" name="showing_info" class="frm_input required" size="60" placeholder="ex) [1회] 13시 00분,[2회] 17시 00분">
+                            <input type="text" name="showing_info" class="frm_input required" size="60" placeholder="ex) [1회] 13시 00분,[2회] 17시 00분" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 일시</th>
                         <td>
-                            <input type="text" name="showing_date" class="frm_input required" size="20" placeholder="ex) 2024-11-25">
+                            <input type="text" name="showing_date" class="frm_input required" size="20" placeholder="ex) 2024-11-25" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 요일</th>
                         <td>
-                            <input type="text" name="showing_day" class="frm_input required" size="10" placeholder="ex) 월,화,수">
+                            <input type="text" name="showing_day" class="frm_input required" size="10" placeholder="ex) 월,화,수" required>
                         </td>
                     </tr>
                     <tr>
@@ -148,13 +148,13 @@
                     <tr>
                         <th scope="row">회차 좌석수</th>
                         <td>
-                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" readonly>
+                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" readonly required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석가격</th>
                         <td>
-                            <input type="text" name="showing_seat_price" class="frm_input required" size="10">
+                            <input type="text" name="showing_seat_price" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     </tbody>

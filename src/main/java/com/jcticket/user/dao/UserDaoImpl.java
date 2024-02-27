@@ -51,6 +51,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public int insertSNS(UserDto userDto) throws Exception {
+        return session.insert(namespace+"signupSNS",userDto);
+    }
+
+    @Override
     public int count() throws Exception {
         return session.selectOne(namespace+"count");
     }
