@@ -106,7 +106,7 @@
                     <!-- 소셜 로그인 영역 시작  -->
                     <ul class="loginSocial">
                         <li class="loginNaver">
-                            <a href="네이버로그인페이지" class="btn_social">
+                            <a href="${naverUrl}" class="btn_social">
                                     <span class="socialWrap">
                                         <em class="social_icon_naver">
                                             <img src="/resources/img/login/네이버.png" class="naver_icon">
