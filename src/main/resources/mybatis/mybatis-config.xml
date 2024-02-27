@@ -32,5 +32,6 @@
 
 
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
+        <typeAlias alias="SeatDto" type="com.jcticket.dto.SeatDto"/>
     </typeAliases>
 </configuration>
