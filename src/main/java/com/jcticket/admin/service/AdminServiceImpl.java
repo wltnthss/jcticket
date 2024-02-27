@@ -408,8 +408,8 @@ public class AdminServiceImpl implements AdminService {
             playImgDto.setPlay_info_original_file_name(infoOriginalFileName);
             playImgDto.setPlay_info_stored_file_name(infoStoredFileName);
             // 5.
-            String savePosterPath = "FILE_PATH" + posterStoredFileName;
-            String saveInfoPath = "FILE_PATH" + infoStoredFileName;
+            String savePosterPath = FILE_PATH + posterStoredFileName;
+            String saveInfoPath = FILE_PATH + infoStoredFileName;
             // 6.
             playPoster.transferTo(new File(savePosterPath));
             playInfo.transferTo(new File(saveInfoPath));
