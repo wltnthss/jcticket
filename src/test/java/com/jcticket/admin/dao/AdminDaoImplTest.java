@@ -2,10 +2,12 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,18 @@ public class AdminDaoImplTest {
 
     final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
+    @Test
+    public void insertAdmin() throws Exception{
+
+        adminDao.adminAllDelete();
+
+        // given
+        for (int i = 1; i < 10; i++) {
+            AdminDto adminDto = new AdminDto("jcticket"+i, "admin"+i+"@gmail.com", "1111", "010-1257-7845", "jcticket"+i+" 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+            // when, then
+            assertEquals(1, adminDao.insertAdmin(adminDto));
+        }
+    }
     @Test
     public void login() throws Exception{
 
@@ -296,5 +310,86 @@ public class AdminDaoImplTest {
         assertEquals(1, adminDao.insertStage(stageDto3));
         assertEquals(1, adminDao.insertStage(stageDto4));
         assertEquals(1, adminDao.insertStage(stageDto5));
+    }
+
+    @Test
+    public void selectKeywordStage() throws Exception {
+
+        adminDao.deleteAllStage();
+
+        // given => DB내에 존재한다 가정하는 공연장 테스트 데이터 5개 생성
+        StageDto stageDto1 = new StageDto("1ad62b31", "올림픽공원 체조경기장", "서울특별시 송파구 올림픽로 424", 80, "조영상", "02-6000-0114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto2 = new StageDto("2ad62b31", "서울예술의전당", "서울특별시 서초구 서초동 700", 900, "이철수", "02-580-1300", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto3 = new StageDto("3ad62b31", "세종문화회관", "서울특별시 종로구 세종로 175", 500, "박미영", "02-399-1114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto4 = new StageDto("4ad62b31", "블루스퀘어", "서울특별시 용산구 이태원로 294", 700, "정성호", "02-1588-5212", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto5 = new StageDto("5ad62b31", "디큐브아트센터", "서울특별시 구로구 신도림동 360-51", 200, "조영상", "02-2211-3660", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        adminDao.insertStage(stageDto1);
+        adminDao.insertStage(stageDto2);
+        adminDao.insertStage(stageDto3);
+        adminDao.insertStage(stageDto4);
+        adminDao.insertStage(stageDto5);
+
+        String keyword = "올림픽공원";
+
+        // when
+        List<StageDto> list = adminDao.selectKeywordStage(keyword);
+        System.out.println("list = " + list);
+
+        // then
+        assertEquals(list.get(0).getStage_seat_cnt(), 80);
+    }
+
+    @Test
+    public void showingRegisterSeatClass() throws Exception {
+
+        adminDao.deleteAllShoiwing();
+
+        // given
+        ShowingDto showingDto = new ShowingDto(0, "2024-02-27 13:53:00.0", "2024-03-27 13:53:00.0", "[1회] 13시 00분", "2024-03-15", "월,수,금", "BS", 80, 40000, "공연아이디1", "1ad62b31",
+                CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        int showingSeat = showingDto.getShowing_seat_cnt();
+        int showingSeq = showingDto.getShowing_seq();
+        String showingStageId = showingDto.getStage_id();
+        System.out.println("showSeat = " + showingSeat);
+
+        // 공연장 좌석 수에 따른 행과 열 계산
+        final int COL = 10;         // 좌석 수를 열의 총 개수 10으로 나눔.
+        int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
+        char startRow = 'A';
+        char endRow = (char) (startRow + rows - 1);
+
+        ShowSeatDto showSeatDto = new ShowSeatDto();
+
+
+        System.out.println("========= 좌석 수 검증 시작 ===========");
+
+        System.out.println("열 개수 = " + COL);
+        System.out.println("총 행의 개수 = " + rows);
+        System.out.println("시작 Row 알파벳 startRow = " + startRow);
+        System.out.println("끝나는 Row 알파벳 endRow = " + endRow);
+
+        for (char row = startRow; row <= endRow; row++) {
+            for (int column = 1; column <= COL; column++) {
+                String seat = String.format("%c%d", row, column);
+                System.out.print(seat + " ");
+                showSeatDto.setShowing_seq(showingSeq);
+                showSeatDto.setSeat_row(new String(String.valueOf(row)));
+                showSeatDto.setSeat_col(column);
+                showSeatDto.setStage_id(showingStageId);
+                adminDao.insertShowSeat(showSeatDto);
+            }
+            System.out.println();
+        }
+
+        System.out.println("========= 좌석 수 검증 끝 ===========");
+
+        // when
+        int insertShoiwng = adminDao.insertShowing(showingDto);
+        System.out.println("testShowingDto = " + insertShoiwng);
+
+        // then
+        assertEquals(insertShoiwng, 1);
     }
 }

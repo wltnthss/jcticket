@@ -16,6 +16,10 @@
         DELETE FROM NOTICE WHERE notice_seq = #{notice_seq}
     </delete>
 
+    <delete id="adminAllDelete">
+        DELETE FROM ADMIN
+    </delete>
+
     <delete id="adminDelete" parameterType="String">
         DELETE FROM ADMIN WHERE admin_id = #{admin_id}
     </delete>
@@ -339,5 +343,45 @@
         delete from stage
     </delete>
 
+    <select id="selectKeywordStage" resultType="StageDto" parameterType="String">
+        select
+            stage_id,
+            stage_name,
+            stage_address,
+            stage_seat_cnt,
+            stage_tel,
+            stage_manager
+        from
+            stage
+        where
+            stage_name like concat ('%', #{keyword} ,'%')
+    </select>
 
+    <select id="selectKeywordPlay" resultType="PlayDto" parameterType="String">
+        select
+            play_id,
+            play_name,
+            play_major_cat,
+            play_run_time
+        from
+            play
+        where
+            play_name like concat ('%', #{keyword} ,'%')
+    </select>
+
+    <insert id="insertShowing" parameterType="ShowingDto" useGeneratedKeys="true" keyProperty="showing_seq">
+        INSERT INTO showing
+        (showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, showing_seat_price, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_start_at}, #{showing_end_at}, #{showing_info}, #{showing_date}, #{showing_day}, #{showing_status}, #{showing_seat_cnt}, #{showing_seat_price}, #{play_id}, #{stage_id}, CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+    </insert>
+
+    <delete id="deleteAllShowing">
+        delete from showing
+    </delete>
+
+    <insert id="insertShowSeat" parameterType="ShowSeatDto">
+        INSERT INTO show_seat
+        (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_seq}, #{seat_row}, #{seat_col}, #{stage_id}, "Y", now(), "JISOO", now(), "JISOO");
+    </insert>
 </mapper>

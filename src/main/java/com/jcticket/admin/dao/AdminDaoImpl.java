@@ -2,9 +2,12 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -73,6 +76,12 @@ public class AdminDaoImpl implements AdminDao{
     public int deleteAdmin(String admin_id) throws Exception {
         return sqlSession.delete(namespace + "adminDelete", admin_id);
     }
+
+    @Override
+    public void adminAllDelete() throws Exception {
+        sqlSession.delete(namespace + "adminAllDelete");
+    }
+
     @Override
     public int insertAgency(AgencyDto agencyDto) throws Exception {
         return sqlSession.insert(namespace+"insertAgency", agencyDto);
@@ -155,4 +164,30 @@ public class AdminDaoImpl implements AdminDao{
     public void deleteAllStage() throws Exception {
         sqlSession.delete(namespace + "deleteAllStage");
     }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordStage", keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
+    }
+
+    @Override
+    public int insertShowing(ShowingDto showingDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowing", showingDto);
+    }
+
+    @Override
+    public void deleteAllShoiwing() throws Exception {
+        sqlSession.delete(namespace + "deleteAllShowing");
+    }
+
+    @Override
+    public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowSeat", showSeatDto);
+    }
+
 }

@@ -1,16 +1,15 @@
 package com.jcticket.admin.controller;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.AdminValidLoginDto;
-import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.notice.dto.NoticeValidDto;
-import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -626,6 +625,34 @@ public class AdminController {
 
         return result;
     }
+    // 관리자 공연장명 검색 팝업 조회
+    @GetMapping("/admin/stage")
+    @ResponseBody
+    public List<StageDto> adminProduct(@RequestParam String keyword) throws Exception {
+
+        List<StageDto> list = null;
+        try {
+            list = adminService.selectKeywordStage(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    // 관리자 공연명 검색 팝업 조회
+    @GetMapping("/admin/play")
+    @ResponseBody
+    public List<PlayDto> adminPlay(@RequestParam String keyword) throws Exception {
+
+        List<PlayDto> list = null;
+        try {
+            list = adminService.selectKeywordPlay(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     // 관리자 상품 관리
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{
@@ -636,10 +663,54 @@ public class AdminController {
     public String adminProductRegisterForm() throws Exception{
         return "admin/adminproductregister";
     }
-    // 관리자 상품 관리 등록
-    @PostMapping("/admin/productregister")
+    // 관리자 공연 등록
+    @PostMapping("/admin/playregister")
     public String adminProductRegister() throws Exception{
         return "admin/adminproductregister";
+    }
+    // 관리자 회차 등록
+    @PostMapping("/admin/showingregister")
+    public String adminShowingRegister(ShowingDto showingDto) throws Exception{
+
+        String[] formatShowingInfo = showingDto.getShowing_info().split(",");
+
+        // 회차 정보의 개수 만큼 회차 테이블에 인서트
+        Arrays.stream(formatShowingInfo)
+                .forEach(info -> {
+                    System.out.println("info = " + info);
+                    try {
+                        System.out.println("showingSeq ++++ " + showingDto.getShowing_seq());
+                        showingDto.setShowing_info(info);
+                        adminService.insertShowing(showingDto);
+
+                        int showingSeat = showingDto.getShowing_seat_cnt();
+                        int showingSeq = showingDto.getShowing_seq();
+                        System.out.println("showingSeq ===== " + showingSeq);
+                        String showingStageId = showingDto.getStage_id();
+
+                        final int COL = 10;         // 좌석 수를 열의 총 개수 10으로 나눔.
+                        int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
+                        char startRow = 'A';
+                        char endRow = (char) (startRow + rows - 1);
+
+                        // 회차 인서트 개수 만큼 회차에 존재하는 좌석수의 수 만큼 회차 좌석 수 삽입
+                        for (char row = startRow; row <= endRow; row++) {
+                            for (int column = 1; column <= COL; column++) {
+                                ShowSeatDto showSeatDto = new ShowSeatDto();
+
+                                showSeatDto.setShowing_seq(showingSeq);
+                                showSeatDto.setSeat_row(new String(String.valueOf(row)));
+                                showSeatDto.setSeat_col(column);
+                                showSeatDto.setStage_id(showingStageId);
+                                adminService.insertShowSeat(showSeatDto);
+                            }
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException("INSERT ERROR => " + e);
+                    }
+                });
+
+        return "admin/adminproduct";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
