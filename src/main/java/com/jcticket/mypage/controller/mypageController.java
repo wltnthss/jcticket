@@ -1,5 +1,7 @@
 package com.jcticket.mypage.controller;
 
+import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.jcticket.mypage.service.mypageService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,13 +153,47 @@ public class mypageController {
     }
 
     @GetMapping("/mypagecupon")
-    public String cupon(@RequestParam(required = false) String coupon_id) throws  Exception{
+    public String cupon(@RequestParam(required = false) String coupon_id,
+                        @RequestParam(defaultValue = "1") Integer page,
+                        @RequestParam(defaultValue = "5") Integer pageSize,
+                        Model model) throws  Exception{
 
-        int a = mypageService.coupon_count(coupon_id);
 
-        if(a != 0 && coupon_id != null) {
+        Map map = new HashMap();
+        map.put("offset", (page - 1) * pageSize);
+        map.put("pageSize", pageSize);
 
+//        PageHandler pageHandler = new PageHandler()
+
+
+        List<UserCouponDto> list = mypageService.coupon_list(map);
+
+        model.addAttribute("coupon_list", list);
+
+
+
+
+
+        if(coupon_id != null) {
+            try {
+                CouponDto couponDto = mypageService.coupon_count(coupon_id);
+
+                Timestamp now = new Timestamp(System.currentTimeMillis());
+
+                if(couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
+                UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+                mypageService.coupon_insert(userCouponDto);
+                mypageService.update_coupon(couponDto);
+
+                }
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
 
 
 

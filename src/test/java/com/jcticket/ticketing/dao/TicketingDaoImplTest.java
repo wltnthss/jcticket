@@ -123,7 +123,6 @@ public class TicketingDaoImplTest {
                 System.out.println("value ==> " + map.get(key));
                 if (key.equals("showing_date")) {
                     assertEquals(testDate, map.get(key));
-
                 }
             }
         }

@@ -118,66 +118,21 @@
     <!--  ===========================================================================================================================================================================  -->
 
     <insert id="insert" parameterType="TicketingDto">
-        insert into ticketing (
-            ticketing_id, ticketing_at, ticketing_cnt, ticketing_status,
-            showing_info, showing_date, cancelable_at, play_price, stage_name,
-            choice_show_seat, ticketing_price, user_name, user_id, viewing_at,
-            play_name, created_at, created_id, updated_at, updated_id
-        )
-        VALUES (
-            #{ticketing_id}, #{ticketing_at}, #{ticketing_cnt}, #{ticketing_status},
-            #{showing_info}, #{showing_date}, current_timestamp, #{play_price},
-            #{stage_name}, #{choice_show_seat}, #{ticketing_price}, #{user_name},
-            #{user_id}, current_timestamp, #{play_name}, current_timestamp, #{created_id},
-            current_timestamp, #{updated_id}
-               )
+        insert into ticketing (ticketing_id, ticketing_at, ticketing_cnt, ticketing_status,
+                               showing_info, showing_date, cancelable_at, play_price, stage_name,
+                               choice_show_seat, ticketing_price, user_name, user_id, viewing_at,
+                               play_name, created_at, created_id, updated_at, updated_id)
+        VALUES (#{ticketing_id}, #{ticketing_at}, #{ticketing_cnt}, #{ticketing_status},
+                #{showing_info}, #{showing_date}, current_timestamp, #{play_price},
+                #{stage_name}, #{choice_show_seat}, #{ticketing_price}, #{user_name},
+                #{user_id}, current_timestamp, #{play_name}, current_timestamp, #{created_id},
+                current_timestamp, #{updated_id})
     </insert>
 
     <!--  ===========================================================================================================================================================================  -->
 
 
     <select id="select_view" parameterType="map" resultType="TicketingDto">
-<!--        SELECT-->
-<!--        t.ticketing_id,-->
-<!--        MAX(t.ticketing_at) AS ticketing_at,-->
-<!--        t.stage_name,-->
-<!--        t.choice_show_seat,-->
-<!--        p.play_middle_cat,-->
-<!--        t.play_name-->
-<!--        FROM-->
-<!--        ticketing t-->
-<!--        JOIN play p ON t.play_name = p.play_name-->
-<!--        WHERE-->
-<!--        true-->
-<!--        <choose>-->
-<!--            <when test='option=="A"'>-->
-<!--                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')-->
-<!--            </when>-->
-<!--            <when test='option=="M"'>-->
-<!--                AND p.play_middle_cat = '뮤지컬'-->
-<!--            </when>-->
-<!--            <when test='option=="C"'>-->
-<!--                AND p.play_middle_cat = '콘서트'-->
-<!--            </when>-->
-<!--            <when test='option=="J"'>-->
-<!--                AND p.play_middle_cat = '전시'-->
-<!--            </when>-->
-<!--            <when test='option=="G"'>-->
-<!--                AND p.play_middle_cat = '공연'-->
-<!--            </when>-->
-<!--        </choose>-->
-<!--        <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">-->
-<!--            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')-->
-<!--        </if>-->
-<!--        <if test="keyword != null and keyword != ''">-->
-<!--            AND t.play_name LIKE CONCAT('%', #{keyword}, '%')-->
-<!--        </if>-->
-<!--        GROUP BY-->
-<!--        t.ticketing_id-->
-<!--        ORDER BY-->
-<!--        ticketing_at DESC-->
-<!--        LIMIT #{pageSize}-->
-<!--        OFFSET #{offset};-->
 
         SELECT
         t.ticketing_id,
@@ -223,65 +178,75 @@
     </select>
 
     <!--  ===========================================================================================================================================================================  -->
-    
+
     <insert id="Inquiry_insert" parameterType="InquiryDto">
-        INSERT INTO `Inquiry` (
-            `inquiry_seq`, `inquiry_title`, `inquiry_img`, `inquiry_content`,
-            `inquiry_time`, `inquiry_category`, `user_id`, `created_at`, `created_id`,
-            `updated_at`, `updated_id`
-        ) VALUES (
-            #{inquiry_seq}, #{inquiry_title}, #{inquiry_img}, #{inquiry_content},
-            current_timestamp, #{inquiry_category}, #{user_id}, current_timestamp,
-            #{created_id}, current_timestamp, #{updated_id}
-            );
+        INSERT INTO `Inquiry` (`inquiry_seq`, `inquiry_title`, `inquiry_img`, `inquiry_content`,
+                               `inquiry_time`, `inquiry_category`, `user_id`, `created_at`, `created_id`,
+                               `updated_at`, `updated_id`)
+        VALUES (#{inquiry_seq}, #{inquiry_title}, #{inquiry_img}, #{inquiry_content},
+                current_timestamp, #{inquiry_category}, #{user_id}, current_timestamp,
+                #{created_id}, current_timestamp, #{updated_id});
     </insert>
 
     <!--  ===========================================================================================================================================================================  -->
 
-<!--  예매 상세보기   -->
+    <!--  예매 상세보기   -->
     <select id="ticket_detail" resultType="TicketingDto" parameterType="String">
-        SELECT
-            t.ticketing_at,
-            t.user_name,
-            t.viewing_at,
-            t.stage_name,
-            t.ticketing_id,
-            t.play_name,
-            t.viewing_at,
-            t.ticketing_cnt,
-            t.choice_show_seat,
-            (SELECT cc.comn_code_name FROM comn_code cc WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
-        FROM
-            ticketing t
-        WHERE
-            t.ticketing_id = #{ticketing_id};
+        SELECT t.ticketing_at,
+               t.user_name,
+               t.viewing_at,
+               t.stage_name,
+               t.ticketing_id,
+               t.play_name,
+               t.viewing_at,
+               t.ticketing_cnt,
+               t.choice_show_seat,
+               (SELECT cc.comn_code_name
+                FROM comn_code cc
+                WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
+        FROM ticketing t
+        WHERE t.ticketing_id = #{ticketing_id};
     </select>
 
-<!--  ===========================================================================================================================================================================  -->
+    <!--  ===========================================================================================================================================================================  -->
 
-    <select id="coupon_count" parameterType="String" resultType="int">
-        SELECT count(*)
+    <select id="coupon_count" parameterType="String" resultType="CouponDto">
+        SELECT *
         FROM coupon
         <if test="coupon_id != null and coupon_id != ''">
             WHERE coupon_id = #{coupon_id}
         </if>
     </select>
 
-    <insert id="coupon_insert">
-        INSERT INTO user (user_id, coupon_id, created_at, created_id, updated_at, updated_id)
-        SELECT
-            '사용자 ID 값' AS user_id,
-            c.coupon_id,
-            current_timestamp AS created_at,
-            '생성자 ID 값' AS created_id,
-            current_timestamp AS updated_at,
-            '생성자 ID 값' AS updated_id
-        FROM
-            Coupon c
-        WHERE
-            -- 특정 조건을 여기에 추가, 예를 들어 쿠폰 이름이 '특정 쿠폰 이름'인 경우
-            c.coupon_name = '특정 쿠폰 이름'
-            LIMIT 1;
+    <insert id="coupon_insert" parameterType="UserCouponDto">
+                INSERT INTO coupon_user
+        (user_coupon_seq, user_id, coupon_id, coupon_use_at, coupon_issue_at, coupon_expire_at, coupon_use_yn, created_at, created_id, updated_at, updated_id)
+        VALUES
+            (#{user_coupon_seq}, "Ralo2", #{coupon_id}, null, NOW(), NOW()+INTERVAL + 1 WEEK, 'N', NOW() , #{created_id}, NOW(), #{updated_id});
     </insert>
+
+
+    <update id="update_coupon" parameterType="CouponDto">
+        update coupon
+        set coupon_status = 'U'
+        where coupon_id = #{coupon_id};
+    </update>
+
+
+    <select id="coupon_list" parameterType="map" resultType="UserCouponDto">
+        SELECT uc.coupon_id,
+               uc.coupon_issue_at,
+               uc.coupon_expire_at,
+               (SELECT coupon_name
+                FROM coupon c
+                WHERE c.coupon_id = uc.coupon_id) AS coupon_name,
+               (SELECT coupon_discount_amount
+                FROM coupon c
+                WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
+               (SELECT coupon_use_condition
+                FROM coupon c
+                WHERE c.coupon_id = uc.coupon_id) AS coupon_use_condition
+        FROM coupon_user uc;
+    </select>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
@@ -12,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -78,8 +80,8 @@ public class AdminDaoImplTest {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
                     "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
-            int insertResult = adminDao.insertUser(userDto);
             int deleteResult = adminDao.userDelete("jisoo" + i);
+            int insertResult = adminDao.insertUser(userDto);
             // then
             assertEquals(1, insertResult);
             assertEquals(1, deleteResult);
@@ -152,7 +154,7 @@ public class AdminDaoImplTest {
     @Test
     public void insertCoupon() throws Exception {
 
-        adminDao.deleteAllCoupon();
+//        adminDao.deleteAllCoupon();
 
         String start_at = "2024-02-01";
         String end_at = "2024-03-01";
@@ -168,8 +170,8 @@ public class AdminDaoImplTest {
         Timestamp start_timestamp = new Timestamp(start_date.getTime());
         Timestamp end_timestamp = new Timestamp(end_date.getTime());
 
-        // 쿠폰 31개 생성
-        for (int i = 0; i < 31; i++) {
+        // 날짜별 사용가능한 쿠폰 31개 생성
+        for (int i = 0; i < 3; i++) {
             // given
             // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
             UUID uuid = UUID.randomUUID();
@@ -184,8 +186,8 @@ public class AdminDaoImplTest {
                     .coupon_min_order_amount(20000)
                     .coupon_use_yn("Y")
 //                    .coupon_status("A") DEFAULT A 인서트
-                    .coupon_useable_start_at("2023-02-01")
-                    .coupon_useable_end_at("2023-03-01")
+                    .coupon_useable_start_at("2024-02-01")
+                    .coupon_useable_end_at("2026-02-01")
                     .coupon_use_condition("20000원 이상 구매시 사용 가능")
                     .coupon_description("중복 쿠폰 사용 불가한 쿠폰입니다")
 //                    .created_at(CURRENT_TIMESTAMP) DEFAULT 현재시간
@@ -198,7 +200,129 @@ public class AdminDaoImplTest {
             adminDao.insertCoupon(couponDto);
         }
 
+        // 날짜별 유효만료된 쿠폰 31개 생성
+        for (int i = 0; i < 3; i++) {
+            // given
+            // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
+            UUID uuid = UUID.randomUUID();
+            String couponCode = uuid.toString().replace("-", "").substring(0, 8);
+            System.out.println("생성된 쿠폰 코드: " + couponCode);
+
+            CouponDto couponDto = CouponDto.builder()
+                    .coupon_id(couponCode)
+                    .coupon_reg_at(CURRENT_TIMESTAMP)
+                    .coupon_name("[웰컴 쿠폰] 2000원 할인")
+                    .coupon_discount_amount(2000)
+                    .coupon_min_order_amount(30000)
+                    .coupon_use_yn("Y")
+//                    .coupon_status("A") DEFAULT A 인서트
+                    .coupon_useable_start_at("2023-01-01")
+                    .coupon_useable_end_at("2024-02-01")
+                    .coupon_use_condition("30000원 이상 구매시 사용 가능")
+                    .coupon_description("중복 쿠폰 사용 불가한 쿠폰입니다")
+//                    .created_at(CURRENT_TIMESTAMP) DEFAULT 현재시간
+//                    .created_id("JISOO") DEFAULT "JISOO"
+//                    .updated_at(CURRENT_TIMESTAMP) DEFAULT 현재시간
+//                    .updated_id("JISOO")  DEFAULT "JISOO"
+                    .build();
+
+            // when
+            adminDao.insertCoupon(couponDto);
+        }
+
         // then
-        assertTrue(adminDao.countAllCoupon() == 31);
+        assertTrue(adminDao.countAllCoupon() == 62);
+    }
+
+    @Test
+    public void selectAllCoupon() throws Exception {
+
+        // given, when
+        List<CouponDto> list = adminDao.selectAllCoupon();
+
+        // then
+        assertEquals(list.size(), adminDao.countAllCoupon());
+    }
+    @Test
+    public void countOptionNCoupon() throws Exception {
+        // given
+        Map<String, Object> map = new HashMap<>();
+        map.put("option", "N");
+        map.put("keyword", "1000원");
+        map.put("start_date", "2023-02-01");
+        map.put("end_date", "2026-03-05");
+
+        // when
+        int cnt = adminDao.countOptionCoupon(map);
+
+        // then
+        assertEquals(31, cnt);
+    }
+
+    @Test
+    public void selectAllOptionCoupon() throws Exception {
+        // given
+        Map<String, Object> map = new HashMap<>();
+        map.put("option", "N");
+        map.put("keyword", "1000원");
+        map.put("start_date", "2023-02-01");
+        map.put("end_date", "2026-03-05");
+        map.put("start", 0);
+        map.put("limit", 10);
+
+        // when
+        List<CouponDto> list = adminDao.selectAllOptionCoupon(map);
+        System.out.println("list = " + list);
+
+        // then
+        assertEquals(10, list.size());
+    }
+
+    @Test
+    public void insert5StageData() throws Exception {
+
+        adminDao.deleteAllStage();
+
+        // given => DB내에 존재한다 가정하는 공연장 테스트 데이터 5개 생성
+        StageDto stageDto1 = new StageDto("1ad62b31", "올림픽공원 체조경기장", "서울특별시 송파구 올림픽로 424", 80, "조영상", "02-6000-0114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto2 = new StageDto("2ad62b31", "서울예술의전당", "서울특별시 서초구 서초동 700", 900, "이철수", "02-580-1300", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto3 = new StageDto("3ad62b31", "세종문화회관", "서울특별시 종로구 세종로 175", 500, "박미영", "02-399-1114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto4 = new StageDto("4ad62b31", "블루스퀘어", "서울특별시 용산구 이태원로 294", 700, "정성호", "02-1588-5212", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto5 = new StageDto("5ad62b31", "디큐브아트센터", "서울특별시 구로구 신도림동 360-51", 200, "조영상", "02-2211-3660", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        // when, then
+        assertEquals(1, adminDao.insertStage(stageDto1));
+        assertEquals(1, adminDao.insertStage(stageDto2));
+        assertEquals(1, adminDao.insertStage(stageDto3));
+        assertEquals(1, adminDao.insertStage(stageDto4));
+        assertEquals(1, adminDao.insertStage(stageDto5));
+    }
+
+    @Test
+    public void selectKeywordStage() throws Exception {
+
+        adminDao.deleteAllStage();
+
+        // given => DB내에 존재한다 가정하는 공연장 테스트 데이터 5개 생성
+        StageDto stageDto1 = new StageDto("1ad62b31", "올림픽공원 체조경기장", "서울특별시 송파구 올림픽로 424", 80, "조영상", "02-6000-0114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto2 = new StageDto("2ad62b31", "서울예술의전당", "서울특별시 서초구 서초동 700", 900, "이철수", "02-580-1300", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto3 = new StageDto("3ad62b31", "세종문화회관", "서울특별시 종로구 세종로 175", 500, "박미영", "02-399-1114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto4 = new StageDto("4ad62b31", "블루스퀘어", "서울특별시 용산구 이태원로 294", 700, "정성호", "02-1588-5212", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto5 = new StageDto("5ad62b31", "디큐브아트센터", "서울특별시 구로구 신도림동 360-51", 200, "조영상", "02-2211-3660", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+
+        adminDao.insertStage(stageDto1);
+        adminDao.insertStage(stageDto2);
+        adminDao.insertStage(stageDto3);
+        adminDao.insertStage(stageDto4);
+        adminDao.insertStage(stageDto5);
+
+        String keyword = "올림픽공원";
+
+        // when
+        List<StageDto> list = adminDao.selectKeywordStage(keyword);
+        System.out.println("list = " + list);
+
+        // then
+        assertEquals(list.get(0).getStage_seat_cnt(), 80);
     }
 }

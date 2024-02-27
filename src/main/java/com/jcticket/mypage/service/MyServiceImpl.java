@@ -1,6 +1,8 @@
 package com.jcticket.mypage.service;
 
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,6 @@ import java.util.Map;
  */
 
 
-
 @Service
 public class MyServiceImpl implements mypageService {
 
@@ -40,13 +41,23 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
-    public Integer coupon_count(String coupon_id) throws Exception {
+    public Integer coupon_insert(UserCouponDto userCouponDto) throws Exception {
+        return mypageDAO.coupon_insert(userCouponDto);
+    }
+
+    @Override
+    public CouponDto coupon_count(String coupon_id) throws Exception {
         return mypageDAO.coupon_count(coupon_id);
     }
 
     @Override
     public List<TicketingDto> selectAll(Map map) throws Exception {
         return mypageDAO.selectAll(map);
+    }
+
+    @Override
+    public List<UserCouponDto> coupon_list(Map map) throws Exception {
+        return mypageDAO.coupon_list(map);
     }
 
     @Override
@@ -65,6 +76,11 @@ public class MyServiceImpl implements mypageService {
     @Override
     public TicketingDto ticket_detail(String ticketing_id) throws Exception {
         return mypageDAO.ticket_detail(ticketing_id);
+    }
+
+    @Override
+    public Integer update_coupon(CouponDto couponDto) throws Exception {
+        return mypageDAO.update_coupon(couponDto);
     }
 
 

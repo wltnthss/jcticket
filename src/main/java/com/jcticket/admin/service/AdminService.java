@@ -3,8 +3,10 @@ package com.jcticket.admin.service;
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.PageDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 
 import java.util.List;
 import java.util.Map;
@@ -51,5 +53,20 @@ public interface AdminService {
     AdminDto showAdminInfo(String admin_id) throws Exception;
     // 관리자 쿠폰 등록
     int insertCoupon(CouponDto couponDto) throws Exception;
-
+    // 관리자 전체 쿠폰 리스트 조회
+    List<CouponDto> selectAllCoupon() throws Exception;
+    // 관리자 쿠폰 전체 카운트
+    int countAllCoupon() throws Exception;
+    // 관리자 쿠폰 옵션,keyword 카운트 조회
+    int countOptionCoupon(Map<String, Object> map) throws Exception;
+    // 관리자 쿠폰 옵션,keyword,date 리스트 조회
+    List<CouponDto> selectAllOptionCoupon(int page, String option, String keyword, String start_at, String end_at) throws Exception;
+    // 현재페이지, 전체, 시작, 끝, 검색값 전달 PageDto 전달
+    PageDto couponPagingParam(int page, String option, String keyword, String start_at, String end_at) throws Exception;
+    // 관리자 쿠폰 삭제
+    void deleteCoupon(String coupon_id) throws Exception;
+    // 상품 관리 팝업창 공연장명 검색 조회
+    List<StageDto> selectKeywordStage(String keyword) throws Exception;
+    // 상품 관리 팝업창 공연명 검색 조회
+    List<PlayDto> selectKeywordPlay(String keyword) throws Exception;
 }

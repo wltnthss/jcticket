@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -87,28 +88,29 @@
                                 <th>사용일자</th>
                                 <th>등록일</th>
                             </tr>
-                            <tr>
-                                <td>[네이버] 2,500원 할인</td>
-                                <td>2,500원</td>
-                                <td>10,000원 이상 결제 시 사용 가능
-                                    다운로드 당일만 사용 가능
-                                    ID당 1일 1회 발급 가능
-                                    전시/체험/행사는 쿠폰 적용 제외</td>
-                                <td>유효기간만료</td>
-                                <td>2024.01.15</td>
-                            </tr>
-                            <tr>
-                                <td>[네이버] 2,500원 할인</td>
-                                <td>2,500원</td>
-                                <td>10,000원 이상 결제 시 사용 가능
-                                    다운로드 당일만 사용 가능
-                                    ID당 1일 1회 발급 가능
-                                    전시/체험/행사는 쿠폰 적용 제외</td>
-                                <td>유효기간만료</td>
-                                <td>2024.01.15</td>
-                            </tr>
+                            <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                <tr>
+                                    <td>${UserCouponDto.coupon_name}</td>
+                                    <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                    <td>${UserCouponDto.coupon_use_condition}</td>
+                                    <td>${UserCouponDto.coupon_expire_at}</td>
+                                    <td>${UserCouponDto.coupon_issue_at}</td>
+                                </tr>
+                            </c:forEach>
                         </table>
 
+                    </div>
+
+                    <div id="paging">
+                        <c:if test="${ph.showPrev}">
+                            <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&lt;</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                            <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">${i}</a>
+                        </c:forEach>
+                        <c:if test="${ph.showNext}">
+                            <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&gt;</a>
+                        </c:if>
                     </div>
 
                     <div id="cupon-use">

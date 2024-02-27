@@ -1,5 +1,7 @@
 package com.jcticket.mypage.dao;
 
+import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.mypage.dto.InquiryDto;
 import org.springframework.stereotype.Repository;
@@ -30,12 +32,16 @@ public interface mypageDAO {
 
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
+    List<UserCouponDto> coupon_list(Map map) throws Exception;
     int insert(TicketingDto ticketingDto)  throws Exception;
 
     int insert_InquiryDto(InquiryDto inquiryDto) throws Exception;
-    int coupon_count(String coupon_id) throws Exception;
+    int coupon_insert(UserCouponDto userCouponDto) throws Exception;
+    CouponDto coupon_count(String coupon_id) throws Exception;
 
     TicketingDto ticket_detail(String ticketing_at) throws Exception;
+
+    int update_coupon(CouponDto CouponDto) throws Exception;
 
 
 }

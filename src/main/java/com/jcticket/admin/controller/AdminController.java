@@ -1,16 +1,14 @@
 package com.jcticket.admin.controller;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.AdminValidLoginDto;
-import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.notice.dto.NoticeValidDto;
-import com.jcticket.admin.dto.PageDto;
 import com.jcticket.admin.service.AdminService;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -531,25 +529,46 @@ public class AdminController {
     }
     // 관리자 쿠폰 관리 폼 이동
     @GetMapping("/admin/coupon")
-    public String adminCouponForm() throws Exception{
+    public String adminCouponForm(Model model, Map<String, Object> map
+                        ,@RequestParam(defaultValue = "A") String option
+                        ,@RequestParam(required = false) String start_at
+                        ,@RequestParam(required = false) String end_at
+                        ,@RequestParam(required = false) String keyword
+                        ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+
+        List<CouponDto> list = adminService.selectAllOptionCoupon(page, option, keyword, start_at, end_at);
+        PageDto pageDto = adminService.couponPagingParam(page, option, keyword, start_at, end_at);
+        int couponListCnt = adminService.countOptionCoupon(map);
+
+        model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
+        model.addAttribute("couponListCnt", couponListCnt);
+
         return "admin/admincoupon";
     }
     // 관리자 쿠폰 등록 폼 이동
     @GetMapping("/admin/couponregister")
     public String adminCouponRegisterForm() throws Exception{
+
         return "admin/admincouponregister";
     }
     // 관리자 쿠폰 등록
     @PostMapping("/admin/couponregister")
-    public String adminCouponRegister(CouponDto couponDto) throws Exception{
-
-        System.out.println("couponDto = " + couponDto);
+    public String adminCouponRegister(Model model, RedirectAttributes rattr,
+                                      CouponDto couponDto) throws Exception{
 
         try {
+
             int rslt = adminService.insertCoupon(couponDto);
 
             if(rslt == 0){
-//                rattr.addFlashAttribute("msg", "INS_ERR");
+                rattr.addFlashAttribute("msg", "INS_ERR");
                 return "redirect:/admin/couponregister";
             }
 
@@ -559,9 +578,94 @@ public class AdminController {
 
         return "redirect:/admin/coupon";
     }
+    // 관리자 쿠폰 삭제 폼
+    @GetMapping("/admin/coupondelete")
+    public String adminCouponDeleteForm(Model model, Map<String, Object> map
+            ,@RequestParam(defaultValue = "A") String option
+            ,@RequestParam(required = false) String start_at
+            ,@RequestParam(required = false) String end_at
+            ,@RequestParam(required = false) String keyword
+            ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
+
+        map = new HashMap<>();
+        map.put("option", option);
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+
+        List<CouponDto> list = adminService.selectAllOptionCoupon(page, option, keyword, start_at, end_at);
+        PageDto pageDto = adminService.couponPagingParam(page, option, keyword, start_at, end_at);
+        int couponListCnt = adminService.countOptionCoupon(map);
+
+        model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
+        model.addAttribute("couponListCnt", couponListCnt);
+
+        return "admin/admincoupondelete";
+    }
+    // 관리자 쿠폰 삭제
+    @DeleteMapping("/admin/coupondelete")
+    @ResponseBody
+    public int adminCouponDelete(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+        System.out.println("valueArr = " + valueArr);
+
+        try {
+            for (String couponId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.deleteCoupon(couponId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    // 관리자 공연장명 검색 팝업 조회
+    @GetMapping("/admin/stage")
+    @ResponseBody
+    public List<StageDto> adminProduct(@RequestParam String keyword) throws Exception {
+
+        List<StageDto> list = null;
+        try {
+            list = adminService.selectKeywordStage(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    // 관리자 공연명 검색 팝업 조회
+    @GetMapping("/admin/play")
+    @ResponseBody
+    public List<PlayDto> adminPlay(@RequestParam String keyword) throws Exception {
+
+        List<PlayDto> list = null;
+        try {
+            list = adminService.selectKeywordPlay(keyword);
+            System.out.println("list = " + list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    // 관리자 상품 관리
     @GetMapping("/admin/product")
     public String adminProduct() throws Exception{
         return "admin/adminproduct";
+    }
+    // 관리자 상품 관리 등록 폼
+    @GetMapping("/admin/productregister")
+    public String adminProductRegisterForm() throws Exception{
+        return "admin/adminproductregister";
+    }
+    // 관리자 상품 관리 등록
+    @PostMapping("/admin/productregister")
+    public String adminProductRegister() throws Exception{
+        return "admin/adminproductregister";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{

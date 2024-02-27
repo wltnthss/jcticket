@@ -2,9 +2,10 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.PlayDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -124,5 +125,45 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public int countAllCoupon() throws Exception {
         return sqlSession.selectOne(namespace+"countAllCoupon");
+    }
+
+    @Override
+    public List<CouponDto> selectAllCoupon() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllCoupon");
+    }
+
+    @Override
+    public int countOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionCoupon", map);
+    }
+
+    @Override
+    public List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectList(namespace+"selectAllOptionCoupon", map);
+    }
+
+    @Override
+    public void deleteCoupon(String coupon_id) throws Exception {
+        sqlSession.delete(namespace + "deleteCoupon", coupon_id);
+    }
+
+    @Override
+    public int insertStage(StageDto stageDto) throws Exception {
+        return sqlSession.delete(namespace+"insertStage", stageDto);
+    }
+
+    @Override
+    public void deleteAllStage() throws Exception {
+        sqlSession.delete(namespace + "deleteAllStage");
+    }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordStage", keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
     }
 }
