@@ -53,7 +53,7 @@ public class AdminDaoImplTest {
 
         // given
         for (int i = 1; i < 10; i++) {
-            AdminDto adminDto = new AdminDto("jcticket"+i, "admin"+i+"@gmail.com", "1111", "010-1257-7845", "jcticket"+i+" 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+            AdminDto adminDto = new AdminDto("jcticket"+i, "admin"+i+"@gmail.com", "smgsmg12!@", "010-1257-7845", "jcticket"+i+" 관리자", "Y", CURRENT_TIMESTAMP, "S", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
             // when, then
             assertEquals(1, adminDao.insertAdmin(adminDto));
         }
