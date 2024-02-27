@@ -1,12 +1,8 @@
 package com.jcticket.admin.dao;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.ShowSeatDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +27,6 @@ public class AdminDaoImpl implements AdminDao{
 
     @Autowired
     private SqlSession sqlSession;
-
     private static final String namespace = "adminMapper.";
 
     @Override
@@ -188,6 +183,17 @@ public class AdminDaoImpl implements AdminDao{
     @Override
     public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
         return sqlSession.insert(namespace + "insertShowSeat", showSeatDto);
+    }
+
+    @Override
+    public PlayDto insertPlay(PlayDto playDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlay", playDto);
+        return playDto;
+    }
+
+    @Override
+    public void insertPlayImg(PlayImgDto playImgDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlayImg", playImgDto);
     }
 
 }
