@@ -4,11 +4,12 @@ import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -350,4 +351,70 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.insertShowSeat(showSeatDto);
     }
 
+    @Override
+    public void insertPlay(PlayDto playDto) throws Exception {
+
+        final String FILE_PATH = "C:/play_img/";
+
+        // 공연 아이디 랜덤 난수 8글자 insert 하기 위함
+        UUID uuid = UUID.randomUUID();
+        String idCode = uuid.toString().replace("-", "").substring(0, 8);
+        playDto.setPlay_id(idCode);
+
+        System.out.println("공연 Dto .. play_id = " + playDto.getPlay_id());
+
+        // 임시 기획사 아이디 insert
+        String agency_id = "agency1";
+        playDto.setAgency_id(agency_id);
+
+        System.out.println("공연 Dto .. agency_id = " + playDto.getAgency_id());
+
+        if ((playDto.getPlay_poster().isEmpty() && playDto.getPlay_info().isEmpty())) {
+            // 1. 파일 첨부를 하지 않은 경우
+
+            // 파일 첨부 여부 판별 후 파일 첨부 없이 insert
+            playDto.setPlay_file_yn("N");
+            adminDao.insertPlay(playDto);
+        } else{
+            // 2. 파일 첨부를 진행한 경우
+
+            // 파일 첨부 여부 판별
+            playDto.setPlay_file_yn("N");
+            adminDao.insertPlay(playDto);
+
+            /*
+                1. 파일 따로 가져옴
+                2. 파일 이름 가져옴
+                3. 서버 저장용 이름을 만듬
+                4. PlayImgDto 세팅 (저장한 파일의 경로를 저장하기 위함)
+                5. 저장 경로 설정
+                6. 해당 경로에 파일 저장
+                8. PlayImgTable에 해당 데이터 insert 처리
+            */
+            // 1.
+            MultipartFile playPoster = playDto.getPlay_poster();
+            MultipartFile playInfo = playDto.getPlay_info();
+            // 2.
+            String posterOriginalFileName = playPoster.getOriginalFilename();
+            String infoOriginalFileName = playInfo.getOriginalFilename();
+            // 3.
+            String posterStoredFileName = System.currentTimeMillis() + "-" + posterOriginalFileName;
+            String infoStoredFileName = System.currentTimeMillis() + "-" + infoOriginalFileName;
+            // 4.
+            PlayImgDto playImgDto = new PlayImgDto();
+            playImgDto.setPlay_id(idCode);
+            playImgDto.setPlay_poster_original_file_name(posterOriginalFileName);
+            playImgDto.setPlay_poster_stored_file_name(posterStoredFileName);
+            playImgDto.setPlay_info_original_file_name(infoOriginalFileName);
+            playImgDto.setPlay_info_stored_file_name(infoStoredFileName);
+            // 5.
+            String savePosterPath = "FILE_PATH" + posterStoredFileName;
+            String saveInfoPath = "FILE_PATH" + infoStoredFileName;
+            // 6.
+            playPoster.transferTo(new File(savePosterPath));
+            playInfo.transferTo(new File(saveInfoPath));
+
+            adminDao.insertPlayImg(playImgDto);
+        }
+    }
 }

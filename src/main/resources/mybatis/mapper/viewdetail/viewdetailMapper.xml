@@ -5,11 +5,11 @@
 <mapper namespace="com.jcticket.viewdetail.viewdetailMapper">
 
 <!--    play테이블 insert-->
-    <insert id="play_insert" parameterType="PlayDto">
-        INSERT INTO play
-        (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
-        VALUES(#{play_id},#{play_name},#{play_poster},#{play_info},#{play_major_cat},#{play_middle_cat},#{play_small_cat},#{play_run_time},#{agency_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
-    </insert>
+<!--    <insert id="play_insert" parameterType="PlayDto">-->
+<!--        INSERT INTO play-->
+<!--        (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)-->
+<!--        VALUES(#{play_id},#{play_name},#{play_poster},#{play_info},#{play_major_cat},#{play_middle_cat},#{play_small_cat},#{play_run_time},#{agency_id},#{created_at},#{created_id},#{updated_at},#{updated_id});-->
+<!--    </insert>-->
 
 <!--    showing테이블 insert-->
     <insert id="showing_insert" parameterType="ShowingDto">
@@ -84,8 +84,8 @@
                p.play_major_cat,
                p.play_middle_cat,
                p.play_run_time,
-               p.play_poster,
-               p.play_info,
+--                p.play_poster,
+--                p.play_info,
                p.agency_id,
                sc.seat_price,
                (SELECT stg.stage_name
