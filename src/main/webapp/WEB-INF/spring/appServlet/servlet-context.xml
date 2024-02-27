@@ -28,4 +28,6 @@
     <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <beans:property name="defaultErrorView" value="error"/>
     </beans:bean>
+
+    <beans:bean id="naverLoginBO" class="com.jcticket.user.sns.NaverLoginBO" />
 </beans:beans>

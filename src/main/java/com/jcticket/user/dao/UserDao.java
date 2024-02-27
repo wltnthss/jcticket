@@ -25,6 +25,8 @@ public interface UserDao {
     //회원가입
     int insert(UserDto userDto) throws Exception; //
 
+//    sns회원가입
+    int insertSNS(UserDto userDto)throws  Exception;
 
     int count() throws Exception; //
     int delete(String user_id) throws  Exception; //
