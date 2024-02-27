@@ -92,7 +92,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int deleteResult = adminDao.userDelete("jisoo" + i);
             int insertResult = adminDao.insertUser(userDto);
@@ -107,7 +107,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.insertUser(userDto);
             // then
@@ -120,7 +120,7 @@ public class AdminDaoImplTest {
         // given
         for (int i = 1; i < 9; i++) {
             UserDto userDto = new UserDto("jisoo"+i, "1111", "지수", "soodal"+i , "wltn@naver.com", "010-2521-341"+i,
-                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                    "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
             // when
             int result = adminDao.userDelete("jisoo" + i);
             // then
@@ -131,7 +131,7 @@ public class AdminDaoImplTest {
     public void userRetireUpdate() throws Exception {
         // given
         UserDto userDto = new UserDto("jisoo", "1111", "지수", "soodall" , "wltn@naver.com", "010-2521-3435",
-                "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
+                "서울 성동구", "19990219", "M", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, "N", 0, "공연", "고수","", CURRENT_TIMESTAMP, "userAdmin", CURRENT_TIMESTAMP, "userAdmin");
         int insertUser = adminDao.insertUser(userDto);
         UserDto loginUser = userDao.select(userDto.getUser_id());
 
