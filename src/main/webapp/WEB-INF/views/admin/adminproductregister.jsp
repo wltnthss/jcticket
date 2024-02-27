@@ -37,7 +37,7 @@
                     <tr>
                         <th scope="row">공연명</th>
                         <td>
-                            <input type="text" name="play_name" class="frm_input required" size="20" required>
+                            <input type="text" name="play_name" class="frm_input required" size="50" required>
                         </td>
                     </tr>
                     <tr>
@@ -55,19 +55,19 @@
                     <tr>
                         <th scope="row">공연/전시 대분류</th>
                         <td>
-                            <input type="text" name="play_major_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_major_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 중분류</th>
                         <td>
-                            <input type="text" name="play_middle_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_middle_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 소분류</th>
                         <td>
-                            <input type="text" name="play_small_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_small_cat" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     <tr>
