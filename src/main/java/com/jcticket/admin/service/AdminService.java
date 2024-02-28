@@ -78,4 +78,6 @@ public interface AdminService {
     int insertShowSeat(ShowSeatDto showSeatDto) throws Exception;
     // 관리자 상품 관리 공연, 공연 이미지 등록
     void insertPlay(PlayDto playDto) throws Exception;
+    // 관리자 상품 조회
+    List<Map<String, Object>> selectAllProduct() throws Exception;
 }

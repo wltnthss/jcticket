@@ -379,7 +379,7 @@ public class AdminServiceImpl implements AdminService {
             // 2. 파일 첨부를 진행한 경우
 
             // 파일 첨부 여부 판별
-            playDto.setPlay_file_yn("N");
+            playDto.setPlay_file_yn("Y");
             adminDao.insertPlay(playDto);
 
             /*
@@ -416,5 +416,10 @@ public class AdminServiceImpl implements AdminService {
 
             adminDao.insertPlayImg(playImgDto);
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllProduct() throws Exception {
+        return adminDao.selectAllProduct();
     }
 }

@@ -392,4 +392,19 @@ public class AdminDaoImplTest {
         // then
         assertEquals(insertShoiwng, 1);
     }
+
+    @Test
+    public void selectAllProduct() throws Exception {
+
+        // given, when
+        List<Map<String, Object>> list = adminDao.selectAllProduct();
+        System.out.println("list = " + list);
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("list.get(i) = " + list.get(i));
+
+            String play_name = (String) list.get(i).get("play_name");
+            System.out.println("play_name = " + play_name);
+        }
+    }
 }
