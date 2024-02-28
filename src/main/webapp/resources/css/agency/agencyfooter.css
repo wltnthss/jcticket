@@ -1,0 +1,11 @@
+.agency-dashboard-footer{
+    clear: both;
+    width: 100%;
+    min-width: 1210px;
+    font-family: "Century Gothic", sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+    color: #999;
+    border-top: 1px solid #ccc;
+}

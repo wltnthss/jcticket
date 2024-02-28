@@ -4,6 +4,8 @@ import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.admin.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
 import java.util.Map;
