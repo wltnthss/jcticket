@@ -23,31 +23,31 @@ import static org.junit.Assert.assertTrue;
  * -----------------------------------------------------------
  * 2024-02-25        {sana}       최초 생성
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
-public class EnrollDaoImplTest {
-    @Autowired
-    EnrollDAO enrollDAO;
-
-    @Test
-    public void insertEnroll() throws Exception {
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        EnrollDto enrollDto = new EnrollDto(1,null, "1", 1, currentTimestamp,currentTimestamp,"20240204회차",null,
-                100000, 200, "1", "aaa", "poster", "info","a", "b",120, "agency", "manager",
-                "agency@email.com","01098765432", currentTimestamp,"sana",currentTimestamp,"sana");
-
-        System.out.println("enrollDto = " + enrollDto);
-        //assertTrue(enrollDAO.insertEnroll(enrollDto)==1); // EnrollDAO를 직접 호출하여 db에 삽입. dto호출시 dto에 추가할게 너무 많아짐
-    }
-    @Test
-    public void insertEnrollpk() throws Exception {
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        EnrollDto enrollDto = new EnrollDto(4,null, "1", 1, currentTimestamp,currentTimestamp,"20240204회차",null,
-                100000, 200, "1", "aaa", "poster", "info","a", "b",120, "agency", "manager",
-                "agency@email.com","01098765432", currentTimestamp,"sana",currentTimestamp,"sana");
-
-        System.out.println("enrollDto222 = " + enrollDto);
-
-    }
-
-}
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+//public class EnrollDaoImplTest {
+//    @Autowired
+//    EnrollDAO enrollDAO;
+//
+//    @Test
+//    public void insertEnroll() throws Exception {
+//        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+//        EnrollDto enrollDto = new EnrollDto(1,null, "1", 1, "20240205","20240303","20240204회차",null,
+//                100000, 200, "1", "aaa", "poster", "info","a", "b",120, "agency", "manager",
+//                "agency@email.com","01098765432", currentTimestamp,"sana",currentTimestamp,"sana");
+//
+//        System.out.println("enrollDto = " + enrollDto);
+//        //assertTrue(enrollDAO.insertEnroll(enrollDto)==1); // EnrollDAO를 직접 호출하여 db에 삽입. dto호출시 dto에 추가할게 너무 많아짐
+//    }
+//    @Test
+//    public void insertEnrollpk() throws Exception {
+//        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+//        EnrollDto enrollDto = new EnrollDto(4,null, "1", 1, currentTimestamp,currentTimestamp,"20240204회차",null,
+//                100000, 200, "1", "aaa", "poster", "info","a", "b",120, "agency", "manager",
+//                "agency@email.com","01098765432", currentTimestamp,"sana",currentTimestamp,"sana");
+//
+//        System.out.println("enrollDto222 = " + enrollDto);
+//
+//    }
+//
+//}

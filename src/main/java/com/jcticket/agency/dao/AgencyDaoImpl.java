@@ -1,6 +1,7 @@
 package com.jcticket.agency.dao;
 
 import com.jcticket.agency.dto.*;
+import com.jcticket.notice.dto.NoticeDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
@@ -79,6 +82,22 @@ import org.springframework.transaction.annotation.Propagation;
     }
 
 
+
+    @Override
+    public List<EnrollDto> selectAll(int offset, int limit) throws Exception {
+        Map<String, Object> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("limit", limit);
+
+        return sqlSession.selectList(namespace + ".selectAll", params);
+    }
+
+
+
+//    @Override
+//    public List<EnrollDto> selectAll() throws Exception {
+//        return sqlSession.selectList(namespace+"selectAll");
+//    }
 
 
 //    @Override

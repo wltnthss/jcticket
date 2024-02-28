@@ -82,8 +82,9 @@ $('#AuthBtn').on('click',function (){
     const $resultMsg = $('.authMsg');
 
     console.log(inputCode);
+    if(inputCode.length==0){
 
-    if(inputCode===code && code!=="" && inputCode!==""){
+    }else if(inputCode===code && code!=="" && inputCode!==""){
         $($resultMsg).css('display','block')
         $resultMsg.html('인증에 성공하였습니다.')
         $resultMsg.css('color','rgb(0, 159, 206)');
@@ -160,9 +161,7 @@ $('#userPwdInput').on('keyup', function(){
     const pwdLength = $('#userPwdInput').val().length;
     const pwdValue = $('#userPwdInput').val();
 
-    if(pwdLength===0) {
-
-    }else if(pwdLength<8){
+    if(pwdLength<8){
         $('#pwd_warnMsg').css('display', 'block');
         $('#pwd_warnMsg').css('color', 'orangered');
         $('#pwd_warnMsg').html("8자리 이상의 비밀번호를 입력해주세요.");
@@ -342,6 +341,10 @@ $(document).ready(function() {
 //
         if($('.authMsg').css('color')==='rgb(255, 69, 0)') {
             alert('인증번호 확인을 하거나, 올바르게 입력해주세요.')
+            $('#authNum').focus();
+            event.preventDefault();
+        }else if($('.authMsg').html().length===0) {
+            alert('인증번호 입력 후 인증번호 확인 버튼을 눌러주세요.')
             $('#authNum').focus();
             event.preventDefault();
         }

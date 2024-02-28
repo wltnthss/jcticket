@@ -38,20 +38,3 @@ public class StageDto {
 
 
 
-//    CREATE TABLE `Stage` (
-//              `stage_id`	VARCHAR(30)	NOT NULL,
-//	            `stage_name`	VARCHAR(50)	NOT NULL,
-//	            `stage_address`	VARCHAR(300)	NOT NULL,
-//	            `stage_seat_cnt`	INT	NOT NULL,
-//              `stage_manager`	VARCHAR(20)	NOT NULL,
-//	            `stage_type`	CHAR(1)	NOT NULL	COMMENT 'A 면 지정석 N 이면  비지정석',
-//              `stage_tel`	VARCHAR(20)	NOT NULL,
-//	            `created_at`	TIMESTAMP	NOT NULL	DEFAULT current_timestamp,
-//              `created_id`	VARCHAR(36)	NOT NULL,
-//	            `updated_at`	TIMESTAMP	NOT NULL	DEFAULT current_timestamp,
-//              `updated_id`	VARCHAR(36)	NOT NULL
-//);
-//
-//    ALTER TABLE `Stage` ADD CONSTRAINT `PK_STAGE` PRIMARY KEY (
-//	`stage_id`
-//    );

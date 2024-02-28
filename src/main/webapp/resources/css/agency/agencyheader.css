@@ -82,6 +82,7 @@
     overflow: visible !important;
 }
 .header-nav-li{
+    width:120px;
     z-index: 13;
     position: relative;
     float: left;

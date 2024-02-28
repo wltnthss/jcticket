@@ -38,7 +38,7 @@
                         <a href="/agency/sale" class="header_nav-a">판매중</a>
                     </li>
                     <li class="header-nav-li">
-                        <a href="/agency/rollout" class="header_nav-a">신규/판매예정</a>
+                        <a href="/agency/rollout" class="header_nav-a">신규/예정</a>
                     </li>
                     <li class="header-nav-li">
                         <a href="/agency/soldout" class="header_nav-a">판매종료</a>

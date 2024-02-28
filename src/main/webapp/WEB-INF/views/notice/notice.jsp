@@ -19,7 +19,7 @@
         <div class="notice-search">
             <form action="/notice/paging?page=${paging.page}?keyword=${paging.keyword}">
                 <input type="text" value="${paging.keyword}" name="keyword" placeholder="궁금하신 내용을 입력해주세요" >
-                <button type="submit" class="notice-search-btn"></button>
+                <button type="submit" class="search-btn"></button>
             </form>
         </div>
     </div>
@@ -78,8 +78,8 @@
 <script src="/resources/js/notice/notice.js"></script>
 
 <script>
-
-
+    let msg = "${msg}";
+    if(msg=="READ_ERR")  alert("삭제되었거나 없는 게시물입니다.");
 </script>
 <body>
 </body>

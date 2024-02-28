@@ -5,6 +5,8 @@ import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.StageDto;
 import com.jcticket.agency.dto.EnrollDto;
 import java.util.List;
+
+import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.dto.PlayDto;
 import javax.sql.DataSource;
@@ -33,16 +35,11 @@ public interface AgencyDao {
 
     int agencyCount() throws Exception;
 
-//각 Dto를 db에 삽입하도록---------------------
-//    void insertPlay(PlayDto playDto);
-//    void insertShowing(ShowingDto showingDto);
-//    void insertStage(StageDto stageDto);
-//
-////    void insertEnroll(EnrollDto enrollDto);
-//
-//    List<StageDto> getAllStages();
-//    List<PlayDto> getAllPlays();
-//    List<ShowingDto> getAllShowings();
+    List<EnrollDto> selectAll(int offset, int limit) throws Exception;
+
+
+//    List<NoticeDto> selectAll() throws Exception;
+
 
 //    void setDataSource(DataSource dataSource); // 데이터베이스 연결 설정 메서드
 

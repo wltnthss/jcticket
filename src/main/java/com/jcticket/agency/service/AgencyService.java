@@ -3,6 +3,9 @@ package com.jcticket.agency.service;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.PosterDto;
+import com.jcticket.notice.dto.NoticeDto;
+
+import java.util.List;
 
 /**
  * packageName    : com.jcticket.agency.service
@@ -24,6 +27,13 @@ public interface AgencyService {
 //    void processEnrollment(EnrollDto enrollDto);//processEnrollment() 메서드를 호출
 
     int insertEnroll(EnrollDto enrollDto, PosterDto posterDto) throws Exception;
+
+
+    List<EnrollDto> getEnrollDtoList(int page, int itemsPerPage) throws Exception;
+
+
+
+//    List<NoticeDto> pagingList(int page, String sort, String keyword) throws Exception;
 
 
 }

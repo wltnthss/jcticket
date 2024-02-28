@@ -17,32 +17,62 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminheader.jsp"/>
 
     <div class="admin-common-wrap">
-        <div class="admin-common-snb">
-            <div class="snb-header">
-                <h2>
-                    환경설정
-                </h2>
-                <i class="fas fa-solid fa-gears"></i>
-            </div>
-            <dl>
-                <dt class="menu_toggle-u10">환경설정
-                    <i class="fas fa-solid fa-arrow-down"></i>
-                </dt>
 
-                <div id="u10" style="display: block">
-                    <dd class="u10">
-                        <a href="/admin/user">환경설정 정보관리</a>
-                    </dd>
-                    <dd class="u10">
-                        <a href="/admin/register">환경설정 등록하기</a>
-                    </dd>
-                </div>
-            </dl>
-        </div>
+        <jsp:include page="/WEB-INF/views/admin/common/adminsettingnav.jsp"/>
+
         <div class="admin-common-content">
             <div class="admin-common-title">
                 <h1>환경 설정</h1>
+                <h2>관리자 정보 수정</h2>
             </div>
+            <form action="/admin/setting" method="post">
+                <div class="tbl_frm01">
+                    <table>
+                        <colgroup>
+                            <col class="w180">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th scope="row">아이디</th>
+                            <td>
+                                <input type="text" value="${sessionScope.adminId}" placeholder="4글자 이상 입력." minlength="4" maxlength="20" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;" disabled>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">패스워드</th>
+                            <td>
+                                <input type="password" value="${adminDto.admin_password}" placeholder="4글자 이상 입력." name="admin_password" minlength="4" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_admin_password}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">이메일</th>
+                            <td>
+                                <input type="text" value="${adminDto.admin_email}" maxlength="20" name="admin_email" class="frm_input required" size="20" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_admin_email}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">핸드폰</th>
+                            <td>
+                                <input type="text" value="${adminDto.admin_phone}" maxlength="30" name="admin_phone" class="frm_input required" size="30" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_admin_phone}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">닉네임</th>
+                            <td>
+                                <input type="text" value="${adminDto.admin_nickname}" name="admin_nickname" class="frm_input required" size="30" maxlength="100" style="background-position: right top; background-repeat: no-repeat;">
+                                <p class="valid">${valid_admin_nickname}</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="btn-confirm">
+                    <input type="submit" value="수정" id="btn_submit" class="btn-large">
+                </div>
+            </form>
         </div>
     </div>
 

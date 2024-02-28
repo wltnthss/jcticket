@@ -54,21 +54,21 @@ public class ViewDetailDaoTest {
         assertTrue(1==insert);
     }
 
-//    @Test
-//    public void showing_insert() throws Exception {
-////        쿼리 전부 제거
-////        viewDetailDao.showing_delete_all();
-////        테스트용 딜리트
-//        viewDetailDao.test_delete_showing();
-//        //given
-//        ShowingDto showingDto = new ShowingDto(5,now,now,"1회 13시 00분","2024-03-15","금","BS",10,"테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
-//
-//        //when
-//        int insert = viewDetailDao.showing_insert(showingDto);
-//
-//        //then
-//        assertTrue(1==insert);
-//    }
+    @Test
+    public void showing_insert() throws Exception {
+//        쿼리 전부 제거
+//        viewDetailDao.showing_delete_all();
+//        테스트용 딜리트
+        viewDetailDao.test_delete_showing();
+        //given
+        ShowingDto showingDto = new ShowingDto(5,"2024-02-28", "2024-03-28","1회 13시 00분","2024-03-15","금","BS",10, 40000, "테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
+
+        //when
+        int insert = viewDetailDao.showing_insert(showingDto);
+
+        //then
+        assertTrue(1==insert);
+    }
 
     @Test
     public void seat_class_insert() throws Exception {

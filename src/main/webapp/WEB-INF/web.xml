@@ -58,6 +58,17 @@
     </filter-mapping>
     <!-- 한글 변환 필터 끝 -->
 
+    <!-- form 태그내 put, delete 전송 설정-->
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- form 태그내 put, delete 전송 설정 끝 -->
+
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>

@@ -88,13 +88,14 @@
         group by showing_date
         order by showing_date asc;
     </select>
-<!--    공연아이디 && 공연일정별 회차시퀀스, 회차정보 조회-->
+<!--    공연아이디 && 공연일정별  회차정보 조회-->
     <select id="selectRound" parameterType="hashmap" resultType="hashmap">
         select showing_info
         from showing
         where 1=1
         and play_id = #{play_id}
         and showing_date = #{date_text}
+        order by showing_info asc
     </select>
 
 <!--    공연아이디로 공연명과 ,공연포스터, 공연장명 조회-->

@@ -4,6 +4,7 @@ import com.jcticket.agency.dao.AgencyDao;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.EnrollDto;
 import com.jcticket.agency.dto.PosterDto;
+import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.agency.dto.StageDto;
@@ -17,8 +18,13 @@ import java.sql.Timestamp;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 //import org.apache.commons.lang3.StringUtils;
 //import org.springframework.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 
@@ -64,17 +70,27 @@ private final AgencyDao agencyDao;
     }
 //---------------------------------------------------------------------------
 
+
+    @Override
+    public List<EnrollDto> getEnrollDtoList(int page, int itemsPerPage) throws Exception {
+        int offset = (page - 1) * itemsPerPage;
+        return agencyDao.selectAll(offset, itemsPerPage);
+    }
+
+//-------------------------------------------------------------------
     @Override
     public int insertEnroll(EnrollDto enrollDto, PosterDto posterDto) throws Exception {
-        String uploadDir = "C:\\jctickettest\\src\\main\\webapp\\resources\\img\\agency";
+        String uploadDir = "C:\\play_img";
 
-        // 포스터 이미지 업로드 및 파일명 설정
+        // 포스터 이미지 업로드 , 파일명 설정
         String playPosterFileName = saveFile(posterDto.getPlay_poster_file(), uploadDir);
         enrollDto.setPlay_poster(playPosterFileName);
 
-        // 상세정보 이미지 업로드 및 파일명 설정
+        // 상세정보
         String playInfoFileName = saveFile(posterDto.getPlay_info_file(), uploadDir);
         enrollDto.setPlay_info(playInfoFileName);
+
+//        System.out.println("dsfsdfs : "+enrollDto.getShowing_start_at());
 
         // enrollDto를 데이터베이스에 저장
         return agencyDao.insertEnroll(enrollDto);
@@ -96,6 +112,43 @@ private final AgencyDao agencyDao;
             }
         }
         return fileName;
+
+
+
+
+
+
+
+
+
+//        @Override
+//        public List<EnrollDto> pagingList(int page, String sort, String keyword) throws Exception {
+//
+//
+//            // 1page 는 0부터 2page는 10부터 3page는 20부터 시작
+//            int pagingStart = (page - 1) * PAGELIMIT;
+//            List<NoticeDto> pagingList = null;
+//
+//            Map<String, Object> pagingParams = new HashMap<>();
+//
+//            pagingParams.put("start", pagingStart);
+//            pagingParams.put("limit", PAGELIMIT);
+//            pagingParams.put("keyword", keyword);
+//            pagingParams.put("sort", sort);
+//
+//            // 동적쿼리 번호순 seq 값 들어오면 번호순 정렬, view 값 들어오면 조회순 정렬
+//            pagingList = noticeDao.pagingList(pagingParams);
+//
+//            return pagingList;
+//        }
+
+
+
+
+
+
+
+
     }//끝
 
 //@Override
@@ -194,20 +247,6 @@ private final AgencyDao agencyDao;
 //        }
 //    }
 
-
-
-// catch (Exception e) {
-//        logger.error("An error occurred during enrollment process", e);
-//        // 예외 처리
-//    }로그 사용 하려면 의존성 추가 해 줘야 함
-//}
-
-
-
-//    @Override//selectAgency 메서드를 오버라이드.
-//    public AgencyDto selectAgency(String agency_id) throws Exception {//또외처리
-//        return agencyDao.selectAgency(agency_id); //AgencyDao를 사용하여 agency_id정보를 가져오고 반환?
-//    }
 
 
 

@@ -2,6 +2,7 @@ package com.jcticket.agency.controller;
 
 import com.jcticket.agency.dto.PosterDto;
 import com.jcticket.agency.service.AgencyService;
+import com.jcticket.notice.dto.NoticeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.List;
+
 import com.jcticket.agency.dto.EnrollDto;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -136,18 +139,30 @@ public class AgencyController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during enrollment process.");
         }
     }
-//@PostMapping("/enroll")//자동 주입 @ModelAttribute 어노테이션 사용 불가. 의존성 주입이 필요해 보임
-//public ResponseEntity<String> enroll(@ModelAttribute EnrollDto enrollDto) {
-//    try {
-//        // AgencyService를 통해 처리
-//        agencyService.processEnrollment(enrollDto);
-//        return ResponseEntity.ok("Enrollment process successful.");
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during enrollment process.");
-//    }
-//}
 
+
+
+
+//        try {
+//            List<EnrollDto> enrollDtoList = agencyService.getEnrollDtoList(page, itemsPerPage);
+//            model.addAttribute("enrollDtoList", enrollDtoList);
+//            return "agency/agencysale"; //
+
+
+    @GetMapping("/sale-page")
+    public String getAgencyList(@RequestParam(defaultValue = "1") int page,
+                                @RequestParam(defaultValue = "10") int itemsPerPage,
+                                Model model) {
+        try {
+            List<EnrollDto> enrollDtoList = agencyService.getEnrollDtoList(page, itemsPerPage);
+            model.addAttribute("list", enrollDtoList);
+            return "agency/agencysale"; //
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 예외
+            return "error";
+        }
+    }
 
     @GetMapping("/sale")//판매중
     public String agencysale() {
@@ -176,7 +191,7 @@ public class AgencyController {
         }
     }
 
-    @GetMapping("/productlist")//상품전체
+    @GetMapping("/productlist")//상품등록내역전체
     public  String agencyproductlist(){
         try{
             return "agency/agencyproductlist";
@@ -193,7 +208,45 @@ public class AgencyController {
             return "error";
         }
     }
-}
+
+//    @GetMapping("/agency/sale")
+//    public String agencysale(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+//                              @RequestParam(value = "sort", defaultValue = "seq")  String sort,
+//                              @RequestParam(value = "keyword", required = false)  String keyword) throws Exception{
+//
+//        // page 값이 없이 들어오면다면 default 값 1 설정
+//        System.out.println("page => " + page);
+//        // 정렬값
+//        System.out.println("sort => " + sort) ;
+//        // 검색한 keyword
+//        System.out.println("keyword => " + keyword);
+//
+//        try {
+//
+//            List<EnrollDto> pagingList = null;
+//
+//            // page, sort, keyword 받아온 값 동적으로 list 생성
+//            pagingList = AgencyService.pagingList(page, sort, keyword);
+//            // pageDto에 설정한 maxPage, startPage, endPage 사용하기 위함
+//            com.jcticket.agency.dto.PageDto pageDto = agencyService.pagingParam(page, keyword);
+//            int noticeListCnt = agencyService.count(keyword);
+//
+//            model.addAttribute("list", pagingList);
+//            model.addAttribute("paging", pageDto);
+//            model.addAttribute("noticeListCnt", noticeListCnt);
+//
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return "admin/adminnotice";
+//    }
+//
+
+
+
+
+}//끝
 
 //    private boolean agencyLoginCheck (String agency_id, String agency_pwd) {
 //        AgencyDto agencyDto = null;

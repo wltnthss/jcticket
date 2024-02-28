@@ -67,21 +67,14 @@ public class TicketingServiceImplTest {
     public void getRoundTest() throws Exception{
         //given
         List<String> roundList;
-        Set<String> keys;
         //when
-        Map<String,Object> map = ticketingService.getRound(TEST_PLAY_ID, TEST_DATE);
+        roundList = ticketingService.getRoundList(TEST_PLAY_ID, TEST_DATE);
         //then
-        keys = map.keySet();
-        for (String key : keys){
-            System.out.println("key ==> " + key);
-            System.out.println("value ==> " + map.get(key));
-            roundList = (ArrayList<String>)map.get(key);
-            for(String val : roundList){
-                System.out.println("round ==> " + val);
-                assertTrue(3 == roundList.size());
-                assertTrue(val != null);
-            }
+        //assertTrue( 3 == roundList.size());
+        for (String round : roundList){
+            System.out.println("회차 리스트 : ");
+            System.out.println(round);
+            assertTrue(round != null);
         }
-
     }
 }

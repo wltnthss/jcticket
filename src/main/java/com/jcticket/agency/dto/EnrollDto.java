@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
+
 /**
  * packageName    : com.jcticket.agency.dto
  * fileName       : EnrollDto
@@ -31,9 +32,9 @@ public class EnrollDto {
 
 //  private String agency_id;//로그인한 사용자의 기획사 ID세션을 통해 서버에서 처리 되도록
 
-    private int showing_seq;//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@회차 일련번호 어떡하지?@@@@@@@@@@@@@@@@@@@@@@@@
-    private Timestamp showing_start_at; // 공연 시작 날자
-    private Timestamp showing_end_at;
+    private int showing_seq;//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@회차 일련번호 어떡하지?@@@@@@@@@@@@@@@@@@@@@@@@s이거는 최대값 가져오는 쿼리를 하나 짜서 그걸로 받아오셔도
+    private String showing_start_at; // 공연 시작 날자
+    private String showing_end_at;
     private String showing_info; //크기 늘려주고 showing_date,showing_day전부 적음
 //    private String showing_date;
 //    private String showing_day;

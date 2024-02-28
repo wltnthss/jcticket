@@ -92,6 +92,25 @@
         insert into enroll(enroll_id) values (#{enrollId})
     </insert>
 
+
+<!--    상품 등록 내역 임시 -->
+    <select id="selectAll" parameterType="java.util.Map" resultType="EnrollDto">
+        SELECT
+            notice_seq,
+            play_poster,
+            play_name,
+            play_major_cat,
+            play_run_time,
+            showing_start_at,
+            showing_end_at,
+            stage_id
+        FROM
+            enroll LIMIT #{offset}, #{limit}
+    </select>
+
+
+
+
     <!-- PlayDto를 db에 insert -->
 <!--    <insert id="insertPlay" parameterType="com.jcticket.viewdetail.dto.PlayDto">-->
 <!--        INSERT INTO play (play_id, play_name, play_poster, play_info, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)-->

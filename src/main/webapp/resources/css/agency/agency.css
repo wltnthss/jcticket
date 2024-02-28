@@ -136,17 +136,19 @@ thead{
     margin-bottom: 8px;
 }
 .agency-common-content{
-    margin-left: 204px;
+    margin-left: 200px;
+    margin-right: 200px;
     padding-bottom: 100px;
-    border-left: 1px solid #ccc;
+    /*border-left: 1px solid #ccc;*/
 }
 .agency-common-title{
-    margin: 30px 25px;
+    margin: 30px 25px 0 30px;
+    width: calc(100% - 55px);
 }
 .agency-common-content h1{
     margin: 0 0 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #888;
+    /*border-bottom: 1px solid #888;*/
     font-size: 20px;
     line-height: 1em;
     letter-spacing: -1px;
@@ -236,9 +238,7 @@ table th{
     background-color: #fff;
     height: 23px;
 }
-.w80{
-    width: 80px !important;
-}
+
 /*관리자 회원관리 끝*/
 
 /*관리자 관리자관리 시작*/
@@ -294,8 +294,145 @@ table th{
     content: "\f085";
 }
 
-/*관리자 환경설정 끝*/
+agency-common-content{
+    margin-left: 204px;
+    border-left: 1px solid #ccc;
+}
+agency-common-content h1{
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #888;
+    font-size: 20px;
+    line-height: 1em;
+    letter-spacing: -1px;
+}
 
+agency-common-content h2{
+    margin: 30px 0 0;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    line-height: 1em;
+    padding: 0 0 10px 10px;
+}
+.agency-common-content h2:before{
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background: #1a4e99;
+    content: '';
+}
 
+.agency-form table {
+    /*width: 100%;*/
+}
+.agency-form th {
+    font-weight: 600;
+}
+.agency-form th, .agency-form td {
+    /* padding: 8px 14px; */
+    /* height: 23px; */
+    /* border-bottom: 1px solid #e4e5e7; */
+    text-align: left;
+    vertical-align: middle;
+}
+.agency-form-input {
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: normal;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    /* height: 23px; */
+}
+.btn-medium {
+    padding: 10px;
+    margin-left: 10px;
+    border: 0;
+}
+.agency-w100{
+    width: 100px !important;
+}
+.btn-confirm{
+    margin: 30px;
+    text-align: center;
+}
+.tbl_header{
+    border-top: 1px solid #aeaeae;
+    border-bottom: 1px solid #e4e5e7;
+    width: 100% ;
+}
+.tbl_header table{
+    width: 100%;
+}
+.tbl_header th {
+    padding: 8px 10px;
+    line-height: 1em;
+    font-weight: 600;
+    background: #f1f1f1;
+    border-left: 1px solid #e4e5e7;
+    text-align: center;
+    vertical-align: middle;
+}
+.tbl_header td {
+    height: 22px;
+    padding: 8px 8px;
+    line-height: 1.6em;
+    border: 1px solid #e4e5e7;
+    text-align: center;
+    vertical-align: middle;
+}
+ol, li, ul, dl, dt, dd {
+    list-style: none;
+    text-align: left;
+    position: static;
+    overflow: hidden;
+}
+.agency-paging{
+    margin: 30px 0;
+    text-align: center;
+}
+.agency-paging a{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+    margin: 0 3px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+}
+.agency-paging-pageitems.active{
+    border: 1px solid #333;
+    color: #333;
+}
 
+.local_ov.mart30 {
+    text-align: left;
+}
 
+.sale-tr{
+    border-top: 1px solid lightgray;
+}
+.sale-td{
+    text-align: center;
+    padding: 20px 0;
+}
+.sale-td.title{
+    font-weight: bold;
+}
+.sale-td.title:hover{
+    text-decoration:underline;
+    text-underline-position : under;
+    cursor: pointer;
+}
+.sale-td.content:hover{
+    text-decoration:underline;
+    text-underline-position : under;
+    cursor: pointer;
+}

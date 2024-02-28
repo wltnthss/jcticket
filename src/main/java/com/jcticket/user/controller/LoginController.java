@@ -49,7 +49,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Valid UserValidLoginDto userValidLoginDto, BindingResult bindingResult, boolean rememberId, Model m,
-                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rattr) throws Exception {
+                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rattr){
 
         String user_id = userValidLoginDto.getUser_id();
         String user_password = userValidLoginDto.getUser_password();
@@ -72,22 +72,26 @@ public class LoginController {
         }
         //valid 유효성검사 끝
 
+        try {
 //        아이디 비번 틀리면 로그인 안되게
-        if (!userService.loginCheck(user_id,user_password)){
-            m.addAttribute("user_id", user_id);
-            m.addAttribute("user_password", user_password);
-            return "login/login";
+            if (!userService.loginCheck(user_id, user_password)) {
+                m.addAttribute("user_id", user_id);
+                m.addAttribute("user_password", user_password);
+                return "login/login";
+            }
+
+            //탈퇴회원이면 로그인 안되게
+            if (userService.isUserRetired(user_id)) {
+                m.addAttribute("retireYN", "Y");
+                return "login/login";
+            }
+
+            //방문횟수 증가
+            userService.increaseLoginCnt(user_id);
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        //탈퇴회원이면 로그인 안되게
-        if (userService.isUserRetired(user_id)) {
-            m.addAttribute("retireYN", "Y");
-            return "login/login";
-        }
-
-        //방문횟수 증가
-        userService.increaseLoginCnt(user_id);
-
         //로그인 성공시 세션 부여
         HttpSession session = request.getSession();
         session.setAttribute("user_id", user_id);
@@ -97,6 +101,7 @@ public class LoginController {
 
         return "index";
     }
+
 
 
     private static void rememberId(String user_id, boolean rememberId, HttpServletResponse response) {
