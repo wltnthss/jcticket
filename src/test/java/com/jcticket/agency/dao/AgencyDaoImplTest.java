@@ -2,9 +2,9 @@ package com.jcticket.agency.dao;
 
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.agency.dto.EnrollDto;
-import com.jcticket.agency.dto.StageDto;
+//import com.jcticket.agency.dto.StageDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+//import com.jcticket.viewdetail.dto.PlayDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -718,12 +718,4 @@ public class AdminController {
     public String adminInquiry() throws Exception{
         return "admin/admininquiry";
     }
-    @GetMapping("/admin/coupon")
-    public String admincoupon() throws Exception{
-        return "admin/admincoupon";
-    }
-    @GetMapping("/admin/setting")
-    public String adminsetting() throws Exception{
-        return "admin/adminsetting";
-    }
 }

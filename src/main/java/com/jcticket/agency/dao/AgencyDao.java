@@ -2,13 +2,13 @@ package com.jcticket.agency.dao;
 
 
 import com.jcticket.agency.dto.AgencyDto;
-import com.jcticket.agency.dto.StageDto;
+//import com.jcticket.agency.dto.StageDto;
 import com.jcticket.agency.dto.EnrollDto;
 import java.util.List;
 
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+//import com.jcticket.viewdetail.dto.PlayDto;
 import javax.sql.DataSource;
 
 /**
