@@ -82,6 +82,17 @@
     color: gray;
 }
 
+.play-top-center a span{
+    display: block;
+    background: #ec7d2c;
+    width: 0;
+    height: 3px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    margin-top: 5px;
+}
+
 .play-top-center-main{
     display: flex;
     justify-content: center;
