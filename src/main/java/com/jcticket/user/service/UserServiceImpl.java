@@ -48,6 +48,12 @@ public class UserServiceImpl implements UserService {
 
     //아이디 중복검사
     @Override
+    public int signupSNS(UserDto userDto) throws Exception {
+        return userDao.insertSNS(userDto);
+    }
+
+    //아이디 중복검사
+    @Override
     public int chkIdDupl(String user_id) throws Exception {
         return userDao.selectIdDupl(user_id);
     }

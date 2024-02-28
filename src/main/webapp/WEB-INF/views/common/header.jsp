@@ -32,7 +32,7 @@
                 <img src="/resources/img/components/공지사항_흑.png" class="notice_icon">
             </a>
             <c:choose>
-                <c:when test="${empty sessionScope.user_id}">
+                <c:when test="${empty sessionScope.sessionId}">
                     <!-- 로그인 상태가 아니면(세션이 없으면) 로그인 링크를 보여줌 -->
                     <a href="/login" class="login">
                         <img src="/resources/img/components/로그인_흑.png" class="login_icon">

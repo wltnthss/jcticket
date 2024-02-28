@@ -3,7 +3,8 @@ package com.jcticket.admin.service;
 import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.admin.dto.PlayDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
@@ -75,4 +76,6 @@ public interface AdminService {
     void deleteAllShoiwing() throws Exception;
     // 관리자 상품 관리 공연 좌석 등록
     int insertShowSeat(ShowSeatDto showSeatDto) throws Exception;
+    // 관리자 상품 관리 공연, 공연 이미지 등록
+    void insertPlay(PlayDto playDto) throws Exception;
 }

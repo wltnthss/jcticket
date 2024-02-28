@@ -1,20 +1,26 @@
 package com.jcticket.user.controller;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.user.dto.UserValidLoginDto;
 import com.jcticket.user.service.UserService;
+import com.jcticket.user.sns.NaverLoginBO;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.*;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * packageName    : com.jcticket.login
@@ -29,12 +35,18 @@ import java.util.Map;
  */
 
 @Controller
-//@RequestMapping("/login")
 public class LoginController {
+
+    private NaverLoginBO naverLoginBO;
+    private String apiResult = null;
+
+    @Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
+
     @Autowired
     UserService userService;
-
-    String retireYN = "";
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
@@ -45,7 +57,12 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String loginForm(){return "login/login";}
+    public String loginForm(Model m, HttpSession session){
+        String naverAuthurl = naverLoginBO.getAuthorizationUrl(session);
+        System.out.println("naverAuthurl = " + naverAuthurl);
+        m.addAttribute("naverUrl",naverAuthurl);
+
+        return "login/login";}
 
     @PostMapping("/login")
     public String login(@Valid UserValidLoginDto userValidLoginDto, BindingResult bindingResult, boolean rememberId, Model m,
@@ -94,13 +111,81 @@ public class LoginController {
         }
         //로그인 성공시 세션 부여
         HttpSession session = request.getSession();
-        session.setAttribute("user_id", user_id);
+        session.setAttribute("sessionId", user_id);
+
 
         //아이디 저장
         rememberId(user_id, rememberId, response);
 
         return "index";
     }
+
+    //네이버 로그인 성공시 callback호출 메소드
+     @RequestMapping(value = "/login/naverCb", method = { RequestMethod.GET, RequestMethod.POST })
+     public String callback(Model m, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
+        System.out.println("여기는 callback");
+
+        OAuth2AccessToken oauthToken;
+        oauthToken = naverLoginBO.getAccessToken(session, code, state);
+
+        //1. 로그인 사용자 정보를 읽어온다.
+          apiResult = naverLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
+          /** apiResult json 구조
+          {"resultcode":"00",
+          "message":"success",
+          "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+          **/
+
+         // 2. String형식인 apiResult를 json형태로 바꿈
+          JSONParser parser = new JSONParser();
+          Object obj = parser.parse(apiResult);
+          JSONObject jsonObj = (JSONObject) obj;
+
+         // 3. 데이터 파싱
+         // Top레벨 단계 _response 파싱
+          JSONObject response_obj = (JSONObject)jsonObj.get("response");
+
+         System.out.println("response_obj = " + response_obj);
+
+         //------------ response의 값 파싱 후 인서트 ---------
+
+         // 아이디
+         String id = (String)response_obj.get("email");
+         int idx =  id.indexOf("@");
+         String n_id = id.substring(0,idx);
+         System.out.println("n_id = " + n_id);
+         System.out.println("n_id.length() = " + n_id.length());
+         System.out.println("(userService.getUser(n_id)) = " + (userService.getUser(n_id)));
+         try {
+             if (userService.getUser(n_id)!=null) {
+                 session.setAttribute("sessionId",n_id); //세션 생성/
+                 m.addAttribute("result", apiResult);
+                 return "index";
+             }
+         }catch (Exception e){
+             e.printStackTrace();
+         }
+
+         m.addAttribute("n_id", n_id);
+         // 이름
+         String n_name = (String) response_obj.get("name");
+         m.addAttribute("n_name", n_name);
+         // 이메일
+         String n_email = (String) response_obj.get("email");
+         m.addAttribute("n_email", n_email);
+         // 전화번호
+         String n_tel = (String) response_obj.get("mobile");
+         m.addAttribute("n_tel", n_tel);
+         // 생년월일
+         String n_birth = (String) response_obj.get("birthyear") + ((String) response_obj.get("birthday")).replace("-", "");
+         m.addAttribute("n_birth", n_birth);
+         //성별
+         String n_gender = (String) response_obj.get("gender");
+         m.addAttribute("n_gender", n_gender);
+
+         return "signup/signupSNS";
+          }
+
 
 
 

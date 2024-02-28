@@ -384,4 +384,16 @@
         (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
         VALUES(#{showing_seq}, #{seat_row}, #{seat_col}, #{stage_id}, "Y", now(), "JISOO", now(), "JISOO");
     </insert>
+
+    <insert id="insertPlay" parameterType="PlayDto">
+        INSERT INTO play
+        (play_id, play_name, play_file_yn, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id}, #{play_name}, #{play_file_yn}, #{play_major_cat}, #{play_middle_cat}, #{play_small_cat}, #{play_run_time}, #{agency_id}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
+    </insert>
+
+    <insert id="insertPlayImg" parameterType="PlayImgDto">
+        INSERT INTO play_image
+        (play_id, play_poster_original_file_name, play_poster_stored_file_name, play_info_original_file_name, play_info_stored_file_name, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id}, #{play_poster_original_file_name}, #{play_poster_stored_file_name}, #{play_info_original_file_name}, #{play_info_stored_file_name}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
+    </insert>
 </mapper>
