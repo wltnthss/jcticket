@@ -744,7 +744,7 @@ public class AdminController {
                     }
                 });
 
-        return "admin/adminproduct";
+        return "redirect:/admin/product";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
