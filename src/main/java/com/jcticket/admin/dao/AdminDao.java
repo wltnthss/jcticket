@@ -90,5 +90,7 @@ public interface AdminDao {
     PlayDto insertPlay(PlayDto playDto) throws Exception;
     // 관리자 상품 관리 공연이미지 등록
     void insertPlayImg(PlayImgDto playImgDto) throws Exception;
+    // 관리자 상품 조회
+    List<Map<String, Object>> selectAllProduct() throws Exception;
 
 }

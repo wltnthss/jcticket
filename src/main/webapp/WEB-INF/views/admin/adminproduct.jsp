@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
     <title>Title</title>
@@ -62,7 +63,7 @@
             <div class="tbl_header">
                 <table>
                     <colgroup>
-                        <col class="w150">
+                        <col class="w80">
                         <col class="w400">
                         <col class="w200">
                         <col class="w180">
@@ -78,18 +79,20 @@
                     </tr>
                     </thead>
                     <tbody>
-<%--                    <c:forEach items="${list}" var="UserDto">--%>
+                    <c:forEach items="${list}" var="p">
                         <tr class="list">
-                            <td>공연이미지</td>
-                            <td style="text-align: left">
-                                <span style="font-weight: bold">공연명</span><br>
-                                콘서트 | 140분 | 서울특별시 송파구 올림픽로 424
+                            <td style="padding: 5px 0 !important;">
+                                <img src="<c:url value='/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </td>
-                            <td>2024-02-26 ~ 2024-02-29</td>
-                            <td>올림픽공원 체조경기장</td>
-                            <td>공연중</td>
+                            <td style="text-align: left">
+                                <span style="font-weight: bold">${p.play_name}</span><br>
+                                    ${p.play_cat} | ${p.play_run_time} | ${p.stage_address}
+                            </td>
+                            <td>${p.showing_period_date}</td>
+                            <td>${p.stage_name}</td>
+                            <td>${p.showing_status}</td>
                         </tr>
-<%--                    </c:forEach>--%>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

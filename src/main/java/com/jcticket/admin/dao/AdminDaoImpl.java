@@ -197,4 +197,9 @@ public class AdminDaoImpl implements AdminDao{
         sqlSession.insert(namespace+"insertPlayImg", playImgDto);
     }
 
+    @Override
+    public List<Map<String, Object>> selectAllProduct() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllProduct");
+    }
+
 }

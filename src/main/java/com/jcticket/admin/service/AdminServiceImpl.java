@@ -417,4 +417,9 @@ public class AdminServiceImpl implements AdminService {
             adminDao.insertPlayImg(playImgDto);
         }
     }
+
+    @Override
+    public List<Map<String, Object>> selectAllProduct() throws Exception {
+        return adminDao.selectAllProduct();
+    }
 }
