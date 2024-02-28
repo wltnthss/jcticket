@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
         return userDao.insert(userDto);
     }
 
+    //아이디 중복검사
     @Override
     public int signupSNS(UserDto userDto) throws Exception {
         return userDao.insertSNS(userDto);

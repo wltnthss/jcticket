@@ -2,6 +2,7 @@ package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
