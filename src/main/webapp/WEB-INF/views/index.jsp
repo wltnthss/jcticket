@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<%--    <link rel="stylesheet" type="text/css" href="http://tkfile.yes24.com/New/Css/reset.css">--%>
     <link rel="stylesheet" href="/resources/css/components/header.css">
     <link rel="stylesheet" href="/resources/css/components/index.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
@@ -39,10 +38,18 @@
 
         <!-- 가운데 -->
         <div class="play-top-center-main" style="left : 500px; transform: none;">
-            <a href="콘서트 페이지">콘서트</a>
-            <a href="뮤지컬 페이지">뮤지컬</a>
-            <a href="연극 페이지">연극</a>
-            <a href="클래식 페이지">클래식</a>
+            <a href="/concert">콘서트
+                <span class="concert-sp"></span>
+            </a>
+            <a href="/musical">뮤지컬
+                <span class="musical-sp"></span>
+            </a>
+            <a href="/play">연극
+                <span class="play-sp"></span>
+            </a>
+            <a href="/classic">클래식
+                <span class="classic-sp"></span>
+            </a>
         </div>
         <!-- 오른쪽 -->
         <div class="play-top-right">
@@ -599,11 +606,6 @@
             <%-- 유튜브 --%>
             <div class="focus-con">
                 <iframe width="640" height="360" src="https://www.youtube.com/embed/4SBywZkUkoI?si=YtoTnKgQ3V_hOxpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<%--                <div class="focus-con-img">--%>
-<%--                    <a href="#" title="4SBywZkUkoI">--%>
-<%--                         <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240219/SOR.jpg/dims/quality/70/" alt class="lazyload">--%>
-<%--                    </a>--%>
-<%--                </div>--%>
             </div>
         </div>
     </div>
@@ -644,7 +646,7 @@
 
             <div class="cca3">
                 <c:choose>
-                    <c:when test="${empty sessionScope.user_id}">
+                    <c:when test="${empty sessionScope.sessionId}">
                         <!-- 로그인 상태가 아니면(세션이 없으면) 로그인 링크를 보여줌 -->
                         <a href="/login">
                             <img src="/resources/img/components/로그인_흑.png">

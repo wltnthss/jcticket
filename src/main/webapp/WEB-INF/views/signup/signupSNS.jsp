@@ -18,7 +18,7 @@
         <%-- 회원가입 폼 시작 --%>
         <form action="<c:url value="/signup/signupSNS"/>" id="signupForm" class="signupForm" method="POST">
             <!-- 이메일 부분 시작 -->
-            <input id="totalEmail" type="hidden" name="user_email" value="">
+            <input id="totalEmail" type="hidden" name="user_email" value="${requestScope.n_email}">
             <!-- 이메일 부분 끝 -->
 
             <!-- 아이디 입력 인풋창 시작-->
