@@ -8,7 +8,6 @@ import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -665,8 +664,11 @@ public class AdminController {
     }
     // 관리자 공연 등록
     @PostMapping("/admin/playregister")
-    public String adminProductRegister() throws Exception{
-        return "admin/adminproductregister";
+    public String adminProductRegister(Model model, PlayDto playDto) throws Exception{
+
+        System.out.println("playDto = " + playDto);
+        adminService.insertPlay(playDto);
+        return "admin/adminproduct";
     }
     // 관리자 회차 등록
     @PostMapping("/admin/showingregister")

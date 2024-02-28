@@ -26,7 +26,7 @@
             <h1>상품 관리</h1>
             <h2>공연 등록</h2>
         </div>
-        <form action="/admin/playregister" method="post">
+        <form action="/admin/playregister" method="post" enctype="multipart/form-data">
             <div class="tbl_frm01">
                 <table>
                     <colgroup>
@@ -37,43 +37,43 @@
                     <tr>
                         <th scope="row">공연명</th>
                         <td>
-                            <input type="text" name="play_name" class="frm_input required" size="20" required>
+                            <input type="text" name="play_name" class="frm_input required" size="50" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연표지</th>
                         <td>
-                            <input type="file" name="play_poster" class="frm_input required" size="20" required>
+                            <input type="file" name="play_poster" class="frm_input required" size="20" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연정보</th>
                         <td>
-                            <input type="file" name="play_info" class="frm_input required" size="20" required>
+                            <input type="file" name="play_info" class="frm_input required" size="20" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 대분류</th>
                         <td>
-                            <input type="text" name="play_major_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_major_cat" class="frm_input required" size="10" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 중분류</th>
                         <td>
-                            <input type="text" name="play_middle_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_middle_cat" class="frm_input required" size="10" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 소분류</th>
                         <td>
-                            <input type="text" name="play_small_cat" class="frm_input required" size="20" required>
+                            <input type="text" name="play_small_cat" class="frm_input required" size="10" >
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연시간</th>
                         <td>
-                            <input type="text" name="play_run_time" class="frm_input required" size="2" required> <span>  분</span>
+                            <input type="text" name="play_run_time" class="frm_input required" size="2" > <span>  분</span>
                         </td>
                     </tr>
                     </tbody>

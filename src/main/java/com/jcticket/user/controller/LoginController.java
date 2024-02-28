@@ -188,6 +188,7 @@ public class LoginController {
 
 
 
+
     private static void rememberId(String user_id, boolean rememberId, HttpServletResponse response) {
         // rememberId가 true이면(아이디 저장 체크박스 체크되어있으면)
         if (rememberId) {

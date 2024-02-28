@@ -43,9 +43,9 @@
                     <li class="header-nav-li">
                         <a href="/admin/notice" class="header_nav-a">공지사항관리</a>
                     </li>
-                    <li class="header-nav-li">
-                        <a href="/admin/inquiry" class="header_nav-a">문의관리</a>
-                    </li>
+<%--                    <li class="header-nav-li">--%>
+<%--                        <a href="/admin/inquiry" class="header_nav-a">문의관리</a>--%>
+<%--                    </li>--%>
                     <li class="header-nav-li">
                         <a href="/admin/coupon" class="header_nav-a">쿠폰관리</a>
                     </li>

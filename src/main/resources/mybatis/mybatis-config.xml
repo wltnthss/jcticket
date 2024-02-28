@@ -15,12 +15,14 @@
         <typeAlias alias="ShowingDto" type="com.jcticket.viewdetail.dto.ShowingDto"/>
         <typeAlias alias="ShowSeatDto" type="com.jcticket.admin.dto.ShowSeatDto"/>
         <typeAlias alias="JoinDto" type="com.jcticket.viewdetail.dto.JoinDto"/>
-        <typeAlias alias="PlayDto" type="com.jcticket.viewdetail.dto.PlayDto"/>
+        <typeAlias alias="PlayDto" type="com.jcticket.admin.dto.PlayDto"/>
+        <typeAlias alias="PlayImgDto" type="com.jcticket.admin.dto.PlayImgDto"/>
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
         <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
         <typeAlias alias="StageDto" type="com.jcticket.admin.dto.StageDto"/>
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
         <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
+        <typeAlias alias="EnrollDto" type="com.jcticket.enroll.dto.EnrollDto"/>
     </typeAliases>
 </configuration>

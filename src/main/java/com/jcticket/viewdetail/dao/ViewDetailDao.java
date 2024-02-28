@@ -1,8 +1,8 @@
 package com.jcticket.viewdetail.dao;
 
 
+import com.jcticket.admin.dto.PlayDto;
 import com.jcticket.viewdetail.dto.JoinDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
