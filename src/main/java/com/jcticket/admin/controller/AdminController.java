@@ -676,7 +676,7 @@ public class AdminController {
     public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
 
         try{
-            String path = "C:\\play_img\\" + img_name + ".JPG";
+            String path = "/Users/joyoungsang/Desktop/" + img_name + ".JPG";
             System.out.println("path = " + path);
 
             InputStream in = new FileInputStream(path);

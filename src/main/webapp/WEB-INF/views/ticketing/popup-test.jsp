@@ -27,12 +27,12 @@
             function showPopup() {
                 // 현재 클릭 안먹힘.... ticketing-detail?play_id=테스트ID 치고 들어가야 보임
                 console.log("showPopup 호출");
-                let playId = "테스트공연ID"; // playId 값을 내부에서 생성
+                let playId = "6f72bd86"; // playId 값을 내부에서 생성
                 let popupW = 765;
                 let popupH = 900;
                 let left = Math.ceil((window.screen.width - popupW) / 2);
                 let top = Math.ceil((window.screen.height - popupH) / 2);
-                let url = 'ticketing-detail?play_id=' + playId;
+                let url = 'detail?play_id=' + playId;
                 window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
             }
         });
