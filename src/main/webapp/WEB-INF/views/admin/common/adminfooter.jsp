@@ -9,10 +9,10 @@
 <html>
 <head>
     <title>Title</title>
-  <link rel="stylesheet" href="/resources/css/admin/adminfooter.css">
+  <link rel="stylesheet" href="/resources/css/agency/agencyfooter.css">
 </head>
 <body>
-  <div class="admin-dashboard-footer">
+  <div class="agency-dashboard-footer">
     <p>Copyright © 관리자. All rights reserved.</p>
   </div>
 </body>

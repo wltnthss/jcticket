@@ -19,6 +19,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -193,8 +194,35 @@ public class SignUpController {
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("회원가입 실패");
-            m.addAttribute(userDto);
+            m.addAttribute("userDto",userDto);
             return "redirect:/signup";
+        }
+    }
+
+    @PostMapping("/signupSNS")
+    public String signupSNS_NAVER(UserDto userDto, TermsDto termsDto, Model m, HttpSession session){
+        try {
+
+            System.out.println("userDto = " + userDto);
+            String n_user_id = userDto.getUser_id();
+            userDto.setUser_sns_provider("NAVER");
+
+            if (userService.signupSNS(userDto) != 1) {
+                throw new Exception("signupSNS failed");
+            }
+
+            if(termsService.insertUserTerm(termsDto)!=1){
+                throw new Exception("insert terms failed");
+            }
+
+            System.out.println("회원가입 성공");
+            return "signup/signupSuccess";
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("회원가입 실패");
+            m.addAttribute("userDto",userDto);
+            return "redirect:/signupSNS";
         }
     }
 }

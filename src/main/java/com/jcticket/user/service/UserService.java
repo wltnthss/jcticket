@@ -25,6 +25,8 @@ public interface UserService {
     int chkNickNameDupl(String user_nickname) throws Exception;
     //회원가입
     int signup(UserDto userDto) throws Exception;
+    //sns회원가입
+    int signupSNS(UserDto userDto) throws Exception;
 
     //로그인 유효성검사
     boolean loginCheck(String user_id, String user_password)throws Exception;

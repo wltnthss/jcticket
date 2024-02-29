@@ -233,7 +233,8 @@ $(function (){
                 for (let i = 0; i < res.length; i++) {
                     console.log(res[i]);
                     listHtml += '<tr class="list">'
-                    listHtml += '<td style="cursor: pointer" class="stage-name-list">' + res[i].stage_name + '</td>';
+                    listHtml += '<td style="cursor: pointer" class="stage-id-list">' + res[i].stage_id + '</td>';
+                    listHtml += '<td>' + res[i].stage_name + '</td>';
                     listHtml += '<td>' + res[i].stage_address + '</td>';
                     listHtml += '<td class="stage-seat-list">' + res[i].stage_seat_cnt + '</td>';
                     listHtml += '<td>' + res[i].stage_tel + '</td>';
@@ -243,8 +244,8 @@ $(function (){
 
                 $('#stageList').html(listHtml);
 
-                // 공연장명 선택 시 팝업창이 닫히면서 공연장명 input창에 데이터 삽입
-                let stageLists = document.querySelectorAll(".stage-name-list");
+                // 공연장명 선택 시 팝업창이 닫히면서 공연장 아이디 input창에 데이터 삽입
+                let stageLists = document.querySelectorAll(".stage-id-list");
                 let stageSeatLists = document.querySelectorAll(".stage-seat-list");
 
                 for (let i = 0; i < stageLists.length; i++) {
@@ -288,8 +289,8 @@ $(function (){
                 for (let i = 0; i < res.length; i++) {
                     console.log(res[i]);
                     listHtml += '<tr class="list">'
-                    listHtml += '<td>' + res[i].play_id + '</td>';
-                    listHtml += '<td style="cursor: pointer" class="play-name-list">' + res[i].play_name + '</td>';
+                    listHtml += '<td style="cursor: pointer" class="play-id-list">' + res[i].play_id + '</td>';
+                    listHtml += '<td>' + res[i].play_name + '</td>';
                     listHtml += '<td>' + res[i].play_major_cat + '</td>';
                     listHtml += '<td>' + res[i].play_run_time + '</td>';
                     listHtml += '</tr>'
@@ -298,15 +299,13 @@ $(function (){
                 $('#playList').html(listHtml);
 
                 // 공연명 선택 시 팝업창이 닫히면서 공연명 input창에 데이터 삽입
-                let playLists = document.querySelectorAll(".play-name-list");
+                let playLists = document.querySelectorAll(".play-id-list");
 
                 for (let i = 0; i < playLists.length; i++) {
                     playLists[i].addEventListener('click', function () {
 
-                        // 1. 공연 인풋창에 선택한 공연 DB정보 삽입
-                        // 1.1. 공연명에 < , > 제거하기 위함.
-                        let replaceLtGt = playLists[i].innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-                        document.getElementById("inputSearchPlay").value = replaceLtGt;
+                        // 1. 공연아이디 인풋창에 선택한 공연아이디의 DB정보 삽입
+                        document.getElementById("inputSearchPlay").value = playLists[i].innerHTML;
 
                         // 팝업창 종료
                         closePopup();

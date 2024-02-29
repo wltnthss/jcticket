@@ -8,8 +8,10 @@ import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,11 +19,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * packageName :  com.jcticket.admin.controller
@@ -654,18 +663,88 @@ public class AdminController {
     }
     // 관리자 상품 관리
     @GetMapping("/admin/product")
-    public String adminProduct() throws Exception{
+    public String adminProduct(Model model) throws Exception{
+
+        List<Map<String,Object>> list = adminService.selectAllProduct();
+
+        model.addAttribute("list", list);
+
         return "admin/adminproduct";
     }
+
+    @GetMapping("/upload/{img_name}")
+    public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
+
+        try{
+            String path = "C:\\play_img\\" + img_name + ".JPG";
+            System.out.println("path = " + path);
+
+            InputStream in = new FileInputStream(path);
+
+            return IOUtils.toByteArray(in);
+
+        } catch (IOException e){
+            throw new RuntimeException("이미지 업로드 실패", e);
+        }
+    }
+
     // 관리자 상품 관리 등록 폼
     @GetMapping("/admin/productregister")
     public String adminProductRegisterForm() throws Exception{
         return "admin/adminproductregister";
     }
-    // 관리자 상품 관리 등록
-    @PostMapping("/admin/productregister")
-    public String adminProductRegister() throws Exception{
-        return "admin/adminproductregister";
+    // 관리자 공연 등록
+    @PostMapping("/admin/playregister")
+    public String adminProductRegister(Model model, PlayDto playDto) throws Exception{
+
+        System.out.println("playDto = " + playDto);
+        adminService.insertPlay(playDto);
+
+        return "redirect:/admin/product";
+    }
+    // 관리자 회차 등록
+    @PostMapping("/admin/showingregister")
+    public String adminShowingRegister(ShowingDto showingDto) throws Exception{
+
+        String[] formatShowingInfo = showingDto.getShowing_info().split(",");
+
+        // 회차 정보의 개수 만큼 회차 테이블에 인서트
+        Arrays.stream(formatShowingInfo)
+                .forEach(info -> {
+                    System.out.println("info = " + info);
+                    try {
+                        System.out.println("showingSeq ++++ " + showingDto.getShowing_seq());
+                        showingDto.setShowing_info(info);
+                        adminService.insertShowing(showingDto);
+
+                        int showingSeat = showingDto.getShowing_seat_cnt();
+                        int showingSeq = showingDto.getShowing_seq();
+                        System.out.println("showingSeq ===== " + showingSeq);
+                        String showingStageId = showingDto.getStage_id();
+
+                        final int COL = 10;         // 좌석 수를 열의 총 개수 10으로 나눔.
+                        int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
+                        char startRow = 'A';
+                        char endRow = (char) (startRow + rows - 1);
+
+                        // 회차 인서트 개수 만큼 회차에 존재하는 좌석수의 수 만큼 회차 좌석 수 삽입
+                        for (char row = startRow; row <= endRow; row++) {
+                            for (int column = 1; column <= COL; column++) {
+                                ShowSeatDto showSeatDto = new ShowSeatDto();
+
+                                showSeatDto.setShowing_seq(showingSeq);
+                                showSeatDto.setSeat_row(new String(String.valueOf(row)));
+                                showSeatDto.setSeat_col(column);
+                                showSeatDto.setStage_id(showingStageId);
+                                adminService.insertShowSeat(showSeatDto);
+                            }
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException("INSERT ERROR => " + e);
+                    }
+                });
+
+        return "redirect:/admin/product";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{

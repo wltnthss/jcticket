@@ -1,11 +1,10 @@
 package com.jcticket.admin.dao;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,7 +28,6 @@ public class AdminDaoImpl implements AdminDao{
 
     @Autowired
     private SqlSession sqlSession;
-
     private static final String namespace = "adminMapper.";
 
     @Override
@@ -74,6 +72,12 @@ public class AdminDaoImpl implements AdminDao{
     public int deleteAdmin(String admin_id) throws Exception {
         return sqlSession.delete(namespace + "adminDelete", admin_id);
     }
+
+    @Override
+    public void adminAllDelete() throws Exception {
+        sqlSession.delete(namespace + "adminAllDelete");
+    }
+
     @Override
     public int insertAgency(AgencyDto agencyDto) throws Exception {
         return sqlSession.insert(namespace+"insertAgency", agencyDto);
@@ -166,4 +170,36 @@ public class AdminDaoImpl implements AdminDao{
     public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
         return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
     }
+
+    @Override
+    public int insertShowing(ShowingDto showingDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowing", showingDto);
+    }
+
+    @Override
+    public void deleteAllShoiwing() throws Exception {
+        sqlSession.delete(namespace + "deleteAllShowing");
+    }
+
+    @Override
+    public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowSeat", showSeatDto);
+    }
+
+    @Override
+    public PlayDto insertPlay(PlayDto playDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlay", playDto);
+        return playDto;
+    }
+
+    @Override
+    public void insertPlayImg(PlayImgDto playImgDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlayImg", playImgDto);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllProduct() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllProduct");
+    }
+
 }

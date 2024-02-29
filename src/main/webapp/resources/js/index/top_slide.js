@@ -346,6 +346,174 @@ $(function () {
 
 });
 
+function displayDonut() {
+    config.data.datasets[0].data = [12.5 * (8 - 0), 12.5 * 0];
+    new Chart(document.getElementById('chart-area14063').getContext('2d'), config);
+    config.data.datasets[0].data = [12.5 * (8 - 2), 12.5 * 2];
+    new Chart(document.getElementById('chart-area14061').getContext('2d'), config);
+    config.data.datasets[0].data = [12.5 * (8 - 1), 12.5 * 1];
+    new Chart(document.getElementById('chart-area14058').getContext('2d'), config);
+    config.data.datasets[0].data = [12.5 * (8 - 3), 12.5 * 3];
+    new Chart(document.getElementById('chart-area14051').getContext('2d'), config);
+    config.data.datasets[0].data = [12.5 * (8 - 3), 12.5 * 3];
+    new Chart(document.getElementById('chart-area14040').getContext('2d'), config);
+}
+
+    var config = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [50, 50], //주황색,흰색
+                backgroundColor: [
+                    '#ed8844', '#ebebeb'
+                ],
+                borderWidth: [0, 0],
+                cutout : "90%",
+            }]
+        },
+        options: {
+            responsive: false,
+            animation: {
+                animateRotate: true,
+                duration: 2000
+            },
+            cutoutPercentage: 90,
+            tooltips: {
+                enabled: false
+            }
+        }
+    };
+
+// function displayDonut() {
+//     var config1 = {
+//         type: 'doughnut',
+//         data: {
+//             datasets: [{
+//                 data: [12.5 * (8 - 0), 12.5 * 0],
+//                 backgroundColor: ['#ed8844', '#ebebeb'],
+//                 borderWidth: [0, 0]
+//             }]
+//         },
+//         options: {
+//             animation: {
+//                 animateRotate: true,
+//                 duration: 2000
+//             },
+//             cutoutPercentage: 90,
+//             tooltips: {
+//                 enabled: false
+//             }
+//         }
+//     };
+//     new Chart(document.getElementById('chart-area14063').getContext('2d'), config1);
+//
+//     var config2 = {
+//         type: 'doughnut',
+//         data: {
+//             datasets: [{
+//                 data: [12.5 * (8 - 2), 12.5 * 2],
+//                 backgroundColor: ['#ed8844', '#ebebeb'],
+//                 borderWidth: [0, 0]
+//             }]
+//         },
+//         options: {
+//             animation: {
+//                 animateRotate: true,
+//                 duration: 2000
+//             },
+//             cutoutPercentage: 90,
+//             tooltips: {
+//                 enabled: false
+//             }
+//         }
+//     };
+//     new Chart(document.getElementById('chart-area14061').getContext('2d'), config2);
+//
+//     var config3 = {
+//         type: 'doughnut',
+//         data: {
+//             datasets: [{
+//                 data: [12.5 * (8 - 1), 12.5 * 1],
+//                 backgroundColor: ['#ed8844', '#ebebeb'],
+//                 borderWidth: [0, 0]
+//             }]
+//         },
+//         options: {
+//             animation: {
+//                 animateRotate: true,
+//                 duration: 2000
+//             },
+//             cutoutPercentage: 90,
+//             tooltips: {
+//                 enabled: false
+//             }
+//         }
+//     };
+//     new Chart(document.getElementById('chart-area14058').getContext('2d'), config3);
+//
+//     var config4 = {
+//         type: 'doughnut',
+//         data: {
+//             datasets: [{
+//                 data: [12.5 * (8 - 3), 12.5 * 3],
+//                 backgroundColor: ['#ed8844', '#ebebeb'],
+//                 borderWidth: [0, 0]
+//             }]
+//         },
+//         options: {
+//             animation: {
+//                 animateRotate: true,
+//                 duration: 2000
+//             },
+//             cutoutPercentage: 90,
+//             tooltips: {
+//                 enabled: false
+//             }
+//         }
+//     };
+//     new Chart(document.getElementById('chart-area14051').getContext('2d'), config4);
+//
+//     var config5 = {
+//         type: 'doughnut',
+//         data: {
+//             datasets: [{
+//                 data: [12.5 * (8 - 3), 12.5 * 3],
+//                 backgroundColor: ['#ed8844', '#ebebeb'],
+//                 borderWidth: [0, 0]
+//             }]
+//         },
+//         options: {
+//             animation: {
+//                 animateRotate: true,
+//                 duration: 2000
+//             },
+//             cutoutPercentage: 90,
+//             tooltips: {
+//                 enabled: false
+//             }
+//         }
+//     };
+//     new Chart(document.getElementById('chart-area14040').getContext('2d'), config5);
+// }
+
+
+    var num = 0;
+    $(window).on('scroll', function () {
+        var stop = $(this).scrollTop();
+        if (stop > 1000) {
+            if (num == 0) {
+                num = 1;
+                displayDonut();
+            }
+        } else {
+            num = 0;
+        }
+    });
 
 
 
+if ($(".swiper-container.ticketo > .swiper-wrapper > div").length < 3) {
+        $(".sec02 > p").hide();
+        $(".sec02 > .cont").hide();
+        $(".sec02 > a").hide();
+    }

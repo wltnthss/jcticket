@@ -1,7 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
+import com.jcticket.admin.dto.PlayDto;
 import com.jcticket.viewdetail.dto.JoinDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_play();
         //given
-        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트","poster","infoimg","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231");
+        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트", "Y","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231");
 
         //when
         int insert = viewDetailDao.play_insert(playDto);
@@ -61,7 +61,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_showing();
         //given
-        ShowingDto showingDto = new ShowingDto(5,now,now,"1회 13시 00분","2024-03-15","금","BS",10,"테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
+        ShowingDto showingDto = new ShowingDto(5,"2024-02-28", "2024-03-28","1회 13시 00분","2024-03-15","금","BS",10, 40000, "테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
 
         //when
         int insert = viewDetailDao.showing_insert(showingDto);

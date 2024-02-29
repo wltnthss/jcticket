@@ -1,11 +1,10 @@
 package com.jcticket.admin.dao;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
 import java.util.Map;
@@ -41,6 +40,8 @@ public interface AdminDao {
     int insertAdmin(AdminDto adminDto) throws Exception;
     // 관리자 삭제
     int deleteAdmin(String admin_id) throws Exception;
+    // 관리자 전체 삭제
+    void adminAllDelete() throws Exception;
     // 기획사 등록
     int insertAgency(AgencyDto agencyDto) throws Exception;
     // 기획사 전체 삭제
@@ -79,4 +80,17 @@ public interface AdminDao {
     List<StageDto> selectKeywordStage(String keyword) throws Exception;
     // 상품 관리 팝업창 공연명 검색 조회
     List<PlayDto> selectKeywordPlay(String keyword) throws Exception;
- }
+    // 관리자 상품 관리 회차 등록
+    int insertShowing(ShowingDto showingDto) throws Exception;
+    // 관리자 상품 관리 회차 전체 삭제
+    void deleteAllShoiwing() throws Exception;
+    // 관리자 상품 관리 공연 좌석 등록
+    int insertShowSeat(ShowSeatDto showSeatDto) throws Exception;
+    // 관리자 상품 관리 공연 등록
+    PlayDto insertPlay(PlayDto playDto) throws Exception;
+    // 관리자 상품 관리 공연이미지 등록
+    void insertPlayImg(PlayImgDto playImgDto) throws Exception;
+    // 관리자 상품 조회
+    List<Map<String, Object>> selectAllProduct() throws Exception;
+
+}

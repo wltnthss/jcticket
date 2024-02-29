@@ -1,12 +1,11 @@
 package com.jcticket.admin.service;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.PageDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
+import com.jcticket.admin.dto.PlayDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +44,8 @@ public interface AdminService {
     PageDto agencyPagingParam(int page, String option, String keyword) throws Exception;
     // 공지사항 삭제
     int noticeDelete(int notice_seq) throws Exception;
+    // 관리자 전체 삭제
+    void adminAllDelete() throws Exception;
     // 관리자 수정폼 중복 아이디 체크
     int dupleAdminId(String admin_id) throws Exception;
     // 관리자 정보 수정
@@ -69,4 +70,14 @@ public interface AdminService {
     List<StageDto> selectKeywordStage(String keyword) throws Exception;
     // 상품 관리 팝업창 공연명 검색 조회
     List<PlayDto> selectKeywordPlay(String keyword) throws Exception;
+    // 관리자 상품 관리 회차 등록
+    int insertShowing(ShowingDto showingDto) throws Exception;
+    // 관리자 상품 관리 회차 전체 삭제
+    void deleteAllShoiwing() throws Exception;
+    // 관리자 상품 관리 공연 좌석 등록
+    int insertShowSeat(ShowSeatDto showSeatDto) throws Exception;
+    // 관리자 상품 관리 공연, 공연 이미지 등록
+    void insertPlay(PlayDto playDto) throws Exception;
+    // 관리자 상품 조회
+    List<Map<String, Object>> selectAllProduct() throws Exception;
 }
