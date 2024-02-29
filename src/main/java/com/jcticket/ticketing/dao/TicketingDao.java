@@ -1,6 +1,7 @@
 package com.jcticket.ticketing.dao;
 
 import com.jcticket.admin.dto.ShowSeatDto;
+import com.jcticket.dto.SeatDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
@@ -49,6 +50,11 @@ public interface TicketingDao {
     // 회차좌석테이블 삽입
     int insertShowSeat(ShowSeatDto dto) throws Exception;
 
+    // 좌석테이블 삽입
+    int insertSeat(SeatDto dto ) throws Exception;
+
+    // 좌석테이블 공연장Id 별로 삭제
+    int deleteSeatByStageId(String stage_id)throws Exception;
     // 회차좌석테이블 삭제
     int deleteShowSeat() throws Exception;
 
@@ -60,4 +66,7 @@ public interface TicketingDao {
 
     // 회차시퀀스로 좌석번호, 좌석상태리스트 조회
     List<Map<String, String>> selectSeatList(int showing_seq) throws Exception;
+
+    // 회차시퀀스로 행, 열의 마지막 번호 구하기
+    Map<String, Object> selectEndNum(int showing_seq) throws Exception;
 }

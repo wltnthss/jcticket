@@ -138,6 +138,17 @@
 
 
     <!-- ************** step2. 좌석선택 **************** -->
+    <!-- seat 테이블 insert -->
+    <insert id="insertSeat" parameterType="SeatDto">
+        INSERT INTO jcticket.seat (seat_row, seat_col, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{seat_row}, #{seat_col}, #{stage_id}, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+    </insert>
+
+    <!-- seat 테이블 delete -->
+    <delete id="deleteSeatByStageId" parameterType="string">
+        delete from seat where stage_id = #{stage_id}
+    </delete>
+
     <!-- show_seat 테이블 insert -->
     <insert id="insertShowSeat" parameterType="ShowSeatDto">
         INSERT INTO show_seat (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
@@ -174,8 +185,8 @@
     </select>
 
     <!-- 회차 시퀀스로 회차의 행, 열의 마지막 값 구하기(size) -->
-    <select id="selectRowCol" parameterType="int" resultType="hashmap">
-        SELECT MAX(seat_col) end_col, MAX(seat_row) end_row
+    <select id="selectEndNum" parameterType="int" resultType="hashmap">
+        SELECT MAX(seat_col) AS end_col, MAX(seat_row) AS end_row
         from show_seat ss
         where 1=1
           and showing_seq = #{showing_seq}

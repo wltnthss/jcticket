@@ -117,7 +117,7 @@ public class TicketingServiceImpl implements TicketingService{
         return Integer.toString(ticketingDao.selectPrice((showing_seq)));
     }
 
-    // 회차시퀀스로 좌석번호, 좌석상태리스트를 가공하여 반환한다.
+    // 회차시퀀스로 좌석번호, 좌석상태리스트, 행,열의 끝 번호를 HashMap 으로 가공하여 반환한다.
     @Override
     public Map<String, Object> getSeatList(int showing_seq) throws Exception {
         // controller에 반환할 HashMap 생성
@@ -126,6 +126,8 @@ public class TicketingServiceImpl implements TicketingService{
         List<String> idList = new ArrayList<>();
         // resultMap 에 담길 좌석상태 리스트 생성
         List<String> statusList = new ArrayList<>();
+        // 행,열의 끝 번호를 받아와 저장할 HashMap 생성.
+        Map<String, Object> endMap;
 
         // dao를 통해 리스트 받아오기
         List<Map<String, String>> list = ticketingDao.selectSeatList(showing_seq);
@@ -141,9 +143,19 @@ public class TicketingServiceImpl implements TicketingService{
             // statusList 에 순서대로 add한다.
             statusList.add(map.get(statusKey));
         }
+
+        // 행, 열의 끝 번호 정보를 받아오는 과정
+        endMap = ticketingDao.selectEndNum(showing_seq);
+        String rowKey = "end_row";
+        String s = (String) endMap.get(rowKey);
+        int rowVal = (s.charAt(0) - 'A' + 1);
+        endMap.put(rowKey, rowVal);
         // resultMap 에 put 한다.
         resultMap.put(idKey, idList);
         resultMap.put(statusKey, statusList);
+
+        // 두 맵을 합찬다.
+        endMap.forEach((key, value) -> resultMap.merge(key, value ,(v1, v2) -> v2));
 
         // 반환한다.
         return resultMap;

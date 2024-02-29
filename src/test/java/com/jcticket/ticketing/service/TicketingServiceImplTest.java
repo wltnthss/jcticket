@@ -105,6 +105,7 @@ public class TicketingServiceImplTest {
         List<String> statusList;
         //when
         map = ticketingService.getSeatList(SEQ);
+        System.out.println("map ====> " + map);
         System.out.println("type => " + map.getClass().getName());
         Set<String> keys = map.keySet();
         System.out.println("keySet => " + keys);
@@ -118,16 +119,24 @@ public class TicketingServiceImplTest {
                 idList = (ArrayList<String>)map.get(key);
                 for(String val : idList){
                     assertTrue(null != val);
-                    System.out.println("id => " + val);
+                    System.out.print("id => " + val + ", ");
                 }
-            }else {
+                System.out.println();
+            }else if(key.equals(exKey2)){
                 System.out.print("key2 => " + key + " / ");
                 System.out.println("value2 => " + map.get(key));
                 statusList = (ArrayList<String>)map.get(key);
                 for(String val : statusList){
                     assertEquals("Y", val);
-                    System.out.println("status => " + val);
+                    System.out.print("status => " + val + ", ");
                 }
+                System.out.println();
+            } else if (key.equals("end_row")){
+                System.out.println("key => "+ key);
+                System.out.println("val => "+ map.get(key));
+            } else {
+                System.out.println("key => "+ key);
+                System.out.println("val => "+ map.get(key));
             }
         }
 

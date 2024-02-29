@@ -29,4 +29,10 @@ public class SeatDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+
+    public SeatDto(String seat_row, int seat_col, String stage_id){
+        this.seat_row = seat_row;
+        this.seat_col = seat_col;
+        this.stage_id = stage_id;
+    }
 }

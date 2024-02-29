@@ -111,6 +111,7 @@ $(document).ready(function() {
 
 // 팝업창 제어하는 부분.
 $(document).ready(function(){
+
     $(".next").click(function(){
         let current_fs, next_fs, previous_fs; //fieldsets
         let opacity;
@@ -137,25 +138,124 @@ $(document).ready(function(){
         });
 
     });
+    // 일정선택 후 다음단계 눌렀을때 발생하는 이벤트
+    //
     $("#first-bnt").click(function(){
+        const selectedSeatList = [];
         const data1 = {
             'showing_seq': $(".aTag.clicked").attr("id"),
         }
-        console.log("data1 => "+data1.showing_seq);
+        console.log("seq => "+data1.showing_seq);
         $.ajax({
             url: "detail/seat",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data1),
-            success: function (res){
+            success: function (res) {
                 const seatIdList = res.seat_id;
                 const statusList = res.seat_status;
+                const endRowNum = res.end_row;
+                const endColNum = res.end_col;
                 const seatPrice = res.seat_price;
-                console.log("seatIdList => "+ seatIdList);
+                console.log("seatIdList => " + seatIdList);
                 console.log("statusList => " + statusList);
-                console.log("seatPrice => "+ seatPrice);
+                console.log("endRowNum => " + endRowNum);
+                console.log("endColNum => " + endColNum);
+                console.log("seatPrice => " + seatPrice);
+
+                // 동적으로 seats - span - a 태그를 생성한다.
+                // 만들어야 할 태그의 형태 >>
+                const seatsArea = $("#seatsArea");
+                seatsArea.empty();
+                console.log("== seatsArea Tag removed ===");
+                const divTag = $("<div></div>")
+                    .attr("id", "stage")
+                    .addClass("shadow-sm p-1 mb-2 bg-dark rounded")
+                    .append("STAGE")
+                    .appendTo(seatsArea);
+                console.log("===== #stage 태그 생성 =====")
+                for (let i = 0; i < endRowNum; i++) {
+                    const divSeatsTag = $("<div></div>")
+                        .addClass("seats")
+                        .appendTo(seatsArea);
+                    console.log("===== .seats 태그 생성 "+(i+1)+" =====");
+                }
+
+                const seats = $(".seats");
+                seats.empty();
+                $("#ss").empty();
+                $("#sp").empty();
+                console.log("seats Tag removed");
+                seats.each(function(i){
+                    const currentSeats = $(this);
+                    let asciiVal = 'A'.charCodeAt(0) + i;
+                    let rowChar = String.fromCharCode(asciiVal);
+                    const spanTag = $("<span></span>")
+                        .append(rowChar)
+                        .appendTo(currentSeats);
+                    for (let j = 0; j < endColNum; j++) {
+                        const spanTag = $("<span></span>")
+                            .attr("id", seatIdList[endColNum * i + j])
+                            .addClass("border border-primary")
+                            .appendTo(currentSeats);
+                        if(statusList[endColNum * i + j] === "N"){
+                            spanTag.addClass("disabled");
+                        }
+                        console.log("===== "+(endColNum*i+j)+"번 좌석 생성 =====");
+                    }
+                })
+                $("span.border-primary").hover(
+                    function() {
+                        $(this).css("cursor", "pointer"); // 마우스를 올렸을 때 포인터 커서로 변경
+                    },
+                    function() {
+                        $(this).css("cursor", "auto"); // 마우스를 벗어났을 때 기본 커서로 변경
+                    }
+                );
+                $(".disabled").off("click").css("background-color", "gray");
+
+                // 클릭 이벤트를 추가하여 클릭 가능하도록 설정
+                $("span.border-primary").click(function() {
+                    // 이미 예약된 좌석은 이벤트를 발생시키지 않는다.
+                    if ($(this).hasClass("disabled")) {
+                        return false; // 클릭 이벤트를 처리하지 않음
+                    }
+                    // 클릭 이벤트 처리 코드를 작성한다.
+                    if($(this).hasClass("clicked")){
+                        // 이미 클릭된 경우 클릭을 해제한다.
+                        $(this).removeClass("clicked");
+                        const thisId = $(this).attr("id");
+                        const index = selectedSeatList.indexOf(thisId);
+                        if(index !== -1){
+                            selectedSeatList.splice(index, 1);
+                        }
+                        $("#ss").text(selectedSeatList.join(", "));
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                    }else {
+                        // 클릭하는 경우 clicked 상태가 된다.
+                        $(this).addClass("clicked");
+                        let thisId = $(this).attr("id");
+                        selectedSeatList.push(thisId);
+                        $("#ss").text(selectedSeatList.join(", "));
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                        console.log(`선택된 좌석의 ID => ${thisId}`);
+                    }
+                });
+
+
+                // for ri=0; ri < endRowNum; ri++
+                // <span>${'A' + ri}</span>
+                // For i = 1; i <= endColNum; i++
+                //
+                // if(statusList[i] === 'Y')
+                //<span id="${seatIdList[i]}" class="border border-primary"></span>
+                // else if(statusList[i] === 'N')
+                // <span id="${seatIdList[i]}" class="border border-primary clicked"></span>
+                // + jquery 로 클릭 비활성화 및 비활성화 배경색으로 변경
+                // else -> 예외처리하기
+
             },
-            error: function (error){
+            error: function (error) {
                 alert(`${error.status} error! 회차를 선택해 주세요! `);
                 console.log("error => "+ error.body + error.status);
                 location.reload();
