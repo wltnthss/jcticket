@@ -31,6 +31,8 @@ public class PageHandler {
     private boolean showPrev;
     private boolean showNext;
 
+    private String button;
+
 
 
     public PageHandler(int totalCnt, int page, String option, String start_date, String end_date, String keyword) {
@@ -58,6 +60,21 @@ public class PageHandler {
 
 
 
+
+    public PageHandler(int totalCnt, int page, int pageSize, String button) {
+        this.totalCnt = totalCnt;
+        this.page = page;
+        this.pageSize = pageSize;
+        this.button = button;
+
+        
+        totalPage = (int)Math.ceil(totalCnt / (double)pageSize);    // 11
+        beginPage = (page - 1) / navSize * navSize + 1;             // 1
+        endPage = Math.min(beginPage + navSize - 1, totalPage);     // 10
+        showPrev = beginPage != 1;                                  // false
+        showNext = endPage != totalPage;                            // true
+
+    }
 
     public PageHandler(int totalCnt, int page, int pageSize) {
         this.totalCnt = totalCnt;

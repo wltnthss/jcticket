@@ -210,7 +210,7 @@
 
     <!--  ===========================================================================================================================================================================  -->
 
-    <select id="coupon_count" parameterType="String" resultType="CouponDto">
+    <select id="coupon_select" parameterType="String" resultType="CouponDto">
         SELECT *
         FROM coupon
         <if test="coupon_id != null and coupon_id != ''">
@@ -219,10 +219,11 @@
     </select>
 
     <insert id="coupon_insert" parameterType="UserCouponDto">
-                INSERT INTO coupon_user
-        (user_coupon_seq, user_id, coupon_id, coupon_use_at, coupon_issue_at, coupon_expire_at, coupon_use_yn, created_at, created_id, updated_at, updated_id)
-        VALUES
-            (#{user_coupon_seq}, "Ralo2", #{coupon_id}, null, NOW(), NOW()+INTERVAL + 1 WEEK, 'N', NOW() , #{created_id}, NOW(), #{updated_id});
+        INSERT INTO coupon_user
+        (user_coupon_seq, user_id, coupon_id, coupon_use_at, coupon_issue_at, coupon_expire_at, coupon_use_yn,
+         created_at, created_id, updated_at, updated_id)
+        VALUES (#{user_coupon_seq}, "Ralo2", #{coupon_id}, null, NOW(), NOW() + INTERVAL + 1 WEEK, 'N', NOW(),
+                #{created_id}, NOW(), #{updated_id});
     </insert>
 
 
@@ -237,16 +238,28 @@
         SELECT uc.coupon_id,
                uc.coupon_issue_at,
                uc.coupon_expire_at,
-               (SELECT coupon_name
-                FROM coupon c
-                WHERE c.coupon_id = uc.coupon_id) AS coupon_name,
-               (SELECT coupon_discount_amount
-                FROM coupon c
-                WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
-               (SELECT coupon_use_condition
-                FROM coupon c
-                WHERE c.coupon_id = uc.coupon_id) AS coupon_use_condition
-        FROM coupon_user uc;
+               (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)            AS coupon_name,
+               (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
+               (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)   AS coupon_use_condition
+        FROM coupon_user uc
+        WHERE (#{botton} = 'on' AND uc.coupon_use_yn = 'N')
+           OR (#{botton} = 'off' AND uc.coupon_use_yn = 'Y')
+            LIMIT #{pageSize}
+        OFFSET #{offset};
+    </select>
+
+
+    <select id="coupon_count" parameterType="map" resultType="int">
+        SELECT COUNT(*) AS count
+        FROM coupon_user
+        WHERE coupon_use_yn IN ('Y')
+          AND (
+            (#{botton} = 'on'
+          AND coupon_use_yn = 'N')
+           OR
+            (#{botton} = 'off'
+          AND coupon_use_yn = 'Y')
+            );
     </select>
 
 </mapper>

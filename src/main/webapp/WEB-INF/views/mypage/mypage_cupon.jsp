@@ -14,6 +14,11 @@
     <link href="/resources/css/mypage/mypage.css" rel="stylesheet">
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
+    <style>
+        #paging {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="../common/header.jsp"></jsp:include>
@@ -59,11 +64,7 @@
                 </aside>
                 <article id="con">
                     <h3>할인쿠폰/예매권</h3>
-                    <div id="cupon">
-                        <a href=""><img src="/resources/img/mypage/tab_02_ov.gif"></a>
-                        <a href=""><img src="/resources/img/mypage/tab_01_ov.gif"></a>
-                        <p>전재승 님이 가지고 계신 할인쿠폰 번호 12자리를 입력해 주세요. 예매 시 쿠폰에 기재된 금액만큼 할인해드립니다.</p>
-                    </div>
+
 
                     <div id="cupon-input">
                         <form action="/mypagecupon" method="get">
@@ -75,43 +76,92 @@
                     </div>
 
                     <div id="h2-tag">
-                    <a href=""><h3>사용 가능한 쿠폰</h3></a>
-                    <a href=""><h3>사용 완료된 쿠폰</h3></a>
+                    <form action="/mypagecupon">
+                    <button name="botton" value="on"><a href="/mypagecupon"><h3>사용 가능한 쿠폰</h3></a></button>
+                    <button name="botton" value="off"><a href="/mypagecupon"><h3>사용 완료된 쿠폰</h3></a></button>
+                    </form>
                     </div>
+
+
+
                     <div id="cupon-list">
 
                         <table>
-                            <tr>
-                                <th>쿠폰</th>
-                                <th>할인금액</th>
-                                <th>사용조건</th>
-                                <th>사용일자</th>
-                                <th>등록일</th>
-                            </tr>
-                            <c:forEach items="${coupon_list}" var="UserCouponDto">
-                                <tr>
-                                    <td>${UserCouponDto.coupon_name}</td>
-                                    <td>${UserCouponDto.coupon_discount_amount}원</td>
-                                    <td>${UserCouponDto.coupon_use_condition}</td>
-                                    <td>${UserCouponDto.coupon_expire_at}</td>
-                                    <td>${UserCouponDto.coupon_issue_at}</td>
-                                </tr>
-                            </c:forEach>
+
+                                <c:choose>
+                                    <c:when test="${param.botton eq 'on'}">
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at} ! </td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:when test="${param.botton eq 'off'}">
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at}</td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at}</td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+
+                                </c:choose>
+
+
                         </table>
 
+                        <div id="paging">
+                            <c:if test="${ph.showPrev}">
+                                <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}"/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}"/>">&gt;</a>
+                            </c:if>
+                        </div>
+
                     </div>
 
-                    <div id="paging">
-                        <c:if test="${ph.showPrev}">
-                            <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&lt;</a>
-                        </c:if>
-                        <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                            <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">${i}</a>
-                        </c:forEach>
-                        <c:if test="${ph.showNext}">
-                            <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}"/>">&gt;</a>
-                        </c:if>
-                    </div>
+
 
                     <div id="cupon-use">
                         <h4> 공연 할일쿠폰 사용 안내</h4>

@@ -42,10 +42,9 @@ public class mypageController {
     }
 
 
-
     @GetMapping("/mypageticket")
-    public String ticket(@RequestParam(defaultValue = "1")Integer page,
-                         @RequestParam(defaultValue = "5")Integer pageSize,
+    public String ticket(@RequestParam(defaultValue = "1") Integer page,
+                         @RequestParam(defaultValue = "5") Integer pageSize,
                          @RequestParam(name = "option", defaultValue = "A") String option,
                          @RequestParam(required = false) String start_date,
                          @RequestParam(required = false) String end_date,
@@ -75,7 +74,6 @@ public class mypageController {
     }
 
 
-
     @GetMapping("/mypagedetail")
     public String detail(@RequestParam(required = false) String ticketing_id,
                          Model model) throws Exception {
@@ -88,8 +86,6 @@ public class mypageController {
 
         return "/mypage/mypage_detail";
     }
-
-
 
 
     @GetMapping("/mypageview")
@@ -136,7 +132,6 @@ public class mypageController {
     }
 
 
-
     @GetMapping("/mypageclient")
     public String client() {
         return "/mypage/mypage_client";
@@ -156,46 +151,48 @@ public class mypageController {
     public String cupon(@RequestParam(required = false) String coupon_id,
                         @RequestParam(defaultValue = "1") Integer page,
                         @RequestParam(defaultValue = "5") Integer pageSize,
-                        Model model) throws  Exception{
-
-
-        Map map = new HashMap();
-        map.put("offset", (page - 1) * pageSize);
-        map.put("pageSize", pageSize);
-
-//        PageHandler pageHandler = new PageHandler()
-
-
-        List<UserCouponDto> list = mypageService.coupon_list(map);
-
-        model.addAttribute("coupon_list", list);
+                        @RequestParam(defaultValue = "on") String botton,
+                        Model model) throws Exception {
 
 
 
+        try {
+            if (coupon_id != null) {
 
+                CouponDto couponDto = mypageService.coupon_select(coupon_id);
 
-        if(coupon_id != null) {
-            try {
-                CouponDto couponDto = mypageService.coupon_count(coupon_id);
+                System.out.println(couponDto);
 
                 Timestamp now = new Timestamp(System.currentTimeMillis());
 
-                if(couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
-                UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
-                mypageService.coupon_insert(userCouponDto);
-                mypageService.update_coupon(couponDto);
-
+                if (couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
+                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+                    mypageService.coupon_insert(userCouponDto);
+                    mypageService.update_coupon(couponDto);
                 }
-
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+                Map map = new HashMap();
+                map.put("offset", (page - 1) * pageSize);
+                map.put("pageSize", pageSize);
+                map.put("button", botton);
+
+
+                int totalCount = mypageService.coupon_count(map);
+
+                System.out.println(totalCount);
+
+
+                PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, botton);
+
+
+                List<UserCouponDto> list = mypageService.coupon_list(map);
+
+                model.addAttribute("coupon_list", list);
+                model.addAttribute("ph", pageHandler);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-
-
 
 
         return "/mypage/mypage_cupon";

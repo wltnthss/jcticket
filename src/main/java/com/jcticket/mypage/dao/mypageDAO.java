@@ -26,7 +26,6 @@ public interface mypageDAO {
 
     int count(Map map) throws Exception;
     int view_count(Map map) throws Exception;
-
     List<TicketingDto> selectAll(Map map) throws  Exception;
     List<TicketingDto> selectLimit(Map map) throws  Exception;
 
@@ -34,10 +33,10 @@ public interface mypageDAO {
     List<TicketingDto> select_view(Map map) throws Exception;
     List<UserCouponDto> coupon_list(Map map) throws Exception;
     int insert(TicketingDto ticketingDto)  throws Exception;
-
     int insert_InquiryDto(InquiryDto inquiryDto) throws Exception;
     int coupon_insert(UserCouponDto userCouponDto) throws Exception;
-    CouponDto coupon_count(String coupon_id) throws Exception;
+    int coupon_count(Map map) throws Exception;
+    CouponDto coupon_select(String coupon_id) throws Exception;
 
     TicketingDto ticket_detail(String ticketing_at) throws Exception;
 
