@@ -109,13 +109,13 @@
                     <tr>
                         <th scope="row">회차 시작 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_start_at" class="frm_input required" size="20" required>
+                            <input type="date" name="showing_start_at" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 종료 일시</th>
                         <td>
-                            <input type="datetime-local" name="showing_end_at" class="frm_input required" size="20" required>
+                            <input type="date" name="showing_end_at" class="frm_input required" size="20" required>
                         </td>
                     </tr>
                     <tr>

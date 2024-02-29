@@ -91,7 +91,7 @@ public class AgencyController {
             if (agencyService.processAgencyLogin(agency_id, agency_pwd)) {
                 HttpSession session = request.getSession();
                 session.setAttribute("agency_id", agency_id);
-                return "/agency/agencydashboard"; // 성공 시 대시보드 페이지로 이동
+                return "agency/agencydashboard"; // 성공 시 대시보드 페이지로 이동
             } else {
                 model.addAttribute("loginError", true);
                 return "redirect:/login"; // 실패 시 로그인 페이지를 다시 표시

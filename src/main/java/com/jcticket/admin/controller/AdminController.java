@@ -9,7 +9,9 @@ import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +19,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -654,9 +663,31 @@ public class AdminController {
     }
     // 관리자 상품 관리
     @GetMapping("/admin/product")
-    public String adminProduct() throws Exception{
+    public String adminProduct(Model model) throws Exception{
+
+        List<Map<String,Object>> list = adminService.selectAllProduct();
+
+        model.addAttribute("list", list);
+
         return "admin/adminproduct";
     }
+
+    @GetMapping("/upload/{img_name}")
+    public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
+
+        try{
+            String path = "C:\\play_img\\" + img_name + ".JPG";
+            System.out.println("path = " + path);
+
+            InputStream in = new FileInputStream(path);
+
+            return IOUtils.toByteArray(in);
+
+        } catch (IOException e){
+            throw new RuntimeException("이미지 업로드 실패", e);
+        }
+    }
+
     // 관리자 상품 관리 등록 폼
     @GetMapping("/admin/productregister")
     public String adminProductRegisterForm() throws Exception{
@@ -668,7 +699,8 @@ public class AdminController {
 
         System.out.println("playDto = " + playDto);
         adminService.insertPlay(playDto);
-        return "admin/adminproduct";
+
+        return "redirect:/admin/product";
     }
     // 관리자 회차 등록
     @PostMapping("/admin/showingregister")
@@ -712,7 +744,7 @@ public class AdminController {
                     }
                 });
 
-        return "admin/adminproduct";
+        return "redirect:/admin/product";
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{
