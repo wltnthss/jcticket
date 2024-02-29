@@ -36,6 +36,11 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public Integer coupon_count(Map map) throws Exception {
+        return mypageDAO.coupon_count(map);
+    }
+
+    @Override
     public Integer view_count(Map map) throws Exception {
         return mypageDAO.view_count(map);
     }
@@ -46,8 +51,8 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
-    public CouponDto coupon_count(String coupon_id) throws Exception {
-        return mypageDAO.coupon_count(coupon_id);
+    public CouponDto coupon_select(String coupon_id) throws Exception {
+        return mypageDAO.coupon_select(coupon_id);
     }
 
     @Override

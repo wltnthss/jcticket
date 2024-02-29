@@ -20,9 +20,10 @@ import java.util.Map;
  */
 public interface mypageService {
     Integer count(Map map) throws Exception;
+    Integer coupon_count(Map map) throws Exception;
     Integer view_count(Map map) throws Exception;
     Integer coupon_insert(UserCouponDto userCouponDto) throws Exception;
-    CouponDto coupon_count(String coupon_id) throws Exception;
+    CouponDto coupon_select(String coupon_id) throws Exception;
     List<TicketingDto> selectAll(Map map) throws Exception;
     List<UserCouponDto> coupon_list(Map map) throws Exception;
     List<TicketingDto> select_list() throws Exception;

@@ -78,8 +78,13 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
-    public CouponDto coupon_count(String coupon_id) throws Exception {
-        return session.selectOne(namespace + "coupon_count", coupon_id);
+    public int coupon_count(Map map) throws Exception {
+        return session.selectOne(namespace + "coupon_count", map);
+    }
+
+    @Override
+    public CouponDto coupon_select(String coupon_id) throws Exception {
+        return session.selectOne(namespace + "coupon_select", coupon_id);
     }
 
     @Override
