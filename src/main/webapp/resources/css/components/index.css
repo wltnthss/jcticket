@@ -413,75 +413,75 @@ div.cont {
 }
 
 .donut-dday1 {
-    width: 111px;
-    height: 111px;
+    width: 108.3px;
+    height: 108.3px;
     line-height: 111px;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
     font-size: 22px;
     color: #fff;
     position: absolute;
-    top: 101px;
-    left: 9%;
+    top: 105px;
+    left: 9.15%;
     transform: translate(-50%, 0);
     text-align: center;
 }
 
 .donut-dday2 {
-    width: 111px;
-    height: 111px;
+    width: 108.3px;
+    height: 108.3px;
     line-height: 111px;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
     font-size: 22px;
     color: #fff;
     position: absolute;
-    top: 101px;
+    top: 105px;
     left: 29.5%;
     transform: translate(-50%, 0);
     text-align: center;
 }
 
 .donut-dday3 {
-    width: 111px;
-    height: 111px;
+    width: 108.3px;
+    height: 108.3px;
     line-height: 111px;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
     font-size: 22px;
     color: #fff;
     position: absolute;
-    top: 101px;
+    top: 105px;
     left: 50%;
     transform: translate(-50%, 0);
     text-align: center;
 }
 
 .donut-dday4 {
-    width: 111px;
-    height: 111px;
+    width: 108.3px;
+    height: 108.3px;
     line-height: 111px;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
     font-size: 22px;
     color: #fff;
     position: absolute;
-    top: 101px;
+    top: 105px;
     left: 70.5%;
     transform: translate(-50%, 0);
     text-align: center;
 }
 
 .donut-dday5 {
-    width: 111px;
-    height: 111px;
+    width: 108.3px;
+    height: 108.3px;
     line-height: 111px;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
     font-size: 22px;
     color: #fff;
     position: absolute;
-    top: 101px;
+    top: 105px;
     left: 91%;
     transform: translate(-50%, 0);
     text-align: center;
@@ -886,3 +886,18 @@ body{
     margin: 0;
 }
 
+#chart-area14061{
+    left: 356px;
+}
+
+#chart-area14058{
+    left: 603px;
+}
+
+#chart-area14051{
+    left: 850px;
+}
+
+#chart-area14040{
+    left: 1097px;
+}

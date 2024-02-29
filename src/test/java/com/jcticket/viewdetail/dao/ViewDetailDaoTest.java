@@ -1,7 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
+import com.jcticket.admin.dto.PlayDto;
 import com.jcticket.viewdetail.dto.JoinDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.SeatClassDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.junit.Test;
@@ -45,7 +45,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_play();
         //given
-        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트","poster","infoimg","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231");
+        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트", "Y","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231");
 
         //when
         int insert = viewDetailDao.play_insert(playDto);

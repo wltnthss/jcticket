@@ -1,12 +1,9 @@
 package com.jcticket.admin.dao;
 
-import com.jcticket.admin.dto.AdminDto;
-import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.ShowSeatDto;
-import com.jcticket.admin.dto.StageDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
-import com.jcticket.viewdetail.dto.PlayDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.List;
@@ -89,4 +86,11 @@ public interface AdminDao {
     void deleteAllShoiwing() throws Exception;
     // 관리자 상품 관리 공연 좌석 등록
     int insertShowSeat(ShowSeatDto showSeatDto) throws Exception;
+    // 관리자 상품 관리 공연 등록
+    PlayDto insertPlay(PlayDto playDto) throws Exception;
+    // 관리자 상품 관리 공연이미지 등록
+    void insertPlayImg(PlayImgDto playImgDto) throws Exception;
+    // 관리자 상품 조회
+    List<Map<String, Object>> selectAllProduct() throws Exception;
+
 }

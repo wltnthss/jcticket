@@ -160,7 +160,7 @@ public class LoginController {
              if (userService.getUser(n_id)!=null) {
                  session.setAttribute("sessionId",n_id); //세션 생성/
                  m.addAttribute("result", apiResult);
-                 return "index";
+                 return "redirect:/";
              }
          }catch (Exception e){
              e.printStackTrace();
@@ -185,6 +185,7 @@ public class LoginController {
 
          return "signup/signupSNS";
           }
+
 
 
 

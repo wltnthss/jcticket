@@ -18,10 +18,18 @@
         </div>
         <!-- 가운데 -->
         <div class="play-top-center" style="left : 500px; transform: none;">
-            <a href="콘서트 페이지">콘서트</a>
-            <a href="뮤지컬 페이지">뮤지컬</a>
-            <a href="연극 페이지">연극</a>
-            <a href="클래식 페이지">클래식</a>
+            <a href="/concert">콘서트
+                <span class="concert-sp"></span>
+            </a>
+            <a href="뮤지컬 페이지">뮤지컬
+                <span class="musical-sp"></span>
+            </a>
+            <a href="연극 페이지">연극
+                <span class="play-sp"></span>
+            </a>
+            <a href="클래식 페이지">클래식
+                <span class="classic-sp"></span>
+            </a>
         </div>
         <!-- 오른쪽 -->
         <div class="play-top-right">
