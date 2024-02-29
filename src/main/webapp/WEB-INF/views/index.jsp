@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/resources/css/components/header.css">
     <link rel="stylesheet" href="/resources/css/components/index.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -146,7 +147,6 @@
         </div>
     </div>
         <%-- 상단 공연 슬라이드 끝--%>
-<script src="/resources/js/index/top_slide.js"></script>
 
     <%-- content area    --%>
 <%--section1 시작--%>
@@ -691,7 +691,7 @@
         </div>
     </div>
 </section>
-
+<script src="/resources/js/index/top_slide.js"></script>
 <%--section5끝--%>
 
 
