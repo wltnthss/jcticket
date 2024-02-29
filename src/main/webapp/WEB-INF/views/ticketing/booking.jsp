@@ -100,7 +100,7 @@
 <%--                                    <div class="shadow p-2 mb-2 bg-white rounded"></div>--%>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" />
+                        </div> <input id="first-bnt" type="button" name="next" class="next action-button" value="다음단계" />
                     </fieldset>
 
                     <%-- step2. 좌석선택 --%>
@@ -238,7 +238,7 @@
                                 </div>
 
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div> <input id="second-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
@@ -247,7 +247,7 @@
                                     <h2 class="fs-title">쿠폰/할인</h2>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div> <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
                     </fieldset>
                     <fieldset>
                         <div class="form-card">

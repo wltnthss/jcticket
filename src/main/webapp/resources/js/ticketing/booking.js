@@ -49,7 +49,7 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/ticketing-detail",
+                url: "/ticketing/detail",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
@@ -111,22 +111,21 @@ $(document).ready(function() {
 
 // 팝업창 제어하는 부분.
 $(document).ready(function(){
-    let current_fs, next_fs, previous_fs; //fieldsets
-    let opacity;
-    let current = 1;
-    let steps = $("fieldset").length;
-
     $(".next").click(function(){
+        let current_fs, next_fs, previous_fs; //fieldsets
+        let opacity;
+        let current = 1;
+        let steps = $("fieldset").length;
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
-//Add Class Active
+        //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-//다음단계 넘어가기
+        //다음단계 넘어가기
         next_fs.show();
-//현재 단계 태그, 스타일 숨기기
+        //현재 단계 태그, 스타일 숨기기
         current_fs.animate({opacity: 0}, {
             step: function(now) {
-// 다음단계 넘어갈때 애니메이션 적용하기
+        // 다음단계 넘어갈때 애니메이션 적용하기
                 opacity = 1 - now;
                 current_fs.css({
                     'display': 'none',
@@ -138,17 +137,44 @@ $(document).ready(function(){
         });
 
     });
+    $("#first-bnt").click(function(){
+        const data1 = {
+            'showing_seq': $(".aTag.clicked").attr("id"),
+        }
+        console.log("data1 => "+data1.showing_seq);
+        $.ajax({
+            url: "detail/seat",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data1),
+            success: function (res){
+                const seatIdList = res.seat_id;
+                const statusList = res.seat_status;
+                const seatPrice = res.seat_price;
+                console.log("seatIdList => "+ seatIdList);
+                console.log("statusList => " + statusList);
+                console.log("seatPrice => "+ seatPrice);
+            },
+            error: function (error){
+                alert(`${error.status} error! 회차를 선택해 주세요! `);
+                console.log("error => "+ error.body + error.status);
+                location.reload();
+            }
+        })
+    })
+
+
     $(".previous").click(function(){
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-//Remove class active
+        //Remove class active
         $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-//show the previous fieldset
+        //show the previous fieldset
         previous_fs.show();
-//hide the current fieldset with style
+        //hide the current fieldset with style
         current_fs.animate({opacity: 0}, {
             step: function(now) {
-// for making fielset appear animation
+            // for making fielset appear animation
                 opacity = 1 - now;
                 current_fs.css({
                     'display': 'none',

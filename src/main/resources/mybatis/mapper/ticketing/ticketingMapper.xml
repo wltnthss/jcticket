@@ -138,19 +138,48 @@
 
 
     <!-- ************** step2. 좌석선택 **************** -->
+    <!-- show_seat 테이블 insert -->
+    <insert id="insertShowSeat" parameterType="ShowSeatDto">
+        INSERT INTO show_seat (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_seq}, #{seat_row}, #{seat_col}, #{stage_id}, "Y", CURRENT_TIMESTAMP, "0sang", CURRENT_TIMESTAMP, "0sang");
+    </insert>
+
+    <!-- show_seat 테이블 delete -->
+    <delete id="deleteShowSeat">
+        delete from show_seat
+    </delete>
+
+    <!-- 회차테이블의 회차좌석수 구하기 -->
+    <select id="selectSeatCnt" parameterType="int" resultType="int">
+        select showing_seat_cnt
+        from showing
+        where 1=1
+        and showing_seq = #{showing_seq}
+    </select>
+
     <!-- 회차 시퀀스로 회차좌석가격 조회 -->
-    <select id="selectPrice" parameterType="string" resultType="int">
+    <select id="selectPrice" parameterType="int" resultType="int">
         select showing_seat_price
         FROM showing s
         WHERE 1=1
           and showing_seq = #{showing_seq}
-        group by showing_seat_price ;
     </select>
     <!-- 회차 시퀀스로 좌석번호, 좌석상태 리스트 조회 -->
     <select id="selectSeatList" parameterType="int" resultType="hashmap">
-        
+        SELECT CONCAT(seat_row, seat_col) AS seat_id, show_seat_status AS seat_status
+        FROM show_seat ss
+        WHERE 1=1
+          AND showing_seq = #{showing_seq}
+        order by seat_row asc;
     </select>
 
+    <!-- 회차 시퀀스로 회차의 행, 열의 마지막 값 구하기(size) -->
+    <select id="selectRowCol" parameterType="int" resultType="hashmap">
+        SELECT MAX(seat_col) end_col, MAX(seat_row) end_row
+        from show_seat ss
+        where 1=1
+          and showing_seq = #{showing_seq}
+    </select>
 
 
     <!-- step3. 쿠폰선택 -->

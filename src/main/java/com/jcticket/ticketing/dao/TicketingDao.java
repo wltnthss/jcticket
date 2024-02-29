@@ -1,5 +1,6 @@
 package com.jcticket.ticketing.dao;
 
+import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
@@ -44,4 +45,19 @@ public interface TicketingDao {
 
     // 공연아이디로 공연명과 공연표지, 공연장명 조회
     Map<String, Object> selectPlayStageName(String play_id) throws Exception;
+
+    // 회차좌석테이블 삽입
+    int insertShowSeat(ShowSeatDto dto) throws Exception;
+
+    // 회차좌석테이블 삭제
+    int deleteShowSeat() throws Exception;
+
+    // 회차시퀀스로 회차좌석수 조회
+    int selectSeatCnt(int showing_seq) throws Exception;
+
+    // 회차시퀀스로 회차좌석가격 조회
+    int selectPrice(int showing_seq)throws Exception;
+
+    // 회차시퀀스로 좌석번호, 좌석상태리스트 조회
+    List<Map<String, String>> selectSeatList(int showing_seq) throws Exception;
 }

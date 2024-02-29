@@ -105,9 +105,47 @@ public class TicketingServiceImpl implements TicketingService{
 //        for(Map<String,String> m : list){
 //            infoList.add(m.get(infoKey));
 //        }
-
         // resultMap 에 문자열 infoKey와 ArrayList를 넣어 컨트롤러로 반환한다.
         //resultMap.put(infoKey, infoList);
+    }
 
+
+    // step2. 좌석선택
+    // 회차시퀀스로 회차좌석가격을 조회한다.
+    @Override
+    public String getSeatPrice(int showing_seq) throws Exception {
+        return Integer.toString(ticketingDao.selectPrice((showing_seq)));
+    }
+
+    // 회차시퀀스로 좌석번호, 좌석상태리스트를 가공하여 반환한다.
+    @Override
+    public Map<String, Object> getSeatList(int showing_seq) throws Exception {
+        // controller에 반환할 HashMap 생성
+        Map<String, Object> resultMap = new HashMap<>();
+        // resultMap 에 담길 좌석번호(행+열) 리스트 생성
+        List<String> idList = new ArrayList<>();
+        // resultMap 에 담길 좌석상태 리스트 생성
+        List<String> statusList = new ArrayList<>();
+
+        // dao를 통해 리스트 받아오기
+        List<Map<String, String>> list = ticketingDao.selectSeatList(showing_seq);
+        // dao에서 가져온 첫번째 리스트를 통해 key 값을 추출한다.
+        Iterator<String> it = list.get(0).keySet().iterator();
+        // resultMap 의 좌석번호 리스트의 key로 사용할 컬럼명을 추출한다. (seat_id)
+        String idKey = it.next();
+        // resultMap 의 좌석상태 리스트의 Key로 사용할 컬럼명을 추출한다. (seat_status)
+        String statusKey = it.next();
+        for(Map<String, String> map : list){
+            // idList 에 순서대로 add한다.
+            idList.add(map.get(idKey));
+            // statusList 에 순서대로 add한다.
+            statusList.add(map.get(statusKey));
+        }
+        // resultMap 에 put 한다.
+        resultMap.put(idKey, idList);
+        resultMap.put(statusKey, statusList);
+
+        // 반환한다.
+        return resultMap;
     }
 }

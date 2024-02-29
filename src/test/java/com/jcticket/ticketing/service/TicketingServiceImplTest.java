@@ -60,7 +60,7 @@ public class TicketingServiceImplTest {
 
     }
 
-    // 회차를 잘 가져오는치 테스트
+    // 회차 정보를 조회 테스트
     @Test
     public void getRoundTest() throws Exception{
         //given
@@ -78,4 +78,59 @@ public class TicketingServiceImplTest {
             System.out.println(key+" ==> "+ map.get(key));
         }
     }
+
+    // 회차시퀀스로 회차좌석가격 조회
+    @Test
+    public void getSeatPriceTest() throws Exception {
+        //given
+        int expectedPrice = 15000;
+        int resultPrice;
+        //when
+        resultPrice = Integer.parseInt(ticketingService.getSeatPrice(1));
+        System.out.print("expected price => " + expectedPrice + " / ");
+        System.out.println("result price => " + resultPrice);
+        //then
+        assertEquals(expectedPrice, resultPrice);
+    }
+
+    // 회차시퀀스로 좌석번호, 좌석상태리스트를 받아 HashMap<String,ArrayList<String>> 형태로 가공되는지 테스트
+    @Test
+    public void getSeatListTest() throws Exception {
+        //given
+        final int SEQ = 1;
+        String exKey1 = "seat_id";
+        String exKey2 = "seat_status";
+        Map<String, Object> map;
+        List<String> idList;
+        List<String> statusList;
+        //when
+        map = ticketingService.getSeatList(SEQ);
+        System.out.println("type => " + map.getClass().getName());
+        Set<String> keys = map.keySet();
+        System.out.println("keySet => " + keys);
+        System.out.println("value => " + map.get("seat_id"));
+        System.out.println("value => " + map.get("seat_status"));
+        //then
+        for(String key : keys){
+            if(key.equals(exKey1)){
+                System.out.print("key1 => " + key + "  / ");
+                System.out.println("value1 => " + map.get(key));
+                idList = (ArrayList<String>)map.get(key);
+                for(String val : idList){
+                    assertTrue(null != val);
+                    System.out.println("id => " + val);
+                }
+            }else {
+                System.out.print("key2 => " + key + " / ");
+                System.out.println("value2 => " + map.get(key));
+                statusList = (ArrayList<String>)map.get(key);
+                for(String val : statusList){
+                    assertEquals("Y", val);
+                    System.out.println("status => " + val);
+                }
+            }
+        }
+
+    }
+
 }
