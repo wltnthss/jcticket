@@ -399,19 +399,20 @@
 
     <select id="selectAllProduct" resultType="Map">
         SELECT
-        pimg.play_poster_stored_file_name AS img_name
-        , p.play_name AS play_name
-        , CONCAT(p.play_major_cat, ', ',p.play_middle_cat) play_cat
-        , p.play_run_time AS play_run_time
-        , s.showing_info AS showing_info
-        , st.stage_address
-        , CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) AS showing_period_date
-        , st.stage_name as stage_name
-        , <![CDATA[CASE WHEN NOW() < s.showing_start_at THEN showing_status = '상영전'
-                WHEN NOW() BETWEEN s.showing_start_at AND s.showing_end_at THEN '상영중'
-                WHEN NOW() > s.showing_end_at THEN '상영종료']]>
+             p.play_id AS play_id
+            , pimg.play_poster_stored_file_name AS img_name
+            , p.play_name AS play_name
+            , CONCAT(p.play_major_cat, ', ',p.play_middle_cat) play_cat
+            , p.play_run_time AS play_run_time
+            , s.showing_info AS showing_info
+            , s.showing_date AS showing_date
+            , st.stage_address
+            , CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) AS showing_period_date
+            , st.stage_name as stage_name
+            , <![CDATA[CASE WHEN NOW() < s.showing_start_at THEN '상영전'
+                            WHEN NOW() BETWEEN s.showing_start_at AND s.showing_end_at THEN '상영중'
+                            WHEN NOW() > s.showing_end_at THEN '상영종료']]>
         END showing_status
-        , s.showing_start_at , s.showing_end_at
         FROM
             play p
             LEFT JOIN play_image pimg
@@ -420,5 +421,13 @@
             ON p.play_id = s.play_id
             LEFT JOIN stage st
             ON s.stage_id = st.stage_id
+    </select>
+
+    <select id="selectAllPlayCnt" resultType="int">
+        SELECT count(*) FROM play
+    </select>
+
+    <select id="selectAllShowingCnt" resultType="int">
+        SELECT count(*) FROM showing
     </select>
 </mapper>

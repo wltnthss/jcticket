@@ -172,8 +172,8 @@
                 <h2>공연장명 검색</h2>
                 <div class="popup-content-detail">
                     <div class="popup-content-search">
-                            <input type="text" name="keyword" value="" placeholder="공연장명을 입력하세요" class="frm_input required" id="inputStage" size="30">
-                            <button class="search-btn" id="search-stage"></button>
+                        <input type="text" name="keyword" value="" placeholder="공연장명을 입력하세요" class="frm_input required" id="inputStage" size="30">
+                        <button class="search-btn" id="search-stage"></button>
                     </div>
                     <div class="tbl_header">
                         <table>
