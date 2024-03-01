@@ -79,5 +79,8 @@ public interface AdminService {
     // 관리자 상품 관리 공연, 공연 이미지 등록
     void insertPlay(PlayDto playDto) throws Exception;
     // 관리자 상품 조회
-    List<Map<String, Object>> selectAllProduct() throws Exception;
+    List<Map<String, Object>> selectAllProduct(Map<String, Object> map,
+        String start_at, String end_at, String keyword, String option, String status, String category) throws Exception;
+    // 관리자 상품 옵션 조회 개수
+    int selectOptionProduct(Map<String, Object> map) throws Exception;
 }

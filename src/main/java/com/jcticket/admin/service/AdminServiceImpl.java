@@ -7,6 +7,7 @@ import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -419,7 +420,27 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Map<String, Object>> selectAllProduct() throws Exception {
-        return adminDao.selectAllProduct();
+    public List<Map<String, Object>> selectAllProduct(Map<String, Object> map
+            ,@RequestParam(required = false) String start_at
+            ,@RequestParam(required = false) String end_at
+            ,@RequestParam(required = false) String keyword
+            ,@RequestParam(defaultValue = "A") String option
+            ,@RequestParam(defaultValue = "A") String status
+            ,@RequestParam(defaultValue = "A") String category) throws Exception {
+
+        map = new HashMap<>();
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+        map.put("option", option);
+        map.put("status", status);
+        map.put("category", category);
+
+        return adminDao.selectAllProduct(map);
+    }
+
+    @Override
+    public int selectOptionProduct(Map<String, Object> map) throws Exception {
+        return adminDao.selectOptionProduct(map);
     }
 }

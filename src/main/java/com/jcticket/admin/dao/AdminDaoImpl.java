@@ -198,8 +198,13 @@ public class AdminDaoImpl implements AdminDao{
     }
 
     @Override
-    public List<Map<String, Object>> selectAllProduct() throws Exception {
+    public List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception {
         return sqlSession.selectList(namespace+"selectAllProduct");
+    }
+
+    @Override
+    public int selectOptionProduct(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"selectOptionProduct", map);
     }
 
 }

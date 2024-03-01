@@ -396,17 +396,22 @@ public class AdminDaoImplTest {
     }
 
     @Test
-    public void selectAllProduct() throws Exception {
+    public void selectOptionProduct() throws Exception {
 
-        // given, when
-        List<Map<String, Object>> list = adminDao.selectAllProduct();
-        System.out.println("list = " + list);
+        // given
+        Map<String, Object> map = new HashMap<>();
+        map.put("start_date", "2024-05-11");
+        map.put("end_date", "2024-05-12");
+        map.put("option", "I");
+        map.put("keyword", "뷰티풀 민트 라이프");
+        map.put("status", "BS");
+        map.put("category", "콘서트");
 
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("list.get(i) = " + list.get(i));
+        // when
+        int cnt = adminDao.selectOptionProduct(map);
+        System.out.println("cnt = " + cnt);
 
-            String play_name = (String) list.get(i).get("play_name");
-            System.out.println("play_name = " + play_name);
-        }
+        // then
+        assertEquals(cnt, 1);
     }
 }
