@@ -49,12 +49,13 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/ticketing-detail",
+                url: "/ticketing/detail",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
-                success: function (arrayList) {
+                success: function (resMap) {
+                    console.log(resMap);
                     //a태그 생성 이벤트
                     // 1. ajax로 reqData(map)를 컨트롤러로 보냄,
                     // 2. 컨트롤러에서 reqData를 이용해서 sql문을 돌려서 나온 결과를 res로 리턴함
@@ -62,30 +63,36 @@ $(document).ready(function() {
 
                     const round = $("#round");
                     // res를 arrayList로 변환
-                    //onst arrayList = res;
-                    console.log("roundList ==> "+ arrayList);
+                    // const arrayList = res;
+                    const seqList = resMap.showing_seq;
+                    const infoList = resMap.showing_info;
                     //const showing = document.querySelector('.showing');
 
 
                     //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
-                    $('#round').empty();
+                    round.empty();
                     console.log("a Tag removed");
+                    console.log(`resMap ==> ${resMap}`);
+                    console.log(`seqList ==> ${seqList}`);
+                    console.log(`infoList ==> ${infoList}` );
+
                     // bootstrap 으로 감싸서 a 태그를 생성하는 코드
-                    $.each(arrayList, function (i, item){
+                    $.each(infoList, function (i, item){
                         const divTag = $("<div></div>")
                             .addClass("shadow p-2 mb-2 rounded box")
                             .appendTo(round);
                         console.log("======divTag generated======");
+                        console.log("infoList ==> "+ infoList[i]);
                         const aTag = $("<a></a>")
                             .append(item)
                             .addClass('aTag')
-                            .attr('id', i)
+                            .attr('id', seqList[i])
                             .attr('href', 'javascript:void(0);')
                             .appendTo(divTag);
                         console.log("======aTag generated======");
                     });
 
-                    // 클릭했을때 div태그 배경색 바꾸기 & a태크 글자색 바꾸기
+                    // 클릭했을때 div태그 배경색 바꾸기 & a태그 글자색 바꾸기
                     $('.aTag').click(function() {
                         let $clickedTag = $(this);$('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
                         $clickedTag.toggleClass('clicked').css('color','white').closest('.box').css('background-color', '#673AB7');
@@ -93,6 +100,7 @@ $(document).ready(function() {
                     });
                 },
                 error: function (error) {
+
                     console.log('error => ', error)
                 }
             });
@@ -103,22 +111,22 @@ $(document).ready(function() {
 
 // 팝업창 제어하는 부분.
 $(document).ready(function(){
-    let current_fs, next_fs, previous_fs; //fieldsets
-    let opacity;
-    let current = 1;
-    let steps = $("fieldset").length;
 
     $(".next").click(function(){
+        let current_fs, next_fs, previous_fs; //fieldsets
+        let opacity;
+        let current = 1;
+        let steps = $("fieldset").length;
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
-//Add Class Active
+        //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-//다음단계 넘어가기
+        //다음단계 넘어가기
         next_fs.show();
-//현재 단계 태그, 스타일 숨기기
+        //현재 단계 태그, 스타일 숨기기
         current_fs.animate({opacity: 0}, {
             step: function(now) {
-// 다음단계 넘어갈때 애니메이션 적용하기
+        // 다음단계 넘어갈때 애니메이션 적용하기
                 opacity = 1 - now;
                 current_fs.css({
                     'display': 'none',
@@ -130,17 +138,143 @@ $(document).ready(function(){
         });
 
     });
+    // 일정선택 후 다음단계 눌렀을때 발생하는 이벤트
+    //
+    $("#first-bnt").click(function(){
+        const selectedSeatList = [];
+        const data1 = {
+            'showing_seq': $(".aTag.clicked").attr("id"),
+        }
+        console.log("seq => "+data1.showing_seq);
+        $.ajax({
+            url: "detail/seat",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data1),
+            success: function (res) {
+                const seatIdList = res.seat_id;
+                const statusList = res.seat_status;
+                const endRowNum = res.end_row;
+                const endColNum = res.end_col;
+                const seatPrice = res.seat_price;
+                console.log("seatIdList => " + seatIdList);
+                console.log("statusList => " + statusList);
+                console.log("endRowNum => " + endRowNum);
+                console.log("endColNum => " + endColNum);
+                console.log("seatPrice => " + seatPrice);
+
+                // 동적으로 seats - span - a 태그를 생성한다.
+                // 만들어야 할 태그의 형태 >>
+                const seatsArea = $("#seatsArea");
+                seatsArea.empty();
+                console.log("== seatsArea Tag removed ===");
+                const divTag = $("<div></div>")
+                    .attr("id", "stage")
+                    .addClass("shadow-sm p-1 mb-2 bg-dark rounded")
+                    .append("STAGE")
+                    .appendTo(seatsArea);
+                console.log("===== #stage 태그 생성 =====")
+                for (let i = 0; i < endRowNum; i++) {
+                    const divSeatsTag = $("<div></div>")
+                        .addClass("seats")
+                        .appendTo(seatsArea);
+                    console.log("===== .seats 태그 생성 "+(i+1)+" =====");
+                }
+
+                const seats = $(".seats");
+                seats.empty();
+                $("#ss").empty();
+                $("#sp").empty();
+                console.log("seats Tag removed");
+                seats.each(function(i){
+                    const currentSeats = $(this);
+                    let asciiVal = 'A'.charCodeAt(0) + i;
+                    let rowChar = String.fromCharCode(asciiVal);
+                    const spanTag = $("<span></span>")
+                        .append(rowChar)
+                        .appendTo(currentSeats);
+                    for (let j = 0; j < endColNum; j++) {
+                        const spanTag = $("<span></span>")
+                            .attr("id", seatIdList[endColNum * i + j])
+                            .addClass("border border-primary")
+                            .appendTo(currentSeats);
+                        if(statusList[endColNum * i + j] === "N"){
+                            spanTag.addClass("disabled");
+                        }
+                        console.log("===== "+(endColNum*i+j)+"번 좌석 생성 =====");
+                    }
+                })
+                $("span.border-primary").hover(
+                    function() {
+                        $(this).css("cursor", "pointer"); // 마우스를 올렸을 때 포인터 커서로 변경
+                    },
+                    function() {
+                        $(this).css("cursor", "auto"); // 마우스를 벗어났을 때 기본 커서로 변경
+                    }
+                );
+                $(".disabled").off("click").css("background-color", "gray");
+
+                // 클릭 이벤트를 추가하여 클릭 가능하도록 설정
+                $("span.border-primary").click(function() {
+                    // 이미 예약된 좌석은 이벤트를 발생시키지 않는다.
+                    if ($(this).hasClass("disabled")) {
+                        return false; // 클릭 이벤트를 처리하지 않음
+                    }
+                    // 클릭 이벤트 처리 코드를 작성한다.
+                    if($(this).hasClass("clicked")){
+                        // 이미 클릭된 경우 클릭을 해제한다.
+                        $(this).removeClass("clicked");
+                        const thisId = $(this).attr("id");
+                        const index = selectedSeatList.indexOf(thisId);
+                        if(index !== -1){
+                            selectedSeatList.splice(index, 1);
+                        }
+                        $("#ss").text(selectedSeatList.join(", "));
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                    }else {
+                        // 클릭하는 경우 clicked 상태가 된다.
+                        $(this).addClass("clicked");
+                        let thisId = $(this).attr("id");
+                        selectedSeatList.push(thisId);
+                        $("#ss").text(selectedSeatList.join(", "));
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                        console.log(`선택된 좌석의 ID => ${thisId}`);
+                    }
+                });
+
+
+                // for ri=0; ri < endRowNum; ri++
+                // <span>${'A' + ri}</span>
+                // For i = 1; i <= endColNum; i++
+                //
+                // if(statusList[i] === 'Y')
+                //<span id="${seatIdList[i]}" class="border border-primary"></span>
+                // else if(statusList[i] === 'N')
+                // <span id="${seatIdList[i]}" class="border border-primary clicked"></span>
+                // + jquery 로 클릭 비활성화 및 비활성화 배경색으로 변경
+                // else -> 예외처리하기
+
+            },
+            error: function (error) {
+                alert(`${error.status} error! 회차를 선택해 주세요! `);
+                console.log("error => "+ error.body + error.status);
+                location.reload();
+            }
+        })
+    })
+
+
     $(".previous").click(function(){
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-//Remove class active
+        //Remove class active
         $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-//show the previous fieldset
+        //show the previous fieldset
         previous_fs.show();
-//hide the current fieldset with style
+        //hide the current fieldset with style
         current_fs.animate({opacity: 0}, {
             step: function(now) {
-// for making fielset appear animation
+            // for making fielset appear animation
                 opacity = 1 - now;
                 current_fs.css({
                     'display': 'none',

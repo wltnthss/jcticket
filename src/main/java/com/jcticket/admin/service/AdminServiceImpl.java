@@ -355,7 +355,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void insertPlay(PlayDto playDto) throws Exception {
 
-        final String FILE_PATH = "C:/play_img/";
+//        final String FILE_PATH = "C:/play_img/";
+        final String FILE_PATH = "/Users/joyoungsang/Desktop/";
 
         // 공연 아이디 랜덤 난수 8글자 insert 하기 위함
         UUID uuid = UUID.randomUUID();
