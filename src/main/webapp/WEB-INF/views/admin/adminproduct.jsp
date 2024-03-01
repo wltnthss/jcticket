@@ -44,7 +44,7 @@
                                     <option value="P">공연명</option>
                                     <option value="S">공연장</option>
                                 </select>
-                                <input type="text" name="keyword" value="" class="user-form-input" size="30">
+                                <input type="text" name="keyword" class="user-form-input" size="30">
                             </td>
                         </tr>
                         <tr>
@@ -59,9 +59,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <th scope="row">카테고리</th>
+                            <td>
+                                <select name="category">
+                                    <option value="A">전체</option>
+                                    <option value="콘서트">콘서트</option>
+                                    <option value="뮤지컬">뮤지컬</option>
+                                    <option value="연극">연극</option>
+                                    <option value="클래식">클래식</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <th scope="row">공연기간</th>
                             <td>
-                                <input name="showing_start_at" id="showing_start_at" type="date"  class="frm_input required" > ~ <input name="showing_end_at" id="showing_end_at" type="date"  class="frm_input required" >
+                                <input name="start_date" id="showing_start_at" type="date"  class="frm_input required" > ~ <input name="end_date" id="showing_end_at" type="date"  class="frm_input required" >
                             </td>
                         </tr>
                         </tbody>
@@ -73,7 +85,7 @@
                 </div>
             </form>
             <div class="local_ov mart30">
-                총 공연수 : <b class="fc_red">${playListCnt}</b>개 <span style="margin: 0 10px">|</span> 총 회차수 : <b class="fc_red">${showingListCnt}</b>개
+               총 회차수 : <b class="fc_red">${showingListCnt}</b>개
             </div>
             <div class="local_frm01">
                 <a href="#" class="btn_lsmall bx-white">엑셀저장</a>

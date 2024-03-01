@@ -538,14 +538,14 @@ public class AdminController {
     }
     // 관리자 쿠폰 관리 폼 이동
     @GetMapping("/admin/coupon")
-    public String adminCouponForm(Model model, Map<String, Object> map
+    public String adminCouponForm(Model model
                         ,@RequestParam(defaultValue = "A") String option
                         ,@RequestParam(required = false) String start_at
                         ,@RequestParam(required = false) String end_at
                         ,@RequestParam(required = false) String keyword
                         ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
 
-        map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("option", option);
         map.put("keyword", keyword);
         map.put("start_date", start_at);
@@ -663,11 +663,28 @@ public class AdminController {
     }
     // 관리자 상품 관리
     @GetMapping("/admin/product")
-    public String adminProduct(Model model) throws Exception{
+    public String adminProduct(Model model
+            ,@RequestParam(required = false) String start_at
+            ,@RequestParam(required = false) String end_at
+            ,@RequestParam(required = false) String keyword
+            ,@RequestParam(defaultValue = "A") String option
+            ,@RequestParam(defaultValue = "A") String status
+            ,@RequestParam(defaultValue = "A") String category
+                               ) throws Exception{
 
-        List<Map<String,Object>> list = adminService.selectAllProduct();
+        Map<String, Object> map = new HashMap<>();
+        map.put("keyword", keyword);
+        map.put("start_date", start_at);
+        map.put("end_date", end_at);
+        map.put("option", option);
+        map.put("status", status);
+        map.put("category", category);
+
+        List<Map<String,Object>> list = adminService.selectAllProduct(map, start_at, end_at, keyword, option, status, category);
+        int showingListCnt = adminService.selectOptionProduct(map);
 
         model.addAttribute("list", list);
+        model.addAttribute("showingListCnt", showingListCnt);
 
         return "admin/adminproduct";
     }
@@ -700,7 +717,7 @@ public class AdminController {
         System.out.println("playDto = " + playDto);
         adminService.insertPlay(playDto);
 
-        return "redirect:/admin/product";
+        return "redirect:/admin/productregister";
     }
     // 관리자 회차 등록
     @PostMapping("/admin/showingregister")
