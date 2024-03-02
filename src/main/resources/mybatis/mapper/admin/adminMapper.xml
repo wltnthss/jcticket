@@ -425,42 +425,40 @@
         WHERE
             1=1
             AND s.showing_info IS NOT NULL
-        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
-            AND s.showing_start_at BETWEEN #{start_date} AND #{end_date}
-            AND s.showing_end_at  BETWEEN #{start_date} AND #{end_date}
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
         </if>
-        <choose>
-            <when test='option=="I"'>
-                AND p.play_id like concat('%', #{keyword}, '%')
-            </when>
-            <when test='option=="P"'>
-                AND p.play_name = #{keyword}
-            </when>
-            <when test='option=="S"'>
-                AND st.stage_name like concat('%', #{keyword}, '%')
-            </when>
-            <when test='status=="BS"'>
-                AND showing_status = 'BS'
-            </when>
-            <when test='status=="IS"'>
-                AND showing_status = 'IS'
-            </when>
-            <when test='status=="AS"'>
-                AND showing_status = 'AS'
-            </when>
-            <when test='category=="콘서트"'>
-                AND p.play_major_cat = '콘서트'
-            </when>
-            <when test='category=="뮤지컬"'>
-                AND p.play_major_cat = '뮤지컬'
-            </when>
-            <when test='category=="연극"'>
-                AND p.play_major_cat = '연극'
-            </when>
-            <when test='category=="클래식"'>
-                AND p.play_major_cat = '클래식'
-            </when>
-        </choose>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
     </select>
 
     <select id="selectAllPlayCnt" resultType="int">
@@ -471,7 +469,7 @@
         SELECT count(*) FROM showing
     </select>
 
-    <select id="selectOptionProduct" parameterType="map" resultType="int">
+    <select id="countOptionProduct" parameterType="map" resultType="int">
         SELECT
             count(*)
         FROM
@@ -485,41 +483,39 @@
         WHERE
             1=1
             AND s.showing_info IS NOT NULL
-        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
-            AND s.showing_start_at BETWEEN #{start_date} AND #{end_date}
-            AND s.showing_end_at  BETWEEN #{start_date} AND #{end_date}
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
         </if>
-        <choose>
-            <when test='option=="I"'>
-                AND p.play_id like concat('%', #{keyword}, '%')
-            </when>
-            <when test='option=="P"'>
-                AND p.play_name = #{keyword}
-            </when>
-            <when test='option=="S"'>
-                AND st.stage_name like concat('%', #{keyword}, '%')
-            </when>
-            <when test='status=="BS"'>
-                AND showing_status = 'BS'
-            </when>
-            <when test='status=="IS"'>
-                AND showing_status = 'IS'
-            </when>
-            <when test='status=="AS"'>
-                AND showing_status = 'AS'
-            </when>
-            <when test='category=="콘서트"'>
-                AND p.play_major_cat = '콘서트'
-            </when>
-            <when test='category=="뮤지컬"'>
-                AND p.play_major_cat = '뮤지컬'
-            </when>
-            <when test='category=="연극"'>
-                AND p.play_major_cat = '연극'
-            </when>
-            <when test='category=="클래식"'>
-                AND p.play_major_cat = '클래식'
-            </when>
-        </choose>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
     </select>
 </mapper>

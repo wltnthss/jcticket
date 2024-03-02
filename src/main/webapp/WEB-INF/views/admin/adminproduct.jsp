@@ -73,7 +73,7 @@
                         <tr>
                             <th scope="row">공연기간</th>
                             <td>
-                                <input name="start_date" id="showing_start_at" type="date"  class="frm_input required" > ~ <input name="end_date" id="showing_end_at" type="date"  class="frm_input required" >
+                                <input name="start_at" id="showing_start_at" type="date"  class="frm_input required" > ~ <input name="end_at" id="showing_end_at" type="date"  class="frm_input required" >
                             </td>
                         </tr>
                         </tbody>

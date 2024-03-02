@@ -199,12 +199,12 @@ public class AdminDaoImpl implements AdminDao{
 
     @Override
     public List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception {
-        return sqlSession.selectList(namespace+"selectAllProduct");
+        return sqlSession.selectList(namespace+"selectAllProduct", map);
     }
 
     @Override
-    public int selectOptionProduct(Map<String, Object> map) throws Exception {
-        return sqlSession.selectOne(namespace+"selectOptionProduct", map);
+    public int countOptionProduct(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionProduct", map);
     }
 
 }
