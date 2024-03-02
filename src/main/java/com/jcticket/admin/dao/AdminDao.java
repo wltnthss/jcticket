@@ -93,6 +93,6 @@ public interface AdminDao {
     // 관리자 상품 조회
     List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception;
     // 관리자 상품 옵션 조회 개수
-    int selectOptionProduct(Map<String, Object> map) throws Exception;
+    int countOptionProduct(Map<String, Object> map) throws Exception;
 
 }

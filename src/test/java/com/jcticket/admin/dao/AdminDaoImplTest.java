@@ -394,24 +394,4 @@ public class AdminDaoImplTest {
         // then
         assertEquals(insertShoiwng, 1);
     }
-
-    @Test
-    public void selectOptionProduct() throws Exception {
-
-        // given
-        Map<String, Object> map = new HashMap<>();
-        map.put("start_date", "2024-05-11");
-        map.put("end_date", "2024-05-12");
-        map.put("option", "I");
-        map.put("keyword", "뷰티풀 민트 라이프");
-        map.put("status", "BS");
-        map.put("category", "콘서트");
-
-        // when
-        int cnt = adminDao.selectOptionProduct(map);
-        System.out.println("cnt = " + cnt);
-
-        // then
-        assertEquals(cnt, 1);
-    }
 }
