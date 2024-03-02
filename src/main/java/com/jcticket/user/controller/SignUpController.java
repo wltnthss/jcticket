@@ -200,12 +200,12 @@ public class SignUpController {
     }
 
     @PostMapping("/signupSNS")
-    public String signupSNS_NAVER(UserDto userDto, TermsDto termsDto, Model m, HttpSession session){
+    public String signupSNS_NAVER(UserDto userDto, TermsDto termsDto, Model m){
         try {
 
             System.out.println("userDto = " + userDto);
             String n_user_id = userDto.getUser_id();
-            userDto.setUser_sns_provider("NAVER");
+//            userDto.setUser_sns_provider("NAVER");
 
             if (userService.signupSNS(userDto) != 1) {
                 throw new Exception("signupSNS failed");
