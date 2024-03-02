@@ -17,6 +17,7 @@
 
         <%-- 회원가입 폼 시작 --%>
         <form action="<c:url value="/signup/signupSNS"/>" id="signupForm" class="signupForm" method="POST">
+            <input id="sns_provider" type="hidden" name="user_sns_provider" value="${requestScope.n_sns_provider}">
             <!-- 이메일 부분 시작 -->
             <input id="totalEmail" type="hidden" name="user_email" value="${requestScope.n_email}">
             <!-- 이메일 부분 끝 -->
@@ -203,6 +204,7 @@
     let naverTel = "${requestScope.n_tel}";
     let naverBirth = "${requestScope.n_birth}";
     let naverGender = "${requestScope.n_gender}";
+    let provider = "${requestScope.n_sns_provider}";
 
 
 </script>
