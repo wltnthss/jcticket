@@ -674,14 +674,14 @@ public class AdminController {
 
         Map<String, Object> map = new HashMap<>();
         map.put("keyword", keyword);
-        map.put("start_date", start_at);
-        map.put("end_date", end_at);
+        map.put("start_at", start_at);
+        map.put("end_at", end_at);
         map.put("option", option);
         map.put("status", status);
         map.put("category", category);
 
-        List<Map<String,Object>> list = adminService.selectAllProduct(map, start_at, end_at, keyword, option, status, category);
-        int showingListCnt = adminService.selectOptionProduct(map);
+        List<Map<String,Object>> list = adminService.selectAllProduct(map);
+        int showingListCnt = adminService.countOptionProduct(map);
 
         model.addAttribute("list", list);
         model.addAttribute("showingListCnt", showingListCnt);
@@ -693,7 +693,7 @@ public class AdminController {
     public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
 
         try{
-            String path = "/Users/joyoungsang/Desktop/" + img_name + ".JPG";
+            String path = "C:/play_img/" + img_name + ".JPG";
             System.out.println("path = " + path);
 
             InputStream in = new FileInputStream(path);
