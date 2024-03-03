@@ -459,6 +459,10 @@
         <if test='category=="클래식"'>
             AND p.play_major_cat = '클래식'
         </if>
+        ORDER BY
+            s.created_at DESC
+        LIMIT
+            #{start}, #{limit}
     </select>
 
     <select id="selectAllPlayCnt" resultType="int">
@@ -518,4 +522,8 @@
             AND p.play_major_cat = '클래식'
         </if>
     </select>
+
+    <delete id="deleteProduct" parameterType="String">
+        delete from play where play_id = #{play_id}
+    </delete>
 </mapper>

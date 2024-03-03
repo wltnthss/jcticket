@@ -52,6 +52,9 @@ public class AdminController {
     @Autowired
     NoticeService noticeService;
 
+    final int pageLimit = 10;   // 한 페이지당 보여줄 글 개수
+    final int blockLimit = 10;  // 하단에 보여줄 페이지 번호
+
     // /admin url 입력시 loginform 이동
     @GetMapping("/admin")
     public String admin() throws Exception{
@@ -670,9 +673,12 @@ public class AdminController {
             ,@RequestParam(defaultValue = "A") String option
             ,@RequestParam(defaultValue = "A") String status
             ,@RequestParam(defaultValue = "A") String category
+            ,@RequestParam(value = "page", defaultValue = "1") int page
                                ) throws Exception{
 
         Map<String, Object> map = new HashMap<>();
+        map.put("start", (page - 1) * pageLimit);
+        map.put("limit", pageLimit);
         map.put("keyword", keyword);
         map.put("start_at", start_at);
         map.put("end_at", end_at);
@@ -681,9 +687,11 @@ public class AdminController {
         map.put("category", category);
 
         List<Map<String,Object>> list = adminService.selectAllProduct(map);
+        PageDto pageDto = adminService.productPagingParam(page, option, keyword, start_at, end_at, status, category);
         int showingListCnt = adminService.countOptionProduct(map);
 
         model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
         model.addAttribute("showingListCnt", showingListCnt);
 
         return "admin/adminproduct";
@@ -714,8 +722,12 @@ public class AdminController {
     @PostMapping("/admin/playregister")
     public String adminProductRegister(Model model, PlayDto playDto) throws Exception{
 
-        System.out.println("playDto = " + playDto);
-        adminService.insertPlay(playDto);
+        try {
+            System.out.println("playDto = " + playDto);
+            adminService.insertPlay(playDto);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         return "redirect:/admin/productregister";
     }
@@ -762,6 +774,26 @@ public class AdminController {
                 });
 
         return "redirect:/admin/product";
+    }
+    @DeleteMapping("/admin/productdelete")
+    @ResponseBody
+    public int adminProductDelete(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+        System.out.println("valueArr = " + valueArr);
+
+        try {
+            for (String productId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.deleteProduct(productId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{

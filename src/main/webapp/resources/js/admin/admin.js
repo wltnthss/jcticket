@@ -210,6 +210,50 @@ $(function (){
             }
         }
     });
+
+    // 관리자 상품 삭제 버튼 클릭 이벤트
+    $('#product-delete-btn').on('click', function(){
+
+        // 체크박스 리스트 전체
+        let checkList = $("input[name=selectedItems]:checked");
+        let valueArr = [];
+
+        // checkList가 check 된 상태이면 배열에 값 저장
+        checkList.each(function () {
+            valueArr.push($(this).val());
+        });
+
+        console.log('valueArr => ' + valueArr);
+
+        if(valueArr.length === 0){
+            alert("삭제할 항목을 선택해주세요");
+            return false;
+        }else{
+            if(confirm("정말 삭제하시겠습니까?")){
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/productdelete',
+                    data: JSON.stringify(valueArr),
+                    contentType: "application/json",
+                    success: function (res){
+                        console.log('res => ' + res)
+                        if(res > 0){
+                            alert('삭제되었습니다.');
+                            location.href= "/admin/product";
+                        }else{
+                            alert('삭제 실패');
+                            location.href= "/admin/product";
+                        }
+                    },
+                    error: function (e) {
+                        console.error("삭제 실패", e);
+                    }
+                });
+            }
+        }
+    });
+
     // 공연장 선택 검색 버튼 선택 이벤트
     $('#search-stage').on('click', function () {
 
