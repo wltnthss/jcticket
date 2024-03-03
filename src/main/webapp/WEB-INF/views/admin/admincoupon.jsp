@@ -108,7 +108,7 @@
                 <div class="notice-paging">
                     <c:if test="${paging.showPrev}">
                         <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
-                        <a class="notice-paging-pageitems" href="/admin/coupon?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}"> < </a>
+                        <a class="notice-paging-pageitems" href="/admin/coupon?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${paging.start_at}&end_at=${paging.end_at}"> < </a>
                     </c:if>
 
                     <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -119,7 +119,7 @@
                         </c:if>
                         <c:if test="${i ne paging.page}">
                             <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
-                            <a class="notice-paging-pageitems" href="/admin/coupon?page=${i}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}">${i}</a>
+                            <a class="notice-paging-pageitems" href="/admin/coupon?page=${i}&option=${paging.option}&keyword=${paging.keyword}&start_at=${paging.start_at}&end_at=${paging.end_at}">${i}</a>
                         </c:if>
                     </c:forEach>
 

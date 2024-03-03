@@ -82,4 +82,8 @@ public interface AdminService {
     List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception;
     // 관리자 상품 옵션 조회 개수
     int countOptionProduct(Map<String, Object> map) throws Exception;
+    // 관리자 상품 페이징 처리
+    PageDto productPagingParam(int page, String option, String keyword, String start_at, String end_at, String status, String category) throws Exception;
+    // 관리자 상품 삭제
+    void deleteProduct(String play_id) throws Exception;
 }

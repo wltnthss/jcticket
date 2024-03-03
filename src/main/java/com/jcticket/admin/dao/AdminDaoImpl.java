@@ -207,4 +207,9 @@ public class AdminDaoImpl implements AdminDao{
         return sqlSession.selectOne(namespace+"countOptionProduct", map);
     }
 
+    @Override
+    public void deleteProduct(String play_id) throws Exception {
+        sqlSession.delete(namespace + "deleteProduct", play_id);
+    }
+
 }
