@@ -23,8 +23,8 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 public class ShowingDto {
     private int showing_seq;
-    private Timestamp showing_start_at;
-    private Timestamp showing_end_at;
+    private String showing_start_at;
+    private String showing_end_at;
     private String showing_info;
     private String showing_date;
     private String showing_day;

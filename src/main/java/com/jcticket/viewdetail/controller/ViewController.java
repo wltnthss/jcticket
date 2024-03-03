@@ -31,61 +31,100 @@ import java.util.Map;
  */
 @Controller
 public class ViewController {
+    //에러처리
+    //ExceptionCatcher.java 파일에서 일괄적으로 해줌
+
+    //ExceptionHandler를 사용한 덕에 중복코드 제거 가능해짐
+//        try {
+    
+    //        } catch (Exception e){
+//            e.printStackTrace();
+//            return "viewdetail/error";
+//        }
+
     @Autowired
     ViewDetailService viewDetailService;
+
+//    ajax 사용한 페이징
+    @GetMapping("/viewdetail/page")
+    @ResponseBody
+    public Map<String, Object> viewdetailv(@RequestParam String this_play_id,
+                                    @RequestParam Integer page,
+                                    @RequestParam Integer pageSize
+                                    ,Model model) throws Exception {
+
+        Map<String, Object> msg = new HashMap<>();
+
+        Map board_map = new HashMap();
+        board_map.put("play_id",this_play_id);
+        board_map.put("offset",(page-1)*pageSize);
+        board_map.put("pageSize",pageSize);
+
+        List<ReviewDto> boardList = viewDetailService.review_select_limit(board_map);
+//        System.out.println(boardList);
+        msg.put("boardList",boardList);
+
+        return msg;
+    }
 
 //    공연아이디 조건, view에서 표시할 정보들
     @GetMapping("/viewdetail")
     public String viewdetail(@RequestParam String this_play_id,
-            Model model,Integer page, Integer pageSize) throws Exception {
+                             @RequestParam(defaultValue = "1") Integer page,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             Model model) throws Exception {
 
-        if(page==null) {
-            page = 1;
-        }
-        if(pageSize==null) {
-            pageSize = 10;
-        }
+        //ticketing 페이지로 보낼 play_id
+        String play_id = this_play_id;
+        model.addAttribute("play_id",play_id);
 
-        try {
-            //상세보기에 표시할 것들
-            List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
-            List<ShowingDto> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
-            model.addAttribute("viewDetail", viewDetail);
-            model.addAttribute("viewDetailTime", viewDetailTime);
+        //상세보기에 표시할 것들 서비스에서 하나로 묶어서 tx?
+        List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
+        Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
 
-            //상세보기 - 관람후기 게시판
-            int totalCnt = viewDetailService.get_review_count();
-            PageHandler pageHandler = new PageHandler(page,totalCnt,pageSize);
+//        ReviewDto reviewDto = new ReviewDto();
+//        int review = viewDetailService.review_create(reviewDto);
+//        model.addAttribute("review", review);
 
-            Map map = new HashMap();
-            map.put("offset",(page-1)*pageSize);
-            map.put("pageSize",pageSize);
+//        System.out.println("viewDetailTime=============>"+viewDetailTime);
 
-            List<ReviewDto> list = viewDetailService.review_select_page(map);
-            model.addAttribute("list",list);
-            model.addAttribute("ph",pageHandler);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        model.addAttribute("viewDetail", viewDetail);
+        model.addAttribute("viewDetailTime", viewDetailTime);
+
+
+        //-----------------------------------------------------------------------
+
+//        //페이지핸들러
+        int totalCnt = viewDetailService.get_review_count(this_play_id);
+        PageHandler pageHandler = new PageHandler(page,totalCnt,pageSize);
+
+        model.addAttribute("ph",pageHandler);
+
+        //예외페이지 테스트
+//        throw new Exception("예외 발생");
+//        throw new NullPointerException("예외 발생");
+
         return "viewdetail/viewdetail";
     }
 
 //    회차정보받기(ex.24년 2월 1일 >>> 1회 12시 00분)
     @PostMapping("/viewdetail")
     @ResponseBody
-    public List<ShowingDto> viewDetail2(@RequestBody String dateText)
+    public List<ShowingDto> viewDetail2(
+            @RequestParam String dateText,
+            @RequestParam String play_id
+    )
             throws Exception {
-        // dateText뒤에 계속 등호 들어와서 자름 (2024-02-10=   <<< 이런식으로 들어옴 왜인지는 모르겠다)
-        char[] charArr = dateText.toCharArray();
-        String dateCal = dateText.substring(0, charArr.length-1);
+
         List<ShowingDto> msg = null;
-        try {
+
+//        System.out.println("play_id======>"+play_id);
+//        System.out.println("dateText======>"+dateText);
+
 //            날짜정보를 통해 해당 날짜의 회차정보 받음
-            List<ShowingDto> list = viewDetailService.getShowingInfo(dateCal);
-            msg = list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<ShowingDto> list = viewDetailService.getShowingInfo(dateText,play_id);
+        msg = list;
+
         return msg;
     }
 
@@ -99,12 +138,15 @@ public class ViewController {
         char[] charArr = decodedSeatInfo.toCharArray();
         String remainSeatCal = (decodedSeatInfo.substring(0, charArr.length-1));
         int msg = 0;
-        try {
-            int list = viewDetailService.getRemainSeat(remainSeatCal);
-            msg = list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        int list = viewDetailService.getRemainSeat(remainSeatCal);
+        msg = list;
+
         return msg;
+    }
+
+    @GetMapping("/review_insert")
+    public Object review_insert() throws Exception {
+        return "viewdetail/review_insert";
     }
 }

@@ -35,7 +35,7 @@ public interface ViewDetailDao {
     int test_delete_showing() throws Exception;
     int test_delete_seat_class() throws Exception;
 
-    List<ShowingDto> select_showing_info(String dateText) throws Exception;
+    List<ShowingDto> select_showing_info(String dateText, String play_id) throws Exception;
 
     int remain_seat(String showing_seq) throws Exception;
 
@@ -44,7 +44,7 @@ public interface ViewDetailDao {
     List<ShowingDto> viewDetail_view_time(String play_id) throws Exception;
 
 //    후기게시판
-    int review_count() throws Exception;
+    int review_count(String play_id) throws Exception;
 
     int review_deleteAll() throws Exception;
 
@@ -58,7 +58,7 @@ public interface ViewDetailDao {
 
     List<ReviewDto> review_select_all(String play_id) throws Exception;
 
-    List<ReviewDto> review_select(int review_num) throws Exception;
+    List<ReviewDto> review_select_limit(Map map) throws Exception;
 
-    List<ReviewDto> review_select_page(Map map) throws Exception;
+    List<ReviewDto> review_select(int review_num) throws Exception;
 }

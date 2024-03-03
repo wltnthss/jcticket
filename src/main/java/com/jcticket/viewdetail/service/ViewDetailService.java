@@ -21,16 +21,16 @@ import java.util.Map;
  */
 
 public interface ViewDetailService {
-    List<ShowingDto> getShowingInfo(String dateText) throws Exception;
+    List<ShowingDto> getShowingInfo(String dateText, String play_id) throws Exception;
 
     int getRemainSeat(String showing_seq) throws Exception;
 
     List<JoinDto> getViewDetail(String play_id) throws Exception;
 
-    List<ShowingDto> getViewDetailTime(String play_id) throws Exception;
+    Map<String, List<String>> getViewDetailTime(String play_id) throws Exception;
 
 
-    int get_review_count() throws Exception;
+    int get_review_count(String play_id) throws Exception;
 
     int review_deleteAll() throws Exception;
 
@@ -44,7 +44,7 @@ public interface ViewDetailService {
 
     List<ReviewDto> review_select_all(String play_id) throws Exception;
 
-    List<ReviewDto> review_select(int review_num) throws Exception;
+    List<ReviewDto> review_select_limit(Map map) throws Exception;
 
-    List<ReviewDto> review_select_page(Map map) throws Exception;
+    List<ReviewDto> review_select(int review_num) throws Exception;
 }
