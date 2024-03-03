@@ -57,7 +57,6 @@
         and showing_seq = #{showing_seq}
     </delete>
 
-
     <!-- 전체 삭제하는 쿼리 -->
     <delete id="deleteAll">
         delete from showing
@@ -88,18 +87,19 @@
         group by showing_date
         order by showing_date asc;
     </select>
-<!--    공연아이디 && 공연일정별 회차시퀀스, 회차정보 조회-->
+<!--    공연아이디 && 공연일정별  회차시퀀스, 회차정보 조회-->
     <select id="selectRound" parameterType="hashmap" resultType="hashmap">
-        select showing_info
+        select showing_seq, showing_info
         from showing
         where 1=1
         and play_id = #{play_id}
         and showing_date = #{date_text}
+        order by showing_info asc
     </select>
 
 <!--    공연아이디로 공연명과 ,공연포스터, 공연장명 조회-->
     <select id="selectPlayStageName" parameterType="string" resultType="hashmap">
-        SELECT p.play_name, p.play_poster, t.stage_name
+        SELECT p.play_name, t.stage_name
         from play p
         inner join (select DISTINCT play_id , stage_id from showing) as s
         on p.play_id = s.play_id
@@ -108,8 +108,6 @@
         where 1=1
         and s.play_id = #{play_id}
     </select>
-
-
 
     <!-- 공연아이디로 회차시퀀스 조회 -->
 
@@ -138,22 +136,69 @@
         and showing_date = #{dateText} and play_id = #{play_id}
     </select>
 
-    <!-- 상세페이지에서 선택된 공연아이디(play_id)로 공연명(play_name), 공연장(stage_name) 조회하는 쿼리 -->
-    <!-- 회차(showing) 테이블의 play_id 컬럼, stage_id 컬럼을 이용하여 3개 테이블 조인  -->
 
+    <!-- ************** step2. 좌석선택 **************** -->
+    <!-- seat 테이블 insert -->
+    <insert id="insertSeat" parameterType="SeatDto">
+        INSERT INTO jcticket.seat (seat_row, seat_col, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{seat_row}, #{seat_col}, #{stage_id}, CURRENT_TIMESTAMP, 'system', CURRENT_TIMESTAMP, 'system');
+    </insert>
 
-<!--    <select id="countShowingAll" resultType="int">-->
-<!--        select count(*)-->
-<!--        from showing-->
-<!--    </select>-->
+    <!-- seat 테이블 delete -->
+    <delete id="deleteSeatByStageId" parameterType="string">
+        delete from seat where stage_id = #{stage_id}
+    </delete>
 
+    <!-- show_seat 테이블 insert -->
+    <insert id="insertShowSeat" parameterType="ShowSeatDto">
+        INSERT INTO show_seat (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_seq}, #{seat_row}, #{seat_col}, #{stage_id}, "Y", CURRENT_TIMESTAMP, "0sang", CURRENT_TIMESTAMP, "0sang");
+    </insert>
 
-    <!-- ************** next steps **************** -->
-    <!-- 좌석가격 조회 -->
-    <select id="seat_price" resultType="int">
-        select seat_price
-        from seat_class
+    <!-- show_seat 테이블 delete -->
+    <delete id="deleteShowSeat">
+        delete from show_seat
+    </delete>
+
+    <!-- 회차테이블의 회차좌석수 구하기 -->
+    <select id="selectSeatCnt" parameterType="int" resultType="int">
+        select showing_seat_cnt
+        from showing
+        where 1=1
+        and showing_seq = #{showing_seq}
     </select>
+
+    <!-- 회차 시퀀스로 회차좌석가격 조회 -->
+    <select id="selectPrice" parameterType="int" resultType="int">
+        select showing_seat_price
+        FROM showing s
+        WHERE 1=1
+          and showing_seq = #{showing_seq}
+    </select>
+    <!-- 회차 시퀀스로 좌석번호, 좌석상태 리스트 조회 -->
+    <select id="selectSeatList" parameterType="int" resultType="hashmap">
+        SELECT CONCAT(seat_row, seat_col) AS seat_id, show_seat_status AS seat_status
+        FROM show_seat ss
+        WHERE 1=1
+          AND showing_seq = #{showing_seq}
+        order by seat_row asc;
+    </select>
+
+    <!-- 회차 시퀀스로 회차의 행, 열의 마지막 값 구하기(size) -->
+    <select id="selectEndNum" parameterType="int" resultType="hashmap">
+        SELECT MAX(seat_col) AS end_col, MAX(seat_row) AS end_row
+        from show_seat ss
+        where 1=1
+          and showing_seq = #{showing_seq}
+    </select>
+
+
+    <!-- step3. 쿠폰선택 -->
+
+    <!-- step4. 결제방법 -->
+
+    <!-- etc. -->
+    <!--티켓 모든 정보 조회하기. -->
     <select id="selectAll" resultType="TicketingDto">
         SELECT ticketing_id, ticketing_at, ticketing_cnt,
                ticketing_status, showing_info, showing_date,

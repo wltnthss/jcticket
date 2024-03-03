@@ -34,27 +34,37 @@ public class UserServiceImpl implements UserService {
         return userDao.select(user_id);
     }
 
+    // user가 로그인 할때마다 1씩 증가. 방문횟수
     @Override
     public int increaseLoginCnt(String user_id) throws Exception {
-        // user가 로그인 할때마다 1씩 증가. 방문횟수
         return userDao.increaseLoginCnt(user_id);
     }
 
+    //회원가입(insert)
     @Override
     public int signup(UserDto userDto) throws Exception {
         return userDao.insert(userDto);
     }
 
+    //아이디 중복검사
+    @Override
+    public int signupSNS(UserDto userDto) throws Exception {
+        return userDao.insertSNS(userDto);
+    }
+
+    //아이디 중복검사
     @Override
     public int chkIdDupl(String user_id) throws Exception {
         return userDao.selectIdDupl(user_id);
     }
 
+    //닉네임 중복검사
     @Override
     public int chkNickNameDupl(String user_nickname) throws Exception {
         return userDao.selectNickNameDupl(user_nickname);
     }
 
+    //로그인 검사. 입력한 아이디의 비밀번호 일치하는지
     @Override
     public boolean loginCheck(String user_id, String user_password) throws Exception {
         if (user_id == null || user_id.isEmpty()) {
@@ -79,6 +89,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    //탈퇴회원이면 로그인 안되게
     @Override
     public boolean isUserRetired(String user_id) throws Exception {
         UserDto userDto = userDao.select(user_id);

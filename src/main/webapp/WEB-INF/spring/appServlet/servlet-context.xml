@@ -25,7 +25,12 @@
     <context:component-scan base-package="com.my" />
     <context:component-scan base-package="com.jcticket" />
 
+    <!-- MultipartResolver 설정 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+
     <beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <beans:property name="defaultErrorView" value="error"/>
     </beans:bean>
+
+    <beans:bean id="naverLoginBO" class="com.jcticket.user.sns.NaverLoginBO" />
 </beans:beans>

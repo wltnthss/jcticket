@@ -1,19 +1,19 @@
-package com.jcticket.viewdetail.dto;
+package com.jcticket.dto;
 
 import lombok.*;
 
 import java.sql.Timestamp;
 
 /**
- * packageName    : com.jcticket.viewdetail.dto
- * fileName       : ShowSeatDto
- * author         : sungjun
- * date           : 2024-02-11
+ * packageName    : com.jcticket.dto
+ * fileName       : SeatDto
+ * author         : 조영상
+ * date           : 2/26/24
  * description    : 자동 주석 생성
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2024-02-11        kyd54       최초 생성
+ * 2/26/24         조영상        최초 생성
  */
 @Getter
 @Setter
@@ -21,14 +21,18 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class ShowSeatDto {
-    private int seat_seq;
-    private int seat_grade_seq;
+public class SeatDto {
+    private String seat_row;
+    private int seat_col;
     private String stage_id;
-    private int showing_seq;
-    private char show_seat_status;
     private Timestamp created_at;
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+
+    public SeatDto(String seat_row, int seat_col, String stage_id){
+        this.seat_row = seat_row;
+        this.seat_col = seat_col;
+        this.stage_id = stage_id;
+    }
 }

@@ -1,6 +1,7 @@
 package com.jcticket.viewdetail.dao;
 
 
+import com.jcticket.admin.dto.PlayDto;
 import com.jcticket.viewdetail.dto.*;
 
 import java.util.List;

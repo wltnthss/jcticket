@@ -1,9 +1,10 @@
 package com.jcticket.admin.dao;
 
-import com.jcticket.admin.dto.AdminDto;
+import com.jcticket.admin.dto.*;
 import com.jcticket.agency.dto.AgencyDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
+import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,7 +28,6 @@ public class AdminDaoImpl implements AdminDao{
 
     @Autowired
     private SqlSession sqlSession;
-
     private static final String namespace = "adminMapper.";
 
     @Override
@@ -58,6 +58,12 @@ public class AdminDaoImpl implements AdminDao{
     public int userDelete(String user_id) throws Exception {
         return sqlSession.delete(namespace+"userDelete", user_id);
     }
+
+    @Override
+    public int noticeDelete(int notice_seq) throws Exception {
+        return sqlSession.delete(namespace+"deleteNotice", notice_seq);
+    }
+
     @Override
     public int insertAdmin(AdminDto adminDto) throws Exception {
         return sqlSession.insert(namespace+"insertAdmin", adminDto);
@@ -66,6 +72,12 @@ public class AdminDaoImpl implements AdminDao{
     public int deleteAdmin(String admin_id) throws Exception {
         return sqlSession.delete(namespace + "adminDelete", admin_id);
     }
+
+    @Override
+    public void adminAllDelete() throws Exception {
+        sqlSession.delete(namespace + "adminAllDelete");
+    }
+
     @Override
     public int insertAgency(AgencyDto agencyDto) throws Exception {
         return sqlSession.insert(namespace+"insertAgency", agencyDto);
@@ -88,4 +100,111 @@ public class AdminDaoImpl implements AdminDao{
     public List<AgencyDto> agencyPaingList(Map<String, Object> pagingParams) throws Exception {
         return sqlSession.selectList(namespace + "agencyPagingList", pagingParams);
     }
+
+    @Override
+    public int dupleAdminId(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace + "dupleAdminId", admin_id);
+    }
+
+    @Override
+    public int updateAdminInfo(AdminDto adminDto) throws Exception {
+        return sqlSession.update(namespace + "updateAdminInfo", adminDto);
+    }
+
+    @Override
+    public AdminDto showAdminInfo(String admin_id) throws Exception {
+        return sqlSession.selectOne(namespace+"showAdminInfo", admin_id);
+    }
+
+    @Override
+    public int insertCoupon(CouponDto couponDto) throws Exception {
+        return sqlSession.insert(namespace+"insertCoupon", couponDto);
+    }
+
+    @Override
+    public int deleteAllCoupon() throws Exception {
+        return sqlSession.delete(namespace+"deleteAllCoupon");
+    }
+
+    @Override
+    public int countAllCoupon() throws Exception {
+        return sqlSession.selectOne(namespace+"countAllCoupon");
+    }
+
+    @Override
+    public List<CouponDto> selectAllCoupon() throws Exception {
+        return sqlSession.selectList(namespace+"selectAllCoupon");
+    }
+
+    @Override
+    public int countOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionCoupon", map);
+    }
+
+    @Override
+    public List<CouponDto> selectAllOptionCoupon(Map<String, Object> map) throws Exception {
+        return sqlSession.selectList(namespace+"selectAllOptionCoupon", map);
+    }
+
+    @Override
+    public void deleteCoupon(String coupon_id) throws Exception {
+        sqlSession.delete(namespace + "deleteCoupon", coupon_id);
+    }
+
+    @Override
+    public int insertStage(StageDto stageDto) throws Exception {
+        return sqlSession.delete(namespace+"insertStage", stageDto);
+    }
+
+    @Override
+    public void deleteAllStage() throws Exception {
+        sqlSession.delete(namespace + "deleteAllStage");
+    }
+
+    @Override
+    public List<StageDto> selectKeywordStage(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordStage", keyword);
+    }
+
+    @Override
+    public List<PlayDto> selectKeywordPlay(String keyword) throws Exception {
+        return sqlSession.selectList(namespace+"selectKeywordPlay", keyword);
+    }
+
+    @Override
+    public int insertShowing(ShowingDto showingDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowing", showingDto);
+    }
+
+    @Override
+    public void deleteAllShoiwing() throws Exception {
+        sqlSession.delete(namespace + "deleteAllShowing");
+    }
+
+    @Override
+    public int insertShowSeat(ShowSeatDto showSeatDto) throws Exception {
+        return sqlSession.insert(namespace + "insertShowSeat", showSeatDto);
+    }
+
+    @Override
+    public PlayDto insertPlay(PlayDto playDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlay", playDto);
+        return playDto;
+    }
+
+    @Override
+    public void insertPlayImg(PlayImgDto playImgDto) throws Exception {
+        sqlSession.insert(namespace+"insertPlayImg", playImgDto);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception {
+        return sqlSession.selectList(namespace+"selectAllProduct", map);
+    }
+
+    @Override
+    public int countOptionProduct(Map<String, Object> map) throws Exception {
+        return sqlSession.selectOne(namespace+"countOptionProduct", map);
+    }
+
 }

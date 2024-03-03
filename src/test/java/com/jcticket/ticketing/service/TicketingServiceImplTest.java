@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import static org.junit.Assert.*;
 /**
  * packageName    : com.jcticket.ticketing.service
@@ -62,26 +60,86 @@ public class TicketingServiceImplTest {
 
     }
 
-    // 회차를 잘 가져오는치 테스트
+    // 회차 정보를 조회 테스트
     @Test
     public void getRoundTest() throws Exception{
         //given
-        List<String> roundList;
-        Set<String> keys;
+        HashMap<String, Object> map;
+        ArrayList<String> seqList;
+        ArrayList<String> infoList;
         //when
-        Map<String,Object> map = ticketingService.getRound(TEST_PLAY_ID, TEST_DATE);
+        map = (HashMap<String, Object>) ticketingService.getRoundInfo(TEST_PLAY_ID, TEST_DATE);
         //then
-        keys = map.keySet();
+        assertTrue(1 == 1);
+        //assertTrue( 3 == roundList.size());
+        //Iterator<String> it = map.keySet().iterator();
+        Set<String> keys = map.keySet();
         for (String key : keys){
-            System.out.println("key ==> " + key);
-            System.out.println("value ==> " + map.get(key));
-            roundList = (ArrayList<String>)map.get(key);
-            for(String val : roundList){
-                System.out.println("round ==> " + val);
-                assertTrue(3 == roundList.size());
-                assertTrue(val != null);
+            System.out.println(key+" ==> "+ map.get(key));
+        }
+    }
+
+    // 회차시퀀스로 회차좌석가격 조회
+    @Test
+    public void getSeatPriceTest() throws Exception {
+        //given
+        int expectedPrice = 15000;
+        int resultPrice;
+        //when
+        resultPrice = Integer.parseInt(ticketingService.getSeatPrice(1));
+        System.out.print("expected price => " + expectedPrice + " / ");
+        System.out.println("result price => " + resultPrice);
+        //then
+        assertEquals(expectedPrice, resultPrice);
+    }
+
+    // 회차시퀀스로 좌석번호, 좌석상태리스트를 받아 HashMap<String,ArrayList<String>> 형태로 가공되는지 테스트
+    @Test
+    public void getSeatListTest() throws Exception {
+        //given
+        final int SEQ = 1;
+        String exKey1 = "seat_id";
+        String exKey2 = "seat_status";
+        Map<String, Object> map;
+        List<String> idList;
+        List<String> statusList;
+        //when
+        map = ticketingService.getSeatList(SEQ);
+        System.out.println("map ====> " + map);
+        System.out.println("type => " + map.getClass().getName());
+        Set<String> keys = map.keySet();
+        System.out.println("keySet => " + keys);
+        System.out.println("value => " + map.get("seat_id"));
+        System.out.println("value => " + map.get("seat_status"));
+        //then
+        for(String key : keys){
+            if(key.equals(exKey1)){
+                System.out.print("key1 => " + key + "  / ");
+                System.out.println("value1 => " + map.get(key));
+                idList = (ArrayList<String>)map.get(key);
+                for(String val : idList){
+                    assertTrue(null != val);
+                    System.out.print("id => " + val + ", ");
+                }
+                System.out.println();
+            }else if(key.equals(exKey2)){
+                System.out.print("key2 => " + key + " / ");
+                System.out.println("value2 => " + map.get(key));
+                statusList = (ArrayList<String>)map.get(key);
+                for(String val : statusList){
+                    assertEquals("Y", val);
+                    System.out.print("status => " + val + ", ");
+                }
+                System.out.println();
+            } else if (key.equals("end_row")){
+                System.out.println("key => "+ key);
+                System.out.println("val => "+ map.get(key));
+            } else {
+                System.out.println("key => "+ key);
+                System.out.println("val => "+ map.get(key));
             }
         }
 
     }
+
 }

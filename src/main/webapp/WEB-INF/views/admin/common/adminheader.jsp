@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="header-stat">
-                <ul>ㄴ
+                <ul>
                     <li><a style="cursor: default">${sessionScope.adminNickName}님 환영합니다</a></li>
                     <li><a href="/admin/setting">관리자정보</a></li>
                     <li><a href="/admin/dashboard">관리자홈</a></li>
@@ -43,9 +43,9 @@
                     <li class="header-nav-li">
                         <a href="/admin/notice" class="header_nav-a">공지사항관리</a>
                     </li>
-                    <li class="header-nav-li">
-                        <a href="/admin/inquiry" class="header_nav-a">문의관리</a>
-                    </li>
+<%--                    <li class="header-nav-li">--%>
+<%--                        <a href="/admin/inquiry" class="header_nav-a">문의관리</a>--%>
+<%--                    </li>--%>
                     <li class="header-nav-li">
                         <a href="/admin/coupon" class="header_nav-a">쿠폰관리</a>
                     </li>

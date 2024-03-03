@@ -12,6 +12,14 @@
         DELETE FROM USER WHERE user_id = #{user_id}
     </delete>
 
+    <delete id="deleteNotice" parameterType="int">
+        DELETE FROM NOTICE WHERE notice_seq = #{notice_seq}
+    </delete>
+
+    <delete id="adminAllDelete">
+        DELETE FROM ADMIN
+    </delete>
+
     <delete id="adminDelete" parameterType="String">
         DELETE FROM ADMIN WHERE admin_id = #{admin_id}
     </delete>
@@ -189,5 +197,325 @@
 
     <select id="countAllAgency" resultType="int">
         select count(*) from agency
+    </select>
+
+    <select id="dupleAdminId" resultType="int" parameterType="String">
+        SELECT count(*) FROM admin WHERE admin_id = #{admin_id}
+    </select>
+
+    <update id="updateAdminInfo" parameterType="AdminDto">
+        update admin
+        set
+            admin_email = #{admin_email},
+            admin_password = #{admin_password},
+            admin_phone = #{admin_phone},
+            admin_nickname = #{admin_nickname},
+            admin_use_yn = 'Y',
+            updated_at = now(),
+            updated_id = "JISOO"
+        where
+            admin_id = #{admin_id}
+    </update>
+
+    <select id="showAdminInfo" parameterType="String" resultType="AdminDto">
+        select * from admin where admin_id = #{admin_id}
+    </select>
+
+    <insert id="insertCoupon" parameterType="CouponDto">
+        INSERT INTO coupon
+        (coupon_id, coupon_reg_at, coupon_name, coupon_useable_start_at, coupon_useable_end_at, coupon_discount_amount, coupon_min_order_amount, coupon_use_yn, coupon_status, coupon_description, coupon_use_condition, created_at, created_id, updated_at, updated_id)
+        VALUES(#{coupon_id}, CURRENT_TIMESTAMP, #{coupon_name}, #{coupon_useable_start_at}, #{coupon_useable_end_at}, #{coupon_discount_amount}, #{coupon_min_order_amount}, #{coupon_use_yn}, "A", #{coupon_description}, #{coupon_use_condition}, CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+    </insert>
+
+    <delete id="deleteAllCoupon">
+        delete from coupon
+    </delete>
+
+    <select id="countAllCoupon" resultType="int">
+        select count(*) from coupon
+    </select>
+
+    <select id="selectAllCoupon" resultType="CouponDto">
+        SELECT
+            coupon_id ,
+            coupon_name,
+            date_format(coupon_useable_start_at, '%Y-%m-%d') coupon_useable_start_at,
+            date_format(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at,
+            coupon_discount_amount ,
+            coupon_use_condition ,
+            (
+            SELECT
+                <![CDATA[CASE WHEN coupon_useable_end_at <= now() THEN '유효기간만료' ELSE comn_code_name
+                    END comn_code_name]]>
+            FROM
+                comn_code cc
+            WHERE
+                1=1
+                AND comn_code_group_id = '1'
+                AND	cc.comn_code_id = c.coupon_status
+            ) coupon_status,
+            date_format(coupon_reg_at, '%Y-%m-%d') coupon_reg_at
+        FROM
+            coupon c
+        WHERE
+            1=1
+            and coupon_use_yn  = 'Y'
+        ORDER BY
+            coupon_reg_at DESC
+    </select>
+
+    <select id="selectAllOptionCoupon" resultType="CouponDto" parameterType="Map">
+        SELECT
+            coupon_id ,
+            coupon_name,
+            date_format(coupon_useable_start_at, '%Y-%m-%d') coupon_useable_start_at,
+            date_format(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at,
+            coupon_discount_amount ,
+            coupon_use_condition ,
+            (
+                SELECT
+                <![CDATA[CASE WHEN coupon_useable_end_at <= now() THEN '유효기간만료' ELSE comn_code_name
+                        END comn_code_name]]>
+                FROM
+                    comn_code cc
+                WHERE
+                    1=1
+                  AND comn_code_group_id = '1'
+                  AND	cc.comn_code_id = c.coupon_status
+            ) coupon_status,
+            date_format(coupon_reg_at, '%Y-%m-%d') coupon_reg_at
+        FROM
+            coupon c
+        WHERE
+            1=1
+        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
+            AND coupon_useable_start_at BETWEEN #{start_date} AND #{end_date}
+            AND coupon_useable_end_at BETWEEN #{start_date} AND #{end_date}
+        </if>
+        <choose>
+            <when test='option=="I"'>
+                AND coupon_id like concat('%', #{keyword}, '%')
+            </when>
+            <when test='option=="N"'>
+                AND coupon_name like concat('%', #{keyword}, '%')
+            </when>
+        </choose>
+            AND coupon_use_yn = 'Y'
+        ORDER BY
+            coupon_reg_at DESC
+        LIMIT
+            #{start}, #{limit}
+    </select>
+
+    <select id="countOptionCoupon" parameterType="Map" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            coupon c
+        WHERE
+            1=1
+        <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
+            AND coupon_useable_start_at BETWEEN #{start_date} AND #{end_date}
+            AND coupon_useable_end_at BETWEEN #{start_date} AND #{end_date}
+        </if>
+    <choose>
+        <when test='option=="I"'>
+            AND coupon_id like concat('%', #{keyword}, '%')
+        </when>
+        <when test='option=="N"'>
+            AND coupon_name like concat('%', #{keyword}, '%')
+        </when>
+    </choose>
+            AND coupon_use_yn = 'Y';
+    </select>
+
+    <delete id="deleteCoupon" parameterType="String">
+        delete from coupon where coupon_id = #{coupon_id}
+    </delete>
+
+    <insert id="insertStage" parameterType="StageDto">
+        INSERT INTO stage
+        (stage_id, stage_name, stage_address, stage_seat_cnt, stage_manager, stage_tel, created_at, created_id, updated_at, updated_id)
+        VALUES(#{stage_id}, #{stage_name}, #{stage_address}, #{stage_seat_cnt}, #{stage_manager}, #{stage_tel}, CURRENT_TIMESTAMP, 'JISOO', CURRENT_TIMESTAMP, 'JISOO');
+    </insert>
+
+    <delete id="deleteAllStage">
+        delete from stage
+    </delete>
+
+    <select id="selectKeywordStage" resultType="StageDto" parameterType="String">
+        select
+            stage_id,
+            stage_name,
+            stage_address,
+            stage_seat_cnt,
+            stage_tel,
+            stage_manager
+        from
+            stage
+        where
+            stage_name like concat ('%', #{keyword} ,'%')
+    </select>
+
+    <select id="selectKeywordPlay" resultType="PlayDto" parameterType="String">
+        select
+            play_id,
+            play_name,
+            play_major_cat,
+            play_run_time
+        from
+            play
+        where
+            play_name like concat ('%', #{keyword} ,'%')
+    </select>
+
+    <insert id="insertShowing" parameterType="ShowingDto" useGeneratedKeys="true" keyProperty="showing_seq">
+        INSERT INTO showing
+        (showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, showing_seat_price, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_start_at}, #{showing_end_at}, #{showing_info}, #{showing_date}, #{showing_day}, #{showing_status}, #{showing_seat_cnt}, #{showing_seat_price}, #{play_id}, #{stage_id}, CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+    </insert>
+
+    <delete id="deleteAllShowing">
+        delete from showing
+    </delete>
+
+    <insert id="insertShowSeat" parameterType="ShowSeatDto">
+        INSERT INTO show_seat
+        (showing_seq, seat_row, seat_col, stage_id, show_seat_status, created_at, created_id, updated_at, updated_id)
+        VALUES(#{showing_seq}, #{seat_row}, #{seat_col}, #{stage_id}, "Y", now(), "JISOO", now(), "JISOO");
+    </insert>
+
+    <insert id="insertPlay" parameterType="PlayDto">
+        INSERT INTO play
+        (play_id, play_name, play_file_yn, play_major_cat, play_middle_cat, play_small_cat, play_run_time, agency_id, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id}, #{play_name}, #{play_file_yn}, #{play_major_cat}, #{play_middle_cat}, #{play_small_cat}, #{play_run_time}, #{agency_id}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
+    </insert>
+
+    <insert id="insertPlayImg" parameterType="PlayImgDto">
+        INSERT INTO play_image
+        (play_id, play_poster_original_file_name, play_poster_stored_file_name, play_info_original_file_name, play_info_stored_file_name, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id}, #{play_poster_original_file_name}, #{play_poster_stored_file_name}, #{play_info_original_file_name}, #{play_info_stored_file_name}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
+    </insert>
+
+    <select id="selectAllProduct" resultType="Map" parameterType="Map">
+        SELECT
+            p.play_id as play_id ,
+            pimg.play_poster_stored_file_name as img_name ,
+            p.play_name as play_name ,
+            CONCAT(p.play_major_cat, ', ', p.play_middle_cat) play_cat ,
+            p.play_run_time as play_run_time ,
+            s.showing_info as showing_info ,
+            s.showing_date as showing_date ,
+            st.stage_address ,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
+            st.stage_name as stage_name ,
+            CASE
+                WHEN showing_status = 'BS' then '상영전'
+                WHEN showing_status = 'IS' then '상영중'
+                WHEN showing_status = 'AS' then '상영종료'
+                END showing_status
+        FROM
+            play p
+                LEFT JOIN play_image pimg ON
+                p.play_id = pimg.play_id
+                LEFT JOIN showing s ON
+                p.play_id = s.play_id
+                LEFT JOIN stage st ON
+                s.stage_id = st.stage_id
+        WHERE
+            1=1
+            AND s.showing_info IS NOT NULL
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
+        </if>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
+    </select>
+
+    <select id="selectAllPlayCnt" resultType="int">
+        SELECT count(*) FROM play
+    </select>
+
+    <select id="selectAllShowingCnt" resultType="int">
+        SELECT count(*) FROM showing
+    </select>
+
+    <select id="countOptionProduct" parameterType="map" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            play p
+            LEFT JOIN play_image pimg ON
+            p.play_id = pimg.play_id
+            LEFT JOIN showing s ON
+            p.play_id = s.play_id
+            LEFT JOIN stage st ON
+            s.stage_id = st.stage_id
+        WHERE
+            1=1
+            AND s.showing_info IS NOT NULL
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
+        </if>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
     </select>
 </mapper>
