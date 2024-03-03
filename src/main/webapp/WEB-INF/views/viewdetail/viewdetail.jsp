@@ -16,6 +16,10 @@ git <%--
 <head>
 <%--    페이지 아이콘--%>
     <link rel="icon" href="/resources/img/viewdetail/god.ico">
+
+<%--    별점 아이콘--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제이씨티켓 상세</title>
@@ -38,15 +42,15 @@ git <%--
         <%-- content area    --%>
         <div class="category">
             <a class="major-cat">
-                <c:forEach var="play" items="${viewDetail}">
-                    <a>${play.play_major_cat}</a>
-                </c:forEach>
+                <c:if test="${not empty viewDetail}">
+                    <a>${viewDetail[0].play_major_cat}</a>
+                </c:if>
             </a>
             >
             <a class="middle-cat">
-                <c:forEach var="play" items="${viewDetail}">
-                    <a>${play.play_middle_cat}</a>
-                </c:forEach>
+                <c:if test="${not empty viewDetail}">
+                    <a>${viewDetail[0].play_middle_cat}</a>
+                </c:if>
             </a>
         </div>
 
@@ -54,25 +58,24 @@ git <%--
         <div class="two">
         <%--제목--%>
             <p class="big-title">
-                <c:forEach var="play" items="${viewDetail}">
-                    <a id="for_ticketing_play_name">${play.play_name}</a>
-                </c:forEach>
+                <c:if test="${not empty viewDetail}">
+                    <a id="for_ticketing_play_name">${viewDetail[0].play_name}</a>
+                </c:if>
             </p>
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
 <%--                            대괄호 제거하고 상영날짜 출력--%>
                             <c:forEach var="date" items="${viewDetailTime}" varStatus="loop">
-                                <a class="dateShow"><c:out value="${date.showing_date}" /></a>
+                                <a class="dateShow"><c:out value="${date.key}" /></a>
                                 <c:if test="${!loop.last}">,</c:if>
                             </c:forEach>
                         </span>
 
                         <a href="javascript:void(0);" id="stage_name">
-<%--                            <span>쉼표 도서관 2층</span>--%>
-                            <c:forEach var="stage" items="${viewDetail}">
-                                <span id="for_ticketing_stage_name">${stage.stage_name}</span>
-                            </c:forEach>
+                            <c:if test="${not empty viewDetail}">
+                                <span id="for_ticketing_stage_name">${viewDetail[0].stage_name}</span>
+                            </c:if>
                             <img src="/resources/img/viewdetail/location.png" class="location_img">
                         </a>
 
@@ -112,9 +115,9 @@ git <%--
                             <dt>등급</dt>
                             <dd>&nbsp;전체이용가</dd>
                             <dt>관람시간</dt>
-                            <c:forEach var="play" items="${viewDetail}">
-                                <dd>&nbsp;${play.play_run_time}분</dd>
-                            </c:forEach>
+                            <c:if test="${not empty viewDetail}">
+                                <dd>&nbsp;${viewDetail[0].play_run_time}분</dd>
+                            </c:if>
                             <dt>출연</dt>
                             <dd>&nbsp;개</dd>
                             <dt id="dtPrice">가격</dt>
@@ -124,9 +127,9 @@ git <%--
                                     <div class="seat-price">
                                         <li>
                                             VIP석
-                                            <c:forEach var="price" items="${viewDetail}">
-                                                <span class="text_red">${price.seat_price}</span>원
-                                            </c:forEach>
+                                            <c:if test="${not empty viewDetail}">
+                                                <span class="text_red">${viewDetail[0].seat_price}</span>원
+                                            </c:if>
                                         </li>
                                     </div>
                                 </ul>
@@ -138,7 +141,7 @@ git <%--
                         <dl>
                             <dt>공연시간 안내</dt>
                             <c:forEach var="info" items="${viewDetailTime}">
-                                <dd>${info.showing_date} ${info.showing_info}</dd>
+                                <dd>${info.key}&nbsp;${info.value}</dd>
                             </c:forEach>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
@@ -170,9 +173,9 @@ git <%--
                         <dl class="seatRemain">
                             <li id="seatPrice1">
                                 VIP석
-                                <c:forEach var="price" items="${viewDetail}">
-                                    <span class="text_red">${price.seat_price}</span>원
-                                </c:forEach>
+                                <c:if test="${not empty viewDetail}">
+                                    <span class="text_red">${viewDetail[0].seat_price}</span>원
+                                </c:if>
                             </li>
                         </dl>
                     </div>
@@ -181,7 +184,7 @@ git <%--
         </div>
 
 <%--        <div class="five" onclick="location.href='javascript:void(0);'">--%>
-        <div class="five">
+        <div class="five" id="${play_id}">
             <a class="taketic">예매하기</a>
         </div>
 
@@ -327,10 +330,9 @@ git <%--
 
             <div class="eight">
                 <div class="eight_map" id="mapa">
-<%--                    <p class="map_name">쉼표도서관</p>--%>
-                    <c:forEach var="stage" items="${viewDetail}">
-                        <p class="map_name">&nbsp;${stage.stage_name}</p>
-                    </c:forEach>
+                    <c:if test="${not empty viewDetail}">
+                        <p class="map_name">${viewDetail[0].stage_name}</p>
+                    </c:if>
                     <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
                 </div>
                 <div class="map_icon_box">
@@ -352,81 +354,69 @@ git <%--
                             <span class="text_red">매매, 욕설 등 제이씨티켓 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</span><br>
                             <span>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</span>
                         </div>
-                        <img id="review_create" src="/resources/img/viewdetail/review_create.png/"/>
+<%--                        <img id="review_create" style="cursor: pointer" src="/resources/img/viewdetail/review_create.png/"/>--%>
                     </div>
                 </div>
                 <div class="comment_board_container">
                     <ul class="comment_board">
-                        <li>
-                            <div claas="comment_user">
-<%--                                예매자만 후기 작성 가능하도록 할 것--%>
-                                <span>예매자</span>
-                                <span>유저아이디</span>
-                                <span>후기등록일</span>
-                                <span>별점</span>
-                                <span>관람일자</span>
-                            </div>
-                            <div class="comment_text">
-                                유익한 특강이었어요
-                            </div>
-<%--                            a태그는 후기 내용이 길때 더보기 기능/버튼--%>
-                            <a>
-                                <img src=""/>
-                            </a>
-                        </li>
-
-<%--                        :last-child 테스트--%>
-                        <li>
-                            <div claas="comment_user">
-                                <span>예매자</span>
-                                <span>유저아이디</span>
-                                <span>후기등록일</span>
-                                <span>별점</span>
-                                <span>관람일자</span>
-                            </div>
-                            <div class="comment_text">
-                                대한민국 최고의 명강의 입니다 꼭 들으세요
-                            </div>
-                            <a>
-                                <img src=""/>
-                            </a>
-                        </li>
-<%--                        :last-child 테스트--%>
-
+<%--                       게시판 내용은 스크립트에서 추가--%>
                     </ul>
+
                     <div class="comment_page">
-                        <a class="page_first"><img src="/resources/img/viewdetail/backback.png/"/></a>
-                        <a class="page_prev"><img src="/resources/img/viewdetail/back.png/"/></a>
-<%--                        페이징--%>
-                        <div>
-                            <%--        ph는 BoardController에 정의되어있음, ph = PageHandler--%>
-                            <c:if test="${ph.showPrev}">
-                                <a href="<c:url value='/viewdetail?page=${ph.startPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
-                            </c:if>
+<%--                        <a class="page_first"><img src="/resources/img/viewdetail/backback.png/"/></a>--%>
+<%--                        <a class="page_prev"><img src="/resources/img/viewdetail/back.png/"/></a>--%>
+                        <a class="prev pageCss" href="/viewdetail?this_play_id=${play_id}&page=${ph.startPage-1}&pageSize=${ph.pageSize}">&lt;</a>
+                        <div class="pagination">
+                            <!-- 페이지 번호 및 Ajax 호출을 위한 부분 -->
                             <c:forEach var="i" begin="${ph.startPage}" end="${ph.endPage}">
-                                <a href="<c:url value='/viewdetail?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                                <a class="pageCss" href="/viewdetail?this_play_id=${play_id}&page=${i}&pageSize=${ph.pageSize}">${i}</a>
                             </c:forEach>
-                            <c:if test="${ph.showNext}">
-                                <a href="<c:url value='/viewdetail?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
-                            </c:if>
                         </div>
-<%--                        <div>--%>
-<%--                            <a><span>1</span></a>--%>
-<%--                            <a><span>2</span></a>--%>
-<%--                            <a><span>3</span></a>--%>
-<%--                            <a><span>4</span></a>--%>
-<%--                            <a><span>5</span></a>--%>
-<%--                            <a><span>6</span></a>--%>
-<%--                            <a><span>7</span></a>--%>
-<%--                            <a><span>8</span></a>--%>
-<%--                            <a><span>9</span></a>--%>
-<%--                            <a><span>10</span></a>--%>
-<%--                        </div>--%>
-                        <a class="page_next"><img src="/resources/img/viewdetail/backback.png/"/></a>
-                        <a class="page_last"><img src="/resources/img/viewdetail/back.png/"/></a>
+                        <a class="next pageCss" href="javascript:void(0);">&gt;</a>
+<%--                        <a class="page_next"><img src="/resources/img/viewdetail/backback.png/"/></a>--%>
+<%--                        <a class="page_last"><img src="/resources/img/viewdetail/back.png/"/></a>--%>
                     </div>
+
+                    <p style="font-size: 22px; margin-left: 30px">관람후기등록</p>
+                    <form method="post">
+                        <div class="review_form">
+                            <span>유저아이디</span>
+                            별점 : <span class="review_star">
+                                <i id="1" class="rating__star far fa-star"></i><i id="2" class="rating__star far fa-star"></i><i id="3" class="rating__star far fa-star"></i><i id="4" class="rating__star far fa-star"></i><i id="5" class="rating__star far fa-star"></i>
+                            </span>
+                            <span>
+                                관람일자 : <select>
+                                    <option>관람일1</option>
+                                    <option>관람일2</option>
+                                </select>
+                            </span>
+                        </div>
+                        <%--                        <c:if test="${not empty review}">--%>
+                        <%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
+                        <%--                        </c:if>--%>
+                        <div>
+                            <textarea class="review_box" name="review" placeholder="관람후기를 작성해주세요."></textarea>
+                        </div>
+                        <input type="submit" value="" class="review_submit"/>
+                    </form>
                 </div>
             </div>
+
+<%--            endPage,pageSize,totalPage 저장--%>
+            <c:if test="${not empty ph}">
+                <input type="hidden" class="endPage" value="${ph.endPage}"/>
+            </c:if>
+            <c:if test="${not empty ph}">
+                <input type="hidden" class="pageSize" value="${ph.pageSize}"/>
+            </c:if>
+            <c:if test="${not empty ph}">
+                <input type="hidden" class="totalPage" value="${ph.totalPage}"/>
+            </c:if>
+
+
+<%--            <h1>${ph.totalPage}</h1>--%>
+<%--            <h1>${ph.endPage}</h1>--%>
+<%--            <h1>${ph.startPage}</h1>--%>
         </div>
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>

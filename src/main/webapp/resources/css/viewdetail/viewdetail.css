@@ -408,7 +408,7 @@ li {
     text-align: center;
 }
 
-/*찾아가는길 아이코*/
+/*찾아가는길 아이콘*/
 .map_icon_box {
     width: 800px;
     margin: 40px auto 0 auto;
@@ -462,6 +462,11 @@ li {
 .comment_board {
     width: 1200px;
     margin: 0;
+    padding-left: 0;
+}
+
+.comment_user {
+    padding-left: 40px;
 }
 
 .comment_board > li {
@@ -483,27 +488,18 @@ li {
     display: flex;
     width: 1200px;
     justify-content: center;
-    padding-top: 35px;
+    padding-top: 20px;
 }
 
-.comment_page > a {
+.pageCss {
     display: inline-block;
     width: 30px;
     height: 30px;
     border: 1px solid rgba(0,0,0,0.1);
     text-align: center;
     line-height: 30px;
-    margin: 5px 3px;
-}
-
-.comment_page div > a {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid rgba(0,0,0,0.1);
-    text-align: center;
-    line-height: 30px;
-    margin: 5px 1px;
+    padding: 3px;
+    margin: 5px 5px;
 }
 
 .comment_page div {
@@ -530,4 +526,70 @@ li {
 /*회차 클릭시 가격 색 검은색으로*/
 .fourRight.on .text_red {
     color: black !important;
+}
+
+.board_1 {
+    font-size: 13px;
+}
+
+.board_2 {
+    position: relative;
+    padding-left: 10px;
+    font-size: 13px;
+}
+
+.board_2:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 12px;
+    background: #dadada;
+    position: absolute;
+    top: 6px;
+    left: 8px;
+}
+
+.board_4 {
+    font-size: 12px;
+}
+
+.comment_text {
+    margin-top: 18px;
+    font-size: 13px;
+}
+
+.rating {
+    margin: 0 7px;
+}
+
+.review_submit {
+    background-image: url("/resources/img/viewdetail/review_create.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    width: 175px;
+    height: 35px;
+    float: right;
+    cursor: pointer;
+}
+
+.review_box {
+    resize: none;
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 1150px;
+    height: 75px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.review_star {
+    cursor: pointer;
+    color: #FF9100;
+}
+
+.review_form {
+    margin: 0 0 10px 30px;
 }

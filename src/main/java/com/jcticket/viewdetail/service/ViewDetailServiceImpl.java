@@ -26,12 +26,11 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     @Autowired
     ViewDetailDao viewDetailDao;
 
-    public List<ShowingDto> getShowingInfo(String dateText) throws Exception {
-        return viewDetailDao.select_showing_info(dateText);
+    public List<ShowingDto> getShowingInfo(String dateText, String play_id) throws Exception {
+        return viewDetailDao.select_showing_info(dateText,play_id);
     }
 
     public int getRemainSeat(String showing_seq) throws Exception {
-
         return viewDetailDao.remain_seat(showing_seq);
     }
 
@@ -41,13 +40,33 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     }
 
     @Override
-    public List<ShowingDto> getViewDetailTime(String play_id) throws Exception {
-        return viewDetailDao.viewDetail_view_time(play_id);
+    public Map<String, List<String>> getViewDetailTime(String play_id) throws Exception {
+        //showing_date 중복제거 할 것
+        List<ShowingDto> showingDtoList = viewDetailDao.viewDetail_view_time(play_id);
+
+        Map<String, List<String>> viewDetailTimeMap = new HashMap<>();
+
+        Set<String> showing_date_set = new HashSet<>();
+
+        for (ShowingDto dto : showingDtoList) {
+            String showing_date = dto.getShowing_date();
+            String showing_info = dto.getShowing_info();
+
+            showing_date_set.add(showing_date);
+
+            // 이미 해당 날짜에 대한 정보가 맵에 있는지 확인 후 추가
+            if (!viewDetailTimeMap.containsKey(showing_date)) {
+                viewDetailTimeMap.put(showing_date, new ArrayList<>());
+            }
+            viewDetailTimeMap.get(showing_date).add(showing_info);
+        }
+
+        return viewDetailTimeMap;
     }
 
     @Override
-    public int get_review_count() throws Exception {
-        return viewDetailDao.review_count();
+    public int get_review_count(String play_id) throws Exception {
+        return viewDetailDao.review_count(play_id);
     }
 
     @Override
@@ -81,12 +100,12 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     }
 
     @Override
-    public List<ReviewDto> review_select(int review_num) throws Exception {
-        return viewDetailDao.review_select(review_num);
+    public List<ReviewDto> review_select_limit(Map map) throws Exception {
+        return viewDetailDao.review_select_limit(map);
     }
 
     @Override
-    public List<ReviewDto> review_select_page(Map map) throws Exception {
-        return viewDetailDao.review_select_page(map);
+    public List<ReviewDto> review_select(int review_num) throws Exception {
+        return viewDetailDao.review_select(review_num);
     }
 }

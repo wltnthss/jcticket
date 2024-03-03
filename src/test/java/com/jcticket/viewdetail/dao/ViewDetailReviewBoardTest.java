@@ -37,16 +37,16 @@ public class ViewDetailReviewBoardTest {
     @Test
     public void review_deleteAll() throws Exception {
         viewDetailDao.review_deleteAll();
-        assertTrue(viewDetailDao.review_count()==0);
+        assertTrue(viewDetailDao.review_count("공연아이디1")==0);
     }
     
 //    리뷰 생성 테스트
     @Test
     public void review_insert() throws Exception {
-        for(int i=0;i<100;i++) {
+        for(int i=0;i<255;i++) {
             //랜덤으로 평점주기
             int random_rating = ((int)(Math.random()*5)+1);
-            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼",0,"test123","공연아이디1",now,"test123",now,"test123");
+            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test123","공연아이디1",now,"test123",now,"test123");
             viewDetailDao.review_insert(reviewDto);
         }
     }

@@ -62,6 +62,7 @@
         SELECT showing_info,showing_seq
         FROM showing
         WHERE showing_date = #{dateText}
+        AND play_id = #{play_id}
     </select>
 
     <!--    잔여석 조회(공연회차정보, 시퀀스 조회에서 받은 시퀀스를 가지고 잔여석 조회)-->
@@ -79,6 +80,7 @@
 
 
     <!--    공연(play),좌석구분(seat_class),공연장(stage) 테이블 합침 view에서 보여주는 정보들-->
+<!--    하나 가져오려고 서브쿼리 쓰는것은 좀 별로임-->
     <select id="viewDetail_view" resultType="JoinDto">
         SELECT p.play_name,
                p.play_major_cat,
@@ -113,7 +115,9 @@
 <!--    후기게시판-->
 <!--    리뷰 테이블 카운트-->
     <select id="review_count" resultType="int">
-        SELECT count(*) FROM review
+        SELECT count(*)
+        FROM review
+        WHERE play_id = #{play_id};
     </select>
 <!--    전체삭제-->
     <delete id="review_deleteAll">
@@ -183,6 +187,19 @@
         ORDER BY review_at DESC
     </select>
 
+    <!--한 페이지에 나타낼 게시글의 수를 조절함 1페이지 > 0~10, 2페이지 > 10~20 ~~~   -->
+    <select id="review_select_limit" parameterType="map" resultType="ReviewDto">
+        SELECT user_id,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content
+        FROM review
+        WHERE play_id = #{play_id}
+        ORDER BY review_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
 <!--    특정 리뷰 선택-->
     <select id="review_select" resultType="ReviewDto">
         SELECT review_num,
@@ -195,16 +212,5 @@
                play_id
         FROM review
         WHERE review_num = #{review_num}
-    </select>
-
-    <!--한 페이지에 나타낼 게시글의 수를 조절함 1페이지 > 0~10, 2페이지 > 10~20 ~~~   -->
-    <select id="review_select_page" parameterType="map" resultType="ReviewDto">
-        SELECT user_id,
-               review_at,
-               review_star_rating,
-               review_viewing_at,
-               review_content
-        ORDER BY review_at DESC
-        LIMIT #{offset}, #{pageSize}
     </select>
 </mapper>

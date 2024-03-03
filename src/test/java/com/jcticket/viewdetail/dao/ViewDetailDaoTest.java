@@ -31,12 +31,25 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 public class ViewDetailDaoTest {
 
+
     @Autowired
     ViewDetailDao viewDetailDao;
 
     Timestamp now = new Timestamp(System.currentTimeMillis());
 
+    
 //    play테이블 insert, delete 테스트
+    //공연 테이블에 테스트 데이터가 잘 들어가는지 확인,중복되는것이 들어가는가,당연한것 같아도 항상 확인하는 코드가 들어가야함
+    //1.다 지운다 카운트 0인지 확인한다
+    //2.인서트하고 카운트 1인지 확인한다.
+    //3.인서트한것을 셀렉트해서 내용이 같은지 확인
+    //4.인서트하고 카운트가 2인지 확인한다
+    //5.같은 키 인서트하고 에러 나는지 확인
+    
+
+    //tx 걸어야함 두개를 한번에 들어가게, 실패하면 둘 다 빠지고
+    //서비스 테스트 할때
+    //tx테스트 중간에 하나 실패하게 하고 둘 다 들어가는지 안들어가는지
     @Test
     public void play_insert() throws Exception {
 //        쿼리 전부 제거
@@ -54,6 +67,8 @@ public class ViewDetailDaoTest {
         assertTrue(1==insert);
     }
 
+    //회차테이블 delete insert 테스트
+    //회차테이블에 테스트 데이터가 잘 들어가는지 확인
     @Test
     public void showing_insert() throws Exception {
 //        쿼리 전부 제거
@@ -61,7 +76,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_showing();
         //given
-        ShowingDto showingDto = new ShowingDto(5,now,now,"1회 13시 00분","2024-03-15","금","BS",10,"테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
+        ShowingDto showingDto = new ShowingDto(5,"2024-03-15","2024-03-15","1회 13시 00분","2024-03-15","금","BS",10,"테스트1","테스트공연장1",now,"최초등록자아이디1",now,"최종등록자아이디1");
 
         //when
         int insert = viewDetailDao.showing_insert(showingDto);
@@ -70,6 +85,8 @@ public class ViewDetailDaoTest {
         assertTrue(1==insert);
     }
 
+    //좌석테이블 delete insert 테스트
+    //좌석테이블에 테스트 데이터가 잘 들어가는지 확인
     @Test
     public void seat_class_insert() throws Exception {
 //        쿼리 전부 제거
@@ -87,8 +104,11 @@ public class ViewDetailDaoTest {
         assertTrue(1==insert);
     }
 
+    //viewdetal > 공연, 회차, 좌석테이블 조인한 쿼리 테스트
+    //예상 결과와 쿼리를 통해 나온 결과가 같은지 확인
     @Test
     public void viewDetail() throws Exception {
+
         //given
         String test_play_id = "테스트1";
         //예상결과
@@ -101,6 +121,7 @@ public class ViewDetailDaoTest {
         System.out.println("list =>" + list);
 
         //then
+        //예상결과와 쿼리를 통해 나온 결과의 사이즈와 리스트 같은지 비교함
         assertEquals(expected_result.size(), list.size());
 
         for (int i=0;i<expected_result.size(); i++) {
