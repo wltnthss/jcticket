@@ -136,21 +136,33 @@
                     console.log('Response:', res);
                     
                     //res내용을 span태그로 묶어서 #seatPrice1 아래 추가 (잔여석)
-                    var seatRemain = document.createElement("span");
+                    // var seatRemain = document.createElement("span");
+                    // var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
+                    // var insertSpan = document.querySelector("#seatPrice1");
+                    //
+                    // if(!existSpan) {
+                    //     seatRemain.textContent = "(잔여: "+res+"석)";
+                    //     seatRemain.className = 'remain_seat'
+                    //     insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                    // } else {
+                    //     while(insertSpan.firstChild)  {
+                    //         insertSpan.removeChild(existSpan);
+                    //         seatRemain.textContent = "(잔여: "+res+"석)";
+                    //         seatRemain.className = 'remain_seat'
+                    //         insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                    //     }
+                    // }
+
                     var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
+                    var seatRemain = document.createElement("span");
+                    seatRemain.textContent = "(잔여: "+res+"석)";
+                    seatRemain.className = 'remain_seat';
                     var insertSpan = document.querySelector("#seatPrice1");
 
                     if(!existSpan) {
-                        seatRemain.textContent = "(잔여: "+res+"석)";
-                        seatRemain.className = 'remain_seat'
-                        insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                        insertSpan.appendChild(seatRemain);
                     } else {
-                        while(insertSpan.firstChild)  {
-                            insertSpan.removeChild(existSpan);
-                            seatRemain.textContent = "(잔여: "+res+"석)";
-                            seatRemain.className = 'remain_seat'
-                            insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                        }
+                        insertSpan.replaceChild(seatRemain, existSpan);
                     }
                 },
                 error: function(error) {
@@ -189,7 +201,7 @@
                     var stage_name = stage_name_id.innerHTML;
 
                     //쿼리스트링 이용
-                    var url = '/ticketing-detail?play_id=' + for_ticket.id
+                    var url = '/ticketing/detail?play_id=' + for_ticket.id
                         + 'dateText='+dateText
                         +'&showing_seq='+showing_seq
                         +'&play_name='+play_name

@@ -46,7 +46,11 @@ public class ViewDetailReviewBoardTest {
         for(int i=0;i<255;i++) {
             //랜덤으로 평점주기
             int random_rating = ((int)(Math.random()*5)+1);
-            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test123","공연아이디1",now,"test123",now,"test123");
+            int cnt = viewDetailDao.review_count("공연아이디1");
+            System.out.println("cnt" +
+                    " = " + cnt);
+
+            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test123","공연아이디1",now,"test123",now,"test123", (double) random_rating /cnt,cnt);
             viewDetailDao.review_insert(reviewDto);
         }
     }
@@ -83,8 +87,11 @@ public class ViewDetailReviewBoardTest {
     public void review_update() throws Exception {
         int review_num = 1;
 
+        int random_rating = ((int)(Math.random()*5)+1);
+        int cnt = viewDetailDao.review_count("공연아이디1");
+
 //        1번 리뷰의 내용 변경
-        ReviewDto update_data = new ReviewDto(review_num,now,5,"2024-02-28","꿀잼입니다요",0,"test123","공연아이디1",now,"test123",now,"test123");
+        ReviewDto update_data = new ReviewDto(review_num,now,5,"2024-02-28","꿀잼입니다요",0,"test123","공연아이디1",now,"test123",now,"test123",(double) random_rating /cnt,cnt);
 
         System.out.println("update_data =>" + update_data);
     }

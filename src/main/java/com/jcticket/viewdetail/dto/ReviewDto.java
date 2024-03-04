@@ -35,4 +35,6 @@ public class ReviewDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+    private double review_avg;
+    private int review_count;
 }

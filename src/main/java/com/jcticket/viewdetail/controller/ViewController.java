@@ -82,9 +82,10 @@ public class ViewController {
         List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
         Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
 
-//        ReviewDto reviewDto = new ReviewDto();
-//        int review = viewDetailService.review_create(reviewDto);
-//        model.addAttribute("review", review);
+        ReviewDto reviewDto = new ReviewDto();
+//        인서트로 바꿀것
+        List<ReviewDto> review = viewDetailService.review_select(this_play_id);
+        model.addAttribute("review", review);
 
 //        System.out.println("viewDetailTime=============>"+viewDetailTime);
 
