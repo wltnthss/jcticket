@@ -73,7 +73,6 @@ public class PageHandler {
         endPage = Math.min(beginPage + navSize - 1, totalPage);     // 10
         showPrev = beginPage != 1;                                  // false
         showNext = endPage != totalPage;                            // true
-
     }
 
     public PageHandler(int totalCnt, int page, int pageSize) {
@@ -206,6 +205,14 @@ public class PageHandler {
 
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
+    }
+
+    public String getButton() {
+        return button;
+    }
+
+    public void setButton(String button) {
+        this.button = button;
     }
 
     public PageHandler(int page, String option, String start_date, String end_date, int totalCnt, int pageSize, int navSize, int totalPage, int beginPage, int endPage, boolean showPrev, boolean showNext) {
