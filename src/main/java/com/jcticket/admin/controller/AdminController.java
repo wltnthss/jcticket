@@ -151,16 +151,6 @@ public class AdminController {
                     startTime = new Date();
                     session.setAttribute("startTime", startTime);
                 }
-//                 현재 시간과 시작 시간 사이의 차이를 계산하여 카운트다운 표시
-//                long currentTime = new Date().getTime();
-//                long difference = (startTime.getTime() + 60 * 60 * 1000) - currentTime; // 세션 만료 시간까지의 차이
-//
-//                // 남은 시간을 분과 초로 변환
-//                long minutesLeft = difference / (60 * 1000);
-//                long secondsLeft = (difference / 1000) % 60;
-//
-//                session.setAttribute("minutesLeft", minutesLeft);
-//                session.setAttribute("secondsLeft", secondsLeft);
 
                 return "redirect:/admin/dashboard";
             }else{

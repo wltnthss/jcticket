@@ -283,7 +283,7 @@
                   AND comn_code_group_id = '1'
                   AND	cc.comn_code_id = c.coupon_status
             ) coupon_status,
-            date_format(coupon_reg_at, '%Y-%m-%d') coupon_reg_at
+            coupon_reg_at
         FROM
             coupon c
         WHERE
