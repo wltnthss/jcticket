@@ -478,4 +478,44 @@ public class AdminServiceImpl implements AdminService {
     public void deleteProduct(String play_id) throws Exception {
         adminDao.deleteProduct(play_id);
     }
+    @Override
+    public PlayDto selectPlayInfo(String playId) throws Exception{
+        return adminDao.selectPlayInfo(playId);
+    }
+    @Override
+    public PlayImgDto selectPlayImgInfo(String playId) throws Exception {
+        return adminDao.selectPlayImgInfo(playId);
+    }
+    @Override
+    public ShowingDto selectShowingInfo(int showing_seq) throws Exception {
+        return adminDao.selectShowingInfo(showing_seq);
+    }
+    @Override
+    public int updateShowingInfo(ShowingDto showingDto) throws Exception {
+        return adminDao.updateShowingInfo(showingDto);
+    }
+    @Override
+    public List<Map<String, Object>> selectProductsStactics() throws Exception {
+        return adminDao.selectProductsStactics();
+    }
+
+    @Override
+    public int concertCnt() throws Exception {
+        return adminDao.concertCnt();
+    }
+
+    @Override
+    public int musicalCnt() throws Exception {
+        return adminDao.musicalCnt();
+    }
+
+    @Override
+    public int theaterCnt() throws Exception {
+        return adminDao.theaterCnt();
+    }
+
+    @Override
+    public int classicCnt() throws Exception {
+        return adminDao.classicCnt();
+    }
 }
