@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.*;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -61,11 +62,11 @@ public class LoginController {
         //세션을 지우고
         session.invalidate();
         //홈으로
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
-    public String loginForm(Model m, HttpSession session){
+    public String loginForm(Model m, HttpSession session, HttpServletRequest request){
         String naverAuthurl = naverLoginBO.getAuthorizationUrl(session);
         System.out.println("naverAuthurl = " + naverAuthurl);
         m.addAttribute("naverUrl",naverAuthurl);
@@ -74,11 +75,15 @@ public class LoginController {
         System.out.println("kakaoAuthurl = " + kakaoAuthurl);
         m.addAttribute("kakaoUrl",kakaoAuthurl);
 
+        String prevurl = request.getHeader("referer");
+        System.out.println("prevurl = " + prevurl);
+        m.addAttribute("prevurl",prevurl);
+
         return "login/login";}
 
     @PostMapping("/login")
     public String login(@Valid UserValidLoginDto userValidLoginDto, BindingResult bindingResult, boolean rememberId, Model m,
-                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rattr){
+                        HttpServletRequest request, HttpServletResponse response, RedirectAttributes rattr, String prevurl){
 
         String user_id = userValidLoginDto.getUser_id();
         String user_password = userValidLoginDto.getUser_password();
@@ -129,7 +134,7 @@ public class LoginController {
         //아이디 저장
         rememberId(user_id, rememberId, response);
 
-        return "index";
+        return "redirect:"+prevurl;
     }
 
     //네이버 로그인 성공시 callback호출 메소드

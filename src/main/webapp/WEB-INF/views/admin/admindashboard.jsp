@@ -31,30 +31,39 @@
                     </h2>
                     <a href="/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
                     <table>
+                        <colgroup>
+                            <col class="w150">
+                            <col class="w150">
+                            <col class="w80">
+                            <col class="w80">
+                            <col class="w150">
+                            <col class="w200">
+                            <col class="w80">
+                        </colgroup>
                         <thead >
                         <tr>
-                            <th scope="col">기획사 이름</th>
-                            <th scope="col">기획사 담당자</th>
                             <th scope="col">공연명</th>
                             <th scope="col">공연장</th>
-                            <th scope="col">이메일</th>
-                            <th scope="col">핸드폰</th>
-                            <th scope="col">요청상태</th>
-                            <th scope="col">요청일시</th>
+                            <th scope="col">회차일시</th>
+                            <th scope="col">공연시간</th>
+                            <th scope="col">공연장</th>
+                            <th scope="col">공연장주소</th>
+                            <th scope="col">상태</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="tr_alignc">
-                            <td>정석코딩 에이전시</td>
-                            <td>최산하</td>
-                            <td>오페라의 유령들</td>
-                            <td>올림픽공원</td>
-                            <td>wltnthss@gmail.com</td>
-                            <td>010-6306-1756</td>
-                            <td>등록요청</td>
-                            <td>2020-10-04 18:05 (일)</td>
-                        </tr>
-                        </tbody>
+                        <c:forEach items="${productLists}" var="p">
+                            <tr class="tr_alignc">
+                                <td>${p.play_name}</td>
+                                <td>${p.stage_name}</td>
+                                <td>${p.showing_date}</td>
+                                <td>${p.play_run_time}</td>
+                                <td>${p.stage_name}</td>
+                                <td>${p.stage_address}</td>
+                                <td>${p.showing_status}</td>
+                            </tr>
+                            </tbody>
+                        </c:forEach>
                     </table>
                 </section>
                 <section class="admin-dashboard-side3">
@@ -106,7 +115,7 @@
         let data = {
             labels: ["콘서트", "뮤지컬", "연극", "클래식"],
             datasets: [{
-                data: [20, 40, 10, 30], // 각 데이터의 비율
+                data: [${concertCnt}, ${musicalCnt}, ${theaterCnt}, ${classicCnt}], // 각 데이터의 비율
                 backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"], // 각 데이터에 대한 색상
                 borderColor: ["#FF6384", "#36A2EB", "#FFCE56", "#e9967a"] // 각 border에 대한 색상
 

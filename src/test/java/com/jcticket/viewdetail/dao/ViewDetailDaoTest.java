@@ -45,7 +45,7 @@ public class ViewDetailDaoTest {
 //        테스트용 딜리트
         viewDetailDao.test_delete_play();
         //given
-        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트", "Y","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231");
+        PlayDto playDto = new PlayDto("테스트1","<테스트>-테스트", "Y","콘서트","강연","SmallCategory",60,"1231",now,"1231",now,"1231","화,수,목 20시 | 금 16시, 20시 | 토 15시, 19시 | 일요일 15시 | 공휴일 15시, 19시");
 
         //when
         int insert = viewDetailDao.play_insert(playDto);

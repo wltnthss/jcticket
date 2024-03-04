@@ -86,4 +86,20 @@ public interface AdminService {
     PageDto productPagingParam(int page, String option, String keyword, String start_at, String end_at, String status, String category) throws Exception;
     // 관리자 상품 삭제
     void deleteProduct(String play_id) throws Exception;
+    // 수정폼 이동을 위한 값 읽어오기
+    PlayDto selectPlayInfo(String playId) throws Exception;
+    PlayImgDto selectPlayImgInfo(String playId) throws Exception;
+    ShowingDto selectShowingInfo(int showing_seq) throws Exception;
+    // 회차요일, 회차상태, 회차좌석가격 수정
+    int updateShowingInfo(ShowingDto showingDto) throws Exception;
+    // 관리자 대시보드 상품 조회 5개
+    List<Map<String, Object>> selectProductsStactics() throws Exception;
+    // 관리자 대시보드 콘서트 카테고리 전체 조회
+    int concertCnt() throws Exception;
+    // 관리자 대시보드 뮤지컬 카테고리 전체 조회
+    int musicalCnt() throws Exception;
+    // 관리자 대시보드 극장 카테고리 전체 조회
+    int theaterCnt() throws Exception;
+    // 관리자 대시보드 클래식 카테고리 전체 조회
+    int classicCnt() throws Exception;
 }

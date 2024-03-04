@@ -118,7 +118,8 @@
                                 <img src="<c:url value='/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </td>
                             <td style="text-align: left">
-                                <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>
+                                <span style="font-weight: bold; text-decoration-line: underline"><a style="font-size: 14px !important;" href="/admin/productmodify/${p.play_id}/${p.showing_seq}?page=${paging.page}">${p.play_name}</a></span><br>
+<%--                                    <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>--%>
                                     ${p.play_cat} | ${p.play_run_time} 분 | ${p.showing_info} | ${p.showing_date} | ${p.stage_address}
                             </td>
                             <td>${p.showing_period_date}</td>

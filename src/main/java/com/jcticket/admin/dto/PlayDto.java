@@ -50,8 +50,9 @@ public class PlayDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
+    private String play_time_info;
 
-    public PlayDto(String play_id, String play_name, String play_file_yn, String play_major_cat, String play_middle_cat, String play_small_cat, int play_run_time, String agency_id, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
+    public PlayDto(String play_id, String play_name, String play_file_yn, String play_major_cat, String play_middle_cat, String play_small_cat, int play_run_time, String agency_id, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id, String play_time_info) {
         this.play_id = play_id;
         this.play_name = play_name;
         this.play_file_yn = play_file_yn;
@@ -64,5 +65,6 @@ public class PlayDto {
         this.created_id = created_id;
         this.updated_at = updated_at;
         this.updated_id = updated_id;
+        this.play_time_info = play_time_info;
     }
 }
