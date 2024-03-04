@@ -81,7 +81,7 @@
                 </div>
                 <div class="btn-confirm">
                     <input type="submit" value="검색" class="btn-medium">
-                    <input type="reset" value="초기화" class="btn-medium grey">
+                    <input type="reset" value="초기화" class="btn-medium grey"  onclick="clearInput()">
                 </div>
             </form>
             <div class="local_ov mart30">
@@ -118,7 +118,8 @@
                                 <img src="<c:url value='/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </td>
                             <td style="text-align: left">
-                                <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>
+                                <span style="font-weight: bold; text-decoration-line: underline"><a style="font-size: 14px !important;" href="/admin/productmodify/${p.play_id}/${p.showing_seq}?page=${paging.page}">${p.play_name}</a></span><br>
+<%--                                    <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>--%>
                                     ${p.play_cat} | ${p.play_run_time} 분 | ${p.showing_info} | ${p.showing_date} | ${p.stage_address}
                             </td>
                             <td>${p.showing_period_date}</td>
@@ -129,9 +130,31 @@
                     </tbody>
                 </table>
             </div>
-<%--            페이징 기능--%>
+            <div class="notice-paging">
+                <c:if test="${paging.showPrev}">
+                    <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
+                    <a class="notice-paging-pageitems" href="/admin/product?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${paging.start_at}&end_at=${paging.end_at}&status=${paging.status}&category=${paging.category}"> < </a>
+                </c:if>
+
+                <%-- for(int i=startPage; i<=endPage; i++) --%>
+                <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+                    <c:if test="${i eq paging.page}">
+                        <%-- 요청한 페이지에 있는 경우 현재 페이지 번호는 강조  --%>
+                        <a class="notice-paging-pageitems ${i eq paging.page? "active" : ""}" >${i}</a>
+                    </c:if>
+                    <c:if test="${i ne paging.page}">
+                        <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
+                        <a class="notice-paging-pageitems" href="/admin/product?page=${i}&option=${paging.option}&keyword=${paging.keyword}&start_at=${paging.start_at}&end_at=${paging.end_at}&status=${paging.status}&category=${paging.category}">${i}</a>
+                    </c:if>
+                </c:forEach>
+
+                <c:if test="${paging.showNext}">
+                    <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
+                    <a class="notice-paging-pageitems" href="/admin/product?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${paging.start_at}&end_at=${paging.end_at}&status=${paging.status}&category=${paging.category}"> > </a>
+                </c:if>
+            </div>
             <div class="btn-confirm">
-                <input type="button" value="삭제" id="user-delete-btn" class="btn-large" style="background: red">
+                <input type="button" value="삭제" id="product-delete-btn" class="btn-large" style="background: red">
             </div>
         </div>
     </div>
@@ -142,7 +165,9 @@
     <script src="/resources/js/admin/admin.js"></script>
 
 <script>
-
+    function clearInput() {
+        document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
+    }
 </script>
 
 </body>

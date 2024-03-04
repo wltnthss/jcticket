@@ -7,7 +7,6 @@ import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -355,8 +354,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void insertPlay(PlayDto playDto) throws Exception {
 
-//        final String FILE_PATH = "C:/play_img/";
-        final String FILE_PATH = "/Users/joyoungsang/Desktop/";
+        final String FILE_PATH = "C:/play_img/";
+//        final String FILE_PATH = "/Users/joyoungsang/Desktop/";
 
         // 공연 아이디 랜덤 난수 8글자 insert 하기 위함
         UUID uuid = UUID.randomUUID();
@@ -421,12 +420,102 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception {
+    public List<Map<String, Object>> selectAllProduct( Map<String, Object> map) throws Exception {
         return adminDao.selectAllProduct(map);
     }
 
     @Override
     public int countOptionProduct(Map<String, Object> map) throws Exception {
         return adminDao.countOptionProduct(map);
+    }
+
+    @Override
+    public PageDto productPagingParam(int page, String option, String keyword, String start_at, String end_at, String status, String category) throws Exception {
+        // 전체 글 개수 조회
+        Map<String, Object> pagingParams = new HashMap<>();
+
+        pagingParams.put("option", option);
+        pagingParams.put("keyword", keyword);
+        pagingParams.put("start_date", start_at);
+        pagingParams.put("end_date", end_at);
+        pagingParams.put("status", status);
+        pagingParams.put("category", category);
+
+        int showingListCnt = adminDao.countOptionProduct(pagingParams);
+
+        // 전체 페이지 갯수 계산 ex) 24 / 10 => 2.4 => 3
+        int maxPage = (int) (Math.ceil((double) showingListCnt / pageLimit));
+        // 시작 페이지 값 계산 (1, 11, 21 ...)
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) -1 ) * blockLimit + 1;
+        // 끝 페이지 값 계산 (10, 20, 30...)
+        int endPage = startPage + blockLimit - 1;
+        // 이전, 다음 링크 계산
+        boolean showPrev = page != 1;
+        boolean showNext = page != maxPage;
+
+        if(endPage > maxPage){
+            endPage = maxPage;
+        }
+
+        PageDto pageDto = new PageDto();
+        pageDto.setPage(page);
+        pageDto.setMaxPage(maxPage);
+        pageDto.setStartPage(startPage);
+        pageDto.setEndPage(endPage);
+        pageDto.setShowPrev(showPrev);
+        pageDto.setShowNext(showNext);
+        pageDto.setOption(option);
+        pageDto.setKeyword(keyword);
+        pageDto.setStart_at(start_at);
+        pageDto.setEnd_at(end_at);
+        pageDto.setStatus(status);
+        pageDto.setCategory(category);
+
+        return pageDto;
+    }
+
+    @Override
+    public void deleteProduct(String play_id) throws Exception {
+        adminDao.deleteProduct(play_id);
+    }
+    @Override
+    public PlayDto selectPlayInfo(String playId) throws Exception{
+        return adminDao.selectPlayInfo(playId);
+    }
+    @Override
+    public PlayImgDto selectPlayImgInfo(String playId) throws Exception {
+        return adminDao.selectPlayImgInfo(playId);
+    }
+    @Override
+    public ShowingDto selectShowingInfo(int showing_seq) throws Exception {
+        return adminDao.selectShowingInfo(showing_seq);
+    }
+    @Override
+    public int updateShowingInfo(ShowingDto showingDto) throws Exception {
+        return adminDao.updateShowingInfo(showingDto);
+    }
+    @Override
+    public List<Map<String, Object>> selectProductsStactics() throws Exception {
+        return adminDao.selectProductsStactics();
+    }
+
+    @Override
+    public int concertCnt() throws Exception {
+        return adminDao.concertCnt();
+    }
+
+    @Override
+    public int musicalCnt() throws Exception {
+        return adminDao.musicalCnt();
+    }
+
+    @Override
+    public int theaterCnt() throws Exception {
+        return adminDao.theaterCnt();
+    }
+
+    @Override
+    public int classicCnt() throws Exception {
+        return adminDao.classicCnt();
     }
 }

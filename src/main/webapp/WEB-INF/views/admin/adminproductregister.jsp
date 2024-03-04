@@ -53,6 +53,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <th scope="row">공연시간안내</th>
+                        <td>
+                            <input type="text" name="play_time_info" class="frm_input required" size="50" >
+                        </td>
+                    </tr>
+                    <tr>
                         <th scope="row">공연/전시 대분류</th>
                         <td>
                             <input type="text" name="play_major_cat" class="frm_input required" size="10" required>

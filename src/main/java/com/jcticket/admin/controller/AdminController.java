@@ -10,6 +10,7 @@ import com.jcticket.notice.service.NoticeService;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.commons.io.IOUtils;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,9 @@ public class AdminController {
     @Autowired
     NoticeService noticeService;
 
+    final int pageLimit = 10;   // 한 페이지당 보여줄 글 개수
+    final int blockLimit = 10;  // 하단에 보여줄 페이지 번호
+
     // /admin url 입력시 loginform 이동
     @GetMapping("/admin")
     public String admin() throws Exception{
@@ -77,8 +81,21 @@ public class AdminController {
 
         try {
             List<UserDto> userLists = adminService.userstatics();
+            List<Map<String, Object>> productLists = adminService.selectProductsStactics();
+
+            int concertCnt = adminService.concertCnt();
+            int musicalCnt = adminService.musicalCnt();
+            int theaterCnt = adminService.theaterCnt();
+            int classicCnt = adminService.classicCnt();
 
             model.addAttribute("userLists", userLists);
+            model.addAttribute("productLists", productLists);
+
+            model.addAttribute("concertCnt", concertCnt);
+            model.addAttribute("musicalCnt", musicalCnt);
+            model.addAttribute("theaterCnt", theaterCnt);
+            model.addAttribute("classicCnt", classicCnt);
+
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -126,6 +143,24 @@ public class AdminController {
 
                 // 세션 유지기간 60분
                 session.setMaxInactiveInterval(60*60);
+
+                // 세션에서 startTime 값을 가져오거나 없으면 현재 시간으로 설정
+                Date startTime = (Date) session.getAttribute("startTime");
+
+                if (startTime == null) {
+                    startTime = new Date();
+                    session.setAttribute("startTime", startTime);
+                }
+//                 현재 시간과 시작 시간 사이의 차이를 계산하여 카운트다운 표시
+//                long currentTime = new Date().getTime();
+//                long difference = (startTime.getTime() + 60 * 60 * 1000) - currentTime; // 세션 만료 시간까지의 차이
+//
+//                // 남은 시간을 분과 초로 변환
+//                long minutesLeft = difference / (60 * 1000);
+//                long secondsLeft = (difference / 1000) % 60;
+//
+//                session.setAttribute("minutesLeft", minutesLeft);
+//                session.setAttribute("secondsLeft", secondsLeft);
 
                 return "redirect:/admin/dashboard";
             }else{
@@ -190,6 +225,10 @@ public class AdminController {
 
                 return "admin/adminuserregister";
             }
+
+            // 회원 비밀번호 암호화
+            String hashPassword = BCrypt.hashpw(userDto.getUser_password(), BCrypt.gensalt());
+            userDto.setUser_password(hashPassword);
 
             int rslt = adminService.userInsert(userDto);
 
@@ -670,9 +709,12 @@ public class AdminController {
             ,@RequestParam(defaultValue = "A") String option
             ,@RequestParam(defaultValue = "A") String status
             ,@RequestParam(defaultValue = "A") String category
+            ,@RequestParam(value = "page", defaultValue = "1") int page
                                ) throws Exception{
 
         Map<String, Object> map = new HashMap<>();
+        map.put("start", (page - 1) * pageLimit);
+        map.put("limit", pageLimit);
         map.put("keyword", keyword);
         map.put("start_at", start_at);
         map.put("end_at", end_at);
@@ -681,9 +723,11 @@ public class AdminController {
         map.put("category", category);
 
         List<Map<String,Object>> list = adminService.selectAllProduct(map);
+        PageDto pageDto = adminService.productPagingParam(page, option, keyword, start_at, end_at, status, category);
         int showingListCnt = adminService.countOptionProduct(map);
 
         model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
         model.addAttribute("showingListCnt", showingListCnt);
 
         return "admin/adminproduct";
@@ -694,7 +738,7 @@ public class AdminController {
 
         try{
             String path = "C:/play_img/" + img_name + ".JPG";
-            System.out.println("path = " + path);
+//            System.out.println("path = " + path);
 
             InputStream in = new FileInputStream(path);
 
@@ -714,8 +758,12 @@ public class AdminController {
     @PostMapping("/admin/playregister")
     public String adminProductRegister(Model model, PlayDto playDto) throws Exception{
 
-        System.out.println("playDto = " + playDto);
-        adminService.insertPlay(playDto);
+        try {
+            System.out.println("playDto = " + playDto);
+            adminService.insertPlay(playDto);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         return "redirect:/admin/productregister";
     }
@@ -760,6 +808,67 @@ public class AdminController {
                         throw new RuntimeException("INSERT ERROR => " + e);
                     }
                 });
+
+        return "redirect:/admin/product";
+    }
+    @DeleteMapping("/admin/productdelete")
+    @ResponseBody
+    public int adminProductDelete(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+        System.out.println("valueArr = " + valueArr);
+
+        try {
+            for (String productId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.deleteProduct(productId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    // 상품관리 수정 폼 이동
+    @GetMapping("/admin/productmodify/{play_id}/{showing_seq}")
+    public String adminProductModifyForm(Model model, @PathVariable  String play_id,
+                                        @PathVariable int showing_seq,
+                                        @RequestParam(value = "page", required = false, defaultValue = "1") int page) throws Exception{
+
+        System.out.println("play_id = " + play_id);
+        System.out.println("page = " + page);
+        System.out.println("showing_seq = " + showing_seq);
+
+        try {
+            PlayDto playDto = adminService.selectPlayInfo(play_id);
+            PlayImgDto playImgDto = adminService.selectPlayImgInfo(play_id);
+            ShowingDto showingDto = adminService.selectShowingInfo(showing_seq);
+
+            model.addAttribute("playDto", playDto);
+            model.addAttribute("playImgDto", playImgDto);
+            model.addAttribute("showingDto", showingDto);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "admin/adminproductmodify";
+    }
+
+    @PostMapping("/admin/productmodify")
+    public String adminProductModify(Model model, ShowingDto showingDto) throws Exception{
+
+        System.out.println("showing_seq = " + showingDto.getShowing_seq());
+
+        try {
+
+            adminService.updateShowingInfo(showingDto);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         return "redirect:/admin/product";
     }

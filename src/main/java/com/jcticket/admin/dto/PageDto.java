@@ -30,4 +30,6 @@ public class PageDto {
     private String keyword; // 회원 검색 keyword
     private String start_at;// 관리자 쿠폰 조회 시작 일자
     private String end_at;  // 관리자 쿠폰 조회 종료 일자
+    private String status;  // 관리자 상품 상태
+    private String category;// 관리자 상품 카테고리
 }
