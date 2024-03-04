@@ -29,6 +29,7 @@
 =======
 >>>>>>> c85486b889409aae9e0a8b5e218cc65c3fb67446
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
+        <typeAlias alias="SeatDto" type="com.jcticket.dto.SeatDto"/>
         <typeAlias alias="EnrollDto" type="com.jcticket.enroll.dto.EnrollDto"/>
     </typeAliases>
 </configuration>

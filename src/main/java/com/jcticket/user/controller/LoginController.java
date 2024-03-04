@@ -5,6 +5,7 @@ import com.jcticket.common.CommonValidateHandling;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.user.dto.UserValidLoginDto;
 import com.jcticket.user.service.UserService;
+import com.jcticket.user.sns.KakaoLoginBO;
 import com.jcticket.user.sns.NaverLoginBO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,11 +39,18 @@ import java.util.concurrent.ExecutionException;
 public class LoginController {
 
     private NaverLoginBO naverLoginBO;
+    private KakaoLoginBO kakaoLoginBO;
     private String apiResult = null;
+
 
     @Autowired
     private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
         this.naverLoginBO = naverLoginBO;
+    }
+
+    @Autowired
+    private void setKakaoLoginBO(KakaoLoginBO kakaoLoginBO) {
+        this.kakaoLoginBO = kakaoLoginBO;
     }
 
     @Autowired
@@ -61,6 +69,10 @@ public class LoginController {
         String naverAuthurl = naverLoginBO.getAuthorizationUrl(session);
         System.out.println("naverAuthurl = " + naverAuthurl);
         m.addAttribute("naverUrl",naverAuthurl);
+
+        String kakaoAuthurl = kakaoLoginBO.getAuthorizationUrl(session);
+        System.out.println("kakaoAuthurl = " + kakaoAuthurl);
+        m.addAttribute("kakaoUrl",kakaoAuthurl);
 
         return "login/login";}
 
@@ -122,7 +134,7 @@ public class LoginController {
 
     //네이버 로그인 성공시 callback호출 메소드
      @RequestMapping(value = "/login/naverCb", method = { RequestMethod.GET, RequestMethod.POST })
-     public String callback(Model m, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
+     public String callbackNaver(Model m, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
         System.out.println("여기는 callback");
 
         OAuth2AccessToken oauthToken;
@@ -182,9 +194,101 @@ public class LoginController {
          //성별
          String n_gender = (String) response_obj.get("gender");
          m.addAttribute("n_gender", n_gender);
+         m.addAttribute("n_user_sns_provider","NAVER");
 
          return "signup/signupSNS";
           }
+
+    //네이버 로그인 성공시 callback호출 메소드
+    @RequestMapping(value = "/login/kakaoCb", method = { RequestMethod.GET, RequestMethod.POST })
+    public String callbackKakao(Model m, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
+        System.out.println("여기는 callback");
+
+
+        OAuth2AccessToken oauthToken;
+        oauthToken = kakaoLoginBO.getAccessToken(session, code, state);
+
+        //1. 로그인 사용자 정보를 읽어온다.
+        apiResult = kakaoLoginBO.getUserProfile(oauthToken);  //String형식의 json데이터
+        /** apiResult json 구조
+         {"resultcode":"00",
+         "message":"success",
+         "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+         **/
+
+        // 2. String형식인 apiResult를 json형태로 바꿈
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(apiResult);
+        JSONObject jsonObj = (JSONObject) obj;
+
+        System.out.println("apiResult = " + apiResult);
+
+        // 3. 데이터 파싱
+        // Top레벨 단계 _response 파싱
+        JSONObject kakao_account = (JSONObject)jsonObj.get("kakao_account");
+        JSONObject properties = (JSONObject)jsonObj.get("properties");
+
+        System.out.println("kakao_account = " + kakao_account);
+        System.out.println("properties = " + properties);
+
+        //------------ response의 값 파싱 후 인서트 ---------
+
+        // 아이디
+        String id = (String)kakao_account.get("email");
+        System.out.println("id = " + id);
+        int idx =  id.indexOf("@");
+        String n_id = id.substring(0,idx);
+        System.out.println("n_id = " + n_id);
+        System.out.println("n_id.length() = " + n_id.length());
+//        System.out.println("(userService.getUser(n_id)) = " + (userService.getUser(n_id)));
+        try {
+            if (userService.getUser(n_id)!=null) {
+                session.setAttribute("sessionId",n_id); //세션 생성/
+                m.addAttribute("result", apiResult);
+                return "redirect:/";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        m.addAttribute("n_id", n_id);
+        System.out.println("n_id = " + n_id);
+
+        // 이름
+        String n_name = (String) kakao_account.get("name");
+        m.addAttribute("n_name", n_name);
+        System.out.println("n_name = " + n_name);
+
+        // 이메일
+        String n_email = (String) kakao_account.get("email");
+        m.addAttribute("n_email", n_email);
+        System.out.println("n_email = " + n_email);
+
+        // 전화번호
+        String n_tel = (String) kakao_account.get("phone_number");
+        int fhi = n_tel.indexOf("-");
+        n_tel = "010"+n_tel.substring(fhi);
+        m.addAttribute("n_tel", n_tel);
+        System.out.println("n_tel = " + n_tel);
+
+        // 생년월일
+        String n_birth = (String) kakao_account.get("birthyear") + ((String) kakao_account.get("birthday")).replace("-", "");
+        m.addAttribute("n_birth", n_birth);
+        System.out.println("n_birth = " + n_birth);
+
+        //성별
+        String n_gender = (String) kakao_account.get("gender");
+        if(n_gender.equals("male")){
+            n_gender="M";
+        }else{
+            n_gender="W";
+        }
+        m.addAttribute("n_gender", n_gender);
+        System.out.println("n_gender = " + n_gender);
+        m.addAttribute("n_sns_provider","KAKAO");
+
+        return "signup/signupSNS";
+    }
 
 
 

@@ -397,28 +397,133 @@
         VALUES(#{play_id}, #{play_poster_original_file_name}, #{play_poster_stored_file_name}, #{play_info_original_file_name}, #{play_info_stored_file_name}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
     </insert>
 
-    <select id="selectAllProduct" resultType="Map">
+    <select id="selectAllProduct" resultType="Map" parameterType="Map">
         SELECT
-        pimg.play_poster_stored_file_name AS img_name
-        , p.play_name AS play_name
-        , CONCAT(p.play_major_cat, ', ',p.play_middle_cat) play_cat
-        , p.play_run_time AS play_run_time
-        , s.showing_info AS showing_info
-        , st.stage_address
-        , CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) AS showing_period_date
-        , st.stage_name as stage_name
-        , <![CDATA[CASE WHEN NOW() < s.showing_start_at THEN showing_status = '상영전'
-                WHEN NOW() BETWEEN s.showing_start_at AND s.showing_end_at THEN '상영중'
-                WHEN NOW() > s.showing_end_at THEN '상영종료']]>
-        END showing_status
-        , s.showing_start_at , s.showing_end_at
+            p.play_id as play_id ,
+            pimg.play_poster_stored_file_name as img_name ,
+            p.play_name as play_name ,
+            CONCAT(p.play_major_cat, ', ', p.play_middle_cat) play_cat ,
+            p.play_run_time as play_run_time ,
+            s.showing_info as showing_info ,
+            s.showing_date as showing_date ,
+            st.stage_address ,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
+            st.stage_name as stage_name ,
+            CASE
+                WHEN showing_status = 'BS' then '상영전'
+                WHEN showing_status = 'IS' then '상영중'
+                WHEN showing_status = 'AS' then '상영종료'
+                END showing_status
         FROM
             play p
-            LEFT JOIN play_image pimg
-            ON p.play_id = pimg.play_id
-            LEFT JOIN showing s
-            ON p.play_id = s.play_id
-            LEFT JOIN stage st
-            ON s.stage_id = st.stage_id
+                LEFT JOIN play_image pimg ON
+                p.play_id = pimg.play_id
+                LEFT JOIN showing s ON
+                p.play_id = s.play_id
+                LEFT JOIN stage st ON
+                s.stage_id = st.stage_id
+        WHERE
+            1=1
+            AND s.showing_info IS NOT NULL
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
+        </if>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
+        ORDER BY
+            s.created_at DESC
+        LIMIT
+            #{start}, #{limit}
     </select>
+
+    <select id="selectAllPlayCnt" resultType="int">
+        SELECT count(*) FROM play
+    </select>
+
+    <select id="selectAllShowingCnt" resultType="int">
+        SELECT count(*) FROM showing
+    </select>
+
+    <select id="countOptionProduct" parameterType="map" resultType="int">
+        SELECT
+            count(*)
+        FROM
+            play p
+            LEFT JOIN play_image pimg ON
+            p.play_id = pimg.play_id
+            LEFT JOIN showing s ON
+            p.play_id = s.play_id
+            LEFT JOIN stage st ON
+            s.stage_id = st.stage_id
+        WHERE
+            1=1
+            AND s.showing_info IS NOT NULL
+        <if test=" (start_at != '' and end_at != '') and (start_at != null and end_at != null) ">
+            AND s.showing_start_at BETWEEN #{start_at} AND #{end_at}
+            AND s.showing_end_at  BETWEEN #{start_at} AND #{end_at}
+        </if>
+        <if test='option=="I"'>
+            AND p.play_id = #{keyword}
+        </if>
+        <if test='option=="P"'>
+            AND p.play_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='option=="S"'>
+            AND st.stage_name like concat('%', #{keyword}, '%')
+        </if>
+        <if test='status=="BS"'>
+            AND showing_status = 'BS'
+        </if>
+        <if test='status=="IS"'>
+            AND showing_status = 'IS'
+        </if>
+        <if test='status=="AS"'>
+            AND showing_status = 'AS'
+        </if>
+        <if test='category=="콘서트"'>
+            AND p.play_major_cat = '콘서트'
+        </if>
+        <if test='category=="뮤지컬"'>
+            AND p.play_major_cat = '뮤지컬'
+        </if>
+        <if test='category=="연극"'>
+            AND p.play_major_cat = '연극'
+        </if>
+        <if test='category=="클래식"'>
+            AND p.play_major_cat = '클래식'
+        </if>
+    </select>
+
+    <delete id="deleteProduct" parameterType="String">
+        delete from play where play_id = #{play_id}
+    </delete>
 </mapper>

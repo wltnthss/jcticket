@@ -116,7 +116,7 @@
                             </a>
                         </li>
                         <li class="loginKakao">
-                            <a href="카카오로그인페이지" class="btn_social">
+                            <a href="${kakaoUrl}" class="btn_social">
                                     <span class="socialWrap">
                                         <em class="social_icon_kakao">
                                             <img src="/resources/img/login/카카오.png" class="kakao_icon" style="width: 22px; height: 21px;">

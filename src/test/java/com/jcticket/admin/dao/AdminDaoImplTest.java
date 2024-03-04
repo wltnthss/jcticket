@@ -303,6 +303,7 @@ public class AdminDaoImplTest {
         StageDto stageDto3 = new StageDto("3ad62b31", "세종문화회관", "서울특별시 종로구 세종로 175", 500, "박미영", "02-399-1114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
         StageDto stageDto4 = new StageDto("4ad62b31", "블루스퀘어", "서울특별시 용산구 이태원로 294", 700, "정성호", "02-1588-5212", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
         StageDto stageDto5 = new StageDto("5ad62b31", "디큐브아트센터", "서울특별시 구로구 신도림동 360-51", 200, "조영상", "02-2211-3660", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
+        StageDto stageDto6 = new StageDto("6ad62b31", "올림픽공원 테니스장", "서울특별시 송파구 올림픽로 424", 40, "조영상", "02-6000-0114", CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
 
         // when, then
         assertEquals(1, adminDao.insertStage(stageDto1));
@@ -310,6 +311,7 @@ public class AdminDaoImplTest {
         assertEquals(1, adminDao.insertStage(stageDto3));
         assertEquals(1, adminDao.insertStage(stageDto4));
         assertEquals(1, adminDao.insertStage(stageDto5));
+        assertEquals(1, adminDao.insertStage(stageDto6));
     }
 
     @Test
@@ -391,20 +393,5 @@ public class AdminDaoImplTest {
 
         // then
         assertEquals(insertShoiwng, 1);
-    }
-
-    @Test
-    public void selectAllProduct() throws Exception {
-
-        // given, when
-        List<Map<String, Object>> list = adminDao.selectAllProduct();
-        System.out.println("list = " + list);
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("list.get(i) = " + list.get(i));
-
-            String play_name = (String) list.get(i).get("play_name");
-            System.out.println("play_name = " + play_name);
-        }
     }
 }

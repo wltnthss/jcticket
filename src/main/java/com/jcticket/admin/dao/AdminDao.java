@@ -91,6 +91,9 @@ public interface AdminDao {
     // 관리자 상품 관리 공연이미지 등록
     void insertPlayImg(PlayImgDto playImgDto) throws Exception;
     // 관리자 상품 조회
-    List<Map<String, Object>> selectAllProduct() throws Exception;
-
+    List<Map<String, Object>> selectAllProduct(Map<String, Object> map) throws Exception;
+    // 관리자 상품 옵션 조회 개수
+    int countOptionProduct(Map<String, Object> map) throws Exception;
+    // 관리자 상품 삭제
+    void deleteProduct(String play_id) throws Exception;
 }

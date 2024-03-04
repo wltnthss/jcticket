@@ -1,5 +1,7 @@
 package com.jcticket.ticketing.dao;
 
+import com.jcticket.admin.dto.ShowSeatDto;
+import com.jcticket.dto.SeatDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
@@ -77,9 +79,9 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.selectList(namespace + "selectDateByPlayId", play_id);
     }
 
-    // 공연아이디 && 공연일정별 회차정보 리스트 조회
+    // 공연아이디 && 공연일정별 회차시퀀스, 회차정보 리스트 조회
     @Override
-    public List<Map<String, String>> selectRound(Map<String, String> map) throws Exception {
+    public List<Map<String, Object>> selectRound(Map<String, String> map) throws Exception {
         return session.selectList(namespace + "selectRound", map);
     }
 
@@ -87,6 +89,52 @@ public class TicketingDaoImpl implements TicketingDao {
     public Map<String, Object> selectPlayStageName(String play_id) throws Exception {
         return session.selectOne(namespace + "selectPlayStageName", play_id);
     }
+
+    // 회차좌석 테이블 삽입
+    @Override
+    public int insertShowSeat(ShowSeatDto dto) throws Exception {
+        return session.insert(namespace+"insertShowSeat", dto);
+    }
+
+    // 회차좌석 테이블 삭제
+    @Override
+    public int deleteShowSeat() throws Exception {
+        return session.delete(namespace+"deleteShowSeat");
+    }
+
+    // 좌석 테이블 삽입
+    @Override
+    public int insertSeat(SeatDto dto) throws Exception {
+        return session.insert(namespace+"insertSeat", dto);
+    }
+
+    // 좌석 테이블 공연장ID별 삭제
+    @Override
+    public int deleteSeatByStageId(String stage_id) throws Exception {
+        return session.delete(namespace+"deleteSeatByStageId",stage_id);
+    }
+
+    // 회차시퀀스로 회차좌석수 조회
+    @Override
+    public int selectSeatCnt(int showing_seq) throws Exception {
+        return session.selectOne(namespace+"selectSeatCnt", showing_seq);
+    }
+
+    // 회차시퀀스별 회차좌석가격 조회
+    @Override
+    public int selectPrice(int showing_seq) throws Exception {
+        return session.selectOne(namespace+"selectPrice", showing_seq);
+    }
+
+    // 회차시퀀스별 좌석번호, 좌석상태리스트 조회
+    @Override
+    public List<Map<String, String>> selectSeatList(int showing_seq) throws Exception {
+        return session.selectList(namespace+"selectSeatList", showing_seq);
+    }
+
+    // 회차시퀀스로 회차좌석의  행, 열의 마지막 번호 구하기
+    @Override
+    public Map<String, Object> selectEndNum(int showing_seq) throws Exception {
+        return session.selectOne(namespace+"selectEndNum", showing_seq);
+    }
 }
-
-

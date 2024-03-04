@@ -52,6 +52,9 @@ public class AdminController {
     @Autowired
     NoticeService noticeService;
 
+    final int pageLimit = 10;   // 한 페이지당 보여줄 글 개수
+    final int blockLimit = 10;  // 하단에 보여줄 페이지 번호
+
     // /admin url 입력시 loginform 이동
     @GetMapping("/admin")
     public String admin() throws Exception{
@@ -538,14 +541,14 @@ public class AdminController {
     }
     // 관리자 쿠폰 관리 폼 이동
     @GetMapping("/admin/coupon")
-    public String adminCouponForm(Model model, Map<String, Object> map
+    public String adminCouponForm(Model model
                         ,@RequestParam(defaultValue = "A") String option
                         ,@RequestParam(required = false) String start_at
                         ,@RequestParam(required = false) String end_at
                         ,@RequestParam(required = false) String keyword
                         ,@RequestParam(value = "page", defaultValue = "1") int page) throws Exception{
 
-        map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("option", option);
         map.put("keyword", keyword);
         map.put("start_date", start_at);
@@ -663,11 +666,33 @@ public class AdminController {
     }
     // 관리자 상품 관리
     @GetMapping("/admin/product")
-    public String adminProduct(Model model) throws Exception{
+    public String adminProduct(Model model
+            ,@RequestParam(required = false) String start_at
+            ,@RequestParam(required = false) String end_at
+            ,@RequestParam(required = false) String keyword
+            ,@RequestParam(defaultValue = "A") String option
+            ,@RequestParam(defaultValue = "A") String status
+            ,@RequestParam(defaultValue = "A") String category
+            ,@RequestParam(value = "page", defaultValue = "1") int page
+                               ) throws Exception{
 
-        List<Map<String,Object>> list = adminService.selectAllProduct();
+        Map<String, Object> map = new HashMap<>();
+        map.put("start", (page - 1) * pageLimit);
+        map.put("limit", pageLimit);
+        map.put("keyword", keyword);
+        map.put("start_at", start_at);
+        map.put("end_at", end_at);
+        map.put("option", option);
+        map.put("status", status);
+        map.put("category", category);
+
+        List<Map<String,Object>> list = adminService.selectAllProduct(map);
+        PageDto pageDto = adminService.productPagingParam(page, option, keyword, start_at, end_at, status, category);
+        int showingListCnt = adminService.countOptionProduct(map);
 
         model.addAttribute("list", list);
+        model.addAttribute("paging", pageDto);
+        model.addAttribute("showingListCnt", showingListCnt);
 
         return "admin/adminproduct";
     }
@@ -676,7 +701,7 @@ public class AdminController {
     public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
 
         try{
-            String path = "C:\\play_img\\" + img_name + ".JPG";
+            String path = "C:/play_img/" + img_name + ".JPG";
             System.out.println("path = " + path);
 
             InputStream in = new FileInputStream(path);
@@ -697,10 +722,14 @@ public class AdminController {
     @PostMapping("/admin/playregister")
     public String adminProductRegister(Model model, PlayDto playDto) throws Exception{
 
-        System.out.println("playDto = " + playDto);
-        adminService.insertPlay(playDto);
+        try {
+            System.out.println("playDto = " + playDto);
+            adminService.insertPlay(playDto);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
-        return "redirect:/admin/product";
+        return "redirect:/admin/productregister";
     }
     // 관리자 회차 등록
     @PostMapping("/admin/showingregister")
@@ -745,6 +774,26 @@ public class AdminController {
                 });
 
         return "redirect:/admin/product";
+    }
+    @DeleteMapping("/admin/productdelete")
+    @ResponseBody
+    public int adminProductDelete(@RequestBody List<String> valueArr) throws Exception{
+
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+        System.out.println("valueArr = " + valueArr);
+
+        try {
+            for (String productId : valueArr) {
+                // 각 값에 대한 삭제 로직 구현
+                adminService.deleteProduct(productId);
+            }
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+
+        return result;
     }
     @GetMapping("/admin/inquiry")
     public String adminInquiry() throws Exception{

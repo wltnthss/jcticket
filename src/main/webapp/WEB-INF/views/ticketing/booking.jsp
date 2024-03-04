@@ -100,7 +100,7 @@
 <%--                                    <div class="shadow p-2 mb-2 bg-white rounded"></div>--%>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" />
+                        </div> <input id="first-bnt" type="button" name="next" class="next action-button" value="다음단계" />
                     </fieldset>
 
                     <%-- step2. 좌석선택 --%>
@@ -113,113 +113,21 @@
                             </div>
                             <div class="row">
                                 <div class="col-8">
-                                    <div class="select-seat">
-                                        <div id="stage" class="shadow-sm p-1 mb-2 bg-dark rounded">STAGE</div>
-                                        <div class="seats">
-                                            <span>A</span>
-                                            <span id="a1" class="border border-primary"></span>
-                                            <span id="a2" class="border border-primary"></span>
-                                            <span id="a3" class="border border-primary"></span>
-                                            <span id="a4" class="border border-primary"></span>
-                                            <span id="a5" class="border border-primary"></span>
-                                            <span id="a6" class="border border-primary"></span>
-                                            <span id="a7" class="border border-primary"></span>
-                                            <span id="a8" class="border border-primary"></span>
-                                            <span id="a9" class="border border-primary"></span>
-                                            <span id="a10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>B</span>
-                                            <span id="b1" class="border border-primary"></span>
-                                            <span id="b2" class="border border-primary"></span>
-                                            <span id="b3" class="border border-primary"></span>
-                                            <span id="b4" class="border border-primary"></span>
-                                            <span id="b5" class="border border-primary"></span>
-                                            <span id="b6" class="border border-primary"></span>
-                                            <span id="b7" class="border border-primary"></span>
-                                            <span id="b8" class="border border-primary"></span>
-                                            <span id="b9" class="border border-primary"></span>
-                                            <span id="b10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>C</span>
-                                            <span id="c1" class="border border-primary"></span>
-                                            <span id="c2" class="border border-primary"></span>
-                                            <span id="c3" class="border border-primary"></span>
-                                            <span id="c4" class="border border-primary"></span>
-                                            <span id="c5" class="border border-primary"></span>
-                                            <span id="c6" class="border border-primary"></span>
-                                            <span id="c7" class="border border-primary"></span>
-                                            <span id="c8" class="border border-primary"></span>
-                                            <span id="c9" class="border border-primary"></span>
-                                            <span id="c10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>D</span>
-                                            <span id="d1" class="border border-primary"></span>
-                                            <span id="d2" class="border border-primary"></span>
-                                            <span id="d3" class="border border-primary"></span>
-                                            <span id="d4" class="border border-primary"></span>
-                                            <span id="d5" class="border border-primary"></span>
-                                            <span id="d6" class="border border-primary"></span>
-                                            <span id="d7" class="border border-primary"></span>
-                                            <span id="d8" class="border border-primary"></span>
-                                            <span id="d9" class="border border-primary"></span>
-                                            <span id="d10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>E</span>
-                                            <span id="e1" class="border border-primary"></span>
-                                            <span id="e2" class="border border-primary"></span>
-                                            <span id="e3" class="border border-primary"></span>
-                                            <span id="e4" class="border border-primary"></span>
-                                            <span id="e5" class="border border-primary"></span>
-                                            <span id="e6" class="border border-primary"></span>
-                                            <span id="e7" class="border border-primary"></span>
-                                            <span id="e8" class="border border-primary"></span>
-                                            <span id="e9" class="border border-primary"></span>
-                                            <span id="e10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>F</span>
-                                            <span id="f1" class="border border-primary"></span>
-                                            <span id="f2" class="border border-primary"></span>
-                                            <span id="f3" class="border border-primary"></span>
-                                            <span id="f4" class="border border-primary"></span>
-                                            <span id="f5" class="border border-primary"></span>
-                                            <span id="f6" class="border border-primary"></span>
-                                            <span id="f7" class="border border-primary"></span>
-                                            <span id="f8" class="border border-primary"></span>
-                                            <span id="f9" class="border border-primary"></span>
-                                            <span id="f10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>G</span>
-                                            <span id="g1" class="border border-primary"></span>
-                                            <span id="g2" class="border border-primary"></span>
-                                            <span id="g3" class="border border-primary"></span>
-                                            <span id="g4" class="border border-primary"></span>
-                                            <span id="g5" class="border border-primary"></span>
-                                            <span id="g6" class="border border-primary"></span>
-                                            <span id="g7" class="border border-primary"></span>
-                                            <span id="g8" class="border border-primary"></span>
-                                            <span id="g9" class="border border-primary"></span>
-                                            <span id="g10" class="border border-primary"></span>
-                                        </div>
-                                        <div class="seats">
-                                            <span>H</span>
-                                            <span id="h1" class="border border-primary"></span>
-                                            <span id="h2" class="border border-primary"></span>
-                                            <span id="h3" class="border border-primary"></span>
-                                            <span id="h4" class="border border-primary"></span>
-                                            <span id="h5" class="border border-primary"></span>
-                                            <span id="h6" class="border border-primary"></span>
-                                            <span id="h7" class="border border-primary"></span>
-                                            <span id="h8" class="border border-primary"></span>
-                                            <span id="h9" class="border border-primary"></span>
-                                            <span id="h10" class="border border-primary"></span>
-                                        </div>
-
+                                    <div id="seatsArea" class="select-seat">
+<%--                                        <div id="stage" class="shadow-sm p-1 mb-2 bg-dark rounded">STAGE</div>--%>
+<%--                                        <div class="seats">--%>
+<%--                                            <span>A</span>--%>
+<%--                                            <span id="a1" class="border border-primary"></span>--%>
+<%--                                            <span id="a2" class="border border-primary"></span>--%>
+<%--                                            <span id="a3" class="border border-primary"></span>--%>
+<%--                                            <span id="a4" class="border border-primary"></span>--%>
+<%--                                            <span id="a5" class="border border-primary"></span>--%>
+<%--                                            <span id="a6" class="border border-primary"></span>--%>
+<%--                                            <span id="a7" class="border border-primary"></span>--%>
+<%--                                            <span id="a8" class="border border-primary"></span>--%>
+<%--                                            <span id="a9" class="border border-primary"></span>--%>
+<%--                                            <span id="a10" class="border border-primary"></span>--%>
+<%--                                        </div>--%>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -234,11 +142,11 @@
                                     <div class="selected-price head">
                                         <p>선택좌석가격</p>
                                     </div>
-                                    <div class="selected-price"></div>
+                                    <div id="sp" class="selected-price"></div>
                                 </div>
 
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div> <input id="second-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
@@ -247,7 +155,7 @@
                                     <h2 class="fs-title">쿠폰/할인</h2>
                                 </div>
                             </div>
-                        </div> <input type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div> <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
                     </fieldset>
                     <fieldset>
                         <div class="form-card">

@@ -239,18 +239,19 @@ td{
     flex-flow: column nowrap;
 }
 #stage{
-    width: 100%;
+    width: 115%;
     color: white;
 }
 .seats{
     display: flex;
-    flex-wrap: nowrap;
+    width: 115%;
 }
 
 .seats span{
-    width: 20px;
-    height: 20px;
-    margin: 0 5px 10px 0;
+    flex: 1;
+    aspect-ratio: 1;
+    margin-right: 3px;
+    margin-bottom: 3.5px;
 }
 .selected-seats.head{
     text-align: center;
