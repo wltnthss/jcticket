@@ -1,6 +1,5 @@
 package com.jcticket.viewdetail.dto;
 
-import com.fasterxml.jackson.databind.util.StdDateFormat;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -20,10 +19,10 @@ public class pageHandlerTest {
 
     @Test
     public void startPageTest() {
-        pageHandler ph = new pageHandler(1,260,20);
+        PageHandler ph = new PageHandler(11,260,10);
         System.out.println("ph = " +ph);
-        assertTrue(ph.getTotalPage()==13);
-        assertTrue(ph.getStartPage()==1);
-        assertTrue(ph.getEndPage()==10);
+        assertTrue(ph.getTotalPage()==26);
+        assertTrue(ph.getStartPage()==11);
+        assertTrue(ph.getEndPage()==20);
     }
 }
