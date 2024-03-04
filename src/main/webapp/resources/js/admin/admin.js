@@ -1,4 +1,7 @@
 $(function (){
+
+    // admin 세션 카운트다운
+
     // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
     $('.menu_toggle-u10').on('click', u10Toggle);
     $('.menu_toggle-u20').on('click', u20Toggle);

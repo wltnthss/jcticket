@@ -23,8 +23,8 @@
 
     <div class="admin-common-content">
         <div class="admin-common-title">
-            <h1>상품 관리</h1>
-            <h2>공연 등록</h2>
+            <h1>상품 수정하기</h1>
+            <h2>공연 수정</h2>
         </div>
         <form action="/admin/playregister" method="post" enctype="multipart/form-data">
             <div class="tbl_frm01">
@@ -37,55 +37,53 @@
                     <tr>
                         <th scope="row">공연명</th>
                         <td>
-                            <input type="text" name="play_name" class="frm_input required" size="50" required>
+                            <input type="text" value="${playDto.play_name}" name="play_name" class="frm_input required" size="50" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연표지</th>
                         <td>
-                            <input type="file" name="play_poster" class="frm_input required" size="30" >
+                            <input type="file" value="${playImgDto.play_poster_stored_file_name}" name="play_poster" class="frm_input required" size="30" disabled>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연정보</th>
                         <td>
-                            <input type="file" name="play_info" class="frm_input required" size="30" >
+                            <input type="file" value="${playImgDto.play_info_stored_file_name}" name="play_info" class="frm_input required" size="30" disabled>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 대분류</th>
                         <td>
-                            <input type="text" name="play_major_cat" class="frm_input required" size="10" required>
+                            <input type="text" value="${playDto.play_major_cat}" name="play_major_cat" class="frm_input required" size="10" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 중분류</th>
                         <td>
-                            <input type="text" name="play_middle_cat" class="frm_input required" size="10" >
+                            <input type="text" value="${playDto.play_middle_cat}" name="play_middle_cat" class="frm_input required" size="10" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연/전시 소분류</th>
                         <td>
-                            <input type="text" name="play_small_cat" class="frm_input required" size="10" >
+                            <input type="text" value="${playDto.play_small_cat}" name="play_small_cat" class="frm_input required" size="10" readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연시간</th>
                         <td>
-                            <input type="text" name="play_run_time" class="frm_input required" size="2" required> <span>  분</span>
+                            <input type="text" value="${playDto.play_run_time}" name="play_run_time" class="frm_input required" size="2" required readonly> <span>  분</span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="btn-confirm">
-                <input type="submit" value="등록" class="btn-large">
-            </div>
         </form>
-        <form action="/admin/showingregister" method="post">
+        <form action="/admin/productmodify" method="post">
+            <input type="hidden" name="showing_seq" value="${showingDto.showing_seq}">
             <div class="admin-common-title">
-                <h2>회차 등록</h2>
+                <h2>회차 수정</h2>
             </div>
             <div class="tbl_frm01">
                 <table>
@@ -97,43 +95,43 @@
                     <tr>
                         <th scope="row">공연장아이디 선택</th>
                         <td>
-                            <input type="text" name="stage_id" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick="openStagePopup()"></span>
+                            <input type="text" value="${showingDto.stage_id}" name="stage_id" id="inputSearchStage" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick=""></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">공연아이디 선택</th>
                         <td>
-                            <input type="text" name="play_id" id="inputSearchPlay" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick="openPlayPopup()"></span>
+                            <input type="text" value="${showingDto.play_id}" name="play_id" id="inputSearchPlay" class="frm_input required" size="20" style="cursor: pointer" readonly required><span class="search-btn" onclick=""></span>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 시작 일시</th>
                         <td>
-                            <input type="date" name="showing_start_at" class="frm_input required" size="20" required>
+                            <input type="date" name="showing_start_at" class="frm_input required" size="20" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 종료 일시</th>
                         <td>
-                            <input type="date" name="showing_end_at" class="frm_input required" size="20" required>
+                            <input type="date" name="showing_end_at" class="frm_input required" size="20" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 정보</th>
                         <td>
-                            <input type="text" name="showing_info" class="frm_input required" size="60" placeholder="ex) [1회] 13시 00분,[2회] 17시 00분" required>
+                            <input type="text" value="${showingDto.showing_info}" name="showing_info" class="frm_input required" size="60" placeholder="ex) [1회] 13시 00분,[2회] 17시 00분" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 일시</th>
                         <td>
-                            <input type="text" name="showing_date" class="frm_input required" size="20" placeholder="ex) 2024-11-25" required>
+                            <input type="text" value="${showingDto.showing_date}" name="showing_date" class="frm_input required" size="20" placeholder="ex) 2024-11-25" required readonly>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 요일</th>
                         <td>
-                            <input type="text" name="showing_day" class="frm_input required" size="10" placeholder="ex) 월,화,수" required>
+                            <input type="text" value="${showingDto.showing_day}" name="showing_day" class="frm_input required" size="10" placeholder="ex) 월,화,수" required>
                         </td>
                     </tr>
                     <tr>
@@ -149,20 +147,20 @@
                     <tr>
                         <th scope="row">회차 좌석수</th>
                         <td>
-                            <input type="text" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" readonly required>
+                            <input type="text" value="${showingDto.showing_seat_cnt}" id="showingSeat" name="showing_seat_cnt" class="frm_input required" size="5" readonly required>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">회차 좌석가격</th>
                         <td>
-                            <input type="text" name="showing_seat_price" class="frm_input required" size="10" required>
+                            <input type="text" value="${showingDto.showing_seat_price}" name="showing_seat_price" class="frm_input required" size="10" required>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="btn-confirm">
-                <input type="submit" value="등록" class="btn-large">
+                <input type="submit" value="수정" class="btn-large">
             </div>
         </form>
         <%-- 공연장명 입력 팝업 창 --%>

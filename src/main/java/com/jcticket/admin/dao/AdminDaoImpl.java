@@ -212,4 +212,49 @@ public class AdminDaoImpl implements AdminDao{
         sqlSession.delete(namespace + "deleteProduct", play_id);
     }
 
+    @Override
+    public PlayDto selectPlayInfo(String playId) {
+        return sqlSession.selectOne(namespace+"selectPlayInfo", playId);
+    }
+
+    @Override
+    public PlayImgDto selectPlayImgInfo(String playId) {
+        return sqlSession.selectOne(namespace+"selectPlayImgInfo", playId);
+    }
+
+    @Override
+    public ShowingDto selectShowingInfo(int showing_seq) {
+        return sqlSession.selectOne(namespace+"selectShowingInfo", showing_seq);
+    }
+
+    @Override
+    public int updateShowingInfo(ShowingDto showingDto) throws Exception {
+        return sqlSession.update(namespace+"updateShowingInfo", showingDto);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectProductsStactics() throws Exception {
+        return sqlSession.selectList(namespace + "selectProductsStactics");
+    }
+
+    @Override
+    public int concertCnt() throws Exception {
+        return sqlSession.selectOne(namespace+"concertCnt");
+    }
+
+    @Override
+    public int musicalCnt() throws Exception {
+        return sqlSession.selectOne(namespace+"musicalCnt");
+    }
+
+    @Override
+    public int theaterCnt() throws Exception {
+        return sqlSession.selectOne(namespace+"theaterCnt");
+    }
+
+    @Override
+    public int classicCnt() throws Exception {
+        return sqlSession.selectOne(namespace+"classicCnt");
+    }
+
 }
