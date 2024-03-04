@@ -97,12 +97,15 @@ git <%--
                     <div class="star-review">
                         <div class="review-star">
                             <div class="review-star-info">
-                                ★★★★★
+                                <i class="rating__star far fa-star"></i><i class="rating__star far fa-star"></i><i class="rating__star far fa-star"></i><i class="rating__star far fa-star"></i><i class="rating__star far fa-star"></i>
+                            </div>
+                            <div class="real_star" style="width:calc((${review[0].review_avg}/5) * 90px);">
+                                <i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i>
                             </div>
                         </div>
                         <span class="review">
-                            <em>5</em>
-                             *123
+                            <em>${review[0].review_avg}</em>
+                             *${review[0].review_count}
                             <span>Reviews</span>
                         </span>
                     </div>
@@ -118,8 +121,6 @@ git <%--
                             <c:if test="${not empty viewDetail}">
                                 <dd>&nbsp;${viewDetail[0].play_run_time}분</dd>
                             </c:if>
-                            <dt>출연</dt>
-                            <dd>&nbsp;개</dd>
                             <dt id="dtPrice">가격</dt>
                             <dd id="ddPrice">
     <%--                            price-zone 마진 없애면 동일선상으로 나옴--%>
@@ -198,7 +199,7 @@ git <%--
 <%--                댓글수 가져와야됨--%>
                 <span>
                     관람후기
-                    <span class="comment_cnt">(123)</span>
+                    <span class="comment_cnt">(${review[0].review_count})</span>
                 </span>
             </a>
             <a>
@@ -249,12 +250,6 @@ git <%--
                                     <td>제이씨티켓(주)_나는 오늘도 혼자서 논다</td>
                                     <th scope="row" class="seven_table">소비자상담</th>
                                     <td>제이씨티켓(주) 7777-7777</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="seven_table">주연</th>
-                                    <td>개</td>
-                                    <th scope="row" class="seven_table">관람등급</th>
-                                    <td>전체이용가</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="seven_table">공연시간</th>
@@ -380,7 +375,7 @@ git <%--
                     <p style="font-size: 22px; margin-left: 30px">관람후기등록</p>
                     <form method="post">
                         <div class="review_form">
-                            <span>유저아이디</span>
+                            <span>유저아이디(히든), 작성일자(히든), 넣어야함</span>
                             별점 : <span class="review_star">
                                 <i id="1" class="rating__star far fa-star"></i><i id="2" class="rating__star far fa-star"></i><i id="3" class="rating__star far fa-star"></i><i id="4" class="rating__star far fa-star"></i><i id="5" class="rating__star far fa-star"></i>
                             </span>

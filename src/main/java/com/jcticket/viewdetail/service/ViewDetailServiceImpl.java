@@ -36,7 +36,13 @@ public class ViewDetailServiceImpl implements ViewDetailService{
 
     @Override
     public List<JoinDto> getViewDetail(String play_id) throws Exception {
-        return viewDetailDao.viewDetail_view(play_id);
+        List<JoinDto> joinDtoList = viewDetailDao.viewDetail_view(play_id);
+        // 포맷팅 수행
+        for (JoinDto joinDto : joinDtoList) {
+            joinDto.format_seat_price();
+        }
+        return joinDtoList;
+        //showing_seat_price(30000) >>>> seat_price(30,000) 포맷팅
     }
 
     @Override
@@ -105,7 +111,17 @@ public class ViewDetailServiceImpl implements ViewDetailService{
     }
 
     @Override
-    public List<ReviewDto> review_select(int review_num) throws Exception {
-        return viewDetailDao.review_select(review_num);
+    public List<ReviewDto> review_select(String play_id) throws Exception {
+        List<ReviewDto> review = viewDetailDao.review_select(play_id);
+        int cnt = viewDetailDao.review_count(play_id);
+
+        for (ReviewDto dto : review) {
+            double avg = dto.getReview_avg(); // 리뷰의 평균값 가져오기
+            avg = Math.round(avg * 10) / 10.0; // 소수점 첫 번째 자리까지 반올림
+            dto.setReview_avg(avg); // 반올림한 값을 다시 설정
+            dto.setReview_count(cnt);
+        }
+
+        return review;
     }
 }

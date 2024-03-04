@@ -518,6 +518,8 @@ li {
 /*회차 클릭된 상태에서는 클릭불가*/
 .aTag.clicked {
     pointer-events: none;
+    background-color: #213bcc;
+    color: #fff;
 }
 
 /*회차 클릭시 가격 색 검은색으로*/
@@ -589,4 +591,18 @@ li {
 
 .review_form {
     margin: 0 0 10px 30px;
+}
+
+.review-star-info {
+    color: #FF9100;
+    position:absolute;
+    width:90px;
+    overflow:hidden;
+}
+
+.real_star {
+    position:absolute;
+    overflow:hidden;
+    white-space:nowrap;
+    color: #FF9100;
 }

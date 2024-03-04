@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
     <style>
-        .buttonimg {
+        .button_img {
             background: url('/resources/img/viewdetail/testposter.jpg') no-repeat;
             background-size: cover;
             width: 210px;
@@ -20,13 +20,14 @@
 </head>
 <body>
 <form id="viewDetailForm" action="/viewdetail" method="get">
-    <button type="button" id="공연아이디1" class="buttonimg" onclick="moveToPlay1()"></button>
+    <button type="button" id="공연아이디1" class="button_img" onclick="moveToPlay1()"></button>
 </form>
 
 <script>
     function moveToPlay1() {
         // 공연1의 아이디를 가져와서 URL에 추가
-        var playId = '공연아이디1';
+
+        var playId = document.querySelector(".button_img").id;
         // var url = '/viewdetail?this_play_id=' + encodeURIComponent(playId);
         var url = '/viewdetail?this_play_id=' + playId;
         // URL로 이동

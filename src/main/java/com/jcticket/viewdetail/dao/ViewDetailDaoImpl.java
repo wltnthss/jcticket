@@ -150,7 +150,7 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     }
 
     @Override
-    public List<ReviewDto> review_select(int review_num) throws Exception {
-        return session.selectOne(namespace + "review_select");
+    public List<ReviewDto> review_select(String play_id) throws Exception {
+        return session.selectList(namespace + "review_select", play_id);
     }
 }
