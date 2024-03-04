@@ -139,5 +139,52 @@
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="/resources/js/admin/admin.js"></script>
+
+<script>
+    // 관리자 회원 삭제 버튼 클릭 이벤트
+    $('#user-delete-btn').on('click', function(){
+
+        // 체크박스 리스트 전체
+        let checkList = $("input[name=selectedItems]:checked");
+        let valueArr = [];
+
+        // checkList가 check 된 상태이면 배열에 값 저장
+        checkList.each(function () {
+            valueArr.push($(this).val());
+        });
+
+        console.log('valueArr => ' + valueArr);
+
+        if(valueArr.length === 0){
+            alert("삭제할 항목을 선택해주세요");
+            return false;
+        }else{
+            if(confirm("정말 삭제하시겠습니까?")){
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/userdelete',
+                    data: JSON.stringify(valueArr),
+                    contentType: "application/json",
+                    success: function (res){
+                        console.log('res => ' + res)
+                        if(res > 0){
+                            alert('삭제되었습니다.');
+                            location.href= "/admin/user";
+                        }else{
+                            alert('삭제 실패');
+                            location.href= "/admin/delete";
+                        }
+                    },
+                    error: function (e) {
+                        console.error("삭제 실패", e);
+                    }
+                });
+
+
+            }
+        }
+    });
+</script>
 </body>
 </html>
