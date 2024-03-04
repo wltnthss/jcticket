@@ -22,12 +22,11 @@
         <typeAlias alias="StageDto" type="com.jcticket.admin.dto.StageDto"/>
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
         <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>
-<<<<<<< HEAD
+
         <typeAlias alias="UserCouponDto" type="com.jcticket.mypage.dto.UserCouponDto"/>
 
 
-=======
->>>>>>> c85486b889409aae9e0a8b5e218cc65c3fb67446
+
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
         <typeAlias alias="EnrollDto" type="com.jcticket.enroll.dto.EnrollDto"/>
     </typeAliases>

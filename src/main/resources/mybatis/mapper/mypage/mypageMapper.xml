@@ -235,31 +235,36 @@
 
 
     <select id="coupon_list" parameterType="map" resultType="UserCouponDto">
-        SELECT uc.coupon_id,
-               uc.coupon_issue_at,
-               uc.coupon_expire_at,
-               (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)            AS coupon_name,
-               (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
-               (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)   AS coupon_use_condition
-        FROM coupon_user uc
-        WHERE (#{botton} = 'on' AND uc.coupon_use_yn = 'N')
-           OR (#{botton} = 'off' AND uc.coupon_use_yn = 'Y')
-            LIMIT #{pageSize}
-        OFFSET #{offset};
+        SELECT
+            uc.coupon_id,
+            uc.coupon_issue_at,
+            uc.coupon_expire_at,
+            (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_name,
+            (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
+            (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_use_condition
+        FROM
+            coupon_user uc
+        WHERE
+            ((#{button} = 'on' AND uc.coupon_use_yn = 'N') OR
+             (#{button} = 'off' AND uc.coupon_use_yn = 'Y'))
+        LIMIT
+            #{pageSize}
+        OFFSET
+            #{offset};
     </select>
 
 
     <select id="coupon_count" parameterType="map" resultType="int">
         SELECT COUNT(*) AS count
         FROM coupon_user
-        WHERE coupon_use_yn IN ('Y')
+        WHERE coupon_use_yn IN ('Y', 'N')
           AND (
-            (#{botton} = 'on'
+            (#{button} = 'on'
           AND coupon_use_yn = 'N')
            OR
-            (#{botton} = 'off'
-          AND coupon_use_yn = 'Y')
-            );
+            (#{button} = 'off'
+          AND coupon_use_yn = 'Y'));
     </select>
+
 
 </mapper>

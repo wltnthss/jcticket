@@ -46,7 +46,7 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/signup"><h3>회원정보 수정</h3></a>
+                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
                             <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
@@ -77,17 +77,15 @@
 
                     <div id="h2-tag">
                     <form action="/mypagecupon">
-                    <button name="botton" value="on"><a href="/mypagecupon"><h3>사용 가능한 쿠폰</h3></a></button>
-                    <button name="botton" value="off"><a href="/mypagecupon"><h3>사용 완료된 쿠폰</h3></a></button>
+                    <button name="button" value="on"><h3>사용 가능한 쿠폰</h3></button>
+                    <button name="button" value="off"><h3>사용 완료된 쿠폰</h3></button>
                     </form>
                     </div>
 
 
 
                     <div id="cupon-list">
-
                         <table>
-
                                 <c:choose>
                                     <c:when test="${param.botton eq 'on'}">
                                         <tr>
@@ -115,6 +113,7 @@
                                             <th>사용기간</th>
                                             <th>등록일</th>
                                         </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
                                         <tr>
                                             <td>${UserCouponDto.coupon_name}</td>
                                             <td>${UserCouponDto.coupon_discount_amount}원</td>
@@ -122,6 +121,7 @@
                                             <td>${UserCouponDto.coupon_expire_at}</td>
                                             <td>${UserCouponDto.coupon_issue_at}</td>
                                         </tr>
+                                        </c:forEach>
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
@@ -134,28 +134,26 @@
                                         <c:forEach items="${coupon_list}" var="UserCouponDto">
                                         <tr>
                                             <td>${UserCouponDto.coupon_name}</td>
-                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}</td>
                                             <td>${UserCouponDto.coupon_use_condition}</td>
                                             <td>${UserCouponDto.coupon_expire_at}</td>
                                             <td>${UserCouponDto.coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>
                                     </c:otherwise>
-
                                 </c:choose>
-
 
                         </table>
 
                         <div id="paging">
                             <c:if test="${ph.showPrev}">
-                                <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}"/>">&lt;</a>
+                                <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&lt;</a>
                             </c:if>
                             <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                                <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}"/>">${i}</a>
+                                <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}&button=${ph.button}"/>">${i}</a>
                             </c:forEach>
                             <c:if test="${ph.showNext}">
-                                <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}"/>">&gt;</a>
+                                <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&gt;</a>
                             </c:if>
                         </div>
 

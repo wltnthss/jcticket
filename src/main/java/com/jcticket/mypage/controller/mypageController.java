@@ -147,13 +147,20 @@ public class mypageController {
         return "/mypage/withdraw";
     }
 
+    @GetMapping("Modifying")
+        public String modifying() {
+            return "/mypage/modify";
+        }
+
     @GetMapping("/mypagecupon")
     public String cupon(@RequestParam(required = false) String coupon_id,
                         @RequestParam(defaultValue = "1") Integer page,
                         @RequestParam(defaultValue = "5") Integer pageSize,
-                        @RequestParam(defaultValue = "on") String botton,
+                        @RequestParam(defaultValue = "on") String button,
                         Model model) throws Exception {
 
+
+        System.out.println("button => (be)" + button);
 
 
         try {
@@ -174,21 +181,25 @@ public class mypageController {
                 Map map = new HashMap();
                 map.put("offset", (page - 1) * pageSize);
                 map.put("pageSize", pageSize);
-                map.put("button", botton);
+                map.put("button", button);
+
+            System.out.println("button => (after)" + button);
 
 
                 int totalCount = mypageService.coupon_count(map);
 
-                System.out.println(totalCount);
+            System.out.println(totalCount);
 
 
-                PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, botton);
+            List<UserCouponDto> list = mypageService.coupon_list(map);
 
 
-                List<UserCouponDto> list = mypageService.coupon_list(map);
+            PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, button);
 
-                model.addAttribute("coupon_list", list);
-                model.addAttribute("ph", pageHandler);
+            model.addAttribute("coupon_list", list);
+            model.addAttribute("ph", pageHandler);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
