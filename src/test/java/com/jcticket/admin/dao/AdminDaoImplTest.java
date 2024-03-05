@@ -5,6 +5,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
@@ -43,6 +44,9 @@ public class AdminDaoImplTest {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    TicketingDao ticketingDao;
 
     final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
@@ -184,7 +188,7 @@ public class AdminDaoImplTest {
         Timestamp start_timestamp = new Timestamp(start_date.getTime());
         Timestamp end_timestamp = new Timestamp(end_date.getTime());
 
-        // 날짜별 사용가능한 쿠폰 31개 생성
+        // 날짜별 사용가능한 쿠폰 31개 생성ㅁ
         for (int i = 0; i < 31; i++) {
             // given
             // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
@@ -346,11 +350,14 @@ public class AdminDaoImplTest {
     public void showingRegisterSeatClass() throws Exception {
 
         adminDao.deleteAllShoiwing();
-
+        String pId = "6f72bd86";
+        String stageId = "1ad62b31";
+        String sDate = "2024-03-15";
+        final int PRICE = 35000;
         // given
-        ShowingDto showingDto = new ShowingDto(0, "2024-02-27 13:53:00.0", "2024-03-27 13:53:00.0", "[1회] 13시 00분", "2024-03-15", "월,수,금", "BS", 80, 40000, "공연아이디1", "1ad62b31",
-                CURRENT_TIMESTAMP, "JISOO", CURRENT_TIMESTAMP, "JISOO");
-
+        ShowingDto showingDto = new ShowingDto("[1회] 12시 00분", sDate, "금", "BS", 80, PRICE, pId, stageId, "JISOO","JISOO");
+        int res = ticketingDao.insert(showingDto);
+        assertTrue(1 == res);
         int showingSeat = showingDto.getShowing_seat_cnt();
         int showingSeq = showingDto.getShowing_seq();
         String showingStageId = showingDto.getStage_id();
@@ -361,12 +368,15 @@ public class AdminDaoImplTest {
         int rows = showingSeat / COL;   // 80 / 10 => 8 행수 계산
         char startRow = 'A';
         char endRow = (char) (startRow + rows - 1);
-
+        int count = 0;
         ShowSeatDto showSeatDto = new ShowSeatDto();
 
 
         System.out.println("========= 좌석 수 검증 시작 ===========");
-
+        System.out.println("ShowingDto 의 seq = "+ showingDto.getShowing_seq());
+        System.out.println("Show_seat Dto의 seq = " +showSeatDto.getShowing_seq());
+        System.out.println("ShowingDto 의 stage_id = " + showingDto.getStage_id());
+        System.out.println("Show_seat Dto의 stage_id = " +showSeatDto.getStage_id());
         System.out.println("열 개수 = " + COL);
         System.out.println("총 행의 개수 = " + rows);
         System.out.println("시작 Row 알파벳 startRow = " + startRow);
@@ -380,7 +390,7 @@ public class AdminDaoImplTest {
                 showSeatDto.setSeat_row(new String(String.valueOf(row)));
                 showSeatDto.setSeat_col(column);
                 showSeatDto.setStage_id(showingStageId);
-                adminDao.insertShowSeat(showSeatDto);
+                count += adminDao.insertShowSeat(showSeatDto);
             }
             System.out.println();
         }
@@ -388,10 +398,8 @@ public class AdminDaoImplTest {
         System.out.println("========= 좌석 수 검증 끝 ===========");
 
         // when
-        int insertShoiwng = adminDao.insertShowing(showingDto);
-        System.out.println("testShowingDto = " + insertShoiwng);
 
         // then
-        assertEquals(insertShoiwng, 1);
+        assertEquals(80, count);
     }
 }

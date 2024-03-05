@@ -1,7 +1,9 @@
 package com.jcticket.ticketing.dao;
 
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
@@ -136,5 +138,29 @@ public class TicketingDaoImpl implements TicketingDao {
     @Override
     public Map<String, Object> selectEndNum(int showing_seq) throws Exception {
         return session.selectOne(namespace+"selectEndNum", showing_seq);
+    }
+
+    // 쿠폰테이블 삽입
+    @Override
+    public int insertCoupon(CouponDto couponDto) throws Exception {
+        return session.insert(namespace+"insertCoupon", couponDto);
+    }
+
+    // 쿠폰테이블 삭제
+    @Override
+    public int deleteAllCoupon() throws Exception {
+        return session.delete(namespace+"deleteAllCoupon");
+    }
+
+    // 유저-쿠폰 테이블 삭제
+    @Override
+    public int deleteAllUserCoupon() throws Exception {
+        return session.delete(namespace+"deleteAllUserCoupon");
+    }
+
+    // 유저-쿠폰 테이블 삽입
+    @Override
+    public int insertUserCoupon(UserCouponDto userCouponDto) throws Exception {
+        return session.insert(namespace+"insertUserCoupon", userCouponDto);
     }
 }

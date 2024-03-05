@@ -86,6 +86,7 @@ public class TicketingController {
         }
     }
 
+    // 좌석 정보를 넘겨줄 컨트롤러.
     @PostMapping("/detail/seat")
     public ResponseEntity<?> getSeatPrice(@RequestBody Map<String, String> data) throws Exception{
         // ajax에서 넘어온 data 에는 play_id가 들어있다.
@@ -103,5 +104,7 @@ public class TicketingController {
             return ResponseEntity.badRequest().body("Bad Request!");
         }
     }
+
+    // 쿠폰 정보를 넘겨줄 컨트롤러.
 
 }

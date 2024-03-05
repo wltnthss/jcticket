@@ -111,7 +111,8 @@ $(document).ready(function() {
 
 // 팝업창 제어하는 부분.
 $(document).ready(function(){
-
+    const selectedSeatList = [];
+    let selectedPrice = 0;
     $(".next").click(function(){
         let current_fs, next_fs, previous_fs; //fieldsets
         let opacity;
@@ -141,17 +142,26 @@ $(document).ready(function(){
     // 일정선택 후 다음단계 눌렀을때 발생하는 이벤트
     //
     $("#first-bnt").click(function(){
-        const selectedSeatList = [];
+        //selectedSeatList.splice(0,selectedSeatList.length);
+        // 선택한 좌석 관련 정보들 초기화
+        selectedPrice = 0;
+        selectedSeatList.length = 0;
+
+        // ajax에 json 으로 보낼 데이터 생성
         const data1 = {
             'showing_seq': $(".aTag.clicked").attr("id"),
         }
         console.log("seq => "+data1.showing_seq);
+
+        // ajax 요청을 컨트롤러로 보낸다.
         $.ajax({
             url: "detail/seat",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data1),
             success: function (res) {
+
+                // 컨트롤러에서 받아온 응답으로 부터 사용할 데이터를 변수에 저장한다.
                 const seatIdList = res.seat_id;
                 const statusList = res.seat_status;
                 const endRowNum = res.end_row;
@@ -181,12 +191,16 @@ $(document).ready(function(){
                     console.log("===== .seats 태그 생성 "+(i+1)+" =====");
                 }
 
+                // 선택 좌석, 가격 정보를 표시하는 태그를 초기화하기.
                 const seats = $(".seats");
                 seats.empty();
                 $("#ss").empty();
                 $("#sp").empty();
                 console.log("seats Tag removed");
+
+                // 좌석태그를 동적으로 만들어 화면에 표시한다.
                 seats.each(function(i){
+                    // 행을 표시하기 위한 반복문
                     const currentSeats = $(this);
                     let asciiVal = 'A'.charCodeAt(0) + i;
                     let rowChar = String.fromCharCode(asciiVal);
@@ -194,22 +208,29 @@ $(document).ready(function(){
                         .append(rowChar)
                         .appendTo(currentSeats);
                     for (let j = 0; j < endColNum; j++) {
+                    // 열을 표시하기 위한 반복문
                         const spanTag = $("<span></span>")
                             .attr("id", seatIdList[endColNum * i + j])
                             .addClass("border border-primary")
                             .appendTo(currentSeats);
+
+                        // 예매상태가 N이면 클릭이 불가하다.
                         if(statusList[endColNum * i + j] === "N"){
                             spanTag.addClass("disabled");
                         }
                         console.log("===== "+(endColNum*i+j)+"번 좌석 생성 =====");
                     }
                 })
+
+                // 마우스를 좌석에 올려놨을때 이벤트.
                 $("span.border-primary").hover(
                     function() {
-                        $(this).css("cursor", "pointer"); // 마우스를 올렸을 때 포인터 커서로 변경
+                        // 마우스를 올렸을 때 포인터 커서로 변경
+                        $(this).css("cursor", "pointer");
                     },
                     function() {
-                        $(this).css("cursor", "auto"); // 마우스를 벗어났을 때 기본 커서로 변경
+                        // 마우스를 벗어났을 때 기본 커서로 변경
+                        $(this).css("cursor", "auto");
                     }
                 );
                 $(".disabled").off("click").css("background-color", "gray");
@@ -226,41 +247,57 @@ $(document).ready(function(){
                         $(this).removeClass("clicked");
                         const thisId = $(this).attr("id");
                         const index = selectedSeatList.indexOf(thisId);
+                        // 선탹좌석 리스트에 현재 좌석ID가 들어있는 경우
                         if(index !== -1){
                             selectedSeatList.splice(index, 1);
+                            selectedPrice = selectedSeatList.length * seatPrice;
                         }
                         $("#ss").text(selectedSeatList.join(", "));
-                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedPrice+"원");
+                        console.log(`해제한 좌석의 ID => ${thisId}`);
+                        console.log(selectedSeatList + " 리스트 길이 :"+selectedSeatList.length);
+                        console.log(`가격 => ${selectedPrice}`);
                     }else {
                         // 클릭하는 경우 clicked 상태가 된다.
                         $(this).addClass("clicked");
                         let thisId = $(this).attr("id");
                         selectedSeatList.push(thisId);
+                        selectedPrice = selectedSeatList.length * seatPrice;
                         $("#ss").text(selectedSeatList.join(", "));
-                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedSeatList.length * seatPrice+"원");
+                        $("#sp").text(seatPrice+"원 x "+selectedSeatList.length+"석 >> "+selectedPrice+"원");
                         console.log(`선택된 좌석의 ID => ${thisId}`);
-                    }
+                        console.log(selectedSeatList + " 리스트 길이 :"+selectedSeatList.length);                    }
+                        console.log(`가격 => ${selectedPrice}`);
                 });
-
-
-                // for ri=0; ri < endRowNum; ri++
-                // <span>${'A' + ri}</span>
-                // For i = 1; i <= endColNum; i++
-                //
-                // if(statusList[i] === 'Y')
-                //<span id="${seatIdList[i]}" class="border border-primary"></span>
-                // else if(statusList[i] === 'N')
-                // <span id="${seatIdList[i]}" class="border border-primary clicked"></span>
-                // + jquery 로 클릭 비활성화 및 비활성화 배경색으로 변경
-                // else -> 예외처리하기
-
             },
+            // ajax 응답 실패시 예외처리
             error: function (error) {
                 alert(`${error.status} error! 회차를 선택해 주세요! `);
                 console.log("error => "+ error.body + error.status);
+                // 처음 선택으로 돌아가기 위해 새로고침 한다.
                 location.reload();
             }
         })
+    })
+
+    // 좌석선택 후 다음단계 버튼 클릭했을 때 쿠폰선택 화면
+    $("#second-btn").click(function (){
+        // 데이터가 잘 넘어왔나 확인한다.
+        console.log(`selectedSeatList => ${selectedSeatList}`);
+        console.log(`selectedPrice => ${selectedPrice}`);
+
+        // 쿠폰조회 버튼 클릭시 ajax 에 넘길 데이터 구성하기
+        // 넘길때 필요한 정보 = {유저아이디, 쿠폰아이디}
+        // 받아와야 하는 정보 = {쿠폰할인금액, 쿠폰, 유저쿠폰 아이디}
+        const data = {
+            'user_id' : '',
+            
+
+        }
+
+        // 쿠폰조회 버튼 클릭시 ajax 요청 전송하기
+
+
     })
 
 

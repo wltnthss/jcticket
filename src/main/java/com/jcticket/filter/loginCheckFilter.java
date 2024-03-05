@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+// ,"/ticketing/*" 임시 제외
 @WebFilter(urlPatterns = {"/mypageIndex/*", "/mypageticket/*", "/mypagecupon/*","/mypageview/*","/mypageclient/*","/ticketing/*"})
 public class loginCheckFilter implements Filter {
 

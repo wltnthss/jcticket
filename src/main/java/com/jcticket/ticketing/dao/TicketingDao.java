@@ -1,7 +1,9 @@
 package com.jcticket.ticketing.dao;
 
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
@@ -69,4 +71,16 @@ public interface TicketingDao {
 
     // 회차시퀀스로 행, 열의 마지막 번호 구하기
     Map<String, Object> selectEndNum(int showing_seq) throws Exception;
+
+    // 쿠폰 테이블 삽입
+    int insertCoupon(CouponDto couponDto) throws Exception;
+
+    // 쿠폰 테이블 삭제
+    int deleteAllCoupon() throws Exception;
+
+    // 유저-쿠폰 테이블 삽입
+    int insertUserCoupon(UserCouponDto userCouponDto) throws Exception;
+
+    // 유저-쿠폰 테이블 삭제
+    int deleteAllUserCoupon() throws Exception;
 }
