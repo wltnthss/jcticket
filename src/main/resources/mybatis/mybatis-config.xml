@@ -18,9 +18,15 @@
         <typeAlias alias="PlayDto" type="com.jcticket.admin.dto.PlayDto"/>
         <typeAlias alias="PlayImgDto" type="com.jcticket.admin.dto.PlayImgDto"/>
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
+<!--<<<<<<< HEAD-->
+        <typeAlias alias="ReviewDto" type="com.jcticket.viewdetail.dto.ReviewDto"/>
+
+
+<!--=======-->
         <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
         <typeAlias alias="UserCouponDto" type="com.jcticket.dto.UserCouponDto"/>
         <typeAlias alias="StageDto" type="com.jcticket.admin.dto.StageDto"/>
+<!--&gt;>>>>>> 8c90aed7a302cb15787dd38704fe80ada302c0d5-->
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
         <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>
         <typeAlias alias="AgencyDto" type="com.jcticket.agency.dto.AgencyDto"/>
