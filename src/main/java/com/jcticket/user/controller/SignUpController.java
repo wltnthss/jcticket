@@ -189,13 +189,13 @@ public class SignUpController {
                 throw new Exception("insert terms failed");
             }
             System.out.println("회원가입 성공");
-            return "index";
+            return "signup/signupSuccess";
 
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("회원가입 실패");
             m.addAttribute("userDto",userDto);
-            return "redirect:/signup";
+            return "signup/signup";
         }
     }
 
@@ -222,7 +222,7 @@ public class SignUpController {
             e.printStackTrace();
             System.out.println("회원가입 실패");
             m.addAttribute("userDto",userDto);
-            return "redirect:/signupSNS";
+            return "signup/signupSNS";
         }
     }
 }
