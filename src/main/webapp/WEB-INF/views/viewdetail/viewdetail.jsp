@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
@@ -386,9 +387,26 @@ git <%--
                                 </select>
                             </span>
                         </div>
-                        <%--                        <c:if test="${not empty review}">--%>
-                        <%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
-                        <%--                        </c:if>--%>
+                        <c:forEach var="item" items="${viewing_at}">
+                            <div>${item}</div>
+                        </c:forEach>
+<%--                        <%--%>
+<%--                            // 세션에서 로그인 여부 확인--%>
+<%--                            if (session.getAttribute("user_id") != null) {--%>
+<%--                                // 로그인되어 있는 경우에만 쿼리 실행--%>
+<%--                                List<String> viewingAtList = (List<String>) request.getAttribute("viewing_at");--%>
+<%--                        %>--%>
+<%--                        <!-- JSTL을 사용하여 쿼리 결과를 출력 -->--%>
+<%--                        <c:forEach var="viewing_at" items="${viewingAtList}">--%>
+<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
+<%--                        </c:forEach>--%>
+
+<%--                        <c:forEach var="viewing_at" items="${viewing_at}">--%>
+<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
+<%--                        </c:forEach>--%>
+<%--                        <c:if test="${not empty review}">--%>
+<%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
+<%--                        </c:if>--%>
                         <div>
                             <textarea class="review_box" name="review" placeholder="관람후기를 작성해주세요."></textarea>
                         </div>

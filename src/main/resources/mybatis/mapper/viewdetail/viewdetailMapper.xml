@@ -227,7 +227,12 @@
     </select>
 
 
-    <select id="review_viewing_at" resultType="String">
-        SELECT
+    <select id="review_viewing_at" parameterType="String" resultType="List">
+        SELECT r.review_viewing_at
+        FROM review r
+                 JOIN user u ON r.user_id = u.user_id
+                 JOIN ticketing t ON u.user_id = t.user_id
+        WHERE r.play_id = #{play_id}
+--         AND r.user_id = #{user_id}
     </select>
 </mapper>

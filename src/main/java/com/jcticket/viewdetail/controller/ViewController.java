@@ -89,8 +89,13 @@ public class ViewController {
 
 //        System.out.println("viewDetailTime=============>"+viewDetailTime);
 
+        //상세보기에 들어갈 내용들(제목, 공연장이름, 좌석가격 등)
         model.addAttribute("viewDetail", viewDetail);
         model.addAttribute("viewDetailTime", viewDetailTime);
+        
+        //리뷰작성시 들어갈 관람일시
+        List<String> viewing_at = viewDetailService.viewing_at(this_play_id);
+        model.addAttribute("viewing_at",viewing_at);
 
 
         //-----------------------------------------------------------------------

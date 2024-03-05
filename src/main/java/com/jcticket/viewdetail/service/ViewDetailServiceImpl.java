@@ -124,4 +124,9 @@ public class ViewDetailServiceImpl implements ViewDetailService{
 
         return review;
     }
+
+    @Override
+    public List<String> viewing_at(String play_id) throws Exception {
+        return viewDetailDao.review_viewing_at(play_id);
+    }
 }

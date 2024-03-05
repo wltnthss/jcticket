@@ -62,4 +62,6 @@ public interface ViewDetailDao {
     List<ReviewDto> review_select_limit(Map map) throws Exception;
 
     List<ReviewDto> review_select(String play_id) throws Exception;
+
+    List<String> review_viewing_at(String play_id) throws Exception;
 }

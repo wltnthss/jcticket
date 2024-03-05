@@ -47,4 +47,6 @@ public interface ViewDetailService {
     List<ReviewDto> review_select_limit(Map map) throws Exception;
 
     List<ReviewDto> review_select(String play_id) throws Exception;
+
+    List<String> viewing_at(String play_id) throws Exception;
 }
