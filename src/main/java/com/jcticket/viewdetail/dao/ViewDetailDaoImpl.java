@@ -153,4 +153,11 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     public List<ReviewDto> review_select(String play_id) throws Exception {
         return session.selectList(namespace + "review_select", play_id);
     }
+
+    @Override
+    public List<String> bring_review_viewing_at(Map map) throws Exception {
+        return session.selectList(namespace + "bring_review_viewing_at", map);
+    }
+
+
 }

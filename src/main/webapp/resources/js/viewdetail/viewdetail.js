@@ -234,8 +234,29 @@
         var stagename = document.getElementById('stage_name');
         var movemap = document.getElementById('map');
 
+        var detail_info = document.getElementById('scroll_detail_info');
+        var info_box = document.getElementById('info');
+
+        var review = document.getElementById('scroll_review');
+        var go_review = document.getElementById('review');
+
+        var reservation_notice = document.getElementById('reservation_notice');
+        var go_notice = document.getElementById('seven_text_one');
+
         stagename.onclick = function () {
             movemap.scrollIntoView();
+        }
+
+        detail_info.onclick = function () {
+            info_box.scrollIntoView()
+        }
+
+        review.onclick = function () {
+            go_review.scrollIntoView()
+        }
+
+        reservation_notice.onclick = function () {
+            go_notice.scrollIntoView()
         }
 
 

@@ -124,4 +124,10 @@ public class ViewDetailServiceImpl implements ViewDetailService{
 
         return review;
     }
+
+    //질문
+    @Override
+    public List<String> viewing_at(Map map) throws Exception {
+        return viewDetailDao.bring_review_viewing_at(map);
+    }
 }

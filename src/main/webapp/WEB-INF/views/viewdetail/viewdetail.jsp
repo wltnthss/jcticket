@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
@@ -41,16 +42,18 @@ git <%--
     <div class="container">
         <%-- content area    --%>
         <div class="category">
-            <a class="major-cat">
-                <c:if test="${not empty viewDetail}">
-                    <a>${viewDetail[0].play_major_cat}</a>
-                </c:if>
-            </a>
-            >
-            <a class="middle-cat">
-                <c:if test="${not empty viewDetail}">
-                    <a>${viewDetail[0].play_middle_cat}</a>
-                </c:if>
+            <a href="/${major_cat}" style="color:black;">
+                <span class="major-cat">
+                    <c:if test="${not empty viewDetail}">
+                        ${viewDetail[0].play_major_cat}
+                    </c:if>
+                </span>
+                >
+                <span class="middle-cat">
+                    <c:if test="${not empty viewDetail}">
+                        ${viewDetail[0].play_middle_cat}
+                    </c:if>
+                </span>
             </a>
         </div>
 
@@ -192,23 +195,23 @@ git <%--
 
 <%--            a태그마다 링크 걸어야함--%>
         <div class="six">
-            <a>
+            <a href="javascript:void(0);" id="scroll_detail_info" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
                 <span>상세정보</span>
             </a>
-            <a>
+            <a href="javascript:void(0);" id="scroll_review" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
 <%--                댓글수 가져와야됨--%>
                 <span>
                     관람후기
                     <span class="comment_cnt">(${review[0].review_count})</span>
                 </span>
             </a>
-            <a>
+            <a href="javascript:void(0);" id="reservation_notice" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
                 <span>예매/취소 안내</span>
             </a>
         </div>
 
 
-        <div class="info_box">
+        <div id="info" class="info_box">
             <div class="seven_one">
                 <p class="seven_text">유의사항</p>
                 <div class="seven_con">
@@ -341,7 +344,7 @@ git <%--
             <div class="nine">
                 <div class="comment">
                     <div class="comment_name">
-                        <span>관람후기</span>
+                        <span id="review">관람후기</span>
                     </div>
                     <div class="comment_warning">
                         <img src="/resources/img/viewdetail/comment_icon.png/">
@@ -386,9 +389,26 @@ git <%--
                                 </select>
                             </span>
                         </div>
-                        <%--                        <c:if test="${not empty review}">--%>
-                        <%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
-                        <%--                        </c:if>--%>
+                        <c:forEach var="item" items="${viewing_at}">
+                            <div>${item}</div>
+                        </c:forEach>
+<%--                        <%--%>
+<%--                            // 세션에서 로그인 여부 확인--%>
+<%--                            if (session.getAttribute("user_id") != null) {--%>
+<%--                                // 로그인되어 있는 경우에만 쿼리 실행--%>
+<%--                                List<String> viewingAtList = (List<String>) request.getAttribute("viewing_at");--%>
+<%--                        %>--%>
+<%--                        <!-- JSTL을 사용하여 쿼리 결과를 출력 -->--%>
+<%--                        <c:forEach var="viewing_at" items="${viewingAtList}">--%>
+<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
+<%--                        </c:forEach>--%>
+
+<%--                        <c:forEach var="viewing_at" items="${viewing_at}">--%>
+<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
+<%--                        </c:forEach>--%>
+<%--                        <c:if test="${not empty review}">--%>
+<%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
+<%--                        </c:if>--%>
                         <div>
                             <textarea class="review_box" name="review" placeholder="관람후기를 작성해주세요."></textarea>
                         </div>
