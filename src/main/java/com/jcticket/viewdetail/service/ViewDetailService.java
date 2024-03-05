@@ -3,7 +3,6 @@ package com.jcticket.viewdetail.service;
 import com.jcticket.viewdetail.dto.JoinDto;
 import com.jcticket.viewdetail.dto.ReviewDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -47,4 +46,7 @@ public interface ViewDetailService {
     List<ReviewDto> review_select_limit(Map map) throws Exception;
 
     List<ReviewDto> review_select(String play_id) throws Exception;
+
+    //질문
+    List<String> viewing_at(Map map) throws Exception;
 }

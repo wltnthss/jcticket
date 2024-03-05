@@ -50,7 +50,7 @@ public class ViewDetailReviewBoardTest {
             System.out.println("cnt" +
                     " = " + cnt);
 
-            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test123","공연아이디1",now,"test123",now,"test123", (double) random_rating /cnt,cnt);
+            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test"+i,"공연아이디1",now,"test123",now,"test123", (double) random_rating /cnt,cnt);
             viewDetailDao.review_insert(reviewDto);
         }
     }
