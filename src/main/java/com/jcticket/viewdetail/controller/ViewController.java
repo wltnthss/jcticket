@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,20 +70,44 @@ public class ViewController {
 
 //    공연아이디 조건, view에서 표시할 정보들
     @GetMapping("/viewdetail")
-    public String viewdetail(@RequestParam String this_play_id,
+    public String viewdetail(@RequestParam(required = false) String this_play_id,
                              @RequestParam(defaultValue = "1") Integer page,
                              @RequestParam(defaultValue = "10") Integer pageSize,
                              Model model) throws Exception {
+        
+        //공연아이디 없이 viewdetail페이지로 진입할 시 index 페이지로 이동
+        if (this_play_id == null) {
+            return "redirect:/index";
+        }
 
         //ticketing 페이지로 보낼 play_id
-        String play_id = this_play_id;
-        model.addAttribute("play_id",play_id);
+        model.addAttribute("play_id",this_play_id);
 
         //상세보기에 표시할 것들 서비스에서 하나로 묶어서 tx?
         List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
         Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
 
         ReviewDto reviewDto = new ReviewDto();
+
+        //카테고리 한글 > 영문 변환 (a태그 href에 들어갈 것)
+        String major_cat = "";
+
+        for (JoinDto category : viewDetail) {
+            major_cat = category.getPlay_major_cat().toLowerCase(); // 모든 문자열을 소문자로 변환
+            if (major_cat.equals("콘서트")) {
+                major_cat = "concert";
+            } else if (major_cat.equals("뮤지컬")) {
+                major_cat = "musical";
+            } else if (major_cat.equals("연극")) {
+                major_cat = "play";
+            } else if (major_cat.equals("클래식")) {
+                major_cat = "classic";
+            }
+        }
+//        System.out.println("major_cat==============>"+major_cat);
+        model.addAttribute("major_cat", major_cat);
+
+
 //        인서트로 바꿀것
         List<ReviewDto> review = viewDetailService.review_select(this_play_id);
         model.addAttribute("review", review);
@@ -94,8 +119,11 @@ public class ViewController {
         model.addAttribute("viewDetailTime", viewDetailTime);
         
         //리뷰작성시 들어갈 관람일시
-        List<String> viewing_at = viewDetailService.viewing_at(this_play_id);
-        model.addAttribute("viewing_at",viewing_at);
+        Map viewing_at_map = new HashMap();
+        viewing_at_map.put("play_id",this_play_id);
+        viewing_at_map.put("user_id","test123");
+//        List<String> viewing_at = viewDetailService.viewing_at(viewing_at_map);
+//        model.addAttribute("viewing_at",viewing_at);
 
 
         //-----------------------------------------------------------------------

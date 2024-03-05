@@ -42,16 +42,18 @@ git <%--
     <div class="container">
         <%-- content area    --%>
         <div class="category">
-            <a class="major-cat">
-                <c:if test="${not empty viewDetail}">
-                    <a>${viewDetail[0].play_major_cat}</a>
-                </c:if>
-            </a>
-            >
-            <a class="middle-cat">
-                <c:if test="${not empty viewDetail}">
-                    <a>${viewDetail[0].play_middle_cat}</a>
-                </c:if>
+            <a href="/${major_cat}" style="color:black;">
+                <span class="major-cat">
+                    <c:if test="${not empty viewDetail}">
+                        ${viewDetail[0].play_major_cat}
+                    </c:if>
+                </span>
+                >
+                <span class="middle-cat">
+                    <c:if test="${not empty viewDetail}">
+                        ${viewDetail[0].play_middle_cat}
+                    </c:if>
+                </span>
             </a>
         </div>
 
@@ -193,23 +195,23 @@ git <%--
 
 <%--            a태그마다 링크 걸어야함--%>
         <div class="six">
-            <a>
+            <a href="javascript:void(0);" id="scroll_detail_info" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
                 <span>상세정보</span>
             </a>
-            <a>
+            <a href="javascript:void(0);" id="scroll_review" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
 <%--                댓글수 가져와야됨--%>
                 <span>
                     관람후기
                     <span class="comment_cnt">(${review[0].review_count})</span>
                 </span>
             </a>
-            <a>
+            <a href="javascript:void(0);" id="reservation_notice" style="color: black; background-color: rgba(81, 110, 253, 0.03)">
                 <span>예매/취소 안내</span>
             </a>
         </div>
 
 
-        <div class="info_box">
+        <div id="info" class="info_box">
             <div class="seven_one">
                 <p class="seven_text">유의사항</p>
                 <div class="seven_con">
@@ -342,7 +344,7 @@ git <%--
             <div class="nine">
                 <div class="comment">
                     <div class="comment_name">
-                        <span>관람후기</span>
+                        <span id="review">관람후기</span>
                     </div>
                     <div class="comment_warning">
                         <img src="/resources/img/viewdetail/comment_icon.png/">
