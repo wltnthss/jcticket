@@ -1,10 +1,12 @@
 package com.jcticket.viewdetail.service;
 
 import com.jcticket.viewdetail.dto.JoinDto;
+import com.jcticket.viewdetail.dto.ReviewDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * packageName    : com.jcticket.viewdetail.service
@@ -19,11 +21,30 @@ import java.util.List;
  */
 
 public interface ViewDetailService {
-    List<ShowingDto> getShowingInfo(String dateText) throws Exception;
+    List<ShowingDto> getShowingInfo(String dateText, String play_id) throws Exception;
 
     int getRemainSeat(String showing_seq) throws Exception;
 
     List<JoinDto> getViewDetail(String play_id) throws Exception;
 
-    List<ShowingDto> getViewDetailTime(String play_id) throws Exception;
+    Map<String, List<String>> getViewDetailTime(String play_id) throws Exception;
+
+
+    int get_review_count(String play_id) throws Exception;
+
+    int review_deleteAll() throws Exception;
+
+    int review_delete(int review_num, String user_id) throws Exception;
+
+    int review_create(ReviewDto reviewDto) throws Exception;
+
+    int review_increaseViewCnt(int review_num) throws Exception;
+
+    int review_update(ReviewDto reviewDto) throws Exception;
+
+    List<ReviewDto> review_select_all(String play_id) throws Exception;
+
+    List<ReviewDto> review_select_limit(Map map) throws Exception;
+
+    List<ReviewDto> review_select(String play_id) throws Exception;
 }

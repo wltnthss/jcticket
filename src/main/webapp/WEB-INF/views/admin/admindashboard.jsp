@@ -27,7 +27,7 @@
                 </section>
                 <section class="admin-dashboard-side2" style="width: 1100px">
                     <h2>
-                        상품 요청현황
+                        최근 상품
                     </h2>
                     <a href="/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
                     <table>

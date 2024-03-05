@@ -74,8 +74,16 @@
             <div class="swiper-container m2-kvs">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test1.png">
+                        <%--id등등 DB에서 가져와야함--%>
+                        <a href="/viewdetail?this_play_id=공연아이디1" target="_self">
+<%--                            포스터--%>
+<%--                            <img src="/resources/img/viewdetail/testposter.jpg">--%>
+
+<%--                            이건 나중에 지울것--%>
+                            <video width="100%" height="100%" controls autoplay>
+                                <source src="/resources/img/viewdetail/mad_dog.mp4" type="video/mp4">
+                            </video>
+
                             <div class="m2-kvs-txt">
                                 <p class="m2-kvs-tit">공연명1</p>
                                 <p class="m2-kvs-detail">공연시간</p>
@@ -197,6 +205,7 @@
         </div>
     </div>
 </section>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
