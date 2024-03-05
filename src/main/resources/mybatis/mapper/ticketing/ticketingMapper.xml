@@ -221,13 +221,26 @@
     </delete>
 
     <!-- 유저아이디로 유저-쿠폰아이디, 쿠폰아이디 리스트 조회하기 -->
-    <select id="selectUserCouponList" parameterType="string" resultType="hashmap">
-
+    <select id="selectUserCouponList" parameterType="string" resultType="UserCouponDto">
+        select user_coupon_id , coupon_id
+        from user_coupon
+        where 1=1
+          and user_id = #{user_id}
+          and user_coupon_use_yn = 'N'
+          and NOW() BETWEEN user_coupon_issue_at AND user_coupon_expire_at ;
     </select>
 
     <!-- 쿠폰아이디로 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작, 종료일 조회 -->
-    <select id="selectCoupon" parameterType="string" resultType="hashmap">
-
+    <select id="selectCoupon" parameterType="string" resultType="CouponDto">
+        select coupon_name,
+               coupon_discount_amount,
+               coupon_min_order_amount ,
+               coupon_description,
+               DATE_FORMAT(coupon_useable_start_at, '%Y-%m-%d')  coupon_useable_start_at ,
+               DATE_FORMAT(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at
+        from coupon c
+        where 1=1
+          and coupon_id = #{coupon_id}
     </select>
 
 

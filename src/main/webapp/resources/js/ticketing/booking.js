@@ -289,11 +289,28 @@ $(document).ready(function(){
         // 쿠폰조회 버튼 클릭시 ajax 에 넘길 데이터 구성하기
         // 넘길때 필요한 정보 = {유저아이디, 쿠폰아이디}
         // 받아와야 하는 정보 = {쿠폰할인금액, 쿠폰, 유저쿠폰 아이디}
-        const data = {
-            'user_id' : '',
-            
 
-        }
+        const userId = $("#user_id").val();
+        $.ajax({
+            url: "detail/coupon", // 요청을 보낼 URL
+            type: "GET", // 요청 방식 (GET, POST 등)
+            data: {
+                // 요청에 포함할 데이터
+                userId: userId
+            },
+            success: function(response) {
+                // 요청이 성공했을 때의 처리
+                console.log("Success:", response);
+                console.log("list[0]", response[0]);
+
+
+            },
+            error: function(error) {
+                // 요청이 실패했을 때의 처리
+                console.log("Error:", error.status);
+            }
+        });
+
 
         // 쿠폰조회 버튼 클릭시 ajax 요청 전송하기
 

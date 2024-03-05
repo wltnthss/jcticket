@@ -204,7 +204,7 @@ public class TicketingDaoImplTest {
     // 회차좌석 테이블 insert
     @Test
     public void insertTest2() throws Exception{
-        final int SEQ = 17;
+        final int SEQ = 9;
         String stageID = "1ad62b31";
         int seatCnt = ticketingDao.selectSeatCnt(SEQ);
         final int COL = 10;
@@ -257,7 +257,7 @@ public class TicketingDaoImplTest {
             for(int j = 0; j < COL; j++){
                 SeatDto dto = new SeatDto(row, j+1, stage_id);
                 int res = ticketingDao.insertSeat(dto);
-                assertTrue(1 == res);
+                assertEquals(1, res);
             }
         }
     }
@@ -378,14 +378,14 @@ public class TicketingDaoImplTest {
 
         CouponDto couponDto = CouponDto.builder()
                 .coupon_id(couponId)
-                .coupon_name("[생일 축하 쿠폰] 10,000원 할인")
-                .coupon_discount_amount(10000)
-                .coupon_min_order_amount(20000)
+                .coupon_name("[감사 이벤트 쿠폰] 5,000원 할인")
+                .coupon_discount_amount(5000)
+                .coupon_min_order_amount(30000)
                 .coupon_use_yn("Y")
                 .coupon_useable_start_at(start_at)
                 .coupon_useable_end_at(end_at)
                 .coupon_description("중복 쿠폰 사용 불가한 쿠폰입니다.")
-                .coupon_use_condition("20,000원 이상 구매시 사용 가능")
+                .coupon_use_condition("30,000원 이상 구매시 사용 가능")
                 .created_id(sysId)
                 .updated_id(sysId)
                 .build();
@@ -403,7 +403,7 @@ public class TicketingDaoImplTest {
 
         String issue_at = "2024-02-01";
         String expire_at = "2024-04-30";
-        String userId = "wlsdnr1233";
+        String userId = "www444";
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date issue_date = sdf.parse(issue_at);
@@ -419,7 +419,7 @@ public class TicketingDaoImplTest {
         UserCouponDto userCouponDto = UserCouponDto.builder()
                 .user_coupon_id(userCouponId)
                 .user_id(userId)
-                .coupon_id("c2cd64b9")
+                .coupon_id("141a0ea7")
                 .user_coupon_issue_at(issue_timestamp)
                 .user_coupon_expire_at(expire_timestamp)
                 .created_id(SYS)
@@ -431,5 +431,33 @@ public class TicketingDaoImplTest {
 
         //then
         assertEquals(1 , res);
+    }
+
+    // 유저쿠폰 테이블에서 유저아이디별 "사용가능한" 유저쿠폰아이디, 쿠폰아이디 리스트 조회
+    @Test
+    public void selectUserCouponListTest() throws Exception{
+        String userId = "www444";
+
+        List<UserCouponDto> list = ticketingDao.selectUserCouponList(userId);
+        for(UserCouponDto dto : list){
+            assertTrue(null != dto);
+            System.out.println("user_coupon_id => "+dto.getUser_coupon_id());
+            System.out.println("coupon_id =>"+dto.getCoupon_id());
+            System.out.println("dto toString => "+dto);
+        }
+    }
+
+    // 쿠폰아이디로 쿠폰 테이블에서 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작일, 쿠폰사용가능종료일 조회
+    @Test
+    public void selectCouponTest() throws Exception{
+        String userId = "www444";
+        List<UserCouponDto> list = ticketingDao.selectUserCouponList(userId);
+        CouponDto cDto;
+        for(UserCouponDto dto : list){
+            assertTrue(null != dto);
+            cDto = ticketingDao.selectCoupon(dto.getCoupon_id());
+            System.out.println("****** dto toString => "+dto);
+            System.out.println("***쿠폰정보*** "+dto.getCoupon_id()+" => "+cDto);
+        }
     }
 }

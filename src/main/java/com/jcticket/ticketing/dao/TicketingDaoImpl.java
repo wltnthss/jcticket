@@ -151,7 +151,6 @@ public class TicketingDaoImpl implements TicketingDao {
     public int deleteAllCoupon() throws Exception {
         return session.delete(namespace+"deleteAllCoupon");
     }
-
     // 유저-쿠폰 테이블 삭제
     @Override
     public int deleteAllUserCoupon() throws Exception {
@@ -162,5 +161,17 @@ public class TicketingDaoImpl implements TicketingDao {
     @Override
     public int insertUserCoupon(UserCouponDto userCouponDto) throws Exception {
         return session.insert(namespace+"insertUserCoupon", userCouponDto);
+    }
+
+    // 유저아이디로 유저-쿠폰 테이블에서 유저-쿠폰 아이디, 쿠폰아이디 리스트 조회
+    @Override
+    public List<UserCouponDto> selectUserCouponList(String user_id) throws Exception {
+        return session.selectList(namespace+"selectUserCouponList", user_id);
+    }
+
+    // 쿠폰아이디로 쿠폰 테이블에서 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작일, 쿠폰사용가능종료일 조회
+    @Override
+    public CouponDto selectCoupon(String coupon_id) throws Exception {
+        return session.selectOne(namespace+"selectCoupon", coupon_id);
     }
 }
