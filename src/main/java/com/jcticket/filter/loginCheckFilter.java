@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebFilter(urlPatterns = {"/mypageIndex/*", "/mypageticket/*", "/mypagecupon/*","/mypageview/*","/mypageclient/*","/ticketing/*"})
+@WebFilter(urlPatterns = {"/mypageIndex/*", "/mypageticket/*", "/mypagecupon/*","/mypageview/*","/mypageclient/*","/ticketing/*", "/admin/*"})
 public class loginCheckFilter implements Filter {
 
     @Override
