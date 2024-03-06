@@ -9,6 +9,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -110,5 +112,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int count() throws Exception {
         return userDao.count();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception {
+        return userDao.selectImg(map);
     }
 }

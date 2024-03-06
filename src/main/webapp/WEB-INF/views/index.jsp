@@ -172,130 +172,133 @@
                     </div>
                 </li>
                     <%-- 왓츠핫 작은항목1 --%>
+<%--                    <c:forEach items="${list}" var="p">--%>
                     <li>
                     <div class="whot-list">
                         <a href="왓츠핫 작은항목1">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
+                                                <c:forEach items="${list}" var="p">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="whot-list-txt">
                                 <div>
-                                    <p class="whot-tit">공연제목</p>
+                                    <p class="whot-tit">${p.play_name}</p>
                                     <p class="whot-detail">
-                                        공연날짜
+                                            ${p.showing_period_date}
                                         <br>
-                                        공연장소
+                                        ${p.stage_name}
                                     </p>
                                     <p class="whot-event"></p>
                                 </div>
                             </div>
-                            <p class="whot-list-circle">
-                                <span>단독</span>
-                            </p>
+<%--                            <p class="whot-list-circle">--%>
+<%--                                <span>단독</span>--%>
+<%--                            </p>--%>
                         </a>
                     </div>
                     </li>
+                    </c:forEach>
 
-                    <%-- 왓츠핫 작은항목2 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+<%--                    &lt;%&ndash; 왓츠핫 작은항목2 &ndash;%&gt;--%>
+<%--                    <li>--%>
+<%--                        <div class="whot-list">--%>
+<%--                            <a href="왓츠핫 작은항목1">--%>
+<%--                                <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                                <div class="whot-list-txt">--%>
+<%--                                    <div>--%>
+<%--                                        <p class="whot-tit">공연제목</p>--%>
+<%--                                        <p class="whot-detail">--%>
+<%--                                            공연날짜--%>
+<%--                                            <br>--%>
+<%--                                            공연장소--%>
+<%--                                        </p>--%>
+<%--                                        <p class="whot-event"></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
 
-                    <%-- 왓츠핫 작은항목3 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+<%--                    &lt;%&ndash; 왓츠핫 작은항목3 &ndash;%&gt;--%>
+<%--                    <li>--%>
+<%--                        <div class="whot-list">--%>
+<%--                            <a href="왓츠핫 작은항목1">--%>
+<%--                                <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                                <div class="whot-list-txt">--%>
+<%--                                    <div>--%>
+<%--                                        <p class="whot-tit">공연제목</p>--%>
+<%--                                        <p class="whot-detail">--%>
+<%--                                            공연날짜--%>
+<%--                                            <br>--%>
+<%--                                            공연장소--%>
+<%--                                        </p>--%>
+<%--                                        <p class="whot-event"></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
 
-                    <%-- 왓츠핫 작은항목４ --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                                <p class="whot-list-circle">
-                                    <span>25%</span>
-                                </p>
-                            </a>
-                        </div>
-                    </li>
+<%--                    &lt;%&ndash; 왓츠핫 작은항목４ &ndash;%&gt;--%>
+<%--                    <li>--%>
+<%--                        <div class="whot-list">--%>
+<%--                            <a href="왓츠핫 작은항목1">--%>
+<%--                                <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                                <div class="whot-list-txt">--%>
+<%--                                    <div>--%>
+<%--                                        <p class="whot-tit">공연제목</p>--%>
+<%--                                        <p class="whot-detail">--%>
+<%--                                            공연날짜--%>
+<%--                                            <br>--%>
+<%--                                            공연장소--%>
+<%--                                        </p>--%>
+<%--                                        <p class="whot-event"></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <p class="whot-list-circle">--%>
+<%--                                    <span>25%</span>--%>
+<%--                                </p>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
 
-                    <%-- 왓츠핫 작은항목5 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+<%--                    &lt;%&ndash; 왓츠핫 작은항목5 &ndash;%&gt;--%>
+<%--                    <li>--%>
+<%--                        <div class="whot-list">--%>
+<%--                            <a href="왓츠핫 작은항목1">--%>
+<%--                                <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                                <div class="whot-list-txt">--%>
+<%--                                    <div>--%>
+<%--                                        <p class="whot-tit">공연제목</p>--%>
+<%--                                        <p class="whot-detail">--%>
+<%--                                            공연날짜--%>
+<%--                                            <br>--%>
+<%--                                            공연장소--%>
+<%--                                        </p>--%>
+<%--                                        <p class="whot-event"></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
 
-                    <%-- 왓츠핫 작은항목6 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+<%--                    &lt;%&ndash; 왓츠핫 작은항목6 &ndash;%&gt;--%>
+<%--                    <li>--%>
+<%--                        <div class="whot-list">--%>
+<%--                            <a href="왓츠핫 작은항목1">--%>
+<%--                                <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                                <div class="whot-list-txt">--%>
+<%--                                    <div>--%>
+<%--                                        <p class="whot-tit">공연제목</p>--%>
+<%--                                        <p class="whot-detail">--%>
+<%--                                            공연날짜--%>
+<%--                                            <br>--%>
+<%--                                            공연장소--%>
+<%--                                        </p>--%>
+<%--                                        <p class="whot-event"></p>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </li>--%>
             </ul>
         </div>
     </div>
@@ -700,4 +703,7 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 </body>
+<script>
+    let img = "${list.img_name}";
+</script>
 </html>
