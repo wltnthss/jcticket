@@ -40,7 +40,7 @@
 <!-- Horizontal Steppers -->
 <div class="container-fluid">
     <div class="row justify-content-center" >
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+        <div id="total-wid" class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                 <h2 id="heading">예매하기</h2>
                 <div class="row align-items-center mb-1">
@@ -137,17 +137,27 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
-                            <div class="row">
-                                <div class="col-12">
+                            <div class="my-custom-row">
+                                <div>
                                     <h2 class="fs-title">쿠폰/할인</h2>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <h3 class="couponList">선택 가능한 쿠폰</h3>
+                            <div class="my-custom-row">
+                                <div>
+                                    <p class="couponList">[선택 가능한 쿠폰]</p>
                                 </div>
                             </div>
-                        </div> <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                            <div class="my-custom-row">
+                                <div id="coupons">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="total-order-price"></div>
+                        <div id="third-btns">
+                            <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div>
+
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
