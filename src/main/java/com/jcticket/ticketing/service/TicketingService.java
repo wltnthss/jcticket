@@ -1,5 +1,6 @@
 package com.jcticket.ticketing.service;
 
+import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
@@ -37,4 +38,7 @@ public interface TicketingService {
 
     // 회차시퀀스로 좌석번호, 좌석상태리스트를 가공하여 반환한다.
     Map<String,Object> getSeatList(int showing_seq) throws Exception;
+
+    // 유저아이디를 받아서 쿠폰정보를 반환한다.
+    List<CouponResponseDto> getCouponInfo(String userId) throws Exception;
 }

@@ -1,5 +1,6 @@
 package com.jcticket.ticketing.controller;
 
+import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * packageName    : com.jcticket.ticketing.controller
@@ -86,6 +84,7 @@ public class TicketingController {
         }
     }
 
+    // 좌석 정보를 넘겨줄 컨트롤러.
     @PostMapping("/detail/seat")
     public ResponseEntity<?> getSeatPrice(@RequestBody Map<String, String> data) throws Exception{
         // ajax에서 넘어온 data 에는 play_id가 들어있다.
@@ -104,4 +103,19 @@ public class TicketingController {
         }
     }
 
+    // 쿠폰 정보를 넘겨줄 컨트롤러.
+    @GetMapping("/detail/coupon")
+    public ResponseEntity<?> getCouponInfo(@RequestParam("userId")String userId) throws Exception{
+        System.out.println("======/detail/coupon 진입 =======");
+        System.out.println("RequestParam ==> " + userId);
+
+        try{
+            List<CouponResponseDto> list = ticketingService.getCouponInfo(userId);
+            return ResponseEntity.ok().body(list);
+        }catch (Exception e){
+            System.out.println("===== 예외 발생 ====");
+            return ResponseEntity.badRequest().body("Bad Request!");
+        }
+
+    }
 }

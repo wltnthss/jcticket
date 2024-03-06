@@ -5,6 +5,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.admin.dto.StageDto;
 import com.jcticket.agency.dto.AgencyDto;
+import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.user.dao.UserDao;
 import com.jcticket.user.dto.UserDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
@@ -43,6 +44,9 @@ public class AdminDaoImplTest {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    TicketingDao ticketingDao;
 
     final static Timestamp CURRENT_TIMESTAMP = new Timestamp(System.currentTimeMillis());
 
@@ -184,7 +188,7 @@ public class AdminDaoImplTest {
         Timestamp start_timestamp = new Timestamp(start_date.getTime());
         Timestamp end_timestamp = new Timestamp(end_date.getTime());
 
-        // 날짜별 사용가능한 쿠폰 31개 생성
+        // 날짜별 사용가능한 쿠폰 31개 생성ㅁ
         for (int i = 0; i < 31; i++) {
             // given
             // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?

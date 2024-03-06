@@ -160,8 +160,8 @@
                 <%-- 왓츠핫 큰항목 --%>
                 <li>
                     <div class="big-one">
-                        <a href="왓츠핫 큰항목">
-                            <img src="/resources/img/index/test1.png" alt>
+                        <a href="/viewdetail?this_play_id=공연아이디1" target="_self" style="z-index: 0">
+                            <img src="/resources/img/viewdetail/testposter.jpg" alt>
                             <div class="big-one-txt">
                                 <p class="big-tit">제목</p>
                                 <p class="big-detail">공연날짜, 공연장소
