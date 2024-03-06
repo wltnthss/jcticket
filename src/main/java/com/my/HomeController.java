@@ -21,18 +21,15 @@ public class HomeController {
     @Autowired
     UserService userService;
 
+    @ExceptionHandler
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model m) throws Exception {
         System.out.println("여기는 인덱스!!");
         Map<String, Object> map = new HashMap<>();
-//        map.put("category",category);
 
         List<Map<String,Object>> list = userService.selectImg(map);
-        Object img_name = list.get(0).get("image_name");
-        System.out.println("list.get(0).get(\"img_name\") = " + list.get(0).get("img_name"));
 
-
-//        m.addAttribute("list",list);
+        m.addAttribute("list",list);
         System.out.println("list = " + list);
         return "index";
     }
