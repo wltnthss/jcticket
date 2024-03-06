@@ -2,6 +2,9 @@ package com.jcticket.user.dao;
 
 import com.jcticket.user.dto.UserDto;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * packageName    : com.jcticket.user
  * fileName       : UserDao
@@ -24,6 +27,8 @@ public interface UserDao {
     int selectNickNameDupl(String user_nickname) throws Exception;//
     //회원가입
     int insert(UserDto userDto) throws Exception; //
+
+    List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception;
 
 //    sns회원가입
     int insertSNS(UserDto userDto)throws  Exception;
