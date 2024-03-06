@@ -12,6 +12,9 @@ p {
 td{
     color: gray;
 }
+#total-wid {
+
+}
 #heading {
     text-transform: uppercase;
     color: #673AB7;
@@ -29,7 +32,7 @@ td{
     border: 0 none;
     border-radius: 0.5rem;
     box-sizing: border-box;
-    width: 100%;
+    width: 580px;
     margin: 0;
     padding-bottom: 20px;
     position: relative
@@ -37,6 +40,7 @@ td{
 .form-card {
     margin-top: 10px;
     text-align: center;
+    width: 580px;
     display: flex;
     flex-flow: column nowrap;
 }
@@ -284,4 +288,37 @@ td{
 #ss span{
     height: 25px;
     margin-bottom: 5px;
+}
+.my-custom-row{
+    width: 578px;
+    display: block;
+}
+#coupons {
+    display: block;
+    overflow-y: auto; /* 세로 스크롤바를 자동으로 표시 */
+    height: 200px;
+    max-height: 200px; /* 테이블이 표시될 최대 높이를 지정 */
+    border-top: solid 1px #673AB7;
+    border-bottom: solid 1px #673AB7;
+}
+
+#coupon-list{
+    width: 100%;
+}
+
+.use-btn {
+    margin: 3px 3px;
+    padding: 3px 5px; /* 원하는 패딩 값 설정 */
+    font-size: 10px; /* 원하는 폰트 크기 설정 */
+
+}
+
+#total-order-price{
+    text-align: left;
+    display: block;
+    padding-left: 5px;
+}
+#third-btns{
+    display: inline-block; /* 다른 요소 옆에 위치할 수 있도록 설정 */
+    width: calc(100% - 100px);
 }

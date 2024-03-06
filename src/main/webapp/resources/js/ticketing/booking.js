@@ -113,6 +113,9 @@ $(document).ready(function() {
 $(document).ready(function(){
     const selectedSeatList = [];
     let selectedPrice = 0;
+    let discountAmount = 0;
+    let totalPrice = 0;
+    let selectedDate = $()
     $(".next").click(function(){
         let current_fs, next_fs, previous_fs; //fieldsets
         let opacity;
@@ -123,7 +126,12 @@ $(document).ready(function(){
         //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
         //다음단계 넘어가기
-        next_fs.show();
+        if(!$('.aTag').hasClass('clicked')){
+            alert("회차를 선택해주세요.")
+            location.reload();
+        }else {
+            next_fs.show();
+        }
         //현재 단계 태그, 스타일 숨기기
         current_fs.animate({opacity: 0}, {
             step: function(now) {
@@ -278,44 +286,131 @@ $(document).ready(function(){
                 location.reload();
             }
         })
+
     })
 
     // 좌석선택 후 다음단계 버튼 클릭했을 때 쿠폰선택 화면
     $("#second-btn").click(function (){
-        // 데이터가 잘 넘어왔나 확인한다.
-        console.log(`selectedSeatList => ${selectedSeatList}`);
-        console.log(`selectedPrice => ${selectedPrice}`);
 
-        // 쿠폰조회 버튼 클릭시 ajax 에 넘길 데이터 구성하기
-        // 넘길때 필요한 정보 = {유저아이디, 쿠폰아이디}
-        // 받아와야 하는 정보 = {쿠폰할인금액, 쿠폰, 유저쿠폰 아이디}
+        // 좌석선택을 했는지 검증
+        if(selectedSeatList.length > 0){
+            // 데이터가 잘 넘어왔나 확인한다.
+            console.log(`selectedSeatList => ${selectedSeatList}`);
+            console.log(`selectedPrice => ${selectedPrice}`);
+            discountAmount = 0;
+            totalPrice = selectedPrice;
+            // 쿠폰조회 버튼 클릭시 ajax 에 넘길 데이터 구성하기
+            // 넘길때 필요한 정보 = {유저아이디, 쿠폰아이디}
+            // 받아와야 하는 정보 = {쿠폰할인금액, 쿠폰, 유저쿠폰 아이디}
 
-        const userId = $("#user_id").val();
-        $.ajax({
-            url: "detail/coupon", // 요청을 보낼 URL
-            type: "GET", // 요청 방식 (GET, POST 등)
-            data: {
-                // 요청에 포함할 데이터
-                userId: userId
-            },
-            success: function(response) {
-                // 요청이 성공했을 때의 처리
-                console.log("Success:", response);
-                console.log("list[0]", response[0]);
+            const userId = $("#user_id").val();
+            $.ajax({
+                url: "detail/coupon", // 요청을 보낼 URL
+                type: "GET", // 요청 방식 (GET, POST 등)
+                data: {
+                    // 요청에 포함할 데이터
+                    userId: userId
+                },
+                success: function(list) {
+                    // 요청이 성공했을 때의 처리
+                    console.log("Success:", list);
+                    let tableHtml = '<table id="coupon-list">';
+                    tableHtml += '<tr id="tr-coupon-header"><th class="coupon-header">쿠폰명</th><th class="coupon-header">쿠폰설명</th><th class="coupon-header">사용조건</th><th class="coupon-header">쿠폰사용기한</th><th class="use-btn-header"></th></tr>';
+                    $.each(list, function (index, coupon){
+                        tableHtml += '<tr class="tr-coupon-data">';
+                        tableHtml += '<td class="coupon-data coupon-name">' + coupon.couponName + '</td>';
+                        tableHtml += '<td class="coupon-data">' + coupon.discription + '</td>';
+                        tableHtml += '<td class="coupon-data use-condition">' + coupon.useCondition + '</td>';
+                        let date = coupon.couponUseableStartDate.slice(2) + " ~ " + coupon.couponUseableEndDate.slice(2);
+                        tableHtml += '<td class="coupon-data">' + date + '</td>';
+                        tableHtml += '<td class="use"><button type="button" class="btn btn-outline-primary use-btn">사용</button></td>';
+                        tableHtml += `<input type="hidden" class="discount-amount" value="${coupon.couponDiscount}">`;
+                        tableHtml += `<input type="hidden" class="min-order" value="${coupon.minOrder}">`;
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</table>';
+                    $("#coupons").html(tableHtml);
+                    $("#tr-coupon-header").css({
+                        'height' : '50px',
+                        'text-align' : 'center'
+                    });
+                    $(".coupon-data").css({
+                        'font-size' : '11px',
+                        'height' : '25px'
+                    });
+                    $(".coupon-header").css('font-size', '13px');
+                    $('.tr-coupon-data').css('border-bottom', '1px solid #000');
+                    $('.tr-coupon-data:first').css('border-top', '0.5px solid #000');
+                    $(".discount").css({
+                        'text-align' : 'center'
+                    });
+                    $(".use_condition").css({
+                        'text-align' : 'center'
+                    })
+                    $("#total-order-price").text('선택가격: '+selectedPrice + '원 - 할인가격: 0원'+" = "+totalPrice+"원");
 
 
-            },
-            error: function(error) {
-                // 요청이 실패했을 때의 처리
-                console.log("Error:", error.status);
-            }
-        });
+                    $('.use-btn').click(function() {
+                        // 클릭된 버튼 초기화
+                        //$('.use-btn').removeClass('clicked');
 
+                        // 현재 클릭된 버튼의 jQuery 객체
+                        const $clickedBtn = $(this);
 
-        // 쿠폰조회 버튼 클릭시 ajax 요청 전송하기
+                        // 현재 클릭된 버튼의 상태
+                        const isClicked = $clickedBtn.hasClass('clicked');
 
+                        // 클릭된 버튼이 이미 clicked 클래스를 가지고 있는 경우
+                        if (isClicked) {
+                            // 클릭 해제
+                            $clickedBtn.removeClass('clicked');
+                            alert("쿠폰 적용이 해제되었습니다.");
+                            discountAmount = 0;
+                            totalPrice = selectedPrice;
+                            console.log("discount = " + discountAmount);
+                            console.log("selectedPrice = " + selectedPrice);
+                            console.log("total price = " + totalPrice);
+                        } else {
+                            // 선택된 버튼은 해제
+                            $('.use-btn.clicked').not($clickedBtn).removeClass('clicked');
+                            // 클릭된 버튼으로 변경
+                            $clickedBtn.addClass('clicked');
 
-    })
+                            const minOrderPrice = $clickedBtn.parent().siblings('.min-order').val();
+                            if (selectedPrice >= minOrderPrice) {
+                                // 버튼을 클릭했을 때 알림창 표시
+                                const trElement = $clickedBtn.closest('tr');
+                                // 해당 tr 태그 내의 .coupon-name 클래스에 있는 텍스트 가져오기
+                                const couponName = trElement.find('.coupon-name').text();
+                                discountAmount = $clickedBtn.parent().siblings('.discount-amount').val();
+                                totalPrice = selectedPrice - discountAmount;
+                                console.log("discount = " + discountAmount);
+                                console.log("selectedPrice = " + selectedPrice);
+                                console.log("total price = " + totalPrice);
+                                alert(couponName + "이 적용되었습니다.");
+                            } else {
+                                alert("선택한 금액이 쿠폰의 사용조건을 만족해야 합니다!");
+                                console.log("discount = " + discountAmount);
+                                console.log("selectedPrice = " + selectedPrice);
+                                console.log("total price = " + totalPrice);
+                            }
+                        }
+
+                        const discountedPrice = $("#total-order-price");
+                        discountedPrice.text('선택가격: ' + selectedPrice + ' - 할인가격: ' + discountAmount + " = " + totalPrice + "원");
+                    });
+                },
+                error: function(error) {
+                    // 요청이 실패했을 때의 처리
+                    console.log("Error:", error.status);
+                }
+            });
+        } else {
+            // selectedList의 길이가 0인 경우에 대한 처리 (예: 알림창 표시 등)
+            alert("좌석을 최소한 하나 이상 선택해야 합니다.");
+            location.reload();
+        }
+    });
 
 
     $(".previous").click(function(){
@@ -341,10 +436,12 @@ $(document).ready(function(){
 
     });
 
+
     $(".submit").click(function(){
         return false;
     })
 });
+
 
 // jquery 캘린더 설정
     $.datepicker.setDefaults({
