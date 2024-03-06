@@ -1,27 +1,29 @@
 package com.jcticket.filter;
 
-/**
- * packageName    : com.jcticket.filter
- * fileName       : loginCheckFilter
- * author         : jinwook Song
- * date           : 2024-03-04
- * description    : 자동 주석 생성
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * 2024-03-04        jinwook Song       최초 생성
- */
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * packageName :  com.jcticket.filter
+ * fileName : adminCheckFilter
+ * author :  jisoo Son
+ * date : 2024-03-06
+ * description :
+ * ===========================================================
+ * DATE                 AUTHOR                NOTE
+ * -----------------------------------------------------------
+ * 2024-03-06             jisoo Son             최초 생성
+ */
+@WebFilter(urlPatterns = {"/admin/*"})
 
-@WebFilter(urlPatterns = {"/mypageIndex/*", "/mypageticket/*", "/mypagecupon/*","/mypageview/*","/mypageclient/*","/ticketing/*", "/admin/*"})
+public class AdminCheckFilter implements Filter {
 
-public class loginCheckFilter implements Filter {
+    private String excludedPages;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -37,11 +39,20 @@ public class loginCheckFilter implements Filter {
         httpResponse.setCharacterEncoding("UTF-8");
         httpResponse.setContentType("text/html; charset=UTF-8");
 
-        if (httpRequest.getSession().getAttribute("sessionId") == null) {
+        String requestURI = httpRequest.getRequestURI();
+
+        // 로그인하는 경우는 필터 제외
+        if(requestURI.equals(httpRequest.getContextPath() + "/admin")){
+            System.out.println("로그인 필터만 제외");
+            chain.doFilter(request, response);
+            return;
+        }
+
+        if (httpRequest.getSession().getAttribute("adminId") == null) {
             PrintWriter out = httpResponse.getWriter();
             out.println("<script type=\"text/javascript\">");
             out.println("alert('로그인이 필요한 서비스입니다.');");
-            out.println("window.location.href='" + httpRequest.getContextPath() + "/login';");
+            out.println("window.location.href='" + httpRequest.getContextPath() + "/admin';");
             out.println("</script>");
             out.close();
         } else {
