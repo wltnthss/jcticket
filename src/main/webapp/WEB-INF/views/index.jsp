@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,14 +19,7 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/components/header.css">
-</head>
+
 <body>
 <div class="top-wrap">
     <%-- 헤더시작 --%>
@@ -172,40 +167,18 @@
                     </div>
                 </li>
                     <%-- 왓츠핫 작은항목1 --%>
-                    <li>
-                    <div class="whot-list">
-                        <a href="왓츠핫 작은항목1">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
-                            <div class="whot-list-txt">
-                                <div>
-                                    <p class="whot-tit">공연제목</p>
-                                    <p class="whot-detail">
-                                        공연날짜
-                                        <br>
-                                        공연장소
-                                    </p>
-                                    <p class="whot-event"></p>
-                                </div>
-                            </div>
-                            <p class="whot-list-circle">
-                                <span>단독</span>
-                            </p>
-                        </a>
-                    </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목2 --%>
+                    <c:forEach items="${list}" var="p">
                     <li>
                         <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
+                            <a>
+                                <img src="<c:url value='/index/upload/${p.img_name}'/>" alt="" width="100" height="120">
                                 <div class="whot-list-txt">
                                     <div>
-                                        <p class="whot-tit">공연제목</p>
+                                        <p class="whot-tit">${p.play_name}</p>
                                         <p class="whot-detail">
-                                            공연날짜
+                                                ${p.showing_period_date}
                                             <br>
-                                            공연장소
+                                                ${p.stage_name}
                                         </p>
                                         <p class="whot-event"></p>
                                     </div>
@@ -213,89 +186,8 @@
                             </a>
                         </div>
                     </li>
+                    </c:forEach>
 
-                    <%-- 왓츠핫 작은항목3 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목４ --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                                <p class="whot-list-circle">
-                                    <span>25%</span>
-                                </p>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목5 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목6 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
             </ul>
         </div>
     </div>
@@ -432,19 +324,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                let currentSlide = 0;
-                const slides = document.querySelectorAll('.swiper-slide2');
-                const slideInterval = setInterval(nextSlide, 4000); // 4초마다 이미지 변경
 
-                function nextSlide() {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }
-            });
-        </script>
 </section>
 <%--section2끝--%>
 
@@ -694,10 +574,7 @@
 <script src="/resources/js/index/top_slide.js"></script>
 <%--section5끝--%>
 
-
-
-
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
 </body>
+
 </html>
