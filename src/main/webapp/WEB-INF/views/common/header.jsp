@@ -21,13 +21,13 @@
             <a href="/concert">콘서트
                 <span class="concert-sp"></span>
             </a>
-            <a href="뮤지컬 페이지">뮤지컬
+            <a href="/musical">뮤지컬
                 <span class="musical-sp"></span>
             </a>
-            <a href="연극 페이지">연극
+            <a href="/play">연극
                 <span class="play-sp"></span>
             </a>
-            <a href="클래식 페이지">클래식
+            <a href="/classic">클래식
                 <span class="classic-sp"></span>
             </a>
         </div>
