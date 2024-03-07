@@ -4,6 +4,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,8 +85,24 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public UserDto user_info(String id) throws Exception {
+        return mypageDAO.user_info(id);
+    }
+
+
+    @Override
     public Integer update_coupon(CouponDto couponDto) throws Exception {
         return mypageDAO.update_coupon(couponDto);
+    }
+
+    @Override
+    public Integer coupon_update() throws Exception {
+        return mypageDAO.coupon_update();
+    }
+
+    @Override
+    public Integer user_update(UserDto userDto) throws Exception {
+        return mypageDAO.user_update(userDto);
     }
 
 

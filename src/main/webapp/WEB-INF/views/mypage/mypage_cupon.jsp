@@ -15,8 +15,155 @@
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
+
+        <%--  공통부분 CSS      --%>
+        #container {
+            width: 1200px;
+            height: 900px;
+            margin: auto;
+        }
+
+        #con {
+            width: 950px;
+            height: 1200px;
+            float: left;
+            margin: 0px 20px;
+        }
+
+        <%--        --%>
+
+        #cupon {
+            margin: 10px 0px;
+            font-size: 13px;
+        }
+
+        #cupon > p {
+            margin-top: 15px;
+        }
+
+
+        #cupon-input {
+            border: 5px solid #fafafa;
+            margin: 20px 0px;
+            width: auto;
+            height: 110px;
+            background-color: lightgray;
+            display: flex;
+            align-content: flex-start;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+
+        #cupon-input > input {
+            width: 200px;
+        }
+
+
+
+        #cupon-input > input {
+            font-size: 20px;
+            margin: 45px 0px;
+            margin-left: 10px;
+            width: 300px;
+            height: 45px;
+            border: 3px solid;
+        }
+
+        #cupon-input > button {
+            font-size: 20px;
+            margin: 45px 0px;
+            margin-left: 10px;
+            width: 100px;
+            height: 45px;
+            border: 3px solid;
+        }
+
+        #h2-tag {
+            margin-left: 5px;
+
+            display: flex;
+        }
+
+        #h2-tag > a {
+            text-decoration: none;
+            margin: 10px;
+
+        }
+
+        #h2-tag  h3 {
+            border-radius: 5px;
+            width: 200px;
+            height: 25px;
+        }
+
+
+        #cupon-list {
+            border-top: 3px solid;
+        }
+
+        #cupon_list > table {
+            width: 940px;
+        }
+
+        #cupon-list th {
+            border-bottom: 1px solid;
+            padding: 10px;
+        }
+
+        #cupon-list td {
+            font-size: 14px;
+            border-bottom: 1px solid;
+            padding: 10px;
+        }
+
+        #cupon-use {
+            border: 1px solid;
+            margin: 20px 0px;
+            width: 700px;
+            height: 250px;
+            background-color: #6699cc;
+        }
+
+        #cupon-use > h4 {
+            margin: 10px;
+        }
+
+        #cupon-use > ul {
+            list-style: none;
+        }
+
+        #cupon-use > ul > li {
+            margin: 5px;
+        }
+
+        #coupon_insert {
+            width: 300px;
+            height: 35px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #insert_btn {
+            width: 100px;
+            height: 35px;
+        }
+
+        #coupon_table {
+            width: 940px;
+        }
+
+
+
         #paging {
             text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #paging > a {
+            text-decoration-line: none;
         }
     </style>
 </head>
@@ -46,7 +193,7 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
+                            <a href="/modifying"><h3>회원정보 수정</h3></a>
                             <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
@@ -67,11 +214,10 @@
 
 
                     <div id="cupon-input">
-                        <form action="/mypagecupon" method="get">
                         <h2>공연 할인쿠폰</h2>
-
-                        <input type="text" name="coupon_id">
-                        <input type="submit" value="등록">
+                        <form action="/mypagecupon" method="get">
+                        <input id="coupon_insert" type="text" name="coupon_id">
+                        <input id="insert_btn" type="submit" value="등록">
                         </form>
                     </div>
 
@@ -85,7 +231,7 @@
 
 
                     <div id="cupon-list">
-                        <table>
+                        <table id="coupon_table">
                                 <c:choose>
                                     <c:when test="${param.botton eq 'on'}">
                                         <tr>

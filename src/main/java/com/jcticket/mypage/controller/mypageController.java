@@ -3,6 +3,8 @@ package com.jcticket.mypage.controller;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.jcticket.mypage.service.mypageService;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +34,7 @@ import java.util.Map;
 public class mypageController {
     @Autowired
     mypageService mypageService;
+
 
     @GetMapping("/mypageIndex")
     public String mypage(Model model) throws Exception {
@@ -147,10 +151,60 @@ public class mypageController {
         return "/mypage/withdraw";
     }
 
-    @GetMapping("Modifying")
-        public String modifying() {
-            return "/mypage/modify";
+    @GetMapping("/Modifying")
+    public String modifying(@RequestParam(required = false) String user_password,
+                            @RequestParam(required = false) String user_nickname,
+                            @RequestParam(required = false) String user_tel,
+                            @RequestParam(required = false) String user_address,
+                            @RequestParam(required = false) String user_email,
+                            HttpSession session,
+                            Model model) throws Exception {
+
+        String id = (String) session.getAttribute("sessionId");
+
+        UserDto userDto = mypageService.user_info(id);
+
+
+
+
+        String email = userDto.getUser_email();
+
+        int index = email.indexOf("@");
+
+        userDto.setUser_email(email.substring(0, index));
+
+        System.out.println(userDto);
+
+
+        model.addAttribute("user", userDto);
+
+        if (user_nickname != null) {
+
+            try {
+
+                String hashPassword = BCrypt.hashpw(user_password, BCrypt.gensalt());
+
+
+                userDto.setUser_password(hashPassword);
+                userDto.setUser_nickname(user_nickname);
+                userDto.setUser_tel(user_tel);
+                userDto.setUser_address(user_address);
+                userDto.setUser_email(user_email);
+                mypageService.user_update(userDto);
+
+
+                System.out.println(userDto);
+
+                session.invalidate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                return "index";
+            }
         }
+
+        return "/mypage/modify";
+    }
 
     @GetMapping("/mypagecupon")
     public String cupon(@RequestParam(required = false) String coupon_id,
@@ -160,8 +214,13 @@ public class mypageController {
                         Model model) throws Exception {
 
 
-        System.out.println("button => (be)" + button);
+        int a = mypageService.coupon_update();
 
+        System.out.println("a => " + a);
+
+        if(a == 0) {
+            return "/mypage/mypage_cupon";
+        }
 
         try {
             if (coupon_id != null) {
@@ -178,27 +237,26 @@ public class mypageController {
                     mypageService.update_coupon(couponDto);
                 }
             }
-                Map map = new HashMap();
-                map.put("offset", (page - 1) * pageSize);
-                map.put("pageSize", pageSize);
-                map.put("button", button);
+
+
+            Map map = new HashMap();
+            map.put("offset", (page - 1) * pageSize);
+            map.put("pageSize", pageSize);
+            map.put("button", button);
 
             System.out.println("button => (after)" + button);
 
 
-                int totalCount = mypageService.coupon_count(map);
-
-            System.out.println(totalCount);
-
-
             List<UserCouponDto> list = mypageService.coupon_list(map);
 
+            int totalCount = mypageService.coupon_count(map);
+
+            System.out.println(totalCount);
 
             PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, button);
 
             model.addAttribute("coupon_list", list);
             model.addAttribute("ph", pageHandler);
-
 
 
         } catch (Exception e) {
