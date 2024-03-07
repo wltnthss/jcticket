@@ -100,8 +100,12 @@
                         <tr>
                             <th scope="row">관심장르</th>
                             <td>
-                                <input type="text" value="${userDto.user_interested_genre}" name="user_interested_genre" class="frm_input required" style="background-position: right top; background-repeat: no-repeat;">
-                                <p class="valid">${valid_user_interested_genre}</p>
+                                <select name="user_interested_genre">
+                                    <option value="콘서트">콘서트</option>
+                                    <option value="뮤지컬">뮤지컬</option>
+                                    <option value="연극">연극</option>
+                                    <option value="클래식">클래식</option>
+                                </select>
                             </td>
                         </tr>
                     </table>

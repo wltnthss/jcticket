@@ -5,6 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * packageName    : com.jcticket.user
  * fileName       : UserDaoImpl
@@ -48,6 +51,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int insert(UserDto userDto) throws Exception {
         return session.insert(namespace+"insert",userDto);
+    }
+
+    @Override
+    public List<Map<String, Object>> selectImg() throws Exception {
+        return session.selectList(namespace+"selectImg");
     }
 
     @Override

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -32,11 +33,14 @@
 <%--  그리드 아이템    --%>
 </head>
 <body>
-
+<%
+    String name = (String)session.getAttribute("sessionId");
+%>
+<input id="user_id" value="<%=name%>" type="hidden">
 <!-- Horizontal Steppers -->
 <div class="container-fluid">
     <div class="row justify-content-center" >
-        <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+        <div id="total-wid" class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                 <h2 id="heading">예매하기</h2>
                 <div class="row align-items-center mb-1">
@@ -114,20 +118,6 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div id="seatsArea" class="select-seat">
-<%--                                        <div id="stage" class="shadow-sm p-1 mb-2 bg-dark rounded">STAGE</div>--%>
-<%--                                        <div class="seats">--%>
-<%--                                            <span>A</span>--%>
-<%--                                            <span id="a1" class="border border-primary"></span>--%>
-<%--                                            <span id="a2" class="border border-primary"></span>--%>
-<%--                                            <span id="a3" class="border border-primary"></span>--%>
-<%--                                            <span id="a4" class="border border-primary"></span>--%>
-<%--                                            <span id="a5" class="border border-primary"></span>--%>
-<%--                                            <span id="a6" class="border border-primary"></span>--%>
-<%--                                            <span id="a7" class="border border-primary"></span>--%>
-<%--                                            <span id="a8" class="border border-primary"></span>--%>
-<%--                                            <span id="a9" class="border border-primary"></span>--%>
-<%--                                            <span id="a10" class="border border-primary"></span>--%>
-<%--                                        </div>--%>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -135,9 +125,6 @@
                                         <p>선택좌석내역</p>
                                     </div>
                                     <div id="ss" class="selected-seats">
-<%--                                        선택된 좌석 아이디 들어갈 자리--%>
-<%--                                        <span>a7</span>--%>
-
                                     </div>
                                     <div class="selected-price head">
                                         <p>선택좌석가격</p>
@@ -150,12 +137,27 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
-                            <div class="row">
-                                <div class="col-12">
+                            <div class="my-custom-row">
+                                <div>
                                     <h2 class="fs-title">쿠폰/할인</h2>
                                 </div>
                             </div>
-                        </div> <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                            <div class="my-custom-row">
+                                <div>
+                                    <p class="couponList">[선택 가능한 쿠폰]</p>
+                                </div>
+                            </div>
+                            <div class="my-custom-row">
+                                <div id="coupons">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="total-order-price"></div>
+                        <div id="third-btns">
+                            <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
+                        </div>
+
                     </fieldset>
                     <fieldset>
                         <div class="form-card">

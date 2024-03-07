@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,17 +16,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="/resources/css/components/header.css">
     <link rel="stylesheet" href="/resources/css/components/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%--    <script src="/resources/js/category/category.js"></script>--%>
 </head>
-<body>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/components/header.css">
-</head>
+
 <body>
 <div class="top-wrap">
     <%-- 헤더시작 --%>
@@ -75,6 +72,10 @@
                     </a>
                 </c:otherwise>
             </c:choose>
+            <a class="search">
+                <input type="text" id="searchWord" autocomplete="off">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+            </a>
         </div>
     </header>
 </div>
@@ -84,9 +85,10 @@
     <div class="pf-kvslide-wrap">
         <div class="pf-kvslide">
                 <%--슬라이드-공연1--%>
+            <c:forEach items="${list}" var="p"  begin="1" end="13">
             <div class="kv-item" id="kv-item1">
-                <a href="공연상세페이지1">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_mv_48485_349fd8.jpg/dims/quality/70/" alt class="lazyload">
+            <a href="공연상세페이지1">
+                <img src="<c:url value='/index/upload/${p.img_name}'/>">
                 </a>
                 <a class="pf-kv-text white" href="공연상세페이지1">
                     <p class="sub-tit"></p>
@@ -94,44 +96,47 @@
                     <p class="info-tit"></p>
                 </a>
             </div>
+            </c:forEach>
                 <%--슬라이드-공연2--%>
-            <div class="kv-item">
-                <a href="공연상세페이지2">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">
-                </a>
-                <a class="pf-kv-text white" href="공연상세페이지2">
-                    <p class="sub-tit"></p>
-                    <p class="main-tit"></p>
-                    <p class="info-tit"></p>
-                </a>
-            </div>
-                <%--슬라이드-공연2--%>
-            <div class="kv-item">
-                <a href="공연상세페이지3">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_82559c.jpg/dims/quality/70/" alt class="lazyload">
-                </a>
-                <a class="pf-kv-text white" href="공연상세페이지2">
-                    <p class="sub-tit"></p>
-                    <p class="main-tit"></p>
-                    <p class="info-tit"></p>
-                </a>
-            </div>
+<%--            <div class="kv-item">--%>
+<%--                <a href="공연상세페이지2">--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                </a>--%>
+<%--                <a class="pf-kv-text white" href="공연상세페이지2">--%>
+<%--                    <p class="sub-tit"></p>--%>
+<%--                    <p class="main-tit"></p>--%>
+<%--                    <p class="info-tit"></p>--%>
+<%--                </a>--%>
+<%--            </div>--%>
+<%--                &lt;%&ndash;슬라이드-공연2&ndash;%&gt;--%>
+<%--            <div class="kv-item">--%>
+<%--                <a href="공연상세페이지3">--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_82559c.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                </a>--%>
+<%--                <a class="pf-kv-text white" href="공연상세페이지2">--%>
+<%--                    <p class="sub-tit"></p>--%>
+<%--                    <p class="main-tit"></p>--%>
+<%--                    <p class="info-tit"></p>--%>
+<%--                </a>--%>
+<%--            </div>--%>
         </div>
                 <%-- 슬라이드 페이징 1--%>
         <div class="pf-kvslide-pager">
             <div class="pager-bg">
+                <c:forEach items="${list}" var="p"  begin="1" end="13">
                 <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_mv_48485_s.jpg/dims/quality/70/" alt class="lazyload">
+                    <img src="<c:url value='/index/upload/${p.img_name}'/>">
                     <span>1/10</span>
                 </a>
-                <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">
-                    <span>2/10</span>
-                </a>
-                <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_s.jpg/dims/quality/70/" alt class="lazyload">
-                    <span>3/10</span>
-                </a>
+                </c:forEach>
+<%--                <a href="#" class>--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                    <span>2/10</span>--%>
+<%--                </a>--%>
+<%--                <a href="#" class>--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_s.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                    <span>3/10</span>--%>
+<%--                </a>--%>
             </div>
         </div>
 
@@ -172,40 +177,18 @@
                     </div>
                 </li>
                     <%-- 왓츠핫 작은항목1 --%>
-                    <li>
-                    <div class="whot-list">
-                        <a href="왓츠핫 작은항목1">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
-                            <div class="whot-list-txt">
-                                <div>
-                                    <p class="whot-tit">공연제목</p>
-                                    <p class="whot-detail">
-                                        공연날짜
-                                        <br>
-                                        공연장소
-                                    </p>
-                                    <p class="whot-event"></p>
-                                </div>
-                            </div>
-                            <p class="whot-list-circle">
-                                <span>단독</span>
-                            </p>
-                        </a>
-                    </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목2 --%>
+                    <c:forEach items="${list}" var="p"  begin="1" end="6">
                     <li>
                         <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
+                            <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                                <img src="<c:url value='/index/upload/${p.img_name}'/>" alt="" width="100" height="120">
                                 <div class="whot-list-txt">
                                     <div>
-                                        <p class="whot-tit">공연제목</p>
+                                        <p class="whot-tit">${p.play_name}</p>
                                         <p class="whot-detail">
-                                            공연날짜
+                                                ${p.showing_period_date}
                                             <br>
-                                            공연장소
+                                                ${p.stage_name}
                                         </p>
                                         <p class="whot-event"></p>
                                     </div>
@@ -213,89 +196,8 @@
                             </a>
                         </div>
                     </li>
+                    </c:forEach>
 
-                    <%-- 왓츠핫 작은항목3 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목４ --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                                <p class="whot-list-circle">
-                                    <span>25%</span>
-                                </p>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목5 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-
-                    <%-- 왓츠핫 작은항목6 --%>
-                    <li>
-                        <div class="whot-list">
-                            <a href="왓츠핫 작은항목1">
-                                <img src="/resources/img/index/test2.png" alt class="lazyload">
-                                <div class="whot-list-txt">
-                                    <div>
-                                        <p class="whot-tit">공연제목</p>
-                                        <p class="whot-detail">
-                                            공연날짜
-                                            <br>
-                                            공연장소
-                                        </p>
-                                        <p class="whot-event"></p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
             </ul>
         </div>
     </div>
@@ -310,105 +212,117 @@
         <div class="cont">
             <div class="swiper-container ticketo swiper-container-initialized swiper-container-horizontal">
                 <div class="swiper-wrapper">
+
+                <c:forEach items="${list}" var="p"  begin="7" end="7">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목1">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14063" class="donut"></canvas>
                             </div>
                             <div class="donut-dday1">
-                                D-DAY
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
+                </c:forEach>
 
+                    <c:forEach items="${list}" var="p"  begin="8" end="8">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목2">
-                            <img src="/resources/img/index/test1.png" alt class="lazyload">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14061" class="donut"></canvas>
                             </div>
                             <div class="donut-dday2">
-                                D-2
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
+                    </c:forEach>
 
+                    <c:forEach items="${list}" var="p"  begin="9" end="9">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목3">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14058" class="donut"></canvas>
                             </div>
                             <div class="donut-dday3">
-                                D-1
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
+                    </c:forEach>
 
+                    <c:forEach items="${list}" var="p"  begin="17" end="17">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목4">
-                            <img src="/resources/img/index/test1.png" alt class="lazyload">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14051" class="donut"></canvas>
                             </div>
                             <div class="donut-dday4">
-                                D-3
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
+                    </c:forEach>
 
+                    <c:forEach items="${list}" var="p"  begin="13" end="13">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목5">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14040" class="donut"></canvas>
                             </div>
                             <div class="donut-dday5">
-                                D-3
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
+                    </c:forEach>
+
                 </div>
             </div>
         </div>
@@ -432,19 +346,7 @@
                 </div>
             </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                let currentSlide = 0;
-                const slides = document.querySelectorAll('.swiper-slide2');
-                const slideInterval = setInterval(nextSlide, 4000); // 4초마다 이미지 변경
 
-                function nextSlide() {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }
-            });
-        </script>
 </section>
 <%--section2끝--%>
 
@@ -456,59 +358,16 @@
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
-            <a href="musical/play 항목 1">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
+            <c:forEach items="${musiCalAndPlayList}" var="li" begin="1" end="6">
+                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
+                    <div class="wing-box">
+                        <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
+                        <div class="wing-list-txt">
+                            <p class="wlist-tit">${li.play_name}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 2">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 3">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 4">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 5">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 6">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -522,59 +381,16 @@
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-02">
-            <a href="consert/classic 항목 1">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
+            <c:forEach items="${concertAndClassicList}" var="li" begin="1" end="6">
+                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
+                    <div class="wing-box">
+                        <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
+                        <div class="wing-list-txt">
+                            <p class="wlist-tit">${li.play_name}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 2">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 3">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 4">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 5">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 항목 6">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -694,10 +510,34 @@
 <script src="/resources/js/index/top_slide.js"></script>
 <%--section5끝--%>
 
-
-
-
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+<script>
+    $("#searchBtn").on('click', function () {
+
+        let word = $("#searchWord").val();
+
+        if(word === null || word === ""){
+            alert('검색어를 입력해주세요.')
+            return false;
+        }
+
+        $.ajax({
+            type: 'GET',
+            uri: '/search',
+            contentType: 'application/json',
+            data: {word: word},
+            success: function (res){
+                console.log('응답 성공', res)
+                location.href = "/search?word=" + word;
+            },
+            error: function (err) {
+                console.error("에러", err);
+            }
+        })
+    });
+</script>
+
 </body>
+
 </html>

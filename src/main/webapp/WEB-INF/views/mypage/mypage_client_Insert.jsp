@@ -49,6 +49,7 @@
             width: 170px;
             height: 90px;
         }
+
         #client_left_top > h3 {
             margin: 33px;
         }
@@ -75,6 +76,7 @@
             width: 170px;
             height: 300px;
         }
+
         #client_left_mid > h3 {
             margin: 138px 0px;
         }
@@ -117,8 +119,7 @@
         }
 
 
-
-        #text1, #text2{
+        #text1, #text2 {
             padding: 10px;
             border-radius: 5px;
             width: 255px;
@@ -133,7 +134,8 @@
         }
 
         #client_select > select {
-            width: 50%;
+            border-radius: 5px;
+            width: 60%;
             height: 50px;
         }
 
@@ -141,54 +143,61 @@
             height: 20px;
         }
 
+        #client_submit > input {
+            margin: 0px 10px;
+            float: right;
+            width: 90px;
+            height: 50px;
+        }
+
     </style>
 </head>
 
 <body>
-    <jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/header.jsp"></jsp:include>
 
-    <hr>
-    <br>
-    <br>
+<hr>
+<br>
+<br>
 
-    <div id="wrap">
-        <div id="container">
-            <div id="contents">
-                <aside id="side">
-                    <div id="side-mypage">
-                        <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
-                        
-                        <div id="side_img">
-                            <img src="/resources/img/mypage/1579237093699.jpg">
-                        </div>
+<div id="wrap">
+    <div id="container">
+        <div id="contents">
+            <aside id="side">
+                <div id="side-mypage">
+                    <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
 
-                        <div id="ticket">
-                            <a href="/mypageticket"><h3>예매확인/취소</h3></a>
-                            <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
-                            <a href="/mypageview"><h3>나의 관람 공연</h3></a>
-                            <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href=""><h3>회원정보 수정</h3></a>
-                        </div>
-
-                        <div id="client">
-                            <h3>고객센터 전화상담</h3>
-
-                            <h2>1588-8282</h2>
-                            <ul>
-                                <li>평일      09:00 ~ 18:00</li>
-                                <li>토요일   09:00 ~ 17:00</li>
-                                <li>일요일 공휴일 휴무</li>
-                            </ul>
-                        </div>
-                    </div>
-                </aside>
-                <article id="con">
-                    <div id="client_top">
-                        <h3 id="client_top_h3">1:1 문의하기</h3>
-
-                        <a href="mypageclient">1:1 문의내역</a>
+                    <div id="side_img">
+                        <img src="/resources/img/mypage/1579237093699.jpg">
                     </div>
 
+                    <div id="ticket">
+                        <a href="/mypageticket"><h3>예매확인/취소</h3></a>
+                        <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
+                        <a href="/mypageview"><h3>나의 관람 공연</h3></a>
+                        <a href="/mypageclient"><h3>문의사항</h3></a>
+                        <a href=""><h3>회원정보 수정</h3></a>
+                    </div>
+
+                    <div id="client">
+                        <h3>고객센터 전화상담</h3>
+
+                        <h2>1588-8282</h2>
+                        <ul>
+                            <li>평일 09:00 ~ 18:00</li>
+                            <li>토요일 09:00 ~ 17:00</li>
+                            <li>일요일 공휴일 휴무</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+            <article id="con">
+                <div id="client_top">
+                    <h3 id="client_top_h3">1:1 문의하기</h3>
+
+                    <a href="mypageclient">1:1 문의내역</a>
+                </div>
+                <form action="/mypageclient">
                     <div id="client_select">
                         <select>
                             <option>선택사항</option>
@@ -197,7 +206,6 @@
                             <option>기타문의</option>
                         </select>
                     </div>
-
 
                     <div id="client_list_box">
                         <div id="client_left_top">
@@ -217,23 +225,27 @@
                         </div>
                         <div id="client_right_bottom">
                             <div id="text_box">
-                                <input id="text1" type="text" value="wjswotmd2@naver.com"> <input id="email" type="checkbox"> 이메일로 답변받기
-                                <input id="text2" type="text" value="010-3348-1395"> <input id="phone" type="checkbox"> 핸드폰으로 답변받기
+                                <input id="text1" type="text" value="wjswotmd2@naver.com"> <input id="email"
+                                                                                                  type="checkbox"> 이메일로
+                                답변받기
+                                <input id="text2" type="text" value="010-3348-1395"> <input id="phone" type="checkbox">
+                                핸드폰으로 답변받기
                             </div>
-
-
                         </div>
+
                     </div>
 
-                </article>
-            </div>
+                    <div id="client_submit"><input type="submit" value="문의 등록"></div>
+                </form>
+            </article>
         </div>
     </div>
+</div>
 
-    <br>
-    <br>
-    <hr>
+<br>
+<br>
+<hr>
 
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

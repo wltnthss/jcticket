@@ -2,6 +2,9 @@ package com.jcticket.user.service;
 
 import com.jcticket.user.dto.UserDto;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * packageName    : com.jcticket.login.service
  * fileName       : LoginService
@@ -35,4 +38,6 @@ public interface UserService {
 
     int deleteAll() throws Exception;
     int count() throws Exception;
+    List<Map<String, Object>> selectImg() throws Exception;
+
 }

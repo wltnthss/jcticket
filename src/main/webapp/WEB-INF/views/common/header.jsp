@@ -21,13 +21,13 @@
             <a href="/concert">콘서트
                 <span class="concert-sp"></span>
             </a>
-            <a href="뮤지컬 페이지">뮤지컬
+            <a href="/musical">뮤지컬
                 <span class="musical-sp"></span>
             </a>
-            <a href="연극 페이지">연극
+            <a href="/play">연극
                 <span class="play-sp"></span>
             </a>
-            <a href="클래식 페이지">클래식
+            <a href="/classic">클래식
                 <span class="classic-sp"></span>
             </a>
         </div>
@@ -53,8 +53,17 @@
                     </a>
                 </c:otherwise>
             </c:choose>
+            <a class="search">
+                <input type="text" id="searchWord" autocomplete="off" style="color: black">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+            </a>
         </div>
     </header>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="/resources/js/category/category.js"></script>
+
 </body>
 </html>

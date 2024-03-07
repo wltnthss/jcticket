@@ -109,5 +109,14 @@ public class UserDto {
         this.updated_id = updated_id;
     }
 
+    public UserDto(String user_id, String user_name, String user_nickname, String user_tel, String user_address) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.user_nickname = user_nickname;
+        this.user_tel = user_tel;
+        this.user_address = user_address;
+
+    }
+
 
 }

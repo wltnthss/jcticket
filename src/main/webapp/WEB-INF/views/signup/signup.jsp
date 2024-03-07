@@ -113,7 +113,7 @@
                     영문 대문자, 소문자, 숫자,특수문자를 포함한 8자 이상
                 </div>
                 <label>
-                    <input type="password" id="userPwdInput" value="${userDto.user_password}" class="css_idPwdNickTelAddGenBir_input" name="user_password" placeholder="비밀번호" >
+                    <input type="password" id="userPwdInput" class="css_idPwdNickTelAddGenBir_input" name="user_password" placeholder="비밀번호" >
                 </label>
                 <div id="pwd_warnMsg">${valid_user_password}</div>
             </div>
@@ -222,7 +222,7 @@
                     콘서트, 뮤지컬, 연극, 클래식 중 1개를 입력해주세요.
                 </div>
                 <label>
-                        <select class="selGenre" name="user_interested_genre" >
+                        <select class="selGenre" name="user_interested_genre" required="required" >
                             <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
                             <option class="genreOpt" value="콘서트">콘서트</option>
                             <option class="genreOpt" value="뮤지컬">뮤지컬</option>
@@ -340,5 +340,8 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/signup/signup.js"></script>
+<script>
+    let id = "${userDto.user_id}"
+</script>
 </body>
 </html>

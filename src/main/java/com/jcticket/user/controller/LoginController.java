@@ -131,6 +131,7 @@ public class LoginController {
         session.setAttribute("sessionId", user_id);
 
 
+
         //아이디 저장
         rememberId(user_id, rememberId, response);
 

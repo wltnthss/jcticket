@@ -18,6 +18,7 @@
          showing_day,
          showing_status,
          showing_seat_cnt,
+         showing_seat_price,
          play_id,
          stage_id,
          created_at,
@@ -33,6 +34,7 @@
              #{showing_day},
              #{showing_status},
              #{showing_seat_cnt},
+             #{showing_seat_price},
              #{play_id},
              #{stage_id},
              CURRENT_TIMESTAMP,
@@ -194,6 +196,54 @@
 
 
     <!-- step3. 쿠폰선택 -->
+    <!-- 쿠폰DTO insert -->
+    <insert id="insertCoupon" parameterType="CouponDto">
+        INSERT INTO coupon
+        (coupon_id, coupon_reg_at, coupon_name, coupon_useable_start_at, coupon_useable_end_at, coupon_discount_amount, coupon_min_order_amount, coupon_use_yn, coupon_status, coupon_description, coupon_use_condition, created_at, created_id, updated_at, updated_id)
+        VALUES(#{coupon_id}, default, #{coupon_name}, #{coupon_useable_start_at}, #{coupon_useable_end_at}, #{coupon_discount_amount}, #{coupon_min_order_amount}, #{coupon_use_yn}, default, #{coupon_description}, #{coupon_use_condition}, default, #{created_id}, default, #{updated_id});
+    </insert>
+
+    <!-- 쿠폰DTO delete -->
+    <delete id="deleteAllCoupon">
+        delete from coupon
+    </delete>
+
+    <!-- 쿠폰-유저 DTO insert -->
+    <insert id="insertUserCoupon" parameterType="UserCouponDto">
+        INSERT INTO jcticket.user_coupon
+        (user_coupon_id, user_id, coupon_id, user_coupon_use_at, user_coupon_issue_at, user_coupon_expire_at, user_coupon_use_yn, created_at, created_id, updated_at, updated_id)
+        VALUES(#{user_coupon_id}, #{user_id}, #{coupon_id}, DEFAULT, #{user_coupon_issue_at}, #{user_coupon_expire_at}, DEFAULT, DEFAULT, #{created_id}, DEFAULT, #{updated_id});
+    </insert>
+
+    <!-- 쿠폰-유저 DTO delete -->
+    <delete id="deleteAllUserCoupon">
+        delete from user_coupon
+    </delete>
+
+    <!-- 유저아이디로 유저-쿠폰아이디, 쿠폰아이디 리스트 조회하기 -->
+    <select id="selectUserCouponList" parameterType="string" resultType="UserCouponDto">
+        select user_coupon_id , coupon_id
+        from user_coupon
+        where 1=1
+          and user_id = #{user_id}
+          and user_coupon_use_yn = 'N'
+          and NOW() BETWEEN user_coupon_issue_at AND user_coupon_expire_at ;
+    </select>
+
+    <!-- 쿠폰아이디로 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작, 종료일 조회 -->
+    <select id="selectCoupon" parameterType="string" resultType="CouponDto">
+        select coupon_name,
+               coupon_discount_amount,
+               coupon_min_order_amount ,
+               coupon_use_condition,
+               coupon_description,
+               DATE_FORMAT(coupon_useable_start_at, '%Y-%m-%d')  coupon_useable_start_at ,
+               DATE_FORMAT(coupon_useable_end_at, '%Y-%m-%d') coupon_useable_end_at
+        from coupon c
+        where 1=1
+          and coupon_id = #{coupon_id}
+    </select>
+
 
     <!-- step4. 결제방법 -->
 

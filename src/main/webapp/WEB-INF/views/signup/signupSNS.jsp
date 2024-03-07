@@ -33,7 +33,7 @@
                     사용할 닉네임을 입력해주세요.
                 </div>
                 <label>
-                    <input type="text" id="userNicknameInput" class="css_idPwdNickTelAddGenBir_input" name="user_nickname" placeholder="닉네임" maxlength="30">
+                    <input type="text" id="userNicknameInput" class="css_idPwdNickTelAddGenBir_input"  value="${userDto.user_nickname}"name="user_nickname" placeholder="닉네임" maxlength="30">
                 </label>
                 <div id="nickname_warnMsg">${valid_user_nickname}</div>
             </div>
@@ -56,9 +56,9 @@
                 <div class="css_idPwdNickTelAddGenBir_div">
                 </div>
                 <label>
-                    <input type="text" id="sample4_postcode" placeholder="우편번호" required="required">
+                    <input type="text" id="sample4_postcode" placeholder="우편번호" required="required" >
                     <input type="button" id="addBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" >
+                    <input type="text" id="sample4_roadAddress" placeholder="도로명주소" required="required" >
                     <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
                     <span id="guide" style="color:#999;display:none"></span>
                     <input type="text" id="sample4_detailAddress" placeholder="상세주소" >
@@ -79,7 +79,7 @@
                     콘서트, 뮤지컬, 연극, 클래식 중 1개를 입력해주세요.
                 </div>
                 <label>
-                    <select class="selGenre" name="user_interested_genre" >
+                    <select class="selGenre" name="user_interested_genre" required="required">
                         <option class="disabledOpt" value selected disabled hidden>선택해주세요</option>
                         <option class="genreOpt" value="콘서트">콘서트</option>
                         <option class="genreOpt" value="뮤지컬">뮤지컬</option>
