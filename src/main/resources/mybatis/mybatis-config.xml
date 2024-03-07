@@ -22,7 +22,7 @@
 
 
         <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
-        <typeAlias alias="UserCouponDto" type="com.jcticket.dto.UserCouponDto"/>
+<!--        <typeAlias alias="UserCouponDto" type="com.jcticket.dto.UserCouponDto"/>-->
         <typeAlias alias="StageDto" type="com.jcticket.admin.dto.StageDto"/>
         <typeAlias alias="TermsDto" type="com.jcticket.user.dto.TermsDto"/>
         <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>

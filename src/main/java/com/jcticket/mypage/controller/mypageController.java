@@ -232,9 +232,9 @@ public class mypageController {
                 Timestamp now = new Timestamp(System.currentTimeMillis());
 
                 if (couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
-                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
-                    mypageService.coupon_insert(userCouponDto);
-                    mypageService.update_coupon(couponDto);
+//                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+//                    mypageService.coupon_insert(userCouponDto);
+//                    mypageService.update_coupon(couponDto);
                 }
             }
 

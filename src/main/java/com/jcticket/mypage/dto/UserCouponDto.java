@@ -22,14 +22,16 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserCouponDto {
 
-        private Integer user_coupon_seq;
+//        private Integer user_coupon_seq;
+        private String user_coupon_id;
         private String user_id;
         private String coupon_id;
         private Timestamp coupon_use_at; //사용일자
-        private Timestamp coupon_issue_at; //발급일
-        private Timestamp coupon_expire_at; //만료일자
+        private Timestamp user_coupon_issue_at; //발급일
+        private Timestamp user_coupon_expire_at; //만료일자
         private String coupon_use_yn;
         private Timestamp created_at;
         private String created_id;
@@ -38,19 +40,19 @@ public class UserCouponDto {
         private String coupon_name;
         private Integer coupon_discount_amount;
         private String coupon_use_condition;
-        public UserCouponDto(Integer user_coupon_seq, String user_id, String coupon_id, Timestamp coupon_use_at, Timestamp coupon_issue_at, Timestamp coupon_expire_at, String coupon_use_yn, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
-                this.user_coupon_seq = user_coupon_seq;
-                this.user_id = user_id;
-                this.coupon_id = coupon_id;
-                this.coupon_use_at = coupon_use_at;
-                this.coupon_issue_at = coupon_issue_at;
-                this.coupon_expire_at = coupon_expire_at;
-                this.coupon_use_yn = coupon_use_yn;
-                this.created_at = created_at;
-                this.created_id = created_id;
-                this.updated_at = updated_at;
-                this.updated_id = updated_id;
-        }
+//        public UserCouponDto(Integer user_coupon_seq, String user_id, String coupon_id, Timestamp coupon_use_at, Timestamp coupon_issue_at, Timestamp coupon_expire_at, String coupon_use_yn, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
+//                this.user_coupon_seq = user_coupon_seq;
+//                this.user_id = user_id;
+//                this.coupon_id = coupon_id;
+//                this.coupon_use_at = coupon_use_at;
+//                this.coupon_issue_at = coupon_issue_at;
+//                this.coupon_expire_at = coupon_expire_at;
+//                this.coupon_use_yn = coupon_use_yn;
+//                this.created_at = created_at;
+//                this.created_id = created_id;
+//                this.updated_at = updated_at;
+//                this.updated_id = updated_id;
+//        }
 
 
     }
