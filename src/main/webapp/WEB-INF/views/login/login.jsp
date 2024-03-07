@@ -58,7 +58,10 @@
                 <div class="memLoginForm">
                     <form action="<c:url value="/login"/>" id="loginSub" method="POST" name="LoginSub" autocomplete="off"/>
                         <fieldset class="formFieldSet">
-                                <span id = spanMemID>
+                            <input id="prevurl" type="hidden" name="prevurl" value="${requestScope.prevurl}">
+
+
+                            <span id = spanMemID>
                                     <label for="SMemID">아이디</label>
                                     <input id="SMemID" name="user_id" type="text" value="${cookie.user_id.value}" autocomplete="off" placeholder="아이디">
                                 </span>

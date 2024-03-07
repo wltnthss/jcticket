@@ -118,7 +118,8 @@
                                 <img src="<c:url value='/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </td>
                             <td style="text-align: left">
-                                <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>
+                                <span style="font-weight: bold; text-decoration-line: underline"><a style="font-size: 14px !important;" href="/admin/productmodify/${p.play_id}/${p.showing_seq}?page=${paging.page}">${p.play_name}</a></span><br>
+<%--                                    <span style="font-weight: bold; font-size: 14px">${p.play_name}</span><br>--%>
                                     ${p.play_cat} | ${p.play_run_time} 분 | ${p.showing_info} | ${p.showing_date} | ${p.stage_address}
                             </td>
                             <td>${p.showing_period_date}</td>
@@ -167,6 +168,49 @@
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
     }
+
+    // 관리자 상품 삭제 버튼 클릭 이벤트
+    $('#product-delete-btn').on('click', function(){
+
+        // 체크박스 리스트 전체
+        let checkList = $("input[name=selectedItems]:checked");
+        let valueArr = [];
+
+        // checkList가 check 된 상태이면 배열에 값 저장
+        checkList.each(function () {
+            valueArr.push($(this).val());
+        });
+
+        console.log('valueArr => ' + valueArr);
+
+        if(valueArr.length === 0){
+            alert("삭제할 항목을 선택해주세요");
+            return false;
+        }else{
+            if(confirm("정말 삭제하시겠습니까?")){
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/productdelete',
+                    data: JSON.stringify(valueArr),
+                    contentType: "application/json",
+                    success: function (res){
+                        console.log('res => ' + res)
+                        if(res > 0){
+                            alert('삭제되었습니다.');
+                            location.href= "/admin/product";
+                        }else{
+                            alert('삭제 실패');
+                            location.href= "/admin/product";
+                        }
+                    },
+                    error: function (e) {
+                        console.error("삭제 실패", e);
+                    }
+                });
+            }
+        }
+    });
 </script>
 
 </body>

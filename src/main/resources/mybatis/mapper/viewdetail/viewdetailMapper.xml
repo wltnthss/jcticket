@@ -14,16 +14,16 @@
 <!--    showing테이블 insert-->
     <insert id="showing_insert" parameterType="ShowingDto">
         INSERT INTO showing
-        (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{showing_seq},#{showing_start_at},#{showing_end_at},#{showing_info},#{showing_date},#{showing_day},#{showing_status},#{showing_seat_cnt},#{play_id},#{stage_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
+        (showing_seq, showing_start_at, showing_end_at, showing_info, showing_date, showing_day, showing_status, showing_seat_price, showing_seat_cnt, play_id, stage_id, created_at, created_id, updated_at, updated_id)
+        VALUES (#{showing_seq},#{showing_start_at},#{showing_end_at},#{showing_info},#{showing_date},#{showing_day},#{showing_status},#{showing_seat_price},#{showing_seat_cnt},#{play_id},#{stage_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
     </insert>
 
 <!--    seat_class테이블 insert-->
-    <insert id="seat_class_insert" parameterType="SeatClassDto">
-        INSERT INTO seat_class
-        (seat_grade_seq, seat_price, play_id, created_at, created_id, updated_at, updated_id)
-        VALUES (#{seat_grade_seq},#{seat_price},#{play_id},#{created_at},#{created_id},#{updated_at},#{updated_id});
-    </insert>
+<!--    <insert id="seat_class_insert" parameterType="SeatClassDto">-->
+<!--        INSERT INTO seat_class-->
+<!--        (seat_grade_seq, seat_price, play_id, created_at, created_id, updated_at, updated_id)-->
+<!--        VALUES (#{seat_grade_seq},#{seat_price},#{play_id},#{created_at},#{created_id},#{updated_at},#{updated_id});-->
+<!--    </insert>-->
 
 <!--    play테이블 delete all-->
     <delete id="play_delete_all">
@@ -36,9 +36,9 @@
     </delete>
 
 <!--    seat_class테이블 delete all-->
-    <delete id="seat_class_delete_all">
-        DELETE FROM seat_class
-    </delete>
+<!--    <delete id="seat_class_delete_all">-->
+<!--        DELETE FROM seat_class-->
+<!--    </delete>-->
 
 <!--    테스트용 delete-->
     <delete id="test_delete_play">
@@ -51,10 +51,10 @@
         WHERE play_id = "테스트1";
     </delete>
 
-    <delete id="test_delete_seat_class">
-        DELETE FROM seat_class
-        WHERE play_id = "테스트1";
-    </delete>
+<!--    <delete id="test_delete_seat_class">-->
+<!--        DELETE FROM seat_class-->
+<!--        WHERE play_id = "테스트1";-->
+<!--    </delete>-->
 <!--    테스트용 delete-->
 
     <!--    공연회차정보,시퀀스 조회 (dateText는 달력에서 선택한 날짜)-->
@@ -62,6 +62,7 @@
         SELECT showing_info,showing_seq
         FROM showing
         WHERE showing_date = #{dateText}
+        AND play_id = #{play_id}
     </select>
 
     <!--    잔여석 조회(공연회차정보, 시퀀스 조회에서 받은 시퀀스를 가지고 잔여석 조회)-->
@@ -71,7 +72,7 @@
             (SELECT count(*)
              FROM show_seat ss
              WHERE s.showing_seq = ss.showing_seq
-               AND show_seat_status = 'N') AS remaining_seats
+               AND show_seat_status = 'N') remaining_seats
         FROM
             showing s
         WHERE s.showing_seq = #{showing_seq};
@@ -79,22 +80,36 @@
 
 
     <!--    공연(play),좌석구분(seat_class),공연장(stage) 테이블 합침 view에서 보여주는 정보들-->
+<!--    하나 가져오려고 서브쿼리 쓰는것은 좀 별로임-->
+<!--    <select id="viewDetail_view" resultType="JoinDto">-->
+<!--        SELECT p.play_name,-->
+<!--               p.play_major_cat,-->
+<!--               p.play_middle_cat,-->
+<!--               p.play_run_time,-->
+<!--&#45;&#45;                p.play_poster,-->
+<!--&#45;&#45;                p.play_info,-->
+<!--               p.agency_id,-->
+<!--               (SELECT stg.stage_name-->
+<!--                s.showing_seat_price-->
+<!--                FROM showing s-->
+<!--                         JOIN stage stg ON s.stage_id = stg.stage_id-->
+<!--                WHERE s.play_id = p.play_id-->
+<!--                GROUP BY stg.stage_name) stage_name-->
+<!--        FROM play p-->
+<!--        WHERE p.play_id = #{play_id};-->
+<!--    </select>-->
+
     <select id="viewDetail_view" resultType="JoinDto">
         SELECT p.play_name,
                p.play_major_cat,
                p.play_middle_cat,
                p.play_run_time,
---                p.play_poster,
---                p.play_info,
                p.agency_id,
-               sc.seat_price,
-               (SELECT stg.stage_name
-                FROM showing s
-                         JOIN stage stg ON s.stage_id = stg.stage_id
-                WHERE s.play_id = p.play_id
-                GROUP BY stg.stage_name) stage_name
+               stg.stage_name,
+               s.showing_seat_price
         FROM play p
-                 JOIN seat_class sc ON p.play_id = sc.play_id
+                 JOIN showing s ON p.play_id = s.play_id
+                 JOIN stage stg ON s.stage_id = stg.stage_id
         WHERE p.play_id = #{play_id};
     </select>
 
@@ -107,5 +122,117 @@
         WHERE
             s.play_id = #{play_id}
         ORDER BY showing_date;
+    </select>
+
+
+<!--    후기게시판-->
+<!--    리뷰 테이블 카운트-->
+    <select id="review_count" resultType="int">
+        SELECT count(*)
+        FROM review
+        WHERE play_id = #{play_id};
+    </select>
+<!--    전체삭제-->
+    <delete id="review_deleteAll">
+        DELETE FROM review
+    </delete>
+<!--    하나씩 삭제-->
+    <delete id="review_delete" parameterType="hashmap">
+        DELETE FROM review WHERE review_num = #{review_num} and user_id = #{user_id}
+    </delete>
+<!--        게시글 작성-->
+    <insert id="review_insert" parameterType="ReviewDto">
+        INSERT INTO review
+                (review_num,
+                 review_at,
+                 review_star_rating,
+                 review_viewing_at,
+                 review_content,
+--                  AVG(r.review_star_rating) AS review_star_rating_avg,
+                 review_total,
+                 user_id,
+                 play_id,
+                 created_at,
+                 created_id,
+                 updated_at,
+                 updated_id)
+        VALUES
+            (#{review_num},
+             CURRENT_TIMESTAMP,
+             #{review_star_rating},
+             #{review_viewing_at},
+             #{review_content},
+--              (SELECT AVG(review_star_rating) FROM review),
+             '0',
+             #{user_id},
+             #{play_id},
+             CURRENT_TIMESTAMP,
+             #{user_id},
+             CURRENT_TIMESTAMP,
+             #{user_id})
+    </insert>
+
+<!--    조회수 증가-->
+    <update id="review_increaseViewCnt" parameterType="int">
+        UPDATE review
+        SET   review_total = review_total + 1
+        WHERE review_num = #{review_num}
+    </update>
+
+<!--    리뷰 수정-->
+    <update id="review_update" parameterType="ReviewDto">
+        UPDATE review
+        SET  review_content = #{review_content},
+             review_star_rating = #{review_star_rating},
+             updated_at = CURRENT_TIMESTAMP
+        WHERE review_num = #{review_num}
+    </update>
+
+<!--    관람후기 게시판에서 보여줄 내용을 가져옴-->
+    <select id="review_select_all" resultType="ReviewDto">
+        SELECT user_id,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content
+        FROM review
+        WHERE play_id = #{play_id}
+        ORDER BY review_at DESC
+    </select>
+
+    <!--한 페이지에 나타낼 게시글의 수를 조절함 1페이지 > 0~10, 2페이지 > 10~20 ~~~   -->
+    <select id="review_select_limit" parameterType="map" resultType="ReviewDto">
+        SELECT user_id,
+               review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content
+        FROM review
+        WHERE play_id = #{play_id}
+        ORDER BY review_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+<!--    리뷰 셀렉트-->
+    <select id="review_select" resultType="ReviewDto">
+        SELECT review_at,
+               review_star_rating,
+               review_viewing_at,
+               review_content,
+               review_total,
+               user_id,
+               (select SUM(review_star_rating)/COUNT(*) from review where play_id = #{play_id}) AS review_avg
+        FROM review
+        WHERE play_id = #{play_id}
+    </select>
+
+
+    <select id="bring_review_viewing_at" parameterType="map" resultType="List">
+        SELECT r.review_viewing_at
+        FROM review r
+                 JOIN user u ON r.user_id = u.user_id
+                 JOIN ticketing t ON u.user_id = t.user_id
+        WHERE r.play_id = #{play_id}
+        AND r.user_id = #{user_id}
     </select>
 </mapper>

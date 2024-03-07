@@ -1,5 +1,6 @@
 package com.jcticket.ticketing.service;
 
+import com.jcticket.ticketing.dto.CouponResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,6 +140,28 @@ public class TicketingServiceImplTest {
                 System.out.println("val => "+ map.get(key));
             }
         }
+
+    }
+
+    // 유저아이디를 받아서 쿠폰정보를 반환한다.
+    @Test
+    public void getCouponTest() throws Exception {
+        // given
+        String userId = "www444";
+
+        // when
+        List<CouponResponseDto> list = ticketingService.getCouponInfo(userId);
+        for(CouponResponseDto dto : list){
+            assertTrue(null != dto);
+            System.out.println(dto.getCouponName());
+            System.out.println(dto.getCouponDiscount());
+            System.out.println(dto.getMinOrder());
+            System.out.println(dto.getDiscription());
+            System.out.println(dto.getUseCondition());
+            System.out.println(dto.getCouponUseableStartDate());
+            System.out.println(dto.getCouponUseableEndDate());
+        }
+        // then
 
     }
 

@@ -1,5 +1,6 @@
 // <%--    datepicker 제이쿼리 달력--%>
     $(document).ready(function() {
+        var play_id = document.querySelector('.five').id;
         var dateShow = document.querySelectorAll(".dateShow");
 
         //선택 가능한 날짜 ex)
@@ -40,6 +41,10 @@
             //콜백함수사용,ticketing으로 보낼 데이터
             dateTextCallback(dateText)
 
+
+
+            // console.log('play_id =======>'+play_id);
+
             var left = document.querySelector('.fourLeft');
             var right = document.querySelector('.fourRight');
 
@@ -59,7 +64,7 @@
             $.ajax({
                 type: "POST",
                 url: "/viewdetail",
-                data: dateText,
+                data: {dateText:dateText,play_id:play_id},
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
                 success: function(res) {
@@ -68,7 +73,7 @@
                     // 2. 컨트롤러에서 dateTaxt를 이용해서 sql문을 돌려서 나온 결과를 msg로 리턴함 res로 받음 (배열)
                     // 3. 리턴받은 res를 사용해서 a태그를 만듦
 
-                    // alert(res);
+                    // alert("res ========>"+res);
 
                     var showing = document.querySelector('.showing');
 
@@ -125,29 +130,39 @@
             $.ajax({
                 type: "POST",
                 url: "/viewdetail/remainSeat",
-                // data: seatInfo,
-                // 인코딩 해서 컨트롤러에 데이터 보냄 why? 컨트롤러에서 글자가 깨져서
-                data: encodeURIComponent(remainSeat),
+                data: remainSeat,
                 success: function(res) {
                     // 서버로부터 받은 응답 데이터를 처리
                     console.log('Response:', res);
                     
                     //res내용을 span태그로 묶어서 #seatPrice1 아래 추가 (잔여석)
-                    var seatRemain = document.createElement("span");
+                    // var seatRemain = document.createElement("span");
+                    // var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
+                    // var insertSpan = document.querySelector("#seatPrice1");
+                    //
+                    // if(!existSpan) {
+                    //     seatRemain.textContent = "(잔여: "+res+"석)";
+                    //     seatRemain.className = 'remain_seat'
+                    //     insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                    // } else {
+                    //     while(insertSpan.firstChild)  {
+                    //         insertSpan.removeChild(existSpan);
+                    //         seatRemain.textContent = "(잔여: "+res+"석)";
+                    //         seatRemain.className = 'remain_seat'
+                    //         insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                    //     }
+                    // }
+
                     var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
+                    var seatRemain = document.createElement("span");
+                    seatRemain.textContent = "(잔여: "+res+"석)";
+                    seatRemain.className = 'remain_seat';
                     var insertSpan = document.querySelector("#seatPrice1");
 
                     if(!existSpan) {
-                        seatRemain.textContent = "(잔여: "+res+"석)";
-                        seatRemain.className = 'remain_seat'
-                        insertSpan.insertAdjacentElement('beforeend',seatRemain);
+                        insertSpan.appendChild(seatRemain);
                     } else {
-                        while(insertSpan.firstChild)  {
-                            insertSpan.removeChild(existSpan);
-                            seatRemain.textContent = "(잔여: "+res+"석)";
-                            seatRemain.className = 'remain_seat'
-                            insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                        }
+                        insertSpan.replaceChild(seatRemain, existSpan);
                     }
                 },
                 error: function(error) {
@@ -186,12 +201,16 @@
                     var stage_name = stage_name_id.innerHTML;
 
                     //쿼리스트링 이용
-                    var url = '/ticketing-detail?dateText='+dateText
+                    var url = '/ticketing/detail?play_id=' + for_ticket.id
+                        + 'dateText='+dateText
                         +'&showing_seq='+showing_seq
                         +'&play_name='+play_name
                         +'&stage_name='+stage_name;
-                    // URL로 이동
-                    window.location.href = url; //성공
+
+                    var name = "ticketing"
+                    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+                    window.open(url, name, option); //성공
+                    // ticketing 창 띄우기
                 }
             }
         }
@@ -215,9 +234,31 @@
         var stagename = document.getElementById('stage_name');
         var movemap = document.getElementById('map');
 
+        var detail_info = document.getElementById('scroll_detail_info');
+        var info_box = document.getElementById('info');
+
+        var review = document.getElementById('scroll_review');
+        var go_review = document.getElementById('review');
+
+        var reservation_notice = document.getElementById('reservation_notice');
+        var go_notice = document.getElementById('seven_text_one');
+
         stagename.onclick = function () {
             movemap.scrollIntoView();
         }
+
+        detail_info.onclick = function () {
+            info_box.scrollIntoView()
+        }
+
+        review.onclick = function () {
+            go_review.scrollIntoView()
+        }
+
+        reservation_notice.onclick = function () {
+            go_notice.scrollIntoView()
+        }
+
 
         // 카카오 지도 api
         var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -238,8 +279,249 @@
         // 마커가 지도 위에 표시되도록 설정합니다
         marker.setMap(map);
 
+        
+        //관람후기 ajax 페이징
+        // var play_id = document.querySelector('.five').id
+        var pageSize = document.querySelector('.pageSize').value
+        var totalPage = document.querySelector('.totalPage').value
+        var endPage = parseInt(document.querySelector('.endPage').value);
+        // var startPage = parseInt(document.querySelector('.startPage').value);
+
+        // console.log(totalPage);
+
+        var nextPage = endPage + 1;
+        // var prevPage = startPage-1;
+
+        function loadPage(page) {
+            $.ajax({
+                type: "GET",
+                url: "/viewdetail/page",
+                data: {
+            this_play_id: play_id,
+                page: page,
+                pageSize: pageSize
+        },
+            success: function(res) {
+                $('.comment_board').empty(); // 기존의 게시물을 모두 지움 위치 중요
+                // 데이터를 받아와서 처리하는 부분
+                // console.log('res==========>'+res)
+                var boardList = res.boardList;
+
+                // console.log('boardList==========>'+boardList)
+                for(var i=0;i<boardList.length;i++) {
+                    var board = boardList[i];
+                    //유닉스 시간으로 들어와서 일반시간으로 변환해줌
+                    var reviewAt = new Date(board.review_at);
+                    var review_upload_time = reviewAt.getFullYear() + '.' + (reviewAt.getMonth() + 1).toString().padStart(2,'0') + '.' + reviewAt.getDate().toString().padStart(2,'0');
+
+                    var review_viewing_at = new Date(board.review_viewing_at);
+                    var review_viewing_time = review_viewing_at.getFullYear() + '.' + (review_viewing_at.getMonth() + 1).toString().padStart(2,'0') + '.' + review_viewing_at.getDate().toString().padStart(2,'0');
+                    var list =
+                        '<li>' +
+                        '<div class="comment_user">' +
+                        '<span class="board_1">' + board.user_id + '</span>' +
+                        '<span class="board_2">' + "&nbsp;" + review_upload_time + '</span>' +
+                        '<span class="board_3">' + "&nbsp;" +
+                        '<span class="rating" id='+board.review_star_rating+'>' +
+                        '<i class="rating__star far fa-star"></i>' +
+                        '<i class="rating__star far fa-star"></i>' +
+                        '<i class="rating__star far fa-star"></i>' +
+                        '<i class="rating__star far fa-star"></i>' +
+                        '<i class="rating__star far fa-star"></i>' +
+                        '</span>' +
+                        '</span>' +
+                        '<span class="board_4">' + "&nbsp;" + "(관람일:" + review_viewing_time + ")" + '</span>' +
+
+                        '<div class="comment_text">' +
+                        '<span class="board_5">' + board.review_content + '</span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</li>';
+                    $('.comment_board').append(list);
+                }
+
+                //별점 보여주기
+                var review_star = document.querySelectorAll(".rating");
+                // console.log('review_star.length============>' + review_star.length)
+
+                for (var i=0;i<review_star.length;i++) {
+                    var rating = review_star[i];
+                        rating.style.color = "#FF9100";
+
+                    var star_rating = parseInt(rating.id);
+                    // console.log('star_rating============>' + star_rating)
+
+                    var stars = rating.querySelectorAll('i');
+
+                    for (var j=0;j<stars.length;j++) {
+                        var star = stars[j];
+                        if (j < star_rating) {
+                            star.classList.remove("far");
+                            star.classList.add("fas");
+                        } else {
+                            star.classList.remove("fas");
+                            star.classList.add("far");
+                        }
+                    }
+                }
+            },
+            //에러처리 어떻게할지 생각해볼것
+            error: function(error) {
+                console.log('error => ', error);
+            }
+        });
+        }
+
+        loadPage(1); // 페이지가 로드될 때 첫 번째 페이지 데이터 로드
+        // 페이지 번호 클릭 시 해당 페이지 데이터 로드 (관람후기)
+        $(document).on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            var page = $(this).text();
+
+            loadPage(page);
+        });
+
+
+        // 관람후기 다음버튼 클릭이벤트
+        $(document).on('click', '.next', function loadNextPageData(e) {
+            e.preventDefault();
+            var page_tag = document.querySelectorAll(".pagination a")
+            var create_tag = document.querySelector('.pagination')
+
+            // console.log('page_tag==========>'+page_tag[0].innerHTML);
+
+            if(page_tag.length===10) {
+                if(page_tag[0].innerHTML === "1") {
+                    for(var i=0;i<page_tag.length;i++) {
+                        page_tag[i].remove();
+                        var tag = document.createElement("a");
+                        if(i+11<=totalPage) {
+                            tag.innerText = i + 11; //반복문 0부터 시작하니까 11더함
+                            tag.classList.add('pageCss');
+
+                            tag.setAttribute("href","/viewdetail?this_play_id="+play_id+"&page="+i+11+"&pageSize="+pageSize)
+                            create_tag.appendChild(tag);
+                        }
+                    }
+                    nextPage = parseInt(page_tag[0].innerHTML)+10;
+                    loadPage(nextPage);
+                } else {
+                    // console.log('page_tag else==========>'+page_tag[0].innerHTML);
+                    var page_save = parseInt(page_tag[0].innerHTML);
+
+                    // console.log('page_save else==========>'+page_save);
+                    // console.log("totalPage==========>" + typeof totalPage);
+
+                    for(var i=0;i<page_tag.length;i++) {
+                        if(page_tag[0].innerHTML!=="1" && parseInt(page_tag[9].innerHTML) !== parseInt(totalPage)) {
+                            for(var i=0;i<pageSize;i++) {
+                                page_save = parseInt(page_tag[i].innerHTML)+10;
+                                page_tag[i].remove();
+                                if(page_save<=totalPage) {
+                                    // console.log("page_save==========>" + page_save);
+                                    // console.log("totalPage==========>" + totalPage);
+                                    var tag = document.createElement("a");
+                                    tag.innerText = parseInt(page_save);
+                                    tag.classList.add('pageCss');
+                                    tag.setAttribute("href", "/viewdetail?this_play_id=" + play_id + "&page=" + page_save + "&pageSize=" + pageSize)
+                                    create_tag.appendChild(tag);
+                                }
+                            }
+                            nextPage = parseInt(page_tag[0].innerHTML)+10;
+                            // console.log("new-nextPage=============>"+nextPage);
+                            loadPage(nextPage);
+                        }
+                    }
+                }
+            }
+        })
+        // 관람후기 다음버튼 클릭이벤트 끝 -----------------------------
+
+        // 관람후기 이전버튼 클릭이벤트
+        $(document).on('click', '.prev', function loadPrevPageData(e) {
+            e.preventDefault();
+
+            var page_tag = document.querySelectorAll(".pagination a")
+            var create_tag = document.querySelector('.pagination')
+            if(page_tag.length===10) {
+                if(page_tag[0].innerHTML!=="1") {
+                    for(var i=pageSize;i>0;i--) {
+                        var page_save = parseInt(page_tag[0].innerHTML)-i;
+                        page_tag[pageSize-i].remove();
+                        // console.log("page_save==========>" + page_save);
+                        var tag = document.createElement("a");
+                        tag.innerText = parseInt(page_save);
+                        // console.log("page_save==========>"+page_save);
+                        tag.classList.add('pageCss');
+                        tag.setAttribute("href", "/viewdetail?this_play_id=" + play_id + "&page=" + page_save + "&pageSize=" + pageSize)
+                        create_tag.appendChild(tag);
+                    }
+                    var prevPage = parseInt(page_tag[0].innerHTML)-10;
+                    loadPage(prevPage);
+                }
+            } else {
+
+                if(page_tag[0].innerHTML!=="1") {
+                    // console.log("pageSize==========>"+pageSize);
+                    // console.log("page_tag[0]==========>"+page_tag[0].innerHTML);
+                    var page_save = page_tag[0].innerHTML;
+                    for (var i=0;i<page_tag.length;i++) {
+                        page_tag[i].remove();
+                    }
+                    for(var i=0;i<pageSize;i++) {
+                        var tag = document.createElement("a");
+                        tag.innerText = parseInt(page_save-10+i);
+                        tag.classList.add('pageCss');
+                        tag.setAttribute("href", "/viewdetail?this_play_id=" + play_id + "&page=" + page_save + "&pageSize=" + pageSize)
+                        create_tag.appendChild(tag);
+                    }
+                    var prevPage = parseInt(page_tag[0].innerHTML)-10;
+                    loadPage(prevPage);
+                }
+            }
+        })
+
+        // // 리뷰작성하기
+        // var review_create = document.getElementById("review_create");
+        //
+        // review_create.onclick = function () {
+        //     //쿼리스트링 이용
+        //     var url = '/review_insert?play_id=' + play_id
+        //         // + 'dateText='+dateText
+        //         // +'&showing_seq='+showing_seq
+        //         // +'&play_name='+play_name
+        //         // +'&stage_name='+stage_name;
+        //
+        //     var name = "review_insert"
+        //     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        //     window.open(url, name, option); //성공
+        // };
+
+        // 리뷰 별점 매기기
+        var star_twinkle = document.querySelectorAll(".review_star i")
+
+        star_twinkle.forEach(function (star){
+            star.onclick = function (e) {
+                var clicked_star = parseInt(e.target.id);
+                for (var i = 0; i < star_twinkle.length; i++) {
+                    var starToChange = star_twinkle[i];
+                    
+                    // 클릭한 별의 id(1~5)보다 i가 작으면 채워진 별, 아니면 빈 별
+                    if (i < clicked_star) {
+                        starToChange.classList.remove("far");
+                        starToChange.classList.add("fas");
+                    } else {
+                        starToChange.classList.remove("fas");
+                        starToChange.classList.add("far");
+                    }
+                }
+            }
+        })
+
     });
     //$(document).ready 끝--------------------------------------------------------------------------
+
+
 
 
     // datepicker 설정

@@ -1,6 +1,9 @@
 package com.jcticket.ticketing.service;
 
+import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.ticketing.dao.TicketingDao;
+import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -159,5 +162,26 @@ public class TicketingServiceImpl implements TicketingService{
 
         // 반환한다.
         return resultMap;
+    }
+
+    // 유저아이디를 받아서 쿠폰정보를 반환한다.
+    @Override
+    public List<CouponResponseDto> getCouponInfo(String userId) throws Exception {
+       List<UserCouponDto> list = ticketingDao.selectUserCouponList(userId);
+       List<CouponResponseDto> responseList = new ArrayList<>();
+       for(UserCouponDto dto : list){
+           CouponDto couponDto = ticketingDao.selectCoupon(dto.getCoupon_id());
+           CouponResponseDto responseDto = CouponResponseDto.builder()
+                   .couponName(couponDto.getCoupon_name())
+                   .couponDiscount(couponDto.getCoupon_discount_amount())
+                   .minOrder(couponDto.getCoupon_min_order_amount())
+                   .discription(couponDto.getCoupon_description())
+                   .useCondition(couponDto.getCoupon_use_condition())
+                   .couponUseableStartDate(couponDto.getCoupon_useable_start_at())
+                   .couponUseableEndDate(couponDto.getCoupon_useable_end_at())
+                   .build();
+           responseList.add(responseDto);
+       }
+        return responseList;
     }
 }

@@ -517,3 +517,16 @@ if ($(".swiper-container.ticketo > .swiper-wrapper > div").length < 3) {
         $(".sec02 > .cont").hide();
         $(".sec02 > a").hide();
     }
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.swiper-slide2');
+    const slideInterval = setInterval(nextSlide, 4000); // 4초마다 이미지 변경
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+});
