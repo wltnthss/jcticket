@@ -154,9 +154,8 @@
                         </div>
 
                         <div id="total-order-price"></div>
-                        <div id="third-btns">
-                            <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
-                        </div>
+
+                        <input id="third-btn" type="button" name="next" class="next action-button" value="다음단계" /> <input type="button" name="previous" class="previous action-button-previous" value="이전단계" />
 
                     </fieldset>
                     <fieldset>

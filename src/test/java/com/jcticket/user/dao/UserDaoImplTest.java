@@ -53,7 +53,7 @@ public class UserDaoImplTest {
     @Test
     public void insertTest() throws Exception{
         assertTrue(userDao.count()==2);
-        UserDto userDto = new UserDto("wlswls","Asd1234!","욱","wlsdnr1233@naver.com","010-9741-1239","미왕빌딩","wook2424","19990219","M",currentTimestamp,"N",0,"연극",currentTimestamp,"system",currentTimestamp,"system");
+        UserDto userDto = new UserDto("www444","Ysh31228!","영상","dimple0513@naver.com","010-5425-9150","미왕빌딩","wook2424","19990124","M",currentTimestamp,"N",0,"연극",currentTimestamp,"system",currentTimestamp,"system");
         System.out.println("userDto = " + userDto);
 
         // DB 저장 전 비밀번호 암호화
