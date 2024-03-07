@@ -4,6 +4,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.mypage.dto.InquiryDto;
+import com.jcticket.user.dto.UserDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,9 +39,15 @@ public interface mypageDAO {
     int coupon_count(Map map) throws Exception;
     CouponDto coupon_select(String coupon_id) throws Exception;
 
+    UserDto user_info(String id) throws Exception;
+
+
     TicketingDto ticket_detail(String ticketing_at) throws Exception;
 
     int update_coupon(CouponDto CouponDto) throws Exception;
+    int user_update(UserDto userDto) throws Exception;
+
+    int coupon_update() throws Exception;
 
 
 }

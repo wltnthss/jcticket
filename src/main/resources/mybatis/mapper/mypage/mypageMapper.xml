@@ -239,15 +239,29 @@
             uc.coupon_id,
             uc.coupon_issue_at,
             uc.coupon_expire_at,
-            (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_name,
-            (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_discount_amount,
-            (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id) AS coupon_use_condition
+            CASE
+                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                ELSE NULL
+                END AS coupon_name,
+            CASE
+                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                ELSE NULL
+                END AS coupon_discount_amount,
+            CASE
+                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+                ELSE NULL
+                END AS coupon_use_condition
         FROM
             coupon_user uc
         WHERE
             ((#{button} = 'on' AND uc.coupon_use_yn = 'N') OR
              (#{button} = 'off' AND uc.coupon_use_yn = 'Y'))
-        LIMIT
+        ORDER BY
+            uc.coupon_expire_at DESC
+            LIMIT
             #{pageSize}
         OFFSET
             #{offset};
@@ -257,14 +271,38 @@
     <select id="coupon_count" parameterType="map" resultType="int">
         SELECT COUNT(*) AS count
         FROM coupon_user
-        WHERE coupon_use_yn IN ('Y', 'N')
-          AND (
-            (#{button} = 'on'
-          AND coupon_use_yn = 'N')
-           OR
-            (#{button} = 'off'
-          AND coupon_use_yn = 'Y'));
+        WHERE coupon_use_yn IN ('N','Y')
+          AND CASE
+            WHEN #{button} = 'on' THEN coupon_use_yn = 'N'
+            WHEN #{button} = 'off' THEN coupon_use_yn = 'Y'
+            ELSE FALSE
+        END;
     </select>
 
+
+    <select id="user_info" parameterType="String" resultType="UserDto">
+        SELECT user_id, user_name, user_nickname, user_tel, user_birth, user_email
+        FROM user
+        WHERE user_id = #{user_id};
+    </select>
+
+
+    <update id="user_update" parameterType="UserDto">
+        UPDATE user
+        SET user_email    = #{user_email},
+            user_nickname = #{user_nickname},
+            user_password = #{user_password},
+            user_tel      = #{user_tel},
+            user_address  = #{user_address}
+        WHERE user_id = #{user_id};
+    </update>
+
+
+    <update id="coupon_update">
+        UPDATE coupon_user
+        SET coupon_use_yn = 'Y'
+        WHERE
+        <![CDATA[coupon_expire_at < now();]]>
+    </update>
 
 </mapper>

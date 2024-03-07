@@ -4,6 +4,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.InquiryDto;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -88,6 +89,12 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
+    public UserDto user_info(String id) throws Exception {
+        return session.selectOne(namespace + "user_info", id);
+    }
+
+
+    @Override
     public TicketingDto ticket_detail(String ticketing_id) throws Exception {
         return session.selectOne(namespace + "ticket_detail", ticketing_id);
     }
@@ -95,6 +102,16 @@ public class mypageImpl implements mypageDAO {
     @Override
     public int update_coupon(CouponDto CouponDto) throws Exception {
         return session.update(namespace + "update_coupon", CouponDto);
+    }
+
+    @Override
+    public int user_update(UserDto userDto) throws Exception {
+        return session.update(namespace + "user_update", userDto);
+    }
+
+    @Override
+    public int coupon_update() throws Exception {
+        return session.update(namespace + "coupon_update");
     }
 
 

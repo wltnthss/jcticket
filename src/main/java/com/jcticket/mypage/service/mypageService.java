@@ -3,6 +3,7 @@ package com.jcticket.mypage.service;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,10 @@ public interface mypageService {
     List<TicketingDto> select_view(Map map) throws Exception;
     TicketingDto ticket_detail(String ticketing_id) throws Exception;
 
+    UserDto user_info(String id) throws Exception;
     Integer update_coupon (CouponDto couponDto) throws Exception;
+
+    Integer coupon_update () throws Exception;
+    Integer user_update (UserDto userDto) throws Exception;
 
 }

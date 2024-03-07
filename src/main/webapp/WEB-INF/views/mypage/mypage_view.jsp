@@ -15,6 +15,23 @@
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
+
+        <%--  공통부분 CSS      --%>
+        #container {
+            width: 1200px;
+            height: 900px;
+            margin: auto;
+        }
+
+        #con {
+            width: 950px;
+            height: 1200px;
+            float: left;
+            margin: 0px 20px;
+        }
+
+        <%--        --%>
+
         #viewing {
             width: 700px;
             height: 150px;
@@ -136,7 +153,7 @@
                         <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                         <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                         <a href="/mypageclient"><h3>문의사항</h3></a>
-                        <a href="/signup"><h3>회원정보 수정</h3></a>
+                        <a href="/modifying"><h3>회원정보 수정</h3></a>
                         <a href="/withdraw"><h3>회원탈퇴</h3></a>
                     </div>
 

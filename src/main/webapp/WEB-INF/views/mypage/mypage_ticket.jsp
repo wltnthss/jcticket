@@ -16,24 +16,55 @@
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
+
+        <%--  공통부분 CSS      --%>
+        #container {
+            width: 1200px;
+            height: 900px;
+            margin: auto;
+        }
+
+        #con {
+            width: 950px;
+            height: 1200px;
+            float: left;
+            margin: 0px 20px;
+        }
+
+        <%--        --%>
+
         #client > ul {
             list-style: none;
         }
 
         #select-date {
-            width: 690px;
-            height: 100px;
+            width: 850px;
+            height: 150px;
             margin: 20px auto;
-            border: 1px solid #dddddd;
-            background-color: #dddddd;
+            border-style: outset;
+            border: 1px solid #BDBDBD;
+            background-color: #eeeeee;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .month {
+            width: 50px;
+            height: 30px;
         }
 
         #select-date > p {
+            font-size: 20px;
+            font-weight: bold;
             margin: 5px 5px;
             display: inline-block;
         }
 
         #select-date > ul {
+            margin: 0px 300px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
             list-style: none;
         }
 
@@ -49,7 +80,7 @@
         #note {
             padding-left: 5px;
             text-align: left;
-            font-size: 12px;
+            font-size: 15px;
             margin: 20px 0;
         }
 
@@ -86,11 +117,51 @@
         }
 
         #submit {
-            font-size: 16px;
-            bottom: 40px;
-            color: #666;
+            background-color: #fafafa;
+            border-radius: 5px;
+            width: 100px;
+            height: 25px;
             font-weight: bold;
         }
+
+        #start_date, #end_date {
+            width: 202px;
+            height: 25px;
+        }
+        #option {
+            width: 150px;
+            height: 25px;
+        }
+
+        #ticketing {
+            text-align: center;
+            margin: 20px 0px;
+        }
+
+        #ticketing > table {
+            width: 820px;
+            margin: 0px 51px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        td:nth-child(2n), th:nth-child(2n){
+            background-color: #fafafa;
+        }
+        td:nth-child(2n-1), th:nth-child(2n-1){
+            background-color: #eeeeee;
+        }
+
+        #paging {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #paging > a {
+            text-decoration-line: none;
+        }
+
+
     </style>
 
 
@@ -162,7 +233,7 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
+                            <a href="/modifying"><h3>회원정보 수정</h3></a>
                             <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
@@ -182,22 +253,22 @@
 
                         <h3>예매확인/취소</h3>
                     <div id="select-date">
-                        <p>전재승님의 최근 1개월 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
+                        <p>전재승님의 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
                         <br>
                         <p>기간별 조회</p>
                         <ul>
-                        <li><button id="1month">1개월</button></li>
-                        <li><button id="3month">3개월</button></li>
-                        <li><button id="6month">6개월</button></li>
+                        <li><button class="month" id="1month">1개월</button></li>
+                        <li><button class="month" id="3month">3개월</button></li>
+                        <li><button class="month" id="6month">6개월</button></li>
                        </ul>
                         <form action="/mypageticket" method="get">
                             <input name="start_date" id="start_date" type="date"> ~ <input name="end_date" id="end_date" type="date">
-                            <select name="option">
+                            <select name="option" id="option">
                                 <option value="A">전체</option>
                                 <option value="Y">예매확인</option>
                                 <option value="C">예매취소</option>
                             </select>
-                            <input type="submit" value="조회">
+                            <input id="submit" type="submit" value="조회">
                         </form>
                     </div>
 
