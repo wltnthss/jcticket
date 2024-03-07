@@ -79,9 +79,10 @@
     <div class="pf-kvslide-wrap">
         <div class="pf-kvslide">
                 <%--슬라이드-공연1--%>
+            <c:forEach items="${list}" var="p"  begin="1" end="13">
             <div class="kv-item" id="kv-item1">
-                <a href="공연상세페이지1">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_mv_48485_349fd8.jpg/dims/quality/70/" alt class="lazyload">
+            <a href="공연상세페이지1">
+                <img src="<c:url value='/index/upload/${p.img_name}'/>">
                 </a>
                 <a class="pf-kv-text white" href="공연상세페이지1">
                     <p class="sub-tit"></p>
@@ -89,44 +90,47 @@
                     <p class="info-tit"></p>
                 </a>
             </div>
+            </c:forEach>
                 <%--슬라이드-공연2--%>
-            <div class="kv-item">
-                <a href="공연상세페이지2">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">
-                </a>
-                <a class="pf-kv-text white" href="공연상세페이지2">
-                    <p class="sub-tit"></p>
-                    <p class="main-tit"></p>
-                    <p class="info-tit"></p>
-                </a>
-            </div>
-                <%--슬라이드-공연2--%>
-            <div class="kv-item">
-                <a href="공연상세페이지3">
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_82559c.jpg/dims/quality/70/" alt class="lazyload">
-                </a>
-                <a class="pf-kv-text white" href="공연상세페이지2">
-                    <p class="sub-tit"></p>
-                    <p class="main-tit"></p>
-                    <p class="info-tit"></p>
-                </a>
-            </div>
+<%--            <div class="kv-item">--%>
+<%--                <a href="공연상세페이지2">--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                </a>--%>
+<%--                <a class="pf-kv-text white" href="공연상세페이지2">--%>
+<%--                    <p class="sub-tit"></p>--%>
+<%--                    <p class="main-tit"></p>--%>
+<%--                    <p class="info-tit"></p>--%>
+<%--                </a>--%>
+<%--            </div>--%>
+<%--                &lt;%&ndash;슬라이드-공연2&ndash;%&gt;--%>
+<%--            <div class="kv-item">--%>
+<%--                <a href="공연상세페이지3">--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_82559c.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                </a>--%>
+<%--                <a class="pf-kv-text white" href="공연상세페이지2">--%>
+<%--                    <p class="sub-tit"></p>--%>
+<%--                    <p class="main-tit"></p>--%>
+<%--                    <p class="info-tit"></p>--%>
+<%--                </a>--%>
+<%--            </div>--%>
         </div>
                 <%-- 슬라이드 페이징 1--%>
         <div class="pf-kvslide-pager">
             <div class="pager-bg">
+                <c:forEach items="${list}" var="p"  begin="1" end="13">
                 <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_mv_48485_s.jpg/dims/quality/70/" alt class="lazyload">
+                    <img src="<c:url value='/index/upload/${p.img_name}'/>">
                     <span>1/10</span>
                 </a>
-                <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">
-                    <span>2/10</span>
-                </a>
-                <a href="#" class>
-                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_s.jpg/dims/quality/70/" alt class="lazyload">
-                    <span>3/10</span>
-                </a>
+                </c:forEach>
+<%--                <a href="#" class>--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202402/20240206/wel_mv_48552.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                    <span>2/10</span>--%>
+<%--                </a>--%>
+<%--                <a href="#" class>--%>
+<%--                    <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240119/wel_mv_48398_s.jpg/dims/quality/70/" alt class="lazyload">--%>
+<%--                    <span>3/10</span>--%>
+<%--                </a>--%>
             </div>
         </div>
 
@@ -203,7 +207,7 @@
             <div class="swiper-container ticketo swiper-container-initialized swiper-container-horizontal">
                 <div class="swiper-wrapper">
 
-                <c:forEach items="${list}" var="p"  begin="6" end="10">
+                <c:forEach items="${list}" var="p"  begin="7" end="7">
                     <div class="swiper-slide">
                         <a href="티켓 오픈 항목1">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
@@ -211,99 +215,108 @@
                                 <canvas id="chart-area14063" class="donut"></canvas>
                             </div>
                             <div class="donut-dday1">
-                                D-DAY
+                                D-${p.dday}
                             </div>
                             <div class="ticket-txt">
                                 <p class="ticket-date">
-                                    날짜
+                                    ${p.showing_date}
                                 </p>
                                 <p class="ticket-tit">
-                                    제목
+                                    ${p.play_name}
                                 </p>
                             </div>
                         </a>
                     </div>
                 </c:forEach>
-<%--                        --%>
-<%--                    <div class="swiper-slide">--%>
-<%--                        <a href="티켓 오픈 항목2">--%>
-<%--                            <img src="/resources/img/index/test1.png" alt class="lazyload">--%>
-<%--                            <div class="donut-area">--%>
-<%--                                <canvas id="chart-area14061" class="donut"></canvas>--%>
-<%--                            </div>--%>
-<%--                            <div class="donut-dday2">--%>
-<%--                                D-2--%>
-<%--                            </div>--%>
-<%--                            <div class="ticket-txt">--%>
-<%--                                <p class="ticket-date">--%>
-<%--                                    날짜--%>
-<%--                                </p>--%>
-<%--                                <p class="ticket-tit">--%>
-<%--                                    제목--%>
-<%--                                </p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
 
-<%--                    <div class="swiper-slide">--%>
-<%--                        <a href="티켓 오픈 항목3">--%>
-<%--                            <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
-<%--                            <div class="donut-area">--%>
-<%--                                <canvas id="chart-area14058" class="donut"></canvas>--%>
-<%--                            </div>--%>
-<%--                            <div class="donut-dday3">--%>
-<%--                                D-1--%>
-<%--                            </div>--%>
-<%--                            <div class="ticket-txt">--%>
-<%--                                <p class="ticket-date">--%>
-<%--                                    날짜--%>
-<%--                                </p>--%>
-<%--                                <p class="ticket-tit">--%>
-<%--                                    제목--%>
-<%--                                </p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
+                    <c:forEach items="${list}" var="p"  begin="8" end="8">
+                    <div class="swiper-slide">
+                        <a href="티켓 오픈 항목2">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
+                            <div class="donut-area">
+                                <canvas id="chart-area14061" class="donut"></canvas>
+                            </div>
+                            <div class="donut-dday2">
+                                D-${p.dday}
+                            </div>
+                            <div class="ticket-txt">
+                                <p class="ticket-date">
+                                    ${p.showing_date}
+                                </p>
+                                <p class="ticket-tit">
+                                    ${p.play_name}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    </c:forEach>
 
-<%--                    <div class="swiper-slide">--%>
-<%--                        <a href="티켓 오픈 항목4">--%>
-<%--                            <img src="/resources/img/index/test1.png" alt class="lazyload">--%>
-<%--                            <div class="donut-area">--%>
-<%--                                <canvas id="chart-area14051" class="donut"></canvas>--%>
-<%--                            </div>--%>
-<%--                            <div class="donut-dday4">--%>
-<%--                                D-3--%>
-<%--                            </div>--%>
-<%--                            <div class="ticket-txt">--%>
-<%--                                <p class="ticket-date">--%>
-<%--                                    날짜--%>
-<%--                                </p>--%>
-<%--                                <p class="ticket-tit">--%>
-<%--                                    제목--%>
-<%--                                </p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
+                    <c:forEach items="${list}" var="p"  begin="9" end="9">
+                    <div class="swiper-slide">
+                        <a href="티켓 오픈 항목3">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
+                            <div class="donut-area">
+                                <canvas id="chart-area14058" class="donut"></canvas>
+                            </div>
+                            <div class="donut-dday3">
+                                D-${p.dday}
+                            </div>
+                            <div class="ticket-txt">
+                                <p class="ticket-date">
+                                    ${p.showing_date}
+                                </p>
+                                <p class="ticket-tit">
+                                    ${p.play_name}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    </c:forEach>
 
-<%--                    <div class="swiper-slide">--%>
-<%--                        <a href="티켓 오픈 항목5">--%>
-<%--                            <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
-<%--                            <div class="donut-area">--%>
-<%--                                <canvas id="chart-area14040" class="donut"></canvas>--%>
-<%--                            </div>--%>
-<%--                            <div class="donut-dday5">--%>
-<%--                                D-3--%>
-<%--                            </div>--%>
-<%--                            <div class="ticket-txt">--%>
-<%--                                <p class="ticket-date">--%>
-<%--                                    날짜--%>
-<%--                                </p>--%>
-<%--                                <p class="ticket-tit">--%>
-<%--                                    제목--%>
-<%--                                </p>--%>
-<%--                            </div>--%>
-<%--                        </a>--%>
-<%--                    </div>--%>
+                    <c:forEach items="${list}" var="p"  begin="17" end="17">
+                    <div class="swiper-slide">
+                        <a href="티켓 오픈 항목4">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
+                            <div class="donut-area">
+                                <canvas id="chart-area14051" class="donut"></canvas>
+                            </div>
+                            <div class="donut-dday4">
+                                D-${p.dday}
+                            </div>
+                            <div class="ticket-txt">
+                                <p class="ticket-date">
+                                    ${p.showing_date}
+                                </p>
+                                <p class="ticket-tit">
+                                    ${p.play_name}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    </c:forEach>
+
+                    <c:forEach items="${list}" var="p"  begin="13" end="13">
+                    <div class="swiper-slide">
+                        <a href="티켓 오픈 항목5">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
+                            <div class="donut-area">
+                                <canvas id="chart-area14040" class="donut"></canvas>
+                            </div>
+                            <div class="donut-dday5">
+                                D-${p.dday}
+                            </div>
+                            <div class="ticket-txt">
+                                <p class="ticket-date">
+                                    ${p.showing_date}
+                                </p>
+                                <p class="ticket-tit">
+                                    ${p.play_name}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    </c:forEach>
+
                 </div>
             </div>
         </div>
