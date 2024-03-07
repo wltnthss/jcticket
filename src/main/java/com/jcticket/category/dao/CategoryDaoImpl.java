@@ -44,4 +44,14 @@ public class CategoryDaoImpl implements CategoryDao{
     public List<Map<String, Object>> selectClassicList() throws Exception {
         return session.selectList(namespace+"selectClassicList");
     }
+
+    @Override
+    public List<Map<String, Object>> selectMusicalAndPlayList() throws Exception {
+        return session.selectList(namespace+"selectMusicalAndPlayList");
+    }
+
+    @Override
+    public List<Map<String, Object>> selectConcertAndClassicList() throws Exception {
+        return session.selectList(namespace + "selectConcertAndClassicList");
+    }
 }

@@ -15,9 +15,13 @@ import java.util.Map;
  * 2024-03-06             jisoo Son             최초 생성
  */
 public interface CategoryDao {
-
+    // 카테고리별 회차 조회
     List<Map<String, Object>> selectConcertList() throws Exception;
     List<Map<String, Object>> selectMusicalList() throws Exception;
     List<Map<String, Object>> selectTheaterList() throws Exception;
     List<Map<String, Object>> selectClassicList() throws Exception;
+
+    // 메인 2개쌍 회차별 조회
+    List<Map<String, Object>> selectMusicalAndPlayList() throws Exception;
+    List<Map<String, Object>> selectConcertAndClassicList() throws Exception;
 }
