@@ -3,45 +3,33 @@
     margin: 0;
     padding: 0;
 }
-
 #wrap {
-
     height: 100%;
     padding: 0px 0px 500px 0px;
 }
-
 #container {
-    width: 960px;
+    width: 1200px;
     height: 900px;
     margin: auto;
 }
-
-
 #side {
     width: 210px;
     height: 900px;
     float: left;
 }
-
 #con {
-    width: 710px;
-    height: 820px;
+    width: 950px;
+    height: 800px;
     float: left;
     margin: 0px 20px;
 }
 
-/*<%--     mypage시작   --%>*/
-
-#container {
-    width: 960px;
-    height: 921px;
-}
 
 #side-mypage, #side-ticket, #side-client {
     display: inline-block;
 }
 
-/*<%--    예약관리 시작    --%>*/
+
 #ticket {
     margin: 10px 0px;
     padding-left: 5px;
@@ -58,9 +46,6 @@
     margin: 10px;
 }
 
-/*<%--    예약관리 끝    --%>*/
-
-/*<%--    클라이언트 시작    --%>*/
 #client {
     border: 5px solid #6699cc;
     border-radius: 5px;
@@ -78,34 +63,16 @@
 #client > ul > li {
     margin: 5px;
 }
+
 /* 공통 코드 끝 */
 
-/*<%--     mypage끝   --%>*/
 
 /* mypage_main 시작 */
 #ticketing {
     margin: 15px;
 }
 
-#ticketing > table {
-    margin: 10px 0px;
-    text-align: center;
-    font-size: 15px;
 
-}
-
-#ticketing th {
-    padding: 10px;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-}
-
-#ticketing td {
-    font-size: 14px;
-    font-weight: bold;
-    padding: 10px;
-    border-bottom: 1px solid;
-}
 
 /*<%--    ticketing 끝    --%>*/
 
@@ -130,7 +97,7 @@
     font-size: 20px;
     font-weight: bold;
     border: 5px solid;
-    width: 315px;
+    width: 425px;
 }
 
 #main_cupon > ul, #event > ul {
@@ -155,6 +122,7 @@
 
 #ticketing > table {
     margin: auto;
+    width: 700px;
     text-align: center;
     font-size: 15px;
 }
@@ -172,244 +140,97 @@
 
 /* mypage_main 끝 */
 
-
-/* mypage_ticket 시작 */
-
-#client > ul {
-    list-style: none;
-}
-
-#select-date {
-    width: 690px;
-    height: 100px;
-    margin: 20px auto;
-    border: 1px solid #dddddd;
-    background-color: #dddddd;
-}
-
-#select-date > p {
-    margin: 5px 5px;
-    display: inline-block;
-}
-
-#select-date > ul {
-    list-style: none;
-}
-
-#select-date > ul > li {
-    margin: 3px;
-    float: left;
-}
-
-#select-date > input {
-    width: 180px;
-}
-
-#note {
-    padding-left: 5px;
-    text-align: left;
-    font-size: 12px;
-    margin: 20px 0;
-}
-
-#note > hr {
-    height: 2px;
-    background: black;
-}
-
-#note > ul {
-    list-style: none;
-}
-
-#note > ul > li {
-    margin: 5px;
-}
-
-#paging {
-    text-align: center;
-}
-
-#search {
-    display: inline-block;
-    padding-left: 550px;
-}
-
-#search > select {
-    width: 100px;
-    height: 25px;
-}
-
-#search > input {
-    width: 40px;
-    height: 25px;
-}
-
-
-
-/* mypage_ticket 끝*/
-
-/* mypage_view 시작 */
-
-
-/*#viewing {*/
-/*    width: 700px;*/
-/*    height: 150px;*/
-/*    border: 1px solid;*/
-/*}*/
-
-/*#viewing > p {*/
-/*    font-size: 14px;*/
-/*    padding: 15px;*/
-/*}*/
-
-/*#view-date {*/
-/*    margin: 5px 15px;*/
-/*}*/
-
-
-/*#view-date > input {*/
-/*    width: 160px;*/
-/*    height: 25px;*/
-/*}*/
-
-/*#view-select {*/
-/*    display: inline-block;*/
-/*    margin-left: 40px;*/
-/*}*/
-
-/*#view-select > select {*/
-/*    width: 165px;*/
-/*    height: 25px;*/
-/*}*/
-
-/*#view-nmae {*/
-/*    display: inline-block;*/
-/*    margin: 20px 0px;*/
-/*}*/
-
-/*#view-nmae > input {*/
-/*    width: 230px;*/
-/*    height: 25px;*/
-/*}*/
-
-/*#view-nmae > a {*/
-/*    border-radius: 3px;*/
-/*    color: #dddddd;*/
-/*    text-decoration: none;*/
-/*    margin-left: 5px;*/
-/*    padding-left: 5px;*/
-/*    padding-right: 5px;*/
-/*    padding-bottom: 5px;*/
-/*    border: 1px solid #444444;*/
-/*    background-color: #444444;*/
-/*}*/
-
-
-/*#show-img {*/
-/*    width: 100%;*/
-/*    display: inline-block;*/
-/*}*/
-
-/*#show-img > a > img {*/
-/*    margin: 10px 5px;*/
-/*    width: 200px;*/
-/*    height: 300px;*/
-/*}*/
-
-/* mypage_view 끝 */
-
-
 /* mypage_cupon 시작*/
 
 
-#cupon {
-    margin: 10px 0px;
-    font-size: 13px;
-}
+/*#cupon {*/
+/*    margin: 10px 0px;*/
+/*    font-size: 13px;*/
+/*}*/
 
-#cupon > p {
-    margin-top: 15px;
-}
-
-
-#cupon-input {
-    margin: 20px 0px;
-    width: auto;
-    height: 140px;
-    background-color: lightgray;
-    display: flex;
-}
-
-#cupon-input > h2 {
-    margin-top: 52px;
-    margin-left: 70px;
-}
-
-#cupon-input > input {
-    font-size: 20px;
-    margin: 45px 0px;
-    margin-left: 10px;
-    width: 300px;
-    height: 45px;
-    border: 3px solid;
-}
-
-#cupon-input > button {
-    font-size: 20px;
-    margin: 45px 0px;
-    margin-left: 10px;
-    width: 100px;
-    height: 45px;
-    border: 3px solid;
-}
-
-#h2-tag {
-    margin-left: 5px;
-
-    display: flex;
-}
-
-#h2-tag > a {
-    text-decoration: none;
-    margin: 10px;
-}
+/*#cupon > p {*/
+/*    margin-top: 15px;*/
+/*}*/
 
 
-#cupon-list {
-    border-top: 3px solid;
+/*#cupon-input {*/
+/*    margin: 20px 0px;*/
+/*    width: auto;*/
+/*    height: 140px;*/
+/*    background-color: lightgray;*/
+/*    display: flex;*/
+/*}*/
 
-}
+/*#cupon-input > h2 {*/
+/*    margin-top: 52px;*/
+/*    margin-left: 70px;*/
+/*}*/
 
-#cupon-list th {
-    border-bottom: 1px solid;
-    padding: 10px;
-}
+/*#cupon-input > input {*/
+/*    font-size: 20px;*/
+/*    margin: 45px 0px;*/
+/*    margin-left: 10px;*/
+/*    width: 300px;*/
+/*    height: 45px;*/
+/*    border: 3px solid;*/
+/*}*/
 
-#cupon-list td {
-    font-size: 14px;
-    border-bottom: 1px solid;
-    padding: 10px;
-}
+/*#cupon-input > button {*/
+/*    font-size: 20px;*/
+/*    margin: 45px 0px;*/
+/*    margin-left: 10px;*/
+/*    width: 100px;*/
+/*    height: 45px;*/
+/*    border: 3px solid;*/
+/*}*/
 
-#cupon-use {
-    border: 1px solid;
-    margin: 20px 0px;
-    width: 700px;
-    height: 250px;
-    background-color: #6699cc;
-}
+/*#h2-tag {*/
+/*    margin-left: 5px;*/
 
-#cupon-use > h4 {
-    margin: 10px;
-}
+/*    display: flex;*/
+/*}*/
 
-#cupon-use > ul {
-    list-style: none;
-}
+/*#h2-tag > a {*/
+/*    text-decoration: none;*/
+/*    margin: 10px;*/
+/*}*/
 
-#cupon-use > ul > li {
-    margin: 5px;
-}
+
+/*#cupon-list {*/
+/*    border-top: 3px solid;*/
+
+/*}*/
+
+/*#cupon-list th {*/
+/*    border-bottom: 1px solid;*/
+/*    padding: 10px;*/
+/*}*/
+
+/*#cupon-list td {*/
+/*    font-size: 14px;*/
+/*    border-bottom: 1px solid;*/
+/*    padding: 10px;*/
+/*}*/
+
+/*#cupon-use {*/
+/*    border: 1px solid;*/
+/*    margin: 20px 0px;*/
+/*    width: 700px;*/
+/*    height: 250px;*/
+/*    background-color: #6699cc;*/
+/*}*/
+
+/*#cupon-use > h4 {*/
+/*    margin: 10px;*/
+/*}*/
+
+/*#cupon-use > ul {*/
+/*    list-style: none;*/
+/*}*/
+
+/*#cupon-use > ul > li {*/
+/*    margin: 5px;*/
+/*}*/
 
 
 /* mypage_cupon 끝*/

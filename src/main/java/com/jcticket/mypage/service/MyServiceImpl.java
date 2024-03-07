@@ -1,7 +1,10 @@
 package com.jcticket.mypage.service;
 
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,6 @@ import java.util.Map;
  */
 
 
-
 @Service
 public class MyServiceImpl implements mypageService {
 
@@ -35,13 +37,33 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public Integer coupon_count(Map map) throws Exception {
+        return mypageDAO.coupon_count(map);
+    }
+
+    @Override
     public Integer view_count(Map map) throws Exception {
         return mypageDAO.view_count(map);
     }
 
     @Override
+    public Integer coupon_insert(UserCouponDto userCouponDto) throws Exception {
+        return mypageDAO.coupon_insert(userCouponDto);
+    }
+
+    @Override
+    public CouponDto coupon_select(String coupon_id) throws Exception {
+        return mypageDAO.coupon_select(coupon_id);
+    }
+
+    @Override
     public List<TicketingDto> selectAll(Map map) throws Exception {
         return mypageDAO.selectAll(map);
+    }
+
+    @Override
+    public List<UserCouponDto> coupon_list(Map map) throws Exception {
+        return mypageDAO.coupon_list(map);
     }
 
     @Override
@@ -57,7 +79,31 @@ public class MyServiceImpl implements mypageService {
     public List<TicketingDto> select_view(Map map) throws Exception {
         return mypageDAO.select_view(map);
     }
+    @Override
+    public TicketingDto ticket_detail(String ticketing_id) throws Exception {
+        return mypageDAO.ticket_detail(ticketing_id);
+    }
 
+    @Override
+    public UserDto user_info(String id) throws Exception {
+        return mypageDAO.user_info(id);
+    }
+
+
+    @Override
+    public Integer update_coupon(CouponDto couponDto) throws Exception {
+        return mypageDAO.update_coupon(couponDto);
+    }
+
+    @Override
+    public Integer coupon_update() throws Exception {
+        return mypageDAO.coupon_update();
+    }
+
+    @Override
+    public Integer user_update(UserDto userDto) throws Exception {
+        return mypageDAO.user_update(userDto);
+    }
 
 
 }

@@ -73,65 +73,17 @@
         <div class="m2-kv">
             <div class="swiper-container m2-kvs">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test1.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명1</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test2.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명2</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test1.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명3</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test2.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명4</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test1.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명5</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="공연상세페이지" target="_self">
-                            <img src="/resources/img/index/test2.png">
-                            <div class="m2-kvs-txt">
-                                <p class="m2-kvs-tit">공연명6</p>
-                                <p class="m2-kvs-detail">공연시간</p>
-                            </div>
-                        </a>
-                    </div>
+                    <c:forEach items="${list}" var="li" begin="1" end="6">
+                        <div class="swiper-slide">
+                            <a href="공연상세페이지" target="_self">
+                                <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="120" height="120">
+                                <div class="m2-kvs-txt">
+                                    <p class="m2-kvs-tit">${li.play_name}</p>
+                                    <p class="m2-kvs-detail">${li.showing_period_date}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
                 </div>
                 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
             </div>
@@ -149,51 +101,16 @@
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
-            <a href="musical/play 항목 1">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
+            <c:forEach items="${list}" var="li" begin="1" end="5">
+                <a href="musical/play 항목 1">
+                    <div class="wing-box">
+                        <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
+                        <div class="wing-list-txt">
+                            <p class="wlist-tit">${li.play_name}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 2">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 3">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 4">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 5">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
+                </a>
+            </c:forEach>
         </div>
     </div>
 </section>

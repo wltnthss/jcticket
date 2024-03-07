@@ -156,7 +156,8 @@ public class TicketingServiceImplTest {
             System.out.println(dto.getCouponName());
             System.out.println(dto.getCouponDiscount());
             System.out.println(dto.getMinOrder());
-            System.out.println(dto.getDescription());
+            System.out.println(dto.getDiscription());
+            System.out.println(dto.getUseCondition());
             System.out.println(dto.getCouponUseableStartDate());
             System.out.println(dto.getCouponUseableEndDate());
         }

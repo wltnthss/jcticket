@@ -1,26 +1,27 @@
-package com.jcticket.dto;
+package com.jcticket.mypage.dto;
 
 import lombok.*;
 
 import java.sql.Timestamp;
 
 /**
- * packageName    : com.jcticket.dto
- * fileName       : CouponUser
- * author         : 조영상
- * date           : 3/5/24
+ * packageName    : com.jcticket.mypage.dto
+ * fileName       : UserCouponDto
+ * author         : JJS
+ * date           : 2024-02-26
  * description    : 자동 주석 생성
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 3/5/24         조영상        최초 생성
+ * 2024-02-26        JJS       최초 생성
  */
+
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
-@AllArgsConstructor
 @EqualsAndHashCode
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class UserCouponDto {
     private String user_coupon_id;          // 쿠폰-유저 아이디
@@ -34,4 +35,5 @@ public class UserCouponDto {
     private String created_id;              // 최초등록 아이디
     private Timestamp updated_at;           // 최종변경 일자
     private String updated_id;              // 최종변경 아이디
-}
+    }
+

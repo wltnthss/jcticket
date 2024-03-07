@@ -1,7 +1,7 @@
 package com.jcticket.ticketing.service;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.dto.UserCouponDto;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
@@ -175,7 +175,8 @@ public class TicketingServiceImpl implements TicketingService{
                    .couponName(couponDto.getCoupon_name())
                    .couponDiscount(couponDto.getCoupon_discount_amount())
                    .minOrder(couponDto.getCoupon_min_order_amount())
-                   .description(couponDto.getCoupon_description())
+                   .discription(couponDto.getCoupon_description())
+                   .useCondition(couponDto.getCoupon_use_condition())
                    .couponUseableStartDate(couponDto.getCoupon_useable_start_at())
                    .couponUseableEndDate(couponDto.getCoupon_useable_end_at())
                    .build();

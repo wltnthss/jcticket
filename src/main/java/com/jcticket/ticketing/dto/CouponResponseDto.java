@@ -26,7 +26,8 @@ public class CouponResponseDto {
     private String couponName;
     private int couponDiscount;
     private int minOrder;
-    private String description;
+    private String discription;
+    private String useCondition;
     private String couponUseableStartDate;
     private String couponUseableEndDate;
 }
