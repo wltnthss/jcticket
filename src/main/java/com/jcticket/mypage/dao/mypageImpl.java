@@ -1,7 +1,10 @@
 package com.jcticket.mypage.dao;
 
+import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.InquiryDto;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,6 +59,11 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
+    public List<UserCouponDto> coupon_list(Map map) throws Exception {
+        return session.selectList(namespace + "coupon_list", map);
+    }
+
+    @Override
     public int insert(TicketingDto ticketingDto) throws Exception {
         return session.insert(namespace + "insert", ticketingDto);
     }
@@ -63,6 +71,47 @@ public class mypageImpl implements mypageDAO {
     @Override
     public int insert_InquiryDto(InquiryDto inquiryDto) throws Exception {
         return session.insert(namespace + "Inquiry_insert", inquiryDto);
+    }
+
+    @Override
+    public int coupon_insert(UserCouponDto userCouponDto) throws Exception {
+        return session.insert(namespace + "coupon_insert" ,userCouponDto);
+    }
+
+    @Override
+    public int coupon_count(Map map) throws Exception {
+        return session.selectOne(namespace + "coupon_count", map);
+    }
+
+    @Override
+    public CouponDto coupon_select(String coupon_id) throws Exception {
+        return session.selectOne(namespace + "coupon_select", coupon_id);
+    }
+
+    @Override
+    public UserDto user_info(String id) throws Exception {
+        return session.selectOne(namespace + "user_info", id);
+    }
+
+
+    @Override
+    public TicketingDto ticket_detail(String ticketing_id) throws Exception {
+        return session.selectOne(namespace + "ticket_detail", ticketing_id);
+    }
+
+    @Override
+    public int update_coupon(CouponDto CouponDto) throws Exception {
+        return session.update(namespace + "update_coupon", CouponDto);
+    }
+
+    @Override
+    public int user_update(UserDto userDto) throws Exception {
+        return session.update(namespace + "user_update", userDto);
+    }
+
+    @Override
+    public int coupon_update() throws Exception {
+        return session.update(namespace + "coupon_update");
     }
 
 

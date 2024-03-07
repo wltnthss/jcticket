@@ -175,7 +175,8 @@ public class TicketingServiceImpl implements TicketingService{
                    .couponName(couponDto.getCoupon_name())
                    .couponDiscount(couponDto.getCoupon_discount_amount())
                    .minOrder(couponDto.getCoupon_min_order_amount())
-                   .description(couponDto.getCoupon_description())
+                   .discription(couponDto.getCoupon_description())
+                   .useCondition(couponDto.getCoupon_use_condition())
                    .couponUseableStartDate(couponDto.getCoupon_useable_start_at())
                    .couponUseableEndDate(couponDto.getCoupon_useable_end_at())
                    .build();
