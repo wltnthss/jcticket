@@ -167,7 +167,7 @@
                     </div>
                 </li>
                     <%-- 왓츠핫 작은항목1 --%>
-                    <c:forEach items="${list}" var="p">
+                    <c:forEach items="${list}" var="p"  begin="1" end="6">
                     <li>
                         <div class="whot-list">
                             <a>
@@ -202,9 +202,11 @@
         <div class="cont">
             <div class="swiper-container ticketo swiper-container-initialized swiper-container-horizontal">
                 <div class="swiper-wrapper">
+
+                <c:forEach items="${list}" var="p"  begin="6" end="10">
                     <div class="swiper-slide">
                         <a href="티켓 오픈 항목1">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14063" class="donut"></canvas>
                             </div>
@@ -221,86 +223,87 @@
                             </div>
                         </a>
                     </div>
+                </c:forEach>
+<%--                        --%>
+<%--                    <div class="swiper-slide">--%>
+<%--                        <a href="티켓 오픈 항목2">--%>
+<%--                            <img src="/resources/img/index/test1.png" alt class="lazyload">--%>
+<%--                            <div class="donut-area">--%>
+<%--                                <canvas id="chart-area14061" class="donut"></canvas>--%>
+<%--                            </div>--%>
+<%--                            <div class="donut-dday2">--%>
+<%--                                D-2--%>
+<%--                            </div>--%>
+<%--                            <div class="ticket-txt">--%>
+<%--                                <p class="ticket-date">--%>
+<%--                                    날짜--%>
+<%--                                </p>--%>
+<%--                                <p class="ticket-tit">--%>
+<%--                                    제목--%>
+<%--                                </p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
 
-                    <div class="swiper-slide">
-                        <a href="티켓 오픈 항목2">
-                            <img src="/resources/img/index/test1.png" alt class="lazyload">
-                            <div class="donut-area">
-                                <canvas id="chart-area14061" class="donut"></canvas>
-                            </div>
-                            <div class="donut-dday2">
-                                D-2
-                            </div>
-                            <div class="ticket-txt">
-                                <p class="ticket-date">
-                                    날짜
-                                </p>
-                                <p class="ticket-tit">
-                                    제목
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+<%--                    <div class="swiper-slide">--%>
+<%--                        <a href="티켓 오픈 항목3">--%>
+<%--                            <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                            <div class="donut-area">--%>
+<%--                                <canvas id="chart-area14058" class="donut"></canvas>--%>
+<%--                            </div>--%>
+<%--                            <div class="donut-dday3">--%>
+<%--                                D-1--%>
+<%--                            </div>--%>
+<%--                            <div class="ticket-txt">--%>
+<%--                                <p class="ticket-date">--%>
+<%--                                    날짜--%>
+<%--                                </p>--%>
+<%--                                <p class="ticket-tit">--%>
+<%--                                    제목--%>
+<%--                                </p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
 
-                    <div class="swiper-slide">
-                        <a href="티켓 오픈 항목3">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
-                            <div class="donut-area">
-                                <canvas id="chart-area14058" class="donut"></canvas>
-                            </div>
-                            <div class="donut-dday3">
-                                D-1
-                            </div>
-                            <div class="ticket-txt">
-                                <p class="ticket-date">
-                                    날짜
-                                </p>
-                                <p class="ticket-tit">
-                                    제목
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+<%--                    <div class="swiper-slide">--%>
+<%--                        <a href="티켓 오픈 항목4">--%>
+<%--                            <img src="/resources/img/index/test1.png" alt class="lazyload">--%>
+<%--                            <div class="donut-area">--%>
+<%--                                <canvas id="chart-area14051" class="donut"></canvas>--%>
+<%--                            </div>--%>
+<%--                            <div class="donut-dday4">--%>
+<%--                                D-3--%>
+<%--                            </div>--%>
+<%--                            <div class="ticket-txt">--%>
+<%--                                <p class="ticket-date">--%>
+<%--                                    날짜--%>
+<%--                                </p>--%>
+<%--                                <p class="ticket-tit">--%>
+<%--                                    제목--%>
+<%--                                </p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
 
-                    <div class="swiper-slide">
-                        <a href="티켓 오픈 항목4">
-                            <img src="/resources/img/index/test1.png" alt class="lazyload">
-                            <div class="donut-area">
-                                <canvas id="chart-area14051" class="donut"></canvas>
-                            </div>
-                            <div class="donut-dday4">
-                                D-3
-                            </div>
-                            <div class="ticket-txt">
-                                <p class="ticket-date">
-                                    날짜
-                                </p>
-                                <p class="ticket-tit">
-                                    제목
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="티켓 오픈 항목5">
-                            <img src="/resources/img/index/test2.png" alt class="lazyload">
-                            <div class="donut-area">
-                                <canvas id="chart-area14040" class="donut"></canvas>
-                            </div>
-                            <div class="donut-dday5">
-                                D-3
-                            </div>
-                            <div class="ticket-txt">
-                                <p class="ticket-date">
-                                    날짜
-                                </p>
-                                <p class="ticket-tit">
-                                    제목
-                                </p>
-                            </div>
-                        </a>
-                    </div>
+<%--                    <div class="swiper-slide">--%>
+<%--                        <a href="티켓 오픈 항목5">--%>
+<%--                            <img src="/resources/img/index/test2.png" alt class="lazyload">--%>
+<%--                            <div class="donut-area">--%>
+<%--                                <canvas id="chart-area14040" class="donut"></canvas>--%>
+<%--                            </div>--%>
+<%--                            <div class="donut-dday5">--%>
+<%--                                D-3--%>
+<%--                            </div>--%>
+<%--                            <div class="ticket-txt">--%>
+<%--                                <p class="ticket-date">--%>
+<%--                                    날짜--%>
+<%--                                </p>--%>
+<%--                                <p class="ticket-tit">--%>
+<%--                                    제목--%>
+<%--                                </p>--%>
+<%--                            </div>--%>
+<%--                        </a>--%>
+<%--                    </div>--%>
                 </div>
             </div>
         </div>
