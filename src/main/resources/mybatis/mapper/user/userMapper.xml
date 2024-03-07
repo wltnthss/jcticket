@@ -29,23 +29,42 @@
     </select>
 
     <select id="selectImg" resultType="Map">
-        SELECT
+        select
             pimg.play_poster_stored_file_name as img_name ,
             p.play_name as play_name ,
             p.play_id as play_id ,
-            s.showing_date as showing_date,
-            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
             DATEDIFF(s.showing_date, CURDATE()) as dday
-        FROM
+        from
             play p
-                LEFT JOIN play_image pimg ON
-                p.play_id = pimg.play_id
-                LEFT JOIN showing s ON
-                p.play_id = s.play_id
-        WHERE
+                left join play_image pimg on p.play_id = pimg.play_id
+                left join
+            (
+                SELECT
+                    s1.play_id,
+                    min(s1.showing_date) showing_date,
+                    s1.showing_start_at showing_start_at,
+                    s1.showing_end_at showing_end_at,
+                    CONCAT(DATE_FORMAT(s1.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s1.showing_end_at, '%Y-%m-%d')) as showing_period_date
+                FROM
+                    showing s1
+                        left JOIN (
+                        SELECT
+                            play_id,
+                            MIN(showing_date) AS min_showing_date
+                        FROM
+                            showing
+                        GROUP BY
+                            play_id
+                    ) s2 on s1.play_id = s2.play_id
+                group by
+                    s1.play_id, s1.showing_start_at, s1.showing_end_at, showing_period_date
+            ) s on p.play_id = s.play_id
+        where
             1=1
-          AND s.showing_info IS NOT null
-        GROUP BY p.play_id
+          and s.showing_period_date is not null
+        group by
+            p.play_id  ,img_name, p.play_name, showing_period_date, showing_start_at, showing_end_at, dday
     </select>
 
 

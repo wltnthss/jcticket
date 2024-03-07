@@ -29,7 +29,7 @@
                 <div class="swiper-wrapper">
                     <c:forEach items="${list}" var="li" begin="1" end="6">
                         <div class="swiper-slide">
-                            <a href="공연상세페이지" target="_self">
+                            <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="120" height="120">
                                 <div class="m2-kvs-txt">
                                     <p class="m2-kvs-tit">${li.play_name}</p>
@@ -56,7 +56,7 @@
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
             <c:forEach items="${list}" var="li" begin="1" end="5">
-                <a href="musical/play 항목 1">
+                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                     <div class="wing-box">
                         <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="80" height="100">
                         <div class="wing-list-txt">

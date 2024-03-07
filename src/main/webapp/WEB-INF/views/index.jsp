@@ -180,7 +180,7 @@
                     <c:forEach items="${list}" var="p"  begin="1" end="6">
                     <li>
                         <div class="whot-list">
-                            <a>
+                            <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${p.img_name}'/>" alt="" width="100" height="120">
                                 <div class="whot-list-txt">
                                     <div>
@@ -215,7 +215,7 @@
 
                 <c:forEach items="${list}" var="p"  begin="7" end="7">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목1">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14063" class="donut"></canvas>
@@ -237,7 +237,7 @@
 
                     <c:forEach items="${list}" var="p"  begin="8" end="8">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목2">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14061" class="donut"></canvas>
@@ -259,7 +259,7 @@
 
                     <c:forEach items="${list}" var="p"  begin="9" end="9">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목3">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14058" class="donut"></canvas>
@@ -281,7 +281,7 @@
 
                     <c:forEach items="${list}" var="p"  begin="17" end="17">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목4">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14051" class="donut"></canvas>
@@ -303,7 +303,7 @@
 
                     <c:forEach items="${list}" var="p"  begin="13" end="13">
                     <div class="swiper-slide">
-                        <a href="티켓 오픈 항목5">
+                        <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
                             <div class="donut-area">
                                 <canvas id="chart-area14040" class="donut"></canvas>
@@ -359,7 +359,7 @@
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
             <c:forEach items="${musiCalAndPlayList}" var="li" begin="1" end="6">
-                <a href="musical/play 항목 1">
+                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                     <div class="wing-box">
                         <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
                         <div class="wing-list-txt">
@@ -382,7 +382,7 @@
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-02">
             <c:forEach items="${concertAndClassicList}" var="li" begin="1" end="6">
-                <a href="musical/play 항목 1">
+                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                     <div class="wing-box">
                         <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
                         <div class="wing-list-txt">
