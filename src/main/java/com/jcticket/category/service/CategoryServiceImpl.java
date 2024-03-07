@@ -43,4 +43,14 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Map<String, Object>> selectClassicList() throws Exception {
         return categoryDao.selectClassicList();
     }
+
+    @Override
+    public List<Map<String, Object>> selectMusicalAndPlayList() throws Exception {
+        return categoryDao.selectMusicalAndPlayList();
+    }
+
+    @Override
+    public List<Map<String, Object>> selectConcertAndClassicList() throws Exception {
+        return categoryDao.selectConcertAndClassicList();
+    }
 }
