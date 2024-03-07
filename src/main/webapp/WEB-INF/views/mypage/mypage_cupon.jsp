@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -13,6 +14,158 @@
     <link href="/resources/css/mypage/mypage.css" rel="stylesheet">
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
+    <style>
+
+        <%--  공통부분 CSS      --%>
+        #container {
+            width: 1200px;
+            height: 900px;
+            margin: auto;
+        }
+
+        #con {
+            width: 950px;
+            height: 1200px;
+            float: left;
+            margin: 0px 20px;
+        }
+
+        <%--        --%>
+
+        #cupon {
+            margin: 10px 0px;
+            font-size: 13px;
+        }
+
+        #cupon > p {
+            margin-top: 15px;
+        }
+
+
+        #cupon-input {
+            border: 5px solid #fafafa;
+            margin: 20px 0px;
+            width: auto;
+            height: 110px;
+            background-color: lightgray;
+            display: flex;
+            align-content: flex-start;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            border-radius: 5px;
+        }
+
+        #cupon-input > input {
+            width: 200px;
+        }
+
+
+
+        #cupon-input > input {
+            font-size: 20px;
+            margin: 45px 0px;
+            margin-left: 10px;
+            width: 300px;
+            height: 45px;
+            border: 3px solid;
+        }
+
+        #cupon-input > button {
+            font-size: 20px;
+            margin: 45px 0px;
+            margin-left: 10px;
+            width: 100px;
+            height: 45px;
+            border: 3px solid;
+        }
+
+        #h2-tag {
+            margin-left: 5px;
+
+            display: flex;
+        }
+
+        #h2-tag > a {
+            text-decoration: none;
+            margin: 10px;
+
+        }
+
+        #h2-tag  h3 {
+            border-radius: 5px;
+            width: 200px;
+            height: 25px;
+        }
+
+
+        #cupon-list {
+            border-top: 3px solid;
+        }
+
+        #cupon_list > table {
+            width: 940px;
+        }
+
+        #cupon-list th {
+            border-bottom: 1px solid;
+            padding: 10px;
+        }
+
+        #cupon-list td {
+            font-size: 14px;
+            border-bottom: 1px solid;
+            padding: 10px;
+        }
+
+        #cupon-use {
+            border: 1px solid;
+            margin: 20px 0px;
+            width: 700px;
+            height: 250px;
+            background-color: #6699cc;
+        }
+
+        #cupon-use > h4 {
+            margin: 10px;
+        }
+
+        #cupon-use > ul {
+            list-style: none;
+        }
+
+        #cupon-use > ul > li {
+            margin: 5px;
+        }
+
+        #coupon_insert {
+            width: 300px;
+            height: 35px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #insert_btn {
+            width: 100px;
+            height: 35px;
+        }
+
+        #coupon_table {
+            width: 940px;
+        }
+
+
+
+        #paging {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #paging > a {
+            text-decoration-line: none;
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="../common/header.jsp"></jsp:include>
@@ -40,7 +193,8 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href=""><h3>회원정보 수정</h3></a>
+                            <a href="/modifying"><h3>회원정보 수정</h3></a>
+                            <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
                         <div id="client">
@@ -57,56 +211,101 @@
                 </aside>
                 <article id="con">
                     <h3>할인쿠폰/예매권</h3>
-                    <div id="cupon">
-                        <a href=""><img src="/resources/img/mypage/tab_02_ov.gif"></a>
-                        <a href=""><img src="/resources/img/mypage/tab_01_ov.gif"></a>
-                        <p>전재승 님이 가지고 계신 할인쿠폰 번호 12자리를 입력해 주세요. 예매 시 쿠폰에 기재된 금액만큼 할인해드립니다.</p>
-                    </div>
+
 
                     <div id="cupon-input">
                         <h2>공연 할인쿠폰</h2>
-
-                        <input type="text">
-                        <button>등록하기</button>
+                        <form action="/mypagecupon" method="get">
+                        <input id="coupon_insert" type="text" name="coupon_id">
+                        <input id="insert_btn" type="submit" value="등록">
+                        </form>
                     </div>
 
                     <div id="h2-tag">
-                    <a href=""><h3>사용 가능한 쿠폰</h3></a>
-                    <a href=""><h3>사용 완료된 쿠폰</h3></a>
+                    <form action="/mypagecupon">
+                    <button name="button" value="on"><h3>사용 가능한 쿠폰</h3></button>
+                    <button name="button" value="off"><h3>사용 완료된 쿠폰</h3></button>
+                    </form>
                     </div>
-                    <div id="cupon-list">
 
-                        <table>
-                            <tr>
-                                <th>쿠폰</th>
-                                <th>할인금액</th>
-                                <th>사용조건</th>
-                                <th>사용일자</th>
-                                <th>등록일</th>
-                            </tr>
-                            <tr>
-                                <td>[네이버] 2,500원 할인</td>
-                                <td>2,500원</td>
-                                <td>10,000원 이상 결제 시 사용 가능
-                                    다운로드 당일만 사용 가능
-                                    ID당 1일 1회 발급 가능
-                                    전시/체험/행사는 쿠폰 적용 제외</td>
-                                <td>유효기간만료</td>
-                                <td>2024.01.15</td>
-                            </tr>
-                            <tr>
-                                <td>[네이버] 2,500원 할인</td>
-                                <td>2,500원</td>
-                                <td>10,000원 이상 결제 시 사용 가능
-                                    다운로드 당일만 사용 가능
-                                    ID당 1일 1회 발급 가능
-                                    전시/체험/행사는 쿠폰 적용 제외</td>
-                                <td>유효기간만료</td>
-                                <td>2024.01.15</td>
-                            </tr>
+
+
+                    <div id="cupon-list">
+                        <table id="coupon_table">
+                                <c:choose>
+                                    <c:when test="${param.botton eq 'on'}">
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at} ! </td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:when test="${param.botton eq 'off'}">
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at}</td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr>
+                                            <th>쿠폰</th>
+                                            <th>할인금액</th>
+                                            <th>사용조건</th>
+                                            <th>사용기간</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <tr>
+                                            <td>${UserCouponDto.coupon_name}</td>
+                                            <td>${UserCouponDto.coupon_discount_amount}</td>
+                                            <td>${UserCouponDto.coupon_use_condition}</td>
+                                            <td>${UserCouponDto.coupon_expire_at}</td>
+                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+                                </c:choose>
+
                         </table>
 
+                        <div id="paging">
+                            <c:if test="${ph.showPrev}">
+                                <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&lt;</a>
+                            </c:if>
+                            <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                                <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}&button=${ph.button}"/>">${i}</a>
+                            </c:forEach>
+                            <c:if test="${ph.showNext}">
+                                <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&gt;</a>
+                            </c:if>
+                        </div>
+
                     </div>
+
+
 
                     <div id="cupon-use">
                         <h4> 공연 할일쿠폰 사용 안내</h4>

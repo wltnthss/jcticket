@@ -172,7 +172,7 @@ public class AdminDaoImplTest {
     @Test
     public void insertCoupon() throws Exception {
 
-        adminDao.deleteAllCoupon();
+//        adminDao.deleteAllCoupon();
 
         String start_at = "2024-02-01";
         String end_at = "2024-03-01";
@@ -188,8 +188,13 @@ public class AdminDaoImplTest {
         Timestamp start_timestamp = new Timestamp(start_date.getTime());
         Timestamp end_timestamp = new Timestamp(end_date.getTime());
 
+<<<<<<< HEAD
+        // 날짜별 사용가능한 쿠폰 31개 생성
+        for (int i = 0; i < 3; i++) {
+=======
         // 날짜별 사용가능한 쿠폰 31개 생성ㅁ
         for (int i = 0; i < 31; i++) {
+>>>>>>> a35036176605b7711fb710539f9c37d1fa91c741
             // given
             // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
             UUID uuid = UUID.randomUUID();
@@ -219,7 +224,7 @@ public class AdminDaoImplTest {
         }
 
         // 날짜별 유효만료된 쿠폰 31개 생성
-        for (int i = 0; i < 31; i++) {
+        for (int i = 0; i < 3; i++) {
             // given
             // 쿠폰 코드 난수 생성 => 중복 발생을 대비한 로직이 필요할까?
             UUID uuid = UUID.randomUUID();
