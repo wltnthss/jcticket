@@ -102,7 +102,7 @@
 }
 
 .m2-kv .m2-kvs .swiper-slide a .m2-kvs-txt p {
-    color: #fff;
+    color: white;
     line-height: 34px;
     padding: 0 20px;
     font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
@@ -118,7 +118,8 @@
 }
 
 .m2-kv .m2-kvs .swiper-slide a .m2-kvs-txt .m2-kvs-detail {
-    font-size: 12px;
+    color: white;
+    font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

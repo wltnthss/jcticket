@@ -336,59 +336,16 @@
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
-            <a href="musical/play 항목 1">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
+            <c:forEach items="${musiCalAndPlayList}" var="li" begin="1" end="6">
+                <a href="musical/play 항목 1">
+                    <div class="wing-box">
+                        <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
+                        <div class="wing-list-txt">
+                            <p class="wlist-tit">${li.play_name}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 2">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 3">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 4">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 5">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="musical/play 항목 6">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -402,59 +359,16 @@
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-02">
-            <a href="consert/classic 항목 1">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
+            <c:forEach items="${concertAndClassicList}" var="li" begin="1" end="6">
+                <a href="musical/play 항목 1">
+                    <div class="wing-box">
+                        <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
+                        <div class="wing-list-txt">
+                            <p class="wlist-tit">${li.play_name}</p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 2">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 3">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 4">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 5">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test2.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="consert/classic 항목 항목 6">
-                <div class="wing-box">
-                    <img src="/resources/img/index/test1.png" alt class="lazyload">
-                    <div class="wing-list-txt">
-                        <p class="wlist-tit">공연명</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </c:forEach>
         </div>
     </div>
 </section>

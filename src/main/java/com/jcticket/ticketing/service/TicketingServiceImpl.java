@@ -1,7 +1,7 @@
 package com.jcticket.ticketing.service;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.dto.UserCouponDto;
+import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
