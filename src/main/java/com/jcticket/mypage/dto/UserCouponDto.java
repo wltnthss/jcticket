@@ -24,36 +24,16 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 public class UserCouponDto {
-
-//        private Integer user_coupon_seq;
-        private String user_coupon_id;
-        private String user_id;
-        private String coupon_id;
-        private Timestamp coupon_use_at; //사용일자
-        private Timestamp user_coupon_issue_at; //발급일
-        private Timestamp user_coupon_expire_at; //만료일자
-        private String coupon_use_yn;
-        private Timestamp created_at;
-        private String created_id;
-        private Timestamp updated_at;
-        private String updated_id;
-        private String coupon_name;
-        private Integer coupon_discount_amount;
-        private String coupon_use_condition;
-//        public UserCouponDto(Integer user_coupon_seq, String user_id, String coupon_id, Timestamp coupon_use_at, Timestamp coupon_issue_at, Timestamp coupon_expire_at, String coupon_use_yn, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
-//                this.user_coupon_seq = user_coupon_seq;
-//                this.user_id = user_id;
-//                this.coupon_id = coupon_id;
-//                this.coupon_use_at = coupon_use_at;
-//                this.coupon_issue_at = coupon_issue_at;
-//                this.coupon_expire_at = coupon_expire_at;
-//                this.coupon_use_yn = coupon_use_yn;
-//                this.created_at = created_at;
-//                this.created_id = created_id;
-//                this.updated_at = updated_at;
-//                this.updated_id = updated_id;
-//        }
-
-
+    private String user_coupon_id;          // 쿠폰-유저 아이디
+    private String user_id;                 // 유저 아이디
+    private String coupon_id;               // 쿠폰 아이디
+    private Timestamp user_coupon_use_at;   // 쿠폰 사용일자
+    private Timestamp user_coupon_issue_at; // 쿠폰 발급 일자
+    private Timestamp user_coupon_expire_at;// 쿠폰 만료 일자
+    private String user_coupon_use_yn;      // 쿠폰 사용 여부
+    private Timestamp created_at;           // 최초등록 일자
+    private String created_id;              // 최초등록 아이디
+    private Timestamp updated_at;           // 최종변경 일자
+    private String updated_id;              // 최종변경 아이디
     }
 
