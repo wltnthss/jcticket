@@ -511,6 +511,33 @@
 <%--section5끝--%>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+<script>
+    $("#searchBtn").on('click', function () {
+
+        let word = $("#searchWord").val();
+
+        if(word === null || word === ""){
+            alert('검색어를 입력해주세요.')
+            return false;
+        }
+
+        $.ajax({
+            type: 'GET',
+            uri: '/search',
+            contentType: 'application/json',
+            data: {word: word},
+            success: function (res){
+                console.log('응답 성공', res)
+                location.href = "/search?word=" + word;
+            },
+            error: function (err) {
+                console.error("에러", err);
+            }
+        })
+    });
+</script>
+
 </body>
 
 </html>
