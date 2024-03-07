@@ -24,4 +24,6 @@ public interface CategoryDao {
     // 메인 2개쌍 회차별 조회
     List<Map<String, Object>> selectMusicalAndPlayList() throws Exception;
     List<Map<String, Object>> selectConcertAndClassicList() throws Exception;
+    // 메인 search 기능
+    List<Map<String, Object>> mainSearchShowingList(String word) throws Exception;
 }

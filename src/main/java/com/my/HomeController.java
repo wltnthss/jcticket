@@ -29,9 +29,8 @@ public class HomeController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model m) throws Exception {
         System.out.println("여기는 인덱스!!");
-        Map<String, Object> map = new HashMap<>();
 
-        List<Map<String,Object>> list = userService.selectImg(map);
+        List<Map<String,Object>> list = userService.selectImg();
         List<Map<String, Object>> musiCalAndPlayList = categoryService.selectMusicalAndPlayList();
         List<Map<String, Object>> concertAndClassicList = categoryService.selectConcertAndClassicList();
 

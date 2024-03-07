@@ -27,9 +27,7 @@ public interface UserDao {
     int selectNickNameDupl(String user_nickname) throws Exception;//
     //회원가입
     int insert(UserDto userDto) throws Exception; //
-
-    List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception;
-
+    List<Map<String, Object>> selectImg() throws Exception;
 //    sns회원가입
     int insertSNS(UserDto userDto)throws  Exception;
 

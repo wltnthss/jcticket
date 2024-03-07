@@ -41,6 +41,7 @@
         st.stage_address ,
         CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
         st.stage_name as stage_name ,
+        s.showing_status as showing_status,
         CASE
             WHEN showing_status = 'BS' then '상영전'
             WHEN showing_status = 'IS' then '상영중'
