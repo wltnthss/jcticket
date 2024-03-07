@@ -80,5 +80,43 @@
           and p.play_major_cat = '클래식'
     </select>
 
+    <select id="selectMusicalAndPlayList" resultType="Map">
+        SELECT
+            distinct
+            pimg.play_poster_stored_file_name as img_name ,
+            p.play_name as play_name ,
+            p.play_id as play_id ,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date
+        FROM
+            play p
+                LEFT JOIN play_image pimg ON
+                p.play_id = pimg.play_id
+                LEFT JOIN showing s ON
+                p.play_id = s.play_id
+        WHERE
+                    1=1
+                AND s.showing_info IS NOT null
+                and p.play_major_cat = '연극' or p.play_major_cat = '뮤지컬'
+    </select>
+
+    <select id="selectConcertAndClassicList" resultType="Map">
+        SELECT
+            distinct
+            pimg.play_poster_stored_file_name as img_name ,
+            p.play_name as play_name ,
+            p.play_id as play_id ,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date
+        FROM
+            play p
+                LEFT JOIN play_image pimg ON
+                p.play_id = pimg.play_id
+                LEFT JOIN showing s ON
+                p.play_id = s.play_id
+        WHERE
+                    1=1
+                AND s.showing_info IS NOT null
+                and p.play_major_cat = '콘서트' or p.play_major_cat = '클래식'
+    </select>
+
 </mapper>
 

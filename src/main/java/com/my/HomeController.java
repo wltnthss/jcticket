@@ -1,5 +1,6 @@
 package com.my;
 
+import com.jcticket.category.service.CategoryService;
 import com.jcticket.user.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class HomeController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CategoryService categoryService;
+
     @ExceptionHandler
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model m) throws Exception {
@@ -28,9 +32,15 @@ public class HomeController {
         Map<String, Object> map = new HashMap<>();
 
         List<Map<String,Object>> list = userService.selectImg(map);
+        List<Map<String, Object>> musiCalAndPlayList = categoryService.selectMusicalAndPlayList();
+        List<Map<String, Object>> concertAndClassicList = categoryService.selectConcertAndClassicList();
 
         m.addAttribute("list",list);
+        m.addAttribute("musiCalAndPlayList",musiCalAndPlayList);
+        m.addAttribute("concertAndClassicList",concertAndClassicList);
+
         System.out.println("list = " + list);
+
         return "index";
     }
 
