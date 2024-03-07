@@ -16,8 +16,10 @@
     <title>Document</title>
     <link rel="stylesheet" href="/resources/css/components/header.css">
     <link rel="stylesheet" href="/resources/css/components/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%--    <script src="/resources/js/category/category.js"></script>--%>
 </head>
 
 <body>
@@ -70,6 +72,10 @@
                     </a>
                 </c:otherwise>
             </c:choose>
+            <a class="search">
+                <input type="text" id="searchWord" autocomplete="off">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+            </a>
         </div>
     </header>
 </div>

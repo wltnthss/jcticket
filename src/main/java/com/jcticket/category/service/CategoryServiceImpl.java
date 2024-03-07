@@ -53,4 +53,9 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Map<String, Object>> selectConcertAndClassicList() throws Exception {
         return categoryDao.selectConcertAndClassicList();
     }
+
+    @Override
+    public List<Map<String, Object>> mainSearchShowingList(String word) throws Exception {
+        return categoryDao.mainSearchShowingList(word);
+    }
 }

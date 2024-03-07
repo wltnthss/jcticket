@@ -38,6 +38,6 @@ public interface UserService {
 
     int deleteAll() throws Exception;
     int count() throws Exception;
-    List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception;
+    List<Map<String, Object>> selectImg() throws Exception;
 
 }

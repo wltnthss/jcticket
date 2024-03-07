@@ -901,3 +901,20 @@ body{
 #chart-area14040{
     left: 1097px;
 }
+
+/*검색 기능 css 시작 추가*/
+#searchWord{
+    /*font-size: 15px;*/
+    /*vertical-align: bottom;*/
+    /*text-indent: 13px;*/
+    border: 0 none;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    background: none;
+    border-bottom: 3px solid #fff;
+    /*height: 32px;*/
+    /*line-height: 32px;*/
+    color: #fff;
+}
+/*검색 기능 css 끝 추가*/

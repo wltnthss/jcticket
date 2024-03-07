@@ -1,10 +1,11 @@
 package com.jcticket.category.controller;
 
 import com.jcticket.category.service.CategoryService;
+import com.jcticket.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,6 @@ public class CategoryController {
 
         return "category/concert";
     }
-
     @GetMapping("/musical")
     public String musical(Model m) throws Exception {
 
@@ -47,7 +47,6 @@ public class CategoryController {
 
         return "category/musical";
     }
-
     @GetMapping("/play")
     public String play(Model m) throws Exception {
 
@@ -58,8 +57,6 @@ public class CategoryController {
         return "category/play";
     }
 
-
-
     @GetMapping("/classic")
     public String classic(Model m) throws Exception {
 
@@ -68,5 +65,18 @@ public class CategoryController {
         m.addAttribute("list",list);
 
         return "category/classic";
+    }
+
+    @GetMapping("/search")
+    public String SearchPage(Model m, @RequestParam("word") String word) throws Exception{
+
+        System.out.println("word = " + word);
+
+        List<Map<String, Object>> list = categoryService.mainSearchShowingList(word);
+
+        m.addAttribute("word" ,word);
+        m.addAttribute("list" ,list);
+
+        return "common/search";
     }
 }
