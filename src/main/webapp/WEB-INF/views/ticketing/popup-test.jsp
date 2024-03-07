@@ -29,7 +29,7 @@
                 console.log("showPopup 호출");
                 // 40석 ecb9ea03 , 80석 6f72bd86
                 let playId = "6f72bd86"; // playId 값을 내부에서 생성
-                let popupW = 765``;
+                let popupW = 765;
                 let popupH = 900;
                 let left = Math.ceil((window.screen.width - popupW) / 2);
                 let top = Math.ceil((window.screen.height - popupH) / 2);
