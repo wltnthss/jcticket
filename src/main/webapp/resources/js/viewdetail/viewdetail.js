@@ -41,8 +41,6 @@
             //콜백함수사용,ticketing으로 보낼 데이터
             dateTextCallback(dateText)
 
-
-
             // console.log('play_id =======>'+play_id);
 
             var left = document.querySelector('.fourLeft');
@@ -232,16 +230,19 @@
 
         // 스크롤 이동 이벤트
         var stagename = document.getElementById('stage_name');
-        var movemap = document.getElementById('map');
+        var movemap = document.getElementById('mapa');
 
         var detail_info = document.getElementById('scroll_detail_info');
         var info_box = document.getElementById('info');
 
         var review = document.getElementById('scroll_review');
+        var review_mini = document.getElementById('review_mini');
         var go_review = document.getElementById('review');
 
         var reservation_notice = document.getElementById('reservation_notice');
         var go_notice = document.getElementById('seven_text_one');
+
+
 
         stagename.onclick = function () {
             movemap.scrollIntoView();
@@ -252,6 +253,10 @@
         }
 
         review.onclick = function () {
+            go_review.scrollIntoView()
+        }
+
+        review_mini.onclick = function () {
             go_review.scrollIntoView()
         }
 
@@ -322,7 +327,7 @@
                         '<span class="board_1">' + board.user_id + '</span>' +
                         '<span class="board_2">' + "&nbsp;" + review_upload_time + '</span>' +
                         '<span class="board_3">' + "&nbsp;" +
-                        '<span class="rating" id='+board.review_star_rating+'>' +
+                        '<span class="rating" id=' + board.review_star_rating + '>' +
                         '<i class="rating__star far fa-star"></i>' +
                         '<i class="rating__star far fa-star"></i>' +
                         '<i class="rating__star far fa-star"></i>' +
@@ -331,11 +336,14 @@
                         '</span>' +
                         '</span>' +
                         '<span class="board_4">' + "&nbsp;" + "(관람일:" + review_viewing_time + ")" + '</span>' +
-
                         '<div class="comment_text">' +
                         '<span class="board_5">' + board.review_content + '</span>' +
                         '</div>' +
                         '</div>' +
+                        '<form action="/review_delete">' +
+                        '<input type="hidden" id="delete_user_id" name="del_user_id" value=""/>' +
+                        '<input id="delete_submit" type="submit"/>' +
+                        '</form>' +
                         '</li>';
                     $('.comment_board').append(list);
                 }
@@ -351,10 +359,12 @@
                     var star_rating = parseInt(rating.id);
                     // console.log('star_rating============>' + star_rating)
 
+                    // 작성되어있는 후기의 별점
                     var stars = rating.querySelectorAll('i');
 
                     for (var j=0;j<stars.length;j++) {
                         var star = stars[j];
+
                         if (j < star_rating) {
                             star.classList.remove("far");
                             star.classList.add("fas");
@@ -481,28 +491,19 @@
             }
         })
 
-        // // 리뷰작성하기
-        // var review_create = document.getElementById("review_create");
-        //
-        // review_create.onclick = function () {
-        //     //쿼리스트링 이용
-        //     var url = '/review_insert?play_id=' + play_id
-        //         // + 'dateText='+dateText
-        //         // +'&showing_seq='+showing_seq
-        //         // +'&play_name='+play_name
-        //         // +'&stage_name='+stage_name;
-        //
-        //     var name = "review_insert"
-        //     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-        //     window.open(url, name, option); //성공
-        // };
-
         // 리뷰 별점 매기기
         var star_twinkle = document.querySelectorAll(".review_star i")
 
         star_twinkle.forEach(function (star){
             star.onclick = function (e) {
                 var clicked_star = parseInt(e.target.id);
+
+                // console.log("clicked_star==========>"+clicked_star)
+                var star_input = document.getElementById('star_input');
+                star_input.value = clicked_star;
+
+                // console.log("star_input.value==========>"+star_input.value)
+
                 for (var i = 0; i < star_twinkle.length; i++) {
                     var starToChange = star_twinkle[i];
                     
@@ -510,6 +511,7 @@
                     if (i < clicked_star) {
                         starToChange.classList.remove("far");
                         starToChange.classList.add("fas");
+
                     } else {
                         starToChange.classList.remove("fas");
                         starToChange.classList.add("far");
@@ -517,6 +519,26 @@
                 }
             }
         })
+
+        // 후기작성 알람
+        var form = document.querySelector('#insert_form');
+
+        form.addEventListener('submit', function(event) {
+            var starValue = document.getElementById('star_input').value;
+            var reviewContent = document.querySelector('.review_box').value;
+            var form_user_id = document.getElementById('form_user_id').value
+            if (!starValue) {
+                event.preventDefault(); // 폼 제출 막기
+                alert('별점을 선택해주세요.');
+            } else if (!reviewContent) {
+                event.preventDefault(); // 폼 제출 막기
+                alert('후기를 입력해주세요.');
+            } else if(!form_user_id){
+                alert('로그인이 필요합니다.');
+            }
+        });
+
+        //후기삭제
 
     });
     //$(document).ready 끝--------------------------------------------------------------------------

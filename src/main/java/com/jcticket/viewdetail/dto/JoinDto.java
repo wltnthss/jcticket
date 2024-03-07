@@ -29,7 +29,8 @@ public class JoinDto {
     private  int showing_seat_price;
     private String agency_id;
     private String stage_name;
-    
+    private String stage_address;
+
     //showing_seat_price(30000) >>>> seat_price(30,000) 포맷팅
     private String seat_price;
 
