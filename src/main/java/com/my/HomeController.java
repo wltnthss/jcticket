@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class HomeController {
     public String index(Model m) throws Exception {
         System.out.println("여기는 인덱스!!");
 
+
         List<Map<String,Object>> list = userService.selectImg();
         List<Map<String, Object>> musiCalAndPlayList = categoryService.selectMusicalAndPlayList();
         List<Map<String, Object>> concertAndClassicList = categoryService.selectConcertAndClassicList();
@@ -38,13 +41,33 @@ public class HomeController {
         m.addAttribute("musiCalAndPlayList",musiCalAndPlayList);
         m.addAttribute("concertAndClassicList",concertAndClassicList);
 
+
+        System.out.println("list.size() = " + list.size());
         System.out.println("list = " + list);
 
         return "index";
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    private String getIndex(){
+    private String getIndex(Model m) throws Exception {
+        System.out.println("여기는 인덱스!!");
+        Map<String, Object> map = new HashMap<>();
+
+
+        List<Map<String,Object>> list = userService.selectImg();
+        List<Map<String, Object>> musiCalAndPlayList = categoryService.selectMusicalAndPlayList();
+        List<Map<String, Object>> concertAndClassicList = categoryService.selectConcertAndClassicList();
+
+        LocalDate currentDate = LocalDate.now();
+
+
+        m.addAttribute("list",list);
+        m.addAttribute("musiCalAndPlayList",musiCalAndPlayList);
+        m.addAttribute("concertAndClassicList",concertAndClassicList);
+
+
+        System.out.println("list.size() = " + list.size());
+        System.out.println("list = " + list);
         return "index";
     }
 
