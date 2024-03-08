@@ -114,7 +114,7 @@ public class ViewController {
         List<ReviewDto> review = viewDetailService.review_select(this_play_id);
         model.addAttribute("review", review);
 
-//        System.out.println("viewDetailTime=============>"+viewDetailTime);
+        System.out.println("viewDetail=============>"+viewDetail);
 
         //상세보기에 들어갈 내용들(제목, 공연장이름, 좌석가격 등)
         model.addAttribute("viewDetail", viewDetail);

@@ -33,6 +33,8 @@ public class JoinDto {
 
     //showing_seat_price(30000) >>>> seat_price(30,000) 포맷팅
     private String seat_price;
+    private String  play_poster_stored_file_name;
+    private String  play_info_stored_file_name;
 
     // 포맷팅 메서드
     public void format_seat_price() {

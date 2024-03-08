@@ -107,10 +107,13 @@
                p.agency_id,
                stg.stage_name,
                stg.stage_address,
-               s.showing_seat_price
+               s.showing_seat_price,
+               pi.play_poster_stored_file_name,
+               pi.play_info_stored_file_name
         FROM play p
                  JOIN showing s ON p.play_id = s.play_id
                  JOIN stage stg ON s.stage_id = stg.stage_id
+                 JOIN Play_Image pi ON p.play_id = pi.play_id
         WHERE p.play_id = #{play_id};
     </select>
 

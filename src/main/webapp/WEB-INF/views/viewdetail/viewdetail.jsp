@@ -92,10 +92,14 @@ git <%--
         <div class="three">
             <div class="three-one">
                 <div class="three-one-left">
-                    <div class="play-img">
-                        <img src='/resources/img/viewdetail/testposter.jpg'/>
-<%--                        <a href="#" class="rn-product-movie" style="display:none;"><img src="http://tkfile.yes24.com/imgNew/common/kv-movie.png" alt="" /></a>--%>
-                    </div>
+                    <c:if test="${not empty viewDetail}">
+                        <div class="play-img">
+                            <img src="<c:url value='/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
+                        </div>
+                    </c:if>
+<%--                    <div class="play-img">--%>
+<%--                        <img src='/resources/img/viewdetail/testposter.jpg'/>--%>
+<%--                    </div>--%>
     <%--                review-mini안에 별점, 평균별점, 리뷰 수 등등 들어감--%>
                     <div class="star-review">
                         <div class="review-star">
@@ -213,26 +217,15 @@ git <%--
 
         <div id="info" class="info_box">
             <div class="seven_one">
-                <p class="seven_text">유의사항</p>
-                <div class="seven_con">
-                    <p>이미지 들어갈 자리</p>
-<%--                    이미지 사이 공백--%>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                </div>
+<%--                <p class="seven_text">유의사항</p>--%>
             </div>
 
             <div class="seven_two">
                 <p class="seven_text">공연정보</p>
                 <div class="seven_con">
-                    <p>이미지 들어갈 자리</p>
-                    <%--                    이미지 사이 공백--%>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
+                    <c:if test="${not empty viewDetail}">
+                        <img src="<c:url value='/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
+                    </c:if>
                 </div>
             </div>
 
@@ -436,7 +429,7 @@ git <%--
 
 
 <%--    카카오 지도 api 스크립트--%>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae&libraries=services"></script>
 
     <%--    js파일--%>
     <script src="/resources/js/viewdetail/viewdetail.js"></script>
