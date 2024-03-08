@@ -26,7 +26,7 @@
 
             <div id="u10" style="display: block">
                 <dd class="u10">
-                    <a href="/admin/setting">환경설정 정보관리</a>
+                    <a href="${pageContext.request.contextPath}/admin/setting">환경설정 정보관리</a>
                 </dd>
             </div>
         </dl>

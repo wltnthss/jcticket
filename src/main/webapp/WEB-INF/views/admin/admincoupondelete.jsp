@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -27,7 +27,7 @@
             <h1>쿠폰 관리</h1>
             <h2>쿠폰 삭제</h2>
             <hr>
-            <form id="userSearch" action="/admin/coupondelete">
+            <form id="userSearch" action="${pageContext.request.contextPath}/admin/coupondelete">
                 <div class="user-form">
                     <table>
                         <colgroup>
@@ -112,7 +112,7 @@
             <div class="notice-paging">
                 <c:if test="${paging.showPrev}">
                     <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
-                    <a class="notice-paging-pageitems" href="/admin/coupondelete?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}"> < </a>
+                    <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/coupondelete?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}"> < </a>
                 </c:if>
 
                 <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -123,13 +123,13 @@
                     </c:if>
                     <c:if test="${i ne paging.page}">
                         <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
-                        <a class="notice-paging-pageitems" href="/admin/coupondelete?page=${i}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}">${i}</a>
+                        <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/coupondelete?page=${i}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}">${i}</a>
                     </c:if>
                 </c:forEach>
 
                 <c:if test="${paging.showNext}">
                     <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
-                    <a class="notice-paging-pageitems" href="/admin/coupondelete?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}"> > </a>
+                    <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/coupondelete?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}&start_at=${pagin.start_at}&end_at=${paging.end_at}"> > </a>
                 </c:if>
             </div>
             <div class="btn-confirm">
@@ -141,13 +141,22 @@
 
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
+
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="/resources/js/admin/admin.js"></script>
+
+<script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
+
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
     }
+
+
+
 </script>
 </body>
 </html>
