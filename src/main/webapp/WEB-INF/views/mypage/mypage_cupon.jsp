@@ -43,11 +43,11 @@
 
 
         #cupon-input {
-            border: 5px solid #fafafa;
+            border: 5px solid lightgray;
             margin: 20px 0px;
             width: auto;
             height: 110px;
-            background-color: lightgray;
+            background-color: #FAFAFA;
             display: flex;
             align-content: flex-start;
             align-items: center;
@@ -119,11 +119,12 @@
         }
 
         #cupon-use {
+            text-align: center;
             border: 1px solid;
-            margin: 20px 0px;
-            width: 700px;
+            margin: 20px 10px;
+            width: 923px;
             height: 250px;
-            background-color: #6699cc;
+            background-color: #FAFAE9;
         }
 
         #cupon-use > h4 {
@@ -143,6 +144,7 @@
             height: 35px;
             font-size: 20px;
             font-weight: bold;
+            border-radius: 3px;
         }
 
         #insert_btn {
@@ -160,10 +162,19 @@
             text-align: center;
             font-size: 20px;
             font-weight: bold;
+            color: black;
         }
 
         #paging > a {
             text-decoration-line: none;
+            color: black;
+        }
+
+        td:nth-child(2n), th:nth-child(2n){
+            background-color: #fafafa;
+        }
+        td:nth-child(2n-1), th:nth-child(2n-1){
+            background-color: #eeeeee;
         }
     </style>
 </head>
@@ -193,7 +204,7 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/modifying"><h3>회원정보 수정</h3></a>
+                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
                             <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
@@ -241,13 +252,13 @@
                                             <th>사용기간</th>
                                             <th>등록일</th>
                                         </tr>
-                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <c:forEach items="${coupon_list}" var="MyUserCouponDto">
                                         <tr>
-                                            <td>${UserCouponDto.coupon_name}</td>
-                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
-                                            <td>${UserCouponDto.coupon_use_condition}</td>
-                                            <td>${UserCouponDto.coupon_expire_at} ! </td>
-                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                            <td>${MyUserCouponDto.coupon_name}</td>
+                                            <td>${MyUserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${MyUserCouponDto.coupon_use_condition}</td>
+                                            <td>${MyUserCouponDto.user_coupon_expire_at} ! </td>
+                                            <td>${MyUserCouponDto.user_coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>
                                     </c:when>
@@ -256,16 +267,16 @@
                                             <th>쿠폰</th>
                                             <th>할인금액</th>
                                             <th>사용조건</th>
-                                            <th>사용기간</th>
+                                            <th>사용일자</th>
                                             <th>등록일</th>
                                         </tr>
-                                        <c:forEach items="${coupon_list}" var="UserCouponDto">
+                                        <c:forEach items="${coupon_list}" var="MyUserCouponDto">
                                         <tr>
-                                            <td>${UserCouponDto.coupon_name}</td>
-                                            <td>${UserCouponDto.coupon_discount_amount}원</td>
-                                            <td>${UserCouponDto.coupon_use_condition}</td>
-                                            <td>${UserCouponDto.coupon_expire_at}</td>
-                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                            <td>${MyUserCouponDto.coupon_name}</td>
+                                            <td>${MyUserCouponDto.coupon_discount_amount}원</td>
+                                            <td>${MyUserCouponDto.coupon_use_condition}</td>
+                                            <td>${MyUserCouponDto.user_coupon_expire_at}</td>
+                                            <td>${MyUserCouponDto.user_coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>
                                     </c:when>
@@ -274,7 +285,7 @@
                                             <th>쿠폰</th>
                                             <th>할인금액</th>
                                             <th>사용조건</th>
-                                            <th>사용기간</th>
+                                            <th>일자</th>
                                             <th>등록일</th>
                                         </tr>
                                         <c:forEach items="${coupon_list}" var="UserCouponDto">
@@ -282,8 +293,8 @@
                                             <td>${UserCouponDto.coupon_name}</td>
                                             <td>${UserCouponDto.coupon_discount_amount}</td>
                                             <td>${UserCouponDto.coupon_use_condition}</td>
-                                            <td>${UserCouponDto.coupon_expire_at}</td>
-                                            <td>${UserCouponDto.coupon_issue_at}</td>
+                                            <td>${UserCouponDto.user_coupon_expire_at}</td>
+                                            <td>${UserCouponDto.user_coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>
                                     </c:otherwise>

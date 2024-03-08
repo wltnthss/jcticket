@@ -1,7 +1,7 @@
 package com.jcticket.mypage.controller;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.mindrot.jbcrypt.BCrypt;
@@ -218,9 +218,6 @@ public class mypageController {
 
         System.out.println("a => " + a);
 
-        if(a == 0) {
-            return "/mypage/mypage_cupon";
-        }
 
         try {
             if (coupon_id != null) {
@@ -232,9 +229,15 @@ public class mypageController {
                 Timestamp now = new Timestamp(System.currentTimeMillis());
 
                 if (couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
+<<<<<<< HEAD
 //                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
 //                    mypageService.coupon_insert(userCouponDto);
 //                    mypageService.update_coupon(couponDto);
+=======
+                    MyUserCouponDto userCouponDto = new MyUserCouponDto(coupon_id, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+                    mypageService.coupon_insert(userCouponDto);
+                    mypageService.update_coupon(couponDto);
+>>>>>>> mypage05
                 }
             }
 
@@ -247,23 +250,26 @@ public class mypageController {
             System.out.println("button => (after)" + button);
 
 
-            List<UserCouponDto> list = mypageService.coupon_list(map);
+            List<MyUserCouponDto> list = mypageService.coupon_list(map);
 
             int totalCount = mypageService.coupon_count(map);
 
-            System.out.println(totalCount);
+            System.out.println("totalCount = >" + totalCount);
 
             PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, button);
+
+
+            System.out.println("여기서 오류 나나 1");
 
             model.addAttribute("coupon_list", list);
             model.addAttribute("ph", pageHandler);
 
-
+            System.out.println("여기서 오류 나나 2");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
+        System.out.println("여기서 오류 나나 3");
         return "/mypage/mypage_cupon";
     }
 }
