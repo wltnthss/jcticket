@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
                 <h1>기획사 정보관리</h1>
                 <h2>기본검색</h2>
                 <hr>
-                <form id="agencySearch" action="/admin/agency" method="get">
+                <form id="agencySearch" action="${pageContext.request.contextPath}/admin/agency" method="get">
                     <div class="user-form">
                         <table>
                             <colgroup>

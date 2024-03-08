@@ -25,10 +25,10 @@
 
             <div id="u10" style="display: block">
                 <dd class="u10">
-                    <a href="/admin/agency">기획사 정보관리</a>
+                    <a href="${pageContext.request.contextPath}/admin/agency">기획사 정보관리</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/agencyregister">기획사 등록하기</a>
+                    <a href="${pageContext.request.contextPath}/admin/agencyregister">기획사 등록하기</a>
                 </dd>
                 <dd class="u10">
                     <a href="#">기획사 일괄등록하기</a>

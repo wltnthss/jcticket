@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
                 <h1>공지사항 관리</h1>
                 <h2>기본검색</h2>
                 <hr>
-                <form id="userSearch" action="/admin/notice?keyword=${paging.keyword}">
+                <form id="userSearch" action="${pageContext.request.contextPath}/admin/notice?keyword=${paging.keyword}">
                     <div class="user-form">
                         <table>
                             <colgroup>
@@ -91,7 +91,7 @@
                 <div class="notice-paging">
                     <c:if test="${paging.showPrev}">
                         <%-- 1페이지가 아닌 경우는 < 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
-                        <a class="notice-paging-pageitems" href="/admin/notice?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
+                        <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/notice?page=${paging.page-1}&keyword=${paging.keyword}"> < </a>
                     </c:if>
 
                     <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -102,13 +102,13 @@
                         </c:if>
                         <c:if test="${i ne paging.page}">
                             <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
-                            <a class="notice-paging-pageitems" href="/admin/notice?page=${i}&keyword=${paging.keyword}">${i}</a>
+                            <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/notice?page=${i}&keyword=${paging.keyword}">${i}</a>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${paging.showNext}">
                         <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
-                        <a class="notice-paging-pageitems" href="/admin/notice?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
+                        <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/notice?page=${paging.page+1}&keyword=${paging.keyword}"> > </a>
                     </c:if>
                 </div>
             </div>

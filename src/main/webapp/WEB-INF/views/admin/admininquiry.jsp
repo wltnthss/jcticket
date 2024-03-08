@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -31,10 +31,10 @@
 
                 <div id="u10" style="display: block">
                     <dd class="u10">
-                        <a href="/admin/user">문의 정보관리</a>
+                        <a href="${pageContext.request.contextPath}/admin/user">문의 정보관리</a>
                     </dd>
                     <dd class="u10">
-                        <a href="/admin/register">문의 등록하기</a>
+                        <a href="${pageContext.request.contextPath}/admin/register">문의 등록하기</a>
                     </dd>
                 </div>
             </dl>
@@ -49,7 +49,7 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 </body>
 </html>

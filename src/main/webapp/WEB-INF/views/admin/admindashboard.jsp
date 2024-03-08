@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>관리자 페이지</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
 </head>
 <body class="admin-dashboard">
     <div class="admin-dashboard-container">
@@ -29,7 +29,7 @@
                     <h2>
                         최근 상품
                     </h2>
-                    <a href="/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
+                    <a href="${pageContext.request.contextPath}/admin/product" style="float: right" class="admin-btn_small2">상품관리 바로가기</a>
                     <table>
                         <colgroup>
                             <col class="w150">
@@ -70,7 +70,7 @@
                     <h2>
                         최근 회원가입
                     </h2>
-                    <a href="/admin/user" class="admin-btn_small3">회원관리 바로가기</a>
+                    <a href="${pageContext.request.contextPath}/admin/user" class="admin-btn_small3">회원관리 바로가기</a>
                     <table>
                         <thead>
                             <tr>
