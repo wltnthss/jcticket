@@ -28,13 +28,13 @@
             <c:forEach items="${list}" var="p">
                 <div class="srch-list-item">
                         <div>
-                            <a href="#" target="_blank">
+                            <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </a>
                         </div>
                         <div>
                             <p class="item-state"><span class="item-state02">${p.showing_status}</span></p>
-                            <p class="item-tit" style="font-weight: bold;"><a href="#" target="_blank" style="text-decoration-line: none">${p.play_name}</a></p>
+                            <p class="item-tit" style="font-weight: bold;"><a href="/viewdetail?this_play_id=${p.play_id}" target="_blank" style="text-decoration-line: none">${p.play_name}</a></p>
                         </div>
                         <div>${p.showing_period_date}</div>
                         <div>${p.stage_name}</div>

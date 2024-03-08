@@ -34,8 +34,7 @@
             p.play_name as play_name ,
             p.play_id as play_id ,
             CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
-            DATEDIFF(s.showing_date, CURDATE()) as dday,
-            s.showing_date as showing_date
+            DATEDIFF(s.showing_date, CURDATE()) as dday
         from
             play p
                 left join play_image pimg on p.play_id = pimg.play_id
@@ -58,7 +57,6 @@
                         GROUP BY
                             play_id
                     ) s2 on s1.play_id = s2.play_id
-                        AND s1.showing_date = s2.min_showing_date
                 group by
                     s1.play_id, s1.showing_start_at, s1.showing_end_at, showing_period_date
             ) s on p.play_id = s.play_id
@@ -66,7 +64,7 @@
             1=1
           and s.showing_period_date is not null
         group by
-            p.play_id  ,img_name, p.play_name, showing_period_date, showing_start_at, showing_end_at, dday;
+            p.play_id  ,img_name, p.play_name, showing_period_date, showing_start_at, showing_end_at, dday
     </select>
 
 
