@@ -34,6 +34,7 @@
             p.play_name as play_name ,
             p.play_id as play_id ,
             CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
+            s.showing_date ,
             DATEDIFF(s.showing_date, CURDATE()) as dday
         from
             play p
