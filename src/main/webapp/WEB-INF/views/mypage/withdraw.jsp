@@ -127,6 +127,41 @@
                     </dl>
                 </div>
 
+                <div class="grp_cell">
+                    <dl class="yesAlertDl b_size">
+                        <dt>탈퇴 후 정보보관</dt>
+                        <dd>
+                            <p class="yesAlertP">
+                                전자상거래 등에서의 소비자보호에 관한 법률 제6조에 의거 성명, 주소 등 거래의 주체를 식별할 수 있는 정보에 한하여 서비스<br>
+                                이용에 관한 동의를 철회한 경우에도 이를 보존할 수 있으며, 동법 시행령 제6조에 의거 다음과 같이 거래 기록을 보관합니다.
+                            </p>
+                            <ul class="yesAlertLi mgt5">
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>표시, 광고에 관한 기록 : 6개월               </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>계약 또는 청약철회 등에 관한 기록 : 5년      </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>대금결제 및 재화등의 공급에 관한 기록 : 5년  </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>소비자의 불만 또는 분쟁처리에 관한 기록 : 3년</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+
+            <div id="chkPw" class="yesFormGrayBox chkPwBox">
+                <div class="yesFormGrayBox_cont">
+                    <div class="yesIptRow">
+								<span class="yesIpt m_size ipt_wSizeF">
+									<label for="CLabMemId"></label>
+                                    <input name="CLabMemId" type="text" id="CLabMemId" readonly="readonly">
+								</span>
+                    </div>
+                    <div class="yesIptRow mgt10">
+								<span class="yesIpt m_size ipt_wSizeF focus_blue  labelHide">
+									<label for="password">비밀번호</label>
+									<input name="password" type="password" id="password" maxlength="20" data-gtm-form-interact-field-id="0">
+								</span>
+                    </div>
+                </div>
             </div>
 
 
