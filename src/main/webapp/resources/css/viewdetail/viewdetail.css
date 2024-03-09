@@ -609,7 +609,7 @@ li {
     color: #FF9100;
 }
 
-#delete_submit {
+.delete_button {
     position: relative;
     bottom: 50px;
     float: right;

@@ -211,7 +211,8 @@
                review_at,
                review_star_rating,
                review_viewing_at,
-               review_content
+               review_content,
+               review_num
         FROM review
         WHERE play_id = #{play_id}
         ORDER BY review_at DESC
