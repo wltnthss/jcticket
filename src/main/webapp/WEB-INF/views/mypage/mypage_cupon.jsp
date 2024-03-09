@@ -244,7 +244,7 @@
                     <div id="cupon-list">
                         <table id="coupon_table">
                                 <c:choose>
-                                    <c:when test="${param.botton eq 'on'}">
+                                    <c:when test="${param.button eq 'on'}">
                                         <tr>
                                             <th>쿠폰</th>
                                             <th>할인금액</th>
@@ -257,12 +257,12 @@
                                             <td>${MyUserCouponDto.coupon_name}</td>
                                             <td>${MyUserCouponDto.coupon_discount_amount}원</td>
                                             <td>${MyUserCouponDto.coupon_use_condition}</td>
-                                            <td>${MyUserCouponDto.user_coupon_expire_at} ! </td>
+                                            <td>${MyUserCouponDto.user_coupon_expire_at} </td>
                                             <td>${MyUserCouponDto.user_coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>
                                     </c:when>
-                                    <c:when test="${param.botton eq 'off'}">
+                                    <c:when test="${param.button eq 'off'}">
                                         <tr>
                                             <th>쿠폰</th>
                                             <th>할인금액</th>
@@ -285,7 +285,7 @@
                                             <th>쿠폰</th>
                                             <th>할인금액</th>
                                             <th>사용조건</th>
-                                            <th>일자</th>
+                                            <th>사용기간</th>
                                             <th>등록일</th>
                                         </tr>
                                         <c:forEach items="${coupon_list}" var="UserCouponDto">

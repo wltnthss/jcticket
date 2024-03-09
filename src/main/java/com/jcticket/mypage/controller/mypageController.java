@@ -55,6 +55,7 @@ public class mypageController {
                          @RequestParam(required = false) String keyword,
                          Model model) throws Exception {
 
+
         try {
             Map map = new HashMap();
             map.put("offset", (page - 1) * pageSize);
@@ -63,7 +64,9 @@ public class mypageController {
             map.put("start_date", start_date);
             map.put("end_date", end_date);
 
+
             int totalCount = mypageService.count(map);
+
 
             PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
 
@@ -160,11 +163,13 @@ public class mypageController {
                             HttpSession session,
                             Model model) throws Exception {
 
+
         String id = (String) session.getAttribute("sessionId");
 
         UserDto userDto = mypageService.user_info(id);
 
 
+        System.out.println(id);
 
 
         String email = userDto.getUser_email();
@@ -229,15 +234,15 @@ public class mypageController {
                 Timestamp now = new Timestamp(System.currentTimeMillis());
 
                 if (couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
-<<<<<<< HEAD
+
 //                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
 //                    mypageService.coupon_insert(userCouponDto);
 //                    mypageService.update_coupon(couponDto);
-=======
+
                     MyUserCouponDto userCouponDto = new MyUserCouponDto(coupon_id, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
                     mypageService.coupon_insert(userCouponDto);
                     mypageService.update_coupon(couponDto);
->>>>>>> mypage05
+
                 }
             }
 
@@ -259,17 +264,17 @@ public class mypageController {
             PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, button);
 
 
-            System.out.println("여기서 오류 나나 1");
+
 
             model.addAttribute("coupon_list", list);
             model.addAttribute("ph", pageHandler);
 
-            System.out.println("여기서 오류 나나 2");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("여기서 오류 나나 3");
+
         return "/mypage/mypage_cupon";
     }
 }

@@ -51,6 +51,33 @@
             margin: 10px 0px;
         }
 
+        #grp_cell ul {
+            font-weight: bold;
+        }
+
+        .grp_cell_A {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .grp_cell_B {
+            font-weight: bold;
+        }
+
+        .grp_cell_B  ul {
+            list-style: none;
+            padding: 5px;
+        }
+
+        .grp_cell_B  p {
+            margin: 10px;
+        }
+
+        .grp_cell_B dt {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         #grp_cell {
             margin: 20px 0px;
         }
@@ -71,6 +98,17 @@
         #grp_cell > ul > li {
             margin: 10px 0px;
         }
+
+
+        #id_input {
+            width: 700px;
+            height: 200px;
+            background-color: #FAFAE9;
+        }
+
+
+
+
 
     </style>
 </head>
@@ -115,10 +153,12 @@
                                 </ul>
                     </div>
                 </div>
-                <br>
+
                 <hr>
 
-                <div class="grp_cell">
+                <br>
+
+                <div class="grp_cell_A">
                     <dl class="yesAlertDl b_size">
                         <dt>1개월간 회원 재가입 제한</dt>
                         <dd>
@@ -127,8 +167,12 @@
                     </dl>
                 </div>
 
-                <div class="grp_cell">
-                    <dl class="yesAlertDl b_size">
+                <br>
+                <hr>
+                <br>
+
+                <div class="grp_cell_B">
+                    <dl id="yesAlertDlb_size">
                         <dt>탈퇴 후 정보보관</dt>
                         <dd>
                             <p class="yesAlertP">
@@ -147,23 +191,10 @@
 
             </div>
 
-            <div id="chkPw" class="yesFormGrayBox chkPwBox">
-                <div class="yesFormGrayBox_cont">
-                    <div class="yesIptRow">
-								<span class="yesIpt m_size ipt_wSizeF">
-									<label for="CLabMemId"></label>
-                                    <input name="CLabMemId" type="text" id="CLabMemId" readonly="readonly">
-								</span>
-                    </div>
-                    <div class="yesIptRow mgt10">
-								<span class="yesIpt m_size ipt_wSizeF focus_blue  labelHide">
-									<label for="password">비밀번호</label>
-									<input name="password" type="password" id="password" maxlength="20" data-gtm-form-interact-field-id="0">
-								</span>
-                    </div>
-                </div>
-            </div>
 
+            <div id="id_input">
+
+            </div>
 
         </article>
     </div>
