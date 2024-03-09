@@ -132,24 +132,6 @@
                 success: function(res) {
                     // 서버로부터 받은 응답 데이터를 처리
                     console.log('Response:', res);
-                    
-                    //res내용을 span태그로 묶어서 #seatPrice1 아래 추가 (잔여석)
-                    // var seatRemain = document.createElement("span");
-                    // var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
-                    // var insertSpan = document.querySelector("#seatPrice1");
-                    //
-                    // if(!existSpan) {
-                    //     seatRemain.textContent = "(잔여: "+res+"석)";
-                    //     seatRemain.className = 'remain_seat'
-                    //     insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                    // } else {
-                    //     while(insertSpan.firstChild)  {
-                    //         insertSpan.removeChild(existSpan);
-                    //         seatRemain.textContent = "(잔여: "+res+"석)";
-                    //         seatRemain.className = 'remain_seat'
-                    //         insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                    //     }
-                    // }
 
                     var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
                     var seatRemain = document.createElement("span");
@@ -367,10 +349,10 @@
                         '<span class="board_5">' + board.review_content + '</span>' +
                         '</div>' +
                         '</div>' +
-                        '<form action="/review_delete">' +
-                        '<input type="hidden" id="delete_user_id" name="del_user_id" value=""/>' +
-                        '<input id="delete_submit" type="submit"/>' +
-                        '</form>' +
+                        // '<input type="hidden" id="delete_user_id" name="del_user_id" value=""/>' +
+                        // '<input type="hidden" id="delete_review_num" name="del_review_num" value="'+board.review_num+'"/>' +
+                        '<input class="delete_button" data-review-num="'+board.review_num+'" value="삭제" type="button"/>' +
+                        // '<input id="delete_button'+board.review_num+'" value="삭제" type="button"/>' +
                         '</li>';
                     $('.comment_board').append(list);
                 }
@@ -549,11 +531,12 @@
 
         // 후기작성 알람
         var form = document.querySelector('#insert_form');
+        // form_user_id 요소의 값을 가져옴
+        var form_user_id = document.getElementById('form_user_id').value
 
         form.addEventListener('submit', function(event) {
             var starValue = document.getElementById('star_input').value;
             var reviewContent = document.querySelector('.review_box').value;
-            var form_user_id = document.getElementById('form_user_id').value
             if (!starValue) {
                 event.preventDefault(); // 폼 제출 막기
                 alert('별점을 선택해주세요.');
@@ -566,6 +549,40 @@
         });
 
         //후기삭제
+        // delete_button 클래스를 가진 요소가 클릭되었을 때
+        $(document).on('click', '.delete_button', function() {
+            // 클릭된 버튼의 data-reviewNum 속성값을 가져옴
+            var review_num = this.dataset.reviewNum;
+
+            // 로그인상태가아닐시
+            if (form_user_id === null || form_user_id.length === 0) {
+                alert("로그인이 필요합니다.");
+                return;
+            }
+
+            // console.log("delete_user_id=====================>" + form_user_id);
+            // console.log("delete_review_num=====================>" + review_num);
+            if(confirm("정말 삭제하시겠습니까?")){
+                // AJAX 요청
+                $.ajax({
+                    type: "GET",
+                    url: "/review_delete",
+                    data: {
+                        delete_user_id: form_user_id,
+                        delete_review_num: review_num
+                    },
+                    success: function() {
+                        location.reload(true);
+                        alert("리뷰가 성공적으로 삭제되었습니다.");
+                        // 성공적으로 삭제되었을 때 추가 작업을 수행할 수 있습니다.
+                    },
+                    error: function(xhr, status, error) {
+                        alert("리뷰 삭제에 실패했습니다.");
+                        // 삭제 실패시 추가 작업을 수행할 수 있습니다.
+                    }
+                });
+            }
+        });
 
     });
     //$(document).ready 끝--------------------------------------------------------------------------
