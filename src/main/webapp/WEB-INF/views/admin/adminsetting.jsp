@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -25,7 +25,7 @@
                 <h1>환경 설정</h1>
                 <h2>관리자 정보 수정</h2>
             </div>
-            <form action="/admin/setting" method="post">
+            <form action="${pageContext.request.contextPath}/admin/setting" method="post">
                 <div class="tbl_frm01">
                     <table>
                         <colgroup>
@@ -79,7 +79,7 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 </body>
 </html>

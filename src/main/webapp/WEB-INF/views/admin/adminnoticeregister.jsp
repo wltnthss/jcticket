@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
             <h1>공지사항 등록하기</h1>
             <h2>공지사항 정보 입력</h2>
         </div>
-        <form action="/admin/noticeregister" method="post">
+        <form action="${pageContext.request.contextPath}/admin/noticeregister" method="post">
             <div class="tbl_frm01">
                 <table>
                     <colgroup>

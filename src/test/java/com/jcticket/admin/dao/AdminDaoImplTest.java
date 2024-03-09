@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.jcticket.admin.dao;
 
 import com.jcticket.admin.dto.AdminDto;
@@ -351,9 +351,9 @@ public class AdminDaoImplTest {
 
 //    @Test
 //    public void showingRegisterSeatClass() throws Exception {
-=======
+
 //package com.jcticket.admin.dao;
->>>>>>> mypage05
+
 //
 //import com.jcticket.admin.dto.AdminDto;
 //import com.jcticket.admin.dto.CouponDto;

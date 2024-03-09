@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-  <link rel="stylesheet" href="/resources/css/agency/agencyfooter.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/agency/agencyfooter.css">
 </head>
 <body>
   <div class="agency-dashboard-footer">

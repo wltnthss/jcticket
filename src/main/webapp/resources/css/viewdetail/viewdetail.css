@@ -608,3 +608,9 @@ li {
     white-space:nowrap;
     color: #FF9100;
 }
+
+#delete_submit {
+    position: relative;
+    bottom: 50px;
+    float: right;
+}
