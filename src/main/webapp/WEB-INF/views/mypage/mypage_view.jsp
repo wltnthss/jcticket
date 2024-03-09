@@ -258,10 +258,10 @@
                     <div id="show-img"><a href=""><img src="/resources/img/mypage/페페%20한잔해.jpg"></a></div>
                     <div id="show-text">
                         <div class="line"><span>예매번호 :</span> <em>${TicketingDto.ticketing_id}</em></div>
-                        <div class="line"><span>장르 :</span> <em>${TicketingDto.play_middle_cat}</em></div>
+                        <div class="line"><span>장르 :</span> <em>${TicketingDto.play_major_cat}</em></div>
                         <div class="line"><span>관람일시: </span> <em>${TicketingDto.ticketing_at}</em></div>
                         <div class="line"><span>공연장 : </span> <em>${TicketingDto.stage_name}</em></div>
-                        <div class="line"><span>좌석 : </span> <em>${TicketingDto.choice_show_seat}</em></div>
+                        <div class="line"><span>좌석 : </span> <em>${TicketingDto.selected_seats}</em></div>
                     </div>
                 </div>
                 </c:forEach>

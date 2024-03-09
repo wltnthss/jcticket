@@ -238,7 +238,7 @@
                                     <td>${TicketingDto.ticketing_at}</td>
                                     <td>${TicketingDto.ticketing_id}</td>
                                     <td>${TicketingDto.play_name}</td>
-                                    <td>${TicketingDto.viewing_at}</td>
+                                    <td>${TicketingDto.showing_date}</td>
                                     <td>${TicketingDto.ticketing_cnt}</td>
                                     <td>${TicketingDto.ticketing_status}</td>
                                 </tr>

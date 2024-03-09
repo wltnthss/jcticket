@@ -8,7 +8,7 @@
         SELECT t.ticketing_at,
                t.ticketing_id,
                t.play_name,
-               t.viewing_at,
+               t.showing_date,
                t.ticketing_cnt,
                (SELECT cc.comn_code_name
                 FROM comn_code cc
@@ -55,19 +55,19 @@
         WHERE true
         <choose>
             <when test='option=="A"'>
-                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
             </when>
             <when test='option=="M"'>
-                AND p.play_middle_cat = '뮤지컬'
+                AND p.play_major_cat = '뮤지컬'
             </when>
             <when test='option=="C"'>
-                AND p.play_middle_cat = '콘서트'
+                AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_middle_cat = '전시'
+                AND p.play_major_cat = '전시'
             </when>
             <when test='option=="G"'>
-                AND p.play_middle_cat = '공연'
+                AND p.play_major_cat = '연극'
             </when>
         </choose>
         <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
@@ -89,7 +89,7 @@
         t.ticketing_at,
         t.ticketing_id,
         t.play_name,
-        t.viewing_at,
+        t.showing_date,
         t.ticketing_cnt,
         (SELECT cc.comn_code_name FROM comn_code cc WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
         FROM
@@ -138,8 +138,8 @@
         t.ticketing_id,
         MAX(t.ticketing_at) AS ticketing_at,
         MAX(t.stage_name) AS stage_name,
-        MAX(t.choice_show_seat) AS choice_show_seat,
-        MAX(p.play_middle_cat) AS play_middle_cat,
+        MAX(t.selected_seats) AS selected_seats,
+        MAX(p.play_major_cat) AS play_major_cat,
         MAX(t.play_name) AS play_name
         FROM
         ticketing t
@@ -148,19 +148,19 @@
         true
         <choose>
             <when test='option=="A"'>
-                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
             </when>
             <when test='option=="M"'>
-                AND p.play_middle_cat = '뮤지컬'
+                AND p.play_major_cat = '뮤지컬'
             </when>
             <when test='option=="C"'>
-                AND p.play_middle_cat = '콘서트'
+                AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_middle_cat = '전시'
+                AND p.play_major_cat = '전시'
             </when>
             <when test='option=="G"'>
-                AND p.play_middle_cat = '공연'
+                AND p.play_major_cat = '연극'
             </when>
         </choose>
         <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
@@ -194,11 +194,11 @@
     <select id="ticket_detail" resultType="TicketingDto" parameterType="String">
         SELECT t.ticketing_at,
                t.user_name,
-               t.viewing_at,
+               t.showing_date,
                t.stage_name,
                t.ticketing_id,
                t.play_name,
-               t.viewing_at,
+               t.showing_date,
                t.ticketing_cnt,
                t.choice_show_seat,
                (SELECT cc.comn_code_name

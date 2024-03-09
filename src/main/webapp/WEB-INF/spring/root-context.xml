@@ -12,7 +12,7 @@
 
 <<<<<<< HEAD
 
-<!--        <property name="url" value="jdbc:mysql://localhost:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8" ></property>-->
+        <property name="url" value="jdbc:mysql://localhost:3306/team?useUnicode=true&amp;characterEncoding=utf8" ></property>
 
 =======
 <!--        운영 DB-->
@@ -21,9 +21,14 @@
 <!--        <property name="password" value="1q2w3e4R$"></property>-->
 >>>>>>> baa020f477190662c289e64ee90ce4c16054799c
 
-        <property name="url" value="jdbc:mysql://localhost:3306/jcticket?useUnicode=true&amp;characterEncoding=utf8" ></property>
+<!--        <property name="url" value="jdbc:mysql://192.168.129.82:3306/jcticket?useUnicode=true&amp;characterEncoding=utf8" ></property>-->
+
+<!--        <property name="username" value="js2"></property>-->
+<!--        <property name="password" value="1q2w3e4R$"></property>-->
+
         <property name="username" value="root"></property>
         <property name="password" value="1234"></property>
+
 
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
