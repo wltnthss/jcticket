@@ -1,5 +1,6 @@
 // step.1 일정선택
 $(document).ready(function() {
+
     let dateShow = $(".dateShow");
     //선택 가능한 날짜 ex)
     // var availableDates = ["2024-02-28", "2024-02-29"];
@@ -49,7 +50,7 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/ticketing/detail",
+                url: "/ticketing/detail/round",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
@@ -68,7 +69,7 @@ $(document).ready(function() {
                     const infoList = resMap.showing_info;
                     //const showing = document.querySelector('.showing');
 
-
+                    $("#date-text").val(dateText);
                     //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
                     round.empty();
                     console.log("a Tag removed");
@@ -115,7 +116,6 @@ $(document).ready(function(){
     let selectedPrice = 0;
     let discountAmount = 0;
     let totalPrice = 0;
-    let selectedDate = $()
     $(".next").click(function(){
         let current_fs, next_fs, previous_fs; //fieldsets
         let opacity;
@@ -407,10 +407,47 @@ $(document).ready(function(){
             });
         } else {
             // selectedList의 길이가 0인 경우에 대한 처리 (예: 알림창 표시 등)
-            alert("좌석을 최소한 하나 이상 선택해야 합니다.");
+            alert("좌석을 하나 이상 선택해야 합니다.");
             location.reload();
         }
     });
+
+    // 결제하기 버튼 클릭하기.
+    // 누르면 선택된 일정, 좌석, 금액 정보를 백엔드로 넘긴다. 넘긴 후 백엔드에서 DB에 ticketing 테이블에 insert 한다.
+
+    $("#third-btn").click(function (){
+        console.log(`주문가격 : ${totalPrice}`);
+        console.log(`선택좌석리스트 : ${selectedSeatList}`);
+        console.log(`선택회차 : ${$(".aTag.clicked").text()}`);
+        console.log(`주문자 아이디 : ${$("#user_id").val()}`);
+        console.log(`공연명 : ${$("#play-name").text()}`);
+        console.log(`공연장명 : ${$("#stage-name").text()}`);
+        console.log(`할인가격 : ${discountAmount}`);
+
+        const data = {
+            'ticketingPrice' : totalPrice,
+            'seatList' : selectedSeatList.toString(),
+            'ticketingDate' : $("#date-text").val(),
+            'showingInfo' : $(".aTag.clicked").text(),
+            'playName' : $("#play-name").text(),
+            'stageName' : $("#stage-name").text(),
+            'ticketCnt' : selectedSeatList.length,
+            'userId' : $("#user_id").val(),
+            'discountAmount' : discountAmount,
+        }
+        $.ajax({
+            type: "POST",
+            url: "detail/book-info",
+            data: JSON.stringify(data),
+            contentType : 'application/json; charset=utf-8',
+            success: function (res){
+                console.log(res);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        })
+    })
 
 
     $(".previous").click(function(){
@@ -436,12 +473,45 @@ $(document).ready(function(){
 
     });
 
+    // 카카오페이 결제
+    // $("#payment-btn").click(function (){
+    //     requestPay();
+    // })
 
-    $(".submit").click(function(){
-        return false;
-    })
+    // 포트원 호출 함수
+    // IMP.init("imp43864664");
+
+    // function requestPay(){
+    //     IMP.request_pay({
+    //         pg: "kakaopay",
+    //         pay_method: "card",
+    //         merchant_uid: "test_ltjyrto8",
+    //         name: "테스트 결제",
+    //         amount: 100,
+    //         buyer_tel: "010-0000-0000",
+    //         request_id: "req_1709981436787",
+    //         tier_code: undefined,
+    //     });
+    // }
 });
 
+$(document).ready(function(){
+    IMP.init("imp43864664");
+    $("#payment-btn").click(function (){
+        console.log("카카오페이 포트원 결제!")
+        requestPay();
+    })
+    function requestPay(){
+        IMP.request_pay({
+            pg: "kakaopay",
+            pay_method: "card",
+            merchant_uid: "test_ltjyrto1",
+            name: "이클립스 민트",
+            amount: 3500,
+            buyer_tel: "010-5425-9150",
+        });
+    }
+});
 
 // jquery 캘린더 설정
     $.datepicker.setDefaults({

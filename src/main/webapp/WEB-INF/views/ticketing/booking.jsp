@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <%--    bootstrap--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -37,6 +38,7 @@
     String name = (String)session.getAttribute("sessionId");
 %>
 <input id="user_id" value="<%=name%>" type="hidden">
+<input id="date-text" type="hidden" value="">
 <!-- Horizontal Steppers -->
 <div class="container-fluid">
     <div class="row justify-content-center" >
@@ -55,7 +57,7 @@
                             <tr>
                                 <th scope="row" style="width: 30%">공연명</th>
                                 <%--데이터 받아오기: playname --%>
-                                <td>${play_name}</td>
+                                <td id="play-name">${play_name}</td>
                             </tr>
                             <tr>
                                 <th scope="row">공연일시</th>
@@ -70,7 +72,7 @@
                             <tr>
                                 <th scope="row">공연장</th>
                                 <%--데이터 받아오기: stagename --%>
-                                <td>${stage_name}</td>
+                                <td id="stage-name">${stage_name}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -162,9 +164,11 @@
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="fs-title">결제방법</h2>
+                                    <h2 class="fs-title">결제</h2>
                                 </div>
                             </div> <br><br>
+                            <button id="payments-btn">결제하기</button>
+<%--                            <script src="/resources/js/payment/payment.js"></script>--%>
                         </div>
                     </fieldset>
                 </form>

@@ -2,6 +2,7 @@ package com.jcticket.ticketing.controller;
 
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.ticketing.dto.TicketingRequestDto;
 import com.jcticket.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class TicketingController {
 
     @GetMapping(value = "/")
     public String ticketing() throws Exception{
-        System.out.println("/ticketing 실행");
+        System.out.println("===== /ticketing 실행 =====");
         return "ticketing/popup-test";
     }
 
@@ -39,7 +40,7 @@ public class TicketingController {
     // 팝업창을 만들어 보여준다.
 
     @GetMapping(value = "/detail")
-    public String getTicketingDetail(@RequestParam("play_id") String play_id, Model model) throws Exception{
+    public String getTicketingDetail(@RequestParam(value = "play_id") String play_id, Model model) throws Exception{
         System.out.println("ticketing/detail 진입: parameter ==> " + play_id);
         try{
 
@@ -58,6 +59,7 @@ public class TicketingController {
             System.out.println("stage_name ==> " +stage_name);
             System.out.println("date list ==> " +list.toString());
         }catch (Exception e){
+            System.out.println("예외발생!!! at ==> controller /detail");
             e.printStackTrace();
         }
         return "ticketing/booking";
@@ -68,7 +70,7 @@ public class TicketingController {
     // @RequestBody => http 요청의 본문이 그대로 전달된다.
     // @ResponseBody => http 요청의 본문이 그대로 전달된다.
     // ajax로 파라미터 넘기는 방법 찾가
-    @PostMapping("/detail")
+    @PostMapping("/detail/round")
     //@ResponseBody // 자바 객체를 HTTP요청의 바디 내용으로 매핑하여 클라이언트로 전송한다.
     public ResponseEntity<?> getShowingRound(@RequestBody Map<String,String> data) throws Exception{
         // ajax로 받아온 Map data 에는 date_text와 play_id가 들어있다.
@@ -116,6 +118,13 @@ public class TicketingController {
             System.out.println("===== 예외 발생 ====");
             return ResponseEntity.badRequest().body("Bad Request!");
         }
+    }
 
+    // 예매 정보를 받는 컨트롤러
+    @PostMapping("/detail/book-info")
+    public ResponseEntity<?> createTicket(@RequestBody TicketingRequestDto dto)throws Exception{
+        System.out.println("=========book-info 진입===============");
+        System.out.println("매수: "+dto.getTicketCnt()+",  좌석 리스트: "+ dto.getSeatList() +",  예매 가격: "+ dto.getTicketingPrice() + ",  예매일: "+dto.getTicketingDate()+ ",  주문자 아이디: "+dto.getUserId()+",  할인가격: "+dto.getDiscountAmount());
+        return ResponseEntity.ok().body("ok");
     }
 }

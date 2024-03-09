@@ -11,6 +11,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <title>Title</title>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
@@ -36,12 +37,28 @@
                 let url = 'detail?play_id=' + playId;
                 window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
             }
+
+            IMP.init("imp43864664");
+            $("#payments-btn").click(function (){
+                console.log("카카오페이 포트원 결제 이벤트!")
+                requestPay();
+            })
+            function requestPay(){
+                IMP.request_pay({
+                    pg: "kakaopay",
+                    pay_method: "card",
+                    merchant_uid: "test_ltjyrto2",
+                    name: "이클립스 민트맛",
+                    amount: 3500,
+                    buyer_tel: "010-0000-9150",
+                });
+            }
         });
     </script>
 </head>
 <body>
-
- <button id="popupButton">예매팝업 열기</button>
+<button id="popupButton">예매팝업 열기</button>
+<button id="payments-btn">결제하기</button>
 </body>
 </html>
 
