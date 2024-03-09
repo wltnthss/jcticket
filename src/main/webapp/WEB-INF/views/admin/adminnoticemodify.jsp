@@ -69,9 +69,10 @@
 <script>
 
     let page = ${page}
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 
     $("#btn_goList").on('click', function (){
-        location.href = "/admin/notice?page=" + page
+        location.href = sessionStorage.getItem("contextpath") + "/admin/notice?page=" + page
     });
 
     $("#btn_submit").on('click', function (){

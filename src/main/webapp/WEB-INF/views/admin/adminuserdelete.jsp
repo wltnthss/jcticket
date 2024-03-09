@@ -141,6 +141,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
     // 관리자 회원 삭제 버튼 클릭 이벤트
     $('#user-delete-btn').on('click', function(){
 
@@ -163,17 +164,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/userdelete',
+                    url: sessionStorage.getItem("contextpath") + '/admin/userdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href= "/admin/user";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/user";
                         }else{
                             alert('삭제 실패');
-                            location.href= "/admin/delete";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/delete";
                         }
                     },
                     error: function (e) {

@@ -162,9 +162,14 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+
+
     <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
     }
@@ -191,17 +196,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/productdelete',
+                    url: sessionStorage.getItem("contextpath") + '/admin/productdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href= "/admin/product";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/product";
                         }else{
                             alert('삭제 실패');
-                            location.href= "/admin/product";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/product";
                         }
                     },
                     error: function (e) {
