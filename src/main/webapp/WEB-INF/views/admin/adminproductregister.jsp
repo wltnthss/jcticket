@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
             <h1>상품 관리</h1>
             <h2>공연 등록</h2>
         </div>
-        <form action="/admin/playregister" method="post" enctype="multipart/form-data">
+        <form action="${pageContext.request.contextPath}/admin/playregister" method="post" enctype="multipart/form-data">
             <div class="tbl_frm01">
                 <table>
                     <colgroup>
@@ -89,7 +89,7 @@
                 <input type="submit" value="등록" class="btn-large">
             </div>
         </form>
-        <form action="/admin/showingregister" method="post">
+        <form action="${pageContext.request.contextPath}/admin/showingregister" method="post">
             <div class="admin-common-title">
                 <h2>회차 등록</h2>
             </div>
@@ -255,7 +255,7 @@
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="/resources/js/admin/admin.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 </body>
 </html>

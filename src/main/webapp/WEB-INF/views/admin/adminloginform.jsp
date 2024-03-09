@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/admin/admin.css"/>">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             </div>
             <div class="loginright">
                 <h1>티켓매니저 관리자 로그인</h1>
-                <form class="loginform form-group" id="loginform" action="<c:url value="/admin"/>" method="POST">
+                <form class="loginform form-group" id="loginform" action="${pageContext.request.contextPath}/admin" method="POST">
                     <fieldset>
                         <legend class="blind">로그인</legend>
                         <div class="inputwrap">

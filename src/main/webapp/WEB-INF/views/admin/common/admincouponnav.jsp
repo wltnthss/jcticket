@@ -26,13 +26,13 @@
 
             <div id="u10" style="display: block">
                 <dd class="u10">
-                    <a href="/admin/coupon">쿠폰 정보관리</a>
+                    <a href="${pageContext.request.contextPath}/admin/coupon">쿠폰 정보관리</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/couponregister">쿠폰 등록하기</a>
+                    <a href="${pageContext.request.contextPath}/admin/couponregister">쿠폰 등록하기</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/coupondelete">쿠폰 삭제하기</a>
+                    <a href="${pageContext.request.contextPath}/admin/coupondelete">쿠폰 삭제하기</a>
                 </dd>
             </div>
         </dl>

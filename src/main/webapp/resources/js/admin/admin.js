@@ -105,17 +105,17 @@ $(function (){
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/coupondelete',
+                    url: sessionStorage.getItem("contextpath") + '/admin/coupondelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href= "/admin/coupondelete";
+                            location.href = sessionStorage.getItem("contextpath")+ "/admin/coupondelete";
                         }else{
                             alert('삭제 실패');
-                            location.href= "/admin/coupondelete";
+                            location.href = sessionStorage.getItem("contextpath")+ "/admin/coupondelete";
                         }
                     },
                     error: function (e) {

@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -27,7 +27,7 @@
                 <h1>회원 삭제하기</h1>
                 <h2>기본검색</h2>
                 <hr>
-                <form id="userSearch" action="/admin/userdelete" method="get">
+                <form id="userSearch" action="${pageContext.request.contextPath}/admin/userdelete" method="get">
                     <div class="user-form">
                         <table>
                             <colgroup>
@@ -108,7 +108,7 @@
                 <div class="notice-paging">
                     <c:if test="${paging.showPrev}">
                         <%-- 1페이지가 아닌 경우는 [이전] 클릭하면 현재 페이지보다 1작은 페이지 요청 --%>
-                        <a class="notice-paging-pageitems" href="/admin/userdelete?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}"> < </a>
+                        <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/userdelete?page=${paging.page-1}&option=${paging.option}&keyword=${paging.keyword}"> < </a>
                     </c:if>
 
                     <%-- for(int i=startPage; i<=endPage; i++) --%>
@@ -119,13 +119,13 @@
                         </c:if>
                         <c:if test="${i ne paging.page}">
                             <%-- 요청한 페이지가 아닌 다른 페이지번호 클릭시 이동  --%>
-                            <a class="notice-paging-pageitems" href="/admin/userdelete?page=${i}&option=${paging.option}&keyword=${paging.keyword}">${i}</a>
+                            <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/userdelete?page=${i}&option=${paging.option}&keyword=${paging.keyword}">${i}</a>
                         </c:if>
                     </c:forEach>
 
                     <c:if test="${paging.showNext}">
                         <%-- page가 maxPage보다 작으면 클릭시 현재 page에서 1증가된 페이지로 이동 --%>
-                        <a class="notice-paging-pageitems" href="/admin/userdelete?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}"> > </a>
+                        <a class="notice-paging-pageitems" href="${pageContext.request.contextPath}/admin/userdelete?page=${paging.page+1}&option=${paging.option}&keyword=${paging.keyword}"> > </a>
                     </c:if>
                 </div>
                 <div class="btn-confirm">
@@ -138,9 +138,10 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
     // 관리자 회원 삭제 버튼 클릭 이벤트
     $('#user-delete-btn').on('click', function(){
 
@@ -163,17 +164,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/userdelete',
+                    url: sessionStorage.getItem("contextpath") + '/admin/userdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href= "/admin/user";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/user";
                         }else{
                             alert('삭제 실패');
-                            location.href= "/admin/delete";
+                            location.href = sessionStorage.getItem("contextpath") + "/admin/delete";
                         }
                     },
                     error: function (e) {

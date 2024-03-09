@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/notice/notice.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/notice/notice.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -33,13 +33,15 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <script>
+        sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
         $(function(){
 
             const page = '${page}';
 
             // 목록 버튼 클릭시 현재 page 로 이동
             $('#notice-detail-container-btn').on('click', () => {
-                location.href = "/notice/paging?page=" + page;
+                location.href = sessionStorage.getItem("contextpath") + "/notice/paging?page=" + page;
             });
         });
     </script>

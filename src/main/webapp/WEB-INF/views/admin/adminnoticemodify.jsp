@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -26,7 +26,7 @@
             <h1>공지사항 수정하기</h1>
             <h2>공지사항 수정 정보 입력</h2>
         </div>
-        <form action="/admin/noticemodify" method="POST">
+        <form action="${pageContext.request.contextPath}/admin/noticemodify" method="POST">
             <input type="hidden" name="notice_seq" value="${dto.notice_seq}">
             <input type="hidden" name="page" value="${page}">
             <div class="tbl_frm01">
@@ -69,9 +69,10 @@
 <script>
 
     let page = ${page}
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 
     $("#btn_goList").on('click', function (){
-        location.href = "/admin/notice?page=" + page
+        location.href = sessionStorage.getItem("contextpath") + "/admin/notice?page=" + page
     });
 
     $("#btn_submit").on('click', function (){
