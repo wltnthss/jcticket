@@ -59,7 +59,7 @@
     </header>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="/resources/js/admin/admin.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
     $(function () {

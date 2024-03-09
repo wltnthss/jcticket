@@ -78,7 +78,7 @@
                             <tr class="list">
                                 <td>${NoticeDto.notice_seq}</td>
                                 <td>${NoticeDto.notice_title}</td>
-                                <td style="font-weight: bold; text-decoration-line: underline"><a href="/admin/noticemodify/${NoticeDto.notice_seq}?page=${paging.page}">${NoticeDto.notice_content}</a></td>
+                                <td style="font-weight: bold; text-decoration-line: underline"><a href="${pageContext.request.contextPath}/admin/noticemodify/${NoticeDto.notice_seq}?page=${paging.page}">${NoticeDto.notice_content}</a></td>
                                 <td>${NoticeDto.notice_reg_at}</td>
                                 <td>${NoticeDto.notice_view_cnt}</td>
                                 <td>${NoticeDto.notice_use_yn}</td>
@@ -120,6 +120,8 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
     }
