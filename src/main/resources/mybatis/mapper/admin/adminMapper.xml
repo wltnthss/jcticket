@@ -393,8 +393,8 @@
 
     <insert id="insertPlayImg" parameterType="PlayImgDto">
         INSERT INTO play_image
-        (play_id, play_poster_original_file_name, play_poster_stored_file_name, play_info_original_file_name, play_info_stored_file_name, created_at, created_id, updated_at, updated_id)
-        VALUES(#{play_id}, #{play_poster_original_file_name}, #{play_poster_stored_file_name}, #{play_info_original_file_name}, #{play_info_stored_file_name}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
+        (play_id, play_poster_original_file_name, play_poster_stored_file_name, play_info_original_file_name, play_info_stored_file_name, play_slide_original_file_name, play_slide_stored_file_name, created_at, created_id, updated_at, updated_id)
+        VALUES(#{play_id}, #{play_poster_original_file_name}, #{play_poster_stored_file_name}, #{play_info_original_file_name}, #{play_info_stored_file_name},#{play_slide_original_file_name},#{play_slide_stored_file_name}, CURRENT_TIMESTAMP, "SYSTEM", CURRENT_TIMESTAMP, "SYSTEM");
     </insert>
 
     <select id="selectAllProduct" resultType="Map" parameterType="Map">

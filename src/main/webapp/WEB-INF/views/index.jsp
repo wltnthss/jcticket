@@ -84,10 +84,10 @@
     <div class="pf-kvslide-wrap">
         <div class="pf-kvslide">
                 <%--슬라이드-공연1--%>
-            <c:forEach items="${list}" var="p"  begin="1" end="13">
+            <c:forEach items="${list}" var="p"  begin="17" end="28">
             <div class="kv-item" id="kv-item1">
             <a href="공연상세페이지1">
-                <img src="<c:url value='/index/upload/${p.img_name}'/>">
+                <img src="<c:url value='/index/upload/${p.slide_img_name}'/>">
                 </a>
                 <a class="pf-kv-text white" href="공연상세페이지1">
                     <p class="sub-tit"></p>
@@ -100,7 +100,7 @@
                 <%-- 슬라이드 페이징 1--%>
         <div class="pf-kvslide-pager">
             <div class="pager-bg">
-                <c:forEach items="${list}" var="p"  begin="1" end="13">
+                <c:forEach items="${list}" var="p"  begin="17" end="28">
                 <a href="#" class>
                     <img src="<c:url value='/index/upload/${p.img_name}'/>">
                     <span>1/10</span>
@@ -132,19 +132,21 @@
         <div class="whot-area">
             <ul id="ulWhatshot">
                 <%-- 왓츠핫 큰항목 --%>
-                <li>
+                    <c:forEach items="${list}" var="p"  begin="14" end="14">
+                    <li>
                     <div class="big-one">
                         <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=공연아이디1" target="_self" style="z-index: 0">
-                            <img src="${pageContext.request.contextPath}/resources/img/viewdetail/testposter.jpg" alt>
+                            <img src="<c:url value='/index/upload/${p.img_name}'/>" alt>
                             <div class="big-one-txt">
-                                <p class="big-tit">제목</p>
-                                <p class="big-detail">공연날짜, 공연장소
+                                <p class="big-tit">${p.play_name}</p>
+                                <p class="big-detail">${p.showing_period_date}.${p.stage_name}
                                 <span></span>
                                 </p>
                             </div>
                         </a>
                     </div>
-                </li>
+                    </li>
+                    </c:forEach>
                     <%-- 왓츠핫 작은항목1 --%>
                     <c:forEach items="${list}" var="p"  begin="1" end="6">
                     <li>
@@ -270,7 +272,7 @@
                     </div>
                     </c:forEach>
 
-                    <c:forEach items="${list}" var="p"  begin="13" end="13">
+                    <c:forEach items="${list}" var="p"  begin="26" end="26">
                     <div class="swiper-slide">
                         <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>">
@@ -299,17 +301,17 @@
         <div class="bnr-slide">
             <div class="bnrslide">
                 <div class="swiper-slide2 active">
-                    <a href="#">
+                    <a href="javascipt:void(0)">
                         <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202311/20231127/wel_wide_47873_2.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
                 <div class="swiper-slide2">
-                    <a href="#">
+                    <a href="javascipt:void(0)">
                         <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202312/20231205/wel_wide_47595.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
                 <div class="swiper-slide2">
-                    <a href="#">
+                    <a href="javascipt:void(0)">
                         <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_wide_48277_f9dfdf.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
