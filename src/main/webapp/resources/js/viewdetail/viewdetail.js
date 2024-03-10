@@ -397,6 +397,12 @@
             e.preventDefault();
             var page = $(this).text();
 
+            // clicked 클래스 삭제
+            $('.pagination a').removeClass('clicked');
+            
+            // 선택한 놈만 clicked 클래스 추가
+            $(this).addClass('clicked');
+
             loadPage(page);
         });
 
@@ -545,6 +551,8 @@
                 alert('후기를 입력해주세요.');
             } else if(!form_user_id){
                 alert('로그인이 필요합니다.');
+            } else {
+                alert('리뷰가 등록되었습니다.')
             }
         });
 
