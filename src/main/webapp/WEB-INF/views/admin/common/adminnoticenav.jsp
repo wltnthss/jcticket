@@ -25,13 +25,13 @@
 
             <div id="u10" style="display: block">
                 <dd class="u10">
-                    <a href="/admin/notice">공지사항 정보관리</a>
+                    <a href="${pageContext.request.contextPath}/admin/notice">공지사항 정보관리</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/noticeregister">공지사항 등록하기</a>
+                    <a href="${pageContext.request.contextPath}/admin/noticeregister">공지사항 등록하기</a>
                 </dd>
                 <dd class="u10">
-                    <a href="/admin/noticedelete">공지사항 삭제하기</a>
+                    <a href="${pageContext.request.contextPath}/admin/noticedelete">공지사항 삭제하기</a>
                 </dd>
             </div>
         </dl>

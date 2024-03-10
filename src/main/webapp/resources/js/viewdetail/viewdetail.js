@@ -41,8 +41,6 @@
             //콜백함수사용,ticketing으로 보낼 데이터
             dateTextCallback(dateText)
 
-
-
             // console.log('play_id =======>'+play_id);
 
             var left = document.querySelector('.fourLeft');
@@ -134,24 +132,6 @@
                 success: function(res) {
                     // 서버로부터 받은 응답 데이터를 처리
                     console.log('Response:', res);
-                    
-                    //res내용을 span태그로 묶어서 #seatPrice1 아래 추가 (잔여석)
-                    // var seatRemain = document.createElement("span");
-                    // var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
-                    // var insertSpan = document.querySelector("#seatPrice1");
-                    //
-                    // if(!existSpan) {
-                    //     seatRemain.textContent = "(잔여: "+res+"석)";
-                    //     seatRemain.className = 'remain_seat'
-                    //     insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                    // } else {
-                    //     while(insertSpan.firstChild)  {
-                    //         insertSpan.removeChild(existSpan);
-                    //         seatRemain.textContent = "(잔여: "+res+"석)";
-                    //         seatRemain.className = 'remain_seat'
-                    //         insertSpan.insertAdjacentElement('beforeend',seatRemain);
-                    //     }
-                    // }
 
                     var existSpan = document.querySelector("#seatPrice1 > span.remain_seat");
                     var seatRemain = document.createElement("span");
@@ -232,16 +212,19 @@
 
         // 스크롤 이동 이벤트
         var stagename = document.getElementById('stage_name');
-        var movemap = document.getElementById('map');
+        var movemap = document.getElementById('mapa');
 
         var detail_info = document.getElementById('scroll_detail_info');
         var info_box = document.getElementById('info');
 
         var review = document.getElementById('scroll_review');
+        var review_mini = document.getElementById('review_mini');
         var go_review = document.getElementById('review');
 
         var reservation_notice = document.getElementById('reservation_notice');
         var go_notice = document.getElementById('seven_text_one');
+
+
 
         stagename.onclick = function () {
             movemap.scrollIntoView();
@@ -255,31 +238,62 @@
             go_review.scrollIntoView()
         }
 
+        review_mini.onclick = function () {
+            go_review.scrollIntoView()
+        }
+
         reservation_notice.onclick = function () {
             go_notice.scrollIntoView()
         }
 
 
         // 카카오 지도 api
-        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(37.450701, 126.570667), //지도의 중심좌표.
-            level: 3 //지도의 레벨(확대, 축소 정도)
-        };
-        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
 
-        // 마커가 표시될 위치입니다
-        var markerPosition  = new kakao.maps.LatLng(37.450701, 126.570667);
+        // 지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
+        // console.log("map================>"+map);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // console.log("geocoder================>"+geocoder);
+
+        var map_location = document.querySelector(".map_location").innerHTML;
+
+        // console.log("map_location============>"+map_location)
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch(map_location, function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                var infowindow = new kakao.maps.InfoWindow({
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">공연장소</div>'
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+            }
         });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
 
-        
         //관람후기 ajax 페이징
         // var play_id = document.querySelector('.five').id
         var pageSize = document.querySelector('.pageSize').value
@@ -322,7 +336,7 @@
                         '<span class="board_1">' + board.user_id + '</span>' +
                         '<span class="board_2">' + "&nbsp;" + review_upload_time + '</span>' +
                         '<span class="board_3">' + "&nbsp;" +
-                        '<span class="rating" id='+board.review_star_rating+'>' +
+                        '<span class="rating" id=' + board.review_star_rating + '>' +
                         '<i class="rating__star far fa-star"></i>' +
                         '<i class="rating__star far fa-star"></i>' +
                         '<i class="rating__star far fa-star"></i>' +
@@ -331,11 +345,14 @@
                         '</span>' +
                         '</span>' +
                         '<span class="board_4">' + "&nbsp;" + "(관람일:" + review_viewing_time + ")" + '</span>' +
-
                         '<div class="comment_text">' +
                         '<span class="board_5">' + board.review_content + '</span>' +
                         '</div>' +
                         '</div>' +
+                        // '<input type="hidden" id="delete_user_id" name="del_user_id" value=""/>' +
+                        // '<input type="hidden" id="delete_review_num" name="del_review_num" value="'+board.review_num+'"/>' +
+                        '<input class="delete_button" data-review-num="'+board.review_num+'" value="삭제" type="button"/>' +
+                        // '<input id="delete_button'+board.review_num+'" value="삭제" type="button"/>' +
                         '</li>';
                     $('.comment_board').append(list);
                 }
@@ -351,10 +368,12 @@
                     var star_rating = parseInt(rating.id);
                     // console.log('star_rating============>' + star_rating)
 
+                    // 작성되어있는 후기의 별점
                     var stars = rating.querySelectorAll('i');
 
                     for (var j=0;j<stars.length;j++) {
                         var star = stars[j];
+
                         if (j < star_rating) {
                             star.classList.remove("far");
                             star.classList.add("fas");
@@ -377,6 +396,12 @@
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
             var page = $(this).text();
+
+            // clicked 클래스 삭제
+            $('.pagination a').removeClass('clicked');
+            
+            // 선택한 놈만 clicked 클래스 추가
+            $(this).addClass('clicked');
 
             loadPage(page);
         });
@@ -481,28 +506,19 @@
             }
         })
 
-        // // 리뷰작성하기
-        // var review_create = document.getElementById("review_create");
-        //
-        // review_create.onclick = function () {
-        //     //쿼리스트링 이용
-        //     var url = '/review_insert?play_id=' + play_id
-        //         // + 'dateText='+dateText
-        //         // +'&showing_seq='+showing_seq
-        //         // +'&play_name='+play_name
-        //         // +'&stage_name='+stage_name;
-        //
-        //     var name = "review_insert"
-        //     var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-        //     window.open(url, name, option); //성공
-        // };
-
         // 리뷰 별점 매기기
         var star_twinkle = document.querySelectorAll(".review_star i")
 
         star_twinkle.forEach(function (star){
             star.onclick = function (e) {
                 var clicked_star = parseInt(e.target.id);
+
+                // console.log("clicked_star==========>"+clicked_star)
+                var star_input = document.getElementById('star_input');
+                star_input.value = clicked_star;
+
+                // console.log("star_input.value==========>"+star_input.value)
+
                 for (var i = 0; i < star_twinkle.length; i++) {
                     var starToChange = star_twinkle[i];
                     
@@ -510,6 +526,7 @@
                     if (i < clicked_star) {
                         starToChange.classList.remove("far");
                         starToChange.classList.add("fas");
+
                     } else {
                         starToChange.classList.remove("fas");
                         starToChange.classList.add("far");
@@ -517,6 +534,63 @@
                 }
             }
         })
+
+        // 후기작성 알람
+        var form = document.querySelector('#insert_form');
+        // form_user_id 요소의 값을 가져옴
+        var form_user_id = document.getElementById('form_user_id').value
+
+        form.addEventListener('submit', function(event) {
+            var starValue = document.getElementById('star_input').value;
+            var reviewContent = document.querySelector('.review_box').value;
+            if (!starValue) {
+                event.preventDefault(); // 폼 제출 막기
+                alert('별점을 선택해주세요.');
+            } else if (!reviewContent) {
+                event.preventDefault(); // 폼 제출 막기
+                alert('후기를 입력해주세요.');
+            } else if(!form_user_id){
+                alert('로그인이 필요합니다.');
+            } else {
+                alert('리뷰가 등록되었습니다.')
+            }
+        });
+
+        //후기삭제
+        // delete_button 클래스를 가진 요소가 클릭되었을 때
+        $(document).on('click', '.delete_button', function() {
+            // 클릭된 버튼의 data-reviewNum 속성값을 가져옴
+            var review_num = this.dataset.reviewNum;
+
+            // 로그인상태가아닐시
+            if (form_user_id === null || form_user_id.length === 0) {
+                alert("로그인이 필요합니다.");
+                return;
+            }
+
+            // console.log("delete_user_id=====================>" + form_user_id);
+            // console.log("delete_review_num=====================>" + review_num);
+            if(confirm("정말 삭제하시겠습니까?")){
+                // AJAX 요청
+                $.ajax({
+                    type: "GET",
+                    url: "/review_delete",
+                    data: {
+                        delete_user_id: form_user_id,
+                        delete_review_num: review_num
+                    },
+                    success: function() {
+                        location.reload(true);
+                        alert("리뷰가 성공적으로 삭제되었습니다.");
+                        // 성공적으로 삭제되었을 때 추가 작업을 수행할 수 있습니다.
+                    },
+                    error: function(xhr, status, error) {
+                        alert("리뷰 삭제에 실패했습니다.");
+                        // 삭제 실패시 추가 작업을 수행할 수 있습니다.
+                    }
+                });
+            }
+        });
 
     });
     //$(document).ready 끝--------------------------------------------------------------------------

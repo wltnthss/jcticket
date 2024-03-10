@@ -106,10 +106,14 @@
                p.play_run_time,
                p.agency_id,
                stg.stage_name,
-               s.showing_seat_price
+               stg.stage_address,
+               s.showing_seat_price,
+               pi.play_poster_stored_file_name,
+               pi.play_info_stored_file_name
         FROM play p
                  JOIN showing s ON p.play_id = s.play_id
                  JOIN stage stg ON s.stage_id = stg.stage_id
+                 JOIN Play_Image pi ON p.play_id = pi.play_id
         WHERE p.play_id = #{play_id};
     </select>
 
@@ -149,7 +153,7 @@
                  review_viewing_at,
                  review_content,
 --                  AVG(r.review_star_rating) AS review_star_rating_avg,
-                 review_total,
+--                  review_total,
                  user_id,
                  play_id,
                  created_at,
@@ -157,13 +161,14 @@
                  updated_at,
                  updated_id)
         VALUES
-            (#{review_num},
+            (
+             #{review_num},
              CURRENT_TIMESTAMP,
              #{review_star_rating},
              #{review_viewing_at},
              #{review_content},
 --              (SELECT AVG(review_star_rating) FROM review),
-             '0',
+--              '0',
              #{user_id},
              #{play_id},
              CURRENT_TIMESTAMP,
@@ -206,7 +211,8 @@
                review_at,
                review_star_rating,
                review_viewing_at,
-               review_content
+               review_content,
+               review_num
         FROM review
         WHERE play_id = #{play_id}
         ORDER BY review_at DESC
@@ -227,8 +233,9 @@
     </select>
 
 
-    <select id="bring_review_viewing_at" parameterType="map" resultType="List">
-        SELECT r.review_viewing_at
+    <select id="bring_review_viewing_at" parameterType="map" resultType="String">
+--         SELECT r.review_viewing_at
+        SELECT t.showing_date
         FROM review r
                  JOIN user u ON r.user_id = u.user_id
                  JOIN ticketing t ON u.user_id = t.user_id

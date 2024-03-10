@@ -25,13 +25,13 @@
 
         <div id="u10" style="display: block">
             <dd class="u10">
-                <a href="/admin/user">회원 정보관리</a>
+                <a href="${pageContext.request.contextPath}/admin/user">회원 정보관리</a>
             </dd>
             <dd class="u10">
-                <a href="/admin/userregister">회원 등록하기</a>
+                <a href="${pageContext.request.contextPath}/admin/userregister">회원 등록하기</a>
             </dd>
             <dd class="u10">
-                <a href="/admin/userdelete">회원 삭제하기</a>
+                <a href="${pageContext.request.contextPath}/admin/userdelete">회원 삭제하기</a>
             </dd>
             <dd class="u10">
                 <a href="#">회원 일괄등록하기</a>

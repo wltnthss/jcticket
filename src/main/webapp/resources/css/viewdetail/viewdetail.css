@@ -499,6 +499,19 @@ li {
     line-height: 30px;
     padding: 3px;
     margin: 5px 5px;
+    color: black;
+}
+
+.pageCss.clicked {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0,0,0);
+    text-align: center;
+    line-height: 30px;
+    padding: 3px;
+    margin: 5px 5px;
+    color: black;
 }
 
 .comment_page div {
@@ -608,3 +621,10 @@ li {
     white-space:nowrap;
     color: #FF9100;
 }
+
+.delete_button {
+    position: relative;
+    bottom: 50px;
+    float: right;
+}
+

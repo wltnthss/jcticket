@@ -26,10 +26,10 @@
 
                 <div id="u10" style="display: block">
                     <dd class="u10">
-                        <a href="/admin/product">상품 정보관리</a>
+                        <a href="${pageContext.request.contextPath}/admin/product">상품 정보관리</a>
                     </dd>
                     <dd class="u10">
-                        <a href="/admin/productregister">상품 등록하기</a>
+                        <a href="${pageContext.request.contextPath}/admin/productregister">상품 등록하기</a>
                     </dd>
                 </div>
             </dl>
