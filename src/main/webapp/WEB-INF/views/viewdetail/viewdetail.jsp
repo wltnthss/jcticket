@@ -30,10 +30,10 @@ git <%--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <%--    datepicker css--%>
-    <link rel="stylesheet" href="/resources/css/viewdetail/jquery-ui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/viewdetail/jquery-ui.css">
 
 <%--    viewdetail 페이지 css--%>
-    <link rel="stylesheet" href="/resources/css/viewdetail/viewdetail.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/viewdetail/viewdetail.css">
 
 </head>
 <body>
@@ -42,7 +42,7 @@ git <%--
     <div class="container">
         <%-- content area    --%>
         <div class="category">
-            <a href="/${major_cat}" style="color:black;">
+            <a href="${pageContext.request.contextPath}/${major_cat}" style="color:black;">
                 <span class="major-cat">
                     <c:if test="${not empty viewDetail}">
                         ${viewDetail[0].play_major_cat}
@@ -79,7 +79,7 @@ git <%--
                             <c:if test="${not empty viewDetail}">
                                 <span id="for_ticketing_stage_name">${viewDetail[0].stage_name}</span>
                             </c:if>
-                            <img src="/resources/img/viewdetail/location.png" class="location_img">
+                            <img src="${pageContext.request.contextPath}/resources/img/viewdetail/location.png" class="location_img">
                         </a>
 
                         <a href="javascript:void(0);" id="url_image">
@@ -94,12 +94,9 @@ git <%--
                 <div class="three-one-left">
                     <c:if test="${not empty viewDetail}">
                         <div class="play-img">
-                            <img src="<c:url value='/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
+                            <img src="<c:url value='${pageContext.request.contextPath}/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
                         </div>
                     </c:if>
-<%--                    <div class="play-img">--%>
-<%--                        <img src='/resources/img/viewdetail/testposter.jpg'/>--%>
-<%--                    </div>--%>
     <%--                review-mini안에 별점, 평균별점, 리뷰 수 등등 들어감--%>
                     <div class="star-review">
                         <div class="review-star">
@@ -224,7 +221,7 @@ git <%--
                 <p class="seven_text">공연정보</p>
                 <div class="seven_con">
                     <c:if test="${not empty viewDetail}">
-                        <img src="<c:url value='/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
+                        <img src="<c:url value='${pageContext.request.contextPath}/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
                     </c:if>
                 </div>
             </div>
@@ -318,12 +315,6 @@ git <%--
                         </table>
                     </div>
 
-<%--                    <p>이미지 들어갈 자리</p>--%>
-<%--                    &lt;%&ndash;                    이미지 사이 공백&ndash;%&gt;--%>
-<%--                    <p><br></p>--%>
-<%--                    <p>이미지 들어갈 자리</p>--%>
-<%--                    <p><br></p>--%>
-<%--                    <p>이미지 들어갈 자리</p>--%>
                 </div>
             </div>
 
@@ -337,7 +328,7 @@ git <%--
                     </c:if>
                 </div>
                 <div class="map_icon_box">
-                    <img src="/resources/img/viewdetail/path_icon.png"/><br>찾아가는길
+                    <img src="${pageContext.request.contextPath}/resources/img/viewdetail/path_icon.png"/><br>찾아가는길
                 </div>
 
 <%--                카카오 지도 api--%>
@@ -350,7 +341,7 @@ git <%--
                         <span id="review">관람후기</span>
                     </div>
                     <div class="comment_warning">
-                        <img src="/resources/img/viewdetail/comment_icon.png/">
+                        <img src="${pageContext.request.contextPath}/resources/img/viewdetail/comment_icon.png/">
                         <div class="span_box">
                             <span class="text_red">매매, 욕설 등 제이씨티켓 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</span><br>
                             <span>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</span>
@@ -366,11 +357,11 @@ git <%--
                     <div class="comment_page">
 <%--                        <a class="page_first"><img src="/resources/img/viewdetail/backback.png/"/></a>--%>
 <%--                        <a class="page_prev"><img src="/resources/img/viewdetail/back.png/"/></a>--%>
-                        <a class="prev pageCss" href="/viewdetail?this_play_id=${play_id}&page=${ph.startPage-1}&pageSize=${ph.pageSize}">&lt;</a>
+                        <a class="prev pageCss" href="${pageContext.request.contextPath}/viewdetail?this_play_id=${play_id}&page=${ph.startPage-1}&pageSize=${ph.pageSize}">&lt;</a>
                         <div class="pagination">
                             <!-- 페이지 번호 및 Ajax 호출을 위한 부분 -->
                             <c:forEach var="i" begin="${ph.startPage}" end="${ph.endPage}">
-                                <a class="pageCss" href="/viewdetail?this_play_id=${play_id}&page=${i}&pageSize=${ph.pageSize}">${i}</a>
+                                <a class="num pageCss" href="${pageContext.request.contextPath}/viewdetail?this_play_id=${play_id}&page=${i}&pageSize=${ph.pageSize}">${i}</a>
                             </c:forEach>
                         </div>
                         <a class="next pageCss" href="javascript:void(0);">&gt;</a>
@@ -379,7 +370,7 @@ git <%--
                     </div>
 
                     <p id="review_place" style="font-size: 22px; margin-left: 30px">관람후기등록</p>
-                        <form id="insert_form" action="/review_insert" method="post">
+                        <form id="insert_form" action="${pageContext.request.contextPath}/review_insert" method="post">
                             <div class="review_form">
                                 <input type="hidden" name="play_id" value="${play_id}"/>
                                 <input type="hidden" id="form_user_id" name="user_id" value="${user_id}"/>
@@ -425,14 +416,14 @@ git <%--
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
     <%--    datepicker 제이쿼리 달력--%>
-    <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/viewdetail/jquery-ui.min.js"></script>
 
 
 <%--    카카오 지도 api 스크립트--%>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae&libraries=services"></script>
 
     <%--    js파일--%>
-    <script src="/resources/js/viewdetail/viewdetail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/viewdetail/viewdetail.js"></script>
 
 </body>
 </html>
