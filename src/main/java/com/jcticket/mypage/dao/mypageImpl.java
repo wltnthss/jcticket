@@ -49,6 +49,9 @@ public class mypageImpl implements mypageDAO {
         return session.selectList(namespace + "selectLimit", map);
     }
 
+
+
+
     @Override
     public List<TicketingDto> select_list() throws Exception {
         return session.selectList(namespace + "select_list");
@@ -107,6 +110,11 @@ public class mypageImpl implements mypageDAO {
     @Override
     public int user_update(UserDto userDto) throws Exception {
         return session.update(namespace + "user_update", userDto);
+    }
+
+    @Override
+    public int withdraw(UserDto userDto) throws Exception {
+        return session.update(namespace + "withdraw" , userDto);
     }
 
     @Override

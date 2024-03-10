@@ -281,7 +281,7 @@
 
 
     <select id="user_info" parameterType="String" resultType="UserDto">
-        SELECT user_id, user_name, user_nickname, user_tel, user_birth, user_email
+        SELECT user_id, user_name, user_nickname, user_tel, user_birth, user_email,user_password
         FROM user
         WHERE user_id = #{user_id};
     </select>
@@ -294,6 +294,7 @@
             user_password = #{user_password},
             user_tel      = #{user_tel},
             user_address  = #{user_address}
+            user_update_at = NOW();
         WHERE user_id = #{user_id};
     </update>
 
@@ -302,6 +303,14 @@
         UPDATE user_coupon
         SET user_coupon_use_yn = 'Y'
         WHERE user_coupon_use_yn = 'N' AND <![CDATA[user_coupon_expire_at < now();]]>
+    </update>
+
+
+    <update id="withdraw" parameterType="map">
+        UPDATE user
+        SET user_retire_yn = 'Y'
+        WHERE user_id = #{user_id}
+        AND user_password = #{user_password};
     </update>
 
 </mapper>

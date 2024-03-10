@@ -47,6 +47,8 @@ public interface mypageDAO {
     int update_coupon(CouponDto CouponDto) throws Exception;
     int user_update(UserDto userDto) throws Exception;
 
+    int withdraw(UserDto userDto) throws Exception;
+
     int coupon_update() throws Exception;
 
 

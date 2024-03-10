@@ -150,7 +150,35 @@ public class mypageController {
     }
 
     @GetMapping("/withdraw")
-    public String withdraw() {
+    public String withdraw(HttpSession session,
+                           String user_id,
+                           String user_password,
+                           Model model) throws Exception {
+        String id = (String) session.getAttribute("sessionId");
+
+        System.out.println(user_id);
+        System.out.println(user_password);
+
+
+
+        UserDto userDto = mypageService.user_info(id);
+
+        boolean pass = BCrypt.checkpw(user_password, userDto.getUser_password());
+
+        System.out.println(userDto);
+
+        model.addAttribute("user", userDto);
+
+        if(pass && user_id.equals(userDto.getUser_id())) {
+
+            int result = mypageService.withdraw(userDto);
+
+            System.out.println(result);
+            session.invalidate();
+
+            return "/index";
+        }
+
         return "/mypage/withdraw";
     }
 

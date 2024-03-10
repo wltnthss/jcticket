@@ -97,6 +97,11 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public Integer withdraw(UserDto userDto) throws Exception {
+        return mypageDAO.withdraw(userDto);
+    }
+
+    @Override
     public Integer coupon_update() throws Exception {
         return mypageDAO.coupon_update();
     }

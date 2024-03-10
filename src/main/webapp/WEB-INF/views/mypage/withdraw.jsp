@@ -101,9 +101,19 @@
 
 
         #id_input {
+            display: flex;
+            margin: 170px auto;
             width: 700px;
             height: 200px;
             background-color: #FAFAE9;
+            flex-direction: column;
+            align-items: center;
+            align-content: stretch;
+            justify-content: center;
+        }
+
+        #id_input > input {
+            width: 100px;
         }
 
 
@@ -189,14 +199,22 @@
                     </dl>
                 </div>
 
-            </div>
-
-
-            <div id="id_input">
 
             </div>
+
+
+
 
         </article>
+
+
+        <div id="id_input">
+            <form action="/withdraw">
+            <div>아이디: <input type="text" name="user_id" value="${user.user_id}"></div>
+            <div>패스워드 : <input type="password" name="user_password"></div>
+            <div><input type="submit" value="회원탈퇴"></div>
+            </form>
+        </div>
     </div>
 </div>
 
