@@ -1,5 +1,6 @@
 package com.jcticket.payment.dao;
 
+import com.jcticket.payment.dto.PaymentDto;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Repository;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Repository
+
 public interface PaymentDao {
+    int insertPayment(PaymentDto dto) throws Exception;
+
+    int updatePaymentStatusF(String paymentId) throws Exception;
 }

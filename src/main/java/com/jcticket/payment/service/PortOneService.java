@@ -1,6 +1,7 @@
 package com.jcticket.payment.service;
 
-import org.springframework.stereotype.Service;
+import com.jcticket.payment.dto.PaymentPrepareDto;
+import org.springframework.http.ResponseEntity;
 
 /**
  * packageName    : com.jcticket.payment.service
@@ -13,6 +14,6 @@ import org.springframework.stereotype.Service;
  * -----------------------------------------------------------
  * 1/31/24         조영상        최초 생성
  */
-@Service
-public interface PaymentService {
+public interface PortOneService {
+    ResponseEntity<String> preparePayment(PaymentPrepareDto dto) throws Exception;
 }

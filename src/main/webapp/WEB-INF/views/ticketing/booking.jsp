@@ -167,7 +167,9 @@
                                     <h2 class="fs-title">결제</h2>
                                 </div>
                             </div> <br><br>
-                            <button id="payments-btn">결제하기</button>
+                            <button id="payment-btn">결제하기</button>
+                            <input type="hidden" id="ticketing-id" value="">
+                            <input type="hidden" id="showing-seq" value="">
 <%--                            <script src="/resources/js/payment/payment.js"></script>--%>
                         </div>
                     </fieldset>

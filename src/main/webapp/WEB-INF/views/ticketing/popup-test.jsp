@@ -34,25 +34,25 @@
                 let popupH = 900;
                 let left = Math.ceil((window.screen.width - popupW) / 2);
                 let top = Math.ceil((window.screen.height - popupH) / 2);
-                let url = 'detail?play_id=' + playId;
+                let url = '/ticketing/booking/?play_id=' + playId;
                 window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
             }
 
-            IMP.init("imp43864664");
-            $("#payments-btn").click(function (){
-                console.log("카카오페이 포트원 결제 이벤트!")
-                requestPay();
-            })
-            function requestPay(){
-                IMP.request_pay({
-                    pg: "kakaopay",
-                    pay_method: "card",
-                    merchant_uid: "test_ltjyrto2",
-                    name: "이클립스 민트맛",
-                    amount: 3500,
-                    buyer_tel: "010-0000-9150",
-                });
-            }
+            // IMP.init("imp43864664");
+            // $("#payments-btn").click(function (){
+            //     console.log("카카오페이 포트원 결제 이벤트!")
+            //     requestPay();
+            // })
+            // function requestPay(){
+            //     IMP.request_pay({
+            //         pg: "kakaopay",
+            //         pay_method: "card",
+            //         merchant_uid: "test_ltjyrto2",
+            //         name: "이클립스 민트맛",
+            //         amount: 3500,
+            //         buyer_tel: "010-0000-9150",
+            //     });
+            // }
         });
     </script>
 </head>

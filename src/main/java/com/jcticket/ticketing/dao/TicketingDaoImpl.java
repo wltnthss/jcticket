@@ -3,6 +3,7 @@ package com.jcticket.ticketing.dao;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
+import com.jcticket.dto.TicketingDto2;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
@@ -30,11 +31,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TicketingDaoImpl implements TicketingDao {
 
-    @Autowired
     private final SqlSession session;
 
 
-    public final String namespace = "com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper.";
+    public final String namespace = "TicketingMapper.";
 
     // 삽입
     @Override
@@ -95,83 +95,120 @@ public class TicketingDaoImpl implements TicketingDao {
     // 회차좌석 테이블 삽입
     @Override
     public int insertShowSeat(ShowSeatDto dto) throws Exception {
-        return session.insert(namespace+"insertShowSeat", dto);
+        return session.insert(namespace + "insertShowSeat", dto);
     }
 
     // 회차좌석 테이블 삭제
     @Override
     public int deleteShowSeat() throws Exception {
-        return session.delete(namespace+"deleteShowSeat");
+        return session.delete(namespace + "deleteShowSeat");
     }
 
     // 좌석 테이블 삽입
     @Override
     public int insertSeat(SeatDto dto) throws Exception {
-        return session.insert(namespace+"insertSeat", dto);
+        return session.insert(namespace + "insertSeat", dto);
     }
 
     // 좌석 테이블 공연장ID별 삭제
     @Override
     public int deleteSeatByStageId(String stage_id) throws Exception {
-        return session.delete(namespace+"deleteSeatByStageId",stage_id);
+        return session.delete(namespace + "deleteSeatByStageId",stage_id);
     }
 
     // 회차시퀀스로 회차좌석수 조회
     @Override
     public int selectSeatCnt(int showing_seq) throws Exception {
-        return session.selectOne(namespace+"selectSeatCnt", showing_seq);
+        return session.selectOne(namespace + "selectSeatCnt", showing_seq);
     }
 
     // 회차시퀀스별 회차좌석가격 조회
     @Override
     public int selectPrice(int showing_seq) throws Exception {
-        return session.selectOne(namespace+"selectPrice", showing_seq);
+        return session.selectOne(namespace + "selectPrice", showing_seq);
     }
 
     // 회차시퀀스별 좌석번호, 좌석상태리스트 조회
     @Override
     public List<Map<String, String>> selectSeatList(int showing_seq) throws Exception {
-        return session.selectList(namespace+"selectSeatList", showing_seq);
+        return session.selectList(namespace + "selectSeatList", showing_seq);
     }
 
     // 회차시퀀스로 회차좌석의  행, 열의 마지막 번호 구하기
     @Override
     public Map<String, Object> selectEndNum(int showing_seq) throws Exception {
-        return session.selectOne(namespace+"selectEndNum", showing_seq);
+        return session.selectOne(namespace + "selectEndNum", showing_seq);
     }
 
     // 쿠폰테이블 삽입
     @Override
     public int insertCoupon(CouponDto couponDto) throws Exception {
-        return session.insert(namespace+"insertCoupon", couponDto);
+        return session.insert(namespace + "insertCoupon", couponDto);
     }
 
     // 쿠폰테이블 삭제
     @Override
     public int deleteAllCoupon() throws Exception {
-        return session.delete(namespace+"deleteAllCoupon");
+        return session.delete(namespace + "deleteAllCoupon");
     }
     // 유저-쿠폰 테이블 삭제
     @Override
     public int deleteAllUserCoupon() throws Exception {
-        return session.delete(namespace+"deleteAllUserCoupon");
+        return session.delete(namespace + "deleteAllUserCoupon");
     }
 
     // 유저-쿠폰 테이블 삽입
     @Override
     public int insertUserCoupon(UserCouponDto userCouponDto) throws Exception {
-        return session.insert(namespace+"insertUserCoupon", userCouponDto);
+        return session.insert(namespace + "insertUserCoupon", userCouponDto);
     }
 
     // 유저아이디로 유저-쿠폰 테이블에서 유저-쿠폰 아이디, 쿠폰아이디 리스트 조회
     @Override
     public List<UserCouponDto> selectUserCouponList(String user_id) throws Exception {
-        return session.selectList(namespace+"selectUserCouponList", user_id);
+        return session.selectList(namespace + "selectUserCouponList", user_id);
     }
 
     // 쿠폰아이디로 쿠폰 테이블에서 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작일, 쿠폰사용가능종료일 조회
     @Override
     public CouponDto selectCoupon(String coupon_id) throws Exception {
-        return session.selectOne(namespace+"selectCoupon", coupon_id);
+        return session.selectOne(namespace + "selectCoupon", coupon_id);
+    }
+
+    // 예매과정 step1~step3 진행 후 결제 직전 ticketing table insert
+    @Override
+    public int insertTicketing(TicketingDto2 dto) throws Exception {
+        return session.insert(namespace + "insertTicketing", dto);
+    }
+
+    // 결제 과정에서 결제 실패시 예매되었던 테이블에 해당 ticketing_id delete!
+    @Override
+    public int deleteTicketing(String ticketing_id) throws Exception {
+        return session.delete(namespace + "deleteTicketing",ticketing_id);
+    }
+
+    // 유저 아이디로 유저 이름 조회
+
+    @Override
+    public String selectUserNameById(String user_id) throws Exception {
+        return session.selectOne(namespace + "selectUserNameById", user_id);
+    }
+
+    // 생성된 예매아이디로 예매가격 조회
+    @Override
+    public int selectTicketingAmount(String ticketing_id) throws Exception {
+        return session.selectOne(namespace + "selectTicketingAmount", ticketing_id);
+    }
+
+    // 결제 완료 후 회차-좌석 테이블 상태 업데이트
+    @Override
+    public int updateSeatStatusN(ShowSeatDto dto) throws Exception {
+        return session.update(namespace + "updateSeatStatusN", dto);
+    }
+
+    // 결제 완료 후 사용된 유저-쿠폰 테이블 사용여부, 사용일자 업데이트
+    @Override
+    public int updateUserCouponStatusY(String user_coupon_id) throws Exception {
+        return session.update(namespace + "updateUserCouponStatusY", user_coupon_id);
     }
 }

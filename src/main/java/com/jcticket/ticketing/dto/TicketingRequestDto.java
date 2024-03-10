@@ -1,9 +1,6 @@
 package com.jcticket.ticketing.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -22,7 +19,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class TicketingRequestDto {
+    private String userCouponId;
+    private int showingSeq;
     private int ticketingPrice;
     private String seatList;
     private String ticketingDate;

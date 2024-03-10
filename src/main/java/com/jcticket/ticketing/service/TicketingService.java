@@ -1,7 +1,9 @@
 package com.jcticket.ticketing.service;
 
+import com.jcticket.payment.dto.PaymentPrepareDto;
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.ticketing.dto.TicketingRequestDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 
 import java.util.HashMap;
@@ -39,6 +41,20 @@ public interface TicketingService {
     // 회차시퀀스로 좌석번호, 좌석상태리스트를 가공하여 반환한다.
     Map<String,Object> getSeatList(int showing_seq) throws Exception;
 
+    // step3. 쿠폰선택
     // 유저아이디를 받아서 쿠폰정보를 반환한다.
     List<CouponResponseDto> getCouponInfo(String userId) throws Exception;
+
+    // step4. 결제(결제 직전 예매테이블 insert/delete 끼지..)
+    String createTicketing(TicketingRequestDto requestDto) throws Exception;
+
+    // 결제 사전검증을 위해 만들어진 ticketing 테이블에서 amount 값을 조회하고 ticketing_id 와 함께 전달하는 서비스
+    PaymentPrepareDto getTicketingIdAmount(String ticketingId) throws Exception;
+
+    // 결제 성공시 show_seat 테이블과 user_coupon 테이블의 각각 상태를 업데이트하는 서비스:
+    //  (파라미터로 한번에 두 개의 Dao에서 필요한 값들을 받는다)
+    String setBookingStatus(TicketingRequestDto dto) throws Exception;
+
+    // 결제 or 결제 사전검증 실패시 만들어진 ticketing DB 삭제
+    String remvoeTicketing(String userId) throws Exception;
 }

@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class ShowSeatDto {
     //    CREATE TABLE `show_seat` (
 //            `showing_seq`	INT	NOT NULL,
