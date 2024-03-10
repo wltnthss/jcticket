@@ -21,17 +21,17 @@
             </div>
             <ul class="signup-social-icon">
                 <li class="ssc-icon">
-                    <a href="네이버 회원가입" title="네이버로 가입하기" class="ssc">
+                    <a href="#" title="네이버로 가입하기" class="ssc">
                         <img src="${pageContext.request.contextPath}/resources/img/signup/네이버_회원가입.png" class="sscImg">
                     </a>
                 </li>
                 <li class="ssc-icon">
-                    <a href="카카오 회원가입" title="카카오로 가입하기" class="ssc">
+                    <a href="#" title="카카오로 가입하기" class="ssc">
                         <img src="${pageContext.request.contextPath}/resources/img/signup/카카오_회원가입.png" class="sscImg">
                     </a>
                 </li>
                 <li class="ssc-icon">
-                    <a href="구글 회원가입" title="구글로 가입하기" class="ssc">
+                    <a href="#" title="구글로 가입하기" class="ssc">
                         <img src="${pageContext.request.contextPath}/resources/img/signup/구글_회원가입.png" class="sscImg">
                     </a>
                 </li>
@@ -338,8 +338,11 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/signup/signup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/signup/signup.js"></script>
 <script>
     let id = "${userDto.user_id}"
 </script>

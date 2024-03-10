@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/components/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/components/header.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
@@ -28,13 +28,13 @@
             <c:forEach items="${list}" var="p">
                 <div class="srch-list-item">
                         <div>
-                            <a href="/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
+                            <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${p.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${p.img_name}'/>" alt="" width="100" height="120">
                             </a>
                         </div>
                         <div>
                             <p class="item-state"><span class="item-state02">${p.showing_status}</span></p>
-                            <p class="item-tit" style="font-weight: bold;"><a href="/viewdetail?this_play_id=${p.play_id}" target="_blank" style="text-decoration-line: none">${p.play_name}</a></p>
+                            <p class="item-tit" style="font-weight: bold;"><a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${p.play_id}" target="_blank" style="text-decoration-line: none">${p.play_name}</a></p>
                         </div>
                         <div>${p.showing_period_date}</div>
                         <div>${p.stage_name}</div>

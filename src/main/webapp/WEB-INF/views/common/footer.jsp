@@ -9,14 +9,14 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/components/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/components/footer.css">
 </head>
 <body>
 <footer class="play-bottom" id="play-bottom">
     <div class="cont">
         <div class="play-bottom-txt">
-            <a href="/" class="bottom-main-logo">
-                <img src="/resources/img/components/로고1.png" class="logout_icon">
+            <a href="${pageContext.request.contextPath}/" class="bottom-main-logo">
+                <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" class="logout_icon">
             </a>
             <div class="play-bottom-copyright">
                 <p class="cr1">제이씨티켓</p>
@@ -31,7 +31,7 @@
         </div>
         <div class="foo-right">
             <p class="mark">
-                <img src="http://tkfile.yes24.com/imgNew/common/fmark.png" alt>
+                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/fmark.png" alt>
             </p>
             <p class="fservice">
                 고객님은 안전거래를 위한 현금 등으로 결제 시
