@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>제이씨티켓</title>
     <link rel="stylesheet" href="/resources/css/components/header.css">
     <link rel="stylesheet" href="/resources/css/components/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
