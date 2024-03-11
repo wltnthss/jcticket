@@ -19,7 +19,7 @@
     <div class="login-header">
         <div class="login-headerArea">
             <h1>
-                <a href="/" class="login-top-left" >
+                <a href="${pageContext.request.contextPath}/index" class="login-top-left" >
                     <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" alt="JC TICKET" >
                 </a>
                 <span class="login-top-center">로그인</span>
