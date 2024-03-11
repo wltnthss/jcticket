@@ -391,7 +391,7 @@ git <%--
                             <div>
                                 <textarea class="review_box" name="review_content" placeholder="관람후기를 작성해주세요."></textarea>
                             </div>
-                            <input type="submit" value="" class="review_submit"/>
+                            <input type="submit" value="" class="review_submit" style="background-image: url('${pageContext.request.contextPath}/resources/img/viewdetail/review_create.png');"/>
                         </form>
                 </div>
             </div>

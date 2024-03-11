@@ -67,6 +67,8 @@
           and s.showing_period_date is not null
         group by
             p.play_id  ,img_name,slide_img_name, p.play_name, showing_period_date, showing_start_at, showing_end_at, dday
+        order by
+            slide_img_name
     </select>
 
 
