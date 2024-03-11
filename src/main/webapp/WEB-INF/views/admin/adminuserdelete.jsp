@@ -165,7 +165,7 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: contextPath + + '/admin/userdelete',
+                    url: contextPath + '/admin/userdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
