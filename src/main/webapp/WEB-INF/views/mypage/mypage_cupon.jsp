@@ -11,8 +11,8 @@
 <head>
     <title>Title</title>
 
-    <link href="/resources/css/mypage/mypage.css" rel="stylesheet">
-    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
+    <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
 
@@ -224,14 +224,14 @@
 
                     <div id="cupon-input">
                         <h2>공연 할인쿠폰</h2>
-                        <form action="/mypagecupon" method="get">
+                        <form action="${pageContext.request.contextPath}/mypagecupon" method="get">
                         <input id="coupon_insert" type="text" name="coupon_id">
                         <input id="insert_btn" type="submit" value="등록">
                         </form>
                     </div>
 
                     <div id="h2-tag">
-                    <form action="/mypagecupon">
+                    <form action="${pageContext.request.contextPath}/mypagecupon">
                     <button name="button" value="on"><h3>사용 가능한 쿠폰</h3></button>
                     <button name="button" value="off"><h3>사용 완료된 쿠폰</h3></button>
                     </form>
@@ -302,13 +302,13 @@
 
                         <div id="paging">
                             <c:if test="${ph.showPrev}">
-                                <a href="<c:url value="/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&lt;</a>
+                                <a href="<c:url value="${pageContext.request.contextPath}/mypagecupon?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&lt;</a>
                             </c:if>
                             <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                                <a href="<c:url value="/mypagecupon?page=${i}&pageSize=${ph.pageSize}&button=${ph.button}"/>">${i}</a>
+                                <a href="<c:url value="${pageContext.request.contextPath}/mypagecupon?page=${i}&pageSize=${ph.pageSize}&button=${ph.button}"/>">${i}</a>
                             </c:forEach>
                             <c:if test="${ph.showNext}">
-                                <a href="<c:url value="/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&gt;</a>
+                                <a href="<c:url value="${pageContext.request.contextPath}/mypagecupon?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&button=${ph.button}"/>">&gt;</a>
                             </c:if>
                         </div>
 

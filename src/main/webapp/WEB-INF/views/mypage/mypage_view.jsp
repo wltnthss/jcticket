@@ -11,8 +11,8 @@
 <head>
     <title>Title</title>
 
-    <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
-    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
+    <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css?after" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
 
@@ -201,12 +201,12 @@
                     </div>
 
                     <div id="ticket">
-                        <a href="/mypageticket"><h3>예매확인/취소</h3></a>
-                        <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
-                        <a href="/mypageview"><h3>나의 관람 공연</h3></a>
-                        <a href="/mypageclient"><h3>문의사항</h3></a>
-                        <a href="/Modifying"><h3>회원정보 수정</h3></a>
-                        <a href="/withdraw"><h3>회원탈퇴</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageticket"><h3>예매확인/취소</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypagecupon"><h3>쿠폰/예매권</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageview"><h3>나의 관람 공연</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageclient"><h3>문의사항</h3></a>
+                        <a href="${pageContext.request.contextPath}/Modifying"><h3>회원정보 수정</h3></a>
+                        <a href="${pageContext.request.contextPath}/withdraw"><h3>회원탈퇴</h3></a>
                     </div>
 
                     <div id="client">
@@ -230,7 +230,7 @@
                     <p>전재승님의 관람 공연은 총 1건 입니다.(2024년 02월 05일 기준) / 관람후기 작성 1건, 미작성 0건</p>
                     <hr>
 
-                    <form class="form_tag" action="/mypageview" method="get">
+                    <form class="form_tag" action="${pageContext.request.contextPath}/mypageview" method="get">
                         <input name="start_date" id="start_date" type="date"> ~ <input name="end_date" id="end_date" type="date">
                         <select name="option">
                             <option value="A">전체</option>
@@ -242,7 +242,7 @@
                         <input class="submit" type="submit" value="조회">
                     </form>
 
-                    <form class="form_tag" action="/mypageview" method="get">
+                    <form class="form_tag" action="${pageContext.request.contextPath}/mypageview" method="get">
                         <p>공연명 :</p> <input id="keyword" type="text" name="keyword">
                         <input class="submit" type="submit" value="조회" >
                     </form>
@@ -268,13 +268,13 @@
 
                 <div id="paging">
                     <c:if test="${ph.showPrev}">
-                        <a href="<c:url value="/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&lt;</a>
+                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&lt;</a>
                     </c:if>
                     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a href="<c:url value="/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">${i}</a>
+                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">${i}</a>
                     </c:forEach>
                     <c:if test="${ph.showNext}">
-                        <a href="<c:url value="/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&gt;</a>
+                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&gt;</a>
                     </c:if>
                 </div>
 

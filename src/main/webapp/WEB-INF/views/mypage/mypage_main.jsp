@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>MyPage</title>
-    <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
-    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
+    <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
 
@@ -59,15 +59,15 @@
         }
 
         .slide:nth-child(1) {
-            background-image: url("/resources/img/mypage/랄죠_사토루(무량공처).png");
+            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/랄죠_사토루(무량공처).png");
             animation-delay: 0s;
         }
         .slide:nth-child(2) {
-            background-image: url("/resources/img/mypage/랄샘_무라사키.png");
+            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/랄샘_무라사키.png");
             animation-delay: -5s;
         }
         .slide:nth-child(3) {
-            background-image: url("/resources/img/mypage/IMG_2641.jpg");
+            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/IMG_2641.jpg");
             animation-delay: -10s;
         }
 
@@ -173,12 +173,12 @@
                         </div>
 
                         <div id="ticket">
-                            <a href="/mypageticket"><h3>예매확인/취소</h3></a>
-                            <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
-                            <a href="/mypageview"><h3>나의 관람 공연</h3></a>
-                            <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
-                            <a href="/withdraw"><h3>회원탈퇴</h3></a>
+                            <a href="${pageContext.request.contextPath}/mypageticket"><h3>예매확인/취소</h3></a>
+                            <a href="${pageContext.request.contextPath}/mypagecupon"><h3>쿠폰/예매권</h3></a>
+                            <a href="${pageContext.request.contextPath}/mypageview"><h3>나의 관람 공연</h3></a>
+                            <a href="${pageContext.request.contextPath}/mypageclient"><h3>문의사항</h3></a>
+                            <a href="${pageContext.request.contextPath}/Modifying"><h3>회원정보 수정</h3></a>
+                            <a href="${pageContext.request.contextPath}/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
                         <div id="client">
