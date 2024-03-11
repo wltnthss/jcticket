@@ -2,6 +2,9 @@
 
 $(function(){
 
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
+    console.log('TTTTTTEEEEESSSSSTTTTT ' + sessionStorage.getItem("contextpath"));
 
     $("#searchBtn").on('click', function () {
 
