@@ -63,11 +63,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/category/category.js"></script>
 
 <script>
     sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 </script>
+
+<script src="${pageContext.request.contextPath}/resources/js/category/category.js"></script>
+
+
 
 </body>
 </html>
