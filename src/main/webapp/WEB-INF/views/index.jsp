@@ -497,12 +497,12 @@
 
         $.ajax({
             type: 'GET',
-            uri: '/search',
+            uri: sessionStorage.getItem("contextpath") + '/search',
             contentType: 'application/json',
             data: {word: word},
             success: function (res){
                 console.log('응답 성공', res)
-                location.href = "/search?word=" + word;
+                location.href = sessionStorage.getItem("contextpath") + "/search?word=" + word;
             },
             error: function (err) {
                 console.error("에러", err);
