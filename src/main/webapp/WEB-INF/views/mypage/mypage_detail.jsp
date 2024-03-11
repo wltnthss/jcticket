@@ -1,6 +1,7 @@
 <%@ page import="com.jcticket.mypage.dao.mypageDAO" %>
 <%@ page import="com.jcticket.mypage.dao.mypageImpl" %>
-<%@ page import="com.jcticket.ticketing.dto.TicketingDto" %><%--
+<%@ page import="com.jcticket.ticketing.dto.TicketingDto" %>
+<%--
   Created by IntelliJ IDEA.
   User: wjswo
   Date: 2024-02-04
@@ -22,15 +23,15 @@
         #detail_info {
             display: inline-flex;
             margin: 20px 0px;
-            border: 1px solid;
+            border: 5px solid #dddddd;
             width: 100%;
             height: 363px;
             flex-wrap: wrap;
-            flex-wrap: wrap;
+            border-radius: 3px;
         }
 
         #detail_header {
-            border: 1px solid;
+            border: 3px solid #FAFAF0;
             width: 100%;
             height: 60px;
         }
@@ -40,7 +41,6 @@
         }
 
         #derail_left {
-            border: 1px solid;
             width: 213px;
             height: 300px;
         }
@@ -52,9 +52,9 @@
 
 
         #derail_right {
-            border: 1px solid;
-            width: 492px;
-            height: 300px;
+            border: 3px solid #FAFAFA;
+            width: 731px;
+            height: 292px;
         }
 
         #derail_right > table {
@@ -90,7 +90,6 @@
 
         #payment_detail {
             margin: 20px 0px;
-            border: 1px solid;
             width: 100%;
             height: 150px;
         }
@@ -102,8 +101,10 @@
         }
 
         #table_gbox {
-            border: 1px solid;
+            width: 950px;
+            border: 5px solid #dddddd;
             margin: 5px;
+            background-color: #FAFAFAFA;
         }
 
         #table_gbox > tbody > tr > th {
@@ -111,12 +112,10 @@
         }
 
         #seat_info_table > thead > tr > th {
-            border: 1px solid;
             padding: 5px;
         }
 
         #seat_info_table > tbody > tr > td {
-            border: 1px solid;
             padding: 5px;
         }
 
@@ -191,6 +190,16 @@
             margin: 10px 0px;
         }
 
+        #cancel_btn {
+            display: flex;
+            justify-content: center;
+        }
+
+        #cancel_btn  button {
+            width: 100px;
+            height: 34px;
+        }
+
 
     </style>
 </head>
@@ -239,7 +248,7 @@
                 <div id="detail_info">
                     <div id="detail_header">
                         <p class="tit">
-                            국립중앙박물관 특별전 ‘탕탕평평-글과 그림의 힘’
+                            ${ticketingDto.play_name}
                         </p>
                     </div>
 
@@ -257,7 +266,7 @@
                             </tr>
                             <tr id="tr2">
                                 <th>관람일</th>
-                                <td colspan="3" class="ri"><strong>${ticketingDto.viewing_at}</strong></td>
+                                <td colspan="3" class="ri"><strong>${ticketingDto.showing_date}</strong></td>
                             </tr>
                             <tr id="tr3">
                                 <th>공연장</th>
@@ -267,7 +276,7 @@
                                 <th>좌석<p></p></th>
                                 <td colspan="3">
                                     <div class="scroll">
-                                        ${ticketingDto.choice_show_seat}
+                                        ${ticketingDto.selected_seats}
                                     </div>
                                 </td>
                             </tr>
@@ -310,7 +319,7 @@
                             </tr>
                             <tr>
                                 <th>총결제금액</th>
-                                <td colspan="3" class="ri"><span class="red tit"><strong>2,500</strong>원</span><br><span
+                                <td colspan="3" class="ri"><span class="red tit"><strong>2,500 - 100</strong>원</span><br><span
                                         class="sm">(티켓금액 <strong>2,500</strong>원 + 예매수수료 <strong>0</strong>원 + 배송비 <strong>0</strong>원)</span>
                                 </td>
                             </tr>
@@ -406,6 +415,23 @@
                             </ul>
                         </div>
                     </div>
+
+
+
+
+
+
+                    <c:if test="${ticketingDto.ticketing_status eq '예매완료'}">
+                        <div id="cancel_btn">
+                        <form action="/mypageticket">
+                            <button value="${ticketingDto.ticketing_id}" name="cancel" type="submit">예매취소</button>
+                        </form>
+                        </div>
+                    </c:if>
+
+
+
+
                     <div id="notice_info">
                         <ul>
                             <li class="red">- 취소 시 예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</li>

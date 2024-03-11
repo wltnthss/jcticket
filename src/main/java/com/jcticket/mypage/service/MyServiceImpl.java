@@ -102,6 +102,11 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public Integer ticket_cancel(String ticket_id) throws Exception {
+        return mypageDAO.ticket_cancel(ticket_id);
+    }
+
+    @Override
     public Integer coupon_update() throws Exception {
         return mypageDAO.coupon_update();
     }
