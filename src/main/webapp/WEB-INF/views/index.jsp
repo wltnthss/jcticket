@@ -86,10 +86,10 @@
                 <%--슬라이드-공연1--%>
             <c:forEach items="${list}" var="p"  begin="17" end="28">
             <div class="kv-item" id="kv-item1">
-            <a href="공연상세페이지1">
+            <a href="#">
                 <img src="<c:url value='/index/upload/${p.slide_img_name}'/>">
                 </a>
-                <a class="pf-kv-text white" href="공연상세페이지1">
+                <a class="pf-kv-text white" href="#">
                     <p class="sub-tit"></p>
                     <p class="main-tit"></p>
                     <p class="info-tit"></p>
@@ -135,7 +135,7 @@
                     <c:forEach items="${list}" var="p"  begin="14" end="14">
                     <li>
                     <div class="big-one">
-                        <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=공연아이디1" target="_self" style="z-index: 0">
+                        <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${p.play_id}" target="_self" style="z-index: 0">
                             <img src="<c:url value='/index/upload/${p.img_name}'/>" alt>
                             <div class="big-one-txt">
                                 <p class="big-tit">${p.play_name}</p>
