@@ -164,17 +164,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: sessionStorage.getItem("contextpath") + '/admin/userdelete',
+                    url: '/admin/userdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href = sessionStorage.getItem("contextpath") + "/admin/user";
+                            location.href = "/admin/user";
                         }else{
                             alert('삭제 실패');
-                            location.href = sessionStorage.getItem("contextpath") + "/admin/delete";
+                            location.href = "/admin/delete";
                         }
                     },
                     error: function (e) {
