@@ -35,21 +35,6 @@ function sample4_execDaumPostcode() {
                 document.getElementById("sample4_extraAddress").value = '';
             }
 
-            // var guideTextBox = document.getElementById("guide");
-            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            // if(data.autoRoadAddress) {
-            //     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-            //     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-            //     guideTextBox.style.display = 'block';
-            //
-            // } else if(data.autoJibunAddress) {
-            //     var expJibunAddr = data.autoJibunAddress;
-            //     guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-            //     guideTextBox.style.display = 'block';
-            // } else {
-            //     guideTextBox.innerHTML = '';
-            //     guideTextBox.style.display = 'none';
-            // }
         }
     }).open();
 }
@@ -61,7 +46,7 @@ $('#emailBtn').on('click',function (){
     const totalEmail = $('.idInput').val()+$('.emailSep').text()+$('.selDomain').val();
     $.ajax({
         type:"GET",
-        url:"/signup/emailChk?totalEmail="+totalEmail,
+        url:sessionStorage.getItem("contextpath") + "/signup/emailChk?totalEmail="+totalEmail,
         cache:false,
         success:function(data){
             if(data==="error"){
@@ -130,7 +115,7 @@ $('#userIdInput').on('keyup',function(){
     }else if(idLength>=4 && idLength <=20){
             // 아이디 중복체크
             $.ajax({
-                url: '/signup/chk_id_dupl',
+                url: sessionStorage.getItem("contextpath") + '/signup/chk_id_dupl',
                 method: 'POST',
                 data:{user_id:idValue},
                 success:function(data){
@@ -203,7 +188,7 @@ $('#userPwdChkInput').on('keyup',function (){
     $('#userNicknameInput').on('keyup',function (){
         const nicknameValue = $('#userNicknameInput').val();
         $.ajax({
-            url:'/signup/chk_nickname_dupl',
+            url:sessionStorage.getItem("contextpath") + '/signup/chk_nickname_dupl',
             method: 'POST',
             data:{user_nickname:nicknameValue},
             success:function(data){
@@ -268,7 +253,7 @@ $('#user_birth_input').on('keyup', function (){
         $('#birth_warnMsg').html('8자리를 입력해주세요')
     }else if(birthLength===8){
         $.ajax({
-            url:'/signup/chk_birth',
+            url:sessionStorage.getItem("contextpath") + '/signup/chk_birth',
             method:"POST",
             data:{user_birth:birthValue},
             success:function(data){

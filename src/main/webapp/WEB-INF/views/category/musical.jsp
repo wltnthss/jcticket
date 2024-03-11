@@ -27,7 +27,7 @@
         <div class="m2-kv">
             <div class="swiper-container m2-kvs">
                 <div class="swiper-wrapper">
-                    <c:forEach items="${list}" var="li" begin="1" end="6">
+                    <c:forEach items="${list}" var="li">
                         <div class="swiper-slide">
                             <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="120" height="120">

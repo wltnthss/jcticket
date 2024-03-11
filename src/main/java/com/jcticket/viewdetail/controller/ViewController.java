@@ -114,7 +114,7 @@ public class ViewController {
         List<ReviewDto> review = viewDetailService.review_select(this_play_id);
         model.addAttribute("review", review);
 
-        System.out.println("viewDetail=============>"+viewDetail);
+//        System.out.println("viewDetail=============>"+viewDetail);
 
         //상세보기에 들어갈 내용들(제목, 공연장이름, 좌석가격 등)
         model.addAttribute("viewDetail", viewDetail);
@@ -190,6 +190,7 @@ public class ViewController {
         return msg;
     }
 
+//    후기작성
     @PostMapping("/review_insert")
     public String review_insert(HttpServletRequest request,
                                 HttpServletResponse response,
@@ -197,7 +198,8 @@ public class ViewController {
                                 @RequestParam(required = false) String user_id,
                                 @RequestParam(required = false) String star,
                                 @RequestParam(required = false) String viewing_at,
-                                @RequestParam(required = false) String review_content
+                                @RequestParam(required = false) String review_content,
+                                @RequestParam(required = false) Integer review_num
                                 ) throws Exception {
         // 이전 페이지의 URL을 받아오기
         String referer = request.getHeader("referer");
@@ -216,6 +218,9 @@ public class ViewController {
             reviewDto.setReview_content(review_content);
             reviewDto.setCreated_id(user_id);
             reviewDto.setUpdated_id(user_id);
+            reviewDto.setReview_num(review_num);
+
+            System.out.println("review_num=============>"+review_num);
 
             // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
             viewDetailService.review_create(reviewDto);
@@ -226,10 +231,21 @@ public class ViewController {
     }
 
     @GetMapping("/review_delete") //@DeleteMapping 써볼것
-    public int ReviewDelete() throws Exception {
+    public int ReviewDelete(@RequestParam Integer delete_review_num,
+                            @RequestParam String delete_user_id
+                            ) throws Exception {
+//        System.out.println("delete_user_id===============>"+delete_user_id);
+//        System.out.println("delete_review_num===============>"+delete_review_num);
         // ajax 성공, 실패 결과 return
         int result = 1;
 
+        try {
+            //리뷰작성시 들어갈 관람일시
+            viewDetailService.review_delete(delete_review_num,delete_user_id);
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
         return result;
     }
 }

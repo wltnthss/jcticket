@@ -45,6 +45,8 @@ public class PlayImgDto {
     private String play_poster_stored_file_name ;       // 공연 표지 변경파일 (사진 이름의 중복 방지, 언제, 파일 이름을 구분하기 위함)
     private String play_info_original_file_name ;       // 공연 정보 원본파일
     private String play_info_stored_file_name ;         // 공연 정보 변경파일
+    private String play_slide_original_file_name;            // 메인페이지 슬라이드 원본 파일
+    private String play_slide_stored_file_name;              // 메인페이지 슬라이드 변경 파일
     private Timestamp created_at;
     private String created_id;
     private Timestamp updated_at;

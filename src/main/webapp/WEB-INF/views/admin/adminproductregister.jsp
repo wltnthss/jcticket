@@ -53,6 +53,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <th scope="row">공연슬라이드이미지</th>
+                        <td>
+                            <input type="file" name="play_slide" class="frm_input required" size="30" >
+                        </td>
+                    </tr>
+                    <tr>
                         <th scope="row">공연시간안내</th>
                         <td>
                             <input type="text" name="play_time_info" class="frm_input required" size="50" >

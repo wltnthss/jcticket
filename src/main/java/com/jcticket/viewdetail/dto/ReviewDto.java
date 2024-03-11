@@ -22,7 +22,7 @@ import java.sql.Timestamp;
 @ToString
 @EqualsAndHashCode
 public class ReviewDto {
-    private int review_num;
+    private Integer review_num;
     private Timestamp review_at;
     private int review_star_rating;
     private String review_viewing_at;
@@ -34,6 +34,6 @@ public class ReviewDto {
     private Timestamp updated_at;
     private String updated_id;
     private double review_avg;
-    private int review_count;
+    private Integer review_count;
 
 }
