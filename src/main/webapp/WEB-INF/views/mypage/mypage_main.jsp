@@ -136,7 +136,7 @@
         .showing_img {
             border: 1px solid;
             width: 280px;
-            height: 200px;
+            height: 350px;
             background-color: orange;
             padding: 5px 5px;
         }
@@ -177,7 +177,7 @@
                             <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
                             <a href="/mypageview"><h3>나의 관람 공연</h3></a>
                             <a href="/mypageclient"><h3>문의사항</h3></a>
-                            <a href="/modifying"><h3>회원정보 수정</h3></a>
+                            <a href="/Modifying"><h3>회원정보 수정</h3></a>
                             <a href="/withdraw"><h3>회원탈퇴</h3></a>
                         </div>
 
@@ -238,7 +238,7 @@
                                     <td>${TicketingDto.ticketing_at}</td>
                                     <td>${TicketingDto.ticketing_id}</td>
                                     <td>${TicketingDto.play_name}</td>
-                                    <td>${TicketingDto.viewing_at}</td>
+                                    <td>${TicketingDto.showing_date}</td>
                                     <td>${TicketingDto.ticketing_cnt}</td>
                                     <td>${TicketingDto.ticketing_status}</td>
                                 </tr>

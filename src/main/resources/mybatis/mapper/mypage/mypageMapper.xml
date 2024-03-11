@@ -4,30 +4,31 @@
 
 <mapper namespace="com.jcticket.ticketing.mybatis.mapper.mypage.mypageMapper">
 
-    <sql id="selectTicketingDto">
+
+
+    <select id="selectLimit" parameterType="map" resultType="TicketingDTO">
         SELECT t.ticketing_at,
                t.ticketing_id,
                t.play_name,
-               t.viewing_at,
+               t.showing_date,
                t.ticketing_cnt,
                (SELECT cc.comn_code_name
                 FROM comn_code cc
                 WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
         FROM ticketing t
-    </sql>
-
-    <select id="selectLimit" parameterType="map" resultType="TicketingDTO">
-        <include refid="selectTicketingDto"></include>
-        ORDER BY
-        t.ticketing_at DESC
-        LIMIT 5;
+                 INNER JOIN user u ON t.user_id = u.user_id
+        WHERE u.user_id = #{user_id}
+        ORDER BY t.ticketing_at DESC
+            LIMIT 5;
     </select>
 
     <select id="count" parameterType="map" resultType="int">
-        select count(*)
-        from ticketing t
-        where
-        true
+        SELECT COUNT(*)
+        FROM ticketing t
+        JOIN user u ON t.user_id = u.user_id
+        WHERE
+        TRUE
+        AND t.user_id = #{user_id} <!-- 수정된 부분 -->
         <choose>
             <when test='option=="A"'>
                 AND t.ticketing_status IN ('Y', 'N')
@@ -40,8 +41,8 @@
             </when>
         </choose>
         <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
-            AND t.ticketing_at between DATE_FORMAT(#{start_date} , '%Y-%m-%d') and DATE_FORMAT(#{end_date}, '%Y-%m-%d')
-        </if>
+            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date}, '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')
+        </if>;
     </select>
     <!--  ===========================================================================================================================================================================  -->
 
@@ -52,22 +53,24 @@
         SELECT t.ticketing_id
         FROM ticketing t
         JOIN play p ON t.play_name = p.play_name
+        JOIN user u ON t.user_id = u.user_id <!-- 추가된 부분 -->
         WHERE true
+        AND u.user_id = #{user_id} <!-- 추가된 부분 -->
         <choose>
             <when test='option=="A"'>
-                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
             </when>
             <when test='option=="M"'>
-                AND p.play_middle_cat = '뮤지컬'
+                AND p.play_major_cat = '뮤지컬'
             </when>
             <when test='option=="C"'>
-                AND p.play_middle_cat = '콘서트'
+                AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_middle_cat = '전시'
+                AND p.play_major_cat = '전시'
             </when>
             <when test='option=="G"'>
-                AND p.play_middle_cat = '공연'
+                AND p.play_major_cat = '연극'
             </when>
         </choose>
         <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
@@ -89,13 +92,13 @@
         t.ticketing_at,
         t.ticketing_id,
         t.play_name,
-        t.viewing_at,
+        t.showing_date,
         t.ticketing_cnt,
         (SELECT cc.comn_code_name FROM comn_code cc WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
         FROM
         ticketing t
         WHERE
-        true
+        TRUE
         <choose>
             <when test='option=="A"'>
                 AND t.ticketing_status IN ('Y', 'N')
@@ -108,8 +111,9 @@
             </when>
         </choose>
         <if test=" (start_date != '' and end_date != '') and (start_date != null and end_date != null) ">
-            AND t.ticketing_at between DATE_FORMAT(#{start_date} , '%Y-%m-%d') and DATE_FORMAT(#{end_date}, '%Y-%m-%d')
+            AND t.ticketing_at BETWEEN DATE_FORMAT(#{start_date} , '%Y-%m-%d') AND DATE_FORMAT(#{end_date}, '%Y-%m-%d')
         </if>
+        AND t.user_id = #{user_id} <!-- 추가된 부분 -->
         ORDER BY ticketing_at DESC
         LIMIT #{pageSize}
         OFFSET #{offset};
@@ -138,29 +142,31 @@
         t.ticketing_id,
         MAX(t.ticketing_at) AS ticketing_at,
         MAX(t.stage_name) AS stage_name,
-        MAX(t.choice_show_seat) AS choice_show_seat,
-        MAX(p.play_middle_cat) AS play_middle_cat,
+        MAX(t.selected_seats) AS selected_seats,
+        MAX(p.play_major_cat) AS play_major_cat,
         MAX(t.play_name) AS play_name
         FROM
         ticketing t
         JOIN play p ON t.play_name = p.play_name
+        JOIN user u ON t.user_id = u.user_id <!-- 추가된 부분 -->
         WHERE
         true
+        AND u.user_id = #{user_id} <!-- 추가된 부분 -->
         <choose>
             <when test='option=="A"'>
-                AND p.play_middle_cat IN ('공연', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
             </when>
             <when test='option=="M"'>
-                AND p.play_middle_cat = '뮤지컬'
+                AND p.play_major_cat = '뮤지컬'
             </when>
             <when test='option=="C"'>
-                AND p.play_middle_cat = '콘서트'
+                AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_middle_cat = '전시'
+                AND p.play_major_cat = '전시'
             </when>
             <when test='option=="G"'>
-                AND p.play_middle_cat = '공연'
+                AND p.play_major_cat = '연극'
             </when>
         </choose>
         <if test="(start_date != '' and end_date != '') and (start_date != null and end_date != null)">
@@ -194,13 +200,13 @@
     <select id="ticket_detail" resultType="TicketingDto" parameterType="String">
         SELECT t.ticketing_at,
                t.user_name,
-               t.viewing_at,
+               t.showing_date,
                t.stage_name,
                t.ticketing_id,
                t.play_name,
-               t.viewing_at,
+               t.showing_date,
                t.ticketing_cnt,
-               t.choice_show_seat,
+               t.selected_seats,
                (SELECT cc.comn_code_name
                 FROM comn_code cc
                 WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
@@ -218,11 +224,11 @@
         </if>
     </select>
 
-    <insert id="coupon_insert" parameterType="UserCouponDto">
-        INSERT INTO coupon_user
-        (user_coupon_seq, user_id, coupon_id, coupon_use_at, coupon_issue_at, coupon_expire_at, coupon_use_yn,
+    <insert id="coupon_insert" parameterType="MyUserCouponDto">
+        INSERT INTO user_coupon
+        (user_coupon_id, user_id, coupon_id, user_coupon_use_at, user_coupon_issue_at, user_coupon_expire_at, user_coupon_use_yn,
          created_at, created_id, updated_at, updated_id)
-        VALUES (#{user_coupon_seq}, "Ralo2", #{coupon_id}, null, NOW(), NOW() + INTERVAL + 1 WEEK, 'N', NOW(),
+        VALUES (#{user_coupon_id}, #{user_id}, #{coupon_id}, null, NOW(), NOW() + INTERVAL + 1 WEEK, 'N', NOW(),
                 #{created_id}, NOW(), #{updated_id});
     </insert>
 
@@ -234,54 +240,57 @@
     </update>
 
 
-    <select id="coupon_list" parameterType="map" resultType="UserCouponDto">
+    <select id="coupon_list" parameterType="map" resultType="MyUserCouponDto">
         SELECT
-            uc.coupon_id,
-            uc.coupon_issue_at,
-            uc.coupon_expire_at,
-            CASE
-                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                ELSE NULL
-                END AS coupon_name,
-            CASE
-                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                ELSE NULL
-                END AS coupon_discount_amount,
-            CASE
-                WHEN #{button} = 'on' AND uc.coupon_use_yn = 'N' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                WHEN #{button} = 'off' AND uc.coupon_use_yn = 'Y' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
-                ELSE NULL
-                END AS coupon_use_condition
+        uc.coupon_id,
+        uc.user_coupon_issue_at,
+        uc.user_coupon_expire_at,
+        CASE
+        WHEN #{button} = 'on' AND uc.user_coupon_use_yn = 'N' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        WHEN #{button} = 'off' AND uc.user_coupon_use_yn = 'Y' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        ELSE NULL
+        END AS coupon_name,
+        CASE
+        WHEN #{button} = 'on' AND uc.user_coupon_use_yn = 'N' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        WHEN #{button} = 'off' AND uc.user_coupon_use_yn = 'Y' THEN (SELECT coupon_discount_amount FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        ELSE NULL
+        END AS coupon_discount_amount,
+        CASE
+        WHEN #{button} = 'on' AND uc.user_coupon_use_yn = 'N' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        WHEN #{button} = 'off' AND uc.user_coupon_use_yn = 'Y' THEN (SELECT coupon_use_condition FROM coupon c WHERE c.coupon_id = uc.coupon_id)
+        ELSE NULL
+        END AS coupon_use_condition
         FROM
-            coupon_user uc
+        user_coupon uc
+        JOIN user u ON uc.user_id = u.user_id <!-- 추가된 부분 -->
         WHERE
-            ((#{button} = 'on' AND uc.coupon_use_yn = 'N') OR
-             (#{button} = 'off' AND uc.coupon_use_yn = 'Y'))
+        ((#{button} = 'on' AND uc.user_coupon_use_yn = 'N') OR
+        (#{button} = 'off' AND uc.user_coupon_use_yn = 'Y'))
+        AND u.user_id = #{user_id} <!-- 추가된 부분 -->
         ORDER BY
-            uc.coupon_expire_at DESC
-            LIMIT
-            #{pageSize}
+        uc.user_coupon_expire_at DESC
+        LIMIT
+        #{pageSize}
         OFFSET
-            #{offset};
+        #{offset};
     </select>
 
 
     <select id="coupon_count" parameterType="map" resultType="int">
         SELECT COUNT(*) AS count
-        FROM coupon_user
-        WHERE coupon_use_yn IN ('N','Y')
-          AND CASE
-            WHEN #{button} = 'on' THEN coupon_use_yn = 'N'
-            WHEN #{button} = 'off' THEN coupon_use_yn = 'Y'
-            ELSE FALSE
-        END;
+        FROM user_coupon uc
+        JOIN user u ON uc.user_id = u.user_id <!-- 추가된 부분 -->
+        WHERE uc.user_coupon_use_yn IN ('N', 'Y')
+        AND (
+        (#{button} = 'on' AND uc.user_coupon_use_yn = 'N') OR
+        (#{button} = 'off' AND uc.user_coupon_use_yn = 'Y')
+        )
+        AND u.user_id = #{user_id}; <!-- 추가된 부분 -->
     </select>
 
 
     <select id="user_info" parameterType="String" resultType="UserDto">
-        SELECT user_id, user_name, user_nickname, user_tel, user_birth, user_email
+        SELECT user_id, user_name, user_nickname, user_tel, user_birth, user_email,user_password
         FROM user
         WHERE user_id = #{user_id};
     </select>
@@ -294,15 +303,29 @@
             user_password = #{user_password},
             user_tel      = #{user_tel},
             user_address  = #{user_address}
+            user_update_at = NOW();
         WHERE user_id = #{user_id};
     </update>
 
 
     <update id="coupon_update">
-        UPDATE coupon_user
-        SET coupon_use_yn = 'Y'
-        WHERE
-        <![CDATA[coupon_expire_at < now();]]>
+        UPDATE user_coupon
+        SET user_coupon_use_yn = 'Y'
+        WHERE user_coupon_use_yn = 'N' AND <![CDATA[user_coupon_expire_at < now();]]>
+    </update>
+
+
+    <update id="withdraw" parameterType="map">
+        UPDATE user
+        SET user_retire_yn = 'Y'
+        WHERE user_id = #{user_id}
+        AND user_password = #{user_password};
+    </update>
+
+    <update id="ticket_cancel" parameterType="String">
+        UPDATE ticketing
+        SET ticketing_status = 'N'
+        WHERE ticketing_id = #{ticketing_id};
     </update>
 
 </mapper>

@@ -28,7 +28,7 @@ public class HomeController {
     CategoryService categoryService;
 
     @ExceptionHandler
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public String index(Model m) throws Exception {
         System.out.println("여기는 인덱스!!");
 
@@ -48,7 +48,7 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = {RequestMethod.GET, RequestMethod.POST})
     private String getIndex(Model m) throws Exception {
         System.out.println("여기는 인덱스!!");
         Map<String, Object> map = new HashMap<>();

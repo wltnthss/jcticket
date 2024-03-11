@@ -51,6 +51,33 @@
             margin: 10px 0px;
         }
 
+        #grp_cell ul {
+            font-weight: bold;
+        }
+
+        .grp_cell_A {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .grp_cell_B {
+            font-weight: bold;
+        }
+
+        .grp_cell_B  ul {
+            list-style: none;
+            padding: 5px;
+        }
+
+        .grp_cell_B  p {
+            margin: 10px;
+        }
+
+        .grp_cell_B dt {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         #grp_cell {
             margin: 20px 0px;
         }
@@ -71,6 +98,27 @@
         #grp_cell > ul > li {
             margin: 10px 0px;
         }
+
+
+        #id_input {
+            display: flex;
+            margin: 170px auto;
+            width: 700px;
+            height: 200px;
+            background-color: #FAFAE9;
+            flex-direction: column;
+            align-items: center;
+            align-content: stretch;
+            justify-content: center;
+        }
+
+        #id_input > input {
+            width: 100px;
+        }
+
+
+
+
 
     </style>
 </head>
@@ -115,10 +163,12 @@
                                 </ul>
                     </div>
                 </div>
-                <br>
+
                 <hr>
 
-                <div class="grp_cell">
+                <br>
+
+                <div class="grp_cell_A">
                     <dl class="yesAlertDl b_size">
                         <dt>1개월간 회원 재가입 제한</dt>
                         <dd>
@@ -127,10 +177,44 @@
                     </dl>
                 </div>
 
+                <br>
+                <hr>
+                <br>
+
+                <div class="grp_cell_B">
+                    <dl id="yesAlertDlb_size">
+                        <dt>탈퇴 후 정보보관</dt>
+                        <dd>
+                            <p class="yesAlertP">
+                                전자상거래 등에서의 소비자보호에 관한 법률 제6조에 의거 성명, 주소 등 거래의 주체를 식별할 수 있는 정보에 한하여 서비스<br>
+                                이용에 관한 동의를 철회한 경우에도 이를 보존할 수 있으며, 동법 시행령 제6조에 의거 다음과 같이 거래 기록을 보관합니다.
+                            </p>
+                            <ul class="yesAlertLi mgt5">
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>표시, 광고에 관한 기록 : 6개월               </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>계약 또는 청약철회 등에 관한 기록 : 5년      </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>대금결제 및 재화등의 공급에 관한 기록 : 5년  </li>
+                                <li><em class="bl_dot bgYUI">&nbsp;</em>소비자의 불만 또는 분쟁처리에 관한 기록 : 3년</li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+
+
             </div>
 
 
+
+
         </article>
+
+
+        <div id="id_input">
+            <form action="/withdraw" method="post">
+            <div>아이디: <input type="text" name="user_id" value="${user.user_id}"></div>
+            <div>패스워드 : <input type="password" name="user_password"></div>
+            <div><input type="submit" value="회원탈퇴"></div>
+            </form>
+        </div>
     </div>
 </div>
 
