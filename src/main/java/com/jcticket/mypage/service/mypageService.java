@@ -35,6 +35,7 @@ public interface mypageService {
     UserDto user_info(String id) throws Exception;
     Integer update_coupon (CouponDto couponDto) throws Exception;
     Integer withdraw (UserDto userDto) throws Exception;
+    Integer ticket_cancel (String ticket_id) throws Exception;
 
     Integer coupon_update () throws Exception;
     Integer user_update (UserDto userDto) throws Exception;

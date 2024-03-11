@@ -8,9 +8,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import com.jcticket.mypage.service.mypageService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
@@ -37,9 +36,16 @@ public class mypageController {
 
 
     @GetMapping("/mypageIndex")
-    public String mypage(Model model) throws Exception {
+    public String mypage(HttpSession session,
+                         Model model) throws Exception {
+
+        String sessionId = (String)session.getAttribute("sessionId");
+
+        System.out.println("sessionId => " + sessionId);
+
         Map map = new HashMap();
         map.put("selectType", "desc");
+        map.put("user_id", sessionId);
         List<TicketingDto> list = mypageService.selectLimit(map);
         model.addAttribute("ticketList", list);
         return "/mypage/mypage_main";
@@ -53,7 +59,27 @@ public class mypageController {
                          @RequestParam(required = false) String start_date,
                          @RequestParam(required = false) String end_date,
                          @RequestParam(required = false) String keyword,
+                         @RequestParam(defaultValue = "ok") String cancel,
+                         HttpSession session,
                          Model model) throws Exception {
+
+
+
+
+        if(!cancel.equals("ok")) {
+            int result = mypageService.ticket_cancel(cancel);
+            System.out.println(result);
+        }
+        
+
+//        if(cancel.equals("cancel")) {
+//            System.out.println("응애");
+//        }
+
+
+        String sessionId = (String)session.getAttribute("sessionId");
+
+        System.out.println("sessionId => " + sessionId);
 
 
         try {
@@ -63,6 +89,7 @@ public class mypageController {
             map.put("option", option);
             map.put("start_date", start_date);
             map.put("end_date", end_date);
+            map.put("user_id", sessionId);
 
 
             int totalCount = mypageService.count(map);
@@ -102,13 +129,14 @@ public class mypageController {
                        @RequestParam(required = false) String start_date,
                        @RequestParam(required = false) String end_date,
                        @RequestParam(required = false) String keyword,
+                       HttpSession session,
                        Model model) throws Exception {
 
 
-        System.out.println("option => " + option);
-        System.out.println("start_date => " + start_date);
-        System.out.println("end_date => " + end_date);
-        System.out.println("keyword => " + keyword);
+        String sessionId = (String)session.getAttribute("sessionId");
+
+        System.out.println("sessionId => " + sessionId);
+
 
         try {
 
@@ -119,6 +147,7 @@ public class mypageController {
             map.put("start_date", start_date);
             map.put("end_date", end_date);
             map.put("keyword", keyword);
+            map.put("user_id", sessionId);
 
             int totalCount = mypageService.view_count(map);
 
@@ -149,7 +178,7 @@ public class mypageController {
         return "/mypage/mypage_client_Insert";
     }
 
-    @GetMapping("/withdraw")
+    @RequestMapping(value = "/withdraw", method = {RequestMethod.GET,RequestMethod.POST})
     public String withdraw(HttpSession session,
                            String user_id,
                            String user_password,
@@ -182,7 +211,7 @@ public class mypageController {
         return "/mypage/withdraw";
     }
 
-    @GetMapping("/Modifying")
+    @RequestMapping(value = "/Modifying", method = {RequestMethod.GET, RequestMethod.POST})
     public String modifying(@RequestParam(required = false) String user_password,
                             @RequestParam(required = false) String user_nickname,
                             @RequestParam(required = false) String user_tel,
@@ -240,16 +269,22 @@ public class mypageController {
     }
 
     @GetMapping("/mypagecupon")
+    @PostMapping("mypagecoupn")
     public String cupon(@RequestParam(required = false) String coupon_id,
                         @RequestParam(defaultValue = "1") Integer page,
                         @RequestParam(defaultValue = "5") Integer pageSize,
                         @RequestParam(defaultValue = "on") String button,
+                        HttpSession session,
                         Model model) throws Exception {
 
 
         int a = mypageService.coupon_update();
 
         System.out.println("a => " + a);
+
+        String sessionId = (String)session.getAttribute("sessionId");
+
+        System.out.println("sessionId => " + sessionId);
 
 
         try {
@@ -267,7 +302,7 @@ public class mypageController {
 //                    mypageService.coupon_insert(userCouponDto);
 //                    mypageService.update_coupon(couponDto);
 
-                    MyUserCouponDto userCouponDto = new MyUserCouponDto(coupon_id, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+                    MyUserCouponDto userCouponDto = new MyUserCouponDto(coupon_id, sessionId, coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
                     mypageService.coupon_insert(userCouponDto);
                     mypageService.update_coupon(couponDto);
 
@@ -279,6 +314,7 @@ public class mypageController {
             map.put("offset", (page - 1) * pageSize);
             map.put("pageSize", pageSize);
             map.put("button", button);
+            map.put("user_id", sessionId);
 
             System.out.println("button => (after)" + button);
 
@@ -290,8 +326,6 @@ public class mypageController {
             System.out.println("totalCount = >" + totalCount);
 
             PageHandler pageHandler = new PageHandler(totalCount, page, pageSize, button);
-
-
 
 
             model.addAttribute("coupon_list", list);

@@ -136,7 +136,7 @@
         .showing_img {
             border: 1px solid;
             width: 280px;
-            height: 200px;
+            height: 350px;
             background-color: orange;
             padding: 5px 5px;
         }

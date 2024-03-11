@@ -113,6 +113,11 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
+    public int ticket_cancel(String ticket_id) throws Exception {
+        return session.update(namespace + "ticket_cancel", ticket_id);
+    }
+
+    @Override
     public int withdraw(UserDto userDto) throws Exception {
         return session.update(namespace + "withdraw" , userDto);
     }

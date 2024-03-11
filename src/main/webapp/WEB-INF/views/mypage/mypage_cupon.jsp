@@ -156,8 +156,6 @@
             width: 940px;
         }
 
-
-
         #paging {
             text-align: center;
             font-size: 20px;
