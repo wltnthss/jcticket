@@ -73,7 +73,7 @@
             </c:choose>
             <a class="search">
                 <input type="text" id="searchWord" autocomplete="off">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
             </a>
         </div>
     </header>
@@ -435,7 +435,7 @@
                 <c:choose>
                     <c:when test="${empty sessionScope.sessionId}">
                         <!-- 로그인 상태가 아니면(세션이 없으면) 로그인 링크를 보여줌 -->
-                        <a href="<c:url value="/login"/>">
+                        <a href="${pageContext.request.contextPath}/login">
                             <img src="${pageContext.request.contextPath}/resources/img/components/로그인_흑.png">
                         </a>
                         <span>로그인</span>

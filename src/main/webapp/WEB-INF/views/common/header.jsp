@@ -55,7 +55,7 @@
             </c:choose>
             <a class="search">
                 <input type="text" id="searchWord" autocomplete="off" style="color: black">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
             </a>
         </div>
     </header>
