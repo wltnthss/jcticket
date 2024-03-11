@@ -94,7 +94,7 @@ git <%--
                 <div class="three-one-left">
                     <c:if test="${not empty viewDetail}">
                         <div class="play-img">
-                            <img src="<c:url value='${pageContext.request.contextPath}/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
+                            <img src="<c:url value='/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
                         </div>
                     </c:if>
     <%--                review-mini안에 별점, 평균별점, 리뷰 수 등등 들어감--%>
@@ -221,7 +221,7 @@ git <%--
                 <p class="seven_text">공연정보</p>
                 <div class="seven_con">
                     <c:if test="${not empty viewDetail}">
-                        <img src="<c:url value='${pageContext.request.contextPath}/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
+                        <img src="<c:url value='/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
                     </c:if>
                 </div>
             </div>
@@ -391,7 +391,7 @@ git <%--
                             <div>
                                 <textarea class="review_box" name="review_content" placeholder="관람후기를 작성해주세요."></textarea>
                             </div>
-                            <input type="submit" value="" class="review_submit"/>
+                            <input type="submit" value="" class="review_submit" style="background-image: url('${pageContext.request.contextPath}/resources/img/viewdetail/review_create.png');"/>
                         </form>
                 </div>
             </div>
@@ -415,6 +415,9 @@ git <%--
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
+    <script>
+        sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+    </script>
     <%--    datepicker 제이쿼리 달력--%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/viewdetail/jquery-ui.min.js"></script>
 
