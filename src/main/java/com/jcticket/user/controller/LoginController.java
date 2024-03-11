@@ -135,7 +135,7 @@ public class LoginController {
         //아이디 저장
         rememberId(user_id, rememberId, response);
 
-        return "redirect:"+prevurl;
+        return "redirect:/";
     }
 
     //네이버 로그인 성공시 callback호출 메소드
