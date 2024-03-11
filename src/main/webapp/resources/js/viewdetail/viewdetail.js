@@ -61,7 +61,7 @@
             // ajax를 통해 컨트롤러로 dateText 보냄
             $.ajax({
                 type: "POST",
-                url: "/viewdetail",
+                url: sessionStorage.getItem("contextpath") + "/viewdetail",
                 data: {dateText:dateText,play_id:play_id},
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
                 // 가져온 메세지(msg)를 이용해서 a태그 만들것
@@ -127,7 +127,7 @@
             var remainSeat = $(this).attr("id");
             $.ajax({
                 type: "POST",
-                url: "/viewdetail/remainSeat",
+                url: sessionStorage.getItem("contextpath") + "/viewdetail/remainSeat",
                 data: remainSeat,
                 success: function(res) {
                     // 서버로부터 받은 응답 데이터를 처리
@@ -309,7 +309,7 @@
         function loadPage(page) {
             $.ajax({
                 type: "GET",
-                url: "/viewdetail/page",
+                url: sessionStorage.getItem("contextpath") + "/viewdetail/page",
                 data: {
             this_play_id: play_id,
                 page: page,
@@ -574,7 +574,7 @@
                 // AJAX 요청
                 $.ajax({
                     type: "GET",
-                    url: "/review_delete",
+                    url: sessionStorage.getItem("contextpath") + "/review_delete",
                     data: {
                         delete_user_id: form_user_id,
                         delete_review_num: review_num
