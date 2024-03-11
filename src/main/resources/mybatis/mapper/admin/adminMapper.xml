@@ -355,6 +355,8 @@
             stage
         where
             stage_name like concat ('%', #{keyword} ,'%')
+        limit
+            7
     </select>
 
     <select id="selectKeywordPlay" resultType="PlayDto" parameterType="String">
@@ -367,6 +369,8 @@
             play
         where
             play_name like concat ('%', #{keyword} ,'%')
+        limit
+            7
     </select>
 
     <insert id="insertShowing" parameterType="ShowingDto" useGeneratedKeys="true" keyProperty="showing_seq">

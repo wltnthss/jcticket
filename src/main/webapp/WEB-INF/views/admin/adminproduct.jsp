@@ -165,7 +165,7 @@
 
 
 
-    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+
 
 <script>
     sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
@@ -217,6 +217,8 @@
         }
     });
 </script>
+
+    <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 </body>
 </html>
