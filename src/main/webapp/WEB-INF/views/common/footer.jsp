@@ -31,7 +31,7 @@
         </div>
         <div class="foo-right">
             <p class="mark">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/fmark.png" alt>
+                <img src="http://tkfile.yes24.com/imgNew/common/fmark.png" alt>
             </p>
             <p class="fservice">
                 고객님은 안전거래를 위한 현금 등으로 결제 시
