@@ -113,10 +113,10 @@
                 <%-- 슬라이드 방향키--%>
         <div class="pf-kvslide-dir">
             <a href="#" class="pf-kv-prev">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/slide-dir-prev.png">
+                <img src="http://tkfile.yes24.com/imgNew/common/slide-dir-prev.png">
             </a>
             <a href="#" class="pf-kv-next">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/slide-dir-next.png">
+                <img src="http://tkfile.yes24.com/imgNew/common/slide-dir-next.png">
             </a>
         </div>
     </div>
@@ -126,7 +126,7 @@
 <%--section1 시작--%>
 <section class="sec01">
     <p class="cont-tit">
-        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/tit1.png" alt>
+        <img src="http://tkfile.yes24.com/imgNew/main/tit1.png" alt>
     </p>
     <div class="cont">
         <div class="whot-area">
@@ -178,7 +178,7 @@
 <%--section2시작--%>
 <section class="sec02">
     <p class="cont-tit">
-        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/tit2-1.png">
+        <img src="http://tkfile.yes24.com/imgNew/main/tit2-1.png">
     </p>
         <div class="cont">
             <div class="swiper-container ticketo swiper-container-initialized swiper-container-horizontal">
@@ -302,17 +302,17 @@
             <div class="bnrslide">
                 <div class="swiper-slide2 active">
                     <a href="javascipt:void(0)">
-                        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202311/20231127/wel_wide_47873_2.png/dims/quality/70/" alt class="lazyload">
+                        <img src="http://tkfile.yes24.com/Upload2/Display/202311/20231127/wel_wide_47873_2.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
                 <div class="swiper-slide2">
                     <a href="javascipt:void(0)">
-                        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202312/20231205/wel_wide_47595.png/dims/quality/70/" alt class="lazyload">
+                        <img src="http://tkfile.yes24.com/Upload2/Display/202312/20231205/wel_wide_47595.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
                 <div class="swiper-slide2">
                     <a href="javascipt:void(0)">
-                        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_wide_48277_f9dfdf.png/dims/quality/70/" alt class="lazyload">
+                        <img src="http://tkfile.yes24.com/Upload2/Display/202401/20240125/wel_wide_48277_f9dfdf.png/dims/quality/70/" alt class="lazyload">
                     </a>
                 </div>
             </div>
@@ -324,7 +324,7 @@
 <%--section4시작 musical/play--%>
 <section class="sec04">
     <p class="cont-tit num6l">
-        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/tit4.png" alt>
+        <img src="http://tkfile.yes24.com/imgNew/main/tit4.png" alt>
     </p>
 
     <div class="wing-wrap">
@@ -347,7 +347,7 @@
 <%--section4시작 musical/play--%>
 <section class="sec04">
     <p class="cont-tit num6l">
-        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/tit5.png" alt>
+        <img src="http://tkfile.yes24.com/imgNew/main/tit5.png" alt>
     </p>
 
     <div class="wing-wrap">
@@ -375,7 +375,7 @@
                 <%-- 좌측 타이틀 --%>
                 <p class="focus-tit">
                     <span href="#">
-                        <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/tit8.png">
+                        <img src="http://tkfile.yes24.com/imgNew/main/tit8.png">
                     </span>
                 </p>
                 <p class="focus-tit2">
@@ -392,7 +392,7 @@
 
             <%-- 유튜브 --%>
             <div class="focus-con">
-                <iframe width="640" height="360" src="${pageContext.request.contextPath}https://www.youtube.com/embed/4SBywZkUkoI?si=YtoTnKgQ3V_hOxpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe width="640" height="360" src="https://www.youtube.com/embed/4SBywZkUkoI?si=YtoTnKgQ3V_hOxpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -454,26 +454,26 @@
         <div class="con-right">
             <div class="social">
                 <a href="#" class="soc1">
-                    <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/social1.png">
+                    <img src="http://tkfile.yes24.com/imgNew/main/social1.png">
                 </a>
                 <a href="#" class="soc2">
-                    <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/social2.png">
+                    <img src="http://tkfile.yes24.com/imgNew/main/social2.png">
                 </a>
                 <a href="#" class="soc3">
-                    <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/social3.png">
+                    <img src="http://tkfile.yes24.com/imgNew/main/social3.png">
                 </a>
             </div>
             <div class="appdown">
                 <a href="#">
-                    <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/appdown1.png">
+                    <img src="http://tkfile.yes24.com/imgNew/main/appdown1.png">
                 </a>
                 <a href="#">
-                    <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/appdown2.png">
+                    <img src="http://tkfile.yes24.com/imgNew/main/appdown2.png">
                 </a>
             </div>
 
-            <a href="${pageContext.request.contextPath}https://www.culture.go.kr/deduction/main.do" class="deduction" target="_blank">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/main/deduction.png" alt>
+            <a href="https://www.culture.go.kr/deduction/main.do" class="deduction" target="_blank">
+                <img src="http://tkfile.yes24.com/imgNew/main/deduction.png" alt>
             </a>
         </div>
     </div>
