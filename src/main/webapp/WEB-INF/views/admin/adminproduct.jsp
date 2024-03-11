@@ -163,12 +163,10 @@
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
-
-
-
-
 <script>
-    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+    let contextPath = "${pageContext.request.contextPath}";
+
+    sessionStorage.setItem("contextpath", contextPath)
 
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
@@ -196,17 +194,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: sessionStorage.getItem("contextpath") + '/admin/productdelete',
+                    url: contextPath + '/admin/productdelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href =  sessionStorage.getItem("contextpath") +"/admin/product";
+                            location.href =  contextPath +"/admin/product";
                         }else{
                             alert('삭제 실패');
-                            location.href = sessionStorage.getItem("contextpath") + "/admin/product";
+                            location.href = contextPath + "/admin/product";
                         }
                     },
                     error: function (e) {

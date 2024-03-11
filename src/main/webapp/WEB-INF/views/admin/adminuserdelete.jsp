@@ -142,7 +142,9 @@
 
 <script>
     let contextPath = "${pageContext.request.contextPath}";
+
     sessionStorage.setItem("contextpath", contextPath)
+
     // 관리자 회원 삭제 버튼 클릭 이벤트
     $('#user-delete-btn').on('click', function(){
 

@@ -143,14 +143,13 @@
 
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
-<script>
-    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
-</script>
-
 <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
+    let contextPath = "${pageContext.request.contextPath}";
+
+    sessionStorage.setItem("contextpath", contextPath)
+
     function clearInput() {
         document.getElementById("input_keyword").value = "" // input 요소의 값 초기화
     }
@@ -177,17 +176,17 @@
 
                 $.ajax({
                     type: 'DELETE',
-                    url: '/admin/coupondelete',
+                    url: contextPath + '/admin/coupondelete',
                     data: JSON.stringify(valueArr),
                     contentType: "application/json",
                     success: function (res){
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href = "/admin/coupondelete";
+                            location.href = contextPath + "/admin/coupondelete";
                         }else{
                             alert('삭제 실패');
-                            location.href = "/admin/coupondelete";
+                            location.href = contextPath + "/admin/coupondelete";
                         }
                     },
                     error: function (e) {
