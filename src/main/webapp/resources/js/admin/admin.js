@@ -1,5 +1,7 @@
 $(function (){
 
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
     // admin 세션 카운트다운
 
     // admin 관리 페이지 ↓ 버튼 클릭시 toggle 이벤트
@@ -53,13 +55,13 @@ $(function (){
 
         $.ajax({
             type: 'POST',
-            uri: '/admin',
+            uri: sessionStorage.getItem("contextpath") + '/admin',
             contentType: 'application/json',
             data: JSON.stringify(adminDto),
             success: function (res) {
 
                 if(res == "ok"){
-                    location.href = "/admin/dashboard";
+                    location.href = sessionStorage.getItem("contextpath") + "/admin/dashboard";
                 }else {
                     loginfail.html('아이디와 비밀번호가 틀렸습니다.')
                     loginfail.css('color', 'red');
@@ -139,7 +141,7 @@ $(function (){
 
         $.ajax({
             type: 'GET',
-            url: '/admin/stage',
+            url: sessionStorage.getItem("contextpath") + '/admin/stage',
             data: sendData,
             contentType: "application/json",
             success: function (res){
@@ -195,7 +197,7 @@ $(function (){
 
         $.ajax({
             type: 'GET',
-            url: '/admin/play',
+            url: sessionStorage.getItem("contextpath") + '/admin/play',
             data: sendData,
             contentType: "application/json",
             success: function (res){

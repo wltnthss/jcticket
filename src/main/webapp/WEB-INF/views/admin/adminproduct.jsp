@@ -203,7 +203,7 @@
                         console.log('res => ' + res)
                         if(res > 0){
                             alert('삭제되었습니다.');
-                            location.href = sessionStorage.getItem("contextpath") + "/admin/product";
+                            location.href =  sessionStorage.getItem("contextpath") +"/admin/product";
                         }else{
                             alert('삭제 실패');
                             location.href = sessionStorage.getItem("contextpath") + "/admin/product";
