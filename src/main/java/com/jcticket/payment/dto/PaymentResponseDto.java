@@ -6,20 +6,18 @@ import lombok.*;
  * packageName    : com.jcticket.payment.dto
  * fileName       : PaymentRequestDto
  * author         : 조영상
- * date           : 3/11/24
+ * date           : 3/10/24
  * description    : 자동 주석 생성
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 3/11/24         조영상        최초 생성
+ * 3/10/24         조영상        최초 생성
  */
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 @EqualsAndHashCode
-public class PaymentRequestDto {
+public class PaymentResponseDto {
     private boolean success;
     private String imp_uid;
     private String pay_method;
@@ -38,11 +36,10 @@ public class PaymentRequestDto {
     private String buyer_postcode;
     private Object custom_data;
     private String status;
-    private String paid_at;
+    private long paid_at;
     private String receipt_url;
     private String card_name;
     private String bank_name;
     private Integer card_quota;
     private String card_number;
-
 }

@@ -124,11 +124,11 @@ public class TicketingController {
 
     // 예매(ticketing) 테이블 create 요청 받는 컨트롤러..
     @PostMapping("/ticketing/tickets")
-    public ResponseEntity<?> createTicket(@RequestBody TicketingRequestDto requestDto)throws Exception{
+    public ResponseEntity<String> createTicket(@RequestBody TicketingRequestDto requestDto)throws Exception{
         System.out.println("========= /ticketing/tickets 진입===============");
         System.out.println(requestDto.toString());
-
         String res = ticketingService.createTicketing(requestDto);
+        System.out.println("생성된 예매 아이디 >> "+ res);
         if(res.equals("fail")){
             return ResponseEntity.status(500).body("internal server error");
         }else {

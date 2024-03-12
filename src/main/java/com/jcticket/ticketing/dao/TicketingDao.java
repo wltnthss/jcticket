@@ -98,15 +98,12 @@ public interface TicketingDao {
     // ticketing table insert
     int insertTicketing(TicketingDto2 dto) throws Exception;
 
-    // ticketing table delete
-    int deleteTicketing(String ticketing_id) throws Exception;
+
 
     // select User Name by user id
     String selectUserNameById(String user_id) throws Exception;
 
     int selectTicketingAmount(String ticketing_id) throws Exception;
 
-    int updateSeatStatusN(ShowSeatDto dto) throws Exception;
 
-    int updateUserCouponStatusY(String user_coupon_id) throws Exception;
 }

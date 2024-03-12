@@ -6,6 +6,7 @@ import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
 import com.jcticket.dto.TicketingDto2;
 import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.payment.dao.PaymentDao;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.jdbc.Null;
@@ -51,6 +52,8 @@ public class TicketingDaoImplTest {
 
     @Autowired
     TicketingDao ticketingDao;
+    @Autowired
+    PaymentDao paymentDao;
 
 //    @Before
 //    public void init() throws Exception {
@@ -505,7 +508,7 @@ public class TicketingDaoImplTest {
         // given
         String ticketingId = "395004ac";
         // when
-        int res = ticketingDao.deleteTicketing(ticketingId);
+        int res = paymentDao.deleteTicketing(ticketingId);
         // then
         assertEquals(1, res);
     }

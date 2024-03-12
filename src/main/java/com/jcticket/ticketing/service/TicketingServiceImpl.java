@@ -4,11 +4,10 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.TicketingDto2;
 import com.jcticket.mypage.dto.UserCouponDto;
-import com.jcticket.payment.dto.PaymentPrepareDto;
+import com.jcticket.payment.dto.prepare.PrepareRequestDto;
 import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingRequestDto;
-import com.jcticket.viewdetail.dto.ShowingDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -193,7 +192,6 @@ public class TicketingServiceImpl implements TicketingService{
     }
 
     // step4. 결제(결제 직전 예매테이블 insert/delete 끼지..)
-    // 호출 시 insert 하고 유저쿠폰 아이디의 status를 "Y"로 업데이트함 결제 실패시 tickieting 테이블에 delete query를 날린다.
 
     @Override
     public String createTicketing(TicketingRequestDto requestDto) throws Exception {
@@ -235,49 +233,12 @@ public class TicketingServiceImpl implements TicketingService{
     }
     // 결제 사전검증을 위해 만들어진 ticketing 테이블에서 amount 값을 조회하고 ticketing_id 와 함께 전달하는 서비스
     @Override
-    public PaymentPrepareDto getTicketingIdAmount(String ticketingId) throws Exception {
+    public PrepareRequestDto getTicketingIdAmount(String ticketingId) throws Exception {
         int ticketingAmount = ticketingDao.selectTicketingAmount(ticketingId);
-        PaymentPrepareDto dto = PaymentPrepareDto.builder()
-                .merchantUid(ticketingId)
+
+        return PrepareRequestDto.builder()
+                .merchant_uid(ticketingId)
                 .amount(ticketingAmount)
                 .build();
-        return dto;
-    }
-
-    // 결제 성공시 show_seat 테이블과 user_coupon 테이블의 각각 상태를 업데이트하는 서비스:
-    //  (파라미터로 한번에 두 개의 Dao에서 필요한 값들을 받는다)
-    @Override
-    public String setBookingStatus(TicketingRequestDto dto) throws Exception {
-        try{
-            String seats = dto.getSeatList();
-            String[] seatArr = seats.split(",");
-            for(String seat : seatArr){
-                String seatRow = String.valueOf(seat.charAt(0));
-                int seatCol = Integer.parseInt(seat.substring(1));
-                ShowSeatDto ssDto = ShowSeatDto.builder()
-                        .showing_seq(dto.getShowingSeq())
-                        .seat_row(seatRow)
-                        .seat_col(seatCol)
-                        .build();
-                ticketingDao.updateSeatStatusN(ssDto);
-                System.out.println("좌석의 행: " + seatRow + ", 좌석의 열: " + seatCol);
-            }
-            ticketingDao.updateUserCouponStatusY(dto.getUserCouponId());
-            return "success";
-        }catch (Exception e){
-            return "fail";
-        }
-
-    }
-
-    // 결제 or 결제 사전검증 실패시 만들어진 ticketing DB 삭제
-    @Override
-    public String removeTicketing(String ticketingId) throws Exception {
-        try{
-            ticketingDao.deleteTicketing(ticketingId);
-        }catch (Exception e){
-            return e.getMessage();
-        }
-        return null;
     }
 }

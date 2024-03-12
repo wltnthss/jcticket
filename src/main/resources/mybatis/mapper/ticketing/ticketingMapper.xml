@@ -279,20 +279,9 @@
         default, #{created_id}, default, #{updated_id});
     </insert>
 
-    <!-- 결제가 중간에 취소되거나 정상적으로 이루어지지 않은 경우 ticketing테이블 delete -->
-    <delete id="deleteTicketing" parameterType="string">
-        delete
-        from ticketing
-        where ticketing_id = #{ticketing_id};
-    </delete>
 
-    <!-- 유저아이디로 유저이름 가져오기 -->
-    <select id="selectUserNameById" parameterType="string" resultType="string">
-        select user_name
-        from user
-        where 1=1
-        and user_id = #{user_id}
-    </select>
+
+
 
     <!-- 예매 아이디로 결제금액 조회 -->
     <select id="selectTicketingAmount" parameterType="string" resultType="int">
@@ -303,22 +292,7 @@
     </select>
 
 
-    <!-- 결제 완료 후 회차-좌석 테이블 상태 업데이트 -->
-    <update id="updateSeatStatusN" parameterType="ShowSeatDto">
-        UPDATE show_seat
-        SET show_seat_status='N', updated_at=current_timestamp
-        WHERE  1=1
-          and showing_seq=#{showing_seq}
-          AND seat_row=#{seat_row}
-          AND seat_col=#{seat_col}
-    </update>
 
-    <!-- 결제 완료 후 사용된 유저-쿠폰 테이블 사용여부, 사용일자 업데이트 -->
-    <update id="updateUserCouponStatusY" parameterType="string">
-        UPDATE user_coupon
-        SET user_coupon_use_at=current_timestamp, user_coupon_use_yn='Y', updated_at=current_timestamp
-        WHERE user_coupon_id=#{user_coupon_id}
-    </update>
 
     <!-- etc. -->
     <!--티켓 모든 정보 조회하기. -->

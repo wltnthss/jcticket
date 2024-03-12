@@ -1,10 +1,12 @@
-package com.jcticket.payment.dto;
+package com.jcticket.payment.dto.token;
 
 import lombok.*;
 
+import java.util.Iterator;
+
 /**
- * packageName    : com.jcticket.payment.dto
- * fileName       : PaymentPrepareDto
+ * packageName    : com.jcticket.payment.dto.token
+ * fileName       : TokenResponseDto
  * author         : 조영상
  * date           : 3/11/24
  * description    : 자동 주석 생성
@@ -14,12 +16,10 @@ import lombok.*;
  * 3/11/24         조영상        최초 생성
  */
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
-public class PaymentPrepareDto {
-    private String merchantUid;
-    private int amount;
+public class TokenResponseDto {
+    private Integer code;
+    private String message;
+    private TokenData response;
 }

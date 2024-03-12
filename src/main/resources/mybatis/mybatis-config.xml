@@ -20,7 +20,7 @@
         <typeAlias alias="SeatClassDto" type="com.jcticket.viewdetail.dto.SeatClassDto"/>
         <typeAlias alias="ReviewDto" type="com.jcticket.viewdetail.dto.ReviewDto"/>
         <typeAlias alias="TicketingDto2" type="com.jcticket.dto.TicketingDto2"/>
-
+        <typeAlias alias="UserPayDto" type="com.jcticket.payment.dto.UserPayDto/>
         <typeAlias alias="CouponDto" type="com.jcticket.admin.dto.CouponDto"/>
 <!--        <typeAlias alias="UserCouponDto" type="com.jcticket.dto.UserCouponDto"/>-->
         <typeAlias alias="StageDto" type="com.jcticket.admin.dto.StageDto"/>

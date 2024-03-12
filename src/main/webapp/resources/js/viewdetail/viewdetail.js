@@ -201,16 +201,18 @@
                     var stage_name = stage_name_id.innerHTML;
 
                     //쿼리스트링 이용
-                    var url = '/ticketing/detail?play_id=' + for_ticket.id
-                        + 'dateText='+dateText
-                        +'&showing_seq='+showing_seq
-                        +'&play_name='+play_name
-                        +'&stage_name='+stage_name;
-
-                    var name = "ticketing"
-                    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-                    window.open(url, name, option); //성공
-                    // ticketing 창 띄우기
+                    var url = '/ticketing/booking/?play_id=' + for_ticket.id;
+                        // + 'dateText='+dateText
+                        // +'&showing_seq='+showing_seq
+                        // +'&play_name='+play_name
+                        // +'&stage_name='+stage_name;
+                    let popupW = 765;
+                    let popupH = 900;
+                    let left = Math.ceil((window.screen.width - popupW) / 2);
+                    let top = Math.ceil((window.screen.height - popupH) / 2);
+                    //var name = "ticketing"
+                    //var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+                    window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');                    // ticketing 창 띄우기
                 }
             }
         }

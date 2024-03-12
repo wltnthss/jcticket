@@ -107,6 +107,8 @@
             <version>${org.springframework-version}</version>
         </dependency>
 
+
+
         <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -277,6 +279,24 @@
             <version>1.1.1</version>
         </dependency>
 
+        <!-- server-to-server 하려면 webClient  -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-webflux</artifactId>-->
+<!--            <version>5.0.20.RELEASE</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.projectreactor.netty</groupId>-->
+<!--            <artifactId>reactor-netty</artifactId>-->
+<!--            <version>1.1.15</version>-->
+<!--        </dependency>-->
+
+        <!-- RestTemplate 시용하는 방법 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
 
     </dependencies>
     <build>

@@ -449,23 +449,8 @@ $(document).ready(function(){
             data: JSON.stringify(data),
             contentType : 'application/json; charset=utf-8',
             success: function (res){
-                console.log(`생성된 ticketing ID >> ${res.body}`);
-                const ticketingId = res.body;
-                $("#ticketing-id").val(ticketingId);
-                const url = "/payments/" + ticketingId;
-                    $.ajax({
-                        type: "GET",
-                        url: url,
-                        success: function (res2){
-                            console.log("응답 정보 >> " + res2);
-                            // console.log();
-                            // console.log();
-                        },
-                        error: function(error){
-                            console.log(error);
-                            alert(error.status+"ajax GET /payments/"+ticketingId +"요청 실패!");
-                        }
-                    })
+                console.log("응답 데이터 >> " + res);
+                $("#ticketing-id").val(res);
             },
             error: function(error){
                 console.log(error);
@@ -499,40 +484,85 @@ $(document).ready(function(){
 
 
     // 포트원 결제 JavaScript SDK 사용
-    IMP.init("imp43864664");
+
     $("#payment-btn").click(function (event){
-        console.log("카카오페이 결제 버튼 클릭!")
-        event.preventDefault();
         const ticketingId = $("#ticketing-id").val();
+        const userId = $("#user_id").val();
+        $.ajax({
+            type: "GET",
+            url: "/payments/"+userId+"/info",
+            success: function (res){
+                console.log(res);
+                $("#user-tel").val(res.user_tel);
+            },
+            error: function (err){
+                console.log(err);
+            }
+        });
+        const url = "/payments/"+ticketingId;
+        console.log("카카오페이 결제 버튼 클릭! with : "+ticketingId);
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (res){
+                console.log("응답 정보 >> " + res);
+                // console.log();
+            },
+            error: function(error){
+                console.log(error);
+                alert(error.status+"ajax GET /payments/"+ticketingId +"요청 실패!");
+            }
+        })
+        event.preventDefault();
         requestPay(ticketingId);
     })
 
+
+    IMP.init("imp43864664");
     // 결제수단: 카카오페이 간편결제 - (모바일에서 결제 진행)
     function requestPay(ticketingId){
         IMP.request_pay({
             pg: "kakaopay",
             pay_method: "card",
             merchant_uid: ticketingId,
-            name: $("#play-name"),
+            name: $("#play-name").val(),
             amount: totalPrice,
-            buyer_tel: "010-5425-9150",
+            buyer_name: $("#user_id").val(),
+            buyer_tel: $("#user-tel").val(),
         }, function (res){
             console.log(res);
             if(res.success){
                 console.log("결제 성공 여부 >> "+res.success);
                 console.log("결제 내역 url >> "+res.receipt_url);
-                $.ajax({
-                    type: "POST",
-                    url: "/payments",
-                    data: JSON.stringify(data),
-                    contentType : 'application/json; charset=utf-8',
-                    success: function (res){
-                        console.log(res);
-                    },
-                    error: function(error){
-                        console.log(error);
-                    }
-                })
+                if(res.success){
+                    $.ajax({
+                        type: "POST",
+                        url: "/payments/success",
+                        data: JSON.stringify(res),
+                        contentType : 'application/json; charset=utf-8',
+                        success: function (response){
+                            console.log(response);
+
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    })
+                }else {
+                    $.ajax({
+                        type: "GET",
+                        url: "/payments/"+ticketingId+"/delete",
+                        success: function (res){
+                            console.log(res);
+
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    })
+
+                }
+
 
             }else {
                 console.log("결제 성공 여부 >> "+res.success);
@@ -540,6 +570,25 @@ $(document).ready(function(){
             }
         });
     }
+
+    $(window).bind("beforeunload", function (event){
+        const ticketingId = $("#ticketing-id").val();
+        event.preventDefault();
+        event.returnValue = false;
+        if(ticketingId !== null){
+            $.ajax({
+                url: "/payments/"+ticketingId+"/delete",
+                cache : "false",
+                type: "GET",
+                success: function (res){
+                    console.log(res);
+                },
+                error: function (error){
+                    console.log(error);
+                }
+            })
+        }
+    })
 
 });
 // 결제 성공시 응답 코드 예시

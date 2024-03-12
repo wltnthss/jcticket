@@ -1,6 +1,8 @@
 package com.jcticket.payment.service;
 
-import com.jcticket.payment.dto.PaymentPrepareDto;
+import com.jcticket.payment.dto.prepare.PrepareRequestDto;
+import com.jcticket.payment.dto.prepare.PrepareResponseDto;
+import com.jcticket.payment.dto.token.TokenResponseDto;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -15,5 +17,10 @@ import org.springframework.http.ResponseEntity;
  * 1/31/24         조영상        최초 생성
  */
 public interface PortOneService {
-    ResponseEntity<String> preparePayment(PaymentPrepareDto dto) throws Exception;
+
+    // 토큰 발급 받아오기
+    ResponseEntity<TokenResponseDto> getToken()throws Exception;
+
+    // 결제 사전검증위해 사전등록
+    ResponseEntity<PrepareResponseDto> preparePayment(PrepareRequestDto dto, String token) throws Exception;
 }

@@ -181,11 +181,6 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.insert(namespace + "insertTicketing", dto);
     }
 
-    // 결제 과정에서 결제 실패시 예매되었던 테이블에 해당 ticketing_id delete!
-    @Override
-    public int deleteTicketing(String ticketing_id) throws Exception {
-        return session.delete(namespace + "deleteTicketing",ticketing_id);
-    }
 
     // 유저 아이디로 유저 이름 조회
 
@@ -200,15 +195,5 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.selectOne(namespace + "selectTicketingAmount", ticketing_id);
     }
 
-    // 결제 완료 후 회차-좌석 테이블 상태 업데이트
-    @Override
-    public int updateSeatStatusN(ShowSeatDto dto) throws Exception {
-        return session.update(namespace + "updateSeatStatusN", dto);
-    }
 
-    // 결제 완료 후 사용된 유저-쿠폰 테이블 사용여부, 사용일자 업데이트
-    @Override
-    public int updateUserCouponStatusY(String user_coupon_id) throws Exception {
-        return session.update(namespace + "updateUserCouponStatusY", user_coupon_id);
-    }
 }
