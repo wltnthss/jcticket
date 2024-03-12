@@ -147,7 +147,8 @@
 <!--        게시글 작성-->
     <insert id="review_insert" parameterType="ReviewDto">
         INSERT INTO review
-                (review_num,
+                (
+                 review_num,
                  review_at,
                  review_star_rating,
                  review_viewing_at,

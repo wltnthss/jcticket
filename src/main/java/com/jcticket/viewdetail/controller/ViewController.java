@@ -90,6 +90,8 @@ public class ViewController {
         List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
         Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
 
+//        System.out.println("viewDetail==================>"+viewDetail);
+
 //        ReviewDto reviewDto = new ReviewDto();
 
         //카테고리 한글 > 영문 변환 (a태그 href에 들어갈 것)
@@ -211,16 +213,16 @@ public class ViewController {
         } else {
             // ReviewDto 객체 생성
             ReviewDto reviewDto = new ReviewDto();
-            reviewDto.setPlay_id(play_id);
-            reviewDto.setUser_id(user_id);
             reviewDto.setReview_star_rating(Integer.parseInt(star)); // 별점은 정수로 변환
             reviewDto.setReview_viewing_at(viewing_at);
             reviewDto.setReview_content(review_content);
             reviewDto.setCreated_id(user_id);
+            reviewDto.setPlay_id(play_id);
+            reviewDto.setUser_id(user_id);
             reviewDto.setUpdated_id(user_id);
             reviewDto.setReview_num(review_num);
 
-            System.out.println("review_num=============>"+review_num);
+//            System.out.println("review_num=============>"+review_num);
 
             // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
             viewDetailService.review_create(reviewDto);
@@ -230,6 +232,7 @@ public class ViewController {
         }
     }
 
+    //리뷰삭제
     @GetMapping("/review_delete") //@DeleteMapping 써볼것
     public int ReviewDelete(@RequestParam Integer delete_review_num,
                             @RequestParam String delete_user_id
