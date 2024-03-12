@@ -54,6 +54,8 @@ body{
 
 .loginpage{
     text-align: center;
+    width: 958px;
+    margin: 0 auto;
 }
 
 .loginpage img{
@@ -453,8 +455,6 @@ li{
 
 #loginBotBn{
     margin-top: 20px;
-    margin: 0 auto;
-    width: 50%
 }
 
 #loginBotBn img{
