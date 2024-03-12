@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jcticket.ticketing.mybatis.mapper.ticketing.TicketingMapper">
+<mapper namespace="TicketingMapper">
     <!-- 예매창 구현에 필요한 쿼리들 -->
 
     <!-- ********** step1. 일정 선택 ************-->
@@ -246,6 +246,53 @@
 
 
     <!-- step4. 결제방법 -->
+    <!-- step3 까지의 정보를 바탕으로 Ticketing 테이블을 작성한다 -->
+    <insert id="insertTicketing" parameterType="TicketingDto2">
+        insert into ticketing
+            (ticketing_id,
+            ticketing_at,
+            ticketing_cnt,
+            ticketing_status,
+            play_name,
+            stage_name,
+            showing_info,
+            showing_date,
+            selected_seats,
+            ticketing_price,
+            user_id,
+            user_name,
+            cancelable_at,
+            created_at, created_id, updated_at, updated_id )
+        VALUES(#{ticketing_id},
+        default,
+        #{ticketing_cnt},
+        default,
+        #{play_name},
+        #{stage_name},
+        #{showing_info},
+        #{showing_date},
+        #{selected_seats},
+        #{ticketing_price},
+        #{user_id},
+        #{user_name},
+        #{cancelable_at},
+        default, #{created_id}, default, #{updated_id});
+    </insert>
+
+
+
+
+
+    <!-- 예매 아이디로 결제금액 조회 -->
+    <select id="selectTicketingAmount" parameterType="string" resultType="int">
+        select ticketing_price
+        from ticketing
+        where 1=1
+        and ticketing_id = #{ticketing_id}
+    </select>
+
+
+
 
     <!-- etc. -->
     <!--티켓 모든 정보 조회하기. -->

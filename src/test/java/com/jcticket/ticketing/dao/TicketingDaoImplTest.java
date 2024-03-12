@@ -4,7 +4,9 @@ import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
+import com.jcticket.dto.TicketingDto2;
 import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.payment.dao.PaymentDao;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
 import org.apache.ibatis.jdbc.Null;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -49,6 +52,8 @@ public class TicketingDaoImplTest {
 
     @Autowired
     TicketingDao ticketingDao;
+    @Autowired
+    PaymentDao paymentDao;
 
 //    @Before
 //    public void init() throws Exception {
@@ -459,5 +464,52 @@ public class TicketingDaoImplTest {
             System.out.println("****** dto toString => "+dto);
             System.out.println("***쿠폰정보*** "+dto.getCoupon_id()+" => "+cDto);
         }
+    }
+
+    // 예매테이블 insert Test
+    @Test
+    public void insertTicketingTest() throws Exception{
+        // given
+        UUID uuid = UUID.randomUUID();
+        String ticketingId = uuid.toString().replace("-","").substring(0, 8);
+        TicketingDto2 dto  = TicketingDto2.builder()
+                .ticketing_id(ticketingId)
+                .ticketing_cnt(1)
+                .ticketing_price(35000)
+                .play_name("테스트2")
+                .stage_name("올림픽공원 체조경기장")
+                .showing_info("[1회] 12시 00분")
+                .showing_date("2024-03-15")
+                .selected_seats("D3")
+                .user_id("www444")
+                .user_name("조영상")
+                .created_id(SYS)
+                .updated_id(SYS)
+                .build();
+        System.out.println(dto.toString());
+        // Timestamp에 7일 더하기 실험 --> OK
+        LocalDateTime currentTime = LocalDateTime.now();
+        Timestamp currentTimestamp = Timestamp.valueOf(currentTime);
+        long newTime = currentTimestamp.getTime() + (7 * 24 * 60 * 60 * 1000); // 7일 = 7 * 24시간 * 60분 * 60초 * 1000밀리초
+        Timestamp newTimestamp = new Timestamp(newTime);
+        System.out.println("현재 timestamp: " + currentTimestamp);
+        System.out.println("7일 후 timestamp: " + newTimestamp);
+        // when
+        int res = ticketingDao.insertTicketing(dto);
+        if(res == 1) System.out.println("삽입 성공");
+        else System.out.println("삽입 실패");
+        // then
+        assertEquals(1, res);
+    }
+
+    // 예매테이블 delete Test
+    @Test
+    public void deleteTicketingTest() throws Exception{
+        // given
+        String ticketingId = "395004ac";
+        // when
+        int res = paymentDao.deleteTicketing(ticketingId);
+        // then
+        assertEquals(1, res);
     }
 }

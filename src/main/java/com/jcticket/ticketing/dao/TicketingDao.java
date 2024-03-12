@@ -3,6 +3,7 @@ package com.jcticket.ticketing.dao;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
+import com.jcticket.dto.TicketingDto2;
 import com.jcticket.mypage.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
@@ -93,4 +94,16 @@ public interface TicketingDao {
 
     // 쿠폰아이디로 쿠폰 테이블에서 쿠폰명, 쿠폰할인가격, 쿠폰사용조건, 쿠폰사용가능시작일, 쿠폰사용가능종료일 조회
     CouponDto selectCoupon(String coupon_id) throws Exception;
+
+    // ticketing table insert
+    int insertTicketing(TicketingDto2 dto) throws Exception;
+
+
+
+    // select User Name by user id
+    String selectUserNameById(String user_id) throws Exception;
+
+    int selectTicketingAmount(String ticketing_id) throws Exception;
+
+
 }

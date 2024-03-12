@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org.//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PaymentMapper">
+<!-- 결제 성공시 결제 테이블 인서트-->
+    <insert id="insertPayment" parameterType="PaymentDto">
+        INSERT INTO jcticket.Payment
+        (payment_Id,
+         payment_approval_id,
+         payment_amount,
+         payment_at,
+         payment_method,
+         payment_status,
+         payment_fail_reason,
+         receipt_url,
+         ticketing_id,
+         user_coupon_id,
+         user_id,
+         created_at, created_id, updated_at, updated_id)
+        VALUES(#{payment_Id},
+               #{payment_approval_id},
+               #{payment_amount},
+               #{payment_at},
+               #{payment_method},
+               #{payment_status},
+               #{payment_fail_reason},
+               #{receipt_url},
+               #{ticketing_id},
+               #{user_coupon_id},
+               #{user_id},
+               default, "system", default, "system");
+    </insert>
+    <!-- 결제 성공시 회차-좌석 테이블 update -->
+
+    <!-- 결제 완료 후 회차-좌석 테이블 상태 업데이트 -->
+    <update id="updateSeatStatusN" parameterType="ShowSeatDto">
+        UPDATE show_seat
+        SET show_seat_status='N', updated_at=current_timestamp
+        WHERE  1=1
+          and showing_seq=#{showing_seq}
+          AND seat_row=#{seat_row}
+          AND seat_col=#{seat_col}
+    </update>
+
+    <!-- 결제 완료 후 사용된 유저-쿠폰 테이블 사용여부, 사용일자 업데이트 -->
+    <update id="updateUserCouponStatusY" parameterType="string">
+        UPDATE user_coupon
+        SET user_coupon_use_at=current_timestamp, user_coupon_use_yn='Y', updated_at=current_timestamp
+        WHERE user_coupon_id=#{user_coupon_id}
+    </update>
+
+    <!-- 결제가 실패한경우  ticketing 테이블 delete -->
+    <delete id="deleteTicketing" parameterType="string">
+        delete
+        from ticketing
+        where ticketing_id = #{ticketing_id};
+    </delete>
+
+
+    <!-- 결제 검증 또는 결제 취소시 결제상태 업데이트 -->
+    <update id="updatePaymentStatusF" parameterType="string">
+        update
+            payment
+        set
+            payment_status = 'F'
+        where
+            1=1
+        and payment_id = #{payment_id}
+    </update>
+
+    <select id="selectUserId" parameterType="string" resultType="string">
+        select user_id
+        from user
+        WHERE user_email = #{user_email};
+    </select>
+
+    <!-- 유저아이디로 유저이름, 이메일 가져오기 -->
+    <select id="selectUserInfo" parameterType="string" resultType="UserPayDto">
+        select user_name, user_email, user_tel, user_address
+        from user
+        where 1=1
+          and user_id = #{user_id}
+    </select>
+
+    <select id="selectedSeats" parameterType="string" resultType="string">
+        select selected_seats
+        from ticketing
+        where ticketing_id = #{ticketing_id}
+    </select>
+</mapper>
