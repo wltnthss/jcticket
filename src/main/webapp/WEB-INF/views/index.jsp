@@ -26,7 +26,7 @@
     <%-- 헤더시작 --%>
     <header class="play-top_main" id = "play-top">
         <!-- 좌측 -->
-        <div class="play-top-left">
+        <div class="play-top-left-main">
                 <a href="${pageContext.request.contextPath}/" class="top-main-logo">
                     <img src="${pageContext.request.contextPath}/resources/img/components/로고2.png" alt class="fixed"/>
                     <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" alt class="trans"/>
@@ -49,7 +49,7 @@
             </a>
         </div>
         <!-- 오른쪽 -->
-        <div class="play-top-right">
+        <div class="play-top-right-main">
             <a href="${pageContext.request.contextPath}/mypageIndex" class="my-page">
                 <img src="${pageContext.request.contextPath}/resources/img/components/마이페이지_백.png" class="mp_icon">
             </a>
