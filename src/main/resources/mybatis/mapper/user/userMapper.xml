@@ -29,35 +29,79 @@
     </select>
 
     <select id="selectImg" resultType="Map">
-    SELECT
-        s.showing_seq as showing_seq,
-        p.play_id as play_id ,
-        pimg.play_poster_stored_file_name as img_name ,
-        p.play_name as play_name ,
-        p.play_major_cat play_cat ,
-        p.play_run_time as play_run_time ,
-        s.showing_info as showing_info ,
-        s.showing_date as showing_date ,
-        st.stage_address ,
-        CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
-        st.stage_name as stage_name ,
-        CASE
-            WHEN showing_status = 'BS' then '상영전'
-            WHEN showing_status = 'IS' then '상영중'
-            WHEN showing_status = 'AS' then '상영종료'
-        END showing_status
-    FROM
-        play p
-        LEFT JOIN play_image pimg ON
-        p.play_id = pimg.play_id
-        LEFT JOIN showing s ON
-        p.play_id = s.play_id
-        LEFT JOIN stage st ON
-        s.stage_id = st.stage_id
-    WHERE
-        1=1
-        AND s.showing_info IS NOT NULL
+        select
+            pimg.play_poster_stored_file_name as img_name ,
+            pimg.play_slide_stored_file_name as slide_img_name ,
+            p.play_name as play_name ,
+            p.play_id as play_id ,
+            CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,
+            s.showing_date ,
+            DATEDIFF(s.showing_date, CURDATE()) as dday
+        from
+            play p
+                left join play_image pimg on p.play_id = pimg.play_id
+                left join
+            (
+                SELECT
+                    s1.play_id,
+                    min(s1.showing_date) showing_date,
+                    s1.showing_start_at showing_start_at,
+                    s1.showing_end_at showing_end_at,
+                    CONCAT(DATE_FORMAT(s1.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s1.showing_end_at, '%Y-%m-%d')) as showing_period_date
+                FROM
+                    showing s1
+                        left JOIN (
+                        SELECT
+                            play_id,
+                            MIN(showing_date) AS min_showing_date
+                        FROM
+                            showing
+                        GROUP BY
+                            play_id
+                    ) s2 on s1.play_id = s2.play_id
+                group by
+                    s1.play_id, s1.showing_start_at, s1.showing_end_at, showing_period_date
+            ) s on p.play_id = s.play_id
+        where
+            1=1
+          and s.showing_period_date is not null
+        group by
+            p.play_id  ,img_name,slide_img_name, p.play_name, showing_period_date, showing_start_at, showing_end_at, dday
+        order by
+            slide_img_name
     </select>
+
+
+<!--    <select id="selectImg" resultType="Map">-->
+<!--    SELECT-->
+<!--        s.showing_seq as showing_seq,-->
+<!--        p.play_id as play_id ,-->
+<!--        pimg.play_poster_stored_file_name as img_name ,-->
+<!--        p.play_name as play_name ,-->
+<!--        p.play_major_cat play_cat ,-->
+<!--        p.play_run_time as play_run_time ,-->
+<!--        s.showing_info as showing_info ,-->
+<!--        s.showing_date as showing_date ,-->
+<!--        st.stage_address ,-->
+<!--        CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,-->
+<!--        st.stage_name as stage_name ,-->
+<!--        CASE-->
+<!--            WHEN showing_status = 'BS' then '상영전'-->
+<!--            WHEN showing_status = 'IS' then '상영중'-->
+<!--            WHEN showing_status = 'AS' then '상영종료'-->
+<!--        END showing_status-->
+<!--    FROM-->
+<!--        play p-->
+<!--        LEFT JOIN play_image pimg ON-->
+<!--        p.play_id = pimg.play_id-->
+<!--        LEFT JOIN showing s ON-->
+<!--        p.play_id = s.play_id-->
+<!--        LEFT JOIN stage st ON-->
+<!--        s.stage_id = st.stage_id-->
+<!--    WHERE-->
+<!--        1=1-->
+<!--        AND s.showing_info IS NOT NULL-->
+<!--    </select>-->
 
 <!--방문 횟수 카운팅-->
     <update id="increase_visit_cnt" parameterType="String">

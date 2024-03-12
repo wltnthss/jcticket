@@ -11,8 +11,8 @@
 <head>
     <title>Title</title>
 
-    <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
-    <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
+    <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css?after" rel="stylesheet">
+    <link rel="icon" href="${pageContext.request.contextPath}/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>
 
@@ -33,40 +33,29 @@
         <%--        --%>
 
         #viewing {
-            width: 700px;
+            width: 945px;
             height: 150px;
-            border: 1px solid;
+            border: 3px solid #E8EAF6;
+            background-color: #FAFAFA;
         }
 
         #viewing > p {
-            font-size: 14px;
+            font-size: 18px;
             padding: 15px;
+            font-weight: bold;
         }
-
-        #view-date {
-            margin: 5px 15px;
-        }
-
 
         #view-date > input {
             width: 160px;
             height: 25px;
         }
 
-        #view-select {
-            display: inline-block;
-            margin-left: 40px;
-        }
 
         #view-select > select {
             width: 165px;
             height: 25px;
         }
 
-        #view-nmae {
-            display: inline-block;
-            margin: 20px 0px;
-        }
 
         #view-nmae > input {
             width: 230px;
@@ -87,10 +76,22 @@
 
 
         #show-all {
-            border: 1px solid;
-            width: 100%;
+            border: 5px solid #FAFAE9;
+            width: 940px;
             text-align: left;
             display: flex;
+            background-color: #FAFAFA;
+            border-radius: 5px;
+        }
+
+        #show-all  span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #show-all  em {
+            font-size: 20px;
+
         }
 
         #show-all > #show-img{
@@ -106,8 +107,8 @@
 
         #show-all > #show-text {
             display: flex;
-            margin: 20px 0px;
-            width: 450px;
+            margin: 20px 20px;
+            width: 850px;
             flex-direction: row;
             align-items: flex-start;
             flex-wrap: wrap;
@@ -120,8 +121,59 @@
         }
 
         #title {
-            border: 1px solid;
+            text-align: center;
+            border: 3px solid #dddddd;
             margin: 15px 0px 0px 0px;
+            background-color: #FAFAFA;
+            padding: 2px;
+            border-radius: 5px;
+        }
+
+        #paging {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+            margin: 20px 0px;
+        }
+
+        #paging > a {
+            text-decoration-line: none;
+            color: black;
+        }
+
+        .line {
+            width: 720px;
+        }
+
+        .form_tag {
+            margin: 15px 25px;
+        }
+
+        .form_tag > select {
+            width: 130px;
+            height: 25px;
+        }
+
+        .submit {
+            width: 60px;
+            height: 25px;
+        }
+
+        #start_date, #end_date {
+            width: 250px;
+            height: 25px;
+        }
+
+        .form_tag > p {
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        #keyword {
+            font-weight: bold;
+            width: 200px;
+            height: 25px;
         }
 
 
@@ -149,12 +201,12 @@
                     </div>
 
                     <div id="ticket">
-                        <a href="/mypageticket"><h3>예매확인/취소</h3></a>
-                        <a href="/mypagecupon"><h3>쿠폰/예매권</h3></a>
-                        <a href="/mypageview"><h3>나의 관람 공연</h3></a>
-                        <a href="/mypageclient"><h3>문의사항</h3></a>
-                        <a href="/modifying"><h3>회원정보 수정</h3></a>
-                        <a href="/withdraw"><h3>회원탈퇴</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageticket"><h3>예매확인/취소</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypagecupon"><h3>쿠폰/예매권</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageview"><h3>나의 관람 공연</h3></a>
+                        <a href="${pageContext.request.contextPath}/mypageclient"><h3>문의사항</h3></a>
+                        <a href="${pageContext.request.contextPath}/Modifying"><h3>회원정보 수정</h3></a>
+                        <a href="${pageContext.request.contextPath}/withdraw"><h3>회원탈퇴</h3></a>
                     </div>
 
                     <div id="client">
@@ -172,50 +224,57 @@
             <article id="con">
                 <h3>나의 관람 공연</h3>
 
+                <br>
+
                 <div id="viewing">
                     <p>전재승님의 관람 공연은 총 1건 입니다.(2024년 02월 05일 기준) / 관람후기 작성 1건, 미작성 0건</p>
                     <hr>
 
-                </div>
-
-                        <form action="/mypageview" method="get">
+                    <form class="form_tag" action="${pageContext.request.contextPath}/mypageview" method="get">
                         <input name="start_date" id="start_date" type="date"> ~ <input name="end_date" id="end_date" type="date">
                         <select name="option">
-                                <option value="A">전체</option>
-                                <option value="G">연극</option>
-                                <option value="C">콘서트</option>
-                                <option value="J">전시</option>
-                                <option value="M">뮤지컬</option>
+                            <option value="A">전체</option>
+                            <option value="G">연극</option>
+                            <option value="C">콘서트</option>
+                            <option value="J">전시</option>
+                            <option value="M">뮤지컬</option>
                         </select>
-                         <input type="submit" value="조회">
-                        </form>
+                        <input class="submit" type="submit" value="조회">
+                    </form>
 
-                        <form action="/mypageview" method="get">
-                            공연명 : <input type="text" name="keyword">
-                            <input type="submit" value="조회" >
-                        </form>
+                    <form class="form_tag" action="${pageContext.request.contextPath}/mypageview" method="get">
+                        <p>공연명 :</p> <input id="keyword" type="text" name="keyword">
+                        <input class="submit" type="submit" value="조회" >
+                    </form>
+
+                </div>
+
+
 
 
                 <c:forEach items="${view_list}" var="TicketingDto">
                 <h2 id="title">${TicketingDto.play_name}</h2>
                 <div id="show-all">
                     <div id="show-img"><a href=""><img src="/resources/img/mypage/페페%20한잔해.jpg"></a></div>
-                    <div id="show-text"><span>예매번호 :</span> <em>${TicketingDto.ticketing_id}</em> <span>장르 :</span> <em>${TicketingDto.play_middle_cat}</em>
-                    <span>관람일시: </span> <em>${TicketingDto.ticketing_at}</em>
-                        <span>공연장 : </span> <em>${TicketingDto.stage_name}</em><span>좌석 : </span> <em>${TicketingDto.choice_show_seat}</em>
+                    <div id="show-text">
+                        <div class="line"><span>예매번호 :</span> <em>${TicketingDto.ticketing_id}</em></div>
+                        <div class="line"><span>장르 :</span> <em>${TicketingDto.play_major_cat}</em></div>
+                        <div class="line"><span>관람일시: </span> <em>${TicketingDto.ticketing_at}</em></div>
+                        <div class="line"><span>공연장 : </span> <em>${TicketingDto.stage_name}</em></div>
+                        <div class="line"><span>좌석 : </span> <em>${TicketingDto.selected_seats}</em></div>
                     </div>
                 </div>
                 </c:forEach>
 
                 <div id="paging">
                     <c:if test="${ph.showPrev}">
-                        <a href="<c:url value="/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&lt;</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">&lt;</a>
                     </c:if>
                     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a href="<c:url value="/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">${i}</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">${i}</a>
                     </c:forEach>
                     <c:if test="${ph.showNext}">
-                        <a href="<c:url value="/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&gt;</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">&gt;</a>
                     </c:if>
                 </div>
 

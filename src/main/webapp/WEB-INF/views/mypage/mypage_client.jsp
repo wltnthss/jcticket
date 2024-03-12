@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
 
-    <link href="/resources/css/mypage/mypage.css?after" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/mypage/mypage.css?after" rel="stylesheet">
     <link rel="icon" href="/resources/img/mypage/KakaoTalk_20240131_192702986_02.ico">
 
     <style>

@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/login/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/login.css">
 </head>
 <body>
 <div class="loginpage">
@@ -19,13 +19,13 @@
     <div class="login-header">
         <div class="login-headerArea">
             <h1>
-                <a href="/" class="login-top-left" >
-                    <img src="/resources/img/components/로고1.png" alt="JC TICKET" >
+                <a href="${pageContext.request.contextPath}/index" class="login-top-left" >
+                    <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" alt="JC TICKET" >
                 </a>
                 <span class="login-top-center">로그인</span>
             </h1>
             <div class="login-top-right">
-                <a href="/signup" class="signup-logo">
+                <a href="${pageContext.request.contextPath}/signup" class="signup-logo">
                     <span class="signup-wrap"> 회원가입</span>
                 </a>
             </div>
@@ -56,7 +56,7 @@
             <div class="loginForm">
                 <!-- 회원 로그인 영역 시작 -->
                 <div class="memLoginForm">
-                    <form action="<c:url value="/login"/>" id="loginSub" method="POST" name="LoginSub" autocomplete="off"/>
+                    <form action="${pageContext.request.contextPath}/login" id="loginSub" method="POST" name="LoginSub" autocomplete="off">
                         <fieldset class="formFieldSet">
                             <input id="prevurl" type="hidden" name="prevurl" value="${requestScope.prevurl}">
 
@@ -99,20 +99,13 @@
                         </fieldset>
                     </form>
 
-                    <!-- 아이디 비번 찾기영역 시작-->
-                    <div class="loginEtc">
-                        <a href="아이디 찾기페이지" class="lnk_etc">아이디 찾기</a>
-                        <a href="비밀번호 찾기페이지" class="lnk_etc">비밀번호 찾기</a>
-                    </div>
-                    <!-- 아이디 비번 찾기영역 끝 -->
-
                     <!-- 소셜 로그인 영역 시작  -->
                     <ul class="loginSocial">
                         <li class="loginNaver">
                             <a href="${naverUrl}" class="btn_social">
                                     <span class="socialWrap">
                                         <em class="social_icon_naver">
-                                            <img src="/resources/img/login/네이버.png" class="naver_icon">
+                                            <img src="${pageContext.request.contextPath}/resources/img/login/네이버.png" class="naver_icon">
                                         </em>
                                         <em class="txt">네이버 아이디로 로그인</em>
                                     </span>
@@ -122,7 +115,7 @@
                             <a href="${kakaoUrl}" class="btn_social">
                                     <span class="socialWrap">
                                         <em class="social_icon_kakao">
-                                            <img src="/resources/img/login/카카오.png" class="kakao_icon" style="width: 22px; height: 21px;">
+                                            <img src="${pageContext.request.contextPath}/resources/img/login/카카오.png" class="kakao_icon" style="width: 22px; height: 21px;">
                                         </em>
                                         <em class="txt">카카오 아이디로 로그인</em>
                                     </span>
@@ -132,7 +125,7 @@
                             <a href="구글로그인페이지" class="btn_social">
                                     <span class="socialWrap">
                                         <em class="social_icon_google">
-                                            <img src="/resources/img/login/구글.png" class="google_icon" style="width: 22px; height: 21px;">
+                                            <img src="${pageContext.request.contextPath}/resources/img/login/구글.png" class="google_icon" style="width: 22px; height: 21px;">
                                         </em>
                                         <em class="txt">구글 아이디로 로그인</em>
                                     </span>
@@ -175,7 +168,7 @@
 
                 <%--기획사 로그인 시작--%>
                 <div class="agencyLoginForm" style="display: none">
-                    <form action="/agency/processLogin" method="POST" name="loginAgency" autocomplete="off">
+                    <form action="${pageContext.request.contextPath}/agency/processLogin" method="POST" name="loginAgency" autocomplete="off">
                         <fieldset class="formFieldSet">
                             <span id="spanAgencyID">
                                 <label for="SAgencyID">아이디</label>
@@ -206,14 +199,14 @@
             <!-- 로그인화면 포스터 시작 -->
             <div class="adArea">
                 <div class="ad">
-                    <img src="/resources/img/login/로그인화면_포스터.png" class="ad_img">
+                    <img src="${pageContext.request.contextPath}/resources/img/login/로그인화면_포스터.png" class="ad_img">
                 </div>
             </div>
         </div>
     </div>
     <!-- 로그인 화면 하단배너 시작 -->
     <div id = loginBotBn>
-        <img src="/resources/img/login/로그인_하단배너.gif">
+        <img src="${pageContext.request.contextPath}/resources/img/login/로그인_하단배너.gif">
     </div>
     <!-- 로그인 화면 하단배너 끝 -->
 
@@ -230,7 +223,7 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="/resources/js/login/login.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/login/login.js"></script>
 
 
 

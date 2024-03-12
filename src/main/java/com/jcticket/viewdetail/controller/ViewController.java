@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +51,7 @@ public class ViewController {
 //    ajax 사용한 페이징
     @GetMapping("/viewdetail/page")
     @ResponseBody
-    public Map<String, Object> viewdetailv(@RequestParam String this_play_id,
+    public Map<String, Object> review(@RequestParam String this_play_id,
                                     @RequestParam Integer page,
                                     @RequestParam Integer pageSize
                                     ,Model model) throws Exception {
@@ -73,7 +75,8 @@ public class ViewController {
     public String viewdetail(@RequestParam(required = false) String this_play_id,
                              @RequestParam(defaultValue = "1") Integer page,
                              @RequestParam(defaultValue = "10") Integer pageSize,
-                             Model model) throws Exception {
+                             Model model,
+                             HttpServletRequest request) throws Exception {
         
         //공연아이디 없이 viewdetail페이지로 진입할 시 index 페이지로 이동
         if (this_play_id == null) {
@@ -87,11 +90,12 @@ public class ViewController {
         List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
         Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
 
-        ReviewDto reviewDto = new ReviewDto();
+//        System.out.println("viewDetail==================>"+viewDetail);
+
+//        ReviewDto reviewDto = new ReviewDto();
 
         //카테고리 한글 > 영문 변환 (a태그 href에 들어갈 것)
         String major_cat = "";
-
         for (JoinDto category : viewDetail) {
             major_cat = category.getPlay_major_cat().toLowerCase(); // 모든 문자열을 소문자로 변환
             if (major_cat.equals("콘서트")) {
@@ -112,20 +116,29 @@ public class ViewController {
         List<ReviewDto> review = viewDetailService.review_select(this_play_id);
         model.addAttribute("review", review);
 
-//        System.out.println("viewDetailTime=============>"+viewDetailTime);
+//        System.out.println("viewDetail=============>"+viewDetail);
 
         //상세보기에 들어갈 내용들(제목, 공연장이름, 좌석가격 등)
         model.addAttribute("viewDetail", viewDetail);
         model.addAttribute("viewDetailTime", viewDetailTime);
         
+        //세션에 저장된 아이디 가져오기
+        HttpSession session = request.getSession();
+        String user_id = (String)session.getAttribute("sessionId");
+
+//        System.out.println("user_id================>"+user_id);
+
+        model.addAttribute("user_id",user_id);
+        
         //리뷰작성시 들어갈 관람일시
         Map viewing_at_map = new HashMap();
         viewing_at_map.put("play_id",this_play_id);
-        viewing_at_map.put("user_id","test123");
-//        List<String> viewing_at = viewDetailService.viewing_at(viewing_at_map);
-//        model.addAttribute("viewing_at",viewing_at);
+        viewing_at_map.put("user_id",user_id);
+        List<String> viewing_at = viewDetailService.viewing_at(viewing_at_map);
+        model.addAttribute("viewing_at",viewing_at);
 
 
+        
         //-----------------------------------------------------------------------
 
 //        //페이지핸들러
@@ -144,7 +157,7 @@ public class ViewController {
 //    회차정보받기(ex.24년 2월 1일 >>> 1회 12시 00분)
     @PostMapping("/viewdetail")
     @ResponseBody
-    public List<ShowingDto> viewDetail2(
+    public List<ShowingDto> GetShowingInfo(
             @RequestParam String dateText,
             @RequestParam String play_id
     )
@@ -165,7 +178,7 @@ public class ViewController {
 //    잔여석정보(ex.잔여 5석)
     @PostMapping("/viewdetail/remainSeat")
     @ResponseBody
-    public int viewDetail4(@RequestBody String remainSeat)
+    public int RemainSeat(@RequestBody String remainSeat)
             throws Exception {
         //디코딩
         String decodedSeatInfo = URLDecoder.decode(remainSeat, "UTF-8");
@@ -179,8 +192,63 @@ public class ViewController {
         return msg;
     }
 
-    @GetMapping("/review_insert")
-    public Object review_insert() throws Exception {
-        return "viewdetail/review_insert";
+//    후기작성
+    @PostMapping("/review_insert")
+    public String review_insert(HttpServletRequest request,
+                                HttpServletResponse response,
+                                @RequestParam(required = false) String play_id,
+                                @RequestParam(required = false) String user_id,
+                                @RequestParam(required = false) String star,
+                                @RequestParam(required = false) String viewing_at,
+                                @RequestParam(required = false) String review_content,
+                                @RequestParam(required = false) Integer review_num
+                                ) throws Exception {
+        // 이전 페이지의 URL을 받아오기
+        String referer = request.getHeader("referer");
+
+//        System.out.println("user_id===================>"+user_id);
+//        System.out.println("play_id===================>"+play_id);
+        if(user_id==null || user_id.isEmpty()) {
+            return "redirect:/login";
+        } else {
+            // ReviewDto 객체 생성
+            ReviewDto reviewDto = new ReviewDto();
+            reviewDto.setReview_star_rating(Integer.parseInt(star)); // 별점은 정수로 변환
+            reviewDto.setReview_viewing_at(viewing_at);
+            reviewDto.setReview_content(review_content);
+            reviewDto.setCreated_id(user_id);
+            reviewDto.setPlay_id(play_id);
+            reviewDto.setUser_id(user_id);
+            reviewDto.setUpdated_id(user_id);
+            reviewDto.setReview_num(review_num);
+
+//            System.out.println("review_num=============>"+review_num);
+
+            // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
+            viewDetailService.review_create(reviewDto);
+
+            // 후기작성란으로 리다이렉트
+            return "redirect:" + referer + "#review_place";
+        }
+    }
+
+    //리뷰삭제
+    @GetMapping("/review_delete") //@DeleteMapping 써볼것
+    public int ReviewDelete(@RequestParam Integer delete_review_num,
+                            @RequestParam String delete_user_id
+                            ) throws Exception {
+//        System.out.println("delete_user_id===============>"+delete_user_id);
+//        System.out.println("delete_review_num===============>"+delete_review_num);
+        // ajax 성공, 실패 결과 return
+        int result = 1;
+
+        try {
+            //리뷰작성시 들어갈 관람일시
+            viewDetailService.review_delete(delete_review_num,delete_user_id);
+        } catch (Exception e){
+            result = 0;
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -347,15 +347,15 @@ $(function () {
 });
 
 function displayDonut() {
-    config.data.datasets[0].data = [12.5 * (8 - 0), 12.5 * 0];
+    config.data.datasets[0].data = [2 * (50 - 5), 2 * 5];
     new Chart(document.getElementById('chart-area14063').getContext('2d'), config);
-    config.data.datasets[0].data = [12.5 * (8 - 2), 12.5 * 2];
+    config.data.datasets[0].data = [2 * (50 - 2), 2 * 2];
     new Chart(document.getElementById('chart-area14061').getContext('2d'), config);
-    config.data.datasets[0].data = [12.5 * (8 - 1), 12.5 * 1];
+    config.data.datasets[0].data = [2 * (50 - 1), 2 * 1];
     new Chart(document.getElementById('chart-area14058').getContext('2d'), config);
-    config.data.datasets[0].data = [12.5 * (8 - 3), 12.5 * 3];
+    config.data.datasets[0].data = [2 * (50 - 9), 2 * 9];
     new Chart(document.getElementById('chart-area14051').getContext('2d'), config);
-    config.data.datasets[0].data = [12.5 * (8 - 3), 12.5 * 3];
+    config.data.datasets[0].data = [2 * (50 - 23), 2 * 23];
     new Chart(document.getElementById('chart-area14040').getContext('2d'), config);
 }
 
@@ -384,117 +384,6 @@ function displayDonut() {
         }
     };
 
-// function displayDonut() {
-//     var config1 = {
-//         type: 'doughnut',
-//         data: {
-//             datasets: [{
-//                 data: [12.5 * (8 - 0), 12.5 * 0],
-//                 backgroundColor: ['#ed8844', '#ebebeb'],
-//                 borderWidth: [0, 0]
-//             }]
-//         },
-//         options: {
-//             animation: {
-//                 animateRotate: true,
-//                 duration: 2000
-//             },
-//             cutoutPercentage: 90,
-//             tooltips: {
-//                 enabled: false
-//             }
-//         }
-//     };
-//     new Chart(document.getElementById('chart-area14063').getContext('2d'), config1);
-//
-//     var config2 = {
-//         type: 'doughnut',
-//         data: {
-//             datasets: [{
-//                 data: [12.5 * (8 - 2), 12.5 * 2],
-//                 backgroundColor: ['#ed8844', '#ebebeb'],
-//                 borderWidth: [0, 0]
-//             }]
-//         },
-//         options: {
-//             animation: {
-//                 animateRotate: true,
-//                 duration: 2000
-//             },
-//             cutoutPercentage: 90,
-//             tooltips: {
-//                 enabled: false
-//             }
-//         }
-//     };
-//     new Chart(document.getElementById('chart-area14061').getContext('2d'), config2);
-//
-//     var config3 = {
-//         type: 'doughnut',
-//         data: {
-//             datasets: [{
-//                 data: [12.5 * (8 - 1), 12.5 * 1],
-//                 backgroundColor: ['#ed8844', '#ebebeb'],
-//                 borderWidth: [0, 0]
-//             }]
-//         },
-//         options: {
-//             animation: {
-//                 animateRotate: true,
-//                 duration: 2000
-//             },
-//             cutoutPercentage: 90,
-//             tooltips: {
-//                 enabled: false
-//             }
-//         }
-//     };
-//     new Chart(document.getElementById('chart-area14058').getContext('2d'), config3);
-//
-//     var config4 = {
-//         type: 'doughnut',
-//         data: {
-//             datasets: [{
-//                 data: [12.5 * (8 - 3), 12.5 * 3],
-//                 backgroundColor: ['#ed8844', '#ebebeb'],
-//                 borderWidth: [0, 0]
-//             }]
-//         },
-//         options: {
-//             animation: {
-//                 animateRotate: true,
-//                 duration: 2000
-//             },
-//             cutoutPercentage: 90,
-//             tooltips: {
-//                 enabled: false
-//             }
-//         }
-//     };
-//     new Chart(document.getElementById('chart-area14051').getContext('2d'), config4);
-//
-//     var config5 = {
-//         type: 'doughnut',
-//         data: {
-//             datasets: [{
-//                 data: [12.5 * (8 - 3), 12.5 * 3],
-//                 backgroundColor: ['#ed8844', '#ebebeb'],
-//                 borderWidth: [0, 0]
-//             }]
-//         },
-//         options: {
-//             animation: {
-//                 animateRotate: true,
-//                 duration: 2000
-//             },
-//             cutoutPercentage: 90,
-//             tooltips: {
-//                 enabled: false
-//             }
-//         }
-//     };
-//     new Chart(document.getElementById('chart-area14040').getContext('2d'), config5);
-// }
 
 
     var num = 0;

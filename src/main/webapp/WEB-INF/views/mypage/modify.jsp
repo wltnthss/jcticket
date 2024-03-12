@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/signup/signup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signup/signup.css">
 </head>
 <body>
 <div class="page">
     <section class="section">
-        <a href="/" class="mainLogoWrap">
+        <a href="${pageContext.request.contextPath}/" class="mainLogoWrap">
             <img src="/resources/img/components/로고1.png" class="logoImg">
         </a>
     </section>
@@ -195,6 +195,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/mypage/modify.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/mypage/modify.js"></script>
 </body>
 </html>

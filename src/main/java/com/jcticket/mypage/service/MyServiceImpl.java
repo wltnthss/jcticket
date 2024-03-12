@@ -2,7 +2,7 @@ package com.jcticket.mypage.service;
 
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
-import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +46,9 @@ public class MyServiceImpl implements mypageService {
         return mypageDAO.view_count(map);
     }
 
+
     @Override
-    public Integer coupon_insert(UserCouponDto userCouponDto) throws Exception {
+    public Integer coupon_insert(MyUserCouponDto userCouponDto) throws Exception {
         return mypageDAO.coupon_insert(userCouponDto);
     }
 
@@ -62,7 +63,7 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
-    public List<UserCouponDto> coupon_list(Map map) throws Exception {
+    public List<MyUserCouponDto> coupon_list(Map map) throws Exception {
         return mypageDAO.coupon_list(map);
     }
 
@@ -93,6 +94,16 @@ public class MyServiceImpl implements mypageService {
     @Override
     public Integer update_coupon(CouponDto couponDto) throws Exception {
         return mypageDAO.update_coupon(couponDto);
+    }
+
+    @Override
+    public Integer withdraw(UserDto userDto) throws Exception {
+        return mypageDAO.withdraw(userDto);
+    }
+
+    @Override
+    public Integer ticket_cancel(String ticket_id) throws Exception {
+        return mypageDAO.ticket_cancel(ticket_id);
     }
 
     @Override

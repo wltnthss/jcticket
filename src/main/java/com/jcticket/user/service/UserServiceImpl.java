@@ -115,7 +115,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception {
-        return userDao.selectImg(map);
+    public List<Map<String, Object>> selectImg() throws Exception {
+        return userDao.selectImg();
     }
 }

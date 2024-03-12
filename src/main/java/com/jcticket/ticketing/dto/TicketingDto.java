@@ -33,6 +33,24 @@ public class TicketingDto {
     private int play_price; //가격
     private String stage_name; //
     private String choice_show_seat;
+    private String selected_seats;
+
+    public String getSelected_seats() {
+        return selected_seats;
+    }
+
+    public void setSelected_seats(String selected_seats) {
+        this.selected_seats = selected_seats;
+    }
+
+    public String getPlay_major_cat() {
+        return play_major_cat;
+    }
+
+    public void setPlay_major_cat(String play_major_cat) {
+        this.play_major_cat = play_major_cat;
+    }
+
     private int ticketing_price;
     private String user_name;
     private String user_id;
@@ -42,7 +60,7 @@ public class TicketingDto {
     private String created_id;
     private Timestamp updated_at;
     private String updated_id;
-    private String play_middle_cat;
+    private String play_major_cat;
 
 
     public String getTicketing_id() {
@@ -197,12 +215,12 @@ public class TicketingDto {
         this.updated_id = updated_id;
     }
 
-    public String getPlay_middle_cat() {
-        return play_middle_cat;
+    public String getPlay_play_major_cat() {
+        return play_major_cat;
     }
 
-    public void setPlay_middle_cat(String play_middle_cat) {
-        this.play_middle_cat = play_middle_cat;
+    public void setPlay_play_major_cat(String play_middle_cat) {
+        this.play_major_cat = play_middle_cat;
     }
 
     public TicketingDto(String ticketing_id, Timestamp ticketing_at, int ticketing_cnt, String ticketing_status,

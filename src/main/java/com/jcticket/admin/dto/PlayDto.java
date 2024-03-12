@@ -40,6 +40,7 @@ public class PlayDto {
     private String play_name;
     private MultipartFile play_poster;  // 공연 표지 이미지 파일 controller 담기 위함
     private MultipartFile play_info;    // 공연 정보 이미지 파일 controller 담기 위함
+    private MultipartFile play_slide;    // 메인 슬라이드 이미지 파일 controller 담기 위함
     private String play_file_yn;           // 공연 파일 첨부 여부 판별 위함
     private String play_major_cat;
     private String play_middle_cat;

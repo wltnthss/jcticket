@@ -54,8 +54,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<Map<String, Object>> selectImg(Map<String, Object> map) throws Exception {
-        return session.selectList(namespace+"selectImg", map);
+    public List<Map<String, Object>> selectImg() throws Exception {
+        return session.selectList(namespace+"selectImg");
     }
 
     @Override

@@ -395,12 +395,18 @@ public class AdminServiceImpl implements AdminService {
             // 1.
             MultipartFile playPoster = playDto.getPlay_poster();
             MultipartFile playInfo = playDto.getPlay_info();
+            MultipartFile playSlide = playDto.getPlay_slide();
+            System.out.println("playSlide = " + playSlide);
             // 2.
             String posterOriginalFileName = playPoster.getOriginalFilename();
             String infoOriginalFileName = playInfo.getOriginalFilename();
+            String slideOriginalFileName = playSlide.getOriginalFilename();
+            System.out.println("slideOriginalFileName = " + slideOriginalFileName);
             // 3.
             String posterStoredFileName = System.currentTimeMillis() + "-" + posterOriginalFileName;
             String infoStoredFileName = System.currentTimeMillis() + "-" + infoOriginalFileName;
+            String slideStoredFileName = System.currentTimeMillis() + "-" + slideOriginalFileName;
+            System.out.println("slideStoredFileName = " + slideStoredFileName);
             // 4.
             PlayImgDto playImgDto = new PlayImgDto();
             playImgDto.setPlay_id(idCode);
@@ -408,12 +414,18 @@ public class AdminServiceImpl implements AdminService {
             playImgDto.setPlay_poster_stored_file_name(posterStoredFileName);
             playImgDto.setPlay_info_original_file_name(infoOriginalFileName);
             playImgDto.setPlay_info_stored_file_name(infoStoredFileName);
+            playImgDto.setPlay_slide_original_file_name(slideOriginalFileName);
+            playImgDto.setPlay_slide_stored_file_name(slideStoredFileName);
             // 5.
             String savePosterPath = FILE_PATH + posterStoredFileName;
             String saveInfoPath = FILE_PATH + infoStoredFileName;
+            String saveSlidePath = FILE_PATH + slideStoredFileName;
+            System.out.println("saveSlidePath = " + saveSlidePath);
+
             // 6.
             playPoster.transferTo(new File(savePosterPath));
             playInfo.transferTo(new File(saveInfoPath));
+            playSlide.transferTo(new File(saveSlidePath));
 
             adminDao.insertPlayImg(playImgDto);
         }

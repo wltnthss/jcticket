@@ -11,7 +11,7 @@ a {
 .container{
     display: grid;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 80px 24px 0 24px;
     border-top: solid rgba(0, 0, 0, 0.1);
     place-items: center;
@@ -499,6 +499,19 @@ li {
     line-height: 30px;
     padding: 3px;
     margin: 5px 5px;
+    color: black;
+}
+
+.pageCss.clicked {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0,0,0);
+    text-align: center;
+    line-height: 30px;
+    padding: 3px;
+    margin: 5px 5px;
+    color: black;
 }
 
 .comment_page div {
@@ -564,7 +577,7 @@ li {
 }
 
 .review_submit {
-    background-image: url("/resources/img/viewdetail/review_create.png");
+    /*background-image: url("/resources/img/viewdetail/review_create.png");*/
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border: none;
@@ -608,3 +621,10 @@ li {
     white-space:nowrap;
     color: #FF9100;
 }
+
+.delete_button {
+    position: relative;
+    bottom: 50px;
+    float: right;
+}
+

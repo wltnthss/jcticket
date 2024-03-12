@@ -39,7 +39,7 @@ public class ViewDetailReviewBoardTest {
         viewDetailDao.review_deleteAll();
         assertTrue(viewDetailDao.review_count("공연아이디1")==0);
     }
-    
+
 //    리뷰 생성 테스트
     @Test
     public void review_insert() throws Exception {
@@ -50,7 +50,22 @@ public class ViewDetailReviewBoardTest {
             System.out.println("cnt" +
                     " = " + cnt);
 
-            ReviewDto reviewDto = new ReviewDto(1+i,now,random_rating,"2024-02-28","꿀잼"+i,0,"test"+i,"공연아이디1",now,"test123",now,"test123", (double) random_rating /cnt,cnt);
+//            ReviewDto reviewDto = new ReviewDto(now,random_rating,"2024-02-28","꿀잼"+i,"test"+i,"공연아이디1",now,"test123",now,"test123", (double) random_rating /cnt,cnt);
+            ReviewDto reviewDto = new ReviewDto(
+                    i,
+                    now, // review_at
+                    random_rating, // review_star_rating
+                    "2024-02-28", // review_viewing_at
+                    "꿀잼" + i, // review_content
+                    "test123", // user_id (임시 값 사용)
+                    "공연아이디1", // play_id
+                    now, // created_at
+                    "test123", // created_id (임시 값 사용)
+                    now, // updated_at
+                    "test123", // updated_id (임시 값 사용)
+                    (double)random_rating / cnt, // review_avg
+                    cnt // review_count
+            );
             viewDetailDao.review_insert(reviewDto);
         }
     }
@@ -91,7 +106,9 @@ public class ViewDetailReviewBoardTest {
         int cnt = viewDetailDao.review_count("공연아이디1");
 
 //        1번 리뷰의 내용 변경
-        ReviewDto update_data = new ReviewDto(review_num,now,5,"2024-02-28","꿀잼입니다요",0,"test123","공연아이디1",now,"test123",now,"test123",(double) random_rating /cnt,cnt);
+        ReviewDto update_data = new ReviewDto(
+                review_num,
+                now,5,"2024-02-28","꿀잼입니다요","test123","공연아이디1",now,"test123",now,"test123",(double) random_rating /cnt,cnt);
 
         System.out.println("update_data =>" + update_data);
     }

@@ -3,13 +3,13 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/signup/signup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/signup/signup.css">
 </head>
 <body>
 <div class="page">
     <section class="section">
-        <a href="/" class="mainLogoWrap">
-            <img src="/resources/img/components/로고1.png" class="logoImg">
+        <a href="${pageContext.request.contextPath}/index" class="mainLogoWrap">
+            <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" class="logoImg">
         </a>
     </section>
     <div class="signup-content">
@@ -21,18 +21,18 @@
             </div>
             <ul class="signup-social-icon">
                 <li class="ssc-icon">
-                    <a href="네이버 회원가입" title="네이버로 가입하기" class="ssc">
-                        <img src="/resources/img/signup/네이버_회원가입.png" class="sscImg">
+                    <a href="#" title="네이버로 가입하기" class="ssc">
+                        <img src="${pageContext.request.contextPath}/resources/img/signup/네이버_회원가입.png" class="sscImg">
                     </a>
                 </li>
                 <li class="ssc-icon">
-                    <a href="카카오 회원가입" title="카카오로 가입하기" class="ssc">
-                        <img src="/resources/img/signup/카카오_회원가입.png" class="sscImg">
+                    <a href="#" title="카카오로 가입하기" class="ssc">
+                        <img src="${pageContext.request.contextPath}/resources/img/signup/카카오_회원가입.png" class="sscImg">
                     </a>
                 </li>
                 <li class="ssc-icon">
-                    <a href="구글 회원가입" title="구글로 가입하기" class="ssc">
-                        <img src="/resources/img/signup/구글_회원가입.png" class="sscImg">
+                    <a href="#" title="구글로 가입하기" class="ssc">
+                        <img src="${pageContext.request.contextPath}/resources/img/signup/구글_회원가입.png" class="sscImg">
                     </a>
                 </li>
             </ul>
@@ -40,7 +40,7 @@
         <!-- 소셜 회원가입 부분 끝 -->
 
         <%-- 회원가입 폼 시작 --%>
-        <form action="<c:url value="/signup/signup"/>" id="signupForm" class="signupForm" method="POST">
+        <form action="${pageContext.request.contextPath}/signup/signup" id="signupForm" class="signupForm" method="POST">
             <!-- 이메일 부분 시작 -->
 
             <div class="emailWrap">
@@ -333,13 +333,16 @@
 
         <p class="signupChkP">
             이미 아이디가 있으신가요?
-            <a href="/login" class="goLoginFromSignUp">로그인</a>
+            <a href="${pageContext.request.contextPath}/login" class="goLoginFromSignUp">로그인</a>
         </p>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/signup/signup.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/signup/signup.js"></script>
 <script>
     let id = "${userDto.user_id}"
 </script>

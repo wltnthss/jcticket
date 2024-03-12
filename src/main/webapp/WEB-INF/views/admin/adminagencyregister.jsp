@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/admin/admin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/admin.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +24,7 @@
                 <h1>기획사 등록하기</h1>
                 <h2>개인정보 입력</h2>
             </div>
-            <form action="/admin/agencyregister" method="post">
+            <form action="${pageContext.request.contextPath}/admin/agencyregister" method="post">
                 <div class="tbl_frm01">
                     <table>
                         <colgroup>
@@ -93,7 +93,7 @@
     <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script src="/resources/js/admin/admin.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 
 <script>
     let msg = "${msg}";

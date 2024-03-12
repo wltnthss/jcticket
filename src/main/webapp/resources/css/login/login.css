@@ -54,6 +54,8 @@ body{
 
 .loginpage{
     text-align: center;
+    width: 958px;
+    margin: 0 auto;
 }
 
 .loginpage img{

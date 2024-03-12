@@ -16,7 +16,7 @@ git <%--
 <html lang="en">
 <head>
 <%--    페이지 아이콘--%>
-    <link rel="icon" href="/resources/img/viewdetail/god.ico">
+<%--    <link rel="icon" href="/resources/img/viewdetail/god.ico">--%>
 
 <%--    별점 아이콘--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
@@ -30,10 +30,10 @@ git <%--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <%--    datepicker css--%>
-    <link rel="stylesheet" href="/resources/css/viewdetail/jquery-ui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/viewdetail/jquery-ui.css">
 
 <%--    viewdetail 페이지 css--%>
-    <link rel="stylesheet" href="/resources/css/viewdetail/viewdetail.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/viewdetail/viewdetail.css">
 
 </head>
 <body>
@@ -42,7 +42,7 @@ git <%--
     <div class="container">
         <%-- content area    --%>
         <div class="category">
-            <a href="/${major_cat}" style="color:black;">
+            <a href="${pageContext.request.contextPath}/${major_cat}" style="color:black;">
                 <span class="major-cat">
                     <c:if test="${not empty viewDetail}">
                         ${viewDetail[0].play_major_cat}
@@ -79,7 +79,7 @@ git <%--
                             <c:if test="${not empty viewDetail}">
                                 <span id="for_ticketing_stage_name">${viewDetail[0].stage_name}</span>
                             </c:if>
-                            <img src="/resources/img/viewdetail/location.png" class="location_img">
+                            <img src="${pageContext.request.contextPath}/resources/img/viewdetail/location.png" class="location_img">
                         </a>
 
                         <a href="javascript:void(0);" id="url_image">
@@ -92,10 +92,11 @@ git <%--
         <div class="three">
             <div class="three-one">
                 <div class="three-one-left">
-                    <div class="play-img">
-                        <img src='/resources/img/viewdetail/testposter.jpg'/>
-<%--                        <a href="#" class="rn-product-movie" style="display:none;"><img src="http://tkfile.yes24.com/imgNew/common/kv-movie.png" alt="" /></a>--%>
-                    </div>
+                    <c:if test="${not empty viewDetail}">
+                        <div class="play-img">
+                            <img src="<c:url value='/index/upload/${viewDetail[0].play_poster_stored_file_name}'/>" alt="">
+                        </div>
+                    </c:if>
     <%--                review-mini안에 별점, 평균별점, 리뷰 수 등등 들어감--%>
                     <div class="star-review">
                         <div class="review-star">
@@ -106,7 +107,7 @@ git <%--
                                 <i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i><i class="rating__star fas fa-star"></i>
                             </div>
                         </div>
-                        <span class="review">
+                        <span id="review_mini" class="review" style="cursor: pointer">
                             <em>${review[0].review_avg}</em>
                              *${review[0].review_count}
                             <span>Reviews</span>
@@ -213,26 +214,15 @@ git <%--
 
         <div id="info" class="info_box">
             <div class="seven_one">
-                <p class="seven_text">유의사항</p>
-                <div class="seven_con">
-                    <p>이미지 들어갈 자리</p>
-<%--                    이미지 사이 공백--%>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                </div>
+<%--                <p class="seven_text">유의사항</p>--%>
             </div>
 
             <div class="seven_two">
                 <p class="seven_text">공연정보</p>
                 <div class="seven_con">
-                    <p>이미지 들어갈 자리</p>
-                    <%--                    이미지 사이 공백--%>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
-                    <p><br></p>
-                    <p>이미지 들어갈 자리</p>
+                    <c:if test="${not empty viewDetail}">
+                        <img src="<c:url value='/index/upload/${viewDetail[0].play_info_stored_file_name}'/>" alt="">
+                    </c:if>
                 </div>
             </div>
 
@@ -250,15 +240,23 @@ git <%--
                             <tbody>
                                 <tr>
                                     <th scope="row" class="seven_table">주최/기획</th>
-                                    <td>제이씨티켓(주)_나는 오늘도 혼자서 논다</td>
+                                    <td>제이씨티켓(주)_<br>
+                                        <c:if test="${not empty viewDetail}">
+                                        ${viewDetail[0].play_name}
+                                    </c:if></td>
+
                                     <th scope="row" class="seven_table">소비자상담</th>
                                     <td>제이씨티켓(주) 7777-7777</td>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="seven_table">공연시간</th>
-                                    <td>60분</td>
+                                    <c:if test="${not empty viewDetail}">
+                                        <td>&nbsp;${viewDetail[0].play_run_time}분</td>
+                                    </c:if>
                                     <th scope="row" class="seven_table">공연장소</th>
-                                    <td>쉼표도서관 2층</td>
+                                    <c:if test="${not empty viewDetail}">
+                                        <td>${viewDetail[0].stage_name}</td>
+                                    </c:if>
                                 </tr>
                                 <tr>
                                     <th scope="row" class="seven_table">취소/환불방법</th>
@@ -317,12 +315,6 @@ git <%--
                         </table>
                     </div>
 
-<%--                    <p>이미지 들어갈 자리</p>--%>
-<%--                    &lt;%&ndash;                    이미지 사이 공백&ndash;%&gt;--%>
-<%--                    <p><br></p>--%>
-<%--                    <p>이미지 들어갈 자리</p>--%>
-<%--                    <p><br></p>--%>
-<%--                    <p>이미지 들어갈 자리</p>--%>
                 </div>
             </div>
 
@@ -331,10 +323,12 @@ git <%--
                     <c:if test="${not empty viewDetail}">
                         <p class="map_name">${viewDetail[0].stage_name}</p>
                     </c:if>
-                    <p class="map_location">경기도 시흥시 은행로 173번길 14</p>
+                    <c:if test="${not empty viewDetail}">
+                        <p class="map_location">${viewDetail[0].stage_address}</p>
+                    </c:if>
                 </div>
                 <div class="map_icon_box">
-                    <img src="/resources/img/viewdetail/path_icon.png"/><br>찾아가는길
+                    <img src="${pageContext.request.contextPath}/resources/img/viewdetail/path_icon.png"/><br>찾아가는길
                 </div>
 
 <%--                카카오 지도 api--%>
@@ -347,7 +341,7 @@ git <%--
                         <span id="review">관람후기</span>
                     </div>
                     <div class="comment_warning">
-                        <img src="/resources/img/viewdetail/comment_icon.png/">
+                        <img src="${pageContext.request.contextPath}/resources/img/viewdetail/comment_icon.png/">
                         <div class="span_box">
                             <span class="text_red">매매, 욕설 등 제이씨티켓 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</span><br>
                             <span>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</span>
@@ -363,11 +357,11 @@ git <%--
                     <div class="comment_page">
 <%--                        <a class="page_first"><img src="/resources/img/viewdetail/backback.png/"/></a>--%>
 <%--                        <a class="page_prev"><img src="/resources/img/viewdetail/back.png/"/></a>--%>
-                        <a class="prev pageCss" href="/viewdetail?this_play_id=${play_id}&page=${ph.startPage-1}&pageSize=${ph.pageSize}">&lt;</a>
+                        <a class="prev pageCss" href="${pageContext.request.contextPath}/viewdetail?this_play_id=${play_id}&page=${ph.startPage-1}&pageSize=${ph.pageSize}">&lt;</a>
                         <div class="pagination">
                             <!-- 페이지 번호 및 Ajax 호출을 위한 부분 -->
                             <c:forEach var="i" begin="${ph.startPage}" end="${ph.endPage}">
-                                <a class="pageCss" href="/viewdetail?this_play_id=${play_id}&page=${i}&pageSize=${ph.pageSize}">${i}</a>
+                                <a class="num pageCss" href="${pageContext.request.contextPath}/viewdetail?this_play_id=${play_id}&page=${i}&pageSize=${ph.pageSize}">${i}</a>
                             </c:forEach>
                         </div>
                         <a class="next pageCss" href="javascript:void(0);">&gt;</a>
@@ -375,45 +369,30 @@ git <%--
 <%--                        <a class="page_last"><img src="/resources/img/viewdetail/back.png/"/></a>--%>
                     </div>
 
-                    <p style="font-size: 22px; margin-left: 30px">관람후기등록</p>
-                    <form method="post">
-                        <div class="review_form">
-                            <span>유저아이디(히든), 작성일자(히든), 넣어야함</span>
-                            별점 : <span class="review_star">
-                                <i id="1" class="rating__star far fa-star"></i><i id="2" class="rating__star far fa-star"></i><i id="3" class="rating__star far fa-star"></i><i id="4" class="rating__star far fa-star"></i><i id="5" class="rating__star far fa-star"></i>
-                            </span>
-                            <span>
-                                관람일자 : <select>
-                                    <option>관람일1</option>
-                                    <option>관람일2</option>
-                                </select>
-                            </span>
-                        </div>
-                        <c:forEach var="item" items="${viewing_at}">
-                            <div>${item}</div>
-                        </c:forEach>
-<%--                        <%--%>
-<%--                            // 세션에서 로그인 여부 확인--%>
-<%--                            if (session.getAttribute("user_id") != null) {--%>
-<%--                                // 로그인되어 있는 경우에만 쿼리 실행--%>
-<%--                                List<String> viewingAtList = (List<String>) request.getAttribute("viewing_at");--%>
-<%--                        %>--%>
-<%--                        <!-- JSTL을 사용하여 쿼리 결과를 출력 -->--%>
-<%--                        <c:forEach var="viewing_at" items="${viewingAtList}">--%>
-<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
-<%--                        </c:forEach>--%>
+                    <p id="review_place" style="font-size: 22px; margin-left: 30px">관람후기등록</p>
+                        <form id="insert_form" action="${pageContext.request.contextPath}/review_insert" method="post">
+                            <div class="review_form">
+                                <input type="hidden" name="play_id" value="${play_id}"/>
+                                <input type="hidden" id="form_user_id" name="user_id" value="${user_id}"/>
+                                별점 : <span class="review_star">
+                                    <i id="1" class="rating__star far fa-star"></i><i id="2" class="rating__star far fa-star"></i><i id="3" class="rating__star far fa-star"></i><i id="4" class="rating__star far fa-star"></i><i id="5" class="rating__star far fa-star"></i>
+                                </span>
+                                <input type="hidden" id="star_input" name="star" value=""/>
+                                <span>
+                                    관람일자 :
+                                    <select name="viewing_at">
+                                        <c:forEach var="item" items="${viewing_at}">
+                                            <option>${item}</option>
+                                        </c:forEach>
+                                    </select>
+                                </span>
+                            </div>
 
-<%--                        <c:forEach var="viewing_at" items="${viewing_at}">--%>
-<%--                            <dd>${viewing_at.review_viewing_at}</dd>--%>
-<%--                        </c:forEach>--%>
-<%--                        <c:if test="${not empty review}">--%>
-<%--                            <input type="hidden" class="user_id" value="${review.user_id}"/>--%>
-<%--                        </c:if>--%>
-                        <div>
-                            <textarea class="review_box" name="review" placeholder="관람후기를 작성해주세요."></textarea>
-                        </div>
-                        <input type="submit" value="" class="review_submit"/>
-                    </form>
+                            <div>
+                                <textarea class="review_box" name="review_content" placeholder="관람후기를 작성해주세요."></textarea>
+                            </div>
+                            <input type="submit" value="" class="review_submit" style="background-image: url('${pageContext.request.contextPath}/resources/img/viewdetail/review_create.png');"/>
+                        </form>
                 </div>
             </div>
 
@@ -436,15 +415,18 @@ git <%--
     </div>
     <jsp:include page="../common/footer.jsp"></jsp:include>
 
+    <script>
+        sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+    </script>
     <%--    datepicker 제이쿼리 달력--%>
-    <script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/viewdetail/jquery-ui.min.js"></script>
 
 
 <%--    카카오 지도 api 스크립트--%>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae"></script>
+    <script type="text/javascript" src="/${pageContext.request.contextPath}/dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae&libraries=services"></script>
 
     <%--    js파일--%>
-    <script src="/resources/js/viewdetail/viewdetail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/viewdetail/viewdetail.js"></script>
 
 </body>
 </html>
