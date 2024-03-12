@@ -224,20 +224,15 @@
         var reservation_notice = document.getElementById('reservation_notice');
         var go_notice = document.getElementById('seven_text_one');
 
-
-
         stagename.onclick = function () {
             movemap.scrollIntoView();
         }
-
         detail_info.onclick = function () {
             info_box.scrollIntoView()
         }
-
         review.onclick = function () {
             go_review.scrollIntoView()
         }
-
         review_mini.onclick = function () {
             go_review.scrollIntoView()
         }
@@ -562,9 +557,16 @@
             // 클릭된 버튼의 data-reviewNum 속성값을 가져옴
             var review_num = this.dataset.reviewNum;
 
+            var review_user_id = document.querySelector('.board_1').innerHTML;
+
             // 로그인상태가아닐시
             if (form_user_id === null || form_user_id.length === 0) {
                 alert("로그인이 필요합니다.");
+                return location.href = sessionStorage.getItem("contextpath")+"/login";
+            }
+
+            if(review_user_id !== form_user_id) {
+                alert("본인이 작성한 후기만 삭제가 가능합니다");
                 return;
             }
 
@@ -612,14 +614,3 @@
         yearSuffix: '.'
     });
     // datepicker 제이쿼리 달력 끝
-
-
-    // 지도 다시 만들어야함
-    //카카오맵 스크립트
-    new daum.roughmap.Lander({
-        "timestamp" : "1707022341823",
-        "key" : "2hy9x",
-        "mapWidth" : "1200",
-        "mapHeight" : "700"
-    }).render();
-
