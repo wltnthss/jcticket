@@ -58,6 +58,7 @@ public class PaymentServiceImpl implements PaymentService{
                 .ticketing_id(requestDto.getMerchant_uid())
                 .user_id(requestDto.getBuyer_name())
                 .build();
+        System.out.println("==========>"+dto.toString());
         return paymentDao.insertPayment(dto);
     }
 
