@@ -48,7 +48,7 @@ git <%--
                         ${viewDetail[0].play_major_cat}
                     </c:if>
                 </span>
-                >
+                <c:if test="${not empty viewDetail[0].play_middle_cat}">></c:if>
                 <span class="middle-cat">
                     <c:if test="${not empty viewDetail}">
                         ${viewDetail[0].play_middle_cat}
@@ -68,11 +68,12 @@ git <%--
                 <div class="two-one">
         <%--            <p>--%>
                         <span class="play-period">
-<%--                            대괄호 제거하고 상영날짜 출력--%>
-                            <c:forEach var="date" items="${viewDetailTime}" varStatus="loop">
-                                <a class="dateShow"><c:out value="${date.key}" /></a>
-                                <c:if test="${!loop.last}">,</c:if>
-                            </c:forEach>
+<%--                            상영기간 출력--%>
+                            <c:if test="${not empty viewDetailTime}">
+                                ${viewDetailTime.get(0).showing_start_at}
+                                <c:if test="${viewDetailTime.get(0).showing_start_at != viewDetailTime.get(0).showing_end_at}">~</c:if>
+                                <c:if test="${viewDetailTime.get(0).showing_start_at != viewDetailTime.get(0).showing_end_at}">${viewDetailTime.get(0).showing_end_at}</c:if>
+                            </c:if>
                         </span>
 
                         <a href="javascript:void(0);" id="stage_name">
@@ -145,9 +146,9 @@ git <%--
                     <div class="playtime-info">
                         <dl>
                             <dt>공연시간 안내</dt>
-                            <c:forEach var="info" items="${viewDetailTime}">
-                                <dd>${info.key}&nbsp;${info.value}</dd>
-                            </c:forEach>
+                            <c:if test="${not empty viewDetailTime}">
+                                ${viewDetailTime.get(0).play_time_info}
+                            </c:if>
                             <dt>배송정보</dt>
                             <dd>현장 수령만 가능</dd>
                         </dl>
