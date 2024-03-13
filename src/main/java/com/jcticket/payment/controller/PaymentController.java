@@ -37,7 +37,7 @@ public class PaymentController {
     }
 
     // 토큰최초 발급 && 사전등록진행하기
-    @GetMapping("/payments")
+    @GetMapping("/payments/{ticketingId}")
     public ResponseEntity<?> preparePayment(@PathVariable String ticketingId) throws Exception{
         System.out.println("==== GET /payments/{ticketingId} 진입 ====");
         System.out.println(ticketingId);
@@ -67,7 +67,7 @@ public class PaymentController {
 
     // 결제 성공시 흐름
     // 1. 업
-    @PostMapping("/payments/success/{showingSeq}")
+    @PostMapping("/payments/success/")
     public ResponseEntity<?> createPayment(
             @RequestParam("showingSeq") int showingSeq,
             @RequestBody PaymentRequestDto requestDto) throws Exception{
