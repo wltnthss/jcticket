@@ -95,7 +95,8 @@ $(document).ready(function() {
 
                     // 클릭했을때 div태그 배경색 바꾸기 & a태그 글자색 바꾸기
                     $('.aTag').click(function() {
-                        let $clickedTag = $(this);$('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
+                        let $clickedTag = $(this);
+                        $('.aTag').not($clickedTag).removeClass('clicked').css('color','').closest('.box').css('background-color', 'white');
                         $clickedTag.toggleClass('clicked').css('color','white').closest('.box').css('background-color', '#673AB7');
                         //$('.box').css('background-color', 'blue');
                     });
@@ -155,13 +156,15 @@ $(document).ready(function(){
         // 선택한 좌석 관련 정보들 초기화
         selectedPrice = 0;
         selectedSeatList.length = 0;
-
+        const seq = $(".aTag.clicked").attr("id");
         // ajax에 json 으로 보낼 데이터 생성
         const data1 = {
-            'showing_seq': $(".aTag.clicked").attr("id"),
+            'showing_seq': seq,
         }
         console.log("seq => "+data1.showing_seq);
-        $("#showing-seq").val(data1.showing_seq);
+        $("#showing-seq").val(seq);
+        console.log($("#showing-seq").val());
+
 
         // ajax 요청을 컨트롤러로 보낸다.
         $.ajax({
@@ -526,11 +529,11 @@ $(document).ready(function(){
             pg: "kakaopay",
             pay_method: "card",
             merchant_uid: ticketingId,
-            name: $("#play-name").val(),
+            name: "테스트 공연",
             amount: totalPrice,
             buyer_name: $("#user_id").val(),
             buyer_tel: $("#user-tel").val(),
-            sustom_data: $("#user-coupon-id").val(),
+            custom_data: $("#user-coupon-id").val(),
         }, function (res){
             console.log(res);
             if(res.success){

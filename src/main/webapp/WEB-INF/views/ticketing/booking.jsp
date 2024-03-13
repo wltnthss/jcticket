@@ -39,6 +39,9 @@
 %>
 <input id="user_id" value="<%=name%>" type="hidden">
 <input id="date-text" type="hidden" value="">
+<input type="hidden" id="ticketing-id" value="">
+<input type="hidden" id="showing-seq" value="">
+<input type="hidden" id="user-coupon-id" value="">
 <!-- Horizontal Steppers -->
 <div class="container-fluid">
     <div class="row justify-content-center" >
@@ -169,9 +172,7 @@
                             </div> <br><br>
                             <input type="hidden" id="user-tel" value="">
                             <button id="payment-btn">결제하기</button>
-                            <input type="hidden" id="ticketing-id" value="">
-                            <input type="hidden" id="showing-seq" value="">
-                            <input type="hidden" id="user-coupon-id" value="">
+
 
 <%--                            <script src="/resources/js/payment/payment.js"></script>--%>
                         </div>
