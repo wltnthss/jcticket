@@ -18,7 +18,7 @@
          user_coupon_id,
          user_id,
          created_at, created_id, updated_at, updated_id)
-        VALUES(#{payment_Id},
+        VALUES(#{payment_id},
                #{payment_approval_id},
                #{payment_amount},
                #{payment_at},
