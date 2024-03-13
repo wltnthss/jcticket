@@ -158,4 +158,9 @@ public class ViewDetailDaoImpl implements ViewDetailDao{
     public List<String> bring_review_viewing_at(Map map) throws Exception {
         return session.selectList(namespace + "bring_review_viewing_at", map);
     }
+
+    @Override
+    public List<String> view_time_info(String play_id) throws Exception {
+        return session.selectList(namespace + "view_time_info", play_id);
+    }
 }

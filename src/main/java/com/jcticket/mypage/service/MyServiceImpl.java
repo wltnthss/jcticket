@@ -1,8 +1,9 @@
 package com.jcticket.mypage.service;
 
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
-import com.jcticket.mypage.dto.MyUserCouponDto;
+//import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +48,11 @@ public class MyServiceImpl implements mypageService {
         return mypageDAO.view_count(map);
     }
 
-
     @Override
-    public Integer coupon_insert(MyUserCouponDto userCouponDto) throws Exception {
+    public Integer coupon_insert(UserCouponDto userCouponDto) throws Exception {
         return mypageDAO.coupon_insert(userCouponDto);
     }
+
 
     @Override
     public CouponDto coupon_select(String coupon_id) throws Exception {
@@ -64,7 +65,7 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
-    public List<MyUserCouponDto> coupon_list(Map map) throws Exception {
+    public List<UserCouponDto> coupon_list(Map map) throws Exception {
         return mypageDAO.coupon_list(map);
     }
 
@@ -77,6 +78,12 @@ public class MyServiceImpl implements mypageService {
     public List<TicketingDto> selectLimit(Map map) throws Exception {
         return mypageDAO.selectLimit(map);
     }
+
+    @Override
+    public List<TicketingDto> selectLimit_img(Map map) throws Exception {
+        return mypageDAO.selectLimit_img(map);
+    }
+
     @Override
     public List<TicketingDto> select_view(Map map) throws Exception {
         return mypageDAO.select_view(map);

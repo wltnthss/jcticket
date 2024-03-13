@@ -7,7 +7,7 @@
         // var availableDates = ["2024-02-28", "2024-02-29"];
         var availableDates = [];
         for(var i=0;i<dateShow.length;i++){
-            availableDates.push(dateShow[i].innerHTML);
+            availableDates.push(dateShow[i].value);
         }
 
         $("#datepicker").datepicker({
@@ -389,6 +389,13 @@
         }
 
         loadPage(1); // 페이지가 로드될 때 첫 번째 페이지 데이터 로드
+
+        // 후기 1페이지는 clicked인 상태
+        var click_default = document.querySelectorAll('.pagination a')
+        // console.log("click_default=======================>"+click_default[0].className)
+        click_default[0].classList.add('clicked');
+        // console.log("click_default=======================>"+click_default[0].className)
+
         // 페이지 번호 클릭 시 해당 페이지 데이터 로드 (관람후기)
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();

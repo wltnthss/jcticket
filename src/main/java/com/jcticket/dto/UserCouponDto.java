@@ -36,19 +36,7 @@ public class UserCouponDto {
     private Timestamp updated_at;           // 최종변경 일자
     private String updated_id;              // 최종변경 아이디
 
-//    public UserCouponDto(String user_coupon_id, String user_id, String coupon_id, Timestamp user_coupon_use_at, Timestamp user_coupon_issue_at, Timestamp user_coupon_expire_at, String user_coupon_use_yn, Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
-//        this.user_coupon_id = user_coupon_id;
-//        this.user_id = user_id;
-//        this.coupon_id = coupon_id;
-//        this.user_coupon_use_at = user_coupon_use_at;
-//        this.user_coupon_issue_at = user_coupon_issue_at;
-//        this.user_coupon_expire_at = user_coupon_expire_at;
-//        this.user_coupon_use_yn = user_coupon_use_yn;
-//        this.created_at = created_at;
-//        this.created_id = created_id;
-//        this.updated_at = updated_at;
-//        this.updated_id = updated_id;
-//    } 
-
-
+    private String coupon_name;
+    private Integer coupon_discount_amount;
+    private String coupon_use_condition;
 }

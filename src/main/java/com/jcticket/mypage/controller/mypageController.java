@@ -1,30 +1,27 @@
 package com.jcticket.mypage.controller;
 
+//import com.jcticket.admin.dto.CouponDto;
+
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.mypage.dto.MyUserCouponDto;
+import com.jcticket.dto.UserCouponDto;
+import com.jcticket.mypage.service.mypageService;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
-import org.apache.commons.io.IOUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import com.jcticket.mypage.service.mypageService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.System.in;
-import static java.lang.System.setOut;
+import java.util.UUID;
 
 
 /**
@@ -56,7 +53,9 @@ public class mypageController {
         map.put("selectType", "desc");
         map.put("user_id", sessionId);
         List<TicketingDto> list = mypageService.selectLimit(map);
+        List<TicketingDto> list2 = mypageService.selectLimit_img(map);
         model.addAttribute("ticketList", list);
+        model.addAttribute("ticketList2", list2);
         return "/mypage/mypage_main";
     }
 
@@ -147,9 +146,6 @@ public class mypageController {
         String sessionId = (String)session.getAttribute("sessionId");
 
         System.out.println("sessionId => " + sessionId);
-
-
-
 
 
         try {
@@ -283,7 +279,6 @@ public class mypageController {
     }
 
     @GetMapping("/mypagecupon")
-    @PostMapping("mypagecoupn")
     public String cupon(@RequestParam(required = false) String coupon_id,
                         @RequestParam(defaultValue = "1") Integer page,
                         @RequestParam(defaultValue = "5") Integer pageSize,
@@ -312,13 +307,15 @@ public class mypageController {
 
                 if (couponDto.getCoupon_id() != null && couponDto.getCoupon_status().equals("A")) {
 
-//                    UserCouponDto userCouponDto = new UserCouponDto(null, "", coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
-//                    mypageService.coupon_insert(userCouponDto);
-//                    mypageService.update_coupon(couponDto);
+                    UUID uuid = UUID.randomUUID();
+                    String couponCode = uuid.toString().replace("-", "").substring(0, 8);
 
-                    MyUserCouponDto userCouponDto = new MyUserCouponDto(coupon_id, sessionId, coupon_id, null, now, now, "N", now, "Ralo", now, "Ralo");
+                    UserCouponDto userCouponDto = new UserCouponDto(couponCode, sessionId, coupon_id, null, now, now, "N", now, "RALO", now, "RALO", "", 0, "");
                     mypageService.coupon_insert(userCouponDto);
                     mypageService.update_coupon(couponDto);
+
+
+
 
                 }
             }
@@ -333,7 +330,7 @@ public class mypageController {
             System.out.println("button => (after)" + button);
 
 
-            List<MyUserCouponDto> list = mypageService.coupon_list(map);
+            List<UserCouponDto> list = mypageService.coupon_list(map);
 
             int totalCount = mypageService.coupon_count(map);
 
