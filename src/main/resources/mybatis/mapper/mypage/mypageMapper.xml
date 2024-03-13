@@ -37,7 +37,7 @@
         FROM jcticket.ticketing t
                  INNER JOIN jcticket.user u ON t.user_id = u.user_id
                  LEFT JOIN jcticket.play_image pi ON t.play_name = SUBSTRING(pi.play_poster_original_file_name, 1, CHAR_LENGTH(pi.play_poster_original_file_name) - 4)
-        WHERE u.user_id = 'wjswotmd2'
+        WHERE u.user_id = #{user_id}
         ORDER BY t.ticketing_at DESC
             LIMIT 3;
     </select>
@@ -79,7 +79,7 @@
         AND u.user_id = #{user_id} <!-- 추가된 부분 -->
         <choose>
             <when test='option=="A"'>
-                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '클래식', '뮤지컬')
             </when>
             <when test='option=="M"'>
                 AND p.play_major_cat = '뮤지컬'
@@ -88,7 +88,7 @@
                 AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_major_cat = '전시'
+                AND p.play_major_cat = '클래식'
             </when>
             <when test='option=="G"'>
                 AND p.play_major_cat = '연극'
@@ -177,7 +177,7 @@
         AND u.user_id = #{user_id}
         <choose>
             <when test='option=="A"'>
-                AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
+                AND p.play_major_cat IN ('연극', '콘서트', '클래식', '뮤지컬')
             </when>
             <when test='option=="M"'>
                 AND p.play_major_cat = '뮤지컬'
@@ -186,7 +186,7 @@
                 AND p.play_major_cat = '콘서트'
             </when>
             <when test='option=="J"'>
-                AND p.play_major_cat = '전시'
+                AND p.play_major_cat = '클래식'
             </when>
             <when test='option=="G"'>
                 AND p.play_major_cat = '연극'
@@ -255,12 +255,28 @@
         </if>
     </select>
 
-    <insert id="coupon_insert" parameterType="MyUserCouponDto">
+    <insert id="coupon_insert" parameterType="UserCouponDto">
         INSERT INTO user_coupon
         (user_coupon_id, user_id, coupon_id, user_coupon_use_at, user_coupon_issue_at, user_coupon_expire_at, user_coupon_use_yn,
-         created_at, created_id, updated_at, updated_id)
-        VALUES (#{user_coupon_id}, #{user_id}, #{coupon_id}, null, NOW(), NOW() + INTERVAL + 1 WEEK, 'N', NOW(),
-                #{created_id}, NOW(), #{updated_id});
+        created_at, created_id, updated_at, updated_id)
+        SELECT
+        #{user_coupon_id},
+        #{user_id},
+        #{coupon_id},
+        null,
+        NOW(),
+        NOW() + INTERVAL 1 WEEK,
+        'N',
+        NOW(),
+        #{created_id},
+        NOW(),
+        #{updated_id}
+        FROM
+        coupon
+        WHERE
+        coupon_id = #{coupon_id}
+         <![CDATA[AND NOW() >= coupon_useable_start_at
+        AND NOW() <= coupon_useable_end_at;]]>
     </insert>
 
 
@@ -271,7 +287,7 @@
     </update>
 
 
-    <select id="coupon_list" parameterType="map" resultType="MyUserCouponDto">
+    <select id="coupon_list" parameterType="map" resultType="UserCouponDto">
         SELECT
         uc.coupon_id,
         uc.user_coupon_issue_at,

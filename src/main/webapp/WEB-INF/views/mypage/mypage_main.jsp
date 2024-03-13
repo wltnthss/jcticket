@@ -151,12 +151,17 @@
 
         #showing_image {
             margin: auto;
-            width: 830px;
+            width: 850px;
             height: 300px;
             border: 5px solid #FAFAF0;
         }
 
         #showing_image_child {
+            margin: 0px 5px;
+            float: left;
+        }
+
+        #showing_image_child > img {
             width: 270px;
             height: 300px;
             border: 1px solid;
@@ -265,11 +270,9 @@
                     <br>
 
                     <div id="showing_image">
-                        <c:forEach items="${ticketList}" var="TicketingDto">
+                        <c:forEach items="${ticketList2}" var="TicketingDto">
                         <div id="showing_image_child">
-                            <ul id="show_img">
-                                    <li><img src="<c:url value='/index/upload/${TicketingDto.play_poster_stored_file_name}'/>"></li>
-                            </ul>
+                            <img src="<c:url value='/index/upload/${TicketingDto.play_poster_stored_file_name}'/>">
                         </div>
                         </c:forEach>
                     </div>

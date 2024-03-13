@@ -1,23 +1,18 @@
 package com.jcticket.ticketing.dao;
 
-import com.jcticket.admin.dao.AdminDao;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
 import com.jcticket.dto.TicketingDto2;
-import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.payment.dao.PaymentDao;
-import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
-import org.apache.ibatis.jdbc.Null;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;

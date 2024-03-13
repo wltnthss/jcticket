@@ -35,6 +35,7 @@ public class UserCouponDto {
     private String created_id;              // 최초등록 아이디
     private Timestamp updated_at;           // 최종변경 일자
     private String updated_id;              // 최종변경 아이디
-
-
+    private String coupon_name;
+    private Integer coupon_discount_amount;
+    private String coupon_use_condition;
 }

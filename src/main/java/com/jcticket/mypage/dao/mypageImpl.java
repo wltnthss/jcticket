@@ -1,8 +1,8 @@
 package com.jcticket.mypage.dao;
 
 import com.jcticket.admin.dto.CouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.mypage.dto.InquiryDto;
-import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
@@ -65,7 +65,7 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
-    public List<MyUserCouponDto> coupon_list(Map map) throws Exception {
+    public List<UserCouponDto> coupon_list(Map map) throws Exception {
         return session.selectList(namespace + "coupon_list", map);
     }
 
@@ -80,7 +80,7 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
-    public int coupon_insert(MyUserCouponDto userCouponDto) throws Exception {
+    public int coupon_insert(UserCouponDto userCouponDto) throws Exception {
         return session.insert(namespace + "coupon_insert" ,userCouponDto);
     }
 
