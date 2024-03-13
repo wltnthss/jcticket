@@ -22,7 +22,7 @@ public interface PaymentService {
 
     // 결제 성공시 show_seat 테이블과 user_coupon 테이블의 각각 상태를 업데이트하는 서비스:
     //  (파라미터로 한번에 두 개의 Dao에서 필요한 값들을 받는다)
-    String setBookingStatus(String ticketingId) throws Exception;
+    String setBookingStatus(String ticketingId, String userCouponId, int showingSeq) throws Exception;
 
     // 결제 or 결제 사전검증 실패시 만들어진 ticketing DB 삭제
     String removeTicketing(String userId) throws Exception;

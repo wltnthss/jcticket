@@ -1,9 +1,8 @@
 package com.jcticket.ticketing.service;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.TicketingDto2;
-import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.payment.dto.prepare.PrepareRequestDto;
 import com.jcticket.ticketing.dao.TicketingDao;
 import com.jcticket.ticketing.dto.CouponResponseDto;
@@ -188,6 +187,7 @@ public class TicketingServiceImpl implements TicketingService{
                    .build();
            responseList.add(responseDto);
        }
+        System.out.println("responseList = " + responseList);
         return responseList;
     }
 

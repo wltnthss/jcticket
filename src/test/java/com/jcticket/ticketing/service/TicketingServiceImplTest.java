@@ -21,8 +21,9 @@ import static org.junit.Assert.*;
  * -----------------------------------------------------------
  * 2/18/24         조영상        최초 생성
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
+
+
+
 public class TicketingServiceImplTest {
     @Autowired
     TicketingService ticketingService;
