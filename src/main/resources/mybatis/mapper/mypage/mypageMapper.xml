@@ -349,8 +349,8 @@
             user_nickname = #{user_nickname},
             user_password = #{user_password},
             user_tel      = #{user_tel},
-            user_address  = #{user_address}
-            user_update_at = NOW();
+            user_address  = #{user_address},
+            user_update_at = NOW()
         WHERE user_id = #{user_id};
     </update>
 
