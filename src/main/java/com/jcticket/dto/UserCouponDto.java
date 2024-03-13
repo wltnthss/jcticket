@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @ToString
-@AllArgsConstructor
+//@AllArgsConstructor
 @EqualsAndHashCode
 @Builder
 public class UserCouponDto {

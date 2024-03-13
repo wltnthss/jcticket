@@ -88,7 +88,7 @@ public class ViewController {
 
         //상세보기에 표시할 것들 서비스에서 하나로 묶어서 tx?
         List<JoinDto> viewDetail = viewDetailService.getViewDetail(this_play_id);
-//        Map<String, List<String>> viewDetailTime = viewDetailService.getViewDetailTime(this_play_id);
+        Map<String, List<String>> viewDetailTimeHidden = viewDetailService.getViewDetailTime(this_play_id);
         List<String> viewDetailTime = viewDetailService.view_time_info(this_play_id);
 
 //        System.out.println("viewDetailTime=========================>"+viewDetailTime);
@@ -123,7 +123,8 @@ public class ViewController {
         //상세보기에 들어갈 내용들(제목, 공연장이름, 좌석가격 등)
         model.addAttribute("viewDetail", viewDetail);
         model.addAttribute("viewDetailTime", viewDetailTime);
-        
+        model.addAttribute("viewDetailTimeHidden", viewDetailTimeHidden);
+
         //세션에 저장된 아이디 가져오기
         HttpSession session = request.getSession();
         String user_id = (String)session.getAttribute("sessionId");

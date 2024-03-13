@@ -7,7 +7,7 @@
         // var availableDates = ["2024-02-28", "2024-02-29"];
         var availableDates = [];
         for(var i=0;i<dateShow.length;i++){
-            availableDates.push(dateShow[i].innerHTML);
+            availableDates.push(dateShow[i].value);
         }
 
         $("#datepicker").datepicker({

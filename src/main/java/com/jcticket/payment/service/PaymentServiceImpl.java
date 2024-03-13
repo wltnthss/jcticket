@@ -43,17 +43,15 @@ public class PaymentServiceImpl implements PaymentService{
         //API 에서 받은 결제승인시각 UNIX Timestamp --> Timestamp 로 변환하기
         String unixTimeStamp = requestDto.getPaid_at();
         long timestamp = Long.parseLong(unixTimeStamp);
-<<<<<<< HEAD
-        Timestamp paidAt = new Timestamp(timestamp);
-//        String userId = paymentDao.selectUserByTicketingId(requestDto.getMerchant_uid());
 
-=======
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(timestamp * 1000);
         String paidAt = sdf.format(date);
+
         //String userId = paymentDao.selectUserByTicketingId(requestDto.getMerchant_uid());
-        Timestamp CUR_TS = new Timestamp(System.currentTimeMillis());
->>>>>>> 5d208a81126884626d432ca7986c31868e59c8c8
+//        Timestamp CUR_TS = new Timestamp(System.currentTimeMillis());
+
         // 결제 테이블 DTO 빌드
         PaymentDto dto = PaymentDto.builder()
                 .payment_id(paymentId)
@@ -64,10 +62,7 @@ public class PaymentServiceImpl implements PaymentService{
                 .payment_status(requestDto.getStatus())
                 .receipt_url(requestDto.getReceipt_url())
                 .ticketing_id(requestDto.getMerchant_uid())
-<<<<<<< HEAD
-//                .user_id(userId)
-                .build();
-=======
+
                 .user_id(requestDto.getBuyer_name())
 //                .created_id("sys")
 //                .updated_id("sys")
@@ -75,18 +70,14 @@ public class PaymentServiceImpl implements PaymentService{
 //                .updated_at(CUR_TS)
                 .build();
         System.out.println("==========>"+dto.toString());
->>>>>>> 5d208a81126884626d432ca7986c31868e59c8c8
         return paymentDao.insertPayment(dto);
     }
 
     // 결제 성공시 show_seat 테이블과 user_coupon 테이블의 각각 상태를 업데이트하는 서비스:
     //  (파라미터로 한번에 두 개의 Dao에서 필요한 값들을 받는다)
     @Override
-<<<<<<< HEAD
-    public String setBookingStatus(String ticketingId) throws Exception {
-=======
+
     public String setBookingStatus(String ticketingId, String userCouponId, int showingSeq) throws Exception {
->>>>>>> 5d208a81126884626d432ca7986c31868e59c8c8
         try{
             String seats = paymentDao.selectedSeats(ticketingId);
             String[] seatArr = seats.split(",");
@@ -94,22 +85,18 @@ public class PaymentServiceImpl implements PaymentService{
                 String seatRow = String.valueOf(seat.charAt(0));
                 int seatCol = Integer.parseInt(seat.substring(1));
                 ShowSeatDto ssDto = ShowSeatDto.builder()
-<<<<<<< HEAD
-//                        .showing_seq(dto.getShowingSeq())
-=======
+
                         .showing_seq(showingSeq)
->>>>>>> 5d208a81126884626d432ca7986c31868e59c8c8
+
                         .seat_row(seatRow)
                         .seat_col(seatCol)
                         .build();
                 paymentDao.updateSeatStatusN(ssDto);
                 System.out.println("좌석의 행: " + seatRow + ", 좌석의 열: " + seatCol);
             }
-<<<<<<< HEAD
-//            paymentDao.updateUserCouponStatusY(dto.getUserCouponId());
-=======
+
             paymentDao.updateUserCouponStatusY(userCouponId);
->>>>>>> 5d208a81126884626d432ca7986c31868e59c8c8
+
             return "success";
         }catch (Exception e){
             return "fail";

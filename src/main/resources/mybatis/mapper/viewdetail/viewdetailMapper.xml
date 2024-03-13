@@ -118,15 +118,15 @@
     </select>
 
     <!--    회차(showing)테이블 view에서 보여주는 정보들(날짜, 시간)-->
-<!--    <select id="viewDetail_view_time" resultType="ShowingDto">-->
-<!--        SELECT-->
-<!--            showing_date,-->
-<!--            showing_info-->
-<!--        FROM showing s-->
-<!--        WHERE-->
-<!--            s.play_id = #{play_id}-->
-<!--        ORDER BY showing_date;-->
-<!--    </select>-->
+    <select id="viewDetail_view_time" resultType="ShowingDto">
+        SELECT
+            showing_date,
+            showing_info
+        FROM showing s
+        WHERE
+            s.play_id = #{play_id}
+        ORDER BY showing_date;
+    </select>
 
 
 <!--    후기게시판-->

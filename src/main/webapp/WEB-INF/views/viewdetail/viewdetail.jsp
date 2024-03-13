@@ -74,6 +74,10 @@ git <%--
                                 <c:if test="${viewDetailTime.get(0).showing_start_at != viewDetailTime.get(0).showing_end_at}">~</c:if>
                                 <c:if test="${viewDetailTime.get(0).showing_start_at != viewDetailTime.get(0).showing_end_at}">${viewDetailTime.get(0).showing_end_at}</c:if>
                             </c:if>
+                            <%--                            대괄호 제거하고 상영날짜 출력--%>
+                            <c:forEach var="date" items="${viewDetailTimeHidden}" varStatus="loop">
+                                <input type="hidden" class="dateShow" value="${date.key}"/>
+                            </c:forEach>
                         </span>
 
                         <a href="javascript:void(0);" id="stage_name">

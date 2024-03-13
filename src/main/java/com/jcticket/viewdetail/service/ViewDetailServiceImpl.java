@@ -131,12 +131,8 @@ public class ViewDetailServiceImpl implements ViewDetailService{
         return viewDetailDao.bring_review_viewing_at(map);
     }
 
-//    @Override
-//    public List<String> view_time_info(String play_id) throws Exception {
-//        return viewDetailDao.view_time_info(play_id);
-//    }
-@Override
-public List<String> view_time_info(String play_id) throws Exception {
-    return viewDetailDao.view_time_info(play_id);
-}
+    @Override
+    public List<String> view_time_info(String play_id) throws Exception {
+        return viewDetailDao.view_time_info(play_id);
+    }
 }
