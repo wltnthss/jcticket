@@ -187,6 +187,7 @@ public class TicketingServiceImpl implements TicketingService{
                    .build();
            responseList.add(responseDto);
        }
+        System.out.println("responseList = " + responseList);
         return responseList;
     }
 

@@ -38,4 +38,5 @@ public class UserCouponDto {
     private String coupon_name;
     private Integer coupon_discount_amount;
     private String coupon_use_condition;
+
 }

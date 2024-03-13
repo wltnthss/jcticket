@@ -67,9 +67,9 @@ public class PaymentController {
 
     // 결제 성공시 흐름
     // 1. 업
-    @PostMapping("/payments/success/")
+    @PostMapping("/payments/success/{showingSeq}")
     public ResponseEntity<?> createPayment(
-            @RequestParam("showingSeq") int showingSeq,
+            @PathVariable("showingSeq") int showingSeq,
             @RequestBody PaymentRequestDto requestDto) throws Exception{
         System.out.println("==== POST /payments 진입 ====");
         System.out.println(requestDto.toString());

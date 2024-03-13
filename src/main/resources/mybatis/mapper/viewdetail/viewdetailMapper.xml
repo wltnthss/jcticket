@@ -243,4 +243,16 @@
         WHERE r.play_id = #{play_id}
         AND r.user_id = #{user_id}
     </select>
+
+
+<!--    공연기간 및 공연시간 셀렉트-->
+    <select id="view_time_info" resultType="map">
+        SELECT
+            SUBSTRING(s.showing_start_at, 1, 10) AS showing_start_at,
+            SUBSTRING(s.showing_end_at, 1, 10) AS showing_end_at,
+            p.play_time_info
+        FROM play p
+                 JOIN showing s ON p.play_id = s.play_id
+        WHERE p.play_id = #{play_id}
+    </select>
 </mapper>
