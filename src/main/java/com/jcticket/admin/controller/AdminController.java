@@ -726,11 +726,16 @@ public class AdminController {
     @GetMapping("/upload/{img_name}")
     public @ResponseBody byte[] adminProductImg(Model model, @PathVariable String img_name) throws Exception {
 
+        System.out.println(img_name);
         try{
             String path = "C:/play_img/" + img_name + ".JPG";
 //            System.out.println("path = " + path);
 
+            System.out.println(path);
+
             InputStream in = new FileInputStream(path);
+
+            System.out.println(in);
 
             return IOUtils.toByteArray(in);
 

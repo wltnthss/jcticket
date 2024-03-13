@@ -137,21 +137,23 @@
 
 
     <select id="select_view" parameterType="map" resultType="TicketingDto">
-
         SELECT
         t.ticketing_id,
         MAX(t.ticketing_at) AS ticketing_at,
         MAX(t.stage_name) AS stage_name,
         MAX(t.selected_seats) AS selected_seats,
         MAX(p.play_major_cat) AS play_major_cat,
-        MAX(t.play_name) AS play_name
+        MAX(t.play_name) AS play_name,
+        pi.play_poster_original_file_name,
+        SUBSTRING(pi.play_poster_stored_file_name, 1, CHAR_LENGTH(pi.play_poster_stored_file_name) - 4) AS play_poster_stored_file_name
         FROM
         ticketing t
         JOIN play p ON t.play_name = p.play_name
-        JOIN user u ON t.user_id = u.user_id <!-- 추가된 부분 -->
+        JOIN user u ON t.user_id = u.user_id
+        LEFT JOIN play_image pi ON t.play_name = SUBSTRING(pi.play_poster_original_file_name, 1, CHAR_LENGTH(pi.play_poster_original_file_name) - 4)
         WHERE
         true
-        AND u.user_id = #{user_id} <!-- 추가된 부분 -->
+        AND u.user_id = #{user_id}
         <choose>
             <when test='option=="A"'>
                 AND p.play_major_cat IN ('연극', '콘서트', '전시', '뮤지컬')
@@ -198,20 +200,28 @@
 
     <!--  예매 상세보기   -->
     <select id="ticket_detail" resultType="TicketingDto" parameterType="String">
-        SELECT t.ticketing_at,
-               t.user_name,
-               t.showing_date,
-               t.stage_name,
-               t.ticketing_id,
-               t.play_name,
-               t.showing_date,
-               t.ticketing_cnt,
-               t.selected_seats,
-               (SELECT cc.comn_code_name
+        SELECT
+            t.ticketing_at,
+            t.user_name,
+            t.showing_date,
+            t.stage_name,
+            t.ticketing_id,
+            t.play_name,
+            t.ticketing_cnt,
+            t.selected_seats,
+            pi.play_poster_original_file_name,
+            SUBSTRING(play_poster_stored_file_name, 1, CHAR_LENGTH(play_poster_stored_file_name) - 4)as play_poster_stored_file_name,
+            (
+                SELECT cc.comn_code_name
                 FROM comn_code cc
-                WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status
-        FROM ticketing t
-        WHERE t.ticketing_id = #{ticketing_id};
+                WHERE cc.comn_code_id = t.ticketing_status
+            ) AS ticketing_status
+        FROM
+            ticketing t
+                JOIN
+            play_image pi ON t.play_name  = SUBSTRING(play_poster_original_file_name, 1, CHAR_LENGTH(play_poster_original_file_name) - 4)
+        WHERE
+            t.ticketing_id = #{ticketing_id};
     </select>
 
     <!--  ===========================================================================================================================================================================  -->

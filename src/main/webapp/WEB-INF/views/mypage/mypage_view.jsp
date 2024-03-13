@@ -194,10 +194,10 @@
         <div id="contents">
             <aside id="side">
                 <div id="side-mypage">
-                    <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
+                    <a href="${pageContext.request.contextPath}/mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                     <div id="side_img">
-                        <img src="/resources/img/mypage/페페%20한잔해.jpg">
+                        <img src="${pageContext.request.contextPath}/resources/img/mypage/페페%20한잔해.jpg">
                     </div>
 
                     <div id="ticket">
@@ -255,7 +255,7 @@
                 <c:forEach items="${view_list}" var="TicketingDto">
                 <h2 id="title">${TicketingDto.play_name}</h2>
                 <div id="show-all">
-                    <div id="show-img"><a href=""><img src="/resources/img/mypage/페페%20한잔해.jpg"></a></div>
+                    <div id="show-img"><a href=""><img src="<c:url value='/index/upload/${TicketingDto.play_poster_stored_file_name}'/>"></a></div>
                     <div id="show-text">
                         <div class="line"><span>예매번호 :</span> <em>${TicketingDto.ticketing_id}</em></div>
                         <div class="line"><span>장르 :</span> <em>${TicketingDto.play_major_cat}</em></div>
