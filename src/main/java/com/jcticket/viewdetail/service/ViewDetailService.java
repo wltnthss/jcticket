@@ -49,4 +49,6 @@ public interface ViewDetailService {
 
     //질문
     List<String> viewing_at(Map map) throws Exception;
+
+    List<String> view_time_info(String play_id) throws Exception;
 }
