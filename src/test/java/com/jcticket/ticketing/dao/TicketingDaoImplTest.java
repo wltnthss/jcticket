@@ -5,7 +5,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.admin.dto.ShowSeatDto;
 import com.jcticket.dto.SeatDto;
 import com.jcticket.dto.TicketingDto2;
-import com.jcticket.mypage.dto.UserCouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.payment.dao.PaymentDao;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.viewdetail.dto.ShowingDto;
