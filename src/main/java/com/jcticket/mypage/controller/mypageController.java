@@ -4,6 +4,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
+import org.apache.commons.io.IOUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import com.jcticket.mypage.service.mypageService;
 
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.System.in;
+import static java.lang.System.setOut;
 
 
 /**
@@ -113,8 +122,10 @@ public class mypageController {
                          Model model) throws Exception {
 
         TicketingDto ticketingDto = mypageService.ticket_detail(ticketing_id);
-        System.out.println(ticketing_id);
-        System.out.println(ticketingDto.toString());
+        System.out.println("ticketingDto => " + ticketingDto);
+
+
+
 
         model.addAttribute("ticketingDto", ticketingDto);
 
@@ -138,6 +149,9 @@ public class mypageController {
         System.out.println("sessionId => " + sessionId);
 
 
+
+
+
         try {
 
             Map map = new HashMap();
@@ -156,6 +170,7 @@ public class mypageController {
             PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
 
             List<TicketingDto> list = mypageService.select_view(map);
+
 
             model.addAttribute("view_list", list);
             model.addAttribute("ph", myPagingDTO);
@@ -187,7 +202,6 @@ public class mypageController {
 
         System.out.println(user_id);
         System.out.println(user_password);
-
 
 
         UserDto userDto = mypageService.user_info(id);

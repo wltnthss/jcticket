@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +116,7 @@ public class MyServiceImpl implements mypageService {
     public Integer user_update(UserDto userDto) throws Exception {
         return mypageDAO.user_update(userDto);
     }
+
 
 
 }

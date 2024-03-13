@@ -5,6 +5,7 @@ import com.jcticket.mypage.dto.MyUserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +40,6 @@ public interface mypageService {
 
     Integer coupon_update () throws Exception;
     Integer user_update (UserDto userDto) throws Exception;
+
 
 }

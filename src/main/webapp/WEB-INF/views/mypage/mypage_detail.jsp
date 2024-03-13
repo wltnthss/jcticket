@@ -121,23 +121,22 @@
 
         #seat_info > table {
             width: 100%;
-            border: 1px solid;
+            border: 5px solid #FAFAFA;
             padding: 20px;
             text-align: center;
         }
 
 
         #cancel_info {
-            margin: 20px 0px;
-            border: 1px solid;
-            width: 100%;
+            margin: 50px 0px;
+            border: 5px solid #FAFAFA;
+            width: 940px;
             height: 275px;
         }
 
         #cancel_header {
             width: 100%;
             height: 45px;
-            border: 1px solid;
         }
 
         #cancel_header > p {
@@ -159,10 +158,11 @@
         }
 
         #notice_info {
-            margin: 20px 0px;
-            border: 1px solid;
-            width: 100%;
-            height: 350px;
+            padding: 5px;
+            margin: 15px 0px;
+            border: 5px solid #FAFAFA;
+            width: 930px;
+            height: 285px;
         }
 
         #notice_info > ul {
@@ -177,18 +177,18 @@
 
         .table_sm {
             margin: 10px 0px;
-            border: 1px solid;
             width: 100%;
         }
 
         #divDeliveryNone > ul {
-            margin: 10px 0px;
+            margin: 0px 10px;
             list-style: none;
         }
 
         #divDeliveryNone > ul > li {
-            margin: 10px 0px;
+            margin: 5px 0px;
         }
+
 
         #cancel_btn {
             display: flex;
@@ -199,6 +199,12 @@
             width: 100px;
             height: 34px;
         }
+
+        .table_sm > tbody > tr{
+            text-align: center;
+        }
+
+
 
 
     </style>
@@ -216,10 +222,10 @@
         <div id="contents">
             <aside id="side">
                 <div id="side-mypage">
-                    <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
+                    <a href="mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                     <div id="side_img">
-                        <img src="/resources/img/mypage/1579237093699.jpg">
+                        <img src="${pageContext.request.contextPath}/resources/img/mypage/1579237093699.jpg">
                     </div>
 
                     <div id="ticket">
@@ -253,7 +259,8 @@
                     </div>
 
                     <div id="derail_left">
-                        <img src="/resources/img/mypage/랄죠_사토루(무량공처).png">
+                        <img src="<c:url value='/index/upload/${ticketingDto.play_poster_stored_file_name}'/>">
+
                     </div>
                     <div id="derail_right">
                         <table>
@@ -286,10 +293,9 @@
 
 
                                     <div id="divDeliveryNone">
-                                        <span>현장수령</span>
 
                                         <ul>
-                                            <li>- 공연 당일 티켓교부처에서 티켓을 받으시면 됩니다.</li>
+                                            <li>- 공연 당일 티켓교부처에서 티켓을 받으시면 됩니다.(현장수령)</li>
                                             <li>- 예매내역서(프린트)와 신분증을 지참해주세요.</li>
                                         </ul>
                                     </div>
@@ -406,13 +412,14 @@
                                 </tr>
                                 </tbody>
                             </table>
-
+                            <c:if test="${ticketingDto.ticketing_status eq '예매완료'}">
                             <ul class="gbox_notice">
                                 <li id="liGuide_CancelOnly">
                                     ※ 취소를 원하시면 <em>취소하고자 하는 티켓을 선택한 후 </em><strong class="red">[예매취소] </strong>버튼을
                                     클릭해주세요.<br>&nbsp;
                                 </li>
                             </ul>
+                            </c:if>
                         </div>
                     </div>
 
@@ -456,6 +463,7 @@
                                 &nbsp;&nbsp;&nbsp;만료된 경우 재사용하실 수 없습니다.
                             </li>
                             <li>- 예매 취소 시점과 해당 카드사의 환불 처리 기준에 따라 환급방법과 환급일은 다소 차이가 있을 수 있습니다.</li>
+
                         </ul>
                     </div>
                 </div>

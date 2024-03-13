@@ -222,10 +222,10 @@
             <div id="contents">
                 <aside id="side">
                     <div id="side-mypage">
-                        <a href="${pageContext.request.contextPath}/mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
+                        <a href="${pageContext.request.contextPath}/mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                         <div id="side_img">
-                            <img src="/resources/img/mypage/페페%20한잔해.jpg">
+                            <img src="${pageContext.request.contextPath}/resources/img/mypage/페페%20한잔해.jpg">
                         </div>
 
 

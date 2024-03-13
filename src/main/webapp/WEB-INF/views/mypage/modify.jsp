@@ -9,14 +9,14 @@
 <div class="page">
     <section class="section">
         <a href="${pageContext.request.contextPath}/" class="mainLogoWrap">
-            <img src="/resources/img/components/로고1.png" class="logoImg">
+            <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" class="logoImg">
         </a>
     </section>
 
     <br>
     <br>
 
-    <form id="emailBtn" action="/Modifying" method="get">
+    <form id="emailBtn" action="${pageContext.request.contextPath}/Modifying" method="get">
         <c:if test="${user != null}">
             <div class="idPwdNickTelAddGenBir_Wrap">
                 <label class="css_idPwdNickTelAddGenBir_label">아이디</label>
