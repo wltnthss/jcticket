@@ -63,6 +63,8 @@ public class PaymentServiceImpl implements PaymentService{
                 .receipt_url(requestDto.getReceipt_url())
                 .ticketing_id(requestDto.getMerchant_uid())
 
+                .user_coupon_id(requestDto.getCustom_data())
+
                 .user_id(requestDto.getBuyer_name())
 //                .created_id("sys")
 //                .updated_id("sys")
