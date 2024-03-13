@@ -388,6 +388,7 @@ $(document).ready(function(){
                                 const couponName = trElement.find('.coupon-name').text();
                                 discountAmount = $clickedBtn.parent().siblings('.discount-amount').val();
                                 userCounponId = $clickedBtn.parent().siblings('.user-coupon-id').val();
+                                $("#user-coupon-id").val(userCounponId);
                                 totalPrice = selectedPrice - discountAmount;
                                 console.log("discount = " + discountAmount);
                                 console.log("selectedPrice = " + selectedPrice);
@@ -427,7 +428,7 @@ $(document).ready(function(){
         console.log(`주문자 아이디 : ${$("#user_id").val()}`);
         console.log(`공연명 : ${$("#play-name").text()}`);
         console.log(`공연장명 : ${$("#stage-name").text()}`);
-        console.log(`유저쿠폰ID : ${userCounponId}`);
+        console.log(`유저쿠폰ID : ${$("#user-coupon-id").val()}`);
         console.log(`할인가격 : ${discountAmount}`);
         const data = {
             'ticketingPrice' : totalPrice,
@@ -439,7 +440,7 @@ $(document).ready(function(){
             'stageName' : $("#stage-name").text(),
             'ticketCnt' : selectedSeatList.length,
             'userId' : $("#user_id").val(),
-            'userCouponId' : userCounponId,
+            'userCouponId' : $("#user-coupon-id").val(),
             'discountAmount' : discountAmount,
         }
         // 보낸 데이터로 예매 테이블 작성한다.
@@ -529,6 +530,7 @@ $(document).ready(function(){
             amount: totalPrice,
             buyer_name: $("#user_id").val(),
             buyer_tel: $("#user-tel").val(),
+            sustom_data: $("#user-coupon-id").val(),
         }, function (res){
             console.log(res);
             if(res.success){
@@ -537,7 +539,7 @@ $(document).ready(function(){
                 if(res.success){
                     $.ajax({
                         type: "POST",
-                        url: "/payments/success",
+                        url: "/payments/success/"+$("#showing-seq").val(),
                         data: JSON.stringify(res),
                         contentType : 'application/json; charset=utf-8',
                         success: function (response){

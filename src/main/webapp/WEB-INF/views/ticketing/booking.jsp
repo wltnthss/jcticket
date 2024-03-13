@@ -171,6 +171,8 @@
                             <button id="payment-btn">결제하기</button>
                             <input type="hidden" id="ticketing-id" value="">
                             <input type="hidden" id="showing-seq" value="">
+                            <input type="hidden" id="user-coupon-id" value="">
+
 <%--                            <script src="/resources/js/payment/payment.js"></script>--%>
                         </div>
                     </fieldset>
