@@ -280,9 +280,6 @@
     </insert>
 
 
-
-
-
     <!-- 예매 아이디로 결제금액 조회 -->
     <select id="selectTicketingAmount" parameterType="string" resultType="int">
         select ticketing_price
@@ -291,7 +288,13 @@
         and ticketing_id = #{ticketing_id}
     </select>
 
-
+    <!-- 유저아이디로 유저이름 가져오기 -->
+    <select id="selectUserNameById" parameterType="string" resultType="string">
+        select user_name
+        from user
+        where 1=1
+          and user_id = #{user_id}
+    </select>
 
 
     <!-- etc. -->
