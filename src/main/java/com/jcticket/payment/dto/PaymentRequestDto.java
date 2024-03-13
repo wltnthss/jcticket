@@ -36,7 +36,7 @@ public class PaymentRequestDto {
     private String buyer_tel;
     private String buyer_addr;
     private String buyer_postcode;
-    private Object custom_data;
+    private String custom_data; // user-coupon-id를 받는 필드
     private String status;
     private String paid_at;
     private String receipt_url;
