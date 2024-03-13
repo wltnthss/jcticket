@@ -28,7 +28,7 @@
         <typeAlias alias="InquiryDto" type="com.jcticket.mypage.dto.InquiryDto"/>
 
         <typeAlias alias="PaymentDto" type="com.jcticket.payment.dto.PaymentDto"/>
-        <typeAlias alias="MyUserCouponDto" type="com.jcticket.mypage.dto.MyUserCouponDto"/>
+<!--        <typeAlias alias="MyUserCouponDto" type="com.jcticket.mypage.dto.MyUserCouponDto"/>-->
 
 
 
