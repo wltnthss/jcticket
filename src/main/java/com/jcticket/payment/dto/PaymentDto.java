@@ -25,8 +25,8 @@ import java.sql.Timestamp;
 public class PaymentDto {
     private String payment_id;
     private String payment_approval_id;
-    private Integer payment_amount;
-    private Timestamp payment_at;
+    private int payment_amount;
+    private String payment_at;
     private String payment_method;
     private String payment_status;
     private String payment_fail_reason;

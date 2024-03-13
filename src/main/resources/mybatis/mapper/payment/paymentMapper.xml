@@ -6,7 +6,7 @@
 <!-- 결제 성공시 결제 테이블 인서트-->
     <insert id="insertPayment" parameterType="PaymentDto">
         INSERT INTO jcticket.Payment
-        (payment_Id,
+        (payment_id,
          payment_approval_id,
          payment_amount,
          payment_at,
@@ -29,7 +29,7 @@
                #{ticketing_id},
                #{user_coupon_id},
                #{user_id},
-               default, "system", default, "system");
+               now(), "system", now(), "system");
     </insert>
     <!-- 결제 성공시 회차-좌석 테이블 update -->
 
