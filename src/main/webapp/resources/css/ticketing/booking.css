@@ -318,7 +318,3 @@ td{
     display: block;
     padding-left: 5px;
 }
-#third-btns{
-    display: inline-block; /* 다른 요소 옆에 위치할 수 있도록 설정 */
-    width: calc(100% - 100px);
-}

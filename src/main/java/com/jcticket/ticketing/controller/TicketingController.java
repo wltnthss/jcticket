@@ -2,6 +2,7 @@ package com.jcticket.ticketing.controller;
 
 import com.jcticket.ticketing.dto.CouponResponseDto;
 import com.jcticket.ticketing.dto.TicketingDto;
+import com.jcticket.ticketing.dto.TicketingRequestDto;
 import com.jcticket.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,12 @@ import java.util.*;
  */
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/ticketing")
 public class TicketingController {
     private final TicketingService ticketingService;
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/ticketing")
     public String ticketing() throws Exception{
-        System.out.println("/ticketing 실행");
+        System.out.println("===== /ticketing 진입 =====");
         return "ticketing/popup-test";
     }
 
@@ -38,8 +38,8 @@ public class TicketingController {
     // 예매하기 버튼을 눌렀을때 들어오는 url
     // 팝업창을 만들어 보여준다.
 
-    @GetMapping(value = "/detail")
-    public String getTicketingDetail(@RequestParam("play_id") String play_id, Model model) throws Exception{
+    @GetMapping(value = "/ticketing/booking")
+    public String getTicketingDetail(@RequestParam(value = "play_id") String play_id, Model model) throws Exception{
         System.out.println("ticketing/detail 진입: parameter ==> " + play_id);
         try{
 
@@ -58,6 +58,7 @@ public class TicketingController {
             System.out.println("stage_name ==> " +stage_name);
             System.out.println("date list ==> " +list.toString());
         }catch (Exception e){
+            System.out.println("예외발생!!! at ==> /ticketing/booking");
             e.printStackTrace();
         }
         return "ticketing/booking";
@@ -68,14 +69,14 @@ public class TicketingController {
     // @RequestBody => http 요청의 본문이 그대로 전달된다.
     // @ResponseBody => http 요청의 본문이 그대로 전달된다.
     // ajax로 파라미터 넘기는 방법 찾가
-    @PostMapping("/detail")
+    @PostMapping("/ticketing/rounds")
     //@ResponseBody // 자바 객체를 HTTP요청의 바디 내용으로 매핑하여 클라이언트로 전송한다.
     public ResponseEntity<?> getShowingRound(@RequestBody Map<String,String> data) throws Exception{
         // ajax로 받아온 Map data 에는 date_text와 play_id가 들어있다.
         // map에서 date_text와 play_id 분리하기
-
-            String date_text = data.get("date_text");
-            String play_id = data.get("play_id");
+        System.out.println("=====/ticketing/rounds 진입=====");
+        String date_text = data.get("date_text");
+        String play_id = data.get("play_id");
         try{
             // 서비스에서 받아온 리스트를 반환한다.
             return ResponseEntity.ok().body(ticketingService.getRoundInfo(play_id, date_text));
@@ -85,10 +86,10 @@ public class TicketingController {
     }
 
     // 좌석 정보를 넘겨줄 컨트롤러.
-    @PostMapping("/detail/seat")
+    @PostMapping("/ticketing/seats")
     public ResponseEntity<?> getSeatPrice(@RequestBody Map<String, String> data) throws Exception{
         // ajax에서 넘어온 data 에는 play_id가 들어있다.
-        System.out.println("======/detail/seat 진입 =======");
+        System.out.println("======/ticketing/seats 진입 =======");
         int seq = Integer.parseInt(data.get("showing_seq"));
         System.out.println("showing_seq = " + seq);
         try{
@@ -103,19 +104,35 @@ public class TicketingController {
         }
     }
 
-    // 쿠폰 정보를 넘겨줄 컨트롤러.
-    @GetMapping("/detail/coupon")
+    // 유저가 보유한 쿠폰 정보 리스트를 반환하는 컨트롤러.
+    @GetMapping("/ticketing/coupons")
     public ResponseEntity<?> getCouponInfo(@RequestParam("userId")String userId) throws Exception{
-        System.out.println("======/detail/coupon 진입 =======");
+        System.out.println("======/ticketing/coupons 진입 =======");
         System.out.println("RequestParam ==> " + userId);
 
         try{
             List<CouponResponseDto> list = ticketingService.getCouponInfo(userId);
+            for(CouponResponseDto dto : list){
+                System.out.println(dto.toString());
+            }
             return ResponseEntity.ok().body(list);
         }catch (Exception e){
             System.out.println("===== 예외 발생 ====");
             return ResponseEntity.badRequest().body("Bad Request!");
         }
+    }
 
+    // 예매(ticketing) 테이블 create 요청 받는 컨트롤러..
+    @PostMapping("/ticketing/tickets")
+    public ResponseEntity<String> createTicket(@RequestBody TicketingRequestDto requestDto)throws Exception{
+        System.out.println("========= /ticketing/tickets 진입===============");
+        System.out.println(requestDto.toString());
+        String res = ticketingService.createTicketing(requestDto);
+        System.out.println("생성된 예매 아이디 >> "+ res);
+        if(res.equals("fail")){
+            return ResponseEntity.status(500).body("internal server error");
+        }else {
+            return ResponseEntity.ok().body(res);
+        }
     }
 }

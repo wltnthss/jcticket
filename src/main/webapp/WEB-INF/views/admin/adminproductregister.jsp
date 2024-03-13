@@ -261,7 +261,119 @@
 <jsp:include page="/WEB-INF/views/admin/common/adminfooter.jsp"/>
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<script>
+    // 공연장 선택 검색 버튼 선택 이벤트
+    $('#search-stage').on('click', function () {
+
+        let keyword = $("#inputStage").val();
+
+        let sendData = {
+            keyword: keyword,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: sessionStorage.getItem("contextpath") + '/admin/stage',
+            data: sendData,
+            contentType: "application/json",
+            success: function (res){
+                // alert('res => ' + res)
+
+                let listHtml = '';
+
+                // controller에서 받은 공연장 조회 쿼리 결과 수만큼 공연장 결과 Html 결과에 출력
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    listHtml += '<tr class="list">'
+                    listHtml += '<td style="cursor: pointer" class="stage-id-list">' + res[i].stage_id + '</td>';
+                    listHtml += '<td>' + res[i].stage_name + '</td>';
+                    listHtml += '<td>' + res[i].stage_address + '</td>';
+                    listHtml += '<td class="stage-seat-list">' + res[i].stage_seat_cnt + '</td>';
+                    listHtml += '<td>' + res[i].stage_tel + '</td>';
+                    listHtml += '<td>' + res[i].stage_manager + '</td>';
+                    listHtml += '</tr>'
+                }
+
+                $('#stageList').html(listHtml);
+
+                // 공연장명 선택 시 팝업창이 닫히면서 공연장 아이디 input창에 데이터 삽입
+                let stageLists = document.querySelectorAll(".stage-id-list");
+                let stageSeatLists = document.querySelectorAll(".stage-seat-list");
+
+                for (let i = 0; i < stageLists.length; i++) {
+                    stageLists[i].addEventListener('click', function () {
+
+                        // 공연장, 회차 좌석수 인풋창에 선택한 공연장의 DB정보 삽입
+                        document.getElementById("inputSearchStage").value = stageLists[i].innerHTML;
+                        document.getElementById("showingSeat").value = stageSeatLists[i].innerHTML;
+
+                        // 팝업창 종료
+                        closePopup();
+                    });
+                }
+            },
+            error: function (e) {
+                console.error("Controller 오류", e);
+            }
+        })
+    })
+
+    // 공연명 선택 검색 버튼 선택 이벤트
+    $('#search-play').on('click', function () {
+
+        let keyword = $("#inputPlay").val();
+
+        let sendData = {
+            keyword: keyword,
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: sessionStorage.getItem("contextpath") + '/admin/play',
+            data: sendData,
+            contentType: "application/json",
+            success: function (res){
+                // alert('res => ' + res)
+
+                let listHtml = '';
+
+                // controller에서 받은 공연 조회 쿼리 결과 수만큼 공연 결과 Html 결과에 출력
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]);
+                    listHtml += '<tr class="list">'
+                    listHtml += '<td style="cursor: pointer" class="play-id-list">' + res[i].play_id + '</td>';
+                    listHtml += '<td>' + res[i].play_name + '</td>';
+                    listHtml += '<td>' + res[i].play_major_cat + '</td>';
+                    listHtml += '<td>' + res[i].play_run_time + '</td>';
+                    listHtml += '</tr>'
+                }
+
+                $('#playList').html(listHtml);
+
+                // 공연명 선택 시 팝업창이 닫히면서 공연명 input창에 데이터 삽입
+                let playLists = document.querySelectorAll(".play-id-list");
+
+                for (let i = 0; i < playLists.length; i++) {
+                    playLists[i].addEventListener('click', function () {
+
+                        // 1. 공연아이디 인풋창에 선택한 공연아이디의 DB정보 삽입
+                        document.getElementById("inputSearchPlay").value = playLists[i].innerHTML;
+
+                        // 팝업창 종료
+                        closePopup();
+                    });
+                }
+            },
+            error: function (e) {
+                console.error("Controller 오류", e);
+            }
+        })
+    });
+</script>
+
 <script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+
 
 </body>
 </html>

@@ -55,7 +55,7 @@
             </c:choose>
             <a class="search">
                 <input type="text" id="searchWord" autocomplete="off" style="color: black">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
             </a>
         </div>
     </header>
@@ -63,7 +63,39 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<script>
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
+
+
+    $("#searchBtn").on('click', function () {
+
+        let word = $("#searchWord").val();
+
+        if(word === null || word === ""){
+            alert('검색어를 입력해주세요.')
+            return false;
+        }
+
+        $.ajax({
+            type: 'GET',
+            uri: sessionStorage.getItem("contextpath") + '/search',
+            contentType: 'application/json',
+            data: {word: word},
+            success: function (res){
+                console.log('응답 성공', res)
+                location.href = sessionStorage.getItem("contextpath") + "/search?word=" + word;
+            },
+            error: function (err) {
+                console.error("에러", err);
+            }
+        })
+    });
+</script>
+
 <script src="${pageContext.request.contextPath}/resources/js/category/category.js"></script>
+
+
 
 </body>
 </html>

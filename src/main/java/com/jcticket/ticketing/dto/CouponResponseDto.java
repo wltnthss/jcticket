@@ -1,9 +1,6 @@
 package com.jcticket.ticketing.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -22,7 +19,9 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CouponResponseDto {
+    private String userCouponId;
     private String couponName;
     private int couponDiscount;
     private int minOrder;

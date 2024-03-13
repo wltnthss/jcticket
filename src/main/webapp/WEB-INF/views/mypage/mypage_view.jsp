@@ -268,13 +268,13 @@
 
                 <div id="paging">
                     <c:if test="${ph.showPrev}">
-                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&lt;</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${ph.beginPage - 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">&lt;</a>
                     </c:if>
                     <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
-                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">${i}</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${i}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">${i}</a>
                     </c:forEach>
                     <c:if test="${ph.showNext}">
-                        <a href="<c:url value="${pageContext.request.contextPath}/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}"/>">&gt;</a>
+                        <a href= "${pageContext.request.contextPath}/mypageview?page=${ph.endPage + 1}&pageSize=${ph.pageSize}&option=${ph.option}&start_date=${ph.start_date}&end_date=${ph.end_date}&keyword=${ph.keyword}">&gt;</a>
                     </c:if>
                 </div>
 

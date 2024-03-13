@@ -26,7 +26,7 @@
     <%-- 헤더시작 --%>
     <header class="play-top_main" id = "play-top">
         <!-- 좌측 -->
-        <div class="play-top-left">
+        <div class="play-top-left-main">
                 <a href="${pageContext.request.contextPath}/" class="top-main-logo">
                     <img src="${pageContext.request.contextPath}/resources/img/components/로고2.png" alt class="fixed"/>
                     <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" alt class="trans"/>
@@ -49,7 +49,7 @@
             </a>
         </div>
         <!-- 오른쪽 -->
-        <div class="play-top-right">
+        <div class="play-top-right-main">
             <a href="${pageContext.request.contextPath}/mypageIndex" class="my-page">
                 <img src="${pageContext.request.contextPath}/resources/img/components/마이페이지_백.png" class="mp_icon">
             </a>
@@ -73,7 +73,7 @@
             </c:choose>
             <a class="search">
                 <input type="text" id="searchWord" autocomplete="off">
-                <img src="${pageContext.request.contextPath}http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
+                <img src="http://tkfile.yes24.com/imgNew/common/pf-srch.png" alt="" style="margin-left: 8px; cursor:pointer;" id="searchBtn">
             </a>
         </div>
     </header>
@@ -435,7 +435,7 @@
                 <c:choose>
                     <c:when test="${empty sessionScope.sessionId}">
                         <!-- 로그인 상태가 아니면(세션이 없으면) 로그인 링크를 보여줌 -->
-                        <a href="<c:url value="/login"/>">
+                        <a href="${pageContext.request.contextPath}/login">
                             <img src="${pageContext.request.contextPath}/resources/img/components/로그인_흑.png">
                         </a>
                         <span>로그인</span>
@@ -497,12 +497,12 @@
 
         $.ajax({
             type: 'GET',
-            uri: '/search',
+            uri: sessionStorage.getItem("contextpath") + '/search',
             contentType: 'application/json',
             data: {word: word},
             success: function (res){
                 console.log('응답 성공', res)
-                location.href = "/search?word=" + word;
+                location.href = sessionStorage.getItem("contextpath") + "/search?word=" + word;
             },
             error: function (err) {
                 console.error("에러", err);

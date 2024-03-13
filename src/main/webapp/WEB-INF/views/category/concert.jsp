@@ -10,9 +10,9 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/components/header.css">
-    <link rel="stylesheet" href="/resources/css/category/category.css">
-    <link rel="stylesheet" href="/resources/css/components/index.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/components/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/category/category.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/components/index.css">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <body>
@@ -29,7 +29,7 @@
                 <div class="swiper-wrapper">
                     <c:forEach items="${list}" var="li" begin="1" end="6">
                         <div class="swiper-slide">
-                            <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
+                            <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                                 <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="120" height="120">
                                 <div class="m2-kvs-txt">
                                     <p class="m2-kvs-tit">${li.play_name}</p>
@@ -50,13 +50,13 @@
 
 <section class="sec04">
     <p class="cont-tit num6l">
-        <img src="/resources/img/category/콘서트.png" alt>
+        <img src="${pageContext.request.contextPath}/resources/img/category/콘서트.png" alt>
     </p>
 
     <div class="wing-wrap">
         <div class="wing-list" id="divGenre_N_A0-006-01">
             <c:forEach items="${list}" var="li" begin="1" end="5">
-                <a href="/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
+                <a href="${pageContext.request.contextPath}/viewdetail?this_play_id=${li.play_id}" target="_self" style="cursor: pointer">
                     <div class="wing-box">
                         <img src="<c:url value='/index/upload/${li.img_name}'/>" alt="" width="100" height="120">
                         <div class="wing-list-txt">

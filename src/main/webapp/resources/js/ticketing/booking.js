@@ -1,5 +1,6 @@
 // step.1 일정선택
 $(document).ready(function() {
+
     let dateShow = $(".dateShow");
     //선택 가능한 날짜 ex)
     // var availableDates = ["2024-02-28", "2024-02-29"];
@@ -49,7 +50,7 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/ticketing/detail",
+                url: "/ticketing/rounds",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
@@ -68,7 +69,7 @@ $(document).ready(function() {
                     const infoList = resMap.showing_info;
                     //const showing = document.querySelector('.showing');
 
-
+                    $("#date-text").val(dateText);
                     //.round 안에 있는 요소들 지우기 (태그 쌓임 방지)
                     round.empty();
                     console.log("a Tag removed");
@@ -115,7 +116,7 @@ $(document).ready(function(){
     let selectedPrice = 0;
     let discountAmount = 0;
     let totalPrice = 0;
-    let selectedDate = $()
+    let userCounponId = "";
     $(".next").click(function(){
         let current_fs, next_fs, previous_fs; //fieldsets
         let opacity;
@@ -160,10 +161,11 @@ $(document).ready(function(){
             'showing_seq': $(".aTag.clicked").attr("id"),
         }
         console.log("seq => "+data1.showing_seq);
+        $("#showing-seq").val(data1.showing_seq);
 
         // ajax 요청을 컨트롤러로 보낸다.
         $.ajax({
-            url: "detail/seat",
+            url: "/ticketing/seats",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data1),
@@ -298,6 +300,7 @@ $(document).ready(function(){
             console.log(`selectedSeatList => ${selectedSeatList}`);
             console.log(`selectedPrice => ${selectedPrice}`);
             discountAmount = 0;
+            userCounponId = "";
             totalPrice = selectedPrice;
             // 쿠폰조회 버튼 클릭시 ajax 에 넘길 데이터 구성하기
             // 넘길때 필요한 정보 = {유저아이디, 쿠폰아이디}
@@ -305,7 +308,7 @@ $(document).ready(function(){
 
             const userId = $("#user_id").val();
             $.ajax({
-                url: "detail/coupon", // 요청을 보낼 URL
+                url: "/ticketing/coupons", // 요청을 보낼 URL
                 type: "GET", // 요청 방식 (GET, POST 등)
                 data: {
                     // 요청에 포함할 데이터
@@ -325,6 +328,7 @@ $(document).ready(function(){
                         tableHtml += '<td class="coupon-data">' + date + '</td>';
                         tableHtml += '<td class="use"><button type="button" class="btn btn-outline-primary use-btn">사용</button></td>';
                         tableHtml += `<input type="hidden" class="discount-amount" value="${coupon.couponDiscount}">`;
+                        tableHtml += `<input type="hidden" class="user-coupon-id" value="${coupon.userCouponId}">`;
                         tableHtml += `<input type="hidden" class="min-order" value="${coupon.minOrder}">`;
                         tableHtml += '</tr>';
                     });
@@ -383,6 +387,7 @@ $(document).ready(function(){
                                 // 해당 tr 태그 내의 .coupon-name 클래스에 있는 텍스트 가져오기
                                 const couponName = trElement.find('.coupon-name').text();
                                 discountAmount = $clickedBtn.parent().siblings('.discount-amount').val();
+                                userCounponId = $clickedBtn.parent().siblings('.user-coupon-id').val();
                                 totalPrice = selectedPrice - discountAmount;
                                 console.log("discount = " + discountAmount);
                                 console.log("selectedPrice = " + selectedPrice);
@@ -407,11 +412,53 @@ $(document).ready(function(){
             });
         } else {
             // selectedList의 길이가 0인 경우에 대한 처리 (예: 알림창 표시 등)
-            alert("좌석을 최소한 하나 이상 선택해야 합니다.");
+            alert("좌석을 하나 이상 선택해야 합니다.");
             location.reload();
         }
     });
 
+    // 결제하기 버튼 클릭하기.
+    // 누르면 선택된 일정, 좌석, 금액 정보를 백엔드로 넘긴다. 넘긴 후 백엔드에서 DB에 ticketing 테이블에 insert 한다.
+
+    $("#third-btn").click(function (){
+        console.log(`주문가격 : ${totalPrice}`);
+        console.log(`선택좌석리스트 : ${selectedSeatList}`);
+        console.log(`선택회차 : ${$(".aTag.clicked").text()}`);
+        console.log(`주문자 아이디 : ${$("#user_id").val()}`);
+        console.log(`공연명 : ${$("#play-name").text()}`);
+        console.log(`공연장명 : ${$("#stage-name").text()}`);
+        console.log(`유저쿠폰ID : ${userCounponId}`);
+        console.log(`할인가격 : ${discountAmount}`);
+        const data = {
+            'ticketingPrice' : totalPrice,
+            'showingSeq' : $("#showing-seq").val(),
+            'seatList' : selectedSeatList.toString(),
+            'ticketingDate' : $("#date-text").val(),
+            'showingInfo' : $(".aTag.clicked").text(),
+            'playName' : $("#play-name").text(),
+            'stageName' : $("#stage-name").text(),
+            'ticketCnt' : selectedSeatList.length,
+            'userId' : $("#user_id").val(),
+            'userCouponId' : userCounponId,
+            'discountAmount' : discountAmount,
+        }
+        // 보낸 데이터로 예매 테이블 작성한다.
+        $.ajax({
+            type: "POST",
+            url: "/ticketing/tickets",
+            data: JSON.stringify(data),
+            contentType : 'application/json; charset=utf-8',
+            success: function (res){
+                console.log("응답 데이터 >> " + res);
+                $("#ticketing-id").val(res);
+            },
+            error: function(error){
+                console.log(error);
+                alert(error.status+"에러 예매를 다시 진행해주세요.");
+            }
+        })
+        // 필요한 정보 == merchant_uid =
+    })
 
     $(".previous").click(function(){
         current_fs = $(this).parent();
@@ -433,15 +480,152 @@ $(document).ready(function(){
             },
             duration: 500
         });
-
     });
 
 
-    $(".submit").click(function(){
-        return false;
-    })
-});
+    // 포트원 결제 JavaScript SDK 사용
 
+    $("#payment-btn").click(function (event){
+        const ticketingId = $("#ticketing-id").val();
+        const userId = $("#user_id").val();
+        $.ajax({
+            type: "GET",
+            url: "/payments/"+userId+"/info",
+            success: function (res){
+                console.log(res);
+                $("#user-tel").val(res.user_tel);
+            },
+            error: function (err){
+                console.log(err);
+            }
+        });
+        const url = "/payments/"+ticketingId;
+        console.log("카카오페이 결제 버튼 클릭! with : "+ticketingId);
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (res){
+                console.log("응답 정보 >> " + res);
+                // console.log();
+            },
+            error: function(error){
+                console.log(error);
+                alert(error.status+"ajax GET /payments/"+ticketingId +"요청 실패!");
+            }
+        })
+        event.preventDefault();
+        requestPay(ticketingId);
+    })
+
+
+    IMP.init("imp43864664");
+    // 결제수단: 카카오페이 간편결제 - (모바일에서 결제 진행)
+    function requestPay(ticketingId){
+        IMP.request_pay({
+            pg: "kakaopay",
+            pay_method: "card",
+            merchant_uid: ticketingId,
+            name: $("#play-name").val(),
+            amount: totalPrice,
+            buyer_name: $("#user_id").val(),
+            buyer_tel: $("#user-tel").val(),
+        }, function (res){
+            console.log(res);
+            if(res.success){
+                console.log("결제 성공 여부 >> "+res.success);
+                console.log("결제 내역 url >> "+res.receipt_url);
+                if(res.success){
+                    $.ajax({
+                        type: "POST",
+                        url: "/payments/success",
+                        data: JSON.stringify(res),
+                        contentType : 'application/json; charset=utf-8',
+                        success: function (response){
+                            console.log(response);
+
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    })
+                }else {
+                    $.ajax({
+                        type: "GET",
+                        url: "/payments/"+ticketingId+"/delete",
+                        success: function (res){
+                            console.log(res);
+
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    })
+
+                }
+
+
+            }else {
+                console.log("결제 성공 여부 >> "+res.success);
+                console.log("에러코드 >> "+res.error_code +"  에러메시지 >> "+res.error_msg);
+            }
+        });
+    }
+
+    $(window).bind("beforeunload", function (event){
+        const ticketingId = $("#ticketing-id").val();
+        event.preventDefault();
+        event.returnValue = false;
+        if(ticketingId !== null){
+            $.ajax({
+                url: "/payments/"+ticketingId+"/delete",
+                cache : "false",
+                type: "GET",
+                success: function (res){
+                    console.log(res);
+                },
+                error: function (error){
+                    console.log(error);
+                }
+            })
+        }
+    })
+
+});
+// 결제 성공시 응답 코드 예시
+// {
+//     "success": true,
+//     "imp_uid": "imp_929757752107",
+//     "pay_method": "point",
+//     "merchant_uid": "test_ltjyrto4",
+//     "name": "이클립스 민트",
+//     "paid_amount": 3500,
+//     "currency": "KRW",
+//     "pg_provider": "kakaopay",
+//     "pg_type": "payment",
+//     "pg_tid": "T5eca1e51c025b0fa081",
+//     "apply_num": "",
+//     "buyer_name": "",
+//     "buyer_email": "",
+//     "buyer_tel": "010-5425-9150",
+//     "buyer_addr": "",
+//     "buyer_postcode": "",
+//     "custom_data": null,
+//     "status": "paid",
+//     "paid_at": 1710006778,
+//     "receipt_url": "https://mockup-pg-web.kakao.com/v1/confirmation/p/T5eca1e51c025b0fa081/3376704876d102f18c29bae86f94733997f3068fe88feed2485846af9d576d6c",
+//     "card_name": null,
+//     "bank_name": null,
+//     "card_quota": 0,
+//     "card_number": ""
+// }
+//  에러코드 예시
+// {
+//     "success": false,
+//     "imp_uid": null,
+//     "merchant_uid": "test_ltjyrto4",
+//     "error_code": "F1002",
+//     "error_msg": "이미 결제가 이루어진 거래건입니다."
+// }
 
 // jquery 캘린더 설정
     $.datepicker.setDefaults({

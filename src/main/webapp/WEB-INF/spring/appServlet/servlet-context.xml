@@ -32,5 +32,10 @@
         <beans:property name="defaultErrorView" value="error"/>
     </beans:bean>
 
+    <!-- PortOne API key, secret 저장 위치 : 외부 노출시 재발급 필요함 -->
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="locations" value="classpath:/key.properties" />
+    </beans:bean>
+
     <beans:bean id="naverLoginBO" class="com.jcticket.user.sns.NaverLoginBO" />
 </beans:beans>

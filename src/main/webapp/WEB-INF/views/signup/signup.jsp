@@ -8,7 +8,7 @@
 <body>
 <div class="page">
     <section class="section">
-        <a href="/" class="mainLogoWrap">
+        <a href="${pageContext.request.contextPath}/index" class="mainLogoWrap">
             <img src="${pageContext.request.contextPath}/resources/img/components/로고1.png" class="logoImg">
         </a>
     </section>
