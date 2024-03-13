@@ -51,7 +51,7 @@
                 <div class="row align-items-center mb-1">
                     <div class="col-4">
                         <%-- 이미지 들어갈 자리--%>
-                        <img id="posterinfo" src='/resources/img/viewdetail/testposter.jpg'/>
+                        <img id="posterinfo" src="<c:url value='/upload/${p.img_name}'/>" alt="">
                     </div>
                     <div class="col-8 text-left">
                         <input type="hidden" id="play_id" value="${play_id}">
