@@ -43,9 +43,11 @@ public class PaymentServiceImpl implements PaymentService{
         //API 에서 받은 결제승인시각 UNIX Timestamp --> Timestamp 로 변환하기
         String unixTimeStamp = requestDto.getPaid_at();
         long timestamp = Long.parseLong(unixTimeStamp);
-        Timestamp paidAt = new Timestamp(timestamp);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date(timestamp * 1000);
+        String paidAt = sdf.format(date);
         //String userId = paymentDao.selectUserByTicketingId(requestDto.getMerchant_uid());
-
+        Timestamp CUR_TS = new Timestamp(System.currentTimeMillis());
         // 결제 테이블 DTO 빌드
         PaymentDto dto = PaymentDto.builder()
                 .payment_id(paymentId)
@@ -57,6 +59,10 @@ public class PaymentServiceImpl implements PaymentService{
                 .receipt_url(requestDto.getReceipt_url())
                 .ticketing_id(requestDto.getMerchant_uid())
                 .user_id(requestDto.getBuyer_name())
+//                .created_id("sys")
+//                .updated_id("sys")
+//                .created_at(CUR_TS)
+//                .updated_at(CUR_TS)
                 .build();
         System.out.println("==========>"+dto.toString());
         return paymentDao.insertPayment(dto);
