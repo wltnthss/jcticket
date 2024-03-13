@@ -77,6 +77,12 @@ public class MyServiceImpl implements mypageService {
     public List<TicketingDto> selectLimit(Map map) throws Exception {
         return mypageDAO.selectLimit(map);
     }
+
+    @Override
+    public List<TicketingDto> selectLimit_img(Map map) throws Exception {
+        return mypageDAO.selectLimit_img(map);
+    }
+
     @Override
     public List<TicketingDto> select_view(Map map) throws Exception {
         return mypageDAO.select_view(map);

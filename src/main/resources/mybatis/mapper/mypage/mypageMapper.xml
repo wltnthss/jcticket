@@ -22,6 +22,27 @@
             LIMIT 5;
     </select>
 
+
+    <select id="selectLimit_img" parameterType="map" resultType="TicketingDTO">
+        SELECT t.ticketing_at,
+               t.ticketing_id,
+               t.play_name,
+               t.showing_date,
+               t.ticketing_cnt,
+               (SELECT cc.comn_code_name
+                FROM jcticket.comn_code cc
+                WHERE cc.comn_code_id = t.ticketing_status) AS ticketing_status,
+               pi.play_poster_original_file_name,
+               SUBSTRING(pi.play_poster_stored_file_name, 1, CHAR_LENGTH(pi.play_poster_stored_file_name) - 4) AS play_poster_stored_file_name
+        FROM jcticket.ticketing t
+                 INNER JOIN jcticket.user u ON t.user_id = u.user_id
+                 LEFT JOIN jcticket.play_image pi ON t.play_name = SUBSTRING(pi.play_poster_original_file_name, 1, CHAR_LENGTH(pi.play_poster_original_file_name) - 4)
+        WHERE u.user_id = 'wjswotmd2'
+        ORDER BY t.ticketing_at DESC
+            LIMIT 3;
+    </select>
+
+
     <select id="count" parameterType="map" resultType="int">
         SELECT COUNT(*)
         FROM ticketing t

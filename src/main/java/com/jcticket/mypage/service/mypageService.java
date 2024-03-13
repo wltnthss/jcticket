@@ -30,6 +30,7 @@ public interface mypageService {
     List<MyUserCouponDto> coupon_list(Map map) throws Exception;
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> selectLimit(Map map) throws Exception;
+    List<TicketingDto> selectLimit_img(Map map) throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
     TicketingDto ticket_detail(String ticketing_id) throws Exception;
 

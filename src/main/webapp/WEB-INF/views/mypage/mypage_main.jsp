@@ -149,6 +149,19 @@
             width: 425px;
         }
 
+        #showing_image {
+            margin: auto;
+            width: 830px;
+            height: 300px;
+            border: 5px solid #FAFAF0;
+        }
+
+        #showing_image_child {
+            width: 270px;
+            height: 300px;
+            border: 1px solid;
+        }
+
 
     </style>
 
@@ -251,12 +264,15 @@
 
                     <br>
 
-                    <ul id="show_img">
-                        <il><div class="showing_img">aa</div></il>
-                        <il><div class="showing_img">aa</div></il>
-                        <il><div class="showing_img">aa</div></il>
-                    </ul>
-
+                    <div id="showing_image">
+                        <c:forEach items="${ticketList}" var="TicketingDto">
+                        <div id="showing_image_child">
+                            <ul id="show_img">
+                                    <li><img src="<c:url value='/index/upload/${TicketingDto.play_poster_stored_file_name}'/>"></li>
+                            </ul>
+                        </div>
+                        </c:forEach>
+                    </div>
                 </article>
             </div>
         </div>

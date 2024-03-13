@@ -49,7 +49,10 @@ public class mypageImpl implements mypageDAO {
         return session.selectList(namespace + "selectLimit", map);
     }
 
-
+    @Override
+    public List<TicketingDto> selectLimit_img(Map map) throws Exception {
+        return session.selectList(namespace + "selectLimit_img", map);
+    }
 
 
     @Override

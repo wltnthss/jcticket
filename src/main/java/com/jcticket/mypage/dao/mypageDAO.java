@@ -29,6 +29,7 @@ public interface mypageDAO {
     int view_count(Map map) throws Exception;
     List<TicketingDto> selectAll(Map map) throws  Exception;
     List<TicketingDto> selectLimit(Map map) throws  Exception;
+    List<TicketingDto> selectLimit_img(Map map) throws  Exception;
 
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
