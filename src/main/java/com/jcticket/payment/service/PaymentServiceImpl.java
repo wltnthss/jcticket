@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService{
         String unixTimeStamp = requestDto.getPaid_at();
         long timestamp = Long.parseLong(unixTimeStamp);
         Timestamp paidAt = new Timestamp(timestamp);
-        String userId = paymentDao.selectUserByTicketingId(requestDto.getMerchant_uid());
+//        String userId = paymentDao.selectUserByTicketingId(requestDto.getMerchant_uid());
 
         // 결제 테이블 DTO 빌드
         PaymentDto dto = PaymentDto.builder()
@@ -56,7 +56,7 @@ public class PaymentServiceImpl implements PaymentService{
                 .payment_status(requestDto.getStatus())
                 .receipt_url(requestDto.getReceipt_url())
                 .ticketing_id(requestDto.getMerchant_uid())
-                .user_id(userId)
+//                .user_id(userId)
                 .build();
         return paymentDao.insertPayment(dto);
     }
@@ -72,14 +72,14 @@ public class PaymentServiceImpl implements PaymentService{
                 String seatRow = String.valueOf(seat.charAt(0));
                 int seatCol = Integer.parseInt(seat.substring(1));
                 ShowSeatDto ssDto = ShowSeatDto.builder()
-                        .showing_seq(dto.getShowingSeq())
+//                        .showing_seq(dto.getShowingSeq())
                         .seat_row(seatRow)
                         .seat_col(seatCol)
                         .build();
                 paymentDao.updateSeatStatusN(ssDto);
                 System.out.println("좌석의 행: " + seatRow + ", 좌석의 열: " + seatCol);
             }
-            paymentDao.updateUserCouponStatusY(dto.getUserCouponId());
+//            paymentDao.updateUserCouponStatusY(dto.getUserCouponId());
             return "success";
         }catch (Exception e){
             return "fail";
