@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <%--    datepicker--%>
-    <link rel="stylesheet" href="/resources/css/ticketing/datepicker-ui.css">
-    <link rel="stylesheet" href="/resources/css/ticketing/booking.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ticketing/datepicker-ui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ticketing/booking.css">
     <style>
 
     </style>
@@ -51,7 +51,7 @@
                 <div class="row align-items-center mb-1">
                     <div class="col-4">
                         <%-- 이미지 들어갈 자리--%>
-                        <img id="posterinfo" src="<c:url value='/upload/${p.img_name}'/>" alt="">
+                        <img id="posterinfo" src="<c:url value='/upload/${img_name}'/>" alt="포스터">
                     </div>
                     <div class="col-8 text-left">
                         <input type="hidden" id="play_id" value="${play_id}">
@@ -185,7 +185,7 @@
 
 
 
-<script src="/resources/js/ticketing/booking.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/ticketing/booking.js"></script>
 <%--<script type="text/javascript" src="/resources/js/viewdetail/jquery-ui.min.js"></script>--%>
 </body>
 </html>

@@ -97,7 +97,12 @@ public class PaymentServiceImpl implements PaymentService{
                 System.out.println("좌석의 행: " + seatRow + ", 좌석의 열: " + seatCol);
             }
 
-            paymentDao.updateUserCouponStatusY(userCouponId);
+            int res = paymentDao.updateUserCouponStatusY(userCouponId);
+            if(res == 1){
+                System.out.println("#######################");
+                System.out.println("#######쿠폰상태 업데이트####");
+                System.out.println("#######################");
+            }
 
             return "success";
         }catch (Exception e){
@@ -112,7 +117,9 @@ public class PaymentServiceImpl implements PaymentService{
         try{
             int res = paymentDao.deleteTicketing(ticketingId);
             if(res == 1){
-                System.out.println("<<삭제완료>>");
+                System.out.println("########################");
+                System.out.println("########삭제완료##########");
+                System.out.println("########################");
             }
         }catch (Exception e){
             return e.getMessage();

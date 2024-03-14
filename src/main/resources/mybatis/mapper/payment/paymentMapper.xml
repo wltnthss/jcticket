@@ -75,7 +75,7 @@
         WHERE user_email = #{user_email};
     </select>
 
-    <!-- 유저아이디로 유저이름, 이메일 가져오기 -->
+    <!-- 유저아이디로 유저이름, 이메일, 연락처, 주소 가져오기 -->
     <select id="selectUserInfo" parameterType="string" resultType="UserPayDto">
         select user_name, user_email, user_tel, user_address
         from user

@@ -241,4 +241,9 @@ public class TicketingServiceImpl implements TicketingService{
                 .amount(ticketingAmount)
                 .build();
     }
+
+    @Override
+    public String getPosterPath(String play_id) throws Exception {
+        return ticketingDao.selectPosterPath(play_id);
+    }
 }

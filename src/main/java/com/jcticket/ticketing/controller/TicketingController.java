@@ -34,10 +34,14 @@ public class TicketingController {
         return "ticketing/popup-test";
     }
 
+//    @GetMapping("/ticketing/poster/{play_id}")
+//    public String getPosterPath(@PathVariable(value = "play_id") String play_id)throws Exception{
+//
+//    }
+
 
     // 예매하기 버튼을 눌렀을때 들어오는 url
     // 팝업창을 만들어 보여준다.
-
     @GetMapping(value = "/ticketing/booking")
     public String getTicketingDetail(@RequestParam(value = "play_id") String play_id, Model model) throws Exception{
         System.out.println("ticketing/detail 진입: parameter ==> " + play_id);
@@ -47,11 +51,12 @@ public class TicketingController {
             String play_name = (String)map.get("play_name");
             String stage_name = (String)map.get("stage_name");
             ArrayList<String> list= (ArrayList<String>)map.get("showing_date");
-
+            String img_name = ticketingService.getPosterPath(play_id);
             model.addAttribute("play_id", play_id);
             model.addAttribute("play_name",play_name);
             model.addAttribute("stage_name",stage_name);
             model.addAttribute("list",list);
+            model.addAttribute("img_name", img_name);
             System.out.println("모델객체에 값 넘김:");
             System.out.println("play_id ==> " +play_id);
             System.out.println("play_name ==> "+ play_name);

@@ -310,9 +310,11 @@
     </select>
 
 
-    <!-- selectAllPro?? 그냥 공연 이미지나 받아 오자.. -->
-    <select id="selectPlayPoster" resultType="Map" parameterType="Map">
-
+    <!-- 공연이름 , 공연이미지 받아오는 쿼리 -->
+    <select id="selectPosterPath" resultType="string" parameterType="string">
+        SELECT play_poster_stored_file_name AS img_name
+        FROM play_image
+        WHERE play_id = #{play_id}
     </select>
 
 
