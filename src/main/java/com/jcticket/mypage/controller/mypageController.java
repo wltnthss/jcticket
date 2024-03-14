@@ -5,6 +5,7 @@ package com.jcticket.mypage.controller;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.dto.UserCouponDto;
 import com.jcticket.mypage.service.mypageService;
+import com.jcticket.payment.dto.PaymentDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.mindrot.jbcrypt.BCrypt;
@@ -18,10 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -49,13 +48,23 @@ public class mypageController {
 
         System.out.println("sessionId => " + sessionId);
 
+
+
+
         Map map = new HashMap();
         map.put("selectType", "desc");
         map.put("user_id", sessionId);
         List<TicketingDto> list = mypageService.selectLimit(map);
         List<TicketingDto> list2 = mypageService.selectLimit_img(map);
+        int possible = mypageService.possible_coupon(sessionId);
+        int impossible = mypageService.impossible_coupon(sessionId);
+
+
         model.addAttribute("ticketList", list);
         model.addAttribute("ticketList2", list2);
+        model.addAttribute("possible", possible);
+        model.addAttribute("impossible", impossible);
+
         return "/mypage/mypage_main";
     }
 
@@ -78,11 +87,6 @@ public class mypageController {
             int result = mypageService.ticket_cancel(cancel);
             System.out.println(result);
         }
-        
-
-//        if(cancel.equals("cancel")) {
-//            System.out.println("응애");
-//        }
 
 
         String sessionId = (String)session.getAttribute("sessionId");
@@ -105,8 +109,12 @@ public class mypageController {
 
             PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
 
+            UserDto userDto = mypageService.user_info(sessionId);
+
             List<TicketingDto> list = mypageService.selectAll(map);
+
             model.addAttribute("ticketList", list);
+            model.addAttribute("User", userDto);
             model.addAttribute("ph", myPagingDTO);
 
         } catch (Exception e) {
@@ -121,12 +129,28 @@ public class mypageController {
                          Model model) throws Exception {
 
         TicketingDto ticketingDto = mypageService.ticket_detail(ticketing_id);
-        System.out.println("ticketingDto => " + ticketingDto);
+
+        PaymentDto paymentDto = mypageService.user_payment(ticketing_id);
+
+        System.out.println(paymentDto);
+
+        if(paymentDto.getUser_coupon_id() != null) {
+            UserCouponDto UsercouponDto = mypageService.coupon_amount(paymentDto.getUser_coupon_id());
+            System.out.println(UsercouponDto);
+            CouponDto couponDto = mypageService.coupon_discount(UsercouponDto.getCoupon_id());
+            System.out.println(couponDto);
+            model.addAttribute("couponDto", UsercouponDto);
+            model.addAttribute("couponDto", couponDto);
+        }
+
+
 
 
 
 
         model.addAttribute("ticketingDto", ticketingDto);
+        model.addAttribute("paymentDto", paymentDto);
+
 
         return "/mypage/mypage_detail";
     }
@@ -161,6 +185,10 @@ public class mypageController {
 
             int totalCount = mypageService.view_count(map);
 
+            UserDto userDto = mypageService.user_info(sessionId);
+
+            System.out.println(userDto);
+
             System.out.println("totalCount = " + totalCount);
 
             PageHandler myPagingDTO = new PageHandler(totalCount, page, pageSize, option, start_date, end_date, keyword);
@@ -169,6 +197,8 @@ public class mypageController {
 
 
             model.addAttribute("view_list", list);
+            model.addAttribute("User", userDto);
+            model.addAttribute("viewing_count", totalCount);
             model.addAttribute("ph", myPagingDTO);
 
         } catch (Exception e) {
@@ -313,10 +343,6 @@ public class mypageController {
                     UserCouponDto userCouponDto = new UserCouponDto(couponCode, sessionId, coupon_id, null, now, now, "N", now, "RALO", now, "RALO", "", 0, "");
                     mypageService.coupon_insert(userCouponDto);
                     mypageService.update_coupon(couponDto);
-
-
-
-
                 }
             }
 

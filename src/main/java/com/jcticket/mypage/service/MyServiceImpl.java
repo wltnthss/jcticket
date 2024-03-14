@@ -4,6 +4,7 @@ import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.dto.UserCouponDto;
 import com.jcticket.mypage.dao.mypageDAO;
 //import com.jcticket.mypage.dto.MyUserCouponDto;
+import com.jcticket.payment.dto.PaymentDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,16 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public UserCouponDto coupon_amount(String coupon_id) throws Exception {
+        return mypageDAO.coupon_amount(coupon_id);
+    }
+
+    @Override
+    public CouponDto coupon_discount(String coupon_id) throws Exception {
+        return mypageDAO.coupon_discount(coupon_id);
+    }
+
+    @Override
     public List<TicketingDto> selectAll(Map map) throws Exception {
         return mypageDAO.selectAll(map);
     }
@@ -94,6 +105,11 @@ public class MyServiceImpl implements mypageService {
     }
 
     @Override
+    public PaymentDto user_payment(String user_id) throws Exception {
+        return mypageDAO.user_payment(user_id);
+    }
+
+    @Override
     public UserDto user_info(String id) throws Exception {
         return mypageDAO.user_info(id);
     }
@@ -112,6 +128,15 @@ public class MyServiceImpl implements mypageService {
     @Override
     public Integer ticket_cancel(String ticket_id) throws Exception {
         return mypageDAO.ticket_cancel(ticket_id);
+    }
+
+    @Override
+    public Integer possible_coupon(String user_id) throws Exception {
+        return mypageDAO.possible_coupon(user_id);
+    }
+    @Override
+    public Integer impossible_coupon(String user_id) throws Exception {
+        return mypageDAO.impossible_coupon(user_id);
     }
 
     @Override

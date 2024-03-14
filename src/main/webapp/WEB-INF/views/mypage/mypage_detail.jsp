@@ -325,15 +325,14 @@
                             </tr>
                             <tr>
                                 <th>총결제금액</th>
-                                <td colspan="3" class="ri"><span class="red tit"><strong>2,500 - 100</strong>원</span><br><span
-                                        class="sm">(티켓금액 <strong>2,500</strong>원 + 예매수수료 <strong>0</strong>원 + 배송비 <strong>0</strong>원)</span>
+                                <td colspan="3" class="ri"><span class="red tit"><strong>${paymentDto.payment_amount}</strong>원</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th>결제수단</th>
                                 <td colspan="3" class="ri">
                                     <div>
-                                        <div class="sub_list">YES머니 <strong>2,500</strong>원</div>
+                                        <div class="sub_list">카카오페이 <strong>${paymentDto.payment_amount}</strong>원</div>
                                     </div>
                                 </td>
                             </tr>
@@ -367,11 +366,18 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="le">성인</td>
-                                <td>비지정석</td>
-                                <td>50% 할인</td>
-                                <td>2,500 원</td>
-                                <td class="ri">예매</td>
+                                <td class="le">VIP</td>
+                                <td>${ticketingDto.selected_seats}</td>
+                                <c:choose>
+                                    <c:when test="${not empty couponDto.coupon_discount_amount}">
+                                        <td>${couponDto.coupon_discount_amount}원</td>
+                                    </c:when>
+                                    <c:when test="${empty couponDto.coupon_discount_amount}">
+                                        <td>-</td>
+                                    </c:when>
+                                </c:choose>
+                                <td>${paymentDto.payment_amount}원</td>
+                                <td class="ri">${ticketingDto.ticketing_status}</td>
                                 <td style="display:none;"><input id="cbxCancelSeat1" type="checkbox" title="취소"
                                                                  style="display:none;">
                             </tbody>
@@ -379,7 +385,7 @@
                     </div>
                     <div id="cancel_info">
                         <div id="cancel_header">
-                            <p>※ 취소 마감시간 : 2024.01.16 (화) 23:00 까지</p>
+                            <p>※ 취소 마감시간 : ${ticketingDto.ticketing_at} 까지</p>
                         </div>
                         <div id="cancel_mid">
                             <h3>취소 수수료안내</h3>

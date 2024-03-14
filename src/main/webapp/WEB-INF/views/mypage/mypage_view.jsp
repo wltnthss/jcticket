@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: wjswo
   Date: 2024-02-04
@@ -6,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>2
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -40,6 +41,7 @@
         }
 
         #viewing > p {
+            display: inline-block;
             font-size: 18px;
             padding: 15px;
             font-weight: bold;
@@ -180,6 +182,17 @@
 
 
     </style>
+
+    <%
+        // 현재 날짜를 가져오기 위해 Date 객체 생성
+        Date currentDate = new Date();
+
+        // 출력 형식을 정의하기 위해 SimpleDateFormat 객체 생성
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy 년 MM 월 dd 일");
+
+        // 현재 날짜를 문자열로 변환
+        String formattedDate = dateFormat.format(currentDate);
+    %>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
@@ -197,7 +210,7 @@
                     <a href="${pageContext.request.contextPath}/mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                     <div id="side_img">
-                        <img src="${pageContext.request.contextPath}/resources/img/mypage/페페%20한잔해.jpg">
+                        <img src="${pageContext.request.contextPath}/resources/img/mypage/img.jpg">
                     </div>
 
                     <div id="ticket">
@@ -227,7 +240,7 @@
                 <br>
 
                 <div id="viewing">
-                    <p>전재승님의 관람 공연은 총 1건 입니다.(2024년 02월 05일 기준) / 관람후기 작성 1건, 미작성 0건</p>
+                    <p>${User.user_name} 관람 공연은 총 ${viewing_count}건 입니다. <p>(<%=formattedDate %> 기준)</p></p>
                     <hr>
 
                     <form class="form_tag" action="${pageContext.request.contextPath}/mypageview" method="get">
