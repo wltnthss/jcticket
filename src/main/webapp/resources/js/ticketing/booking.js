@@ -1,6 +1,6 @@
 // step.1 일정선택
 $(document).ready(function() {
-
+    $("#is-paid").val("");
     let dateShow = $(".dateShow");
     //선택 가능한 날짜 ex)
     // var availableDates = ["2024-02-28", "2024-02-29"];
@@ -8,7 +8,6 @@ $(document).ready(function() {
     for (let i = 0; i < dateShow.length; i++) {
         availableDates.push(dateShow[i].innerHTML);
     }
-
     $("#datepicker").datepicker({
         //오늘부터 날짜 선택 가능하도록 함
         minDate: 0,
@@ -50,7 +49,7 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                uri: sessionStorage.getItem("contextpath") +  "/ticketing/rounds",
+                url: sessionStorage.getItem("contextpath") +  "/ticketing/rounds",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
@@ -125,6 +124,7 @@ $(document).ready(function(){
         let steps = $("fieldset").length;
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
+        $("#payment-res").val("");
         //Add Class Active
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
         //다음단계 넘어가기
@@ -168,7 +168,7 @@ $(document).ready(function(){
 
         // ajax 요청을 컨트롤러로 보낸다.
         $.ajax({
-            uri: sessionStorage.getItem("contextpath") + "/ticketing/seats",
+            url: sessionStorage.getItem("contextpath") + "/ticketing/seats",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data1),
@@ -311,7 +311,7 @@ $(document).ready(function(){
 
             const userId = $("#user_id").val();
             $.ajax({
-                uri: sessionStorage.getItem("contextpath") + "/ticketing/coupons", // 요청을 보낼 URL
+                url: sessionStorage.getItem("contextpath") + "/ticketing/coupons", // 요청을 보낼 URL
                 type: "GET", // 요청 방식 (GET, POST 등)
                 data: {
                     // 요청에 포함할 데이터
@@ -334,6 +334,7 @@ $(document).ready(function(){
                         tableHtml += `<input type="hidden" class="user-coupon-id" value="${coupon.userCouponId}">`;
                         tableHtml += `<input type="hidden" class="min-order" value="${coupon.minOrder}">`;
                         tableHtml += '</tr>';
+                        tableHtml += '<br><br><br><br><br>';
                     });
                     tableHtml += '</table>';
                     $("#coupons").html(tableHtml);
@@ -342,7 +343,7 @@ $(document).ready(function(){
                         'text-align' : 'center'
                     });
                     $(".coupon-data").css({
-                        'font-size' : '11px',
+                        'font-size' : '10px',
                         'height' : '25px'
                     });
                     $(".coupon-header").css('font-size', '13px');
@@ -354,7 +355,7 @@ $(document).ready(function(){
                     $(".use_condition").css({
                         'text-align' : 'center'
                     })
-                    $("#total-order-price").text('선택가격: '+selectedPrice + '원 - 할인가격: 0원'+" = "+totalPrice+"원");
+                    $("#total-order-price").text('선택금액: '+selectedPrice + '원 - 할인금액: 0원'+" = "+totalPrice+"원");
 
 
                     $('.use-btn').click(function() {
@@ -425,6 +426,7 @@ $(document).ready(function(){
     // 누르면 선택된 일정, 좌석, 금액 정보를 백엔드로 넘긴다. 넘긴 후 백엔드에서 DB에 ticketing 테이블에 insert 한다.
 
     $("#third-btn").click(function (){
+        $("#after-payment").css("display","none");
         console.log(`주문가격 : ${totalPrice}`);
         console.log(`선택좌석리스트 : ${selectedSeatList}`);
         console.log(`선택회차 : ${$(".aTag.clicked").text()}`);
@@ -449,7 +451,7 @@ $(document).ready(function(){
         // 보낸 데이터로 예매 테이블 작성한다.
         $.ajax({
             type: "POST",
-            uri: sessionStorage.getItem("contextpath") + "/ticketing/tickets",
+            url: sessionStorage.getItem("contextpath") + "/ticketing/tickets",
             data: JSON.stringify(data),
             contentType : 'application/json; charset=utf-8',
             success: function (res){
@@ -490,11 +492,14 @@ $(document).ready(function(){
     // 포트원 결제 JavaScript SDK 사용
 
     $("#payment-btn").click(function (event){
+        event.preventDefault();
+        $("#pre-payment").val("")
+        console.log("카카오페이 결제 버튼 클릭!");
         const ticketingId = $("#ticketing-id").val();
         const userId = $("#user_id").val();
         $.ajax({
             type: "GET",
-            uri: sessionStorage.getItem("contextpath") + "/payments/"+userId+"/info",
+            url: sessionStorage.getItem("contextpath") + "/payments/"+userId+"/info",
             success: function (res){
                 console.log(res);
                 $("#user-tel").val(res.user_tel);
@@ -503,33 +508,48 @@ $(document).ready(function(){
                 console.log(err);
             }
         });
-        const url = "/payments/"+ticketingId;
-        console.log("카카오페이 결제 버튼 클릭! with : "+ticketingId);
         $.ajax({
             type: "GET",
-            uri:sessionStorage.getItem("contextpath") +  url,
+            url:sessionStorage.getItem("contextpath") + "/payments/"+ticketingId,
             success: function (res){
-                console.log("응답 정보 >> " + res);
-                // console.log();
+                console.log("사전등록 응답 정보 >> "+ JSON.stringify(res));
+                console.log(res.code);
+                console.log(res.message);
+                console.log(res.response);
+                requestPay(ticketingId);
+                // const prepareInfo = $("#pre-payment").val();
+                // if(res.code === 0){
+                //     $("#pre-payment").val("prepared");
+                //     requestPay(ticketingId);
+                // }else {
+                //     if (prepareInfo === "prepared"){
+                //         requestPay(ticketingId);
+                //     }
+                //     console.log(res.message)
+                //     alert("오류: "+res.message);
+                // }
             },
             error: function(error){
                 console.log(error);
                 alert(error.status+"ajax GET /payments/"+ticketingId +"요청 실패!");
             }
         })
-        event.preventDefault();
-        requestPay(ticketingId);
+        //event.preventDefault();
+        //requestPay(ticketingId);
     })
 
 
     IMP.init("imp43864664");
     // 결제수단: 카카오페이 간편결제 - (모바일에서 결제 진행)
     function requestPay(ticketingId){
+        $("#payment-res").val("");
+        const playName = $("#play-name").text();
+        console.log(playName);
         IMP.request_pay({
             pg: "kakaopay",
             pay_method: "card",
             merchant_uid: ticketingId,
-            name: "테스트 공연",
+            name: playName,
             amount: totalPrice,
             buyer_name: $("#user_id").val(),
             buyer_tel: $("#user-tel").val(),
@@ -540,51 +560,61 @@ $(document).ready(function(){
                 console.log("결제 성공 여부 >> "+res.success);
                 console.log("결제 내역 url >> "+res.receipt_url);
                 if(res.success){
+                    $("#payment-res").val("success");
                     $.ajax({
                         type: "POST",
-                        uri: sessionStorage.getItem("contextpath") + "/payments/success/"+$("#showing-seq").val(),
+                        url: sessionStorage.getItem("contextpath") + "/payments/success/"+$("#showing-seq").val(),
                         data: JSON.stringify(res),
                         contentType : 'application/json; charset=utf-8',
                         success: function (response){
-                            let contextPath = "${pageContext.request.contextPath}";
                             console.log(response);
-                            //window.location.replace(contextPath + "/mypageIndex");
-                            window.close();
+                            //$(opener.document).find("#pInput").val("paid");
+                            $("#is-paid").val("paid");
+                            //window.open(sessionStorage.getItem("contextpath") + "/mypageIndex");
+                            //window.close();
+                            //window.location.replace(sessionStorage.getItem("contextpath") + "/mypageIndex");
+                            $("#payment-btn").css("display","none");
+                            $("#after-payment").text("결제내역 보러가기").css("display","inline-block");
                         },
                         error: function(error){
                             console.log(error);
                         }
                     })
-                }else {
-                    $.ajax({
-                        type: "GET",
-                        uri: sessionStorage.getItem("contextpath") + "/payments/"+ticketingId+"/delete",
-                        success: function (res){
-                            console.log(res);
-
-                        },
-                        error: function(error){
-                            console.log(error);
-                        }
-                    })
-
+                }else { // 결제에 대한 응답이 false 인경우 예매테이블 삭제
+                    $("#payment-res").val("fail");
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: sessionStorage.getItem("contextpath") + "/payments/"+ticketingId+"/delete",
+                    //     success: function (res){
+                    //         console.log(res);
+                    //
+                    //     },
+                    //     error: function(error){
+                    //         console.log(error);
+                    //     }
+                    // })
                 }
-
-
             }else {
                 console.log("결제 성공 여부 >> "+res.success);
                 console.log("에러코드 >> "+res.error_code +"  에러메시지 >> "+res.error_msg);
             }
         });
     }
+    $("#after-payment").click(function (){
+        window.open(sessionStorage.getItem("contextpath") + "/mypageIndex");
+    })
 
     $(window).bind("beforeunload", function (event){
-        const ticketingId = $("#ticketing-id").val();
         event.preventDefault();
-        event.returnValue = false;
-        if(ticketingId !== null){
+        // event.returnValue = '';
+    })
+    $(window).bind("unload", function(event){
+        const ticketingId = $("#ticketing-id").val();
+        const res = $("#payment-res").val();
+        //event.returnValue = false;
+        if(ticketingId !== null && res !== "success"){
             $.ajax({
-                uri:sessionStorage.getItem("contextpath") +  "/payments/"+ticketingId+"/delete",
+                url:sessionStorage.getItem("contextpath") +  "/payments/"+ticketingId+"/delete",
                 cache : "false",
                 type: "GET",
                 success: function (res){
@@ -593,7 +623,7 @@ $(document).ready(function(){
                 error: function (error){
                     console.log(error);
                 }
-            })
+            });
         }
     })
 

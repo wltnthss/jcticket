@@ -39,8 +39,7 @@
 %>
 
 <script>
-    let contextPath = "${pageContext.request.contextPath}";
-    sessionStorage.setItem("contextpath", contextPath)
+    sessionStorage.setItem("contextpath", "${pageContext.request.contextPath}");
 </script>
 
 <input id="user_id" value="<%=name%>" type="hidden">
@@ -57,7 +56,7 @@
                 <div class="row align-items-center mb-1">
                     <div class="col-4">
                         <%-- 이미지 들어갈 자리--%>
-                        <img id="posterinfo" src="<c:url value='upload/${img_name}'/>" alt="포스터">
+                        <img id="posterinfo" src="<c:url value='/upload/${img_name}'/>" alt="포스터">
                     </div>
                     <div class="col-8 text-left">
                         <input type="hidden" id="play_id" value="${play_id}">
@@ -173,11 +172,18 @@
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="fs-title">결제</h2>
+                                    <h2 class="fs-title">결제수단</h2>
                                 </div>
-                            </div> <br><br>
-                            <input type="hidden" id="user-tel" value="">
-                            <button id="payment-btn">결제하기</button>
+                            </div> <br><br><br><br><br><br>
+<%--                            <div id="booking-list">--%>
+<%--                                <p>선택내역 확인</p>--%>
+<%--                                --%>
+<%--                            </div>--%>
+                            <div id="pay-btns">
+                                <img id="pay-icon-btn" src="${pageContext.request.contextPath}/resources/img/pay/payment_icon_yellow_small.png">
+                                <button id="payment-btn" type="button" class="btn btn-light">결제하기</button>
+                                <button id="after-payment" type="button" class="btn btn-light"></button>
+                            </div>
 
 
 <%--                            <script src="/resources/js/payment/payment.js"></script>--%>
@@ -187,6 +193,10 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="user-tel" value="">
+    <input type="hidden" id="payment-res" value="">
+    <input type="hidden" id="pre-payment" value="">
+    <input type="hidden" id="is-paid" value="">
 </div>
 
 

@@ -2,6 +2,7 @@
     $(document).ready(function() {
         var play_id = document.querySelector('.five').id;
         var dateShow = document.querySelectorAll(".dateShow");
+        $("#is-paid").val("");
 
         //선택 가능한 날짜 ex)
         // var availableDates = ["2024-02-28", "2024-02-29"];
@@ -192,7 +193,13 @@
                     let top = Math.ceil((window.screen.height - popupH) / 2);
                     //var name = "ticketing"
                     //var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-                    window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');                    // ticketing 창 띄우기
+                    window.open(url, '', 'width=' + popupW + ',height=' + popupH + ',left=' + left + ',top=' + top + ',scrollbars=yes,resizable=no,toolbar=no,titlebar=no,menubar=no,location=no');
+                    // if($("#is-paid").val() === "paid"){
+                    //     popUp.addEventListener('unload', ()=>{
+                    //         location.href = sessionStorage.getItem("contextpath") + "/mypageIndex";
+                    //     })
+                    // }
+                    // ticketing 창 띄우기
                 }
             }
         }

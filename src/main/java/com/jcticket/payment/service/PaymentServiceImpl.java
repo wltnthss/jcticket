@@ -72,7 +72,16 @@ public class PaymentServiceImpl implements PaymentService{
 //                .updated_at(CUR_TS)
                 .build();
         System.out.println("==========>"+dto.toString());
-        return paymentDao.insertPayment(dto);
+        int res = paymentDao.insertPayment(dto);
+        if( res == 1){
+            System.out.println("########################");
+            System.out.println("####### payment  #######");
+            System.out.println("####### inserted #######");
+            System.out.println("########################");
+            return res;
+        }
+        return 0;
+
     }
 
     // 결제 성공시 show_seat 테이블과 user_coupon 테이블의 각각 상태를 업데이트하는 서비스:
@@ -93,14 +102,21 @@ public class PaymentServiceImpl implements PaymentService{
                         .seat_row(seatRow)
                         .seat_col(seatCol)
                         .build();
-                paymentDao.updateSeatStatusN(ssDto);
+                int res1 = paymentDao.updateSeatStatusN(ssDto);
+                if(res1 == 1){
+                    System.out.println("#######################");
+                    System.out.println("######  seatlist ####");
+                    System.out.println("######  updated  ####");
+                    System.out.println("#######################");
+                }
                 System.out.println("좌석의 행: " + seatRow + ", 좌석의 열: " + seatCol);
             }
 
-            int res = paymentDao.updateUserCouponStatusY(userCouponId);
-            if(res == 1){
+            int res2 = paymentDao.updateUserCouponStatusY(userCouponId);
+            if(res2 == 1){
                 System.out.println("#######################");
-                System.out.println("#######쿠폰상태 업데이트####");
+                System.out.println("##### user coupon ####");
+                System.out.println("######  updated  ####");
                 System.out.println("#######################");
             }
 
@@ -117,9 +133,10 @@ public class PaymentServiceImpl implements PaymentService{
         try{
             int res = paymentDao.deleteTicketing(ticketingId);
             if(res == 1){
-                System.out.println("########################");
-                System.out.println("########삭제완료##########");
-                System.out.println("########################");
+                System.out.println("#########################");
+                System.out.println("####### "+ticketingId+" ########");
+                System.out.println("#########deleted#########");
+                System.out.println("#########################");
             }
         }catch (Exception e){
             return e.getMessage();

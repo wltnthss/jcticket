@@ -49,9 +49,14 @@ public class PaymentController {
             PrepareRequestDto dto = ticketingService.getTicketingIdAmount(ticketingId);
             ResponseEntity<PrepareResponseDto> responseEntity = portOneService.preparePayment(dto, token);
             System.out.println("####################################");
-            System.out.println("응답 데이터 >> "+ responseEntity.getBody().getResponse());
-            return ResponseEntity.status(responseEntity.getStatusCode()).headers(responseEntity.getHeaders()).body(responseEntity.getBody());
-
+            int code = responseEntity.getBody().getCode();
+            System.out.println("사전등록 응답 데이터 코드 >> "+ code);
+            if(code == 1){
+                System.out.println(responseEntity.getBody().getMessage());
+            }else {
+                System.out.println("사전등록 성공");
+            }
+                return ResponseEntity.ok().body(responseEntity.getBody());
         }catch (Exception e){
             System.out.println("###################################");
             e.printStackTrace();

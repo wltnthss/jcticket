@@ -318,3 +318,16 @@ td{
     display: block;
     padding-left: 5px;
 }
+
+#pay-icon-btn{
+    width: 97px;
+    height: 40px;
+    display: inline-block;
+}
+#after-payment{
+    display: none;
+}
+#pay-btns{
+    display: inline-block;
+    height: 200px;
+}
