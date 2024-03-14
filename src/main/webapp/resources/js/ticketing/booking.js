@@ -50,7 +50,7 @@ $(document).ready(function() {
             // ajax를 통해 컨트롤러로 dateText 보냄 -->
             $.ajax({
                 type: "POST",
-                url: "/ticketing/rounds",
+                uri: sessionStorage.getItem("contextpath") +  "/ticketing/rounds",
                 data: JSON.stringify(reqData),
                 contentType : 'application/json; charset=utf-8',
                 // 태그를 만들어서 가져올 순 없고 컨트롤러에서 메세지를 리턴해서 가져옴,
@@ -168,7 +168,7 @@ $(document).ready(function(){
 
         // ajax 요청을 컨트롤러로 보낸다.
         $.ajax({
-            url: "/ticketing/seats",
+            uri: sessionStorage.getItem("contextpath") + "/ticketing/seats",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(data1),
@@ -311,7 +311,7 @@ $(document).ready(function(){
 
             const userId = $("#user_id").val();
             $.ajax({
-                url: "/ticketing/coupons", // 요청을 보낼 URL
+                uri: sessionStorage.getItem("contextpath") + "/ticketing/coupons", // 요청을 보낼 URL
                 type: "GET", // 요청 방식 (GET, POST 등)
                 data: {
                     // 요청에 포함할 데이터
@@ -449,7 +449,7 @@ $(document).ready(function(){
         // 보낸 데이터로 예매 테이블 작성한다.
         $.ajax({
             type: "POST",
-            url: "/ticketing/tickets",
+            uri: sessionStorage.getItem("contextpath") + "/ticketing/tickets",
             data: JSON.stringify(data),
             contentType : 'application/json; charset=utf-8',
             success: function (res){
@@ -494,7 +494,7 @@ $(document).ready(function(){
         const userId = $("#user_id").val();
         $.ajax({
             type: "GET",
-            url: "/payments/"+userId+"/info",
+            uri: sessionStorage.getItem("contextpath") + "/payments/"+userId+"/info",
             success: function (res){
                 console.log(res);
                 $("#user-tel").val(res.user_tel);
@@ -507,7 +507,7 @@ $(document).ready(function(){
         console.log("카카오페이 결제 버튼 클릭! with : "+ticketingId);
         $.ajax({
             type: "GET",
-            url: url,
+            uri:sessionStorage.getItem("contextpath") +  url,
             success: function (res){
                 console.log("응답 정보 >> " + res);
                 // console.log();
@@ -542,7 +542,7 @@ $(document).ready(function(){
                 if(res.success){
                     $.ajax({
                         type: "POST",
-                        url: "/payments/success/"+$("#showing-seq").val(),
+                        uri: sessionStorage.getItem("contextpath") + "/payments/success/"+$("#showing-seq").val(),
                         data: JSON.stringify(res),
                         contentType : 'application/json; charset=utf-8',
                         success: function (response){
@@ -558,7 +558,7 @@ $(document).ready(function(){
                 }else {
                     $.ajax({
                         type: "GET",
-                        url: "/payments/"+ticketingId+"/delete",
+                        uri: sessionStorage.getItem("contextpath") + "/payments/"+ticketingId+"/delete",
                         success: function (res){
                             console.log(res);
 
@@ -584,7 +584,7 @@ $(document).ready(function(){
         event.returnValue = false;
         if(ticketingId !== null){
             $.ajax({
-                url: "/payments/"+ticketingId+"/delete",
+                uri:sessionStorage.getItem("contextpath") +  "/payments/"+ticketingId+"/delete",
                 cache : "false",
                 type: "GET",
                 success: function (res){

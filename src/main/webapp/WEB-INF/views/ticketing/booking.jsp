@@ -37,6 +37,12 @@
 <%
     String name = (String)session.getAttribute("sessionId");
 %>
+
+<script>
+    let contextPath = "${pageContext.request.contextPath}";
+    sessionStorage.setItem("contextpath", contextPath)
+</script>
+
 <input id="user_id" value="<%=name%>" type="hidden">
 <input id="date-text" type="hidden" value="">
 <input type="hidden" id="ticketing-id" value="">
@@ -51,7 +57,7 @@
                 <div class="row align-items-center mb-1">
                     <div class="col-4">
                         <%-- 이미지 들어갈 자리--%>
-                        <img id="posterinfo" src="<c:url value='/upload/${img_name}'/>" alt="포스터">
+                        <img id="posterinfo" src="<c:url value='upload/${img_name}'/>" alt="포스터">
                     </div>
                     <div class="col-8 text-left">
                         <input type="hidden" id="play_id" value="${play_id}">
