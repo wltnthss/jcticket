@@ -236,7 +236,7 @@
 
     <select id="bring_review_viewing_at" parameterType="map" resultType="String">
 --         SELECT r.review_viewing_at
-        SELECT t.showing_date
+        SELECT DISTINCT t.showing_date
         FROM review r
                  JOIN user u ON r.user_id = u.user_id
                  JOIN ticketing t ON u.user_id = t.user_id

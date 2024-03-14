@@ -546,8 +546,10 @@ $(document).ready(function(){
                         data: JSON.stringify(res),
                         contentType : 'application/json; charset=utf-8',
                         success: function (response){
+                            let contextPath = "${pageContext.request.contextPath}";
                             console.log(response);
-
+                            //window.location.replace(contextPath + "/mypageIndex");
+                            window.close();
                         },
                         error: function(error){
                             console.log(error);

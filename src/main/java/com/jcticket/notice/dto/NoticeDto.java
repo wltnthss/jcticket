@@ -21,6 +21,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Builder
 public class NoticeDto {
     /*    CREATE TABLE `notice` (
         `notice_seq` int NOT NULL AUTO_INCREMENT,

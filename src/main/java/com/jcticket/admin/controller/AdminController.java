@@ -728,7 +728,9 @@ public class AdminController {
 
         System.out.println(img_name);
         try{
+
             String path = "C:/play_img/" + img_name + ".JPG";
+//            String path = "/Users/joyoungsang/play_img/" + img_name + ".JPG";
 //            System.out.println("path = " + path);
 
             System.out.println(path);
