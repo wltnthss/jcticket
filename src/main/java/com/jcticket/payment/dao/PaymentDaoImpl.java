@@ -57,11 +57,13 @@ public class PaymentDaoImpl implements PaymentDao{
         return session.update(namespace + "updatePaymentStatusFail", paymentId);
     }
 
+//    <!-- 유저아이디로 유저이름, 이메일, 연락처, 주소 가져오기 -->
     @Override
     public UserPayDto selectUserInfo(String user_id) throws Exception {
         return session.selectOne(namespace + "selectUserInfo",user_id);
     }
 
+    // 예매 아이디로 선택된 좌석 리스트 (문자열) 가져오기
     @Override
     public String selectedSeats(String ticketing_id) throws Exception {
         return session.selectOne(namespace + "selectedSeats", ticketing_id);

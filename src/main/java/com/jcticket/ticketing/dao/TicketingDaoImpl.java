@@ -45,10 +45,7 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.delete(namespace + "deleteByPlayId", play_id);
     }
 
-
     // 회차 시퀀스별 삭제
-
-
     @Override
     public int deleteBySeq(int seq) throws Exception {
         return session.delete(namespace + "deleteBySeq", seq);
@@ -192,5 +189,9 @@ public class TicketingDaoImpl implements TicketingDao {
         return session.selectOne(namespace + "selectTicketingAmount", ticketing_id);
     }
 
-
+    // 공연아이디로 공연포스터 이미지 경로 구하기
+    @Override
+    public String selectPosterPath(String play_id) throws Exception {
+        return session.selectOne(namespace + "selectPosterPath", play_id);
+    }
 }

@@ -48,4 +48,7 @@ public interface TicketingService {
     // 결제 사전검증을 위해 만들어진 ticketing 테이블에서 amount 값을 조회하고 ticketing_id 와 함께 전달하는 서비스
     PrepareRequestDto getTicketingIdAmount(String ticketingId) throws Exception;
 
+    // 공연 아이디로 공연 포스터 이미지 경로를 조회한다.
+    String getPosterPath(String play_id) throws Exception;
+
 }

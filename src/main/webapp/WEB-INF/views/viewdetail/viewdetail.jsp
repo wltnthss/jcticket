@@ -38,7 +38,7 @@ git <%--
 </head>
 <body>
     <jsp:include page="../common/header.jsp"></jsp:include>
-
+    <input id="is-paid" type="hidden" value="">
     <div class="container">
         <%-- content area    --%>
         <div class="category">

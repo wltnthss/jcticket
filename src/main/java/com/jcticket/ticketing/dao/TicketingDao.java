@@ -96,7 +96,8 @@ public interface TicketingDao {
     // ticketing table insert
     int insertTicketing(TicketingDto2 dto) throws Exception;
 
-
+    // 공연아이디로 공연포스터 보내기
+    String selectPosterPath(String play_id) throws Exception;
 
     // select User Name by user id
     String selectUserNameById(String user_id) throws Exception;

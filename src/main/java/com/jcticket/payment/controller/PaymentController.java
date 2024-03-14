@@ -48,9 +48,17 @@ public class PaymentController {
             // 사전등록 진행하기
             PrepareRequestDto dto = ticketingService.getTicketingIdAmount(ticketingId);
             ResponseEntity<PrepareResponseDto> responseEntity = portOneService.preparePayment(dto, token);
-            System.out.println("응답 데이터 >> "+ responseEntity.getBody().getResponse());
-            return ResponseEntity.status(responseEntity.getStatusCode()).headers(responseEntity.getHeaders()).body(responseEntity.getBody());
-        } catch (Exception e){
+            System.out.println("####################################");
+            int code = responseEntity.getBody().getCode();
+            System.out.println("사전등록 응답 데이터 코드 >> "+ code);
+            if(code == 1){
+                System.out.println(responseEntity.getBody().getMessage());
+            }else {
+                System.out.println("사전등록 성공");
+            }
+                return ResponseEntity.ok().body(responseEntity.getBody());
+        }catch (Exception e){
+            System.out.println("###################################");
             e.printStackTrace();
             // 상태코드별 에러처리 필요
             return ResponseEntity.status(500).body("Exception!");
@@ -61,6 +69,7 @@ public class PaymentController {
     public ResponseEntity<?> getUserInfo(@PathVariable String userId) throws Exception{
         System.out.println("====getUSerInfo 진입 ==== +"+ userId );
         UserPayDto userPayDto = paymentService.getUserInfo(userId);
+        System.out.println("#####################################");
         System.out.println("userPayInfo >> " + userPayDto);
         return ResponseEntity.ok().body(userPayDto);
     }
@@ -71,14 +80,15 @@ public class PaymentController {
     public ResponseEntity<?> createPayment(
             @PathVariable("showingSeq") int showingSeq,
             @RequestBody PaymentRequestDto requestDto) throws Exception{
-        System.out.println("==== POST /payments 진입 ====");
+        System.out.println("====== POST /payments 진입 ======");
         System.out.println(requestDto.toString());
         try {
             int res = paymentService.createPayment(requestDto);
             String bookingResult = paymentService.setBookingStatus(requestDto.getMerchant_uid(), requestDto.getCustom_data(), showingSeq);
             return ResponseEntity.ok().body("update complete!");
         }catch (Exception e){
-            return ResponseEntity.ok().body("ok!");
+            System.out.println("====== POST /payments 에서 예외발생 ======");
+            return ResponseEntity.status(500).body("create &update  실패");
         }
     }
 
@@ -92,6 +102,7 @@ public class PaymentController {
             System.out.println();
             return ResponseEntity.ok().body(res);
         }catch (Exception e){
+            System.out.println("==== GET /payments/{ticketingId}/delete 에서 예외발생 ====");
             return ResponseEntity.status(500).body("server error");
         }
     }
