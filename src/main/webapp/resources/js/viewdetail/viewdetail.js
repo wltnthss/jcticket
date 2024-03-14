@@ -173,12 +173,12 @@
                         showing_seq = atag_id[i].id;
                     }
 
-                    var play_name_id = document.getElementById("for_ticketing_play_name");
-                    var stage_name_id = document.getElementById("for_ticketing_stage_name");
+                    // var play_name_id = document.getElementById("for_ticketing_play_name");
+                    // var stage_name_id = document.getElementById("for_ticketing_stage_name");
                     //공연이름 (<오늘도 혼자 논다>-시흥)
-                    var play_name = play_name_id.innerHTML;
+                    // var play_name = play_name_id.innerHTML;
                     //공연장이름 (인천앞바다)
-                    var stage_name = stage_name_id.innerHTML;
+                    // var stage_name = stage_name_id.innerHTML;
 
                     //쿼리스트링 이용
                     var url = '/ticketing/booking/?play_id=' + for_ticket.id;
@@ -390,11 +390,19 @@
 
         loadPage(1); // 페이지가 로드될 때 첫 번째 페이지 데이터 로드
 
-        // 후기 1페이지는 clicked인 상태
-        var click_default = document.querySelectorAll('.pagination a')
-        // console.log("click_default=======================>"+click_default[0].className)
-        click_default[0].classList.add('clicked');
-        // console.log("click_default=======================>"+click_default[0].className)
+        // .pagination 요소가 존재하는지 확인
+        var pagination = document.querySelector('.pagination');
+
+        // .pagination 요소가 존재할 경우
+        if (pagination !== null) {
+            // .pagination의 자식 요소 중 첫 번째 a 요소를 선택
+            var click_default = pagination.querySelectorAll('a');
+
+            // 선택된 첫 번째 a 요소에 'clicked' 클래스 추가
+            if (click_default.length > 0) {
+                click_default[0].classList.add('clicked');
+            }
+        }
 
         // 페이지 번호 클릭 시 해당 페이지 데이터 로드 (관람후기)
         $(document).on('click', '.pagination a', function(e) {
@@ -539,6 +547,13 @@
             }
         })
 
+        var select_viewing_at = document.getElementById('viewing_at');
+        // console.log("select_viewing_at==========================>"+select_viewing_at)
+
+        var select_viewing_at_list = select_viewing_at.selectedIndex;
+        // console.log("select_viewing_at_list==========================>"+select_viewing_at_list)
+        //아무것도 없을 때 -1 리턴됨
+
         // 후기작성 알람
         var form = document.querySelector('#insert_form');
         // form_user_id 요소의 값을 가져옴
@@ -547,6 +562,7 @@
         form.addEventListener('submit', function(event) {
             var starValue = document.getElementById('star_input').value;
             var reviewContent = document.querySelector('.review_box').value;
+
             if (!starValue) {
                 event.preventDefault(); // 폼 제출 막기
                 alert('별점을 선택해주세요.');
@@ -555,6 +571,9 @@
                 alert('후기를 입력해주세요.');
             } else if(!form_user_id){
                 alert('로그인이 필요합니다.');
+            } else if(select_viewing_at_list===-1){
+                event.preventDefault(); // 폼 제출 막기
+                alert('관람일자를 선택해주세요.');
             } else {
                 alert('리뷰가 등록되었습니다.')
             }
@@ -605,8 +624,6 @@
 
     });
     //$(document).ready 끝--------------------------------------------------------------------------
-
-
 
 
     // datepicker 설정
