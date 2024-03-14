@@ -3,13 +3,16 @@ package com.jcticket.notice.controller;
 import com.jcticket.notice.dto.NoticeDto;
 import com.jcticket.notice.dto.PageDto;
 import com.jcticket.notice.service.NoticeService;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * packageName :  com.jcticket.notice.controller
@@ -33,14 +36,6 @@ public class NoticeController {
     public String NoticePaging(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
                                @RequestParam(value = "sort", defaultValue = "seq")  String sort,
                                @RequestParam(value = "keyword", required = false)  String keyword) throws Exception {
-        // page 값이 없이 들어오면다면 default 값 1 설정
-        System.out.println("page => " + page);
-        // 정렬값
-        System.out.println("sort => " + sort) ;
-        // 검색한 keyword
-        System.out.println("keyword => " + keyword);
-        
-        // 시작해놓고 DB 꺼놓고 재실행해보기 -> 예외처리 어떤식으로 진행할지.
 
         try {
 

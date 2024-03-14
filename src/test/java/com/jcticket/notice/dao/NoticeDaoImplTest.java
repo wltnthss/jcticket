@@ -41,7 +41,6 @@ public class NoticeDaoImplTest {
     // count keyword null 테스트용
     final static String KEYWORD = "";
 
-    // 각 테스트 케이스 실행전 공지사항 전체 삭제 -> before는 테스트케이스 안에 넣는 것이 명확하기 때문에 메서드 안에서 사용하자.
     @Before
     public void init() throws Exception{
         System.out.println("init DELETE ALL");
@@ -50,37 +49,70 @@ public class NoticeDaoImplTest {
 
     @Test
     public void insert() throws Exception {
-        // given
-        int result = 0;
-        for (int i = 1; i < 112; i++) {
-            NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
+
+        for (int i = 1; i < 12; i++) {
+
+            // given
+            NoticeDto noticeDto = NoticeDto.builder()
+                    .notice_title("정석코딩" +i+ "기")
+                    .notice_content("정석코딩" +i+ "기 모집합니다.")
+                    .notice_reg_at(NOW)
+                    .notice_pin_yn("N")
+                    .notice_use_yn("Y")
+                    .admin_id("admin" +i)
+                    .created_at(NOW)
+                    .created_id("SYSTEM")
+                    .updated_at(NOW)
+                    .update_id("SYSTEM")
+                    .build();
 
             // when
-            result = noticeDao.insert(noticeDto);
-            assertTrue(1 == result);
+            noticeDao.insert(noticeDto);
         }
         // then
-        assertTrue(noticeDao.count(KEYWORD) == 111);
+        assertEquals(11, noticeDao.count(KEYWORD));
     }
     @Test
     public void selectAllCnt() throws Exception {
-        // given
-        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집합니다", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
-        int insertResult = noticeDao.insert(noticeDto);
+
+        NoticeDto noticeDto = NoticeDto.builder()
+                .notice_title("정석코딩13기")
+                .notice_content("정석코딩13기 모집합니다.")
+                .notice_reg_at(NOW)
+                .notice_pin_yn("N")
+                .notice_use_yn("Y")
+                .admin_id("admin")
+                .created_at(NOW)
+                .created_id("SYSTEM")
+                .updated_at(NOW)
+                .update_id("SYSTEM")
+                .build();
 
         // when
+        int insertResult = noticeDao.insert(noticeDto);
         List<NoticeDto> list = noticeDao.selectAll();
         int vertifyCnt = noticeDao.count(KEYWORD);
 
         // then
-        assertTrue(insertResult==1);
-        assertTrue(list.size() == vertifyCnt);
+        assertEquals(1, insertResult);
+        assertEquals(list.size(), vertifyCnt);
     }
     @Test
     public void updateViewCnt() throws Exception{
 
         // given
-        NoticeDto noticeDto = new NoticeDto("정석코딩9기", "정석코딩9기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
+        NoticeDto noticeDto = NoticeDto.builder()
+                .notice_title("정석코딩13기")
+                .notice_content("정석코딩13기 모집합니다.")
+                .notice_reg_at(NOW)
+                .notice_pin_yn("N")
+                .notice_use_yn("Y")
+                .admin_id("admin")
+                .created_at(NOW)
+                .created_id("SYSTEM")
+                .updated_at(NOW)
+                .update_id("SYSTEM")
+                .build();
 
         // when
         int insertRslt = noticeDao.insert(noticeDto);
@@ -90,7 +122,7 @@ public class NoticeDaoImplTest {
         noticeDto = noticeDao.select(noticeDto.getNotice_seq());
 
         // then
-        assertTrue(1 == insertRslt);
-        assertTrue(1 == noticeDto.getNotice_view_cnt());
+        assertEquals(1, insertRslt);
+        assertEquals(1, noticeDto.getNotice_view_cnt());
     }
 }

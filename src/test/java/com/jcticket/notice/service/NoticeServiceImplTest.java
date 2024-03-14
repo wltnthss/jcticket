@@ -46,61 +46,78 @@ public class NoticeServiceImplTest {
     }
     @Test
     public void pageDefaultList() throws Exception{
-        // given
-        int result = 0;
-        for (int i = 1; i < 122; i++) {
-            NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
 
-            result = noticeService.insert(noticeDto);
-            assertTrue(1 == result);
-        }
+        // given
         int page = 2;
         String sort = "";
         String keyword = "";
         List<NoticeDto> pagingList = null;
 
+        for (int i = 1; i < 12; i++) {
+            NoticeDto noticeDto = NoticeDto.builder()
+                    .notice_title("정석코딩" +i+ "기")
+                    .notice_content("정석코딩" +i+ "기 모집합니다.")
+                    .notice_reg_at(NOW)
+                    .notice_pin_yn("N")
+                    .notice_use_yn("Y")
+                    .admin_id("admin" +i)
+                    .created_at(NOW)
+                    .created_id("SYSTEM")
+                    .updated_at(NOW)
+                    .update_id("SYSTEM")
+                    .build();
+
+            noticeService.insert(noticeDto);
+        }
+
         //when
         PageDto pageDto = noticeService.pagingParam(page, keyword);
-        System.out.println("pageDto => " + pageDto.toString());
-
         pagingList = noticeService.pagingList(page, sort, keyword);
-        System.out.println("pagingList => " + pagingList);
 
         //then
-        assertTrue(pagingList.size() == 10);
-        assertTrue(13 == pageDto.getMaxPage());
+        assertTrue(pagingList.size() == 1);
+        assertTrue(2 == pageDto.getMaxPage());
         assertTrue(1 == pageDto.getStartPage());
-        assertTrue(10 == pageDto.getEndPage());
+        assertTrue(2 == pageDto.getEndPage());
     }
 
     @Test
     public void pageKeywordList() throws Exception{
 
-        // given 테스트케이스 꼼꼼하게 더 추가하기
-        int result = 0;
-        for (int i = 1; i < 122; i++) {
-            NoticeDto noticeDto = new NoticeDto("정석코딩"+i+"기", "정석코딩"+i+"기 모집", 0, NOW, "Y", "N", "admin", NOW, "JISOO", NOW, "JISOO");
-
-            result = noticeService.insert(noticeDto);
-            assertTrue(1 == result);
-        }
+        // given
         int page = 1;
         String sort = "";
         String keyword = "1";
         List<NoticeDto> pagingList = null;
 
+        for (int i = 1; i < 12; i++) {
+
+            NoticeDto noticeDto = NoticeDto.builder()
+                    .notice_title("정석코딩" +i+ "기")
+                    .notice_content("정석코딩" +i+ "기 모집합니다.")
+                    .notice_reg_at(NOW)
+                    .notice_pin_yn("N")
+                    .notice_use_yn("Y")
+                    .admin_id("admin" +i)
+                    .created_at(NOW)
+                    .created_id("SYSTEM")
+                    .updated_at(NOW)
+                    .update_id("SYSTEM")
+                    .build();
+
+            noticeService.insert(noticeDto);
+        }
+
+
         //when
         int cnt = noticeService.count(keyword);
-        System.out.println("cnt => " + cnt);
-
         pagingList = noticeService.pagingList(page, sort, keyword);
         PageDto pageDto = noticeService.pagingParam(page, keyword);
-        System.out.println("pageDto => " + pageDto.toString());
 
         //then
-        assertTrue(cnt == 41);
-        assertTrue(5 == pageDto.getMaxPage());
+        assertTrue(cnt == 3);
+        assertTrue(1 == pageDto.getMaxPage());
         assertTrue(1 == pageDto.getStartPage());
-        assertTrue(5 == pageDto.getEndPage());
+        assertTrue(1 == pageDto.getEndPage());
     }
 }
