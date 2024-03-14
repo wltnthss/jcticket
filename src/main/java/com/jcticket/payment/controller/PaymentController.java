@@ -51,6 +51,7 @@ public class PaymentController {
             System.out.println("####################################");
             System.out.println("응답 데이터 >> "+ responseEntity.getBody().getResponse());
             return ResponseEntity.status(responseEntity.getStatusCode()).headers(responseEntity.getHeaders()).body(responseEntity.getBody());
+
         }catch (Exception e){
             System.out.println("###################################");
             e.printStackTrace();

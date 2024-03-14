@@ -192,7 +192,7 @@
                         <a href="mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                         <div id="side_img">
-                            <img src="${pageContext.request.contextPath}/resources/img/mypage/페페%20한잔해.jpg">
+                            <img src="${pageContext.request.contextPath}/resources/img/mypage/img.jpg">
                         </div>
 
 
@@ -273,7 +273,7 @@
                                             <td>${MyUserCouponDto.coupon_name}</td>
                                             <td>${MyUserCouponDto.coupon_discount_amount}원</td>
                                             <td>${MyUserCouponDto.coupon_use_condition}</td>
-                                            <td>${MyUserCouponDto.user_coupon_expire_at}</td>
+                                            <td>기간만료</td>
                                             <td>${MyUserCouponDto.user_coupon_issue_at}</td>
                                         </tr>
                                         </c:forEach>

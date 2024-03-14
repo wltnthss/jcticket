@@ -225,7 +225,7 @@
                         <a href="${pageContext.request.contextPath}/mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
 
                         <div id="side_img">
-                            <img src="${pageContext.request.contextPath}/resources/img/mypage/페페%20한잔해.jpg">
+                            <img src="${pageContext.request.contextPath}/resources/img/mypage/img.jpg">
                         </div>
 
 
@@ -254,7 +254,7 @@
 
                         <h3>예매확인/취소</h3>
                     <div id="select-date">
-                        <p>전재승님의 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
+                        <p>${User.user_name}님의 예매내역입니다. 지난 예매확인을 원하시면 조회조건을 선택해 주세요.</p>
                         <br>
                         <p>기간별 조회</p>
                         <ul>

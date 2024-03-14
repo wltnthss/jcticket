@@ -385,7 +385,7 @@ git <%--
                                 <input type="hidden" id="star_input" name="star" value=""/>
                                 <span>
                                     관람일자 :
-                                    <select name="viewing_at">
+                                    <select name="viewing_at" id="viewing_at">
                                         <c:forEach var="item" items="${viewing_at}">
                                             <option>${item}</option>
                                         </c:forEach>

@@ -3,6 +3,7 @@ package com.jcticket.mypage.dao;
 import com.jcticket.admin.dto.CouponDto;
 import com.jcticket.dto.UserCouponDto;
 import com.jcticket.mypage.dto.InquiryDto;
+import com.jcticket.payment.dto.PaymentDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 import org.apache.ibatis.session.SqlSession;
@@ -90,8 +91,32 @@ public class mypageImpl implements mypageDAO {
     }
 
     @Override
+    public int possible_coupon(String user_id) throws Exception {
+        return session.selectOne(namespace + "possible_coupon", user_id);
+    }
+    @Override
+    public int impossible_coupon(String user_id) throws Exception {
+        return session.selectOne(namespace + "impossible_coupon", user_id);
+    }
+
+    @Override
     public CouponDto coupon_select(String coupon_id) throws Exception {
         return session.selectOne(namespace + "coupon_select", coupon_id);
+    }
+
+    @Override
+    public UserCouponDto coupon_amount(String coupon_id) throws Exception {
+        return session.selectOne(namespace + "coupon_amount", coupon_id);
+    }
+
+    @Override
+    public CouponDto coupon_discount(String coupon_id) throws Exception {
+        return session.selectOne(namespace + "coupon_discount", coupon_id);
+    }
+
+    @Override
+    public PaymentDto user_payment(String user_id) throws Exception {
+        return session.selectOne(namespace + "user_payment", user_id);
     }
 
     @Override
