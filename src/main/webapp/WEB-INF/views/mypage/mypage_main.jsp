@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: wjswo
   Date: 2024-02-04
@@ -54,16 +55,17 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-
+            max-width: 100%;
             animation: slider 7.5s infinite linear;
         }
 
         .slide:nth-child(1) {
-            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/랄죠_사토루(무량공처).png");
+
+            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/1710081382241-뮤지컬 스쿨오브락 슬라이드이미지.jpg");
             animation-delay: 0s;
         }
         .slide:nth-child(2) {
-            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/랄샘_무라사키.png");
+            background-image: url("${pageContext.request.contextPath}/resources/img/mypage/1710081655694-뮤지컬 〈넥스트 투 노멀〉 슬라이드이미지.jpg");
             animation-delay: -5s;
         }
         .slide:nth-child(3) {
@@ -145,8 +147,13 @@
             padding: 8px 10px 6px 13px;
             font-size: 20px;
             font-weight: bold;
-            border: 5px solid;
+            border: 5px solid #fafafa;
             width: 425px;
+        }
+
+        #event_h1 ul {
+            padding-left: 30px;
+            border: 3px solid #FAFAFA;
         }
 
         #showing_image {
@@ -166,9 +173,8 @@
             height: 300px;
             border: 1px solid;
         }
-
-
     </style>
+
 
 </head>
 
@@ -187,7 +193,7 @@
                         <a href="${pageContext.request.contextPath}/mypageIndex"><img src="${pageContext.request.contextPath}/resources/img/mypage/lnb_mypage.gif"></a>
                         
                         <div id="side_img">
-                            <img src="${pageContext.request.contextPath}/resources/img/mypage/1579237093699.jpg">
+                            <img src="${pageContext.request.contextPath}/resources/img/mypage/img.jpg">
                         </div>
 
                         <div id="ticket">
@@ -213,17 +219,17 @@
                 </aside>
                 <article id="con">
                     <div id="main_cupon">
-                        <div id="main_cupon_h1">쿠폰입니다</div>
+                        <div id="main_cupon_h1">보유쿠폰</div>
                         <ul>
-                            <li>내가 가진 쿠폰 개수</li>
-                            <li>내가 가진 쿠폰 개수</li>
+                            <li>내가 가진 쿠폰 개수 : ${possible} 개</li>
+                            <li>내가 사용한 쿠폰 개수 : ${impossible} 개</li>
                         </ul>
                     </div>
                     <div id="event">
-                        <div id="event_h1">이벤트입니다</div>
+                        <div id="event_h1">진행중인 공연</div>
                         <ul>
-                            <li>내가 가진 쿠폰 개수</li>
-                            <li>내가 가진 쿠폰 개수</li>
+                            <li><a href="viewdetail?this_play_id=83ee07bd">뮤지컬 스쿨 오브 락 월드투어</a></li>
+                            <li><a href="viewdetail?this_play_id=e9aaf312">연극 실종법칙 MISSING</a></li>
                         </ul>
                     </div>
                     

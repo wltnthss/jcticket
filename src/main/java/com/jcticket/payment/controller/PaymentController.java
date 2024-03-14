@@ -50,7 +50,7 @@ public class PaymentController {
             ResponseEntity<PrepareResponseDto> responseEntity = portOneService.preparePayment(dto, token);
             System.out.println("응답 데이터 >> "+ responseEntity.getBody().getResponse());
             return ResponseEntity.status(responseEntity.getStatusCode()).headers(responseEntity.getHeaders()).body(responseEntity.getBody());
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             // 상태코드별 에러처리 필요
             return ResponseEntity.status(500).body("Exception!");

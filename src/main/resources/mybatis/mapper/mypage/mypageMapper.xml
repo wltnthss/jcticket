@@ -7,7 +7,7 @@
 
 
     <select id="selectLimit" parameterType="map" resultType="TicketingDTO">
-        SELECT t.ticketing_at,
+        SELECT DATE_FORMAT(t.ticketing_at, '%Y-%m-%d') AS ticketing_at,
                t.ticketing_id,
                t.play_name,
                t.showing_date,
@@ -18,9 +18,31 @@
         FROM ticketing t
                  INNER JOIN user u ON t.user_id = u.user_id
         WHERE u.user_id = #{user_id}
+          AND t.ticketing_status = 'Y'
         ORDER BY t.ticketing_at DESC
             LIMIT 5;
     </select>
+
+    <select id="user_payment" parameterType="String" resultType="PaymentDto">
+        select
+            payment_id,
+            payment_approval_id,
+            payment_amount,
+            payment_at,
+            payment_method,
+            payment_status,
+            payment_fail_reason,
+            receipt_url,
+            ticketing_id,
+            user_coupon_id,
+            user_id
+        from
+            payment
+        where
+            ticketing_id = #{ticketing_id};
+    </select>
+
+
 
 
     <select id="selectLimit_img" parameterType="map" resultType="TicketingDTO">
@@ -38,6 +60,7 @@
                  INNER JOIN jcticket.user u ON t.user_id = u.user_id
                  LEFT JOIN jcticket.play_image pi ON t.play_name = SUBSTRING(pi.play_poster_original_file_name, 1, CHAR_LENGTH(pi.play_poster_original_file_name) - 4)
         WHERE u.user_id = #{user_id}
+        AND t.ticketing_status = 'Y'
         ORDER BY t.ticketing_at DESC
             LIMIT 3;
     </select>
@@ -110,7 +133,7 @@
     <!-- TicketingDto 기반으로 만든 mypage_ticket 페이지 -->
     <select id="selectAll" parameterType="map" resultType="TicketingDto">
         SELECT
-        t.ticketing_at,
+        substring(t.ticketing_at, 1, 10) as ticketing_at,
         t.ticketing_id,
         t.play_name,
         t.showing_date,
@@ -227,6 +250,7 @@
             t.showing_date,
             t.stage_name,
             t.ticketing_id,
+            t.user_id,
             t.play_name,
             t.ticketing_cnt,
             t.selected_seats,
@@ -264,8 +288,8 @@
         #{user_id},
         #{coupon_id},
         null,
-        NOW(),
-        NOW() + INTERVAL 1 WEEK,
+        DATE_FORMAT(NOW(), '%Y-%m-%d'),
+        DATE_FORMAT(NOW() + INTERVAL 1 WEEK, '%Y-%m-%d'),
         'N',
         NOW(),
         #{created_id},
@@ -286,12 +310,28 @@
         where coupon_id = #{coupon_id};
     </update>
 
+    <select id="coupon_amount" parameterType="String" resultType="UserCouponDto">
+        select *
+        from user_coupon
+        where user_coupon_id = #{user_coupon_id}
+    </select>
+
+    <select id="coupon_discount" parameterType="String" resultType="CouponDto">
+        select *
+        from coupon
+        where coupon_id = #{coupon_id}
+    </select>
+
+
+
+
+
 
     <select id="coupon_list" parameterType="map" resultType="UserCouponDto">
         SELECT
         uc.coupon_id,
-        uc.user_coupon_issue_at,
-        uc.user_coupon_expire_at,
+        DATE_FORMAT(uc.user_coupon_issue_at, '%Y-%m-%d') AS user_coupon_issue_at,
+        DATE_FORMAT(uc.user_coupon_expire_at, '%Y-%m-%d') AS user_coupon_expire_at,
         CASE
         WHEN #{button} = 'on' AND uc.user_coupon_use_yn = 'N' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
         WHEN #{button} = 'off' AND uc.user_coupon_use_yn = 'Y' THEN (SELECT coupon_name FROM coupon c WHERE c.coupon_id = uc.coupon_id)
@@ -333,6 +373,22 @@
         (#{button} = 'off' AND uc.user_coupon_use_yn = 'Y')
         )
         AND u.user_id = #{user_id}; <!-- 추가된 부분 -->
+    </select>
+
+    <select id="possible_coupon" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM user_coupon AS uc
+                 INNER JOIN user AS u ON uc.user_id = u.user_id
+        WHERE uc.user_coupon_use_yn = 'N'
+          AND uc.user_id = #{u.user_id};
+    </select>
+
+    <select id="impossible_coupon" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM user_coupon AS uc
+                 INNER JOIN user AS u ON uc.user_id = u.user_id
+        WHERE uc.user_coupon_use_yn = 'Y'
+          AND uc.user_id = #{u.user_id};
     </select>
 
 

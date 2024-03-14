@@ -74,7 +74,7 @@
                     <a href="mypageIndex"><img src="/resources/img/mypage/lnb_mypage.gif"></a>
 
                     <div id="side_img">
-                        <img src="/resources/img/mypage/페페%20한잔해.jpg">
+                        <img src="${pageContext.request.contextPath}/resources/img/mypage/img.jpg">
                     </div>
 
                     <div id="ticket">
