@@ -1,7 +1,7 @@
 package com.jcticket.mypage.dao;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.mypage.dto.MyUserCouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.mypage.dto.InquiryDto;
 import com.jcticket.user.dto.UserDto;
@@ -29,13 +29,14 @@ public interface mypageDAO {
     int view_count(Map map) throws Exception;
     List<TicketingDto> selectAll(Map map) throws  Exception;
     List<TicketingDto> selectLimit(Map map) throws  Exception;
+    List<TicketingDto> selectLimit_img(Map map) throws  Exception;
 
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
-    List<MyUserCouponDto> coupon_list(Map map) throws Exception;
+    List<UserCouponDto> coupon_list(Map map) throws Exception;
     int insert(TicketingDto ticketingDto)  throws Exception;
     int insert_InquiryDto(InquiryDto inquiryDto) throws Exception;
-    int coupon_insert(MyUserCouponDto userCouponDto) throws Exception;
+    int coupon_insert(UserCouponDto userCouponDto) throws Exception;
     int coupon_count(Map map) throws Exception;
     CouponDto coupon_select(String coupon_id) throws Exception;
 

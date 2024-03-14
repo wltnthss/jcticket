@@ -297,6 +297,7 @@
     </select>
 
 
+
     <!-- etc. -->
     <!--티켓 모든 정보 조회하기. -->
     <select id="selectAll" resultType="TicketingDto">
@@ -307,5 +308,13 @@
                viewing_at, play_name
         FROM ticketing
     </select>
+
+
+    <!-- selectAllPro?? 그냥 공연 이미지나 받아 오자.. -->
+    <select id="selectPlayPoster" resultType="Map" parameterType="Map">
+
+    </select>
+
+
 </mapper>
 <!-- com.jcticket.example.mybatis.mapper.ticketing.ticketingMapper -->

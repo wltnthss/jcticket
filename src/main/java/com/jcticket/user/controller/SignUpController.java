@@ -195,7 +195,8 @@ public class SignUpController {
             e.printStackTrace();
             System.out.println("회원가입 실패");
             m.addAttribute("userDto",userDto);
-            return "signup/signup";
+
+            return "index";
         }
     }
 

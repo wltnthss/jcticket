@@ -1,7 +1,7 @@
 package com.jcticket.mypage.service;
 
 import com.jcticket.admin.dto.CouponDto;
-import com.jcticket.mypage.dto.MyUserCouponDto;
+import com.jcticket.dto.UserCouponDto;
 import com.jcticket.ticketing.dto.TicketingDto;
 import com.jcticket.user.dto.UserDto;
 
@@ -24,12 +24,13 @@ public interface mypageService {
     Integer count(Map map) throws Exception;
     Integer coupon_count(Map map) throws Exception;
     Integer view_count(Map map) throws Exception;
-    Integer coupon_insert(MyUserCouponDto userCouponDto) throws Exception;
+    Integer coupon_insert(UserCouponDto userCouponDto) throws Exception;
     CouponDto coupon_select(String coupon_id) throws Exception;
     List<TicketingDto> selectAll(Map map) throws Exception;
-    List<MyUserCouponDto> coupon_list(Map map) throws Exception;
+    List<UserCouponDto> coupon_list(Map map) throws Exception;
     List<TicketingDto> select_list() throws Exception;
     List<TicketingDto> selectLimit(Map map) throws Exception;
+    List<TicketingDto> selectLimit_img(Map map) throws Exception;
     List<TicketingDto> select_view(Map map) throws Exception;
     TicketingDto ticket_detail(String ticketing_id) throws Exception;
 
