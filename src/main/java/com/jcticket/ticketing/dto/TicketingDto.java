@@ -24,7 +24,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class TicketingDto {
     private String ticketing_id; // 예매번호
-    private Timestamp ticketing_at; //예매 날짜
+    private String ticketing_at; //예매 날짜
     private int ticketing_cnt; // 예매 수량
     private String ticketing_status; // 예매 상태
     private String showing_info; //공연정보
@@ -49,7 +49,7 @@ public class TicketingDto {
     private String play_major_cat;
 
 
-    public TicketingDto(String ticketing_id, Timestamp ticketing_at, int ticketing_cnt, String ticketing_status,
+    public TicketingDto(String ticketing_id, String ticketing_at, int ticketing_cnt, String ticketing_status,
                         String showing_info, String showing_date, Timestamp cancelable_at, int play_price, String stage_name,
                         String choice_show_seat, int ticketing_price, String user_name, String user_id, Timestamp viewing_at, String play_name,
                         Timestamp created_at, String created_id, Timestamp updated_at, String updated_id) {
