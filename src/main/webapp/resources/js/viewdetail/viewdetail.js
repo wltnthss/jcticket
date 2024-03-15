@@ -182,7 +182,7 @@
                     // var stage_name = stage_name_id.innerHTML;
 
                     //쿼리스트링 이용
-                    var url = '/ticketing/booking/?play_id=' + for_ticket.id;
+                    var url = sessionStorage.getItem("contextpath") + '/ticketing/booking/?play_id=' + for_ticket.id;
                         // + 'dateText='+dateText
                         // +'&showing_seq='+showing_seq
                         // +'&play_name='+play_name

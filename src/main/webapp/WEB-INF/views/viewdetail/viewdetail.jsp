@@ -428,7 +428,7 @@ git <%--
 
 
 <%--    카카오 지도 api 스크립트--%>
-    <script type="text/javascript" src="/${pageContext.request.contextPath}/dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae&libraries=services"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=69ecfd6866e9fbc699032449e3c3d5ae&libraries=services"></script>
 
     <%--    js파일--%>
     <script src="${pageContext.request.contextPath}/resources/js/viewdetail/viewdetail.js"></script>

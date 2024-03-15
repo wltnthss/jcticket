@@ -154,19 +154,19 @@ public class mypageDAOTest {
             CURRENT_TIMESTAMP.setTime(newTimeInMillis);
 
 
-            if(i % 2 == 0) {
-                ticketingDto = new TicketingDto(
-                        "ID" + i, CURRENT_TIMESTAMP, i, "Y", "[51회] 17시 00분", "20240409", CURRENT_TIMESTAMP, 100, "Stage"  + i, "A"  + i, 200,
-                        "User51", "UserID51", CURRENT_TIMESTAMP, "Play" + i % 10, CURRENT_TIMESTAMP, "Creator" + i, CURRENT_TIMESTAMP, "Updater"  + i);
-                mypageDAO.insert(ticketingDto);
-            }
-            else {
-                ticketingDto = new TicketingDto(
-                        "ID" + i, CURRENT_TIMESTAMP, i, "C", "[51회] 17시 00분", "20240409", CURRENT_TIMESTAMP, 100, "Stage51", "B" + i, 200,
-                        "User51", "UserID51", CURRENT_TIMESTAMP, "Play" + i % 10, CURRENT_TIMESTAMP, "Creator" + i, CURRENT_TIMESTAMP, "Updater" + i);
-
-                mypageDAO.insert(ticketingDto);
-            }
+//            if(i % 2 == 0) {
+//                ticketingDto = new TicketingDto(
+//                        "ID" + i, CURRENT_TIMESTAMP, i, "Y", "[51회] 17시 00분", "20240409", CURRENT_TIMESTAMP, 100, "Stage"  + i, "A"  + i, 200,
+//                        "User51", "UserID51", CURRENT_TIMESTAMP, "Play" + i % 10, CURRENT_TIMESTAMP, "Creator" + i, CURRENT_TIMESTAMP, "Updater"  + i);
+//                mypageDAO.insert(ticketingDto);
+//            }
+//            else {
+//                ticketingDto = new TicketingDto(
+//                        "ID" + i, CURRENT_TIMESTAMP, i, "C", "[51회] 17시 00분", "20240409", CURRENT_TIMESTAMP, 100, "Stage51", "B" + i, 200,
+//                        "User51", "UserID51", CURRENT_TIMESTAMP, "Play" + i % 10, CURRENT_TIMESTAMP, "Creator" + i, CURRENT_TIMESTAMP, "Updater" + i);
+//
+//                mypageDAO.insert(ticketingDto);
+//            }
         }
     }
 
