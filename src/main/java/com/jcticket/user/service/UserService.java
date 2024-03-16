@@ -26,6 +26,8 @@ public interface UserService {
     int chkIdDupl(String user_id) throws Exception;
     //닉네임 중복확인
     int chkNickNameDupl(String user_nickname) throws Exception;
+    //이메일 중복 확인
+    int chkEmailDupl(String user_email) throws Exception;
     //회원가입
     int signup(UserDto userDto) throws Exception;
     //sns회원가입
