@@ -58,8 +58,14 @@ public class SignUpController {
 //    이메일 인증번호 발송 시작
     @ResponseBody
     @GetMapping("/emailChk")
-    public String emailChk(@RequestParam("totalEmail") String totalEmail) throws MessagingException {
+    public String emailChk(@RequestParam("totalEmail") String totalEmail) throws Exception {
         System.out.println("totalEmail = " + totalEmail);
+        String num = "";
+
+        if(userService.chkEmailDupl(totalEmail) == 1){
+            num = "duplicate";
+            return num;
+        }
 
         //난수6자리 인증번호
         int authNum = (int)(Math.random()*(999999-100000+1)+100000);
@@ -69,7 +75,7 @@ public class SignUpController {
         String title = "회원가입시 필요한 인증번호 입니다."; //메일 제목
         String content = "[인증번호] "+authNum+" 입니다. <br/> 인증번호 확인란에 기입해주세요."; // 메일 내용
 
-        String num = "";
+
         try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "utf-8");
@@ -168,10 +174,10 @@ public class SignUpController {
             Map<String, String> validatorRslt = cvh.validateHandling(bindingResult);
 
             for (String key: validatorRslt.keySet()) {
-                rattr.addFlashAttribute(key, validatorRslt.get(key));
+                m.addAttribute(key, validatorRslt.get(key));
             }
 
-            return "redirect:/signup";
+            return "signup/signup";
         }
 
         try{

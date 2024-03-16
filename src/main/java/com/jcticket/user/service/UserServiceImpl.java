@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
         return userDao.selectNickNameDupl(user_nickname);
     }
 
+    @Override
+    public int chkEmailDupl(String user_email) throws Exception {
+        return userDao.selectEmailDupl(user_email);
+    }
+
     //로그인 검사. 입력한 아이디의 비밀번호 일치하는지
     @Override
     public boolean loginCheck(String user_id, String user_password) throws Exception {

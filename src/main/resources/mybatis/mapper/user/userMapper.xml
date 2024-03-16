@@ -205,6 +205,13 @@
         where user_nickname = #{user_nickname}
     </select>
 
+    <select id="chk_Email_Dupl" parameterType="String" resultType="int">
+        select count(*)
+        from user
+        where user_email = #{user_email}
+    </select>
+
+
 
 
     <delete id="delete" parameterType="String">
