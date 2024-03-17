@@ -40,8 +40,7 @@ import java.util.Map;
 @RequestMapping("/signup")
 @Controller
 public class SignUpController {
-    @Autowired
-    private JavaMailSender mailSender;
+
 
     @Autowired
     UserService userService;
@@ -61,39 +60,28 @@ public class SignUpController {
     public String emailChk(@RequestParam("totalEmail") String totalEmail) throws Exception {
         System.out.println("totalEmail = " + totalEmail);
         String num = "";
+        int authNum = (int)(Math.random()*(999999-100000+1)+100000);
 
+        //중복된 이메일이 존재하면 num에 "duplicate" 대입
         if(userService.chkEmailDupl(totalEmail) == 1){
             num = "duplicate";
             return num;
         }
-
         //난수6자리 인증번호
-        int authNum = (int)(Math.random()*(999999-100000+1)+100000);
-
-        String from = "wlsdnr1233@naver.com"; // 보내는사람
-        String to = totalEmail; // 받는사람
-        String title = "회원가입시 필요한 인증번호 입니다."; //메일 제목
-        String content = "[인증번호] "+authNum+" 입니다. <br/> 인증번호 확인란에 기입해주세요."; // 메일 내용
-
 
         try {
-            MimeMessage mail = mailSender.createMimeMessage();
-            MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "utf-8");
+            //인증번호 메일 발송
+            userService.sendEmail(totalEmail,authNum);
 
-            mailHelper.setFrom(from);
-            mailHelper.setTo(to);
-            mailHelper.setSubject(title);
-            mailHelper.setText(content, true);
-
-            mailSender.send(mail);
             num = Integer.toString(authNum);
         }catch (Exception e){
             e.printStackTrace();
+            //올바르지 않은 형태의 이메일이 존재하면 num에 "error" 대입
             num="error";
         }
         return num;
     }
-    //    이메일 인증번호 발송 시작
+    //    이메일 인증번호 발송 끝
 
 
     //    아이디 중복체크 시작
@@ -127,7 +115,7 @@ public class SignUpController {
             return false;
         }
     }
-    // 닉네임 중복체크 시작
+    // 닉네임 중복체크 끝
 
     //생년월일 검사 시작. 1900년생 이후인지, 날짜 형식에 맞는지
     @ResponseBody
@@ -136,24 +124,9 @@ public class SignUpController {
         System.out.println("user_birth = " + user_birth);
 
         try{
-            //검증할 날짜 포맷 설정
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            //false일경우 처리시 입력한 값이 잘못된 형식일 시 오류가 발생
-            sdf.setLenient(false);
-
-            //user_birth를 날짜로 parsing
-            Date formatDate = sdf.parse(user_birth);
-
-            // 입력한 생년월일이 1900년 1월 1일 이후인지 확인
-            Calendar minDate = Calendar.getInstance();
-            minDate.set(1900, Calendar.JANUARY, 1);
-
-            if(formatDate.after(minDate.getTime())) {
-                return true; // 유효한 범위 내에 있음
-            }else{
-                return false; // 범위를 벗어남
-            }
+            return userService.chkBirth(user_birth);
         }catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }
@@ -161,7 +134,7 @@ public class SignUpController {
 
     //회원가입 버튼 눌렀을 때.insert
     @PostMapping("/signup")
-    public String insertUser(@Valid UserDto userDto, BindingResult bindingResult, TermsDto termsDto, Model m, RedirectAttributes rattr) throws Exception{
+    public String insertUser(@Valid UserDto userDto, BindingResult bindingResult, TermsDto termsDto, Model m) throws Exception{
 
         if(bindingResult.hasErrors()){
 
@@ -211,8 +184,6 @@ public class SignUpController {
         try {
 
             System.out.println("userDto = " + userDto);
-            String n_user_id = userDto.getUser_id();
-//            userDto.setUser_sns_provider("NAVER");
 
             if (userService.signupSNS(userDto) != 1) {
                 throw new Exception("signupSNS failed");
