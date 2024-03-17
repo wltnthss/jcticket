@@ -71,38 +71,6 @@
             slide_img_name
     </select>
 
-
-<!--    <select id="selectImg" resultType="Map">-->
-<!--    SELECT-->
-<!--        s.showing_seq as showing_seq,-->
-<!--        p.play_id as play_id ,-->
-<!--        pimg.play_poster_stored_file_name as img_name ,-->
-<!--        p.play_name as play_name ,-->
-<!--        p.play_major_cat play_cat ,-->
-<!--        p.play_run_time as play_run_time ,-->
-<!--        s.showing_info as showing_info ,-->
-<!--        s.showing_date as showing_date ,-->
-<!--        st.stage_address ,-->
-<!--        CONCAT(DATE_FORMAT(s.showing_start_at, '%Y-%m-%d') , ' ~ ', DATE_FORMAT(s.showing_end_at, '%Y-%m-%d')) as showing_period_date ,-->
-<!--        st.stage_name as stage_name ,-->
-<!--        CASE-->
-<!--            WHEN showing_status = 'BS' then '상영전'-->
-<!--            WHEN showing_status = 'IS' then '상영중'-->
-<!--            WHEN showing_status = 'AS' then '상영종료'-->
-<!--        END showing_status-->
-<!--    FROM-->
-<!--        play p-->
-<!--        LEFT JOIN play_image pimg ON-->
-<!--        p.play_id = pimg.play_id-->
-<!--        LEFT JOIN showing s ON-->
-<!--        p.play_id = s.play_id-->
-<!--        LEFT JOIN stage st ON-->
-<!--        s.stage_id = st.stage_id-->
-<!--    WHERE-->
-<!--        1=1-->
-<!--        AND s.showing_info IS NOT NULL-->
-<!--    </select>-->
-
 <!--방문 횟수 카운팅-->
     <update id="increase_visit_cnt" parameterType="String">
         update user
@@ -111,25 +79,25 @@
     </update>
 
     <!--user insert-->
-    <insert id="signup" parameterType="UserDto">
-        insert into user
-        (user_id,
-         user_password,
-         user_name,
-         user_email,
-         user_tel,
-         user_address,
-         user_nickname,
-         user_birth,
-         user_gender,
-         user_create_at,
-         user_retire_yn,
-         user_visit_cnt,
-         user_interested_genre,
-         created_at,
-         created_id,
-         updated_at,
-         updated_id)
+    <insert id="insert" parameterType="UserDto">
+        INSERT INTO `user`
+        (`user_id`,
+         `user_password`,
+         `user_name`,
+         `user_email`,
+         `user_tel`,
+         `user_address`,
+         `user_nickname`,
+         `user_birth`,
+         `user_gender`,
+         `user_create_at`,
+         `user_retire_yn`,
+         `user_visit_cnt`,
+         `user_interested_genre`,
+         `created_at`,
+         `created_id`,
+         `updated_at`,
+         `updated_id`)
         values
             (#{user_id},
              #{user_password},
@@ -246,44 +214,6 @@
         where user_id = #{user_id}
     </update>
 
-    <insert id="insert" parameterType="UserDto">
-        INSERT INTO `user`
-        (`user_id`,
-         `user_password`,
-         `user_name`,
-         `user_email`,
-         `user_tel`,
-         `user_address`,
-         `user_nickname`,
-         `user_birth`,
-         `user_gender`,
-         `user_create_at`,
-         `user_retire_yn`,
-         `user_visit_cnt`,
-         `user_interested_genre`,
-         `created_at`,
-         `created_id`,
-         `updated_at`,
-         `updated_id`)
-        values
-            (#{user_id},
-             #{user_password},
-             #{user_name},
-             #{user_email},
-             #{user_tel},
-             #{user_address},
-             #{user_nickname},
-             #{user_birth},
-             #{user_gender},
-             current_timestamp,
-             "N",
-             0,
-             #{user_interested_genre},
-             current_timestamp,
-             "system",
-             current_timestamp,
-             "system")
-    </insert>
 
     <delete id="deleteAll">
         delete from user

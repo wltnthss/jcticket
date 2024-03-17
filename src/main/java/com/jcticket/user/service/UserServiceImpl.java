@@ -9,9 +9,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * packageName    : com.jcticket.login.service
@@ -29,6 +28,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+    @Autowired
+    private JavaMailSender mailSender;
 
     //user_id에 맞는 유저 정보 가져옴
     @Override
@@ -69,6 +70,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public int chkEmailDupl(String user_email) throws Exception {
         return userDao.selectEmailDupl(user_email);
+    }
+
+    @Override
+    public void sendEmail(String user_email,int authNum) throws Exception {
+
+        String from = "wlsdnr1233@naver.com"; // 보내는사람
+        String to = user_email; // 받는사람
+        String title = "회원가입시 필요한 인증번호 입니다."; //메일 제목
+        String content = "[인증번호] "+authNum+" 입니다. <br/> 인증번호 확인란에 기입해주세요."; // 메일 내용
+
+        MimeMessage mail = mailSender.createMimeMessage();
+        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "utf-8");
+
+        mailHelper.setFrom(from);
+        mailHelper.setTo(to);
+        mailHelper.setSubject(title);
+        mailHelper.setText(content, true);
+
+        mailSender.send(mail);
+    }
+
+    @Override
+    public boolean chkBirth(String user_birth) throws Exception {
+        //검증할 날짜 포맷 설정
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        //false일경우 처리시 입력한 값이 잘못된 형식일 시 오류가 발생
+        sdf.setLenient(false);
+
+        //user_birth를 날짜로 parsing
+        Date formatDate = sdf.parse(user_birth);
+
+        // 입력한 생년월일이 1900년 1월 1일 이후인지 확인
+        Calendar minDate = Calendar.getInstance();
+        minDate.set(1900, Calendar.JANUARY, 1);
+
+        if(formatDate.after(minDate.getTime())) {
+            return true; // 유효한 범위 내에 있음
+        }else{
+            return false; // 범위를 벗어남
+        }
     }
 
     //로그인 검사. 입력한 아이디의 비밀번호 일치하는지
