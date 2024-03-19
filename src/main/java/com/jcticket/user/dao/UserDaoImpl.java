@@ -47,6 +47,11 @@ public class UserDaoImpl implements UserDao {
         return session.selectOne(namespace+"chk_NickName_Dupl",user_nickname);
     }
 
+    @Override
+    public int selectEmailDupl(String user_email) throws Exception {
+        return session.selectOne(namespace+"chk_Email_Dupl",user_email);
+    }
+
     //회원가입
     @Override
     public int insert(UserDto userDto) throws Exception {

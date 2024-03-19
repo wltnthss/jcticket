@@ -25,6 +25,9 @@ public interface UserDao {
     int selectIdDupl(String user_id) throws Exception;//
     //닉네임 중복 확인
     int selectNickNameDupl(String user_nickname) throws Exception;//
+    //이메일 중복 확인
+    int selectEmailDupl(String user_email) throws Exception;//
+
     //회원가입
     int insert(UserDto userDto) throws Exception; //
     List<Map<String, Object>> selectImg() throws Exception;

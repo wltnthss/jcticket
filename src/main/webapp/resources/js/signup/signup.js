@@ -51,6 +51,8 @@ $('#emailBtn').on('click',function (){
         success:function(data){
             if(data==="error"){
                 alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+            }else if(data==="duplicate"){
+                alert("이미 가입된 이메일입니다. 다른 이메일을 입력해주세요.");
             }else{
                 alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호를 확인해주세요.");
             }
@@ -187,27 +189,51 @@ $('#userPwdChkInput').on('keyup',function (){
 //닉네임 중복 체크 시작
     $('#userNicknameInput').on('keyup',function (){
         const nicknameValue = $('#userNicknameInput').val();
-        $.ajax({
-            url:sessionStorage.getItem("contextpath") + '/signup/chk_nickname_dupl',
-            method: 'POST',
-            data:{user_nickname:nicknameValue},
-            success:function(data){
-                if(data){
-                    $('#nickname_warnMsg').css('display', 'block');
-                    $('#nickname_warnMsg').css('color', 'orangered');
-                    $('#nickname_warnMsg').html("이미 사용 중인 닉네임입니다.");
-                } else {
-                    $('#nickname_warnMsg').css('display', 'block');
-                    $('#nickname_warnMsg').css('color','rgb(0, 159, 206)');
-                    $('#nickname_warnMsg').html("사용 가능한 닉네임입니다.");
+        const regEx = /^[a-zA-z0-9가-힣]+$/ //특수문자 및 공백 포함 여부 확인
+
+
+        if(!(regEx.test(nicknameValue))){
+            $('#nickname_warnMsg').css('display', 'block');
+            $('#nickname_warnMsg').css('color','orangered')
+            $('#nickname_warnMsg').html("영문 대문자, 소문자, 한글단어, 숫자를 포함한 10자 이하만 입력가능합니다.");
+        }else if((regEx.test(nicknameValue))){
+            $.ajax({
+                url:sessionStorage.getItem("contextpath") + '/signup/chk_nickname_dupl',
+                method: 'POST',
+                data:{user_nickname:nicknameValue},
+                success:function(data){
+                    if(data){
+                        $('#nickname_warnMsg').css('display', 'block');
+                        $('#nickname_warnMsg').css('color', 'orangered');
+                        $('#nickname_warnMsg').html("이미 사용 중인 닉네임입니다.");
+                    } else {
+                        $('#nickname_warnMsg').css('display', 'block');
+                        $('#nickname_warnMsg').css('color','rgb(0, 159, 206)');
+                        $('#nickname_warnMsg').html("사용 가능한 닉네임입니다.");
+                    }
+                },
+                error:function(xhr, status, error) {
+                    console.error('AJAX Error:', error);
                 }
-            },
-            error:function(xhr, status, error) {
-            console.error('AJAX Error:', error);
+            })
         }
-        })
+
     })
 //닉네임 중복 체크 끝
+
+// 이름 유효성 검사 시작
+$('#userNameInput').on('keyup',function(){
+    const nameValue = $('#userNameInput').val()
+    const regEx = /^[a-z가-힣]+$/
+
+    if(!(regEx.test(nameValue))){
+        $('#name_warnMsg').css('display', 'block');
+        $('#name_warnMsg').css('color','orangered');
+        $('#name_warnMsg').html("한글만 입력 가능합니다.");
+    }
+
+})
+// 이름 유효성 검사 끝
 
 
 //전화번호 유효성 검사 시작
