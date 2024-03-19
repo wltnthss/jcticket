@@ -554,6 +554,7 @@
             }
         })
 
+        //--------------------------------------------------------------------------책갈피
         var select_viewing_at = document.getElementById('viewing_at');
         // console.log("select_viewing_at==========================>"+select_viewing_at)
 
@@ -579,7 +580,7 @@
             } else if(!form_user_id){
                 alert('로그인이 필요합니다.');
             } else if(select_viewing_at_list===-1){
-                event.preventDefault(); // 폼 제출 막기
+                // event.preventDefault(); // 폼 제출 막기
                 alert('관람일자를 선택해주세요.');
             } else {
                 alert('리뷰가 등록되었습니다.')
