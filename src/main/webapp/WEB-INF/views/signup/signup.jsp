@@ -100,7 +100,7 @@
                     영문 소문자,숫자만을 사용한 4글자 이상, 20글자 이하
                 </div>
                 <label>
-                    <input type="text" id="userIdInput" value="${userDto.user_id}" class="css_idPwdNickTelAddGenBir_input" name="user_id" placeholder="아이디" >
+                    <input type="text" id="userIdInput" value="${userDto.user_id}" class="css_idPwdNickTelAddGenBir_input" name="user_id" placeholder="아이디"  maxlength="20">
                 </label>
                 <div id="id_warnMsg">${valid_user_id}</div>
             </div>
@@ -136,10 +136,10 @@
             <div class="idPwdNickTelAddGenBir_Wrap">
                 <label class="css_idPwdNickTelAddGenBir_label">닉네임</label>
                 <div class="css_idPwdNickTelAddGenBir_div">
-                    사용할 닉네임을 입력해주세요.
+                    영문 대문자, 소문자, 한글단어, 숫자를 포함한 10자 이하
                 </div>
                 <label>
-                    <input type="text" id="userNicknameInput" value="${userDto.user_nickname}" class="css_idPwdNickTelAddGenBir_input" name="user_nickname" placeholder="닉네임" maxlength="30">
+                    <input type="text" id="userNicknameInput" value="${userDto.user_nickname}" class="css_idPwdNickTelAddGenBir_input" name="user_nickname" placeholder="닉네임" maxlength="10">
                 </label>
                 <div id="nickname_warnMsg">${valid_user_nickname}</div>
             </div>

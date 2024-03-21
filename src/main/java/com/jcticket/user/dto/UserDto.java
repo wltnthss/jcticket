@@ -27,13 +27,16 @@ import java.sql.Timestamp;
 @EqualsAndHashCode
 public class UserDto {
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
+    @Pattern(regexp = "^[a-z0-9]{4,}$", message = "특수문자 또는 공백을 사용할 수 없으며, 4글자 이상 입력해주세요.")
     private String user_id;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String user_password;
     @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @Pattern(regexp = "^[가-힣]+$", message = "한글만 입력 가능합니다.")
     private String user_name;
     @NotBlank(message = "닉네임은 필수 입력 값입니다.")
+    @Pattern(regexp = "^[a-zA-z0-9가-힣]+$", message = "영문 대문자, 소문자, 한글단어, 숫자를 포함한 10자 이하만 입력가능합니다.")
     private String user_nickname;
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식이 올바르지 않습니다.")

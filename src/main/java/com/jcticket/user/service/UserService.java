@@ -26,6 +26,12 @@ public interface UserService {
     int chkIdDupl(String user_id) throws Exception;
     //닉네임 중복확인
     int chkNickNameDupl(String user_nickname) throws Exception;
+    //이메일 중복 확인
+    int chkEmailDupl(String user_email) throws Exception;
+    //이메일 보내기
+    void sendEmail(String user_email,int authNum) throws  Exception;
+    // 생년월일 유효한지 체크. 날짜 형식에 맞는지, 1900년생 이후인지.
+    boolean chkBirth(String user_birth) throws Exception;
     //회원가입
     int signup(UserDto userDto) throws Exception;
     //sns회원가입
