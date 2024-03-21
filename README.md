@@ -3,6 +3,6 @@
 
 ### Notion (작업일지)
 
-https://www.notion.so/JC-Ticket-3dee608928c3464592bb306fddc56d9c?pvs=4
+https://brave-galley-018.notion.site/JC-Ticket-3dee608928c3464592bb306fddc56d9c
 
 ![img_2.png](img_2.png)
