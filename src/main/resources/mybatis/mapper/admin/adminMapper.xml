@@ -402,7 +402,7 @@
     </insert>
 
     <select id="selectAllProduct" resultType="Map" parameterType="Map">
-        SELECTs
+        SELECT
             s.showing_seq as showing_seq,
             p.play_id as play_id ,
             pimg.play_poster_stored_file_name as img_name ,
