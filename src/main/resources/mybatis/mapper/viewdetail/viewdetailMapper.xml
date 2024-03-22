@@ -240,8 +240,10 @@
         FROM review r
                  JOIN user u ON r.user_id = u.user_id
                  JOIN ticketing t ON u.user_id = t.user_id
+                 JOIN play p ON p.play_id  = r.play_id
         WHERE r.play_id = #{play_id}
         AND r.user_id = #{user_id}
+        AND p.play_name = t.play_name
     </select>
 
 
