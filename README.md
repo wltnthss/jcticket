@@ -1,28 +1,38 @@
-# LiveTemplates 사용 (자동 주석)
+# JCT 티켓팅 서비스 클론코딩 
+<hr>
 
-* class 생성시 자동 주석 생성 설정입니다.
+### Notion (작업일지)
 
-```
-/**
- *packageName    : ${PACKAGE_NAME}
- * fileName       : ${NAME}
- * author         : ${USER}
- * date           : ${DATE}
- * description    : 자동 주석 생성
- * ===========================================================
- * DATE              AUTHOR             NOTE
- * -----------------------------------------------------------
- * ${DATE}        ${USER}       최초 생성
- */
-```
+https://brave-galley-018.notion.site/JC-Ticket-3dee608928c3464592bb306fddc56d9c
 
-* window 기준 ctrl + shift + a -> code template 이동
-* includes 이동 후 -> ${User} 부분 자신 이름 변경 ex) jisoo Son
-* description ex) 클래스 파일 생성 용도 적어주시면 됩니다.
-
-# lombok 세팅
-
-* lombok 은 getter, setter, 생성자를 어노테이션을 통해 자동으로 설정해주는 라이브러리입니다.
-* 설정은 아래와 같이 설정해주세요.
-
-*https://inpa.tistory.com/entry/IntelliJ-%F0%9F%92%BD-Lombok-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0
+![img_2.png](image/img_2.png)
+![img_8.png](image/img_8.png)
+![img_9.png](image/img_9.png)
+![img_10.png](image/img_10.png)
+![img_11.png](image/img_11.png)
+![img_12.png](image/img_12.png)
+![img_13.png](image/img_13.png)
+![img_14.png](image/img_14.png)
+![img_15.png](image/img_15.png)
+![img_16.png](image/img_16.png)
+![img_17.png](image/img_17.png)
+![img_18.png](image/img_18.png)
+![img_19.png](image/img_19.png)
+![img_20.png](image/img_20.png)
+![img_21.png](image/img_21.png)
+![img_22.png](image/img_22.png)
+![img_23.png](image/img_23.png)
+![img_24.png](image/img_24.png)
+![img_25.png](image/img_25.png)
+![img_26.png](image/img_26.png)
+![img_27.png](image/img_27.png)
+![img_28.png](image/img_28.png)
+![img_29.png](image/img_29.png)
+![img_30.png](image/img_30.png)
+![img_31.png](image/img_31.png)
+![img_32.png](image/img_32.png)
+![img_33.png](image/img_33.png)
+![img_34.png](image/img_34.png)
+![img_35.png](image/img_35.png)
+![img_36.png](image/img_36.png)
+![img_37.png](image/img_37.png)
