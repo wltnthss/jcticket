@@ -140,9 +140,7 @@ public class ViewController {
         List<String> viewing_at = viewDetailService.viewing_at(viewing_at_map);
         model.addAttribute("viewing_at",viewing_at);
 
-
-        
-        //-----------------------------------------------------------------------
+        //----------------------------------------------------------------------- 위에 확인할것 책갈피
 
 //        //페이지핸들러
         int totalCnt = viewDetailService.get_review_count(this_play_id);
@@ -211,6 +209,11 @@ public class ViewController {
 
 //        System.out.println("user_id===================>"+user_id);
 //        System.out.println("play_id===================>"+play_id);
+//        System.out.println("star===================>"+star);
+//        System.out.println("viewing_at===================>"+viewing_at);
+//        System.out.println("review_content===================>"+review_content);
+//        System.out.println("review_num===================>"+review_num);
+
         if(user_id==null || user_id.isEmpty()) {
             return "redirect:/login";
         } else {
@@ -224,7 +227,6 @@ public class ViewController {
             reviewDto.setUser_id(user_id);
             reviewDto.setUpdated_id(user_id);
             reviewDto.setReview_num(review_num);
-
 //            System.out.println("review_num=============>"+review_num);
 
             // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
