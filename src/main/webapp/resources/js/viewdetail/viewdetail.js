@@ -555,21 +555,48 @@
         })
 
         //--------------------------------------------------------------------------책갈피
-        var select_viewing_at = document.getElementById('viewing_at');
-        // console.log("select_viewing_at==========================>"+select_viewing_at)
+        // var select_viewing_at = document.getElementById('viewing_at');
+        // // console.log("select_viewing_at==========================>"+select_viewing_at)
+        //
+        // var select_viewing_at_list = select_viewing_at.selectedIndex;
+        // // console.log("select_viewing_at_list==========================>"+select_viewing_at_list)
+        // //아무것도 없을 때 -1 리턴됨
+        //
+        // // 후기작성 알람
+        // var form = document.querySelector('#insert_form');
+        // // form_user_id 요소의 값을 가져옴
+        // var form_user_id = document.getElementById('form_user_id').value
+        //
+        // form.addEventListener('submit', function(event) {
+        //     var starValue = document.getElementById('star_input').value;
+        //     var reviewContent = document.querySelector('.review_box').value;
+        //
+        //     if (!starValue) {
+        //         event.preventDefault(); // 폼 제출 막기
+        //         alert('별점을 선택해주세요.');
+        //     } else if (!reviewContent) {
+        //         event.preventDefault(); // 폼 제출 막기
+        //         alert('후기를 입력해주세요.');
+        //     } else if(!form_user_id){
+        //         alert('로그인이 필요합니다.');
+        //     } else if(select_viewing_at_list===-1){
+        //         event.preventDefault(); // 폼 제출 막기
+        //         alert('관람일자를 선택해주세요.');
+        //     } else {
+        //         alert('리뷰가 등록되었습니다.')
+        //     }
+        // });
 
-        var select_viewing_at_list = select_viewing_at.selectedIndex;
-        // console.log("select_viewing_at_list==========================>"+select_viewing_at_list)
-        //아무것도 없을 때 -1 리턴됨
-
-        // 후기작성 알람
         var form = document.querySelector('#insert_form');
+        var select_viewing_at = document.getElementById('viewing_at');
+
         // form_user_id 요소의 값을 가져옴
         var form_user_id = document.getElementById('form_user_id').value
 
         form.addEventListener('submit', function(event) {
             var starValue = document.getElementById('star_input').value;
             var reviewContent = document.querySelector('.review_box').value;
+            var selectedValue = select_viewing_at.value; // 선택된 값 가져오기
 
             if (!starValue) {
                 event.preventDefault(); // 폼 제출 막기
@@ -577,10 +604,10 @@
             } else if (!reviewContent) {
                 event.preventDefault(); // 폼 제출 막기
                 alert('후기를 입력해주세요.');
-            } else if(!form_user_id){
+            } else if (!form_user_id) {
                 alert('로그인이 필요합니다.');
-            } else if(select_viewing_at_list===-1){
-                // event.preventDefault(); // 폼 제출 막기
+            } else if (!selectedValue) {
+                event.preventDefault(); // 폼 제출 막기
                 alert('관람일자를 선택해주세요.');
             } else {
                 alert('리뷰가 등록되었습니다.')
