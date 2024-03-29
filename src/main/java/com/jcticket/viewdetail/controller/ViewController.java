@@ -7,6 +7,7 @@ import com.jcticket.viewdetail.dto.ShowingDto;
 import com.jcticket.viewdetail.service.ViewDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -229,12 +230,23 @@ public class ViewController {
             reviewDto.setReview_num(review_num);
 //            System.out.println("review_num=============>"+review_num);
 
-            // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
-            viewDetailService.review_create(reviewDto);
-
-            // 후기작성란으로 리다이렉트
-            return "redirect:" + referer + "#review_place";
+            try {
+                // ReviewDto 객체를 서비스 계층을 통해 DAO 계층으로 전달하여 데이터베이스에 저장
+                viewDetailService.review_create(reviewDto);
+                return "redirect:" + referer + "#review_place";
+            } catch (DuplicateKeyException e) {
+                // 테이블의 UNIQUE 제약조건에 걸릴 경우 alert페이지로 이동
+                return "redirect:/alert?referer="+referer;
+            }
         }
+    }
+
+    //알람페이지
+    @GetMapping("/alert")
+    public String alert(@RequestParam String referer,
+                        Model model) throws Exception {
+        model.addAttribute("referer",referer);
+        return "viewdetail/alert";
     }
 
     //리뷰삭제
